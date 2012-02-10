@@ -25,8 +25,6 @@ import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.oauth.OAuth;
-import org.mule.api.annotations.oauth.OAuthAccessToken;
-import org.mule.api.annotations.oauth.OAuthAccessTokenSecret;
 import org.mule.api.annotations.oauth.OAuthConsumerKey;
 import org.mule.api.annotations.oauth.OAuthConsumerSecret;
 import org.mule.api.annotations.param.Default;
@@ -138,8 +136,6 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-account2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-account3}
      *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
      * @param name User-recognizable name for the account. This name must be unique.
      *             When you create a company, you get some default accounts.
      *             If you want to create an account, you must provide an account name that does not
@@ -162,9 +158,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Account createAccount(@OAuthAccessToken String accessToken,
-                                @OAuthAccessTokenSecret String accessTokenSecret,
-                                String name,
+    public Account createAccount(String name,
                                 @Optional String desc,
                                 AccountDetail subtype,
                                 @Optional String acctNum,
@@ -198,9 +192,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill3}
-     * 
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Information on the financial transaction of the Bill.
      * @param lines Information about a specific good or service purchased for which the payment is demanded
      *             as a part of the bill. A bill can have multiple lines.
@@ -210,9 +202,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Bill createBill(@OAuthAccessToken String accessToken,
-                           @OAuthAccessTokenSecret String accessTokenSecret,
-                           Map<String, Object> header,
+    public Bill createBill(Map<String, Object> header,
                            List<Map<String, Object>> lines)
     {
         return client.create(EntityType.BILL,
@@ -237,9 +227,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill-payment}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill-payment2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill-payment3}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Header information about the BillPayment.
      * @param lines List of lines. Specifies the line details for the bill payment.
      * @return The created BillPayment.
@@ -248,9 +236,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public BillPayment createBillPayment(@OAuthAccessToken String accessToken,
-                                         @OAuthAccessTokenSecret String accessTokenSecret,
-                                         Map<String, Object> header,
+    public BillPayment createBillPayment(Map<String, Object> header,
                                          List<Map<String, Object>> lines)
     {    
         return client.create(EntityType.BILLPAYMENT,
@@ -273,9 +259,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-cash-purchase}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-cash-purchase2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-cash-purchase3}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Information about the financial transaction of the entire CashPurchase.
      * @param lines List of lines. Information about a specific good or service purchased for which 
      *             the payment is demanded as a part of the CashPurchase.
@@ -285,9 +269,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase createCashPurchase(@OAuthAccessToken String accessToken,
-                                           @OAuthAccessTokenSecret String accessTokenSecret,
-                                           Map<String, Object> header,
+    public CashPurchase createCashPurchase(Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
         return client.create(EntityType.CASHPURCHASE,
@@ -309,9 +291,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-check}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-check2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Financial Transaction information that pertains to the entire CheckHeader.
      * @param lines List of lines. Information about a specific good or service purchased for which 
      *             the payment is demanded as a part of the check.
@@ -321,9 +301,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Check createCheck(@OAuthAccessToken String accessToken,
-                             @OAuthAccessTokenSecret String accessTokenSecret,
-                             Map<String, Object> header,
+    public Check createCheck(Map<String, Object> header,
                              List<Map<String, Object>> lines)
     {
         return client.create(EntityType.CHECK,
@@ -348,9 +326,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-credit-card-charge}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-credit-card-charge2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Financial Transaction information that pertains to the entire CreditCardChargeHeader.
      * @param lines List of lines. Information about a specific good or service purchased for which the 
      *             payment is demanded as a part of the CreditCardCharge purchase.
@@ -360,9 +336,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CreditCardCharge createCreditCardCharge(@OAuthAccessToken String accessToken,
-                                                   @OAuthAccessTokenSecret String accessTokenSecret,
-                                                   Map<String, Object> header,
+    public CreditCardCharge createCreditCardCharge(Map<String, Object> header,
                                                    List<Map<String, Object>> lines)
     {
         return client.create(EntityType.CREDITCARDCHARGE,
@@ -386,9 +360,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-customer}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-customer2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param name Optional. Specifies the full name of the customer. If the Name is specified, then GivenName,
      *             MiddleName, and FamilyName values are ignored.
      * @param givenName Specifies the given name or first name of a person. GivenName is a required field only if 
@@ -414,9 +386,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Customer createCustomer(@OAuthAccessToken String accessToken,
-                                   @OAuthAccessTokenSecret String accessTokenSecret,
-                                   @Optional String name,
+    public Customer createCustomer(@Optional String name,
                                    @Optional String givenName,
                                    @Optional String middleName,
                                    @Optional String familyName,
@@ -467,9 +437,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-estimate}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-estimate2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Financial transaction information that pertains to the entire Estimate.
      * @param lines Information about a specific good or service for which the estimate is being issued.
      * @return The created Estimate.
@@ -478,9 +446,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Estimate createEstimate(@OAuthAccessToken String accessToken,
-                                   @OAuthAccessTokenSecret String accessTokenSecret,
-                                   Map<String, Object> header,
+    public Estimate createEstimate(Map<String, Object> header,
                                    List<Map<String, Object>> lines)
     {
         return client.create(EntityType.ESTIMATE,
@@ -505,9 +471,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-invoice}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-invoice2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Provides information that pertains to the entire Invoice.
      * @param lines Information about a specific good or service for which the Invoice is being issued.
      * @return The created Invoice.
@@ -516,9 +480,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Invoice createInvoice(@OAuthAccessToken String accessToken,
-                                 @OAuthAccessTokenSecret String accessTokenSecret,
-                                 Map<String, Object> header,
+    public Invoice createInvoice(Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
         return client.create(EntityType.INVOICE,
@@ -542,9 +504,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-item}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-item2}
-     * 
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param name Optional. User recognizable name of the Item.
      * @param unitPrice Optional. Monetary values of the service or product
      * @param desc Optional. User entered description for the item to further describe the details 
@@ -563,9 +523,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Item createItem(@OAuthAccessToken String accessToken,
-                           @OAuthAccessTokenSecret String accessTokenSecret,
-                           @Optional @Default("") String name,
+    public Item createItem(@Optional @Default("") String name,
                            @Optional Map<String, Object> unitPrice,
                            @Optional String desc,
                            @Optional @Default("false") Boolean taxable,
@@ -611,9 +569,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-payment}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-payment2}
-     * 
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Information that pertains to the entire payment.
      * @param lines Line details of the receive payment. A receive payment can have multiple lines.
      * @return The created Payment.
@@ -622,9 +578,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Payment createPayment(@OAuthAccessToken String accessToken,
-                                 @OAuthAccessTokenSecret String accessTokenSecret,
-                                 Map<String, Object> header,
+    public Payment createPayment(Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
         return client.create(EntityType.PAYMENT,
@@ -648,9 +602,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-payment-method}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-payment-method2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param name User recognizable name for the payment method.
      * @param type Type of payment. Specifies if it is a credit card payment type or a 
      *             non-credit card payment type. It must specify either of the following:<br/>
@@ -662,9 +614,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public PaymentMethod createPaymentMethod(@OAuthAccessToken String accessToken,
-                                             @OAuthAccessTokenSecret String accessTokenSecret,
-                                             String name,
+    public PaymentMethod createPaymentMethod(String name,
                                              @Optional @Default("NON_CREDIT_CARD") String type)
     {
         return client.create(EntityType.PAYMENTMETHOD,
@@ -688,9 +638,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-sales-receipt}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-sales-receipt2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param header Groups the elements that are common to the SalesReceipt transaction.
      * @param lines Groups the line items for the sales receipt.
      * @return The created SalesReceipt.
@@ -699,9 +647,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesReceipt createSalesReceipt(@OAuthAccessToken String accessToken,
-                                           @OAuthAccessTokenSecret String accessTokenSecret,
-                                           Map<String, Object> header,
+    public SalesReceipt createSalesReceipt(Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
         return client.create(EntityType.SALESRECEIPT,
@@ -727,9 +673,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-sales-term}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-sales-term2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param name Specifies the user recognizable name for the salesterm.
      * @param dueDays Number of days from the delivery of goods or services till the payment is due.
      *                If DueDays is specified, only DiscountDays and DiscountPercent can be 
@@ -755,9 +699,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm createSalesTerm(@OAuthAccessToken String accessToken,
-                                     @OAuthAccessTokenSecret String accessTokenSecret,
-                                     String name,
+    public SalesTerm createSalesTerm(String name,
                                      Integer dueDays,
                                      @Optional Integer discountDays,
                                      @Optional String discountPercent,
@@ -794,9 +736,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-vendor}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-vendor2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param name Optional. Specifies the full name of the vendor. If the FullName is specified, 
      *             then GivenName, MiddleName, and FamilyName values are ignored.
      * @param givenName Specifies the given name or first name of a person. GivenName is a required 
@@ -825,9 +765,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Vendor createVendor(@OAuthAccessToken String accessToken,
-                               @OAuthAccessTokenSecret String accessTokenSecret,
-                               @Optional String name,
+    public Vendor createVendor(@Optional String name,
                                @Optional String givenName,
                                @Optional String middleName,
                                @Optional String familyName,
@@ -872,9 +810,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:get-object}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:get-object2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
      * @return The object.
@@ -883,9 +819,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Object getObject(@OAuthAccessToken String accessToken,
-                            @OAuthAccessTokenSecret String accessTokenSecret,
-                            EntityType type,
+    public Object getObject(EntityType type,
                             Map<String, Object> id)
     {
         return client.getObject(type, unmap(IdType.class, id), accessToken, accessTokenSecret);
@@ -907,9 +841,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-account}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-account2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-account3}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -936,9 +868,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Account updateAccount(@OAuthAccessToken String accessToken,
-                                 @OAuthAccessTokenSecret String accessTokenSecret, 
-                                 Map<String, Object> id, 
+    public Account updateAccount(Map<String, Object> id, 
                                  @Optional String syncToken,
                                  String name,
                                  @Optional String desc,
@@ -980,9 +910,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill3}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -996,9 +924,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Bill updateBill(@OAuthAccessToken String accessToken,
-                           @OAuthAccessTokenSecret String accessTokenSecret, 
-                           Map<String, Object> id, 
+    public Bill updateBill(Map<String, Object> id, 
                            @Optional String syncToken,
                            Map<String, Object> header,
                            List<Map<String, Object>> lines)
@@ -1031,9 +957,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill-payment}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill-payment2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill-payment3}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1046,9 +970,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public BillPayment updateBillPayment(@OAuthAccessToken String accessToken,
-                                         @OAuthAccessTokenSecret String accessTokenSecret, 
-                                         Map<String, Object> id, 
+    public BillPayment updateBillPayment(Map<String, Object> id, 
                                          @Optional String syncToken,
                                          Map<String, Object> header,
                                          List<Map<String, Object>> lines)
@@ -1079,9 +1001,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-cash-purchase}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-cash-purchase2}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-cash-purchase3}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1095,9 +1015,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase updateCashPurchase(@OAuthAccessToken String accessToken,
-                                           @OAuthAccessTokenSecret String accessTokenSecret, 
-                                           Map<String, Object> id, 
+    public CashPurchase updateCashPurchase(Map<String, Object> id, 
                                            @Optional String syncToken,
                                            Map<String, Object> header,
                                            List<Map<String, Object>> lines)
@@ -1127,9 +1045,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-check}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-check2}
-     * 
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1143,9 +1059,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Check updateCheck(@OAuthAccessToken String accessToken,
-                             @OAuthAccessTokenSecret String accessTokenSecret, 
-                             Map<String, Object> id, 
+    public Check updateCheck(Map<String, Object> id, 
                              @Optional String syncToken,
                              Map<String, Object> header,
                              List<Map<String, Object>> lines)
@@ -1177,9 +1091,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-credit-card-charge}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-credit-card-charge2}
-     * 
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1193,9 +1105,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CreditCardCharge updateCreditCardCharge(@OAuthAccessToken String accessToken,
-                                                   @OAuthAccessTokenSecret String accessTokenSecret, 
-                                                   Map<String, Object> id, 
+    public CreditCardCharge updateCreditCardCharge(Map<String, Object> id, 
                                                    @Optional String syncToken,
                                                    Map<String, Object> header,
                                                    List<Map<String, Object>> lines)
@@ -1226,9 +1136,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-customer}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-customer2}
-     * 
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1258,9 +1166,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Customer updateCustomer(@OAuthAccessToken String accessToken,
-                                   @OAuthAccessTokenSecret String accessTokenSecret, 
-                                   Map<String, Object> id, 
+    public Customer updateCustomer(Map<String, Object> id, 
                                    @Optional String syncToken,
                                    @Optional String name,
                                    @Optional String givenName,
@@ -1319,9 +1225,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-estimate}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-estimate2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1334,9 +1238,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Estimate updateEstimate(@OAuthAccessToken String accessToken,
-                                   @OAuthAccessTokenSecret String accessTokenSecret, 
-                                   Map<String, Object> id, 
+    public Estimate updateEstimate(Map<String, Object> id, 
                                    @Optional String syncToken,
                                    Map<String, Object> header,
                                    List<Map<String, Object>> lines)
@@ -1368,9 +1270,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-invoice}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-invoice2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1383,9 +1283,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Invoice updateInvoice(@OAuthAccessToken String accessToken,
-                                 @OAuthAccessTokenSecret String accessTokenSecret, 
-                                 Map<String, Object> id, 
+    public Invoice updateInvoice(Map<String, Object> id, 
                                  @Optional String syncToken,
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
@@ -1416,9 +1314,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-item}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-item2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1441,9 +1337,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Item updateItem(@OAuthAccessToken String accessToken,
-                           @OAuthAccessTokenSecret String accessTokenSecret, 
-                           Map<String, Object> id, 
+    public Item updateItem(Map<String, Object> id, 
                            @Optional String syncToken,
                            @Optional @Default("") String name, 
                            @Optional Map<String, Object> unitPrice,
@@ -1496,9 +1390,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-payment}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-payment2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1511,9 +1403,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Payment updatePayment(@OAuthAccessToken String accessToken,
-                                 @OAuthAccessTokenSecret String accessTokenSecret, 
-                                 Map<String, Object> id, 
+    public Payment updatePayment(Map<String, Object> id, 
                                  @Optional String syncToken,
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
@@ -1544,9 +1434,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-payment-method}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-payment-method2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1560,9 +1448,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public PaymentMethod updatePaymentMethod(@OAuthAccessToken String accessToken,
-                                             @OAuthAccessTokenSecret String accessTokenSecret, 
-                                             Map<String, Object> id, 
+    public PaymentMethod updatePaymentMethod(Map<String, Object> id, 
                                              @Optional String syncToken,
                                              String name, 
                                              @Optional @Default("NON_CREDIT_CARD") String type)
@@ -1593,9 +1479,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-sales-receipt}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-sales-receipt2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1608,9 +1492,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesReceipt updateSalesReceipt(@OAuthAccessToken String accessToken, 
-                                           @OAuthAccessTokenSecret String accessTokenSecret, 
-                                           Map<String, Object> id, 
+    public SalesReceipt updateSalesReceipt(Map<String, Object> id, 
                                            @Optional String syncToken,
                                            Map<String, Object> header, 
                                            List<Map<String, Object>> lines)
@@ -1643,9 +1525,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-sales-term}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-sales-term2}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1675,9 +1555,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm updateSalesTerm(@OAuthAccessToken String accessToken, 
-                                     @OAuthAccessTokenSecret String accessTokenSecret, 
-                                     Map<String, Object> id, 
+    public SalesTerm updateSalesTerm(Map<String, Object> id, 
                                      @Optional String syncToken,
                                      String name, 
                                      Integer dueDays, 
@@ -1722,8 +1600,6 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-vendor}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-vendor2}
      *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1756,9 +1632,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Vendor updateVendor(@OAuthAccessToken String accessToken, 
-                               @OAuthAccessTokenSecret String accessTokenSecret, 
-                               Map<String, Object> id, 
+    public Vendor updateVendor(Map<String, Object> id, 
                                @Optional String syncToken,
                                @Optional String name, 
                                @Optional String givenName, 
@@ -1808,8 +1682,8 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:delete-object}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:delete-object2}
      *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
+     *  
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
@@ -1820,9 +1694,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public void deleteObject(@OAuthAccessToken String accessToken, 
-                             @OAuthAccessTokenSecret String accessTokenSecret,
-                             EntityType type, 
+    public void deleteObject(EntityType type, 
                              Map<String, Object> id, 
                              @Optional String syncToken)
     {
@@ -1841,9 +1713,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:find-objects3}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:find-objects4}
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:find-objects5}
-     *
-     * @param accessToken the oauth access token
-     * @param accessTokenSecret the oauth secret token
+     *  
      * @param type EntityType of the object.
      * @param queryFilter String with a filter format (see details). Each type of object to be 
      *                    retrieved, has a list of attributes for which it can be filtered (See this 
@@ -1860,9 +1730,7 @@ public class QuickBooksModule
      */
     @SuppressWarnings("rawtypes")
     @Processor
-    public Iterable findObjects(@OAuthAccessToken String accessToken, 
-                                @OAuthAccessTokenSecret String accessTokenSecret,
-                                EntityType type, 
+    public Iterable findObjects(EntityType type, 
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {

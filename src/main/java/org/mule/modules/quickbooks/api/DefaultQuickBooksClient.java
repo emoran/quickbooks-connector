@@ -10,9 +10,15 @@
 
 package org.mule.modules.quickbooks.api;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.security.KeyStore;
+import java.security.PrivateKey;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -29,6 +35,8 @@ import org.mule.modules.quickbooks.schema.QboUser;
 import org.mule.modules.quickbooks.schema.SearchResults;
 import org.mule.modules.quickbooks.utils.ObjectFactories;
 import org.mule.modules.utils.pagination.PaginatedIterable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
@@ -45,21 +53,55 @@ import com.sun.jersey.oauth.signature.OAuthSecrets;
  */
 public class DefaultQuickBooksClient implements QuickBooksClient
 {
+    private static Logger sLog = LoggerFactory.getLogger(DefaultQuickBooksClient.class);
+    private static final String INTERNAL_GATEWAY_PROPS = "/../../../internal-gateway/src/main/resources/internal-gateway.properties";
+    private Properties properties;
     private final String baseUri;
-	private final String realmId;
+    private final String realmId;
     private final Client client;
     private final OAuthParameters params;
     private final OAuthSecrets secrets;
     private final ObjectFactory objectFactory;
     private String companyBaseUri = null;
     private Integer resultsPerPage = 100;
+    private MuleOAuthCredentialStorage storage;
     
+    private final String accessToken = null;
+    private final String accessSecret = null;
+    
+    /*
+        MuleOAuthCredentialStorage storage = new MuleOAuthCredentialStorage();
+        storage.setConsumerKey("e53dxxcn2r6b2buxrgxgdujnd7v");
+        storage.setConsumerSecret("secret");
+        
+        String keyStorePath = "/home/gaston/pruebasCerts/federatedconnectortestapp.zauberlabs.com.p12";
+        String keyStorePassword = "intuit";
+        String privateKeyPassword = "intuit";
+        String privateKeyAlias = "federatedconnectortestapp.zauberlabs.com";
+        String keyStoreType = "PKCS12";
+        String tokens = null;
+        try {
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
+            PrivateKey privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
+            tokens = new OAuthGateway(storage,
+                                      new RsaSha1MessageSigner(privateKey),
+                                      new XoAuthAuthorizationHeaderSigningStrategy())
+                        .getOAuthToken(System.getenv("serviceProviderId"),
+                                       System.getenv("authIdPseudonym"), 
+                                       System.getenv("realmIdPseudonym"));
+        } catch (Exception e) {
+        }
+        
+        System.out.println(tokens);
+        assertNotNull(tokens);
+     */
     public DefaultQuickBooksClient(final String realmId, final String consumerKey,
-                                   final String consumerSecret, final String baseUri)
+                                   /*final String consumerSecret,*/ final String baseUri)
     {
         Validate.notNull(realmId);
         Validate.notNull(consumerKey);
-        Validate.notNull(consumerSecret);
+        //Validate.notNull(consumerSecret);
         Validate.notEmpty(baseUri);
         
         this.objectFactory = new ObjectFactory();
@@ -67,12 +109,49 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         this.client = Client.create();
         
         this.params = new OAuthParameters().signatureMethod("HMAC-SHA1").consumerKey(consumerKey);
-        this.secrets = new OAuthSecrets().consumerSecret(consumerSecret);
+        //this.secrets = new OAuthSecrets().consumerSecret(consumerSecret);
         
-        this.baseUri= baseUri;
+        this.baseUri = baseUri;
+        
+        try 
+        {
+            loadProperties(INTERNAL_GATEWAY_PROPS);
+            storage = new MuleOAuthCredentialStorage();
+            storage.setConsumerKey(consumerKey);
+        } 
+        catch (Exception e) 
+        {
+            sLog.error("Can't locate properties file: " + INTERNAL_GATEWAY_PROPS, e);
+        }
     }
     
-	
+    private void getAccessTokensFromSaml()
+    {   
+        String keyStorePath = (String) properties.get("keystore.keystorePath");
+        String keyStorePassword = (String) properties.get("keystore.password");
+        String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
+        String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
+        String keyStoreType = (String) properties.get("keystore.keystoreType");
+        String tokens = null;
+        try 
+        {
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
+            PrivateKey privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
+            tokens = new OAuthGateway(storage,
+                                      new RsaSha1MessageSigner(privateKey),
+                                      new XoAuthAuthorizationHeaderSigningStrategy())
+                        .getOAuthToken(System.getenv("serviceProviderId"),
+                                       System.getenv("authIdPseudonym"), 
+                                       System.getenv("realmIdPseudonym"));
+        } 
+        catch (Exception e) 
+        {
+        }
+
+        
+    }
+
     /** @throws QuickBooksRuntimeException 
      * @see org.mule.modules.quickbooks.api.QuickBooksClient#create(java.lang.Object) */
     @Override
@@ -139,7 +218,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
         if (obj.getSyncToken() == null)
         {
-            obj.setSyncToken(((CdmBase) getObject(type, obj.getId(), accessKey, accessSecret)).getSyncToken());
+            obj.setSyncToken(getObject(type, obj.getId(), accessKey, accessSecret).getSyncToken());
         }
         String str = String.format("/resource/%s/v2/%s/%s",
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
@@ -147,7 +226,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             obj.getId().getValue());
         try
         {
-            T response = (T) getGateWay(accessKey, accessSecret).path(str)
+            T response = getGateWay(accessKey, accessSecret).path(str)
                 .type(MediaType.APPLICATION_XML)
                 .post(type.<T>getType(), ObjectFactories.createJaxbElement(obj, objectFactory));
             return response;
@@ -173,9 +252,9 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
         if (syncToken == null)
         {
-            syncToken = ((CdmBase) getObject(type, id, accessKey, accessSecret)).getSyncToken();
+            syncToken = getObject(type, id, accessKey, accessSecret).getSyncToken();
         }
-        T obj = (T)type.newInstance();
+        T obj = (T) type.newInstance();
         obj.setSyncToken(syncToken);
         obj.setId(id);
         
@@ -334,5 +413,40 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             throw new IllegalArgumentException("Results Per Page must be a number between 10 and 100");
         }    
         this.resultsPerPage = resultsPerPage;
+    }
+
+    private void loadProperties(String resourceName) throws IOException 
+    {
+        this.properties = new Properties();
+        InputStream fileInputStream = null;
+        try 
+        {
+            fileInputStream = this.getClass().getResourceAsStream(resourceName);
+            if (fileInputStream != null) 
+            {
+                this.properties.load(fileInputStream);
+            } 
+            else 
+            {
+                String name = resourceName.substring(1);
+                fileInputStream = new FileInputStream(name);
+                if (fileInputStream != null) 
+                {
+                    this.properties.load(fileInputStream);
+                } 
+                else 
+                {
+                    throw new IOException("Configuration resource " + resourceName + " not found");
+                }
+            }
+        } 
+        finally 
+        {
+            if (fileInputStream != null) 
+            {
+                fileInputStream.close();
+                fileInputStream = null;
+            }
+        }
     }
 }
