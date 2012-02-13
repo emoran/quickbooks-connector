@@ -15,11 +15,8 @@
 
 package org.mule.modules;
 
-import org.junit.Test;
+import org.junit.Ignore;
 import org.mule.api.MuleContext;
-import org.mule.api.processor.MessageProcessor;
-import org.mule.modules.quickbooks.config.QuickBooksModuleOAuth1Adapter;
-import org.mule.tck.AbstractMuleTestCase;
 import org.mule.tck.FunctionalTestCase;
 import org.mule.transport.http.HttpConnector;
 
@@ -29,7 +26,7 @@ import org.mule.transport.http.HttpConnector;
  * @author Gaston Ponti
  * @since Sep 6, 2011
  */
-
+@Ignore
 public class QuickBooksAccessGetTest extends FunctionalTestCase
 {
     @Override
@@ -39,17 +36,17 @@ public class QuickBooksAccessGetTest extends FunctionalTestCase
          muleContext.getRegistry().registerObject("connector.http.mule.default", new HttpConnector(muleContext));
         return muleContext;
     }
-    
+//    
     @Override
     protected void doSetUp() throws Exception 
     {
 //        MockitoAnnotations.initMocks(this);
 //        LinkedInClientFactory.setDefaultClient(mockClient);
 
-        QuickBooksModuleOAuth1Adapter moduleObject = muleContext.getRegistry().lookupObject(QuickBooksModuleOAuth1Adapter.class);
-        moduleObject.setAccessToken("lvprdUOzPD8jlLdCSgKGYubbNAwFh03PUHM34gWvXPYoPdgJ");
-        moduleObject.setAccessTokenSecret("B5zGyujNpe3dTwL4hHY5Cr0x1CRXqgukiAex9Aab");
-        moduleObject.setOauthVerifier("");
+        //QuickBooksModuleOAuth1Adapter moduleObject = muleContext.getRegistry().lookupObject(QuickBooksModuleOAuth1Adapter.class);
+        //moduleObject.setAccessToken("lvprdUOzPD8jlLdCSgKGYubbNAwFh03PUHM34gWvXPYoPdgJ");
+        //moduleObject.setAccessTokenSecret("B5zGyujNpe3dTwL4hHY5Cr0x1CRXqgukiAex9Aab");
+        //moduleObject.setOauthVerifier("");
 
 //        profileFields = new HashSet<ProfileField>(2);
 //        profileFields.add(ProfileField.LAST_NAME);
@@ -77,21 +74,21 @@ public class QuickBooksAccessGetTest extends FunctionalTestCase
     {
         return "mule-config.xml";
     }
-
-    @Test
-    public void testFlow() throws Exception
-    {
-        lookupFlowConstruct("TestForTheAccessPower").process(getTestEvent(""));
-        QuickBooksModuleOAuth1Adapter moduleObject = muleContext.getRegistry().lookupObject(QuickBooksModuleOAuth1Adapter.class);
-    }
-
-    /**
-     * Retrieve a flow by name from the registry
-     *
-     * @param name Name of the flow to retrieve
-     */
-    protected MessageProcessor lookupFlowConstruct(String name)
-    {
-        return (MessageProcessor) AbstractMuleTestCase.muleContext.getRegistry().lookupFlowConstruct(name);
-    }
+//
+//    @Test
+//    public void testFlow() throws Exception
+//    {
+//        lookupFlowConstruct("TestForTheAccessPower").process(getTestEvent(""));
+//        QuickBooksModuleOAuth1Adapter moduleObject = muleContext.getRegistry().lookupObject(QuickBooksModuleOAuth1Adapter.class);
+//    }
+//
+//    /**
+//     * Retrieve a flow by name from the registry
+//     *
+//     * @param name Name of the flow to retrieve
+//     */
+//    protected MessageProcessor lookupFlowConstruct(String name)
+//    {
+//        return (MessageProcessor) AbstractMuleTestCase.muleContext.getRegistry().lookupFlowConstruct(name);
+//    }
 }

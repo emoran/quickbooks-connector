@@ -24,9 +24,6 @@ import javax.annotation.PostConstruct;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
-import org.mule.api.annotations.oauth.OAuth;
-import org.mule.api.annotations.oauth.OAuthConsumerKey;
-import org.mule.api.annotations.oauth.OAuthConsumerSecret;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.quickbooks.api.DefaultQuickBooksClient;
@@ -66,9 +63,6 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  * @author MuleSoft, inc.
  */
 @Module(name = "quickbooks")
-@OAuth(requestTokenUrl = "https://oauth.intuit.com/oauth/v1/get_request_token",
-       accessTokenUrl = "https://oauth.intuit.com/oauth/v1/get_access_token",
-       authorizationUrl = "https://workplace.intuit.com/Connect/Begin")
 public class QuickBooksModule
 {   
     /**
@@ -87,7 +81,6 @@ public class QuickBooksModule
      * the UI of My Developer Center and save them in persistent storage.
      */
     @Configurable
-    @OAuthConsumerKey
     private String consumerKey;
     
     /**
@@ -97,7 +90,6 @@ public class QuickBooksModule
      * the UI of My Developer Center and save them in persistent storage.
      */
     @Configurable
-    @OAuthConsumerSecret
     private String consumerSecret;
     
     /**
@@ -179,7 +171,7 @@ public class QuickBooksModule
                 .with("openingBalanceDate", openingBalanceDate)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -212,7 +204,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -246,7 +238,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -279,7 +271,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -311,7 +303,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -346,7 +338,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
 
     /**
@@ -424,7 +416,7 @@ public class QuickBooksModule
                 .with("address", addresses)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -456,7 +448,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -490,7 +482,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -555,7 +547,7 @@ public class QuickBooksModule
                 .with("expenseAccountRef", expenseAccount)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -588,7 +580,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -624,7 +616,7 @@ public class QuickBooksModule
                 .with("type", type)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -657,7 +649,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -722,7 +714,7 @@ public class QuickBooksModule
                 .with("dateDiscountPercent", dateDiscountPercent)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -802,7 +794,7 @@ public class QuickBooksModule
                 .with("address", addresses)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -822,7 +814,7 @@ public class QuickBooksModule
     public Object getObject(EntityType type,
                             Map<String, Object> id)
     {
-        return client.getObject(type, unmap(IdType.class, id), accessToken, accessTokenSecret);
+        return client.getObject(type, unmap(IdType.class, id));
     }
 
     /**
@@ -893,7 +885,7 @@ public class QuickBooksModule
                 .with("openingBalanceDate", openingBalanceDate)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -938,7 +930,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -984,7 +976,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1029,7 +1021,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1073,7 +1065,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1119,7 +1111,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
 
     /**
@@ -1208,7 +1200,7 @@ public class QuickBooksModule
                 .with("address", addresses)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1252,7 +1244,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1297,7 +1289,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1373,7 +1365,7 @@ public class QuickBooksModule
                 .with("expenseAccountRef", expenseAccount)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1417,7 +1409,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1462,7 +1454,7 @@ public class QuickBooksModule
                 .with("type", type)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1506,7 +1498,7 @@ public class QuickBooksModule
                 .with("line", lines)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1582,7 +1574,7 @@ public class QuickBooksModule
                 .with("dateDiscountPercent", dateDiscountPercent)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1673,7 +1665,7 @@ public class QuickBooksModule
                 .with("address", addresses)
                 .build()
             )
-        , accessToken, accessTokenSecret);
+        );
     }
     
     /**
@@ -1698,7 +1690,7 @@ public class QuickBooksModule
                              Map<String, Object> id, 
                              @Optional String syncToken)
     {
-        client.deleteObject(type, unmap(IdType.class, id), syncToken, accessToken, accessTokenSecret);
+        client.deleteObject(type, unmap(IdType.class, id), syncToken);
     }
 
     /**
@@ -1734,7 +1726,7 @@ public class QuickBooksModule
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
-        return client.findObjects(type, queryFilter, querySort, accessToken, accessTokenSecret);
+        return client.findObjects(type, queryFilter, querySort);
     }
     
     /**
@@ -1745,7 +1737,7 @@ public class QuickBooksModule
     {
         if (client == null )
         {
-            client = new DefaultQuickBooksClient(realmId, consumerKey, consumerSecret, baseUri);
+            client = new DefaultQuickBooksClient(realmId, consumerKey, baseUri);
         }
     }
     

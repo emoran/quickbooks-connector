@@ -1,3 +1,13 @@
+/**
+ * Mule QuickBooks Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
 package org.mule.modules.quickbooks.api.gateway.oauth;
 
 import java.io.BufferedReader;
@@ -9,6 +19,8 @@ import java.io.UnsupportedEncodingException;
 import net.sf.staccatocommons.lang.SoftException;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
+import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
+import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
@@ -17,6 +29,12 @@ import oauth.signpost.http.HttpParameters;
 import oauth.signpost.signature.OAuthMessageSigner;
 import oauth.signpost.signature.SigningStrategy;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.mule.modules.quickbooks.api.gateway.OAuthCredentialsStorage;
 
 public class OAuthGateway 

@@ -1,4 +1,14 @@
 /**
+ * Mule QuickBooks Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
+/**
   Copyright (c) 2009 Intuit, Inc. 
 
   All rights reserved. This program and the accompanying materials
@@ -164,7 +174,7 @@ public class InternalGatewayServlet extends HttpServlet
             String intuitTicket = valueMap.get(WorkplaceAttributeType.TICKET.toString());
             String intuitAuthId = valueMap.get(WorkplaceAttributeType.AUTH_ID.toString());
             String intuitRealmIdPseudonym = valueMap.get(WorkplaceAttributeType.REALM_ID_PSEUDONYM.toString());
-            //String attrTargetUrl = valueMap.get(WorkplaceAttributeType.TARGET_URL.toString());
+            String attrTargetUrl = valueMap.get(WorkplaceAttributeType.TARGET_URL.toString());
 
             System.out.println("Processed SAML.");
             System.out.println(" ++ intuitTicket: " + intuitTicket);

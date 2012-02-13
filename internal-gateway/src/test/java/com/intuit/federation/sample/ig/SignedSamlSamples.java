@@ -1,13 +1,13 @@
 /**
- * Copyright (c) 2009 Intuit, Inc.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.opensource.org/licenses/eclipse-1.0.php
+ * Mule QuickBooks Connector
  *
- * Contributors:
- *    Intuit Partner Platform - initial contribution
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
  */
+
 package com.intuit.federation.sample.ig;
 
 import java.io.BufferedReader;

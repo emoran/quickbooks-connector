@@ -1,105 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.mule.modules</groupId>
-    <artifactId>mule-module-quick-books</artifactId>
-    <version>1.2-SNAPSHOT</version>
-    <packaging>mule-module</packaging>
-    <name>QuickBooks Cloud Connector</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.mule.modules</groupId>
+	<artifactId>mule-module-quick-books</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>mule-module</packaging>
+	<name>QuickBooks Cloud Connector</name>
 
-    <parent>
-        <groupId>org.mule.tools.devkit</groupId>
-        <artifactId>mule-devkit-parent</artifactId>
-        <version>3.2</version>
-    </parent>
+	<parent>
+		<groupId>org.mule.tools.devkit</groupId>
+		<artifactId>mule-devkit-parent</artifactId>
+		<version>3.2</version>
+	</parent>
 
-    <properties>
-        <mule.module.utils.version>1.0</mule.module.utils.version>
-    </properties>
+	<properties>
+		<mule.module.utils.version>1.0</mule.module.utils.version>
+	</properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <packageName>org.mule.modules.quickbooks.schema</packageName>
-                    <schemaDirectory>src/main/resources/schema</schemaDirectory>
-                    <schemaFiles>
-                        qbo.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitBaseExceptionTypes.xsd,IntuitCustomFieldCdmTypes.xsd,IntuitCdmBaseTypes.xsd,PartyCdmTypes.xsd,qbopayroll.xsd,QboReports.xsd
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<packageName>org.mule.modules.quickbooks.schema</packageName>
+					<schemaDirectory>src/main/resources/schema</schemaDirectory>
+					<schemaFiles>
+						qbo.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitBaseExceptionTypes.xsd,IntuitCustomFieldCdmTypes.xsd,IntuitCdmBaseTypes.xsd,PartyCdmTypes.xsd,qbopayroll.xsd,QboReports.xsd
                     </schemaFiles>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
-            <artifactId>oauth-client</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
-            <artifactId>oauth-signature</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>oauth.signpost</groupId>
-            <artifactId>signpost-core</artifactId>
-            <version>1.2.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mule.transports</groupId>
-            <artifactId>mule-transport-http</artifactId>
-            <version>${mule.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-modules-utils</artifactId>
-            <version>${mule.module.utils.version}</version>
-        </dependency>
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
+			<artifactId>oauth-client</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
+			<artifactId>oauth-signature</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>oauth.signpost</groupId>
+			<artifactId>signpost-core</artifactId>
+			<version>1.2.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-http</artifactId>
+			<version>${mule.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-modules-utils</artifactId>
+			<version>${mule.module.utils.version}</version>
+		</dependency>
+<!--   		<dependency>
+			<groupId>com.intuit.ipp.federation.ig</groupId>
+			<artifactId>saml-federation-filter</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<exclusions>
+			     <exclusion>
+			         <artifactId>log4j-over-slf4j</artifactId>
+			         <groupId>org.slf4j</groupId>
+			     </exclusion>
+			</exclusions>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>com.intuit.code.devkit</groupId>
+			<artifactId>ipp-java-devkit</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.intuit.code.oauth</groupId>
+			<artifactId>oAuthHelper-core</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.intuit.code.oauth</groupId>
+			<artifactId>oAuthHelper-web</artifactId>
+			<version>0.0.1</version> 
+		</dependency>
+	</dependencies>
 
 	<repositories>
-       <repository>
-           <id>mule-ee-snapshot</id>
-           <name>EE Repository Snapshots</name>
-           <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots</url>
-           <layout>default</layout>
-       </repository>
-       <repository>
-           <id>mule-ee</id>
-           <name>EE Repository Releases</name>
-           <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
-           <layout>default</layout>
-       </repository>
-   	</repositories>	
+		<repository>
+			<id>mule-ee-snapshot</id>
+			<name>EE Repository Snapshots</name>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>mule-ee</id>
+			<name>EE Repository Releases</name>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+			<layout>default</layout>
+		</repository>
+		<!-- code.intuit.com Maven release repository -->
+ 		<repository>
+			<id>cic-releases</id>
+			<name>code.intuit.com Release Repository</name>
+			<url>http://forge.code.intuit.com/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
+		<!--  code.intuit.com Maven snapshot repository -->
+		<repository>
+			<id>cic-snapshots</id>
+			<name>code.intuit.com Snapshot Repository</name>
+			<url>http://forge.code.intuit.com/nexus/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+<!-- 
+		<repository>
+			<id>intuit</id>
+			<url>http://forge.code.intuit.com/nexus/content/groups/dev</url>
+			<releases>
+			 <enabled>true</enabled>
+			</releases>
+			<snapshots>
+			 <enabled>true</enabled>
+			</snapshots>
+		</repository> -->
 
-    <scm>
-        <connection>scm:git:git://github.com:mulesoft/quickbooks-connector.git</connection>
-        <developerConnection>
+	</repositories>
+
+	<scm>
+		<connection>scm:git:git://github.com:mulesoft/quickbooks-connector.git</connection>
+		<developerConnection>
             scm:git:git@github.com:mulesoft/quickbooks-connector.git
         </developerConnection>
-        <url>http://github.com/mulesoft/quickbooks-connector</url>
-    </scm>
+		<url>http://github.com/mulesoft/quickbooks-connector</url>
+	</scm>
 
 </project>

@@ -59,27 +59,28 @@ public class QuickBooksModuleTestDriver
     public void setup()
     {
         module = new QuickBooksModule();
-        module.setConsumerKey("qyprdjjAVqbMjp3iQHH2SutYSm2min");
-        module.setConsumerSecret("6I5mTDGjthIeIWJm6iKx7Q4jAihKFd1yvFvkMi3B");
+        module.setConsumerKey("e53dxxcn2r6b2buxrgxgdujnd7v");
+        //module.setConsumerKey("qyprdjjAVqbMjp3iQHH2SutYSm2min");
+        //module.setConsumerSecret("6I5mTDGjthIeIWJm6iKx7Q4jAihKFd1yvFvkMi3B");
         module.setRealmId("212879793");
         module.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module.init();
         
-        accessToken = "lvprdUOzPD8jlLdCSgKGYubbNAwFh03PUHM34gWvXPYoPdgJ";
-        accessTokenSecret = "B5zGyujNpe3dTwL4hHY5Cr0x1CRXqgukiAex9Aab";
+        //accessToken = "lvprdUOzPD8jlLdCSgKGYubbNAwFh03PUHM34gWvXPYoPdgJ";
+        //accessTokenSecret = "B5zGyujNpe3dTwL4hHY5Cr0x1CRXqgukiAex9Aab";
 
     }
 
     @Test
     public void createAccount()
     {
-        Account acc = module.createAccount(accessToken, accessTokenSecret,
+        Account acc = module.createAccount(
             "Test Account", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
                 
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", acc.getId().getValue());
         
-        module.deleteObject(accessToken, accessTokenSecret, EntityType.ACCOUNT, idType, acc.getSyncToken());
+        module.deleteObject(EntityType.ACCOUNT, idType, acc.getSyncToken());
     }
     @Test
     public void createCustomerAnswersNonNullCustomerWithId() throws Exception
@@ -97,8 +98,7 @@ public class QuickBooksModuleTestDriver
         
         auxList.add(auxMap);
 
-        Customer c = module.createCustomer(accessToken, 
-            accessTokenSecret, 
+        Customer c = module.createCustomer( 
             "Susana", 
             "Susana", 
             "Melina", 
@@ -129,7 +129,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", c.getId().getValue());
         //idType.put("idDomain", c.getId().getIdDomain());
-        module.deleteObject(accessToken, accessTokenSecret, EntityType.CUSTOMER, idType, c.getSyncToken());
+        module.deleteObject(EntityType.CUSTOMER, idType, c.getSyncToken());
     }
     
     @Test
@@ -180,7 +180,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", "1");
         //idType.put("idDomain", c.getId().getIdDomain());
-        Customer c = (Customer) module.getObject(accessToken, accessTokenSecret, EntityType.CUSTOMER, idType);
+        Customer c = (Customer) module.getObject(EntityType.CUSTOMER, idType);
         
         assertEquals("Ricardo (deleted)", c.getName());
         assertNotNull(c.getId());
@@ -189,8 +189,7 @@ public class QuickBooksModuleTestDriver
     @Test
     public void modifyCustomer()
     {
-        Customer c1 = module.createCustomer(accessToken, 
-            accessTokenSecret,
+        Customer c1 = module.createCustomer(
             "Paul M. Jonhson", 
             "Paul", 
             "Mark", 
@@ -207,8 +206,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", c1.getId().getValue());
         
-        Customer c2 = module.updateCustomer(accessToken, 
-            accessTokenSecret, 
+        Customer c2 = module.updateCustomer(
             idType, 
             c1.getSyncToken(), 
             c1.getName(), 
@@ -222,17 +220,17 @@ public class QuickBooksModuleTestDriver
             new ArrayList<Map<String, Object>>()
         );
         
-        Customer c3 = (Customer) module.getObject(accessToken, accessTokenSecret, EntityType.CUSTOMER, idType);
+        Customer c3 = (Customer) module.getObject(EntityType.CUSTOMER, idType);
         
         assertEquals("Smith", c3.getFamilyName());
         
-        module.deleteObject(accessToken, accessTokenSecret, EntityType.CUSTOMER, idType, null);
+        module.deleteObject(EntityType.CUSTOMER, idType, null);
     }
     
     @Test
     public void getAllCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(accessToken, accessTokenSecret, EntityType.CUSTOMER, null, null);
+        Iterable it = module.findObjects(EntityType.CUSTOMER, null, null);
         
         for (Object c : it)
         {
@@ -243,7 +241,7 @@ public class QuickBooksModuleTestDriver
     @Test
     public void getSomeCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(accessToken, accessTokenSecret, EntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
+        Iterable it = module.findObjects(EntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
         
         for (Object c : it)
         {
@@ -254,8 +252,7 @@ public class QuickBooksModuleTestDriver
     @Test
     public void createSalesTermAnswersNonNullSalesTermWithId()
     {
-        SalesTerm salesTerm = module.createSalesTerm(accessToken,
-            accessTokenSecret, 
+        SalesTerm salesTerm = module.createSalesTerm(
             "SalesTerm1",
             3,
             null,
@@ -269,7 +266,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", salesTerm.getId().getValue());
         
-        module.deleteObject(accessToken, accessTokenSecret, EntityType.SALESTERM, idType, null);
+        module.deleteObject(EntityType.SALESTERM, idType, null);
     }
     
 }
