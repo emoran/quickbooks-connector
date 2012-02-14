@@ -182,16 +182,16 @@ public class InternalGatewayServlet extends HttpServlet
             System.out.println(" ++ intuitRealmIdPseudonym: " + intuitRealmIdPseudonym);
             //System.out.println(" ++ targetUrl: " + attrTargetUrl);    
 
-            if (!attrTargetUrl.contains("redirectInternal")) 
-            {
-                // We need to pass the SAML info to our application, which we'll do
-                // with URL params.
-                redirectToPartnerServiceApp(request, response, valueMap);
-            }
-            else
-            {
-                redirectToThisUsingIntuitAuthId(request, response, attrTargetUrl, intuitAuthId);
-            }
+//            if (!attrTargetUrl.contains("redirectInternal")) 
+//            {
+//                // We need to pass the SAML info to our application, which we'll do
+//                // with URL params.
+//                redirectToPartnerServiceApp(request, response, valueMap);
+//            }
+//            else
+//            {
+//                redirectToThisUsingIntuitAuthId(request, response, attrTargetUrl, intuitAuthId);
+//            }
         } 
         catch (Exception e) 
         {

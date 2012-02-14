@@ -23,9 +23,9 @@
         
 
   <groupId>com.intuit.ipp.federation.ig</groupId>
-  <artifactId>internal-gateway</artifactId>
+  <artifactId>internal-gateway-webapp</artifactId>
   <packaging>war</packaging>
-  <name>${project.version} - Internal Gateway</name>
+  <name>${project.version} - Internal Gateway Webapp</name>
 
   <dependencies>
     <dependency>

@@ -57,8 +57,8 @@ import com.sun.jersey.oauth.signature.OAuthSecrets;
  */
 public class DefaultQuickBooksClient implements QuickBooksClient
 {
-    private static Logger sLog = LoggerFactory.getLogger(DefaultQuickBooksClient.class);
-    private static final String INTERNAL_GATEWAY_PROPS = "/../../../internal-gateway/src/main/resources/internal-gateway.properties";
+    private static Logger sLog = LoggerFactory.getLogger(DefaultQuickBooksClient.class); //"/../../../../internal-gateway/src/main/resources/internal-gateway.properties"
+    private static final String INTERNAL_GATEWAY_PROPS = "/internal-gateway/src/main/resources/internal-gateway.properties";
     private Properties properties;
     private final String baseUri;
     private final String realmId;
@@ -73,12 +73,12 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     private String accessToken = null;
     private String accessSecret = null;
     
-    public DefaultQuickBooksClient(final String realmId, final String consumerKey,
-                                   /*final String consumerSecret,*/ final String baseUri)
+    public DefaultQuickBooksClient(final String realmId, final String appKey, final String consumerKey,
+                                   final String consumerSecret, final String baseUri)
     {
         Validate.notNull(realmId);
         Validate.notNull(consumerKey);
-        //Validate.notNull(consumerSecret);
+        Validate.notNull(consumerSecret);
         Validate.notEmpty(baseUri);
         
         this.objectFactory = new ObjectFactory();
@@ -86,7 +86,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         this.client = Client.create();
         
         this.params = new OAuthParameters().signatureMethod("HMAC-SHA1").consumerKey(consumerKey);
-        this.secrets = new OAuthSecrets(); //.consumerSecret(consumerSecret);
+        this.secrets = new OAuthSecrets().consumerSecret(consumerSecret);
         
         this.baseUri = baseUri;
         
@@ -94,7 +94,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         {
             loadProperties(INTERNAL_GATEWAY_PROPS);
             storage = new MuleOAuthCredentialStorage();
-            storage.setConsumerKey(consumerKey);
+            storage.setConsumerKey(appKey);
+            storage.setConsumerSecret("");
         } 
         catch (Exception e) 
         {
@@ -123,7 +124,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                                        System.getenv("realmIdPseudonym"));
             
             accessToken = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
-            accessSecret = tokens.substring(tokens.indexOf("oauth_token=") + 1);
+            accessSecret = tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
         } 
         catch (Exception e) 
         {
@@ -374,6 +375,18 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
         if (companyBaseUri == null)
         {
+//            OAuthConsumer consumer = new DefaultOAuthConsumer(
+//                params.getToken(),
+//                secrets.getConsumerSecret());
+//            
+//            consumer.setTokenWithSecret(accessKey, accessSecret);
+//
+//            URL url = new URL("https://workplace.intuit.com/db/main?a=API_GetUserInfo");
+//            HttpsURLConnection request = (HttpsURLConnection) url.openConnection();
+//
+//            consumer.sign(request);
+//            request.connect();
+            
             OAuthClientFilter oauthFilter = new OAuthClientFilter(client.getProviders(),
                 params.token(accessKey), secrets.tokenSecret(accessSecret));
             
@@ -432,7 +445,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                     throw new IOException("Configuration resource " + resourceName + " not found");
                 }
             }
-        } 
+        }
         finally 
         {
             if (fileInputStream != null) 

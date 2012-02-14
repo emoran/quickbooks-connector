@@ -93,6 +93,12 @@ public class QuickBooksModule
     private String consumerSecret;
     
     /**
+     * app key
+     */
+    @Configurable
+    private String appKey;
+    
+    /**
      * Quick-Books client. By default uses DefaultQuickbooksClient class.
      */
     @Configurable
@@ -1737,7 +1743,7 @@ public class QuickBooksModule
     {
         if (client == null )
         {
-            client = new DefaultQuickBooksClient(realmId, consumerKey, baseUri);
+            client = new DefaultQuickBooksClient(realmId, appKey, consumerKey, consumerSecret, baseUri);
         }
     }
     
@@ -1805,6 +1811,22 @@ public class QuickBooksModule
     {
         this.consumerSecret = consumerSecret;
     }
+    
+    /**
+     * @return the appKey
+     */
+    public String getAppKey()
+    {
+        return appKey;
+    }
+
+    /**
+     * @param appKey the appKey to set
+     */
+    public void setAppKey(String appKey)
+    {
+        this.appKey = appKey;
+    }
         
     @SuppressWarnings("unchecked")
     private <T> List<T> coalesceList(List<T> list )
@@ -1826,7 +1848,7 @@ public class QuickBooksModule
     {
         return baseUri;
     }
-    
+
     @SuppressWarnings("unchecked")
     private <A> A  unmap(Class<A> class1, Map<String, Object> id)
     {

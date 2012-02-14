@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.AccountDetail;
@@ -49,19 +49,19 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
 public class QuickBooksModuleTestDriver
 {
 
-    private QuickBooksModule module;
+    private static QuickBooksModule module;
     private String accessToken, accessTokenSecret;
 
     /**
      * 
      */
-    @Before
-    public void setup()
+    @BeforeClass
+    public static void setup()
     {
         module = new QuickBooksModule();
-        module.setConsumerKey("e53dxxcn2r6b2buxrgxgdujnd7v");
-        //module.setConsumerKey("qyprdjjAVqbMjp3iQHH2SutYSm2min");
-        //module.setConsumerSecret("6I5mTDGjthIeIWJm6iKx7Q4jAihKFd1yvFvkMi3B");
+        module.setAppKey("e53dxxcn2r6b2buxrgxgdujnd7v");
+        module.setConsumerKey("qyprdjjAVqbMjp3iQHH2SutYSm2min");
+        module.setConsumerSecret("6I5mTDGjthIeIWJm6iKx7Q4jAihKFd1yvFvkMi3B");
         module.setRealmId("212879793");
         module.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module.init();
