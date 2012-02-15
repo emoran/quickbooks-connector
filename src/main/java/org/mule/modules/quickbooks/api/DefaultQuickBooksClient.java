@@ -62,6 +62,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     private Properties properties;
     private final String baseUri;
     private final String realmId;
+    private final String appKey;
     private final Client client;
     private final OAuthParameters params;
     private final OAuthSecrets secrets;
@@ -69,6 +70,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     private String companyBaseUri = null;
     private Integer resultsPerPage = 100;
     private MuleOAuthCredentialStorage storage;
+    private PrivateKey privateKey;
     
     private String accessToken = null;
     private String accessSecret = null;
@@ -84,9 +86,10 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         this.objectFactory = new ObjectFactory();
         this.realmId = realmId;
         this.client = Client.create();
+        this.appKey = appKey;
         
-        this.params = new OAuthParameters().signatureMethod("HMAC-SHA1").consumerKey(consumerKey);
-        this.secrets = new OAuthSecrets().consumerSecret(consumerSecret);
+        this.params = new OAuthParameters().signatureMethod("HMAC-SHA1")/*.consumerKey(consumerKey)*/;
+        this.secrets = new OAuthSecrets()/*.consumerSecret(consumerSecret)*/;
         
         this.baseUri = baseUri;
         
@@ -115,7 +118,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         {
             KeyStore keyStore = KeyStore.getInstance(keyStoreType);
             keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
-            PrivateKey privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
+            privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
             tokens = new OAuthGateway(storage,
                                       new RsaSha1MessageSigner(privateKey),
                                       new XoAuthAuthorizationHeaderSigningStrategy())
@@ -387,8 +390,23 @@ public class DefaultQuickBooksClient implements QuickBooksClient
 //            consumer.sign(request);
 //            request.connect();
             
+//            this.params = new OAuthParameters().signatureMethod("RSA-SHA1").consumerKey(appKey);
+//            RsaSha1MessageSigner ms = new RsaSha1MessageSigner(privateKey);
+//            this.secrets = new OAuthSecrets().consumerSecret(privateKey);
+            
+//            CommonsHttpOAuthConsumer postConsumer = new CommonsHttpOAuthConsumer(appKey, "");
+//
+//            postConsumer.setMessageSigner(new RsaSha1MessageSigner(privateKey));
+//
+//            postConsumer.setTokenWithSecret(accessToken, "");
+//            
+//            postConsumer.sign(request);
+            
             OAuthClientFilter oauthFilter = new OAuthClientFilter(client.getProviders(),
                 params.token(accessKey), secrets.tokenSecret(accessSecret));
+            
+            
+//            OAuthSignature.sign(request, params, secrets);
             
             String str = String.format("%s/%s", baseUri, realmId);
             WebResource webResource = this.client.resource(str);
