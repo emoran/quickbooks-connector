@@ -25,9 +25,11 @@
     
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     
-    <quickbooks:config consumerKey="#[variable:consumerKey]"
-        consumerSecret="#[variable:consumerSecret]"
-        realmId="#[variable:realmId"/>
+    <quickbooks:config appKey="#[variable:consumerKey]"
+                       realmId="#[variable:realmId]"
+                       serviceProviderId="#[variable:serviceProviderId]"
+                       authIdPseudonym="#[variable:authIdPseudonym]"
+                       realmIdPseudonym="#[variable:realmIdPseudonym]"/>
 
      <!--<flow name="GetProfileByUrl">
         <http:inbound-endpoint host="localhost" port="9091" path="pointsOfInterest"/>

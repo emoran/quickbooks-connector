@@ -30,8 +30,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.modules.quickbooks.api.MapBuilder;
 import org.mule.modules.quickbooks.schema.Customer;
-import org.mule.modules.quickbooks.schema.ObjectFactory;
-import org.mule.modules.quickbooks.utils.ObjectFactories;
+import org.mule.modules.quickbooks.utils.QBOMessageUtils;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
@@ -47,7 +46,6 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
 
 public class ObjectFactoriesTest
 {
-    private ObjectFactory objectFactory;
     private MapObjectMapper mom;
     /**
      * 
@@ -55,7 +53,6 @@ public class ObjectFactoriesTest
     @Before
     public void setup()
     {
-        objectFactory = new ObjectFactory();
         mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.schema").build();
     }
 
@@ -96,7 +93,7 @@ public class ObjectFactoriesTest
             .build(), Customer.class
         );
         
-        JAXBElement<Customer> jaxbCustomer = ObjectFactories.createJaxbElement(customer, objectFactory);
+        JAXBElement<Customer> jaxbCustomer = QBOMessageUtils.createJaxbElement(customer);
         
         assertEquals("Ricardo", jaxbCustomer.getValue().getName());
     }

@@ -10,21 +10,39 @@
 
 package org.mule.modules.quickbooks.api;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+
+import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.mule.modules.quickbooks.EntityType;
 import org.mule.modules.quickbooks.api.Exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.gateway.MuleOAuthCredentialStorage;
@@ -32,23 +50,17 @@ import org.mule.modules.quickbooks.api.gateway.oauth.OAuthGateway;
 import org.mule.modules.quickbooks.schema.CdmBase;
 import org.mule.modules.quickbooks.schema.FaultInfo;
 import org.mule.modules.quickbooks.schema.IdType;
-import org.mule.modules.quickbooks.schema.ObjectFactory;
 import org.mule.modules.quickbooks.schema.QboUser;
 import org.mule.modules.quickbooks.schema.SearchResults;
-import org.mule.modules.quickbooks.utils.ObjectFactories;
+import org.mule.modules.quickbooks.utils.QBOMessageUtils;
+import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.intuit.ipp.oauth.signing.RsaSha1MessageSigner;
 import com.intuit.ipp.oauth.signing.XoAuthAuthorizationHeaderSigningStrategy;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.UniformInterfaceException;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
-import com.sun.jersey.oauth.client.OAuthClientFilter;
-import com.sun.jersey.oauth.signature.OAuthParameters;
-import com.sun.jersey.oauth.signature.OAuthSecrets;
+import com.intuit.platform.client.transport.HttpProtocolConstants;
 
 /**
  * 
@@ -57,39 +69,43 @@ import com.sun.jersey.oauth.signature.OAuthSecrets;
  */
 public class DefaultQuickBooksClient implements QuickBooksClient
 {
-    private static Logger sLog = LoggerFactory.getLogger(DefaultQuickBooksClient.class); //"/../../../../internal-gateway/src/main/resources/internal-gateway.properties"
+    private static Logger sLog = LoggerFactory.getLogger(DefaultQuickBooksClient.class);
     private static final String INTERNAL_GATEWAY_PROPS = "/internal-gateway/src/main/resources/internal-gateway.properties";
     private Properties properties;
     private final String baseUri;
     private final String realmId;
     private final String appKey;
-    private final Client client;
-    private final OAuthParameters params;
-    private final OAuthSecrets secrets;
-    private final ObjectFactory objectFactory;
     private String companyBaseUri = null;
     private Integer resultsPerPage = 100;
     private MuleOAuthCredentialStorage storage;
     private PrivateKey privateKey;
     
+    private final String serviceProviderId;
+    private final String authIdPseudonym;
+    private final String realmIdPseudonym;
+    
     private String accessToken = null;
     private String accessSecret = null;
     
-    public DefaultQuickBooksClient(final String realmId, final String appKey, final String consumerKey,
-                                   final String consumerSecret, final String baseUri)
+    public DefaultQuickBooksClient(final String realmId, 
+                                   final String appKey, 
+                                   final String baseUri, 
+                                   final String serviceProviderId, 
+                                   final String authIdPseudonym, 
+                                   final String realmIdPseudonym)
     {
+        Validate.notNull(serviceProviderId);
+        Validate.notNull(authIdPseudonym); 
+        Validate.notNull(realmIdPseudonym);
         Validate.notNull(realmId);
-        Validate.notNull(consumerKey);
-        Validate.notNull(consumerSecret);
+        Validate.notNull(appKey);
         Validate.notEmpty(baseUri);
         
-        this.objectFactory = new ObjectFactory();
         this.realmId = realmId;
-        this.client = Client.create();
         this.appKey = appKey;
-        
-        this.params = new OAuthParameters().signatureMethod("HMAC-SHA1")/*.consumerKey(consumerKey)*/;
-        this.secrets = new OAuthSecrets()/*.consumerSecret(consumerSecret)*/;
+        this.serviceProviderId = serviceProviderId;
+        this.authIdPseudonym = authIdPseudonym;
+        this.realmIdPseudonym = realmIdPseudonym;
         
         this.baseUri = baseUri;
         
@@ -106,36 +122,6 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         }
     }
     
-    private void getAccessTokensFromSaml()
-    {   
-        String keyStorePath = (String) properties.get("keystore.keystorePath");
-        String keyStorePassword = (String) properties.get("keystore.password");
-        String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
-        String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
-        String keyStoreType = (String) properties.get("keystore.keystoreType");
-        String tokens = null;
-        try 
-        {
-            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-            keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
-            privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
-            tokens = new OAuthGateway(storage,
-                                      new RsaSha1MessageSigner(privateKey),
-                                      new XoAuthAuthorizationHeaderSigningStrategy())
-                        .getOAuthToken(System.getenv("serviceProviderId"),
-                                       System.getenv("authIdPseudonym"), 
-                                       System.getenv("realmIdPseudonym"));
-            
-            accessToken = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
-            accessSecret = tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
-        } 
-        catch (Exception e) 
-        {
-        }
-
-        
-    }
-
     /** @throws QuickBooksRuntimeException 
      * @see org.mule.modules.quickbooks.api.QuickBooksClient#create(java.lang.Object) */
     @Override
@@ -143,26 +129,23 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     {
         Validate.notNull(obj);
         
-        if (accessSecret == null)
-        {
-            getAccessTokensFromSaml();
-        }
+        String str = String.format("%s/resource/%s/v2/%s",
+            getCompanyBaseURI(),
+            QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
+            realmId);
         
+        HttpUriRequest httpRequest = new HttpPost(str);
+        prepareToPost(obj, httpRequest);
+
+        Object response = makeARequestToQuickbooks(httpRequest);
         try
         {
-            String str = String.format("/resource/%s/v2/%s",
-                QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
-                realmId);
-            T response = getGateWay(accessToken, accessSecret).path(str)
-            .type(MediaType.APPLICATION_XML)
-            .post(type.<T>getType(), ObjectFactories.createJaxbElement(obj, objectFactory));
-            
-            return response;
+            return (T) response;
         }
-        catch (final UniformInterfaceException e)
+        catch (ClassCastException e)
         {
-            final FaultInfo fault = e.getResponse().getEntity(FaultInfo.class);
-            throw new QuickBooksRuntimeException(fault);
+          final FaultInfo fault = (FaultInfo) response;
+          throw new QuickBooksRuntimeException(fault);
         }
 
     }
@@ -175,24 +158,19 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         Validate.notNull(type);
         Validate.notNull(id);
         
-        if (accessSecret == null)
-        {
-            getAccessTokensFromSaml();
-        }
-        
-        String str = String.format("/resource/%s/v2/%s/%s",
-            type.getResouceName(), realmId, id.getValue());
+        String str = String.format("%s/resource/%s/v2/%s/%s",
+            getCompanyBaseURI(), type.getResouceName(), realmId, id.getValue());
+
+        HttpUriRequest httpRequest = new HttpGet(str);
+                
+        Object response = makeARequestToQuickbooks(httpRequest);
         try
         {
-            T response = getGateWay(accessToken, accessSecret).path(str)
-                .type(MediaType.APPLICATION_FORM_URLENCODED)
-                .get(type.<T>getType());
-            
-            return response;
+            return (T) response;
         }
-        catch (final UniformInterfaceException e)
+        catch (ClassCastException e)
         {
-            final FaultInfo fault = e.getResponse().getEntity(FaultInfo.class);
+            final FaultInfo fault = (FaultInfo) response;
             throw new QuickBooksRuntimeException(fault);
         }
     }
@@ -204,29 +182,27 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     {
         Validate.notNull(obj);
         
-        if (accessSecret == null)
-        {
-            getAccessTokensFromSaml();
-        }
-        
         if (obj.getSyncToken() == null)
         {
             obj.setSyncToken(getObject(type, obj.getId()).getSyncToken());
         }
-        String str = String.format("/resource/%s/v2/%s/%s",
+        String str = String.format("%s/resource/%s/v2/%s/%s",
+            getCompanyBaseURI(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             realmId,
             obj.getId().getValue());
+        
+        HttpUriRequest httpRequest = new HttpPost(str);
+        
+        prepareToPost(obj, httpRequest);
+        Object response = makeARequestToQuickbooks(httpRequest);
         try
         {
-            T response = getGateWay(accessToken, accessSecret).path(str)
-                .type(MediaType.APPLICATION_XML)
-                .post(type.<T>getType(), ObjectFactories.createJaxbElement(obj, objectFactory));
-            return response;
+            return (T) response;
         }
-        catch (final UniformInterfaceException e)
+        catch (ClassCastException e)
         {
-            final FaultInfo fault = e.getResponse().getEntity(FaultInfo.class);
+            final FaultInfo fault = (FaultInfo) response;
             throw new QuickBooksRuntimeException(fault);
         }
 
@@ -240,11 +216,6 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         Validate.notNull(type);
         Validate.notNull(id);
         
-        if (accessSecret == null)
-        {
-            getAccessTokensFromSaml();
-        }
-        
         if (syncToken == null)
         {
             syncToken = getObject(type, id).getSyncToken();
@@ -253,21 +224,13 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         obj.setSyncToken(syncToken);
         obj.setId(id);
         
-        String str = String.format("/resource/%s/v2/%s/%s",
-            type.getResouceName(), realmId, id.getValue());
+        String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
+            getCompanyBaseURI(), type.getResouceName(), realmId, id.getValue());
+        HttpUriRequest httpRequest = new HttpPost(str);
         
-        try
-        {
-            getGateWay(accessToken, accessSecret).path(str)
-                .queryParam("methodx", "delete")
-                .type(MediaType.APPLICATION_XML)
-                .post(type.<T>getType(), ObjectFactories.createJaxbElement(obj, objectFactory));
-        }
-        catch (final UniformInterfaceException e)
-        {
-            final FaultInfo fault = e.getResponse().getEntity(FaultInfo.class);
-            throw new QuickBooksRuntimeException(fault);
-        }
+        prepareToPost(obj, httpRequest);
+        
+        makeARequestToQuickbooks(httpRequest);
 
     }
 
@@ -304,7 +267,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                 protected Iterator<T> pageIterator(SearchResults page)
                 {
                     try
-                    {                        
+                    {          
                         return ((List<T>) page.getCdmCollections().getClass()
                                         .getMethod("get" + type.getSimpleName(), null)
                                         .invoke(page.getCdmCollections())).iterator();
@@ -325,109 +288,178 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                 
                 private SearchResults askAnEspecificPage(Integer pageNumber)
                 {
-                    if (accessSecret == null)
-                    {
-                        getAccessTokensFromSaml();
-                    }
-                    
-                    MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                     if (queryFilter != null)
                     {
-                        formData.add("Filter", queryFilter);
+                        nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
                     }
                     if (querySort != null)
                     {
-                        formData.add("Sort", querySort);
+                        nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
                     }
-                    formData.add("ResultsPerPage", resultsPerPage.toString());
-                    formData.add("PageNum", pageNumber.toString());
+                    nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", resultsPerPage.toString()));
+                    nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
+                    HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", getCompanyBaseURI(), type.getResouceName(), realmId));
+                    
+                    httpRequest.addHeader(HttpProtocolConstants.HEADER_CONTENT_TYPE, HttpProtocolConstants.CONTENT_TYPE_APPLICATION_URL_ENCODED);
                     try
-                    {    
-                        String str = String.format("/resource/%ss/v2/%s", type.getResouceName(), realmId); 
-                        SearchResults response = getGateWay(accessToken, accessSecret).path(str)
-                            .type(MediaType.APPLICATION_FORM_URLENCODED)
-                            .post(SearchResults.class, formData);
-                        
-                        return response;
-                    }
-                    catch (final UniformInterfaceException e)
                     {
-                        final FaultInfo fault = e.getResponse().getEntity(FaultInfo.class);
+                        ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    }
+                    catch (UnsupportedEncodingException e)
+                    {
+                        throw MuleSoftException.soften(e);
+                    } 
+                    
+                    Object response = makeARequestToQuickbooks(httpRequest);
+                    try
+                    {
+                        return (SearchResults) response;
+                    }
+                    catch (ClassCastException e)
+                    {
+                        final FaultInfo fault = (FaultInfo) response;
                         throw new QuickBooksRuntimeException(fault);
                     }
                 }
             };
     }
     
-    private WebResource getGateWay(String accessKey, String accessSecret)
-    {
-            String str = getCompanyBaseURI(accessKey, accessSecret);
-            OAuthClientFilter oauthFilter = new OAuthClientFilter(client.getProviders(),
-                params.token(accessKey), secrets.tokenSecret(accessSecret));
-            
-            WebResource webResource = this.client.resource(str);
-            webResource.addFilter(oauthFilter);
-            
-            return webResource;
-    }
-
-    private String getCompanyBaseURI(String accessKey, String accessSecret)
-    {
-        Validate.notNull(accessKey);
-        Validate.notNull(accessSecret);
-        
-        if (companyBaseUri == null)
+    private void getAccessTokensFromSaml()
+    {   
+        String keyStorePath = (String) properties.get("keystore.keystorePath");
+        String keyStorePassword = (String) properties.get("keystore.password");
+        String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
+        String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
+        String keyStoreType = (String) properties.get("keystore.keystoreType");
+        String tokens = null;
+        try 
         {
-//            OAuthConsumer consumer = new DefaultOAuthConsumer(
-//                params.getToken(),
-//                secrets.getConsumerSecret());
-//            
-//            consumer.setTokenWithSecret(accessKey, accessSecret);
-//
-//            URL url = new URL("https://workplace.intuit.com/db/main?a=API_GetUserInfo");
-//            HttpsURLConnection request = (HttpsURLConnection) url.openConnection();
-//
-//            consumer.sign(request);
-//            request.connect();
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
+            privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
+            tokens = new OAuthGateway(storage,
+                                      new RsaSha1MessageSigner(privateKey),
+                                      new XoAuthAuthorizationHeaderSigningStrategy())
+                        .getOAuthToken(serviceProviderId,
+                                       authIdPseudonym, 
+                                       realmIdPseudonym);
             
-//            this.params = new OAuthParameters().signatureMethod("RSA-SHA1").consumerKey(appKey);
-//            RsaSha1MessageSigner ms = new RsaSha1MessageSigner(privateKey);
-//            this.secrets = new OAuthSecrets().consumerSecret(privateKey);
-            
-//            CommonsHttpOAuthConsumer postConsumer = new CommonsHttpOAuthConsumer(appKey, "");
-//
-//            postConsumer.setMessageSigner(new RsaSha1MessageSigner(privateKey));
-//
-//            postConsumer.setTokenWithSecret(accessToken, "");
-//            
-//            postConsumer.sign(request);
-            
-            OAuthClientFilter oauthFilter = new OAuthClientFilter(client.getProviders(),
-                params.token(accessKey), secrets.tokenSecret(accessSecret));
-            
-            
-//            OAuthSignature.sign(request, params, secrets);
-            
-            String str = String.format("%s/%s", baseUri, realmId);
-            WebResource webResource = this.client.resource(str);
-            webResource.addFilter(oauthFilter);
-            
-            try
-            {
-                QboUser response = webResource.header("Content-Type", "application/xml")
-                    .type(MediaType.APPLICATION_XML)
-                    .get(QboUser.class);
-                
-                companyBaseUri = response.getCurrentCompany().getBaseURI();
-            }
-            catch (final UniformInterfaceException e)
-            {
-                final FaultInfo fault = e.getResponse().getEntity(FaultInfo.class);
-                throw new QuickBooksRuntimeException(fault);
-            }
+            accessSecret = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
+            accessToken = tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
+        } 
+        catch (Exception e) 
+        {
+            throw MuleSoftException.soften(e);
         }
 
+        
+    }
+    
+    private String getCompanyBaseURI()
+    {   
+        if (companyBaseUri == null)
+        {
+            HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", baseUri, realmId));
+        
+            QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest);
+        
+            companyBaseUri = qboUser.getCurrentCompany().getBaseURI();
+        }
+        
         return companyBaseUri;
+        
+        
+    }
+    
+    private Object makeARequestToQuickbooks(HttpUriRequest httpRequest)
+    {
+        if (accessToken == null)
+        {
+            getAccessTokensFromSaml();
+        }
+        
+        CommonsHttpOAuthConsumer postConsumer = new CommonsHttpOAuthConsumer(appKey, "");
+        postConsumer.setTokenWithSecret(accessToken, "");
+        postConsumer.setMessageSigner(new RsaSha1MessageSigner(privateKey));
+        postConsumer.setSigningStrategy(new XoAuthAuthorizationHeaderSigningStrategy());       
+        try
+        {
+            postConsumer.sign(httpRequest);
+        }
+        catch (Exception e)
+        {
+            throw MuleSoftException.soften(e);
+        }
+
+        HttpClient client = new DefaultHttpClient();
+        
+        BufferedReader br = null;
+        StringBuffer responseBody = null;
+        HttpResponse response = null;
+        int statusCode = HttpStatus.SC_OK;
+        try
+        {
+            response = client.execute(httpRequest);
+
+            br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            String readLine;
+            responseBody = new StringBuffer();
+            while((readLine = br.readLine()) != null) 
+            {
+                responseBody.append(readLine + System.getProperty("line.separator"));
+            }
+            statusCode = response.getStatusLine().getStatusCode();
+            if ( statusCode != HttpStatus.SC_OK)
+            {
+                throw MuleSoftException.soften(new RuntimeException(responseBody.toString()));
+            }   
+        } 
+        catch (Exception e) 
+        {
+            throw MuleSoftException.soften(e);
+        } 
+        finally 
+        {
+            if(br != null) 
+            {
+                try 
+                { 
+                    br.close(); 
+                } 
+                catch (Exception e) 
+                {
+                    throw MuleSoftException.soften(e);
+                }
+            }
+        }
+        try
+        {
+            return QBOMessageUtils.parseResponse(responseBody.toString());
+        }
+        catch (JAXBException e)
+        {
+            throw MuleSoftException.soften(e);
+        }
+    }
+    
+    private <T extends CdmBase> void prepareToPost(T obj, HttpUriRequest httpRequest)
+    {
+        JAXBElement<T> jaxbElement = QBOMessageUtils.createJaxbElement(obj);
+        try
+        {
+            httpRequest.addHeader(HttpProtocolConstants.HEADER_CONTENT_TYPE, HttpProtocolConstants.CONTENT_TYPE_APPLICATION_XML);
+            
+            String documentToPost = QBOMessageUtils.getXmlDocument(jaxbElement);
+            ByteArrayInputStream payLoad = new ByteArrayInputStream(documentToPost.getBytes());
+            InputStreamEntity entity = new InputStreamEntity(payLoad, -1);
+            ((HttpPost) httpRequest).setEntity(entity);
+
+        }
+        catch (Exception e)
+        {
+            throw MuleSoftException.soften(e);
+        }
     }
     
     public void setResultsPerPage(Integer resultsPerPage)

@@ -75,29 +75,28 @@ public class QuickBooksModule
     private String realmId;
     
     /**
-     * Unique consumer key for the app.  When you create an app on My Developer Center, 
-     * Intuit generates the values for the consumer key and secret, and then displays
-     * the values on the UI of My Developer Center. You manually copy these values from
-     * the UI of My Developer Center and save them in persistent storage.
-     */
-    @Configurable
-    private String consumerKey;
-    
-    /**
-     * Unique consumer secret for the app.  When you create an app on My Developer Center, 
-     * Intuit generates the values for the consumer key and secret, and then displays
-     * the values on the UI of My Developer Center. You manually copy these values from
-     * the UI of My Developer Center and save them in persistent storage.
-     */
-    @Configurable
-    private String consumerSecret;
-    
-    /**
      * app key
      */
     @Configurable
     private String appKey;
     
+    /**
+     * The service provider id
+     */
+    @Configurable
+    private String serviceProviderId;
+    
+    /**
+     * The auth id Pseudonym
+     */
+    @Configurable
+    private String authIdPseudonym;
+    
+    /**
+     * The realm id Pseudonym
+     */
+    @Configurable
+    private String realmIdPseudonym;
     /**
      * Quick-Books client. By default uses DefaultQuickbooksClient class.
      */
@@ -120,7 +119,7 @@ public class QuickBooksModule
     @Default("https://qbo.intuit.com/qbo1/rest/user/v2")
     @Configurable
     private String baseUri;
-
+    
     /**
      * Creates an Account.
      * The Account object represents the accounts that you keep to track your business.
@@ -1743,7 +1742,7 @@ public class QuickBooksModule
     {
         if (client == null )
         {
-            client = new DefaultQuickBooksClient(realmId, appKey, consumerKey, consumerSecret, baseUri);
+            client = new DefaultQuickBooksClient(realmId, appKey, baseUri, serviceProviderId, authIdPseudonym, realmIdPseudonym);
         }
     }
     
@@ -1766,50 +1765,6 @@ public class QuickBooksModule
     public String getRealmId()
     {
         return realmId;
-    }
-
-    /**
-     * Returns the consumerKey.
-     * 
-     * @return  with the consumerKey.
-     */
-    
-    public String getConsumerKey()
-    {
-        return consumerKey;
-    }
-
-    /**
-     * Sets the consumerKey. 
-     *
-     * @param consumerKey  with the consumerKey.
-     */
-    
-    public void setConsumerKey(String consumerKey)
-    {
-        this.consumerKey = consumerKey;
-    }
-
-    /**
-     * Returns the consumerSecret.
-     * 
-     * @return  with the consumerSecret.
-     */
-    
-    public String getConsumerSecret()
-    {
-        return consumerSecret;
-    }
-
-    /**
-     * Sets the consumerSecret. 
-     *
-     * @param consumerSecret  with the consumerSecret.
-     */
-    
-    public void setConsumerSecret(String consumerSecret)
-    {
-        this.consumerSecret = consumerSecret;
     }
     
     /**
@@ -1847,6 +1802,55 @@ public class QuickBooksModule
     public String getBaseUri()
     {
         return baseUri;
+    }
+
+    
+    /**
+     * @return the serviceProviderId
+     */
+    public String getServiceProviderId()
+    {
+        return serviceProviderId;
+    }
+
+    /**
+     * @param serviceProviderId the serviceProviderId to set
+     */
+    public void setServiceProviderId(String serviceProviderId)
+    {
+        this.serviceProviderId = serviceProviderId;
+    }
+
+    /**
+     * @return the authIdPseudonym
+     */
+    public String getAuthIdPseudonym()
+    {
+        return authIdPseudonym;
+    }
+
+    /**
+     * @param authIdPseudonym the authIdPseudonym to set
+     */
+    public void setAuthIdPseudonym(String authIdPseudonym)
+    {
+        this.authIdPseudonym = authIdPseudonym;
+    }
+
+    /**
+     * @return the realmIdPseudonym
+     */
+    public String getRealmIdPseudonym()
+    {
+        return realmIdPseudonym;
+    }
+
+    /**
+     * @param realmIdPseudonym the realmIdPseudonym to set
+     */
+    public void setRealmIdPseudonym(String realmIdPseudonym)
+    {
+        this.realmIdPseudonym = realmIdPseudonym;
     }
 
     @SuppressWarnings("unchecked")

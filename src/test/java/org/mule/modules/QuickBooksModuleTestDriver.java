@@ -50,7 +50,6 @@ public class QuickBooksModuleTestDriver
 {
 
     private static QuickBooksModule module;
-    private String accessToken, accessTokenSecret;
 
     /**
      * 
@@ -59,15 +58,13 @@ public class QuickBooksModuleTestDriver
     public static void setup()
     {
         module = new QuickBooksModule();
-        module.setAppKey("e53dxxcn2r6b2buxrgxgdujnd7v");
-        module.setConsumerKey("qyprdjjAVqbMjp3iQHH2SutYSm2min");
-        module.setConsumerSecret("6I5mTDGjthIeIWJm6iKx7Q4jAihKFd1yvFvkMi3B");
-        module.setRealmId("212879793");
+        module.setAppKey(System.getenv("appKey"));
+        module.setAuthIdPseudonym(System.getenv("authIdPseudonym"));
+        module.setRealmIdPseudonym(System.getenv("realmIdPseudonym"));
+        module.setServiceProviderId(System.getenv("serviceProviderId"));
+        module.setRealmId(System.getenv("realmId"));
         module.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module.init();
-        
-        //accessToken = "lvprdUOzPD8jlLdCSgKGYubbNAwFh03PUHM34gWvXPYoPdgJ";
-        //accessTokenSecret = "B5zGyujNpe3dTwL4hHY5Cr0x1CRXqgukiAex9Aab";
 
     }
 
