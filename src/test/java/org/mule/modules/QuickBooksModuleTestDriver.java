@@ -30,6 +30,7 @@ import org.mule.modules.quickbooks.AccountDetail;
 import org.mule.modules.quickbooks.EntityType;
 import org.mule.modules.quickbooks.QuickBooksModule;
 import org.mule.modules.quickbooks.api.MapBuilder;
+import org.mule.modules.quickbooks.api.Exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.schema.Account;
 import org.mule.modules.quickbooks.schema.Customer;
 import org.mule.modules.quickbooks.schema.PhysicalAddress;
@@ -264,6 +265,23 @@ public class QuickBooksModuleTestDriver
         idType.put("value", salesTerm.getId().getValue());
         
         module.deleteObject(EntityType.SALESTERM, idType, null);
+    }
+    
+    @Test(expected = QuickBooksRuntimeException.class)
+    public void createAccountBAD()
+    {
+        QuickBooksModule module2;
+        module2 = new QuickBooksModule();
+        module2.setAppKey(System.getenv("appKey"));
+        module2.setAuthIdPseudonym(System.getenv("authIdPseudonym"));
+        module2.setRealmIdPseudonym(System.getenv("realmIdPseudonym"));
+        module2.setServiceProviderId(System.getenv("serviceProviderId"));
+        module2.setRealmId("abcde");
+        module2.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
+        module2.init();
+        
+        Account acc = module2.createAccount(
+            "Test Account", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
     }
     
 }

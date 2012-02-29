@@ -137,17 +137,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         HttpUriRequest httpRequest = new HttpPost(str);
         prepareToPost(obj, httpRequest);
 
-        Object response = makeARequestToQuickbooks(httpRequest);
-        try
-        {
-            return (T) response;
-        }
-        catch (ClassCastException e)
-        {
-          final FaultInfo fault = (FaultInfo) response;
-          throw new QuickBooksRuntimeException(fault);
-        }
-
+        return (T) makeARequestToQuickbooks(httpRequest);
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -163,16 +153,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
 
         HttpUriRequest httpRequest = new HttpGet(str);
                 
-        Object response = makeARequestToQuickbooks(httpRequest);
-        try
-        {
-            return (T) response;
-        }
-        catch (ClassCastException e)
-        {
-            final FaultInfo fault = (FaultInfo) response;
-            throw new QuickBooksRuntimeException(fault);
-        }
+        return (T) makeARequestToQuickbooks(httpRequest);
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -195,17 +176,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         HttpUriRequest httpRequest = new HttpPost(str);
         
         prepareToPost(obj, httpRequest);
-        Object response = makeARequestToQuickbooks(httpRequest);
-        try
-        {
-            return (T) response;
-        }
-        catch (ClassCastException e)
-        {
-            final FaultInfo fault = (FaultInfo) response;
-            throw new QuickBooksRuntimeException(fault);
-        }
-
+        
+        return (T) makeARequestToQuickbooks(httpRequest);
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -311,16 +283,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                         throw MuleSoftException.soften(e);
                     } 
                     
-                    Object response = makeARequestToQuickbooks(httpRequest);
-                    try
-                    {
-                        return (SearchResults) response;
-                    }
-                    catch (ClassCastException e)
-                    {
-                        final FaultInfo fault = (FaultInfo) response;
-                        throw new QuickBooksRuntimeException(fault);
-                    }
+                    return (SearchResults) makeARequestToQuickbooks(httpRequest);
                 }
             };
     }
@@ -347,6 +310,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             
             accessSecret = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
             accessToken = tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
+            
+            //accessToken = "babababa";
         } 
         catch (Exception e) 
         {
@@ -412,7 +377,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             statusCode = response.getStatusLine().getStatusCode();
             if ( statusCode != HttpStatus.SC_OK)
             {
-                throw MuleSoftException.soften(new RuntimeException(responseBody.toString()));
+                FaultInfo fault = (FaultInfo) QBOMessageUtils.parseResponse(responseBody.toString());
+                throw new QuickBooksRuntimeException(fault);
             }   
         } 
         catch (Exception e) 
