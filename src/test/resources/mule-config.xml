@@ -25,11 +25,7 @@
     
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     
-    <quickbooks:config appKey="#[variable:consumerKey]"
-                       realmId="#[variable:realmId]"
-                       serviceProviderId="#[variable:serviceProviderId]"
-                       authIdPseudonym="#[variable:authIdPseudonym]"
-                       realmIdPseudonym="#[variable:realmIdPseudonym]"/>
+    <quickbooks:config />
 
      <!--<flow name="GetProfileByUrl">
         <http:inbound-endpoint host="localhost" port="9091" path="pointsOfInterest"/>
@@ -41,7 +37,10 @@
     </flow>-->
     
     <flow name="TestForTheAccessPower">
-        <quickbooks:create-account name="String Unique"
+        <quickbooks:create-account realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String Unique"
                                    subtype="VEHICLES"
                                    openingBalanceDate="2010-09-13T01:18:14-07:00">
         </quickbooks:create-account>
@@ -49,7 +48,10 @@
 
     <flow name="Create">
         
-        <quickbooks:create-account name="String Unique"
+        <quickbooks:create-account realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String Unique"
                                    desc="String Optional"
                                    subtype="VEHICLES"
                                    acctNum="String Optional"
@@ -60,7 +62,10 @@
             <quickbooks:account-parent-id ref="#[variable:foo]"/>
         </quickbooks:create-account>
                                    
-        <quickbooks:create-bill >
+        <quickbooks:create-bill realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header >
                 <quickbooks:doc-number>31233123</quickbooks:doc-number>
                 <quickbooks:msg>dfsd</quickbooks:msg>
@@ -73,27 +78,42 @@
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-bill>
                                 
-        <quickbooks:create-bill-payment>
+        <quickbooks:create-bill-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-bill-payment>
                                         
-        <quickbooks:create-cash-purchase>
+        <quickbooks:create-cash-purchase realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-cash-purchase>
                                          
-        <quickbooks:create-check>
+        <quickbooks:create-check realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-check>                     
         
-        <quickbooks:create-credit-card-charge>
+        <quickbooks:create-credit-card-charge realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-credit-card-charge>
                                               
-        <quickbooks:create-customer name="String Optional"
+        <quickbooks:create-customer realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String Optional"
                                     givenName="String Optional"
 						            middleName="String Optional"
 						            familyName="String Optional"
@@ -113,17 +133,26 @@
             salesTermId="idType Optional"-->
         </quickbooks:create-customer>
         
-        <quickbooks:create-estimate>
+        <quickbooks:create-estimate realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-estimate>
                                     
-        <quickbooks:create-invoice>
+        <quickbooks:create-invoice realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-invoice>
                                    
-        <quickbooks:create-item name="String EmptyDefault"
+        <quickbooks:create-item realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String EmptyDefault"
                                 desc="String Optional"
                                 taxable="true"
                                 itemParentName="String N/A"
@@ -141,20 +170,32 @@
             expenseAccountRef="Map"> -->        
         </quickbooks:create-item>
                         
-        <quickbooks:create-payment>
+        <quickbooks:create-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-payment>
                                    
-        <quickbooks:create-payment-method name="String"
+        <quickbooks:create-payment-method realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String"
                                           type="String Optional NON_CREDIT_CARDdefault"/>
                                           
-        <quickbooks:create-sales-receipt>
+        <quickbooks:create-sales-receipt realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   >
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:create-sales-receipt>
                                          
-        <quickbooks:create-sales-term name="String"
+        <quickbooks:create-sales-term realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String"
                                       dueDays="2"
                                       discountDays="2"
                                       discountPercent="9"
@@ -170,7 +211,10 @@
                                       discountDayOfMonth Integer Positive Optional
                                       dateDiscountPercent Decimal Optional-->
                                       
-        <quickbooks:create-vendor name="String"
+        <quickbooks:create-vendor realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String"
                                   givenName="String"
                                   middleName="String Optional"
                                   familyName="String Optional"
@@ -194,7 +238,10 @@
     </flow>
     
     <flow name="GetObject">
-        <quickbooks:get-object type="INVOICE">
+        <quickbooks:get-object realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   type="INVOICE">
             <quickbooks:id ref="#[variable:id]"></quickbooks:id>
         </quickbooks:get-object>
     </flow>
@@ -202,7 +249,10 @@
     <flow name="Update">
         <!-- El update pisa el objeto, osea, si falta un campo en el update ese
         objeto va a dejar de tenerlo -->
-        <quickbooks:update-account name="String Unique"
+        <quickbooks:update-account realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String Unique"
                                    desc="String Optional"
                                    subtype="VEHICLES"
                                    acctNum="String Optional"
@@ -213,7 +263,10 @@
             <quickbooks:account-parent-id ref=" "></quickbooks:account-parent-id>
         </quickbooks:update-account>
                                    
-        <quickbooks:update-bill syncToken="1">
+        <quickbooks:update-bill realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header >
                 <quickbooks:doc-number>31233123</quickbooks:doc-number>
@@ -227,31 +280,46 @@
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-bill>
                                 
-        <quickbooks:update-bill-payment syncToken="1">
+        <quickbooks:update-bill-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-bill-payment>
                                         
-        <quickbooks:update-cash-purchase syncToken="1">
+        <quickbooks:update-cash-purchase realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-cash-purchase>
                                          
-        <quickbooks:update-check syncToken="1">
+        <quickbooks:update-check realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-check>                     
         
-        <quickbooks:update-credit-card-charge syncToken="1">
+        <quickbooks:update-credit-card-charge realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-credit-card-charge>
                                               
-        <quickbooks:update-customer name="String Optional"
+        <quickbooks:update-customer realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String Optional"
                                     givenName="String Optional"
                                     middleName="String Optional"
                                     familyName="String Optional"
@@ -268,19 +336,28 @@
             <quickbooks:addresses ref=" "></quickbooks:addresses>
             </quickbooks:update-customer>
         
-        <quickbooks:update-estimate syncToken="1">
+        <quickbooks:update-estimate realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-estimate>
                                     
-        <quickbooks:update-invoice syncToken="1">
+        <quickbooks:update-invoice realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-invoice>
                                    
-        <quickbooks:update-item name="String EmptyDefault"
+        <quickbooks:update-item realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String EmptyDefault"
                                 desc="String Optional"
                                 taxable="true"
                                 itemParentName="String N/A"
@@ -294,25 +371,37 @@
             <quickbooks:expense-account ref=" "></quickbooks:expense-account>
         </quickbooks:update-item>
                         
-        <quickbooks:update-payment syncToken="1">
+        <quickbooks:update-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-payment>
                                    
-        <quickbooks:update-payment-method name="String"
+        <quickbooks:update-payment-method realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String"
                                           type="String Optional NON_CREDIT_CARDdefault"
                                           syncToken="1">
             <quickbooks:id ref=" "/>
         </quickbooks:update-payment-method>
                                           
-        <quickbooks:update-sales-receipt syncToken="1">
+        <quickbooks:update-sales-receipt realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:header ref=" "></quickbooks:header>
             <quickbooks:lines ref=" "></quickbooks:lines>
         </quickbooks:update-sales-receipt>
                                          
-        <quickbooks:update-sales-term name="String"
+        <quickbooks:update-sales-term realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String"
                                       dueDays="2"
                                       discountDays="2"
                                       discountPercent="9"
@@ -324,7 +413,10 @@
             <quickbooks:id ref=" "/>
         </quickbooks:update-sales-term>
                                       
-        <quickbooks:update-vendor name="String"
+        <quickbooks:update-vendor realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   name="String"
                                   givenName="String"
                                   middleName="String Optional"
                                   familyName="String Optional"
@@ -342,13 +434,19 @@
     </flow>
 
     <flow name="DeleteObject">
-        <quickbooks:delete-object type="INVOICE" syncToken="2">
+        <quickbooks:delete-object realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   type="INVOICE" syncToken="2">
             <quickbooks:id ref="#[variable:id]"></quickbooks:id>
         </quickbooks:delete-object>
     </flow>
     
     <flow name="FindObjects">
-        <quickbooks:find-objects type="ACCOUNT"
+        <quickbooks:find-objects realmId="dasda"
+                                   appKey="dasdasd"
+                                   accessToken="dasdasd"
+                                   type="ACCOUNT"
                                  queryFilter="#[header:queryFilterString]"
                                  querySort="#[header:querySortString]"/>
     </flow>

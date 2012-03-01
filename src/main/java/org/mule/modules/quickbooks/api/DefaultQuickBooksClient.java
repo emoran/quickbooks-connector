@@ -70,39 +70,22 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway/src/main/resources/internal-gateway.properties";
     private Properties properties;
     private final String baseUri;
-    private final String realmId;
-    private final String appKey;
+    //private final String realmId;
+    //private final String appKey;
     private String companyBaseUri = null;
     private Integer resultsPerPage = 100;
-    //private MuleOAuthCredentialStorage storage;
     private PrivateKey privateKey;
     
-    private final String serviceProviderId;
-    private final String authIdPseudonym;
-    private final String realmIdPseudonym;
+    private String serviceProviderId;
+    //private final String authIdPseudonym;
+    //private final String realmIdPseudonym;
     
-    private String accessToken = null;
-    private String accessSecret = null;
+    //private String accessToken = null;
+    //private String accessSecret = null;
     
-    public DefaultQuickBooksClient(final String realmId, 
-                                   final String appKey, 
-                                   final String baseUri, 
-                                   final String serviceProviderId, 
-                                   final String authIdPseudonym, 
-                                   final String realmIdPseudonym)
+    public DefaultQuickBooksClient(final String baseUri)
     {
-        Validate.notNull(serviceProviderId);
-        Validate.notNull(authIdPseudonym); 
-        Validate.notNull(realmIdPseudonym);
-        Validate.notNull(realmId);
-        Validate.notNull(appKey);
         Validate.notEmpty(baseUri);
-        
-        this.realmId = realmId;
-        this.appKey = appKey;
-        this.serviceProviderId = serviceProviderId;
-        this.authIdPseudonym = authIdPseudonym;
-        this.realmIdPseudonym = realmIdPseudonym;
         
         this.baseUri = baseUri;
         
@@ -120,50 +103,62 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     /** @throws QuickBooksRuntimeException 
      * @see org.mule.modules.quickbooks.api.QuickBooksClient#create(java.lang.Object) */
     @Override
-    public <T extends CdmBase> T create(final EntityType type, T obj)
+    public <T extends CdmBase> T create(final String realmId,
+                                        final String appKey,
+                                        final String accessToken,
+                                        final EntityType type,
+                                        T obj)
     {
         Validate.notNull(obj);
         
         String str = String.format("%s/resource/%s/v2/%s",
-            getCompanyBaseURI(),
+            getCompanyBaseURI(realmId, appKey, accessToken),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             realmId);
         
         HttpUriRequest httpRequest = new HttpPost(str);
         prepareToPost(obj, httpRequest);
 
-        return (T) makeARequestToQuickbooks(httpRequest);
+        return (T) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
     }
 
     /** @throws QuickBooksRuntimeException 
      * @see org.mule.modules.quickbooks.api.QuickBooksClient#getObject() */
     @Override
-    public <T extends CdmBase> T getObject(final EntityType type, final IdType id)
+    public <T extends CdmBase> T getObject(final String realmId,
+                                           final String appKey,
+                                           final String accessToken,
+                                           final EntityType type,
+                                           final IdType id)
     {   
         Validate.notNull(type);
         Validate.notNull(id);
         
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            getCompanyBaseURI(), type.getResouceName(), realmId, id.getValue());
+            getCompanyBaseURI(realmId, appKey, accessToken), type.getResouceName(), realmId, id.getValue());
 
         HttpUriRequest httpRequest = new HttpGet(str);
                 
-        return (T) makeARequestToQuickbooks(httpRequest);
+        return (T) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
     }
 
     /** @throws QuickBooksRuntimeException 
      * @see org.mule.modules.quickbooks.api.QuickBooksClient#update(java.lang.String) */
     @Override
-    public <T extends CdmBase> T update(final EntityType type, T obj)
+    public <T extends CdmBase> T update(final String realmId,
+                                        final String appKey,
+                                        final String accessToken,
+                                        final EntityType type,
+                                        T obj)
     {
         Validate.notNull(obj);
         
         if (obj.getSyncToken() == null)
         {
-            obj.setSyncToken(getObject(type, obj.getId()).getSyncToken());
+            obj.setSyncToken(getObject(realmId, appKey, accessToken, type, obj.getId()).getSyncToken());
         }
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            getCompanyBaseURI(),
+            getCompanyBaseURI(realmId, appKey, accessToken),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             realmId,
             obj.getId().getValue());
@@ -172,32 +167,37 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
         prepareToPost(obj, httpRequest);
         
-        return (T) makeARequestToQuickbooks(httpRequest);
+        return (T) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
     }
 
     /** @throws QuickBooksRuntimeException 
      * @see org.mule.modules.quickbooks.api.QuickBooksClient#deleteObject(java.lang.Object) */
     @Override
-    public <T extends CdmBase> void deleteObject(final EntityType type, final IdType id, String syncToken)
+    public <T extends CdmBase> void deleteObject(final String realmId,
+                                                 final String appKey,
+                                                 final String accessToken,
+                                                 final EntityType type,
+                                                 final IdType id,
+                                                 String syncToken)
     {   
         Validate.notNull(type);
         Validate.notNull(id);
         
         if (syncToken == null)
         {
-            syncToken = getObject(type, id).getSyncToken();
+            syncToken = getObject(realmId, appKey, accessToken, type, id).getSyncToken();
         }
         T obj = (T) type.newInstance();
         obj.setSyncToken(syncToken);
         obj.setId(id);
         
         String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
-            getCompanyBaseURI(), type.getResouceName(), realmId, id.getValue());
+            getCompanyBaseURI(realmId, appKey, accessToken), type.getResouceName(), realmId, id.getValue());
         HttpUriRequest httpRequest = new HttpPost(str);
         
         prepareToPost(obj, httpRequest);
         
-        makeARequestToQuickbooks(httpRequest);
+        makeARequestToQuickbooks(httpRequest, appKey, accessToken);
 
     }
 
@@ -205,7 +205,12 @@ public class DefaultQuickBooksClient implements QuickBooksClient
      * @param type 
      * @see org.mule.modules.quickbooks.api.QuickBooksClient#findObjects() */
     @Override
-    public <T extends CdmBase> Iterable<T> findObjects(final EntityType type, final String queryFilter, final String querySort)
+    public <T extends CdmBase> Iterable<T> findObjects(final String realmId, 
+                                                       final String appKey,
+                                                       final String accessToken,
+                                                       final EntityType type, 
+                                                       final String queryFilter, 
+                                                       final String querySort)
     {
         Validate.notNull(type);
         
@@ -266,9 +271,11 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                     }
                     nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", resultsPerPage.toString()));
                     nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
-                    HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", getCompanyBaseURI(), type.getResouceName(), realmId));
+                    HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", 
+                        getCompanyBaseURI(realmId, appKey, accessToken), type.getResouceName(), realmId));
                     
-                    httpRequest.addHeader(HttpProtocolConstants.HEADER_CONTENT_TYPE, HttpProtocolConstants.CONTENT_TYPE_APPLICATION_URL_ENCODED);
+                    httpRequest.addHeader(HttpProtocolConstants.HEADER_CONTENT_TYPE, 
+                        HttpProtocolConstants.CONTENT_TYPE_APPLICATION_URL_ENCODED);
                     try
                     {
                         ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -278,24 +285,17 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                         throw MuleSoftException.soften(e);
                     } 
                     
-                    return (SearchResults) makeARequestToQuickbooks(httpRequest);
+                    return (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
                 }
             };
     }
     
-    private void getAccessTokensFromSaml()
+    @Override
+    public String getAccessTokensFromSaml(String appKey, String realmIdPseudonym, String authIdPseudonym)
     {   
-        String keyStorePath = (String) properties.get("keystore.keystorePath");
-        String keyStorePassword = (String) properties.get("keystore.password");
-        String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
-        String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
-        String keyStoreType = (String) properties.get("keystore.keystoreType");
         String tokens = null;
         try 
         {
-            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-            keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
-            privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
             MuleOAuthCredentialStorage storage = new MuleOAuthCredentialStorage();
             storage.setConsumerKey(appKey);
             storage.setConsumerSecret("");
@@ -306,8 +306,10 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                                        authIdPseudonym, 
                                        realmIdPseudonym);
             
-            accessSecret = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
-            accessToken = tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
+            //The accessSecret it's not used by Quickbooks SAML, but it send it anyway
+            //String accessSecret = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
+            
+            return tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
         } 
         catch (Exception e) 
         {
@@ -317,13 +319,13 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
     }
     
-    private String getCompanyBaseURI()
+    private String getCompanyBaseURI(String realmId, String appKey, String accessToken)
     {   
         if (companyBaseUri == null)
         {
             HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", baseUri, realmId));
         
-            QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest);
+            QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
         
             companyBaseUri = qboUser.getCurrentCompany().getBaseURI();
         }
@@ -333,12 +335,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
     }
     
-    private Object makeARequestToQuickbooks(HttpUriRequest httpRequest)
+    private Object makeARequestToQuickbooks(HttpUriRequest httpRequest, String appKey, String accessToken)
     {
-        if (accessToken == null)
-        {
-            getAccessTokensFromSaml();
-        }
         //httpRequest.addHeader("Accept-Enconding", "gzip,deflate");
         
         CommonsHttpOAuthConsumer postConsumer = new CommonsHttpOAuthConsumer(appKey, "");
@@ -462,6 +460,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
         String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
         String keyStoreType = (String) properties.get("keystore.keystoreType");
+        serviceProviderId = (String) properties.get("serviceProviderId");
+        
         try
         {
             KeyStore keyStore = KeyStore.getInstance(keyStoreType);
