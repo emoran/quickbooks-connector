@@ -55,8 +55,6 @@ import org.mule.modules.quickbooks.schema.SearchResults;
 import org.mule.modules.quickbooks.utils.QBOMessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.intuit.ipp.oauth.signing.RsaSha1MessageSigner;
 import com.intuit.ipp.oauth.signing.XoAuthAuthorizationHeaderSigningStrategy;
@@ -69,15 +67,14 @@ import com.intuit.platform.client.transport.HttpProtocolConstants;
  */
 public class DefaultQuickBooksClient implements QuickBooksClient
 {
-    private static Logger sLog = LoggerFactory.getLogger(DefaultQuickBooksClient.class);
-    private static final String INTERNAL_GATEWAY_PROPS = "/internal-gateway/src/main/resources/internal-gateway.properties";
+    private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway/src/main/resources/internal-gateway.properties";
     private Properties properties;
     private final String baseUri;
     private final String realmId;
     private final String appKey;
     private String companyBaseUri = null;
     private Integer resultsPerPage = 100;
-    private MuleOAuthCredentialStorage storage;
+    //private MuleOAuthCredentialStorage storage;
     private PrivateKey privateKey;
     
     private final String serviceProviderId;
@@ -112,13 +109,11 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         try 
         {
             loadProperties(INTERNAL_GATEWAY_PROPS);
-            storage = new MuleOAuthCredentialStorage();
-            storage.setConsumerKey(appKey);
-            storage.setConsumerSecret("");
+            loadPrivateKey();
         } 
         catch (Exception e) 
         {
-            sLog.error("Can't locate properties file: " + INTERNAL_GATEWAY_PROPS, e);
+            throw MuleSoftException.soften(e);
         }
     }
     
@@ -301,6 +296,9 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             KeyStore keyStore = KeyStore.getInstance(keyStoreType);
             keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
             privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
+            MuleOAuthCredentialStorage storage = new MuleOAuthCredentialStorage();
+            storage.setConsumerKey(appKey);
+            storage.setConsumerSecret("");
             tokens = new OAuthGateway(storage,
                                       new RsaSha1MessageSigner(privateKey),
                                       new XoAuthAuthorizationHeaderSigningStrategy())
@@ -310,8 +308,6 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             
             accessSecret = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
             accessToken = tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
-            
-            //accessToken = "babababa";
         } 
         catch (Exception e) 
         {
@@ -343,6 +339,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         {
             getAccessTokensFromSaml();
         }
+        //httpRequest.addHeader("Accept-Enconding", "gzip,deflate");
         
         CommonsHttpOAuthConsumer postConsumer = new CommonsHttpOAuthConsumer(appKey, "");
         postConsumer.setTokenWithSecret(accessToken, "");
@@ -443,32 +440,37 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         InputStream fileInputStream = null;
         try 
         {
-            fileInputStream = this.getClass().getResourceAsStream(resourceName);
-            if (fileInputStream != null) 
-            {
-                this.properties.load(fileInputStream);
-            } 
-            else 
-            {
-                String name = resourceName.substring(1);
-                fileInputStream = new FileInputStream(name);
-                if (fileInputStream != null) 
-                {
-                    this.properties.load(fileInputStream);
-                } 
-                else 
-                {
-                    throw new IOException("Configuration resource " + resourceName + " not found");
-                }
-            }
+            fileInputStream = new FileInputStream(resourceName);
+            this.properties.load(fileInputStream);
+        }
+        catch (Exception e) {
+            throw new IOException("Configuration resource " + resourceName + " not found");
         }
         finally 
         {
             if (fileInputStream != null) 
             {
                 fileInputStream.close();
-                fileInputStream = null;
             }
         }
+    }
+    
+    private void loadPrivateKey() throws IOException
+    {
+        String keyStorePath = (String) properties.get("keystore.keystorePath");
+        String keyStorePassword = (String) properties.get("keystore.password");
+        String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
+        String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
+        String keyStoreType = (String) properties.get("keystore.keystoreType");
+        try
+        {
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
+            privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
+        }
+        catch (Exception e) {
+            throw new IOException("Properties file with wrong configuration");
+        }
+
     }
 }

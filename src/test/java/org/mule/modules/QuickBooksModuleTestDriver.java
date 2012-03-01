@@ -268,7 +268,7 @@ public class QuickBooksModuleTestDriver
     }
     
     @Test(expected = QuickBooksRuntimeException.class)
-    public void createAccountBAD()
+    public void createAccountThrowingExceptionForWrongCredentials()
     {
         QuickBooksModule module2;
         module2 = new QuickBooksModule();
