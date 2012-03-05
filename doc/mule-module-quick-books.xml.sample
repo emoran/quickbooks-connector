@@ -1419,3 +1419,9 @@
 <quickbooks:find-objects type="INVOICE"
                          queryFilter="LastUpdatedTime :AFTER: 2010-08-10T14:30:00-0700 :AND: LastUpdatedTime :BEFORE: 2010-08-10T15:30:00-0700" />
 <!-- END_INCLUDE(quickbooks:find-objects5) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:get-access-token) -->
+<quickbooks:get-access-token appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                             realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                             authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" />
+<!-- END_INCLUDE(quickbooks:get-access-token) -->
