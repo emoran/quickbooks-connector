@@ -1,5 +1,8 @@
-    <!-- BEGIN_INCLUDE(quickbooks:create-account) -->
-<quickbooks:create-account name="#[map-payload:name]"
+<!-- BEGIN_INCLUDE(quickbooks:create-account) -->
+<quickbooks:create-account realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           accessToken="#[map-payload:accessToken]"
+                           name="#[map-payload:name]"
                            desc="#[map-payload:desc]"
                            subtype="#[map-payload:subType]"
                            acctNum="#[map-payload:acctNum]"
@@ -11,7 +14,10 @@
 <!-- END_INCLUDE(quickbooks:create-account) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-account2) -->
-<quickbooks:create-account name="Loan Account"
+<quickbooks:create-account realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           name="Loan Account"
                            desc="Loan Account"
                            subtype="SAVINGS"
                            acctNum="5001"
@@ -20,7 +26,10 @@
 <!-- END_INCLUDE(quickbooks:create-account2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-account3) -->
-<quickbooks:create-account name="ACME Account"
+<quickbooks:create-account realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           name="ACME Account"
                            desc="ACME inventory Account"
                            subtype="INVENTORY"
                            acctNum="7001"
@@ -30,14 +39,18 @@
 <!-- END_INCLUDE(quickbooks:create-account3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill) -->
-<quickbooks:create-bill >
+<quickbooks:create-bill realmId="#[map-payload:realmId]"
+                        appKey="#[map-payload:appKey]"
+                        accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headerBill]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesBill]"></quickbooks:lines>
 </quickbooks:create-bill>
 <!-- END_INCLUDE(quickbooks:create-bill) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill2) -->
-<quickbooks:create-bill>
+<quickbooks:create-bill realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>2004</docNumber>
         <txnDate>2010-08-06T21:40:41-07:00</txnDate>
@@ -68,7 +81,9 @@
 <!-- END_INCLUDE(quickbooks:create-bill2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill3) -->
-<quickbooks:create-bill>
+<quickbooks:create-bill realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>2004</docNumber>
         <txnDate>2010-08-06T21:40:41-07:00</txnDate>
@@ -119,14 +134,18 @@
 <!-- END_INCLUDE(quickbooks:create-bill3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill-payment) -->
-<quickbooks:create-bill-payment >
+<quickbooks:create-bill-payment realmId="#[map-payload:realmId]"
+                                appKey="#[map-payload:appKey]"
+                                accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headerbillpayment]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesbillpayment]"></quickbooks:lines>
 </quickbooks:create-bill-payment>
 <!-- END_INCLUDE(quickbooks:create-bill-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill-payment2) -->
-<quickbooks:create-bill-payment >
+<quickbooks:create-bill-payment realmId="33221157"
+                                appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>15</docNumber>
         <txnDate>2010-09-08T15:00:00-07:00</txnDate>
@@ -149,7 +168,9 @@
 <!-- END_INCLUDE(quickbooks:create-bill-payment2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill-payment3) -->
-<quickbooks:create-bill-payment >
+<quickbooks:create-bill-payment realmId="33221157"
+                                appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>15</docNumber>
         <txnDate>2010-09-08T15:00:00-07:00</txnDate>
@@ -178,14 +199,18 @@
 <!-- END_INCLUDE(quickbooks:create-bill-payment3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase) -->
-<quickbooks:create-cash-purchase >
+<quickbooks:create-cash-purchase realmId="#[map-payload:realmId]"
+                                 appKey="#[map-payload:appKey]"
+                                 accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headercashpurchase]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescashpurchase]"></quickbooks:lines>
 </quickbooks:create-cash-purchase>
 <!-- END_INCLUDE(quickbooks:create-cash-purchase) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase2) -->
-<quickbooks:create-cash-purchase >
+<quickbooks:create-cash-purchase realmId="33221157"
+                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>1454</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -210,7 +235,9 @@
 <!-- END_INCLUDE(quickbooks:create-cash-purchase2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase3) -->
-<quickbooks:create-cash-purchase >
+<quickbooks:create-cash-purchase realmId="33221157"
+                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>1454</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -243,14 +270,18 @@
 <!-- END_INCLUDE(quickbooks:create-cash-purchase3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-check) -->
-<quickbooks:create-check >
+<quickbooks:create-check realmId="#[map-payload:realmId]"
+                         appKey="#[map-payload:appKey]"
+                         accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headercheck]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescheck]"></quickbooks:lines>
 </quickbooks:create-check>
 <!-- END_INCLUDE(quickbooks:create-check) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-check2) -->
-<quickbooks:create-check >
+<quickbooks:create-check realmId="33221157"
+                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>25</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -276,14 +307,18 @@
 <!-- END_INCLUDE(quickbooks:create-check2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-credit-card-charge) -->
-<quickbooks:create-credit-card-charge >
+<quickbooks:create-credit-card-charge realmId="#[map-payload:realmId]"
+                                      appKey="#[map-payload:appKey]"
+                                      accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headercreditcardcharge]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescreditcardcharge]"></quickbooks:lines>
 </quickbooks:create-credit-card-charge>
 <!-- END_INCLUDE(quickbooks:create-credit-card-charge) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-credit-card-charge2) -->
-<quickbooks:create-credit-card-charge >
+<quickbooks:create-credit-card-charge realmId="33221157"
+                                      appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                      accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>1200</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -308,7 +343,10 @@
 <!-- END_INCLUDE(quickbooks:create-credit-card-charge2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-customer) -->
-<quickbooks:create-customer name="john doe"
+<quickbooks:create-customer realmId="33221157"
+                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            name="john doe"
                             givenName="john"
                             middleName="bill"
                             familyName="doe"
@@ -325,7 +363,10 @@
 <!-- END_INCLUDE(quickbooks:create-customer) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-customer2) -->
-<quickbooks:create-customer name="John Doe"
+<quickbooks:create-customer realmId="33221157"
+                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            name="John Doe"
                             givenName="John"
                             middleName="J"
                             familyName="Doe"
@@ -365,14 +406,18 @@
 <!-- END_INCLUDE(quickbooks:create-customer2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-estimate) -->
-<quickbooks:create-estimate >
+<quickbooks:create-estimate realmId="#[map-payload:realmId]"
+                            appKey="#[map-payload:appKey]"
+                            accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headerestimate]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesestimate]"></quickbooks:lines>
 </quickbooks:create-estimate>
 <!-- END_INCLUDE(quickbooks:create-estimate) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-estimate2) -->
-<quickbooks:create-estimate >
+<quickbooks:create-estimate realmId="33221157"
+                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>1002</docNumber>
         <txnDate>2010-08-07T15:00:00-07:00</txnDate>
@@ -405,14 +450,18 @@
 <!-- END_INCLUDE(quickbooks:create-estimate2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-invoice) -->
-<quickbooks:create-invoice >
+<quickbooks:create-invoice realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headerinvoice]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesinvoice]"></quickbooks:lines>
 </quickbooks:create-invoice>
 <!-- END_INCLUDE(quickbooks:create-invoice) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-invoice2) -->
-<quickbooks:create-invoice >
+<quickbooks:create-invoice realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>00010</docNumber>
         <txnDate>2010-08-07T15:00:00-07:00</txnDate>
@@ -447,12 +496,14 @@
 <!-- END_INCLUDE(quickbooks:create-invoice2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-item) -->
-<quickbooks:create-item name="pencils"
+<quickbooks:create-item realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        name="pencils"
                         desc="pencils hb"
                         taxable="true"
                         itemParentName="office"
                         purchaseDesc="500 pencils purchased">
-
     <quickbooks:unit-price ref="#[variable:unitprice]"></quickbooks:unit-price>
     <quickbooks:income-account ref="#[variable:incomeaccount]"></quickbooks:income-account>
     <quickbooks:item-parent-id ref="#[variable:itemparentid]"></quickbooks:item-parent-id>
@@ -462,7 +513,10 @@
 <!-- END_INCLUDE(quickbooks:create-item) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-item2) -->
-<quickbooks:create-item name="Pencils"
+<quickbooks:create-item realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        name="Pencils"
                         desc="pencils hb"
                         taxable="true"
                         purchaseDesc="500 pencils purchased">
@@ -486,14 +540,18 @@
 <!-- END_INCLUDE(quickbooks:create-item2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-payment) -->
-<quickbooks:create-payment >
+<quickbooks:create-payment realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headerpayment]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linespayment]"></quickbooks:lines>
 </quickbooks:create-payment>
 <!-- END_INCLUDE(quickbooks:create-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-payment2) -->
-<quickbooks:create-payment >
+<quickbooks:create-payment realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>54</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -520,26 +578,36 @@
 <!-- END_INCLUDE(quickbooks:create-payment2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-payment-method) -->
-<quickbooks:create-payment-method name="wire transfer"
+<quickbooks:create-payment-method realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  name="wire transfer"
                                   type="CREDIT_CARD" >
 </quickbooks:create-payment-method>
 <!-- END_INCLUDE(quickbooks:create-payment-method1) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-payment-method2) -->
-<quickbooks:create-payment-method name="Pencil SA"
+<quickbooks:create-payment-method realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  name="Pencil SA"
                                   type="NON_CREDIT_CARD" >
 </quickbooks:create-payment-method>
 <!-- END_INCLUDE(quickbooks:create-payment-method2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-receipt) -->
-<quickbooks:create-sales-receipt >
+<quickbooks:create-sales-receipt realmId="#[map-payload:realmId]"
+                                 appKey="#[map-payload:appKey]"
+                                 accessToken="#[map-payload:accessToken]">
     <quickbooks:header ref="#[variable:headersalesreceipt]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linessalesreceipt]"></quickbooks:lines>
 </quickbooks:create-sales-receipt>
 <!-- END_INCLUDE(quickbooks:create-sales-receipt) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-receipt2) -->
-<quickbooks:create-sales-receipt >
+<quickbooks:create-sales-receipt realmId="33221157"
+                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
     <quickbooks:header>
         <docNumber>99009926</docNumber>
         <txnDate>2010-10-22T15:00:00-07:00</txnDate>
@@ -565,7 +633,10 @@
 <!-- END_INCLUDE(quickbooks:create-sales-receipt2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-term) -->
-<quickbooks:create-sales-term name="#[variable:name]"
+<quickbooks:create-sales-term realmId="#[map-payload:realmId]"
+                              appKey="#[map-payload:appKey]"
+                              accessToken="#[map-payload:accessToken]"
+                              name="#[variable:name]"
                               dueDays="#[variable:dueDays]"
                               discountDays="#[variable:discountDays]"
                               discountPercent="#[variable:discountDays]"
@@ -576,7 +647,10 @@
 <!-- END_INCLUDE(quickbooks:create-sales-term) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-term2) -->
-<quickbooks:create-sales-term name="Due before receipt"
+<quickbooks:create-sales-term realmId="33221157"
+                              appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                              accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                              name="Due before receipt"
                               dueDays="1"
                               discountDays="10"
                               discountPercent="3.2"
@@ -587,7 +661,10 @@
 <!-- END_INCLUDE(quickbooks:create-sales-term2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor) -->
-<quickbooks:create-vendor name="digital"
+<quickbooks:create-vendor realmId="33221157"
+                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          name="digital"
                           givenName="john"
                           middleName="j"
                           familyName="doe"
@@ -604,7 +681,10 @@
 <!-- END_INCLUDE(quickbooks:create-vendor) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor2) -->
-<quickbooks:create-vendor name="Digital"
+<quickbooks:create-vendor realmId="33221157"
+                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          name="Digital"
                           givenName="John"
                           middleName="j"
                           familyName="Doe"
@@ -639,13 +719,19 @@
 <!-- END_INCLUDE(quickbooks:create-vendor2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:get-object) -->
-<quickbooks:get-object type="INVOICE">
+<quickbooks:get-object realmId="#[map-payload:realmId]"
+                       appKey="#[map-payload:appKey]"
+                       accessToken="#[map-payload:accessToken]"
+                       type="INVOICE">
     <quickbooks:id ref="#[variable:id]"></quickbooks:id>
 </quickbooks:get-object>
 <!-- END_INCLUDE(quickbooks:get-object) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:get-object) -->
-<quickbooks:get-object type="CUSTOMER">
+<quickbooks:get-object realmId="33221157"
+                       appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                       accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                       type="CUSTOMER">
     <quickbooks:id>
         <value>45</value>
     </quickbooks:id>
@@ -653,7 +739,10 @@
 <!-- END_INCLUDE(quickbooks:get-object) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-account) -->
-<quickbooks:update-account syncToken="#[variable:synctoken]"
+<quickbooks:update-account realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           accessToken="#[map-payload:accessToken]"
+                           syncToken="#[variable:synctoken]"
                            name="#[variable:name]"
                            desc="#[variable:desc]"
                            subtype="#[variable:subtype]"
@@ -667,7 +756,10 @@
 <!-- END_INCLUDE(quickbooks:update-account) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-account2) -->
-<quickbooks:update-account syncToken="1"
+<quickbooks:update-account realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           syncToken="1"
                            name="Loan Account"
                            desc="Loan Account"
                            subtype="SAVINGS"
@@ -680,7 +772,10 @@
 <!-- END_INCLUDE(quickbooks:update-account2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-account3) -->
-<quickbooks:update-account name="ACME Account"
+<quickbooks:update-account realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           name="ACME Account"
                            desc="ACME inventory Account"
                            subtype="INVENTORY"
                            acctNum="7001"
@@ -693,7 +788,10 @@
 <!-- END_INCLUDE(quickbooks:update-account3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill) -->
-<quickbooks:update-bill syncToken="0">
+<quickbooks:update-bill realmId="#[map-payload:realmId]"
+                        appKey="#[map-payload:appKey]"
+                        accessToken="#[map-payload:accessToken]"
+                        syncToken="0">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headerbill]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesbill]"></quickbooks:lines>
@@ -701,7 +799,10 @@
 <!-- END_INCLUDE(quickbooks:update-bill) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill2) -->
-<quickbooks:update-bill syncToken="0">
+<quickbooks:update-bill realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        syncToken="0">
     <quickbooks:id>
         <value>15</value>
     </quickbooks:id>
@@ -735,7 +836,10 @@
 <!-- END_INCLUDE(quickbooks:update-bill2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill3) -->
-<quickbooks:update-bill syncToken="0">
+<quickbooks:update-bill realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        syncToken="0">
     <quickbooks:id>
         <value>34</value>
     </quickbooks:id>
@@ -789,7 +893,10 @@
 <!-- END_INCLUDE(quickbooks:update-bill3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill-payment) -->
-<quickbooks:update-bill-payment syncToken="0">
+<quickbooks:update-bill-payment realmId="#[map-payload:realmId]"
+                                appKey="#[map-payload:appKey]"
+                                accessToken="#[map-payload:accessToken]"
+                                syncToken="0">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headerbillpayment]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesbillpayment]"></quickbooks:lines>
@@ -797,7 +904,10 @@
 <!-- END_INCLUDE(quickbooks:update-bill-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill-payment2) -->
-<quickbooks:update-bill-payment syncToken="1">
+<quickbooks:update-bill-payment realmId="33221157"
+                                appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                syncToken="1">
     <quickbooks:id>
         <value>75</value>
     </quickbooks:id>
@@ -823,7 +933,10 @@
 <!-- END_INCLUDE(quickbooks:update-bill-payment2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill-payment3) -->
-<quickbooks:update-bill-payment syncToken="0">
+<quickbooks:update-bill-payment realmId="33221157"
+                                appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                syncToken="0">
     <quickbooks:id>
         <value>16</value>
     </quickbooks:id>
@@ -855,7 +968,10 @@
 <!-- END_INCLUDE(quickbooks:update-bill-payment3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase) -->
-<quickbooks:update-cash-purchase syncToken="1">
+<quickbooks:update-cash-purchase realmId="#[map-payload:realmId]"
+                                 appKey="#[map-payload:appKey]"
+                                 accessToken="#[map-payload:accessToken]"
+                                 syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headercashpurchase]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescashpurchase]"></quickbooks:lines>
@@ -863,7 +979,10 @@
 <!-- END_INCLUDE(quickbooks:update-cash-purchase) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase2) -->
-<quickbooks:update-cash-purchase syncToken="1">
+<quickbooks:update-cash-purchase realmId="33221157"
+                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                 syncToken="1">
     <quickbooks:id>
         <value>26</value>
     </quickbooks:id>
@@ -891,7 +1010,10 @@
 <!-- END_INCLUDE(quickbooks:update-cash-purchase2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase3) -->
-<quickbooks:update-cash-purchase syncToken="1">
+<quickbooks:update-cash-purchase realmId="33221157"
+                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                 syncToken="1">
     <quickbooks:id>
         <value>36</value>
     </quickbooks:id>
@@ -927,7 +1049,10 @@
 <!-- END_INCLUDE(quickbooks:update-cash-purchase3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-check) -->
-<quickbooks:update-check syncToken="1">
+<quickbooks:update-check realmId="#[map-payload:realmId]"
+                         appKey="#[map-payload:appKey]"
+                         accessToken="#[map-payload:accessToken]"
+                         syncToken="1">
     <quickbooks:id ref="#[variable:id]" />
     <quickbooks:header ref="#[variable:headercheck]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescheck]"></quickbooks:lines>
@@ -935,7 +1060,10 @@
 <!-- END_INCLUDE(quickbooks:update-check) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-check2) -->
-<quickbooks:update-check syncToken="1">
+<quickbooks:update-check realmId="33221157"
+                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         syncToken="1">
     <quickbooks:id>
         <value>19</value>
     </quickbooks:id>
@@ -964,7 +1092,10 @@
 <!-- END_INCLUDE(quickbooks:update-check2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-credit-card-charge) -->
-<quickbooks:update-credit-card-charge syncToken="1">
+<quickbooks:update-credit-card-charge realmId="#[map-payload:realmId]"
+                                      appKey="#[map-payload:appKey]"
+                                      accessToken="#[map-payload:accessToken]"
+                                      syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headercreditcardcharge]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescreditcardcharge]"></quickbooks:lines>
@@ -972,7 +1103,10 @@
 <!-- END_INCLUDE(quickbooks:update-credit-card-charge) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-credit-card-charge2) -->
-<quickbooks:update-credit-card-charge syncToken="1">
+<quickbooks:update-credit-card-charge realmId="33221157"
+                                      appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                      accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                      syncToken="1">
     <quickbooks:id>
         <value>19</value>
     </quickbooks:id>
@@ -1000,7 +1134,10 @@
 <!-- END_INCLUDE(quickbooks:update-credit-card-charge2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-customer) -->
-<quickbooks:update-customer syncToken="1"
+<quickbooks:update-customer realmId="33221157"
+                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            syncToken="1"
                             name="john doe"
                             givenName="john"
                             middleName="bill"
@@ -1019,7 +1156,10 @@
 <!-- END_INCLUDE(quickbooks:update-customer) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-customer2) -->
-<quickbooks:update-customer syncToken="1"
+<quickbooks:update-customer realmId="33221157"
+                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            syncToken="1"
                             name="John Doe"
                             givenName="John"
                             middleName="J"
@@ -1063,7 +1203,10 @@
 <!-- END_INCLUDE(quickbooks:update-customer2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-estimate) -->
-<quickbooks:update-estimate syncToken="1">
+<quickbooks:update-estimate realmId="#[map-payload:realmId]"
+                            appKey="#[map-payload:appKey]"
+                            accessToken="#[map-payload:accessToken]"
+                            syncToken="1">
     <quickbooks:id ref="#[variable:id]" />
     <quickbooks:header ref="#[variable:headerestimate]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesestimate]"></quickbooks:lines>
@@ -1071,7 +1214,10 @@
 <!-- END_INCLUDE(quickbooks:update-estimate) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-estimate2) -->
-<quickbooks:update-estimate syncToken="1">
+<quickbooks:update-estimate realmId="33221157"
+                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            syncToken="1">
     <quickbooks:id>
         <value>29</value>
     </quickbooks:id>
@@ -1107,7 +1253,10 @@
 <!-- END_INCLUDE(quickbooks:update-estimate2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-invoice) -->
-<quickbooks:update-invoice syncToken="1">
+<quickbooks:update-invoice realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           accessToken="#[map-payload:accessToken]"
+                           syncToken="1">
     <quickbooks:id ref="#[variable:id]" />
     <quickbooks:header ref="#[variable:headerinvoice]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesinvoice]"></quickbooks:lines>
@@ -1115,7 +1264,10 @@
 <!-- END_INCLUDE(quickbooks:update-invoice) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-invoice2) -->
-<quickbooks:update-invoice syncToken="1">
+<quickbooks:update-invoice realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           syncToken="1">
     <quickbooks:id>
         <value>22</value>
     </quickbooks:id>
@@ -1153,7 +1305,10 @@
 <!-- END_INCLUDE(quickbooks:update-invoice2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-item) -->
-<quickbooks:update-item syncToken="1"
+<quickbooks:update-item realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        syncToken="1"
                         name="pencils"
                         desc="pencils hb"
                         taxable="true"
@@ -1169,7 +1324,10 @@
 <!-- END_INCLUDE(quickbooks:update-item) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-item2) -->
-<quickbooks:update-item syncToken="1"
+<quickbooks:update-item realmId="33221157"
+                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        syncToken="1"
                         name="Pencils"
                         desc="pencils hb"
                         taxable="true"
@@ -1197,7 +1355,10 @@
 <!-- END_INCLUDE(quickbooks:update-item2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-payment) -->
-<quickbooks:update-payment syncToken="1">
+<quickbooks:update-payment realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           accessToken="#[map-payload:accessToken]"
+                           syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headerpayment]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linespayment]"></quickbooks:lines>
@@ -1205,7 +1366,10 @@
 <!-- END_INCLUDE(quickbooks:update-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-payment2) -->
-<quickbooks:update-payment syncToken="1" >
+<quickbooks:update-payment realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           syncToken="1" >
     <quickbooks:id>
         <value>27</value>
     </quickbooks:id>
@@ -1235,7 +1399,10 @@
 <!-- END_INCLUDE(quickbooks:update-payment2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-payment-method) -->
-<quickbooks:update-payment-method syncToken="1"
+<quickbooks:update-payment-method realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  syncToken="1"
                                   name="wire transfer"
                                   type="CREDIT_CARD">
     <quickbooks:id ref="#[variable:id]" />
@@ -1243,7 +1410,10 @@
 <!-- END_INCLUDE(quickbooks:update-payment-method) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-payment-method2) -->
-<quickbooks:update-payment-method syncToken="2"
+<quickbooks:update-payment-method realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  syncToken="2"
                                   name="Pencil SA"
                                   type="NON_CREDIT_CARD" >
     <quickbooks:id>
@@ -1253,7 +1423,10 @@
 <!-- END_INCLUDE(quickbooks:update-payment-method2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-receipt) -->
-<quickbooks:update-sales-receipt syncToken="1">
+<quickbooks:update-sales-receipt realmId="#[map-payload:realmId]"
+                                 appKey="#[map-payload:appKey]"
+                                 accessToken="#[map-payload:accessToken]"
+                                 syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headersalesreceipt]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linessalesreceipt]"></quickbooks:lines>
@@ -1261,7 +1434,10 @@
 <!-- END_INCLUDE(quickbooks:update-sales-receipt) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-receipt2) -->
-<quickbooks:update-sales-receipt syncToken="1">
+<quickbooks:update-sales-receipt realmId="33221157"
+                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                 syncToken="1">
     <quickbooks:id>
         <value>39</value>
     </quickbooks:id>
@@ -1290,7 +1466,10 @@
 <!-- END_INCLUDE(quickbooks:update-sales-receipt2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-term) -->
-<quickbooks:update-sales-term syncToken="1"
+<quickbooks:update-sales-term realmId="33221157"
+                              appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                              accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                              syncToken="1"
                               name="due before receipt"
                               dueDays="1"
                               discountDays="10"
@@ -1304,7 +1483,10 @@
 <!-- END_INCLUDE(quickbooks:update-sales-term) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-term2) -->
-<quickbooks:update-sales-term syncToken="2"
+<quickbooks:update-sales-term realmId="33221157"
+                              appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                              accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                              syncToken="2"
                               name="Due before receipt"
                               dueDays="1"
                               discountDays="10"
@@ -1320,7 +1502,10 @@
 <!-- END_INCLUDE(quickbooks:update-sales-term2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-vendor) -->
-<quickbooks:update-vendor syncToken="1"
+<quickbooks:update-vendor realmId="33221157"
+                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          syncToken="1"
                           name="digital"
                           givenName="john"
                           middleName="j"
@@ -1339,7 +1524,10 @@
 <!-- END_INCLUDE(quickbooks:update-vendor) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor2) -->
-<quickbooks:update-vendor syncToken="1"
+<quickbooks:update-vendor realmId="33221157"
+                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          syncToken="1"
                           name="Digital"
                           givenName="John"
                           middleName="j"
@@ -1378,14 +1566,20 @@
 <!-- END_INCLUDE(quickbooks:update-vendor2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:delete-object) -->
-<quickbooks:delete-object type="INVOICE"
+<quickbooks:delete-object realmId="33221157"
+                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          type="INVOICE"
                           syncToken="2">
     <quickbooks:id ref="#[variable:id]"></quickbooks:id>
 </quickbooks:delete-object>
 <!-- END_INCLUDE(quickbooks:delete-object) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:delete-object2) -->
-<quickbooks:delete-object type="CUSTOMER"
+<quickbooks:delete-object realmId="33221157"
+                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          type="CUSTOMER"
                           syncToken="1">
     <quickbooks:id>
         <value>20</value>
@@ -1394,29 +1588,44 @@
 <!-- END_INCLUDE(quickbooks:delete-object2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects) -->
-<quickbooks:find-objects type="ACCOUNT"
+<quickbooks:find-objects realmId="33221157"
+                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         type="ACCOUNT"
                          queryFilter="#[variable:queryfilterstring]"
                          querySort="#[variable:querysortstring]"/>
 <!-- END_INCLUDE(quickbooks:find-objects) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects2) -->
-<quickbooks:find-objects type="ACCOUNT"
+<quickbooks:find-objects realmId="33221157"
+                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         type="ACCOUNT"
                          queryFilter="Name :EQUALS: Loan Account"
                          querySort="Name AToZ"/>
 <!-- END_INCLUDE(quickbooks:find-objects2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects3) -->
-<quickbooks:find-objects type="CUSTOMER"
+<quickbooks:find-objects realmId="33221157"
+                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         type="CUSTOMER"
                          queryFilter="FamilyName :EQUALS: Doe" />
 <!-- END_INCLUDE(quickbooks:find-objects3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects4) -->
-<quickbooks:find-objects type="INVOICE"
+<quickbooks:find-objects realmId="33221157"
+                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         type="INVOICE"
                          queryFilter="DBAName :EQUALS: Smith Bakery :AND: FamilyName :EQUALS: Smith" />
 <!-- END_INCLUDE(quickbooks:find-objects4) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects5) -->
-<quickbooks:find-objects type="INVOICE"
+<quickbooks:find-objects realmId="33221157"
+                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr" 
+                         type="INVOICE"
                          queryFilter="LastUpdatedTime :AFTER: 2010-08-10T14:30:00-0700 :AND: LastUpdatedTime :BEFORE: 2010-08-10T15:30:00-0700" />
 <!-- END_INCLUDE(quickbooks:find-objects5) -->
 
