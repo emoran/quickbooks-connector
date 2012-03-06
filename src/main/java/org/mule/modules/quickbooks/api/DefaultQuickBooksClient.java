@@ -12,7 +12,6 @@ package org.mule.modules.quickbooks.api;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -55,6 +54,7 @@ import org.mule.modules.quickbooks.schema.SearchResults;
 import org.mule.modules.quickbooks.utils.QBOMessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
+import org.springframework.core.io.ClassPathResource;
 
 import com.intuit.ipp.oauth.signing.RsaSha1MessageSigner;
 import com.intuit.ipp.oauth.signing.XoAuthAuthorizationHeaderSigningStrategy;
@@ -67,21 +67,15 @@ import com.intuit.platform.client.transport.HttpProtocolConstants;
  */
 public class DefaultQuickBooksClient implements QuickBooksClient
 {
-    private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway/src/main/resources/internal-gateway.properties";
+    private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway.properties";
     private Properties properties;
     private final String baseUri;
-    //private final String realmId;
-    //private final String appKey;
+
     private String companyBaseUri = null;
     private Integer resultsPerPage = 100;
     private PrivateKey privateKey;
     
     private String serviceProviderId;
-    //private final String authIdPseudonym;
-    //private final String realmIdPseudonym;
-    
-    //private String accessToken = null;
-    //private String accessSecret = null;
     
     public DefaultQuickBooksClient(final String baseUri)
     {
@@ -438,7 +432,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         InputStream fileInputStream = null;
         try 
         {
-            fileInputStream = new FileInputStream(resourceName);
+            fileInputStream = new ClassPathResource(resourceName).getInputStream();
             this.properties.load(fileInputStream);
         }
         catch (Exception e) {
@@ -465,7 +459,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         try
         {
             KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-            keyStore.load(new FileInputStream(keyStorePath), keyStorePassword.toCharArray());
+            keyStore.load(new ClassPathResource(keyStorePath).getInputStream(), keyStorePassword.toCharArray());
             privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
         }
         catch (Exception e) {
