@@ -25,16 +25,14 @@ import org.mule.modules.quickbooks.schema.IdType;
 
 public interface QuickBooksClient
 {
-    <T extends CdmBase> T create(final String realmId, final String appKey, final String accessToken, final EntityType type, T obj);
+    <T extends CdmBase> T create(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final EntityType type, T obj);
     
-    <T extends CdmBase> T getObject(final String realmId, final String appKey, final String accessToken, final EntityType type, final IdType id);
+    <T extends CdmBase> T getObject(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final EntityType type, final IdType id);
     
-    <T extends CdmBase> T update(final String realmId, final String appKey, final String accessToken, final EntityType type, T obj);
+    <T extends CdmBase> T update(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final EntityType type, T obj);
     
-    <T extends CdmBase> void deleteObject(final String realmId, final String appKey, final String accessToken, final EntityType type, final IdType id, String syncToken);
+    <T extends CdmBase> void deleteObject(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final EntityType type, final IdType id, String syncToken);
 
-    <T extends CdmBase> Iterable<T> findObjects(final String realmId, final String appKey, final String accessToken, final EntityType type, final String queryFilter, final String querySort);
-    
-    public String getAccessTokensFromSaml(String appKey, String realmIdPseudonym, String authIdPseudonym);
+    <T extends CdmBase> Iterable<T> findObjects(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final EntityType type, final String queryFilter, final String querySort);
 }
 

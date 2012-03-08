@@ -20,8 +20,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBElement;
@@ -71,17 +73,20 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     private Properties properties;
     private final String baseUri;
 
-    private String companyBaseUri = null;
     private Integer resultsPerPage = 100;
     private PrivateKey privateKey;
     
     private String serviceProviderId;
+    
+    private final Map<String, CompanyConnectionData> connectionDatas;
     
     public DefaultQuickBooksClient(final String baseUri)
     {
         Validate.notEmpty(baseUri);
         
         this.baseUri = baseUri;
+        
+        connectionDatas = new HashMap<String, CompanyConnectionData>();
         
         try 
         {
@@ -99,21 +104,39 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     @Override
     public <T extends CdmBase> T create(final String realmId,
                                         final String appKey,
-                                        final String accessToken,
+                                        final String realmIdPseudonym, 
+                                        final String authIdPseudonym,
                                         final EntityType type,
                                         T obj)
     {
         Validate.notNull(obj);
         
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
         String str = String.format("%s/resource/%s/v2/%s",
-            getCompanyBaseURI(realmId, appKey, accessToken),
+            connectionDatas.get(realmId).getBaseUri(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             realmId);
         
         HttpUriRequest httpRequest = new HttpPost(str);
         prepareToPost(obj, httpRequest);
 
-        return (T) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                connectionDatas.get(realmId).setAccessToken(null);
+                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -121,19 +144,37 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     @Override
     public <T extends CdmBase> T getObject(final String realmId,
                                            final String appKey,
-                                           final String accessToken,
+                                           final String realmIdPseudonym, 
+                                           final String authIdPseudonym,
                                            final EntityType type,
                                            final IdType id)
     {   
         Validate.notNull(type);
         Validate.notNull(id);
         
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            getCompanyBaseURI(realmId, appKey, accessToken), type.getResouceName(), realmId, id.getValue());
+            connectionDatas.get(realmId).getBaseUri(), type.getResouceName(), realmId, id.getValue());
 
         HttpUriRequest httpRequest = new HttpGet(str);
-                
-        return (T) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
+        
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                connectionDatas.get(realmId).setAccessToken(null);
+                return getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -141,18 +182,22 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     @Override
     public <T extends CdmBase> T update(final String realmId,
                                         final String appKey,
-                                        final String accessToken,
+                                        final String realmIdPseudonym, 
+                                        final String authIdPseudonym,
                                         final EntityType type,
                                         T obj)
     {
         Validate.notNull(obj);
         
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
         if (obj.getSyncToken() == null)
         {
-            obj.setSyncToken(getObject(realmId, appKey, accessToken, type, obj.getId()).getSyncToken());
+            obj.setSyncToken(getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj.getId()).getSyncToken());
         }
+        
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            getCompanyBaseURI(realmId, appKey, accessToken),
+            connectionDatas.get(realmId).getBaseUri(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             realmId,
             obj.getId().getValue());
@@ -161,7 +206,22 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
         prepareToPost(obj, httpRequest);
         
-        return (T) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                connectionDatas.get(realmId).setAccessToken(null);
+                return update(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -169,7 +229,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     @Override
     public <T extends CdmBase> void deleteObject(final String realmId,
                                                  final String appKey,
-                                                 final String accessToken,
+                                                 final String realmIdPseudonym, 
+                                                 final String authIdPseudonym,
                                                  final EntityType type,
                                                  final IdType id,
                                                  String syncToken)
@@ -177,22 +238,37 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         Validate.notNull(type);
         Validate.notNull(id);
         
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
         if (syncToken == null)
         {
-            syncToken = getObject(realmId, appKey, accessToken, type, id).getSyncToken();
+            syncToken = getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id).getSyncToken();
         }
         T obj = (T) type.newInstance();
         obj.setSyncToken(syncToken);
         obj.setId(id);
         
         String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
-            getCompanyBaseURI(realmId, appKey, accessToken), type.getResouceName(), realmId, id.getValue());
+            connectionDatas.get(realmId).getBaseUri(), type.getResouceName(), realmId, id.getValue());
         HttpUriRequest httpRequest = new HttpPost(str);
         
         prepareToPost(obj, httpRequest);
-        
-        makeARequestToQuickbooks(httpRequest, appKey, accessToken);
-
+        try
+        {
+            makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                connectionDatas.get(realmId).setAccessToken(null);
+                deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id, syncToken);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
     }
 
     /** @param query 
@@ -201,7 +277,8 @@ public class DefaultQuickBooksClient implements QuickBooksClient
     @Override
     public <T extends CdmBase> Iterable<T> findObjects(final String realmId, 
                                                        final String appKey,
-                                                       final String accessToken,
+                                                       final String realmIdPseudonym, 
+                                                       final String authIdPseudonym,
                                                        final EntityType type, 
                                                        final String queryFilter, 
                                                        final String querySort)
@@ -266,7 +343,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                     nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", resultsPerPage.toString()));
                     nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", 
-                        getCompanyBaseURI(realmId, appKey, accessToken), type.getResouceName(), realmId));
+                        connectionDatas.get(realmId).getBaseUri(), type.getResouceName(), realmId));
                     
                     httpRequest.addHeader(HttpProtocolConstants.HEADER_CONTENT_TYPE, 
                         HttpProtocolConstants.CONTENT_TYPE_APPLICATION_URL_ENCODED);
@@ -279,13 +356,27 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                         throw MuleSoftException.soften(e);
                     } 
                     
-                    return (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
+                    try
+                    {
+                        return (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+                    }
+                    catch(QuickBooksRuntimeException e)
+                    {
+                        if(e.isAExpiredTokenFault())
+                        {
+                            connectionDatas.get(realmId).setAccessToken(null);
+                            return askAnEspecificPage(pageNumber);
+                        } 
+                        else 
+                        {
+                            throw e;
+                        }
+                    }
                 }
             };
     }
     
-    @Override
-    public String getAccessTokensFromSaml(String appKey, String realmIdPseudonym, String authIdPseudonym)
+    private String getAccessTokensFromSaml(String appKey, String realmIdPseudonym, String authIdPseudonym)
     {   
         String tokens = null;
         try 
@@ -308,25 +399,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         catch (Exception e) 
         {
             throw MuleSoftException.soften(e);
-        }
-
-        
-    }
-    
-    private String getCompanyBaseURI(String realmId, String appKey, String accessToken)
-    {   
-        if (companyBaseUri == null)
-        {
-            HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", baseUri, realmId));
-        
-            QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
-        
-            companyBaseUri = qboUser.getCurrentCompany().getBaseURI();
-        }
-        
-        return companyBaseUri;
-        
-        
+        }        
     }
     
     private Object makeARequestToQuickbooks(HttpUriRequest httpRequest, String appKey, String accessToken)
@@ -398,7 +471,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         }
     }
     
-    private <T extends CdmBase> void prepareToPost(T obj, HttpUriRequest httpRequest)
+    private <T extends CdmBase> void prepareToPost(final T obj, HttpUriRequest httpRequest)
     {
         JAXBElement<T> jaxbElement = QBOMessageUtils.createJaxbElement(obj);
         try
@@ -466,5 +539,68 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             throw new IOException("Properties file with wrong configuration");
         }
 
+    }
+    
+    private void loadCompanyData(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym)
+    {
+        if(!connectionDatas.containsKey(realmId) || connectionDatas.get(realmId).getAccessToken() == null)
+        {
+            String accessToken = getAccessTokensFromSaml(appKey, realmIdPseudonym, authIdPseudonym);
+            if(!connectionDatas.containsKey(realmId))
+            {
+                connectionDatas.put(realmId, new CompanyConnectionData());
+            }
+            connectionDatas.get(realmId).setAccessToken(accessToken);
+        }
+        
+        if (connectionDatas.get(realmId).getBaseUri() == null)
+        {
+            HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", baseUri, realmId));
+        
+            QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+        
+            connectionDatas.get(realmId).setBaseUri(qboUser.getCurrentCompany().getBaseURI());
+        }
+    }
+    
+    private class CompanyConnectionData
+    {
+        private String baseUri;
+        private String accessToken;
+        
+        protected CompanyConnectionData()
+        {
+        }
+        
+        /**
+         * @return the baseUri
+         */
+        public String getBaseUri()
+        {
+            return baseUri;
+        }
+        /**
+         * @param baseUri the baseUri to set
+         */
+        public void setBaseUri(String baseUri)
+        {
+            this.baseUri = baseUri;
+        }
+        /**
+         * @return the accessToken
+         */
+        public String getAccessToken()
+        {
+            return accessToken;
+        }
+        /**
+         * @param accessToken the accessToken to set
+         */
+        public void setAccessToken(String accessToken)
+        {
+            this.accessToken = accessToken;
+        }
+        
+        
     }
 }

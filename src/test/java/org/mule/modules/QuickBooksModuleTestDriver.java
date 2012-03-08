@@ -53,8 +53,8 @@ public class QuickBooksModuleTestDriver
     private static QuickBooksModule module;
     private static String appKey = System.getenv("appKey");
     private final String realmId = System.getenv("realmId");
-    
-    private static String accessToken;
+    private final String realmIdPseudonym = System.getenv("realmIdPseudonym");
+    private final String authIdPseudonym = System.getenv("authIdPseudonym");
     
     /**
      * 
@@ -65,21 +65,18 @@ public class QuickBooksModuleTestDriver
         module = new QuickBooksModule();
         module.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module.init();
-        
-        accessToken = module.getAccessToken(appKey, System.getenv("realmIdPseudonym"), System.getenv("authIdPseudonym"));
-
     }
 
     @Test
     public void createAccount()
     {
-        Account acc = module.createAccount(realmId, appKey, accessToken,
-            "Test Account", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
+        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+            "Test Account78", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
                 
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", acc.getId().getValue());
         
-        module.deleteObject(realmId, appKey, accessToken, EntityType.ACCOUNT, idType, acc.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.ACCOUNT, idType, acc.getSyncToken());
     }
     @Test
     public void createCustomerAnswersNonNullCustomerWithId() throws Exception
@@ -97,7 +94,7 @@ public class QuickBooksModuleTestDriver
         
         auxList.add(auxMap);
 
-        Customer c = module.createCustomer(realmId, appKey, accessToken,
+        Customer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             "Susana", 
             "Susana", 
             "Melina", 
@@ -128,7 +125,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", c.getId().getValue());
         //idType.put("idDomain", c.getId().getIdDomain());
-        module.deleteObject(realmId, appKey, accessToken, EntityType.CUSTOMER, idType, c.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType, c.getSyncToken());
     }
     
     @Test
@@ -179,7 +176,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", "1");
         //idType.put("idDomain", c.getId().getIdDomain());
-        Customer c = (Customer) module.getObject(realmId, appKey, accessToken, EntityType.CUSTOMER, idType);
+        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType);
         
         assertEquals("Ricardo (deleted)", c.getName());
         assertNotNull(c.getId());
@@ -188,7 +185,7 @@ public class QuickBooksModuleTestDriver
     @Test
     public void modifyCustomer()
     {
-        Customer c1 = module.createCustomer(realmId, appKey, accessToken,
+        Customer c1 = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             "Paul M. Jonhson", 
             "Paul", 
             "Mark", 
@@ -205,7 +202,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", c1.getId().getValue());
         
-        Customer c2 = module.updateCustomer(realmId, appKey, accessToken,
+        Customer c2 = module.updateCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             idType, 
             c1.getSyncToken(), 
             c1.getName(), 
@@ -219,17 +216,17 @@ public class QuickBooksModuleTestDriver
             new ArrayList<Map<String, Object>>()
         );
         
-        Customer c3 = (Customer) module.getObject(realmId, appKey, accessToken, EntityType.CUSTOMER, idType);
+        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType);
         
         assertEquals("Smith", c3.getFamilyName());
         
-        module.deleteObject(realmId, appKey, accessToken, EntityType.CUSTOMER, idType, null);
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType, null);
     }
     
     @Test
     public void getAllCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(realmId, appKey, accessToken, EntityType.CUSTOMER, null, null);
+        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, null, null);
         
         for (Object c : it)
         {
@@ -240,7 +237,7 @@ public class QuickBooksModuleTestDriver
     @Test
     public void getSomeCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(realmId, appKey, accessToken, EntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
+        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
         
         for (Object c : it)
         {
@@ -251,7 +248,7 @@ public class QuickBooksModuleTestDriver
     @Test
     public void createSalesTermAnswersNonNullSalesTermWithId()
     {
-        SalesTerm salesTerm = module.createSalesTerm(realmId, appKey, accessToken,
+        SalesTerm salesTerm = module.createSalesTerm(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             "SalesTerm1",
             3,
             null,
@@ -265,7 +262,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", salesTerm.getId().getValue());
         
-        module.deleteObject(realmId, appKey, accessToken, EntityType.SALESTERM, idType, null);
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.SALESTERM, idType, null);
     }
     
     @Test(expected = QuickBooksRuntimeException.class)
@@ -275,9 +272,8 @@ public class QuickBooksModuleTestDriver
         module2 = new QuickBooksModule();
         module2.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module2.init();
-        accessToken = "wrongAccessToken";
         
-        Account acc = module2.createAccount(realmId, appKey, accessToken,
+        Account acc = module2.createAccount("wrongRealmId", appKey, realmIdPseudonym, authIdPseudonym,
             "Test Account", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
     }
     

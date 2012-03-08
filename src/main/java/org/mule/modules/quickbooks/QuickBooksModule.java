@@ -105,7 +105,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param name User-recognizable name for the account. This name must be unique.
      *             When you create a company, you get some default accounts.
      *             If you want to create an account, you must provide an account name that does not
@@ -130,7 +131,7 @@ public class QuickBooksModule
     @Processor
     public Account createAccount(String realmId,
                                  String appKey,
-                                 String accessToken,
+                                 String realmIdPseudonym, String authIdPseudonym,
                                  String name,
                                  @Optional String desc,
                                  AccountDetail subtype,
@@ -140,7 +141,7 @@ public class QuickBooksModule
                                  @Optional Map<String, Object> accountParentId)
     {
         
-        return client.create(realmId, appKey, accessToken, EntityType.ACCOUNT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ACCOUNT,
             unmap(Account.class,            
                 new MapBuilder()
                 .with("name", name)
@@ -170,7 +171,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Information on the financial transaction of the Bill.
      * @param lines Information about a specific good or service purchased for which the payment is demanded
      *             as a part of the bill. A bill can have multiple lines.
@@ -182,11 +184,11 @@ public class QuickBooksModule
     @Processor
     public Bill createBill(String realmId,
                            String appKey,
-                           String accessToken,
+                           String realmIdPseudonym, String authIdPseudonym,
                            Map<String, Object> header,
                            List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.BILL,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILL,
             unmap(Bill.class,
                 new MapBuilder()
                 .with("header", header)
@@ -213,7 +215,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Header information about the BillPayment.
      * @param lines List of lines. Specifies the line details for the bill payment.
      * @return The created BillPayment.
@@ -224,11 +227,11 @@ public class QuickBooksModule
     @Processor
     public BillPayment createBillPayment(String realmId,
                                          String appKey,
-                                         String accessToken,
+                                         String realmIdPseudonym, String authIdPseudonym,
                                          Map<String, Object> header,
                                          List<Map<String, Object>> lines)
     {    
-        return client.create(realmId, appKey, accessToken, EntityType.BILLPAYMENT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILLPAYMENT,
             unmap(BillPayment.class,
                 new MapBuilder()
                 .with("header", header)
@@ -253,7 +256,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Information about the financial transaction of the entire CashPurchase.
      * @param lines List of lines. Information about a specific good or service purchased for which 
      *             the payment is demanded as a part of the CashPurchase.
@@ -265,11 +269,11 @@ public class QuickBooksModule
     @Processor
     public CashPurchase createCashPurchase(String realmId,
                                            String appKey,
-                                           String accessToken,
+                                           String realmIdPseudonym, String authIdPseudonym,
                                            Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.CASHPURCHASE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CASHPURCHASE,
             unmap(CashPurchase.class,
                 new MapBuilder()
                 .with("header", header)
@@ -293,7 +297,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Financial Transaction information that pertains to the entire CheckHeader.
      * @param lines List of lines. Information about a specific good or service purchased for which 
      *             the payment is demanded as a part of the check.
@@ -305,11 +310,11 @@ public class QuickBooksModule
     @Processor
     public Check createCheck(String realmId,
                              String appKey,
-                             String accessToken,
+                             String realmIdPseudonym, String authIdPseudonym,
                              Map<String, Object> header,
                              List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.CHECK,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CHECK,
             unmap(Check.class,
                 new MapBuilder()
                 .with("header", header)
@@ -336,7 +341,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Financial Transaction information that pertains to the entire CreditCardChargeHeader.
      * @param lines List of lines. Information about a specific good or service purchased for which the 
      *             payment is demanded as a part of the CreditCardCharge purchase.
@@ -348,11 +354,11 @@ public class QuickBooksModule
     @Processor
     public CreditCardCharge createCreditCardCharge(String realmId,
                                                    String appKey,
-                                                   String accessToken,
+                                                   String realmIdPseudonym, String authIdPseudonym,
                                                    Map<String, Object> header,
                                                    List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.CREDITCARDCHARGE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CREDITCARDCHARGE,
             unmap(CreditCardCharge.class,
                 new MapBuilder()
                 .with("header", header)
@@ -378,7 +384,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param name Optional. Specifies the full name of the customer. If the Name is specified, then GivenName,
      *             MiddleName, and FamilyName values are ignored.
      * @param givenName Specifies the given name or first name of a person. GivenName is a required field only if 
@@ -406,7 +413,7 @@ public class QuickBooksModule
     @Processor
     public Customer createCustomer(String realmId,
                                    String appKey,
-                                   String accessToken,
+                                   String realmIdPseudonym, String authIdPseudonym,
                                    @Optional String name,
                                    @Optional String givenName,
                                    @Optional String middleName,
@@ -427,7 +434,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
 
-        return client.create(realmId, appKey, accessToken, EntityType.CUSTOMER,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CUSTOMER,
             unmap(Customer.class,
                 new MapBuilder()
                 .with("name", name)
@@ -463,7 +470,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Financial transaction information that pertains to the entire Estimate.
      * @param lines Information about a specific good or service for which the estimate is being issued.
      * @return The created Estimate.
@@ -474,11 +482,11 @@ public class QuickBooksModule
     @Processor
     public Estimate createEstimate(String realmId,
                                    String appKey,
-                                   String accessToken,
+                                   String realmIdPseudonym, String authIdPseudonym,
                                    Map<String, Object> header,
                                    List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.ESTIMATE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ESTIMATE,
             unmap(Estimate.class,
                 new MapBuilder()
                 .with("header", header)
@@ -505,7 +513,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Provides information that pertains to the entire Invoice.
      * @param lines Information about a specific good or service for which the Invoice is being issued.
      * @return The created Invoice.
@@ -516,11 +525,11 @@ public class QuickBooksModule
     @Processor
     public Invoice createInvoice(String realmId,
                                  String appKey,
-                                 String accessToken,
+                                 String realmIdPseudonym, String authIdPseudonym,
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.INVOICE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.INVOICE,
             unmap(Invoice.class,
                 new MapBuilder()
                 .with("header", header)
@@ -546,7 +555,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param name Optional. User recognizable name of the Item.
      * @param unitPrice Optional. Monetary values of the service or product
      * @param desc Optional. User entered description for the item to further describe the details 
@@ -567,7 +577,7 @@ public class QuickBooksModule
     @Processor
     public Item createItem(String realmId,
                            String appKey,
-                           String accessToken,
+                           String realmIdPseudonym, String authIdPseudonym,
                            @Optional @Default("") String name,
                            @Optional Map<String, Object> unitPrice,
                            @Optional String desc,
@@ -585,7 +595,7 @@ public class QuickBooksModule
         purchaseCost = coalesceMap(purchaseCost);
         expenseAccount = coalesceMap(expenseAccount);
 
-        return client.create(realmId, appKey, accessToken, EntityType.ITEM,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ITEM,
             unmap(Item.class,
                 new MapBuilder()
                 .with("name", name)
@@ -619,7 +629,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Information that pertains to the entire payment.
      * @param lines Line details of the receive payment. A receive payment can have multiple lines.
      * @return The created Payment.
@@ -630,11 +641,11 @@ public class QuickBooksModule
     @Processor
     public Payment createPayment(String realmId,
                                  String appKey,
-                                 String accessToken,
+                                 String realmIdPseudonym, String authIdPseudonym,
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.PAYMENT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENT,
             unmap(Payment.class,
                 new MapBuilder()
                 .with("header", header)
@@ -660,7 +671,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param name User recognizable name for the payment method.
      * @param type Type of payment. Specifies if it is a credit card payment type or a 
      *             non-credit card payment type. It must specify either of the following:<br/>
@@ -674,11 +686,11 @@ public class QuickBooksModule
     @Processor
     public PaymentMethod createPaymentMethod(String realmId,
                                              String appKey,
-                                             String accessToken,
+                                             String realmIdPseudonym, String authIdPseudonym,
                                              String name,
                                              @Optional @Default("NON_CREDIT_CARD") String type)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.PAYMENTMETHOD,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENTMETHOD,
             unmap(PaymentMethod.class,
                 new MapBuilder()
                 .with("name", name)
@@ -704,7 +716,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param header Groups the elements that are common to the SalesReceipt transaction.
      * @param lines Groups the line items for the sales receipt.
      * @return The created SalesReceipt.
@@ -715,11 +728,11 @@ public class QuickBooksModule
     @Processor
     public SalesReceipt createSalesReceipt(String realmId,
                                            String appKey,
-                                           String accessToken,
+                                           String realmIdPseudonym, String authIdPseudonym,
                                            Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, accessToken, EntityType.SALESRECEIPT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESRECEIPT,
             unmap(SalesReceipt.class,
                 new MapBuilder()
                 .with("header", header)
@@ -747,7 +760,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param name Specifies the user recognizable name for the salesterm.
      * @param dueDays Number of days from the delivery of goods or services till the payment is due.
      *                If DueDays is specified, only DiscountDays and DiscountPercent can be 
@@ -775,7 +789,7 @@ public class QuickBooksModule
     @Processor
     public SalesTerm createSalesTerm(String realmId,
                                      String appKey,
-                                     String accessToken,
+                                     String realmIdPseudonym, String authIdPseudonym,
                                      String name,
                                      Integer dueDays,
                                      @Optional Integer discountDays,
@@ -786,7 +800,7 @@ public class QuickBooksModule
                                      @Optional String dateDiscountPercent)
     {
         
-        return client.create(realmId, appKey, accessToken, EntityType.SALESTERM,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESTERM,
             unmap(SalesTerm.class,
                 new MapBuilder()
                 .with("name", name)
@@ -818,7 +832,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param name Optional. Specifies the full name of the vendor. If the FullName is specified, 
      *             then GivenName, MiddleName, and FamilyName values are ignored.
      * @param givenName Specifies the given name or first name of a person. GivenName is a required 
@@ -849,7 +864,7 @@ public class QuickBooksModule
     @Processor
     public Vendor createVendor(String realmId,
                                String appKey,
-                               String accessToken,
+                               String realmIdPseudonym, String authIdPseudonym,
                                @Optional String name,
                                @Optional String givenName,
                                @Optional String middleName,
@@ -869,7 +884,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         
-        return client.create(realmId, appKey, accessToken, EntityType.VENDOR,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.VENDOR,
             unmap(Vendor.class,
                 new MapBuilder()
                 .with("name", name)
@@ -900,7 +915,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
      * @return The object.
@@ -911,11 +927,11 @@ public class QuickBooksModule
     @Processor
     public Object getObject(String realmId,
                             String appKey,
-                            String accessToken,
+                            String realmIdPseudonym, String authIdPseudonym,
                             EntityType type,
                             Map<String, Object> id)
     {
-        return client.getObject(realmId, appKey, accessToken, type, unmap(IdType.class, id));
+        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, unmap(IdType.class, id));
     }
 
     /**
@@ -939,7 +955,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -968,7 +985,7 @@ public class QuickBooksModule
     @Processor
     public Account updateAccount(String realmId,
                                  String appKey,
-                                 String accessToken,
+                                 String realmIdPseudonym, String authIdPseudonym,
                                  Map<String, Object> id, 
                                  @Optional String syncToken,
                                  String name,
@@ -980,7 +997,7 @@ public class QuickBooksModule
                                  @Optional Map<String, Object> accountParentId)
     {   
         
-        return client.update(realmId, appKey, accessToken, EntityType.ACCOUNT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ACCOUNT,
             unmap(Account.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1016,7 +1033,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1032,13 +1050,13 @@ public class QuickBooksModule
     @Processor
     public Bill updateBill(String realmId,
                            String appKey,
-                           String accessToken,
+                           String realmIdPseudonym, String authIdPseudonym,
                            Map<String, Object> id, 
                            @Optional String syncToken,
                            Map<String, Object> header,
                            List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.BILL,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILL,
             unmap(Bill.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1071,7 +1089,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1086,13 +1105,13 @@ public class QuickBooksModule
     @Processor
     public BillPayment updateBillPayment(String realmId,
                                          String appKey,
-                                         String accessToken,
+                                         String realmIdPseudonym, String authIdPseudonym,
                                          Map<String, Object> id, 
                                          @Optional String syncToken,
                                          Map<String, Object> header,
                                          List<Map<String, Object>> lines)
     {    
-        return client.update(realmId, appKey, accessToken, EntityType.BILLPAYMENT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILLPAYMENT,
             unmap(BillPayment.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1123,7 +1142,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1139,13 +1159,13 @@ public class QuickBooksModule
     @Processor
     public CashPurchase updateCashPurchase(String realmId,
                                            String appKey,
-                                           String accessToken,
+                                           String realmIdPseudonym, String authIdPseudonym,
                                            Map<String, Object> id, 
                                            @Optional String syncToken,
                                            Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.CASHPURCHASE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CASHPURCHASE,
             unmap(CashPurchase.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1175,7 +1195,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1191,13 +1212,13 @@ public class QuickBooksModule
     @Processor
     public Check updateCheck(String realmId,
                              String appKey,
-                             String accessToken,
+                             String realmIdPseudonym, String authIdPseudonym,
                              Map<String, Object> id, 
                              @Optional String syncToken,
                              Map<String, Object> header,
                              List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.CHECK,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CHECK,
             unmap(Check.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1229,7 +1250,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1245,13 +1267,13 @@ public class QuickBooksModule
     @Processor
     public CreditCardCharge updateCreditCardCharge(String realmId,
                                                    String appKey,
-                                                   String accessToken,
+                                                   String realmIdPseudonym, String authIdPseudonym,
                                                    Map<String, Object> id, 
                                                    @Optional String syncToken,
                                                    Map<String, Object> header,
                                                    List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.CREDITCARDCHARGE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CREDITCARDCHARGE,
             unmap(CreditCardCharge.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1282,7 +1304,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1314,7 +1337,7 @@ public class QuickBooksModule
     @Processor
     public Customer updateCustomer(String realmId,
                                    String appKey,
-                                   String accessToken,
+                                   String realmIdPseudonym, String authIdPseudonym,
                                    Map<String, Object> id, 
                                    @Optional String syncToken,
                                    @Optional String name,
@@ -1337,7 +1360,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         
-        return client.update(realmId, appKey, accessToken, EntityType.CUSTOMER,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CUSTOMER,
             unmap(Customer.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1379,7 +1402,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1394,13 +1418,13 @@ public class QuickBooksModule
     @Processor
     public Estimate updateEstimate(String realmId,
                                    String appKey,
-                                   String accessToken,
+                                   String realmIdPseudonym, String authIdPseudonym,
                                    Map<String, Object> id, 
                                    @Optional String syncToken,
                                    Map<String, Object> header,
                                    List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.ESTIMATE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ESTIMATE,
             unmap(Estimate.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1432,7 +1456,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1447,13 +1472,13 @@ public class QuickBooksModule
     @Processor
     public Invoice updateInvoice(String realmId,
                                  String appKey,
-                                 String accessToken,
+                                 String realmIdPseudonym, String authIdPseudonym,
                                  Map<String, Object> id, 
                                  @Optional String syncToken,
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.INVOICE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.INVOICE,
             unmap(Invoice.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1484,7 +1509,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1509,7 +1535,7 @@ public class QuickBooksModule
     @Processor
     public Item updateItem(String realmId,
                            String appKey,
-                           String accessToken,
+                           String realmIdPseudonym, String authIdPseudonym,
                            Map<String, Object> id, 
                            @Optional String syncToken,
                            @Optional @Default("") String name, 
@@ -1529,7 +1555,7 @@ public class QuickBooksModule
         purchaseCost = coalesceMap(purchaseCost);
         expenseAccount = coalesceMap(expenseAccount);
         
-        return client.update(realmId, appKey, accessToken, EntityType.ITEM,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ITEM,
             unmap(Item.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1568,7 +1594,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1583,13 +1610,13 @@ public class QuickBooksModule
     @Processor
     public Payment updatePayment(String realmId,
                                  String appKey,
-                                 String accessToken,
+                                 String realmIdPseudonym, String authIdPseudonym,
                                  Map<String, Object> id, 
                                  @Optional String syncToken,
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.PAYMENT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENT,
             unmap(Payment.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1620,7 +1647,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1636,13 +1664,13 @@ public class QuickBooksModule
     @Processor
     public PaymentMethod updatePaymentMethod(String realmId,
                                              String appKey,
-                                             String accessToken,
+                                             String realmIdPseudonym, String authIdPseudonym,
                                              Map<String, Object> id, 
                                              @Optional String syncToken,
                                              String name, 
                                              @Optional @Default("NON_CREDIT_CARD") String type)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.PAYMENTMETHOD,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENTMETHOD,
             unmap(PaymentMethod.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1673,7 +1701,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1688,13 +1717,13 @@ public class QuickBooksModule
     @Processor
     public SalesReceipt updateSalesReceipt(String realmId,
                                            String appKey,
-                                           String accessToken,
+                                           String realmIdPseudonym, String authIdPseudonym,
                                            Map<String, Object> id, 
                                            @Optional String syncToken,
                                            Map<String, Object> header, 
                                            List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, accessToken, EntityType.SALESRECEIPT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESRECEIPT,
             unmap(SalesReceipt.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1727,7 +1756,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1759,7 +1789,7 @@ public class QuickBooksModule
     @Processor
     public SalesTerm updateSalesTerm(String realmId,
                                      String appKey,
-                                     String accessToken,
+                                     String realmIdPseudonym, String authIdPseudonym,
                                      Map<String, Object> id, 
                                      @Optional String syncToken,
                                      String name, 
@@ -1772,7 +1802,7 @@ public class QuickBooksModule
                                      @Optional String dateDiscountPercent)
     {
         
-        return client.update(realmId, appKey, accessToken, EntityType.SALESTERM,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESTERM,
             unmap(SalesTerm.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1809,7 +1839,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
@@ -1844,7 +1875,7 @@ public class QuickBooksModule
     @Processor
     public Vendor updateVendor(String realmId,
                                String appKey,
-                               String accessToken,
+                               String realmIdPseudonym, String authIdPseudonym,
                                Map<String, Object> id, 
                                @Optional String syncToken,
                                @Optional String name, 
@@ -1866,7 +1897,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         
-        return client.update(realmId, appKey, accessToken, EntityType.VENDOR,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.VENDOR,
             unmap(Vendor.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1899,7 +1930,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Optional. Integer that indicates how many times the object has been updated.
@@ -1912,12 +1944,12 @@ public class QuickBooksModule
     @Processor
     public void deleteObject(String realmId,
                              String appKey,
-                             String accessToken,
+                             String realmIdPseudonym, String authIdPseudonym,
                              EntityType type, 
                              Map<String, Object> id, 
                              @Optional String syncToken)
     {
-        client.deleteObject(realmId, appKey, accessToken, type, unmap(IdType.class, id), syncToken);
+        client.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, unmap(IdType.class, id), syncToken);
     }
 
     /**
@@ -1937,7 +1969,8 @@ public class QuickBooksModule
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
      * @param appKey Application Id.
-     * @param accessToken Access Token.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type EntityType of the object.
      * @param queryFilter String with a filter format (see details). Each type of object to be 
      *                    retrieved, has a list of attributes for which it can be filtered (See this 
@@ -1956,29 +1989,29 @@ public class QuickBooksModule
     @Processor
     public Iterable findObjects(String realmId,
                                 String appKey,
-                                String accessToken,
+                                String realmIdPseudonym, String authIdPseudonym,
                                 EntityType type, 
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
-        return client.findObjects(realmId, appKey, accessToken, type, queryFilter, querySort);
+        return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, queryFilter, querySort);
     }
     
-    /**
-     * Gets a new accessToken from Quickbooks. It will expire in an hour.
-     * 
-     * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:get-access-token}
-     *
-     * @param appKey Application Key
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @return String that represents the accessToken required in every processor.
-     */
-    @Processor
-    public String getAccessToken(String appKey, String realmIdPseudonym, String authIdPseudonym)
-    {
-        return client.getAccessTokensFromSaml(appKey, realmIdPseudonym, authIdPseudonym);
-    }
+//    /**
+//     * Gets a new accessToken from Quickbooks. It will expire in an hour.
+//     * 
+//     * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:get-access-token}
+//     *
+//     * @param appKey Application Key
+//     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+//     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+//     * @return String that represents the accessToken required in every processor.
+//     */
+//    @Processor
+//    public String getAccessToken(String appKey, String realmIdPseudonym, String authIdPseudonym)
+//    {
+//        return client.getAccessTokensFromSaml(appKey, realmIdPseudonym, authIdPseudonym);
+//    }
     /**
      * 
      */

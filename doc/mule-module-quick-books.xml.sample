@@ -1,7 +1,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-account) -->
 <quickbooks:create-account realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
-                           accessToken="#[map-payload:accessToken]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                            name="#[map-payload:name]"
                            desc="#[map-payload:desc]"
                            subtype="#[map-payload:subType]"
@@ -16,7 +17,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-account2) -->
 <quickbooks:create-account realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                            name="Loan Account"
                            desc="Loan Account"
                            subtype="SAVINGS"
@@ -28,7 +30,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-account3) -->
 <quickbooks:create-account realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                            name="ACME Account"
                            desc="ACME inventory Account"
                            subtype="INVENTORY"
@@ -41,7 +44,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-bill) -->
 <quickbooks:create-bill realmId="#[map-payload:realmId]"
                         appKey="#[map-payload:appKey]"
-                        accessToken="#[map-payload:accessToken]">
+                        realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headerBill]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesBill]"></quickbooks:lines>
 </quickbooks:create-bill>
@@ -50,7 +54,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-bill2) -->
 <quickbooks:create-bill realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>2004</docNumber>
         <txnDate>2010-08-06T21:40:41-07:00</txnDate>
@@ -83,7 +88,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-bill3) -->
 <quickbooks:create-bill realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>2004</docNumber>
         <txnDate>2010-08-06T21:40:41-07:00</txnDate>
@@ -136,7 +142,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-bill-payment) -->
 <quickbooks:create-bill-payment realmId="#[map-payload:realmId]"
                                 appKey="#[map-payload:appKey]"
-                                accessToken="#[map-payload:accessToken]">
+                                realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headerbillpayment]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesbillpayment]"></quickbooks:lines>
 </quickbooks:create-bill-payment>
@@ -145,7 +152,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-bill-payment2) -->
 <quickbooks:create-bill-payment realmId="33221157"
                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                                realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>15</docNumber>
         <txnDate>2010-09-08T15:00:00-07:00</txnDate>
@@ -170,7 +178,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-bill-payment3) -->
 <quickbooks:create-bill-payment realmId="33221157"
                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                                realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>15</docNumber>
         <txnDate>2010-09-08T15:00:00-07:00</txnDate>
@@ -201,7 +210,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase) -->
 <quickbooks:create-cash-purchase realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
-                                 accessToken="#[map-payload:accessToken]">
+                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headercashpurchase]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescashpurchase]"></quickbooks:lines>
 </quickbooks:create-cash-purchase>
@@ -210,7 +220,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase2) -->
 <quickbooks:create-cash-purchase realmId="33221157"
                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                                 realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>1454</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -237,7 +248,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase3) -->
 <quickbooks:create-cash-purchase realmId="33221157"
                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                                 realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>1454</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -272,7 +284,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-check) -->
 <quickbooks:create-check realmId="#[map-payload:realmId]"
                          appKey="#[map-payload:appKey]"
-                         accessToken="#[map-payload:accessToken]">
+                         realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headercheck]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescheck]"></quickbooks:lines>
 </quickbooks:create-check>
@@ -281,7 +294,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-check2) -->
 <quickbooks:create-check realmId="33221157"
                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                         realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>25</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -309,7 +323,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-credit-card-charge) -->
 <quickbooks:create-credit-card-charge realmId="#[map-payload:realmId]"
                                       appKey="#[map-payload:appKey]"
-                                      accessToken="#[map-payload:accessToken]">
+                                      realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headercreditcardcharge]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linescreditcardcharge]"></quickbooks:lines>
 </quickbooks:create-credit-card-charge>
@@ -318,7 +333,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-credit-card-charge2) -->
 <quickbooks:create-credit-card-charge realmId="33221157"
                                       appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                      accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                                      realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>1200</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -345,7 +361,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-customer) -->
 <quickbooks:create-customer realmId="33221157"
                             appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                             name="john doe"
                             givenName="john"
                             middleName="bill"
@@ -365,7 +382,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-customer2) -->
 <quickbooks:create-customer realmId="33221157"
                             appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                             name="John Doe"
                             givenName="John"
                             middleName="J"
@@ -408,7 +426,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-estimate) -->
 <quickbooks:create-estimate realmId="#[map-payload:realmId]"
                             appKey="#[map-payload:appKey]"
-                            accessToken="#[map-payload:accessToken]">
+                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headerestimate]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesestimate]"></quickbooks:lines>
 </quickbooks:create-estimate>
@@ -417,7 +436,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-estimate2) -->
 <quickbooks:create-estimate realmId="33221157"
                             appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                            realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>1002</docNumber>
         <txnDate>2010-08-07T15:00:00-07:00</txnDate>
@@ -452,7 +472,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-invoice) -->
 <quickbooks:create-invoice realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
-                           accessToken="#[map-payload:accessToken]">
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headerinvoice]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linesinvoice]"></quickbooks:lines>
 </quickbooks:create-invoice>
@@ -461,7 +482,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-invoice2) -->
 <quickbooks:create-invoice realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>00010</docNumber>
         <txnDate>2010-08-07T15:00:00-07:00</txnDate>
@@ -498,7 +520,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-item) -->
 <quickbooks:create-item realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                         name="pencils"
                         desc="pencils hb"
                         taxable="true"
@@ -515,7 +538,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-item2) -->
 <quickbooks:create-item realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                         name="Pencils"
                         desc="pencils hb"
                         taxable="true"
@@ -542,7 +566,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-payment) -->
 <quickbooks:create-payment realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
-                           accessToken="#[map-payload:accessToken]">
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headerpayment]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linespayment]"></quickbooks:lines>
 </quickbooks:create-payment>
@@ -551,7 +576,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-payment2) -->
 <quickbooks:create-payment realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>54</docNumber>
         <txnDate>2010-08-09T15:00:00-07:00</txnDate>
@@ -580,7 +606,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-payment-method) -->
 <quickbooks:create-payment-method realmId="33221157"
                                   appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                   name="wire transfer"
                                   type="CREDIT_CARD" >
 </quickbooks:create-payment-method>
@@ -589,7 +616,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-payment-method2) -->
 <quickbooks:create-payment-method realmId="33221157"
                                   appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                   name="Pencil SA"
                                   type="NON_CREDIT_CARD" >
 </quickbooks:create-payment-method>
@@ -598,7 +626,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-receipt) -->
 <quickbooks:create-sales-receipt realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
-                                 accessToken="#[map-payload:accessToken]">
+                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]">
     <quickbooks:header ref="#[variable:headersalesreceipt]"></quickbooks:header>
     <quickbooks:lines ref="#[variable:linessalesreceipt]"></quickbooks:lines>
 </quickbooks:create-sales-receipt>
@@ -607,7 +636,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-receipt2) -->
 <quickbooks:create-sales-receipt realmId="33221157"
                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr">
+                                 realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         >
     <quickbooks:header>
         <docNumber>99009926</docNumber>
         <txnDate>2010-10-22T15:00:00-07:00</txnDate>
@@ -635,7 +665,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-term) -->
 <quickbooks:create-sales-term realmId="#[map-payload:realmId]"
                               appKey="#[map-payload:appKey]"
-                              accessToken="#[map-payload:accessToken]"
+                              realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                               name="#[variable:name]"
                               dueDays="#[variable:dueDays]"
                               discountDays="#[variable:discountDays]"
@@ -649,7 +680,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-term2) -->
 <quickbooks:create-sales-term realmId="33221157"
                               appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                              accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                              realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                               name="Due before receipt"
                               dueDays="1"
                               discountDays="10"
@@ -663,7 +695,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor) -->
 <quickbooks:create-vendor realmId="33221157"
                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                           name="digital"
                           givenName="john"
                           middleName="j"
@@ -683,7 +716,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor2) -->
 <quickbooks:create-vendor realmId="33221157"
                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                           name="Digital"
                           givenName="John"
                           middleName="j"
@@ -721,7 +755,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:get-object) -->
 <quickbooks:get-object realmId="#[map-payload:realmId]"
                        appKey="#[map-payload:appKey]"
-                       accessToken="#[map-payload:accessToken]"
+                       realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                        type="INVOICE">
     <quickbooks:id ref="#[variable:id]"></quickbooks:id>
 </quickbooks:get-object>
@@ -730,7 +765,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:get-object) -->
 <quickbooks:get-object realmId="33221157"
                        appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                       accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                       realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                        type="CUSTOMER">
     <quickbooks:id>
         <value>45</value>
@@ -741,7 +777,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-account) -->
 <quickbooks:update-account realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
-                           accessToken="#[map-payload:accessToken]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                            syncToken="#[variable:synctoken]"
                            name="#[variable:name]"
                            desc="#[variable:desc]"
@@ -758,7 +795,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-account2) -->
 <quickbooks:update-account realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                            syncToken="1"
                            name="Loan Account"
                            desc="Loan Account"
@@ -774,7 +812,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-account3) -->
 <quickbooks:update-account realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                            name="ACME Account"
                            desc="ACME inventory Account"
                            subtype="INVENTORY"
@@ -790,7 +829,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-bill) -->
 <quickbooks:update-bill realmId="#[map-payload:realmId]"
                         appKey="#[map-payload:appKey]"
-                        accessToken="#[map-payload:accessToken]"
+                        realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                         syncToken="0">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headerbill]"></quickbooks:header>
@@ -801,7 +841,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-bill2) -->
 <quickbooks:update-bill realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                         syncToken="0">
     <quickbooks:id>
         <value>15</value>
@@ -838,7 +879,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-bill3) -->
 <quickbooks:update-bill realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                         syncToken="0">
     <quickbooks:id>
         <value>34</value>
@@ -895,7 +937,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-bill-payment) -->
 <quickbooks:update-bill-payment realmId="#[map-payload:realmId]"
                                 appKey="#[map-payload:appKey]"
-                                accessToken="#[map-payload:accessToken]"
+                                realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                                 syncToken="0">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headerbillpayment]"></quickbooks:header>
@@ -906,7 +949,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-bill-payment2) -->
 <quickbooks:update-bill-payment realmId="33221157"
                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                 syncToken="1">
     <quickbooks:id>
         <value>75</value>
@@ -935,7 +979,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-bill-payment3) -->
 <quickbooks:update-bill-payment realmId="33221157"
                                 appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                 syncToken="0">
     <quickbooks:id>
         <value>16</value>
@@ -970,7 +1015,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase) -->
 <quickbooks:update-cash-purchase realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
-                                 accessToken="#[map-payload:accessToken]"
+                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                                  syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headercashpurchase]"></quickbooks:header>
@@ -981,7 +1027,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase2) -->
 <quickbooks:update-cash-purchase realmId="33221157"
                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                 realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                  syncToken="1">
     <quickbooks:id>
         <value>26</value>
@@ -1012,7 +1059,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase3) -->
 <quickbooks:update-cash-purchase realmId="33221157"
                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                 realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                  syncToken="1">
     <quickbooks:id>
         <value>36</value>
@@ -1051,7 +1099,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-check) -->
 <quickbooks:update-check realmId="#[map-payload:realmId]"
                          appKey="#[map-payload:appKey]"
-                         accessToken="#[map-payload:accessToken]"
+                         realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                          syncToken="1">
     <quickbooks:id ref="#[variable:id]" />
     <quickbooks:header ref="#[variable:headercheck]"></quickbooks:header>
@@ -1062,7 +1111,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-check2) -->
 <quickbooks:update-check realmId="33221157"
                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                          syncToken="1">
     <quickbooks:id>
         <value>19</value>
@@ -1094,7 +1144,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-credit-card-charge) -->
 <quickbooks:update-credit-card-charge realmId="#[map-payload:realmId]"
                                       appKey="#[map-payload:appKey]"
-                                      accessToken="#[map-payload:accessToken]"
+                                      realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                                       syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headercreditcardcharge]"></quickbooks:header>
@@ -1105,7 +1156,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-credit-card-charge2) -->
 <quickbooks:update-credit-card-charge realmId="33221157"
                                       appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                      accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                      realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                       syncToken="1">
     <quickbooks:id>
         <value>19</value>
@@ -1136,7 +1188,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-customer) -->
 <quickbooks:update-customer realmId="33221157"
                             appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                             syncToken="1"
                             name="john doe"
                             givenName="john"
@@ -1158,7 +1211,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-customer2) -->
 <quickbooks:update-customer realmId="33221157"
                             appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                             syncToken="1"
                             name="John Doe"
                             givenName="John"
@@ -1205,7 +1259,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-estimate) -->
 <quickbooks:update-estimate realmId="#[map-payload:realmId]"
                             appKey="#[map-payload:appKey]"
-                            accessToken="#[map-payload:accessToken]"
+                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                             syncToken="1">
     <quickbooks:id ref="#[variable:id]" />
     <quickbooks:header ref="#[variable:headerestimate]"></quickbooks:header>
@@ -1216,7 +1271,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-estimate2) -->
 <quickbooks:update-estimate realmId="33221157"
                             appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                            accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                            realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                             syncToken="1">
     <quickbooks:id>
         <value>29</value>
@@ -1255,7 +1311,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-invoice) -->
 <quickbooks:update-invoice realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
-                           accessToken="#[map-payload:accessToken]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                            syncToken="1">
     <quickbooks:id ref="#[variable:id]" />
     <quickbooks:header ref="#[variable:headerinvoice]"></quickbooks:header>
@@ -1266,7 +1323,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-invoice2) -->
 <quickbooks:update-invoice realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                            syncToken="1">
     <quickbooks:id>
         <value>22</value>
@@ -1307,7 +1365,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-item) -->
 <quickbooks:update-item realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                         syncToken="1"
                         name="pencils"
                         desc="pencils hb"
@@ -1326,7 +1385,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-item2) -->
 <quickbooks:update-item realmId="33221157"
                         appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                        accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                        realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                         syncToken="1"
                         name="Pencils"
                         desc="pencils hb"
@@ -1357,7 +1417,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-payment) -->
 <quickbooks:update-payment realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
-                           accessToken="#[map-payload:accessToken]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                            syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headerpayment]"></quickbooks:header>
@@ -1368,7 +1429,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-payment2) -->
 <quickbooks:update-payment realmId="33221157"
                            appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                            syncToken="1" >
     <quickbooks:id>
         <value>27</value>
@@ -1401,7 +1463,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-payment-method) -->
 <quickbooks:update-payment-method realmId="33221157"
                                   appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                   syncToken="1"
                                   name="wire transfer"
                                   type="CREDIT_CARD">
@@ -1412,7 +1475,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-payment-method2) -->
 <quickbooks:update-payment-method realmId="33221157"
                                   appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                  accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                   syncToken="2"
                                   name="Pencil SA"
                                   type="NON_CREDIT_CARD" >
@@ -1425,7 +1489,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-receipt) -->
 <quickbooks:update-sales-receipt realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
-                                 accessToken="#[map-payload:accessToken]"
+                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                             authIdPseudonym="#[map-payload:authIdPseudonym]"
                                  syncToken="1">
     <quickbooks:id ref="#[variable:id]"/>
     <quickbooks:header ref="#[variable:headersalesreceipt]"></quickbooks:header>
@@ -1436,7 +1501,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-receipt2) -->
 <quickbooks:update-sales-receipt realmId="33221157"
                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                 accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                                 realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                                  syncToken="1">
     <quickbooks:id>
         <value>39</value>
@@ -1468,7 +1534,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-term) -->
 <quickbooks:update-sales-term realmId="33221157"
                               appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                              accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                              realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                               syncToken="1"
                               name="due before receipt"
                               dueDays="1"
@@ -1485,7 +1552,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-term2) -->
 <quickbooks:update-sales-term realmId="33221157"
                               appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                              accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                              realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                               syncToken="2"
                               name="Due before receipt"
                               dueDays="1"
@@ -1504,7 +1572,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:update-vendor) -->
 <quickbooks:update-vendor realmId="33221157"
                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                           syncToken="1"
                           name="digital"
                           givenName="john"
@@ -1526,7 +1595,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor2) -->
 <quickbooks:update-vendor realmId="33221157"
                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                           syncToken="1"
                           name="Digital"
                           givenName="John"
@@ -1568,7 +1638,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:delete-object) -->
 <quickbooks:delete-object realmId="33221157"
                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                           type="INVOICE"
                           syncToken="2">
     <quickbooks:id ref="#[variable:id]"></quickbooks:id>
@@ -1578,7 +1649,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:delete-object2) -->
 <quickbooks:delete-object realmId="33221157"
                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                          accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                          realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                           type="CUSTOMER"
                           syncToken="1">
     <quickbooks:id>
@@ -1590,7 +1662,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:find-objects) -->
 <quickbooks:find-objects realmId="33221157"
                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                          type="ACCOUNT"
                          queryFilter="#[variable:queryfilterstring]"
                          querySort="#[variable:querysortstring]"/>
@@ -1599,7 +1672,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:find-objects2) -->
 <quickbooks:find-objects realmId="33221157"
                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                          type="ACCOUNT"
                          queryFilter="Name :EQUALS: Loan Account"
                          querySort="Name AToZ"/>
@@ -1608,7 +1682,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:find-objects3) -->
 <quickbooks:find-objects realmId="33221157"
                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                          type="CUSTOMER"
                          queryFilter="FamilyName :EQUALS: Doe" />
 <!-- END_INCLUDE(quickbooks:find-objects3) -->
@@ -1616,7 +1691,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:find-objects4) -->
 <quickbooks:find-objects realmId="33221157"
                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr"
+                         realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                          type="INVOICE"
                          queryFilter="DBAName :EQUALS: Smith Bakery :AND: FamilyName :EQUALS: Smith" />
 <!-- END_INCLUDE(quickbooks:find-objects4) -->
@@ -1624,13 +1700,8 @@
 <!-- BEGIN_INCLUDE(quickbooks:find-objects5) -->
 <quickbooks:find-objects realmId="33221157"
                          appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                         accessToken="amnasdlk123klj123lkj23jalkaslkjaaadsadaabcvbtr" 
+                         realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                         authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
                          type="INVOICE"
                          queryFilter="LastUpdatedTime :AFTER: 2010-08-10T14:30:00-0700 :AND: LastUpdatedTime :BEFORE: 2010-08-10T15:30:00-0700" />
 <!-- END_INCLUDE(quickbooks:find-objects5) -->
-
-<!-- BEGIN_INCLUDE(quickbooks:get-access-token) -->
-<quickbooks:get-access-token appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                             realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                             authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" />
-<!-- END_INCLUDE(quickbooks:get-access-token) -->
