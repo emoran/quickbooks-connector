@@ -131,7 +131,7 @@ public class QuickBooksModule
      * Account is a component of a chart of accounts, and is part of a ledger.
      * You can use Account to record the total monetary amount that is allocated for a specific use.
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Account">Account Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-account}
@@ -192,7 +192,7 @@ public class QuickBooksModule
      * Creates a Bill.
      * The Bill object represents an expense to the business.
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Bill">Bill Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill}
@@ -231,7 +231,7 @@ public class QuickBooksModule
      * from a vendor for goods or services purchased from the vendor.
      * QBO supports bill payments through a credit card or a bank account.
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/BillPayment">BillPayment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-bill-payment}
@@ -267,7 +267,7 @@ public class QuickBooksModule
      * Creates a CashPurchase.
      * CashPurchase represents an expense to the business as a cash transaction.
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/CashPurchase">CashPurchase Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-cash-purchase}
@@ -304,7 +304,7 @@ public class QuickBooksModule
      * Creates a Check.
      * The Check object represents an expense to the business paid as a check transaction.
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Check">Check Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-check}
@@ -343,7 +343,7 @@ public class QuickBooksModule
      * line items.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-credit-card-charge}
@@ -381,7 +381,7 @@ public class QuickBooksModule
      * QBO allows categorizing the customers in a way that is meaningful to the business.
      *
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Customer">Customer Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-customer}
@@ -462,7 +462,7 @@ public class QuickBooksModule
      * The Estimate object represents a proposal for a financial transaction from a business to a customer 
      * for goods or services proposed to be sold, including proposed pricing. It is also known as quote.
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Estimate">Estimate Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-estimate}
@@ -500,7 +500,7 @@ public class QuickBooksModule
      * are not supported. Invoice can be printed and emailed to a customer.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Invoice">Invoice Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-invoice}
@@ -537,7 +537,7 @@ public class QuickBooksModule
      * are not currently supported.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Item">Item Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-item}
@@ -606,7 +606,7 @@ public class QuickBooksModule
      * for one or more sales transactions.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Payment">Payment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-payment}
@@ -643,7 +643,7 @@ public class QuickBooksModule
      * payment type or a non-credit card payment type.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-payment-method}
@@ -683,7 +683,7 @@ public class QuickBooksModule
      * for one or more sales transactions.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-sales-receipt}
@@ -722,7 +722,7 @@ public class QuickBooksModule
      * payment is made within a few days of the stipulated time.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/SalesTerm">SalesTerm Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-sales-term}
@@ -789,7 +789,7 @@ public class QuickBooksModule
      * for your organization.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:create-vendor}
@@ -901,7 +901,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Account">Account Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-account}
@@ -974,7 +974,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Bill">Bill Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill}
@@ -1025,7 +1025,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/BillPayment">BillPayment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-bill-payment}
@@ -1073,7 +1073,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/CashPurchase">CashPurchase Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-cash-purchase}
@@ -1122,7 +1122,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Check">Check Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-check}
@@ -1172,7 +1172,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-credit-card-charge}
@@ -1221,7 +1221,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Customer">Customer Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-customer}
@@ -1314,7 +1314,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Estimate">Estimate Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-estimate}
@@ -1363,7 +1363,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Invoice">Invoice Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-invoice}
@@ -1411,7 +1411,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Item">Item Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-item}
@@ -1491,7 +1491,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Payment">Payment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-payment}
@@ -1539,7 +1539,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-payment-method}
@@ -1588,7 +1588,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-sales-receipt}
@@ -1638,7 +1638,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/SalesTerm">SalesTerm Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-sales-term}
@@ -1716,7 +1716,7 @@ public class QuickBooksModule
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:update-vendor}
@@ -1833,7 +1833,7 @@ public class QuickBooksModule
      * Lazily retrieves Objects
      *
      * For details see: 
-     * <a href="http://qbsdk.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books.xml.sample quickbooks:find-objects}
