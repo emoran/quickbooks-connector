@@ -60,7 +60,6 @@ import org.springframework.core.io.ClassPathResource;
 
 import com.intuit.ipp.oauth.signing.RsaSha1MessageSigner;
 import com.intuit.ipp.oauth.signing.XoAuthAuthorizationHeaderSigningStrategy;
-import com.intuit.platform.client.transport.HttpProtocolConstants;
 
 /**
  * 
@@ -345,8 +344,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", 
                         connectionDatas.get(realmId).getBaseUri(), type.getResouceName(), realmId));
                     
-                    httpRequest.addHeader(HttpProtocolConstants.HEADER_CONTENT_TYPE, 
-                        HttpProtocolConstants.CONTENT_TYPE_APPLICATION_URL_ENCODED);
+                    httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
                     try
                     {
                         ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -476,7 +474,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         JAXBElement<T> jaxbElement = QBOMessageUtils.createJaxbElement(obj);
         try
         {
-            httpRequest.addHeader(HttpProtocolConstants.HEADER_CONTENT_TYPE, HttpProtocolConstants.CONTENT_TYPE_APPLICATION_XML);
+            httpRequest.addHeader("Content-Type", "application/xml");
             
             String documentToPost = QBOMessageUtils.getXmlDocument(jaxbElement);
             ByteArrayInputStream payLoad = new ByteArrayInputStream(documentToPost.getBytes());
