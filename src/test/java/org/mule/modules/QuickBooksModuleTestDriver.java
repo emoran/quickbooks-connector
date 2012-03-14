@@ -17,6 +17,7 @@ package org.mule.modules;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,6 +34,10 @@ import org.mule.modules.quickbooks.api.MapBuilder;
 import org.mule.modules.quickbooks.api.Exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.schema.Account;
 import org.mule.modules.quickbooks.schema.Customer;
+import org.mule.modules.quickbooks.schema.Invoice;
+import org.mule.modules.quickbooks.schema.InvoiceHeader;
+import org.mule.modules.quickbooks.schema.InvoiceLine;
+import org.mule.modules.quickbooks.schema.Item;
 import org.mule.modules.quickbooks.schema.PhysicalAddress;
 import org.mule.modules.quickbooks.schema.SalesTerm;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
@@ -263,6 +268,68 @@ public class QuickBooksModuleTestDriver
         idType.put("value", salesTerm.getId().getValue());
         
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.SALESTERM, idType, null);
+    }
+    
+    @Test
+    public void createInvoiceRetrieveAndUpdateIt()
+    {
+        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.schema").build();
+
+        //creates a customer
+        Customer customer = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+            "Paul M. Jenkins 4", 
+            "Paul", 
+            "Mark", 
+            "Jenkins",
+            null, null, null, 
+            new ArrayList<Map<String, Object>>(), 
+            null, null, new ArrayList<Map<String, Object>>(),
+            new ArrayList<Map<String, Object>>(),
+            new ArrayList<Map<String, Object>>()
+        );
+        
+        //create an item
+        Map<String, Object> unitPrice = new HashMap<String, Object>(){{
+            put("amount", 100);
+        }};
+        
+        Item item = module.createItem(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+            "ItemTest0057", unitPrice, null, false, null, null, null, null, null, null);
+        
+        //create an invoice with the customer and item created before
+        InvoiceHeader invHeader = new InvoiceHeader();
+        invHeader.setCustomerId(customer.getId());
+        invHeader.setDocNumber("DOC-00000010101");
+        
+        List<InvoiceLine> lines = new ArrayList<InvoiceLine>();
+        InvoiceLine invoiceLine = new InvoiceLine();
+        invoiceLine.setAmount(new BigDecimal(100));
+        invoiceLine.setItemId(item.getId());
+        lines.add(invoiceLine);
+        Invoice invoice = module.createInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, (Map<String, Object>) mom.map(invHeader), (List<Map<String, Object>>) mom.map(lines));
+        
+        //retrieve the invoices of our customer
+        String filter = "CustomerId :EQUALS: " + customer.getId().getValue();
+        Iterable<Invoice> iterableInv = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.INVOICE, filter, null);
+
+        //We know that only has one invoice, because we have created him
+        invoice = iterableInv.iterator().next();
+        
+        //change the docNumber and update it
+        invoice.getHeader().setDocNumber("DOC-NEW:001111111101");
+        invoice = module.updateInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                             (Map<String, Object>) mom.map(invoice.getId()), 
+                             invoice.getSyncToken(), 
+                             (Map<String, Object>) mom.map(invoice.getHeader()), 
+                             (List<Map<String, Object>>) mom.map(invoice.getLine()));
+        
+        //delete everything
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.INVOICE, (Map<String, Object>) mom.map(invoice.getId()), invoice.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+    
+        //verify the change
+        assertEquals("DOC-NEW:001111111101", invoice.getHeader().getDocNumber());
     }
     
     @Test(expected = QuickBooksRuntimeException.class)
