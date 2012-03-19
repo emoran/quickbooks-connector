@@ -11,7 +11,7 @@
 package org.mule.modules.quickbooks.api.Exception;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.mule.modules.quickbooks.schema.FaultInfo;
+import org.mule.modules.quickbooks.schema.online.FaultInfo;
 
 
 /**

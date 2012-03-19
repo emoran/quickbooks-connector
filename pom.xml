@@ -30,13 +30,14 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<packageName>org.mule.modules.quickbooks.schema</packageName>
-					<schemaDirectory>src/main/resources/schema</schemaDirectory>
-					<schemaFiles>
-						qbo.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitBaseExceptionTypes.xsd,IntuitCustomFieldCdmTypes.xsd,IntuitCdmBaseTypes.xsd,PartyCdmTypes.xsd,qbopayroll.xsd,QboReports.xsd
+                <configuration>
+                    <packageName>org.mule.modules.quickbooks.schema.windows</packageName>
+                    <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
+ <!-- Employee.xsd,EmployeeTypes.xsd,PayrollItem.xsd *not included* - EmployeeType has some missing groups-->
+                    <schemaFiles>
+                        ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd
                     </schemaFiles>
-				</configuration>
+                </configuration>
 			</plugin>
 		</plugins>
 	</build>

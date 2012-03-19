@@ -11,21 +11,21 @@
 package org.mule.modules.quickbooks;
 
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
-import org.mule.modules.quickbooks.schema.Account;
-import org.mule.modules.quickbooks.schema.Bill;
-import org.mule.modules.quickbooks.schema.BillPayment;
-import org.mule.modules.quickbooks.schema.CashPurchase;
-import org.mule.modules.quickbooks.schema.Check;
-import org.mule.modules.quickbooks.schema.CreditCardCharge;
-import org.mule.modules.quickbooks.schema.Customer;
-import org.mule.modules.quickbooks.schema.Estimate;
-import org.mule.modules.quickbooks.schema.Invoice;
-import org.mule.modules.quickbooks.schema.Item;
-import org.mule.modules.quickbooks.schema.Payment;
-import org.mule.modules.quickbooks.schema.PaymentMethod;
-import org.mule.modules.quickbooks.schema.SalesReceipt;
-import org.mule.modules.quickbooks.schema.SalesTerm;
-import org.mule.modules.quickbooks.schema.Vendor;
+import org.mule.modules.quickbooks.schema.online.Account;
+import org.mule.modules.quickbooks.schema.online.Bill;
+import org.mule.modules.quickbooks.schema.online.BillPayment;
+import org.mule.modules.quickbooks.schema.online.CashPurchase;
+import org.mule.modules.quickbooks.schema.online.Check;
+import org.mule.modules.quickbooks.schema.online.CreditCardCharge;
+import org.mule.modules.quickbooks.schema.online.Customer;
+import org.mule.modules.quickbooks.schema.online.Estimate;
+import org.mule.modules.quickbooks.schema.online.Invoice;
+import org.mule.modules.quickbooks.schema.online.Item;
+import org.mule.modules.quickbooks.schema.online.Payment;
+import org.mule.modules.quickbooks.schema.online.PaymentMethod;
+import org.mule.modules.quickbooks.schema.online.SalesReceipt;
+import org.mule.modules.quickbooks.schema.online.SalesTerm;
+import org.mule.modules.quickbooks.schema.online.Vendor;
 
 /**
  * The supported objects for Data Services for QuickBooks Online.

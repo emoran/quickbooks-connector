@@ -8,15 +8,15 @@
  * LICENSE.txt file.
  */
 
-package org.mule.modules.quickbooks.utils;
+package org.mule.modules.quickbooks.schema.online.objectfactory;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-import org.mule.modules.quickbooks.schema.*;
-import org.mule.modules.quickbooks.schema.Class;
+import org.mule.modules.quickbooks.schema.online.*;
+import org.mule.modules.quickbooks.schema.online.Class;
 
 
 /**

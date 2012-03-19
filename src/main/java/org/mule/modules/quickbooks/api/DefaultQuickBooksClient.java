@@ -10,91 +10,42 @@
 
 package org.mule.modules.quickbooks.api;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.security.KeyStore;
-import java.security.PrivateKey;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-
-import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
 import org.apache.commons.lang.Validate;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.entity.InputStreamEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.mule.modules.quickbooks.EntityType;
 import org.mule.modules.quickbooks.api.Exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.api.gateway.MuleOAuthCredentialStorage;
-import org.mule.modules.quickbooks.api.gateway.oauth.OAuthGateway;
-import org.mule.modules.quickbooks.schema.CdmBase;
-import org.mule.modules.quickbooks.schema.FaultInfo;
-import org.mule.modules.quickbooks.schema.IdType;
-import org.mule.modules.quickbooks.schema.QboUser;
-import org.mule.modules.quickbooks.schema.SearchResults;
-import org.mule.modules.quickbooks.utils.QBOMessageUtils;
+import org.mule.modules.quickbooks.schema.online.CdmBase;
+import org.mule.modules.quickbooks.schema.online.IdType;
+import org.mule.modules.quickbooks.schema.online.QboUser;
+import org.mule.modules.quickbooks.schema.online.SearchResults;
+import org.mule.modules.quickbooks.schema.online.objectfactory.QBOMessageUtils;
+import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
-import org.springframework.core.io.ClassPathResource;
-
-import com.intuit.ipp.oauth.signing.RsaSha1MessageSigner;
-import com.intuit.ipp.oauth.signing.XoAuthAuthorizationHeaderSigningStrategy;
 
 /**
  * 
  * @author Gaston Ponti
  * @since Aug 19, 2011
  */
-public class DefaultQuickBooksClient implements QuickBooksClient
-{
-    private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway.properties";
-    private Properties properties;
-    private final String baseUri;
-
-    private Integer resultsPerPage = 100;
-    private PrivateKey privateKey;
-    
-    private String serviceProviderId;
-    
-    private final Map<String, CompanyConnectionData> connectionDatas;
-    
+public class DefaultQuickBooksClient extends AbstractQuickBooksClient implements QuickBooksClient
+{   
     public DefaultQuickBooksClient(final String baseUri)
     {
         Validate.notEmpty(baseUri);
         
-        this.baseUri = baseUri;
-        
-        connectionDatas = new HashMap<String, CompanyConnectionData>();
-        
-        try 
-        {
-            loadProperties(INTERNAL_GATEWAY_PROPS);
-            loadPrivateKey();
-        } 
-        catch (Exception e) 
-        {
-            throw MuleSoftException.soften(e);
-        }
+        init(baseUri);
     }
     
     /** @throws QuickBooksRuntimeException 
@@ -112,7 +63,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
         String str = String.format("%s/resource/%s/v2/%s",
-            connectionDatas.get(realmId).getBaseUri(),
+            getBaseUri(realmId),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             realmId);
         
@@ -121,13 +72,13 @@ public class DefaultQuickBooksClient implements QuickBooksClient
 
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                connectionDatas.get(realmId).setAccessToken(null);
+                destroyAccessToken(realmId);
                 return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj);
             } 
             else 
@@ -153,19 +104,19 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            connectionDatas.get(realmId).getBaseUri(), type.getResouceName(), realmId, id.getValue());
+            getBaseUri(realmId), type.getResouceName(), realmId, id.getValue());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                connectionDatas.get(realmId).setAccessToken(null);
+                destroyAccessToken(realmId);
                 return getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id);
             } 
             else 
@@ -195,7 +146,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         }
         
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            connectionDatas.get(realmId).getBaseUri(),
+            getBaseUri(realmId),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             realmId,
             obj.getId().getValue());
@@ -206,13 +157,13 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                connectionDatas.get(realmId).setAccessToken(null);
+                destroyAccessToken(realmId);
                 return update(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj);
             } 
             else 
@@ -247,19 +198,19 @@ public class DefaultQuickBooksClient implements QuickBooksClient
         obj.setId(id);
         
         String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
-            connectionDatas.get(realmId).getBaseUri(), type.getResouceName(), realmId, id.getValue());
+            getBaseUri(realmId), type.getResouceName(), realmId, id.getValue());
         HttpUriRequest httpRequest = new HttpPost(str);
         
         prepareToPost(obj, httpRequest);
         try
         {
-            makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+            makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                connectionDatas.get(realmId).setAccessToken(null);
+                destroyAccessToken(realmId);
                 deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id, syncToken);
             } 
             else 
@@ -342,7 +293,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                     nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", resultsPerPage.toString()));
                     nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", 
-                        connectionDatas.get(realmId).getBaseUri(), type.getResouceName(), realmId));
+                        getBaseUri(realmId), type.getResouceName(), realmId));
                     
                     httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
                     try
@@ -356,13 +307,13 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                     
                     try
                     {
-                        return (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
+                        return (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
                     }
                     catch(QuickBooksRuntimeException e)
                     {
                         if(e.isAExpiredTokenFault())
                         {
-                            connectionDatas.get(realmId).setAccessToken(null);
+                            destroyAccessToken(realmId);
                             return askAnEspecificPage(pageNumber);
                         } 
                         else 
@@ -374,231 +325,19 @@ public class DefaultQuickBooksClient implements QuickBooksClient
             };
     }
     
-    private String getAccessTokensFromSaml(String appKey, String realmIdPseudonym, String authIdPseudonym)
-    {   
-        String tokens = null;
-        try 
-        {
-            MuleOAuthCredentialStorage storage = new MuleOAuthCredentialStorage();
-            storage.setConsumerKey(appKey);
-            storage.setConsumerSecret("");
-            tokens = new OAuthGateway(storage,
-                                      new RsaSha1MessageSigner(privateKey),
-                                      new XoAuthAuthorizationHeaderSigningStrategy())
-                        .getOAuthToken(serviceProviderId,
-                                       authIdPseudonym, 
-                                       realmIdPseudonym);
-            
-            //The accessSecret it's not used by Quickbooks SAML, but it send it anyway
-            //String accessSecret = tokens.substring(tokens.indexOf("oauth_token_secret=") + "oauth_token_secret=".length(), tokens.indexOf("&"));
-            
-            return tokens.substring(tokens.indexOf("oauth_token=") + "oauth_token=".length());
-        } 
-        catch (Exception e) 
-        {
-            throw MuleSoftException.soften(e);
-        }        
-    }
-    
-    private Object makeARequestToQuickbooks(HttpUriRequest httpRequest, String appKey, String accessToken)
+    @Override
+    protected String loadCompanyBaseUri(String realmId, String appKey, String accessToken)
     {
-        //httpRequest.addHeader("Accept-Enconding", "gzip,deflate");
+        HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", baseUri, realmId));
         
-        CommonsHttpOAuthConsumer postConsumer = new CommonsHttpOAuthConsumer(appKey, "");
-        postConsumer.setTokenWithSecret(accessToken, "");
-        postConsumer.setMessageSigner(new RsaSha1MessageSigner(privateKey));
-        postConsumer.setSigningStrategy(new XoAuthAuthorizationHeaderSigningStrategy());       
-        try
-        {
-            postConsumer.sign(httpRequest);
-        }
-        catch (Exception e)
-        {
-            throw MuleSoftException.soften(e);
-        }
-
-        HttpClient client = new DefaultHttpClient();
+        QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
         
-        BufferedReader br = null;
-        StringBuffer responseBody = null;
-        HttpResponse response = null;
-        int statusCode = HttpStatus.SC_OK;
-        try
-        {
-            response = client.execute(httpRequest);
-
-            br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            String readLine;
-            responseBody = new StringBuffer();
-            while((readLine = br.readLine()) != null) 
-            {
-                responseBody.append(readLine + System.getProperty("line.separator"));
-            }
-            statusCode = response.getStatusLine().getStatusCode();
-            if ( statusCode != HttpStatus.SC_OK)
-            {
-                FaultInfo fault = (FaultInfo) QBOMessageUtils.parseResponse(responseBody.toString());
-                throw new QuickBooksRuntimeException(fault);
-            }   
-        } 
-        catch (Exception e) 
-        {
-            throw MuleSoftException.soften(e);
-        } 
-        finally 
-        {
-            if(br != null) 
-            {
-                try 
-                { 
-                    br.close(); 
-                } 
-                catch (Exception e) 
-                {
-                    throw MuleSoftException.soften(e);
-                }
-            }
-        }
-        try
-        {
-            return QBOMessageUtils.parseResponse(responseBody.toString());
-        }
-        catch (JAXBException e)
-        {
-            throw MuleSoftException.soften(e);
-        }
-    }
-    
-    private <T extends CdmBase> void prepareToPost(final T obj, HttpUriRequest httpRequest)
-    {
-        JAXBElement<T> jaxbElement = QBOMessageUtils.createJaxbElement(obj);
-        try
-        {
-            httpRequest.addHeader("Content-Type", "application/xml");
-            
-            String documentToPost = QBOMessageUtils.getXmlDocument(jaxbElement);
-            ByteArrayInputStream payLoad = new ByteArrayInputStream(documentToPost.getBytes());
-            InputStreamEntity entity = new InputStreamEntity(payLoad, -1);
-            ((HttpPost) httpRequest).setEntity(entity);
-
-        }
-        catch (Exception e)
-        {
-            throw MuleSoftException.soften(e);
-        }
-    }
-    
-    public void setResultsPerPage(Integer resultsPerPage)
-    {   
-        if ( resultsPerPage > 100 || resultsPerPage < 10 )
-        {
-            throw new IllegalArgumentException("Results Per Page must be a number between 10 and 100");
-        }    
-        this.resultsPerPage = resultsPerPage;
+        return qboUser.getCurrentCompany().getBaseURI();
     }
 
-    private void loadProperties(String resourceName) throws IOException 
+    @Override
+    protected MessageUtils getMessageUtilsInstance()
     {
-        this.properties = new Properties();
-        InputStream fileInputStream = null;
-        try 
-        {
-            fileInputStream = new ClassPathResource(resourceName).getInputStream();
-            this.properties.load(fileInputStream);
-        }
-        catch (Exception e) {
-            throw new IOException("Configuration resource " + resourceName + " not found");
-        }
-        finally 
-        {
-            if (fileInputStream != null) 
-            {
-                fileInputStream.close();
-            }
-        }
-    }
-    
-    private void loadPrivateKey() throws IOException
-    {
-        String keyStorePath = (String) properties.get("keystore.keystorePath");
-        String keyStorePassword = (String) properties.get("keystore.password");
-        String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
-        String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
-        String keyStoreType = (String) properties.get("keystore.keystoreType");
-        serviceProviderId = (String) properties.get("serviceProviderId");
-        
-        try
-        {
-            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-            keyStore.load(new ClassPathResource(keyStorePath).getInputStream(), keyStorePassword.toCharArray());
-            privateKey = (PrivateKey) keyStore.getKey(privateKeyAlias, privateKeyPassword.toCharArray());
-        }
-        catch (Exception e) {
-            throw new IOException("Properties file with wrong configuration");
-        }
-
-    }
-    
-    private void loadCompanyData(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym)
-    {
-        if(!connectionDatas.containsKey(realmId) || connectionDatas.get(realmId).getAccessToken() == null)
-        {
-            String accessToken = getAccessTokensFromSaml(appKey, realmIdPseudonym, authIdPseudonym);
-            if(!connectionDatas.containsKey(realmId))
-            {
-                connectionDatas.put(realmId, new CompanyConnectionData());
-            }
-            connectionDatas.get(realmId).setAccessToken(accessToken);
-        }
-        
-        if (connectionDatas.get(realmId).getBaseUri() == null)
-        {
-            HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", baseUri, realmId));
-        
-            QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, appKey, connectionDatas.get(realmId).getAccessToken());
-        
-            connectionDatas.get(realmId).setBaseUri(qboUser.getCurrentCompany().getBaseURI());
-        }
-    }
-    
-    private class CompanyConnectionData
-    {
-        private String baseUri;
-        private String accessToken;
-        
-        protected CompanyConnectionData()
-        {
-        }
-        
-        /**
-         * @return the baseUri
-         */
-        public String getBaseUri()
-        {
-            return baseUri;
-        }
-        /**
-         * @param baseUri the baseUri to set
-         */
-        public void setBaseUri(String baseUri)
-        {
-            this.baseUri = baseUri;
-        }
-        /**
-         * @return the accessToken
-         */
-        public String getAccessToken()
-        {
-            return accessToken;
-        }
-        /**
-         * @param accessToken the accessToken to set
-         */
-        public void setAccessToken(String accessToken)
-        {
-            this.accessToken = accessToken;
-        }
-        
-        
+        return QBOMessageUtils.getInstance();
     }
 }

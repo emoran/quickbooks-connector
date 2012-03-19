@@ -11,8 +11,8 @@
 package org.mule.modules.quickbooks.api;
 
 import org.mule.modules.quickbooks.EntityType;
-import org.mule.modules.quickbooks.schema.CdmBase;
-import org.mule.modules.quickbooks.schema.IdType;
+import org.mule.modules.quickbooks.schema.online.CdmBase;
+import org.mule.modules.quickbooks.schema.online.IdType;
 
 
 /**
