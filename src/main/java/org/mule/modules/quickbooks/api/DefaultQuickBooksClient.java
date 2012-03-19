@@ -31,7 +31,6 @@ import javax.xml.bind.JAXBException;
 
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -289,6 +288,7 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                 @Override
                 protected SearchResults firstPage()
                 {
+                    loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
                     return askAnEspecificPage(1);
                 }
 
@@ -316,15 +316,15 @@ public class DefaultQuickBooksClient implements QuickBooksClient
                     }
                     catch (IllegalAccessException e)
                     {
-                            throw new NotImplementedException(e);
+                        throw new AssertionError(e);
                     }
                     catch (InvocationTargetException e)
                     {
-                            throw new NotImplementedException(e);
+                        throw new AssertionError(e);
                     }
                     catch (NoSuchMethodException e)
                     {
-                            throw new NotImplementedException(e);
+                        throw new AssertionError(e);
                     }
                 }
                 

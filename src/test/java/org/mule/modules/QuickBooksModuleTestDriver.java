@@ -233,6 +233,7 @@ public class QuickBooksModuleTestDriver
     {
         Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, null, null);
         
+        
         for (Object c : it)
         {
             System.out.println(((Customer) c).getName());
@@ -269,6 +270,27 @@ public class QuickBooksModuleTestDriver
         
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.SALESTERM, idType, null);
     }
+
+    @Test
+    public void retrievesAEmptyIterable()
+    {
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, "Name :EQUALS: MFASDAEAEAAASS", null);
+
+        assertEquals(false, it.iterator().hasNext());
+    }
+    
+//    @Test
+//    public void deleteCustomer()
+//    {
+//        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.schema").build();
+//        
+//        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
+//        
+//        for (Customer customer: it)
+//        {
+//            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+//        }
+//    }
     
     @Test
     public void createInvoiceRetrieveAndUpdateIt()
