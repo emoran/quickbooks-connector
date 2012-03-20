@@ -17,7 +17,7 @@
 
 package org.mule.modules.quickbooks;
 
-import org.mule.modules.quickbooks.schema.online.QboAccountDetailTypeEnum;
+import org.mule.modules.quickbooks.online.schema.QboAccountDetailTypeEnum;
 
 
 /**

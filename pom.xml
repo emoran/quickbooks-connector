@@ -31,7 +31,7 @@
 					</execution>
 				</executions>
                 <configuration>
-                    <packageName>org.mule.modules.quickbooks.schema.windows</packageName>
+                    <packageName>org.mule.modules.quickbooks.windows.schema</packageName>
                     <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
  <!-- Employee.xsd,EmployeeTypes.xsd,PayrollItem.xsd *not included* - EmployeeType has some missing groups-->
                     <schemaFiles>
