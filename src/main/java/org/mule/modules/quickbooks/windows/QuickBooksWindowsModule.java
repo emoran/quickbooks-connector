@@ -102,11 +102,12 @@ public class QuickBooksWindowsModule
                          String authIdPseudonym,
                          WindowsEntityType type,
                          Map<String, Object> obj,
+                         String requestId,
                          @Optional @Default("false") Boolean draft,
                          @Optional @Default("false") Boolean fullResponse)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                             unmap(type.getType(), obj), draft, fullResponse);
+                             unmap(type.getType(), obj), requestId, draft, fullResponse);
         
 //        return null;
 //        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.VENDOR,

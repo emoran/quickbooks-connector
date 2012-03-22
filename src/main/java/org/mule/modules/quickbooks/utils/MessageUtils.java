@@ -10,7 +10,6 @@
 
 package org.mule.modules.quickbooks.utils;
 
-import java.io.StringReader;
 import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
@@ -81,16 +80,7 @@ public abstract class MessageUtils
      * @throws JAXBException If the response unmarshaling fails.
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
-    public Object parseResponse(String responseString) throws JAXBException
-    {
-        Unmarshaller unmarshaller = createUnmarshaller();
-        final Object unmarshalledObject = unmarshaller.unmarshal(new StringReader(responseString));
-        JAXBElement<Object> jaxb = (JAXBElement<Object>)unmarshalledObject;
-
-        return jaxb.getValue();
-
-    }
+    public abstract Object parseResponse(String responseString) throws JAXBException;
     
     public JAXBElement createJaxbElement(Object obj)
     {

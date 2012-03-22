@@ -11,6 +11,7 @@ import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.quickbooks.windows.objectfactory.QBWMessageUtils;
 import org.mule.modules.quickbooks.windows.schema.AddRequest;
 import org.mule.modules.quickbooks.windows.schema.CdmBase;
+import org.mule.modules.quickbooks.windows.schema.ErrorResponse;
 import org.mule.modules.quickbooks.windows.schema.IdType;
 
 public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient implements QuickBooksWindowsClient
@@ -25,12 +26,13 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     
     @Override
     public Object create(String realmId,
-                          String appKey,
-                          String realmIdPseudonym,
-                          String authIdPseudonym,
-                          Object obj,
-                          Boolean draft,
-                          Boolean fullResponse)
+                         String appKey,
+                         String realmIdPseudonym,
+                         String authIdPseudonym,
+                         Object obj,
+                         String requestId,
+                         Boolean draft,
+                         Boolean fullResponse)
     {
         Validate.notNull(obj);
         
@@ -45,6 +47,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         httpRequest.addHeader("Content-Type", "text/xml");
         
         AddRequest addRequest = new AddRequest();
+        addRequest.setRequestId(requestId);
         addRequest.setCdmObject(getMessageUtilsInstance().createJaxbElement(obj));
         addRequest.setDraft(draft);
         addRequest.setFullResponse(fullResponse);
@@ -53,7 +56,11 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
 
         try
         {
-            Object bla = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object auxObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            if(auxObj instanceof ErrorResponse)
+            {
+                throw new QuickBooksRuntimeException((ErrorResponse)auxObj);
+            }
             return null;
         }
         catch(QuickBooksRuntimeException e)
@@ -61,7 +68,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             if(e.isAExpiredTokenFault())
             {
                 destroyAccessToken(realmId);
-                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, obj, draft, fullResponse);
+                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, obj, requestId, draft, fullResponse);
             } 
             else 
             {

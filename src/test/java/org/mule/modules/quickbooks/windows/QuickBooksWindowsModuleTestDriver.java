@@ -19,8 +19,9 @@ import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mule.modules.quickbooks.AccountDetail;
 import org.mule.modules.quickbooks.MapBuilder;
+import org.mule.modules.quickbooks.windows.schema.AccountSubtypeEnum;
+import org.mule.modules.quickbooks.windows.schema.AccountTypeEnum;
 
 
 /**
@@ -54,12 +55,13 @@ public class QuickBooksWindowsModuleTestDriver
     public void createAccount()
     {   
         Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QW 78")
-                                                         .with("subtype", AccountDetail.SAVINGS)
+                                                         .with("type", AccountTypeEnum.EQUITY)
+                                                         .with("subtype", AccountSubtypeEnum.EQUITY)
                                                          .with("acctNum", "9919823")
                                                          .with("openingBalance", 0)
                                                          .with("openingBalanceDate", "2012-02-02T00:00:00Z")
                                                          .build();
-        Object acc = module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, mapAccount, null, null);
+        Object acc = module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, mapAccount, "09876543210987654321098765432101", null, null);
                 
         System.out.println(acc);
     }

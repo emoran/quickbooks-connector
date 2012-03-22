@@ -26,7 +26,6 @@ import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
-import org.mule.modules.quickbooks.AccountDetail;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
@@ -135,7 +134,7 @@ public class QuickBooksModule
                                  String realmIdPseudonym, String authIdPseudonym,
                                  String name,
                                  @Optional String desc,
-                                 AccountDetail subtype,
+                                 AccountOnlineDetail subtype,
                                  @Optional String acctNum,
                                  @Optional String openingBalance,
                                  Date openingBalanceDate,
@@ -991,7 +990,7 @@ public class QuickBooksModule
                                  @Optional String syncToken,
                                  String name,
                                  @Optional String desc,
-                                 AccountDetail subtype,
+                                 AccountOnlineDetail subtype,
                                  @Optional String acctNum,
                                  @Optional String openingBalance,
                                  @Optional Date openingBalanceDate,

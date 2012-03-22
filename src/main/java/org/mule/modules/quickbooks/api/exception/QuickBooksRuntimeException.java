@@ -12,6 +12,7 @@ package org.mule.modules.quickbooks.api.exception;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mule.modules.quickbooks.online.schema.FaultInfo;
+import org.mule.modules.quickbooks.windows.schema.ErrorResponse;
 
 
 /**
@@ -36,9 +37,15 @@ public class QuickBooksRuntimeException extends RuntimeException
         this.fault = fault;
     }
     
+    public QuickBooksRuntimeException(ErrorResponse error)
+    {
+        super(ToStringBuilder.reflectionToString(error));
+        this.fault = null;
+    }
+    
     public boolean isAExpiredTokenFault()
     {
-        return fault.getCause().equals("SERVER") && fault.getErrorCode().equals("401") && fault.getMessage().equals("Unauthorized OAuth Token: token_rejected");
+        return fault != null && fault.getCause().equals("SERVER") && fault.getErrorCode().equals("401") && fault.getMessage().equals("Unauthorized OAuth Token: token_rejected");
     }
 
 }

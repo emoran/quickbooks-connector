@@ -27,7 +27,6 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mule.modules.quickbooks.AccountDetail;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.schema.Account;
@@ -74,7 +73,7 @@ public class QuickBooksOnlineModuleTestDriver
     public void createAccount()
     {
         Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "Test Account78", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
+            "Test Account78", null, AccountOnlineDetail.SAVINGS, "3654", "0", new Date(), null);
                 
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", acc.getId().getValue());
@@ -361,7 +360,7 @@ public class QuickBooksOnlineModuleTestDriver
         module2.init();
         
         Account acc = module2.createAccount("wrongRealmId", appKey, realmIdPseudonym, authIdPseudonym,
-            "Test Account", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
+            "Test Account", null, AccountOnlineDetail.SAVINGS, "3654", "0", new Date(), null);
     }
     
 }

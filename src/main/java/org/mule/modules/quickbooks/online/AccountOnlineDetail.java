@@ -15,7 +15,7 @@
 // Generated on: 2011.08.30 at 12:47:01 PM ART 
 //
 
-package org.mule.modules.quickbooks;
+package org.mule.modules.quickbooks.online;
 
 import org.mule.modules.quickbooks.online.schema.QboAccountDetailTypeEnum;
 
@@ -26,7 +26,7 @@ import org.mule.modules.quickbooks.online.schema.QboAccountDetailTypeEnum;
  * @author Gaston Ponti
  * @since Oct 5, 2011
  */
-public enum AccountDetail
+public enum AccountOnlineDetail
 {
 
     /**
@@ -899,7 +899,7 @@ public enum AccountDetail
 
     private final String value;
 
-    AccountDetail(String v)
+    AccountOnlineDetail(String v)
     {
         value = v;
     }

@@ -10,8 +10,12 @@
 
 package org.mule.modules.quickbooks.online.objectfactory;
 
+import java.io.StringReader;
+
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.mule.modules.quickbooks.utils.MessageUtils;
 
@@ -73,5 +77,16 @@ public class QBOMessageUtils extends MessageUtils {
     protected Object getObjectFactory()
     {
         return QBOMessageUtilsHelper.getObjectFactory();
+    }
+    
+    @Override
+    public Object parseResponse(String responseString) throws JAXBException
+    {
+        Unmarshaller unmarshaller = createUnmarshaller();
+        final Object unmarshalledObject = unmarshaller.unmarshal(new StringReader(responseString));
+        JAXBElement<Object> jaxb = (JAXBElement<Object>)unmarshalledObject;
+
+        return jaxb.getValue();
+
     }
 }

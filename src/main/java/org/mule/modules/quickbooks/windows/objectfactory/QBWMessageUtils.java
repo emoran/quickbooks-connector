@@ -10,10 +10,15 @@
 
 package org.mule.modules.quickbooks.windows.objectfactory;
 
+import java.io.StringReader;
+
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.mule.modules.quickbooks.utils.MessageUtils;
+import org.mule.modules.quickbooks.windows.schema.RestResponse;
 
 
 /**
@@ -49,7 +54,7 @@ public class QBWMessageUtils extends MessageUtils {
         public static JAXBContext getContext() {
             if (privContext == null) {
                 try {
-                    privContext =  JAXBContext.newInstance(ObjectFactory.class.getPackage().getName());
+                    privContext =  JAXBContext.newInstance(org.mule.modules.quickbooks.windows.schema.ObjectFactory.class.getPackage().getName());
                 } catch (JAXBException e) {
                     throw new RuntimeException(e);
                 }
@@ -73,5 +78,16 @@ public class QBWMessageUtils extends MessageUtils {
     protected Object getObjectFactory()
     {
         return QBWMessageUtilsHelper.getObjectFactory();
+    }
+    
+    @Override
+    public Object parseResponse(String responseString) throws JAXBException
+    {
+        Unmarshaller unmarshaller = createUnmarshaller();
+        final Object unmarshalledObject = unmarshaller.unmarshal(new StringReader(responseString));
+        JAXBElement jaxb = ((RestResponse)unmarshalledObject).getSystemResponse();
+
+        return jaxb.getValue();
+
     }
 }

@@ -8,7 +8,7 @@ public interface QuickBooksWindowsClient
 {
     Object create(final String realmId, final String appKey, 
                    final String realmIdPseudonym, final String authIdPseudonym,
-                   Object obj, Boolean draft, Boolean fullResponse);
+                   Object obj, String requestId, Boolean draft, Boolean fullResponse);
     
     <T extends CdmBase> T getObject(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final IdType id);
     

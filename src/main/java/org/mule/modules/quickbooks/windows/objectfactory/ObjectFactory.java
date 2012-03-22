@@ -57,7 +57,7 @@ public class ObjectFactory {
     private final static QName _ItemsConsolidated_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "ItemsConsolidated");
     private final static QName _InventoryAdjustment_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "InventoryAdjustment");
     private final static QName _SyncStatusResponses_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "SyncStatusResponses");
-    private final static QName _DelRequest_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Del");
+    private final static QName _Del_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Del");
     private final static QName _InventorySiteQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "InventorySiteQuery");
     private final static QName _JobTypeQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "JobTypeQuery");
     private final static QName _DiscountQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "DiscountQuery");
@@ -141,7 +141,7 @@ public class ObjectFactory {
     private final static QName _Job_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Job");
     private final static QName _CurrencyInfo_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "CurrencyInfo");
     private final static QName _PaymentMethods_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "PaymentMethods");
-    private final static QName _RevertRequest_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Revert");
+    private final static QName _Revert_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Revert");
     private final static QName _InvoiceQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "InvoiceQuery");
     private final static QName _InventoryAdjustmentQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "InventoryAdjustmentQuery");
     private final static QName _TemplateNames_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "TemplateNames");
@@ -194,7 +194,7 @@ public class ObjectFactory {
     private final static QName _SyncStatusRequest_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "SyncStatusRequest");
     private final static QName _CompanyPreferences_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "CompanyPreferences");
     private final static QName _CreditCardChargeQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "CreditCardChargeQuery");
-    private final static QName _ModRequest_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Mod");
+    private final static QName _Mod_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Mod");
     private final static QName _VendorType_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "VendorType");
     private final static QName _InventoryTransferQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "InventoryTransferQuery");
     private final static QName _CustomerTypes_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "CustomerTypes");
@@ -218,7 +218,7 @@ public class ObjectFactory {
     private final static QName _Discounts_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Discounts");
     private final static QName _CustomTxnDetail_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "CustomTxnDetail");
     private final static QName _Discount_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Discount");
-    private final static QName _AddRequest_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Add");
+    private final static QName _Add_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "Add");
     private final static QName _SalesTaxPaymentChecks_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "SalesTaxPaymentChecks");
     private final static QName _ItemReceiptQuery_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "ItemReceiptQuery");
     private final static QName _SalesByItemSummary_QNAME = new QName("http://www.intuit.com/sb/cdm/v2", "SalesByItemSummary");
@@ -3592,7 +3592,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.intuit.com/sb/cdm/v2", name = "Del", substitutionHeadNamespace = "http://www.intuit.com/sb/cdm/v2", substitutionHeadName = "Request")
     public JAXBElement<DelRequest> createDelRequest(DelRequest value) {
-        return new JAXBElement<DelRequest>(_DelRequest_QNAME, DelRequest.class, null, value);
+        return new JAXBElement<DelRequest>(_Del_QNAME, DelRequest.class, null, value);
     }
 
     /**
@@ -4348,7 +4348,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.intuit.com/sb/cdm/v2", name = "Revert", substitutionHeadNamespace = "http://www.intuit.com/sb/cdm/v2", substitutionHeadName = "Request")
     public JAXBElement<RevertRequest> createRevertRequest(RevertRequest value) {
-        return new JAXBElement<RevertRequest>(_RevertRequest_QNAME, RevertRequest.class, null, value);
+        return new JAXBElement<RevertRequest>(_Revert_QNAME, RevertRequest.class, null, value);
     }
 
     /**
@@ -4825,7 +4825,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.intuit.com/sb/cdm/v2", name = "Mod", substitutionHeadNamespace = "http://www.intuit.com/sb/cdm/v2", substitutionHeadName = "Request")
     public JAXBElement<ModRequest> createModRequest(ModRequest value) {
-        return new JAXBElement<ModRequest>(_ModRequest_QNAME, ModRequest.class, null, value);
+        return new JAXBElement<ModRequest>(_Mod_QNAME, ModRequest.class, null, value);
     }
 
     /**
@@ -5041,7 +5041,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.intuit.com/sb/cdm/v2", name = "Add", substitutionHeadNamespace = "http://www.intuit.com/sb/cdm/v2", substitutionHeadName = "Request")
     public JAXBElement<AddRequest> createAddRequest(AddRequest value) {
-        return new JAXBElement<AddRequest>(_AddRequest_QNAME, AddRequest.class, null, value);
+        return new JAXBElement<AddRequest>(_Add_QNAME, AddRequest.class, null, value);
     }
 
     /**
