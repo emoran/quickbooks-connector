@@ -14,7 +14,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import org.mule.modules.quickbooks.utils.MessageUtils;
-import org.mule.modules.quickbooks.windows.schema.ObjectFactory;
 
 
 /**
@@ -39,7 +38,7 @@ public class QBWMessageUtils extends MessageUtils {
         return qbwMessageUtils;
     }
     
-    private static class QBOMessageUtilsHelper {
+    private static class QBWMessageUtilsHelper {
         private static ObjectFactory objectFactory = new ObjectFactory();
         private static JAXBContext privContext = null;
         
@@ -67,12 +66,12 @@ public class QBWMessageUtils extends MessageUtils {
     @Override
     protected JAXBContext getJaxbContext()
     {
-        return QBOMessageUtilsHelper.getContext();
+        return QBWMessageUtilsHelper.getContext();
     }
 
     @Override
     protected Object getObjectFactory()
     {
-        return QBOMessageUtilsHelper.getObjectFactory();
+        return QBWMessageUtilsHelper.getObjectFactory();
     }
 }

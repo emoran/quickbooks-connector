@@ -27,7 +27,7 @@ import org.mule.transport.http.HttpConnector;
  * @since Sep 6, 2011
  */
 @Ignore
-public class QuickBooksAccessGetTest extends FunctionalTestCase
+public class QuickBooksOnlineAccessGetTest extends FunctionalTestCase
 {
     @Override
     protected MuleContext createMuleContext() throws Exception

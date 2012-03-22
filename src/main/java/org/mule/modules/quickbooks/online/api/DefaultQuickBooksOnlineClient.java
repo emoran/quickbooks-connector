@@ -26,7 +26,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.mule.modules.quickbooks.api.AbstractQuickBooksClient;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.online.EntityType;
+import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
 import org.mule.modules.quickbooks.online.schema.IdType;
@@ -57,7 +57,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                                         final String appKey,
                                         final String realmIdPseudonym, 
                                         final String authIdPseudonym,
-                                        final EntityType type,
                                         T obj)
     {
         Validate.notNull(obj);
@@ -70,6 +69,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
             realmId);
         
         HttpUriRequest httpRequest = new HttpPost(str);
+        httpRequest.addHeader("Content-Type", "application/xml");
         prepareToPost(obj, httpRequest);
 
         try
@@ -81,7 +81,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
             if(e.isAExpiredTokenFault())
             {
                 destroyAccessToken(realmId);
-                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj);
+                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, obj);
             } 
             else 
             {
@@ -97,7 +97,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                                            final String appKey,
                                            final String realmIdPseudonym, 
                                            final String authIdPseudonym,
-                                           final EntityType type,
+                                           final OnlineEntityType type,
                                            final IdType id)
     {   
         Validate.notNull(type);
@@ -135,7 +135,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                                         final String appKey,
                                         final String realmIdPseudonym, 
                                         final String authIdPseudonym,
-                                        final EntityType type,
+                                        final OnlineEntityType type,
                                         T obj)
     {
         Validate.notNull(obj);
@@ -154,7 +154,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
             obj.getId().getValue());
         
         HttpUriRequest httpRequest = new HttpPost(str);
-        
+        httpRequest.addHeader("Content-Type", "application/xml");
         prepareToPost(obj, httpRequest);
         
         try
@@ -182,7 +182,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                                                  final String appKey,
                                                  final String realmIdPseudonym, 
                                                  final String authIdPseudonym,
-                                                 final EntityType type,
+                                                 final OnlineEntityType type,
                                                  final IdType id,
                                                  String syncToken)
     {   
@@ -201,8 +201,9 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
         
         String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
             getBaseUri(realmId), type.getResouceName(), realmId, id.getValue());
-        HttpUriRequest httpRequest = new HttpPost(str);
         
+        HttpUriRequest httpRequest = new HttpPost(str);
+        httpRequest.addHeader("Content-Type", "application/xml");
         prepareToPost(obj, httpRequest);
         try
         {
@@ -230,7 +231,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                                                        final String appKey,
                                                        final String realmIdPseudonym, 
                                                        final String authIdPseudonym,
-                                                       final EntityType type, 
+                                                       final OnlineEntityType type, 
                                                        final String queryFilter, 
                                                        final String querySort)
     {
@@ -254,7 +255,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                 @Override
                 protected boolean hasNextPage(SearchResults page)
                 {
-                    return page.getCount() == resultsPerPage;
+                    return page.getCount() == getResultsPerPage();
                 }
 
                 @Override
@@ -292,7 +293,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     {
                         nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
                     }
-                    nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", resultsPerPage.toString()));
+                    nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
                     nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", 
                         getBaseUri(realmId), type.getResouceName(), realmId));

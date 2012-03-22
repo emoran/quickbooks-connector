@@ -8,7 +8,7 @@
  * LICENSE.txt file.
  */
 
-package org.mule.modules.quickbooks.api;
+package org.mule.modules.quickbooks;
 
 import java.util.HashMap;
 import java.util.Map;

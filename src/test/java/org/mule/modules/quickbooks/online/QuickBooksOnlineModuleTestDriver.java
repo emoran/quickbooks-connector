@@ -28,7 +28,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.AccountDetail;
-import org.mule.modules.quickbooks.api.MapBuilder;
+import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.schema.Account;
 import org.mule.modules.quickbooks.online.schema.Customer;
@@ -50,7 +50,7 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  * @since Sep 9, 2011
  */
 
-public class QuickBooksModuleTestDriver
+public class QuickBooksOnlineModuleTestDriver
 {
 
     private static QuickBooksModule module;
@@ -79,7 +79,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", acc.getId().getValue());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.ACCOUNT, idType, acc.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
     }
     @Test
     public void createCustomerAnswersNonNullCustomerWithId() throws Exception
@@ -128,7 +128,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", c.getId().getValue());
         //idType.put("idDomain", c.getId().getIdDomain());
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType, c.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType, c.getSyncToken());
     }
     
     @Test
@@ -179,7 +179,7 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", "1");
         //idType.put("idDomain", c.getId().getIdDomain());
-        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType);
+        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType);
         
         assertEquals("Ricardo (deleted)", c.getName());
         assertNotNull(c.getId());
@@ -219,17 +219,17 @@ public class QuickBooksModuleTestDriver
             new ArrayList<Map<String, Object>>()
         );
         
-        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType);
+        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType);
         
         assertEquals("Smith", c3.getFamilyName());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, idType, null);
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType, null);
     }
     
     @Test
     public void getAllCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, null, null);
+        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, null, null);
         
         
         for (Object c : it)
@@ -241,7 +241,7 @@ public class QuickBooksModuleTestDriver
     @Test
     public void getSomeCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
+        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
         
         for (Object c : it)
         {
@@ -266,13 +266,13 @@ public class QuickBooksModuleTestDriver
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", salesTerm.getId().getValue());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.SALESTERM, idType, null);
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.SALESTERM, idType, null);
     }
 
     @Test
     public void retrievesAEmptyIterable()
     {
-        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, "Name :EQUALS: MFASDAEAEAAASS", null);
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "Name :EQUALS: MFASDAEAEAAASS", null);
 
         assertEquals(false, it.iterator().hasNext());
     }
@@ -330,7 +330,7 @@ public class QuickBooksModuleTestDriver
         
         //retrieve the invoices of our customer
         String filter = "CustomerId :EQUALS: " + customer.getId().getValue();
-        Iterable<Invoice> iterableInv = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.INVOICE, filter, null);
+        Iterable<Invoice> iterableInv = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, filter, null);
 
         //We know that only has one invoice, because we have created him
         invoice = iterableInv.iterator().next();
@@ -344,9 +344,9 @@ public class QuickBooksModuleTestDriver
                              (List<Map<String, Object>>) mom.map(invoice.getLine()));
         
         //delete everything
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.INVOICE, (Map<String, Object>) mom.map(invoice.getId()), invoice.getSyncToken());
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, (Map<String, Object>) mom.map(invoice.getId()), invoice.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
     
         //verify the change
         assertEquals("DOC-NEW:001111111101", invoice.getHeader().getDocNumber());

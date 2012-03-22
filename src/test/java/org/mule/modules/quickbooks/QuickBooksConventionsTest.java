@@ -14,7 +14,7 @@
  * Copyright (c) 2011 Zauber S.A.  -- All rights reserved
 */
 	
-package org.mule.modules.quickbooks.online;
+package org.mule.modules.quickbooks;
 
 import static org.junit.Assert.*;
 

@@ -28,7 +28,7 @@ import javax.xml.bind.JAXBElement;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mule.modules.quickbooks.api.MapBuilder;
+import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
 import org.mule.modules.quickbooks.online.schema.Customer;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
@@ -44,7 +44,7 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  * @since Sep 9, 2011
  */
 
-public class ObjectFactoriesTest
+public class QBOObjectFactoriesTest
 {
     private MapObjectMapper mom;
     /**

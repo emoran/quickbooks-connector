@@ -34,7 +34,7 @@ import org.mule.modules.quickbooks.online.schema.Vendor;
  * @since Oct 5, 2011
  */
 
-public enum EntityType
+public enum OnlineEntityType
 {
     /**
      * The Account object represents the accounts that you keep to track your business.
@@ -137,7 +137,7 @@ public enum EntityType
     
     private final Class<?> type;
     
-    private EntityType(Class<?> type)
+    private OnlineEntityType(Class<?> type)
     {
         this.type = type;
     }

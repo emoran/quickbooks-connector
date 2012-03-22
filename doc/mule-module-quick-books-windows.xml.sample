@@ -1,0 +1,9 @@
+<!-- BEGIN_INCLUDE(quickbooks-windows:create) -->
+<quickbooks-windows:create realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
+    <quickbooks:account-parent-id ref="#[map-payload:parentId]"/>
+            
+</quickbooks-windows:create>
+<!-- END_INCLUDE(quickbooks-windows:create) -->

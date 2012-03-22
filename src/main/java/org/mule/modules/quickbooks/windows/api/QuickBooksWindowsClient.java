@@ -1,31 +1,14 @@
-/**
- * Mule QuickBooks Connector
- *
- * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
- *
- * The software in this package is published under the terms of the CPAL v1.0
- * license, a copy of which has been included with this distribution in the
- * LICENSE.txt file.
- */
-
-package org.mule.modules.quickbooks.online.api;
+package org.mule.modules.quickbooks.windows.api;
 
 import org.mule.modules.quickbooks.online.OnlineEntityType;
-import org.mule.modules.quickbooks.online.schema.CdmBase;
-import org.mule.modules.quickbooks.online.schema.IdType;
+import org.mule.modules.quickbooks.windows.schema.CdmBase;
+import org.mule.modules.quickbooks.windows.schema.IdType;
 
-
-/**
- *   
- * 
- * 
- * @author Gaston Ponti
- * @since Aug 19, 2011
- */
-
-public interface QuickBooksOnlineClient
+public interface QuickBooksWindowsClient
 {
-    <T extends CdmBase> T create(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, T obj);
+    Object create(final String realmId, final String appKey, 
+                   final String realmIdPseudonym, final String authIdPseudonym,
+                   Object obj, Boolean draft, Boolean fullResponse);
     
     <T extends CdmBase> T getObject(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final IdType id);
     
@@ -35,4 +18,3 @@ public interface QuickBooksOnlineClient
 
     <T extends CdmBase> Iterable<T> findObjects(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final String queryFilter, final String querySort);
 }
-

@@ -177,9 +177,7 @@ public abstract class AbstractQuickBooksClient
     {
         JAXBElement jaxbElement = getMessageUtilsInstance().createJaxbElement(obj);
         try
-        {
-            httpRequest.addHeader("Content-Type", "application/xml");
-            
+        {   
             String documentToPost = getMessageUtilsInstance().getXmlDocument(jaxbElement);
             ByteArrayInputStream payLoad = new ByteArrayInputStream(documentToPost.getBytes());
             InputStreamEntity entity = new InputStreamEntity(payLoad, -1);
@@ -275,6 +273,11 @@ public abstract class AbstractQuickBooksClient
         {
             connectionDatas.get(realmId).setBaseUri(loadCompanyBaseUri(realmId, appKey, connectionDatas.get(realmId).getAccessToken()));
         }
+    }
+    
+    protected Integer getResultsPerPage()
+    {
+        return resultsPerPage;
     }
     
     private class CompanyConnectionData

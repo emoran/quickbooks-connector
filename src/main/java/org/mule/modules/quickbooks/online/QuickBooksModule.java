@@ -27,7 +27,7 @@ import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.quickbooks.AccountDetail;
-import org.mule.modules.quickbooks.api.MapBuilder;
+import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
@@ -142,7 +142,7 @@ public class QuickBooksModule
                                  @Optional Map<String, Object> accountParentId)
     {
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ACCOUNT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Account.class,            
                 new MapBuilder()
                 .with("name", name)
@@ -189,7 +189,7 @@ public class QuickBooksModule
                            Map<String, Object> header,
                            List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILL,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Bill.class,
                 new MapBuilder()
                 .with("header", header)
@@ -232,7 +232,7 @@ public class QuickBooksModule
                                          Map<String, Object> header,
                                          List<Map<String, Object>> lines)
     {    
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILLPAYMENT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(BillPayment.class,
                 new MapBuilder()
                 .with("header", header)
@@ -274,7 +274,7 @@ public class QuickBooksModule
                                            Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CASHPURCHASE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(CashPurchase.class,
                 new MapBuilder()
                 .with("header", header)
@@ -315,7 +315,7 @@ public class QuickBooksModule
                              Map<String, Object> header,
                              List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CHECK,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Check.class,
                 new MapBuilder()
                 .with("header", header)
@@ -359,7 +359,7 @@ public class QuickBooksModule
                                                    Map<String, Object> header,
                                                    List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CREDITCARDCHARGE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(CreditCardCharge.class,
                 new MapBuilder()
                 .with("header", header)
@@ -435,7 +435,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
 
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CUSTOMER,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Customer.class,
                 new MapBuilder()
                 .with("name", name)
@@ -487,7 +487,7 @@ public class QuickBooksModule
                                    Map<String, Object> header,
                                    List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ESTIMATE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Estimate.class,
                 new MapBuilder()
                 .with("header", header)
@@ -530,7 +530,7 @@ public class QuickBooksModule
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.INVOICE,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Invoice.class,
                 new MapBuilder()
                 .with("header", header)
@@ -596,7 +596,7 @@ public class QuickBooksModule
         purchaseCost = coalesceMap(purchaseCost);
         expenseAccount = coalesceMap(expenseAccount);
 
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ITEM,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Item.class,
                 new MapBuilder()
                 .with("name", name)
@@ -646,7 +646,7 @@ public class QuickBooksModule
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Payment.class,
                 new MapBuilder()
                 .with("header", header)
@@ -691,7 +691,7 @@ public class QuickBooksModule
                                              String name,
                                              @Optional @Default("NON_CREDIT_CARD") String type)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENTMETHOD,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(PaymentMethod.class,
                 new MapBuilder()
                 .with("name", name)
@@ -733,7 +733,7 @@ public class QuickBooksModule
                                            Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESRECEIPT,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(SalesReceipt.class,
                 new MapBuilder()
                 .with("header", header)
@@ -801,7 +801,7 @@ public class QuickBooksModule
                                      @Optional String dateDiscountPercent)
     {
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESTERM,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(SalesTerm.class,
                 new MapBuilder()
                 .with("name", name)
@@ -885,7 +885,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.VENDOR,
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Vendor.class,
                 new MapBuilder()
                 .with("name", name)
@@ -929,7 +929,7 @@ public class QuickBooksModule
     public Object getObject(String realmId,
                             String appKey,
                             String realmIdPseudonym, String authIdPseudonym,
-                            EntityType type,
+                            OnlineEntityType type,
                             Map<String, Object> id)
     {
         return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, unmap(IdType.class, id));
@@ -998,7 +998,7 @@ public class QuickBooksModule
                                  @Optional Map<String, Object> accountParentId)
     {   
         
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ACCOUNT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ACCOUNT,
             unmap(Account.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1057,7 +1057,7 @@ public class QuickBooksModule
                            Map<String, Object> header,
                            List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILL,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILL,
             unmap(Bill.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1112,7 +1112,7 @@ public class QuickBooksModule
                                          Map<String, Object> header,
                                          List<Map<String, Object>> lines)
     {    
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.BILLPAYMENT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILLPAYMENT,
             unmap(BillPayment.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1166,7 +1166,7 @@ public class QuickBooksModule
                                            Map<String, Object> header,
                                            List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CASHPURCHASE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CASHPURCHASE,
             unmap(CashPurchase.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1219,7 +1219,7 @@ public class QuickBooksModule
                              Map<String, Object> header,
                              List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CHECK,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CHECK,
             unmap(Check.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1274,7 +1274,7 @@ public class QuickBooksModule
                                                    Map<String, Object> header,
                                                    List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CREDITCARDCHARGE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CREDITCARDCHARGE,
             unmap(CreditCardCharge.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1361,7 +1361,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.CUSTOMER,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER,
             unmap(Customer.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1425,7 +1425,7 @@ public class QuickBooksModule
                                    Map<String, Object> header,
                                    List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ESTIMATE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ESTIMATE,
             unmap(Estimate.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1479,7 +1479,7 @@ public class QuickBooksModule
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.INVOICE,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.INVOICE,
             unmap(Invoice.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1556,7 +1556,7 @@ public class QuickBooksModule
         purchaseCost = coalesceMap(purchaseCost);
         expenseAccount = coalesceMap(expenseAccount);
         
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.ITEM,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ITEM,
             unmap(Item.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1617,7 +1617,7 @@ public class QuickBooksModule
                                  Map<String, Object> header,
                                  List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENT,
             unmap(Payment.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1671,7 +1671,7 @@ public class QuickBooksModule
                                              String name, 
                                              @Optional @Default("NON_CREDIT_CARD") String type)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.PAYMENTMETHOD,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENTMETHOD,
             unmap(PaymentMethod.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1724,7 +1724,7 @@ public class QuickBooksModule
                                            Map<String, Object> header, 
                                            List<Map<String, Object>> lines)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESRECEIPT,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESRECEIPT,
             unmap(SalesReceipt.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1803,7 +1803,7 @@ public class QuickBooksModule
                                      @Optional String dateDiscountPercent)
     {
         
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.SALESTERM,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESTERM,
             unmap(SalesTerm.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1898,7 +1898,7 @@ public class QuickBooksModule
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,EntityType.VENDOR,
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.VENDOR,
             unmap(Vendor.class,
                 new MapBuilder()
                 .with("id", id)
@@ -1946,7 +1946,7 @@ public class QuickBooksModule
     public void deleteObject(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             EntityType type, 
+                             OnlineEntityType type, 
                              Map<String, Object> id, 
                              @Optional String syncToken)
     {
@@ -1991,7 +1991,7 @@ public class QuickBooksModule
     public Iterable findObjects(String realmId,
                                 String appKey,
                                 String realmIdPseudonym, String authIdPseudonym,
-                                EntityType type, 
+                                OnlineEntityType type, 
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
