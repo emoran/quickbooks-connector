@@ -119,7 +119,7 @@ public class QuickBooksWindowsModule
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks:get-object}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-object}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks, the Company ID  appears on the My Account page.
@@ -155,7 +155,7 @@ public class QuickBooksWindowsModule
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks:update}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:update}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -190,7 +190,7 @@ public class QuickBooksWindowsModule
     /**
      * Deletes an object.
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks:delete-object}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:delete}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
