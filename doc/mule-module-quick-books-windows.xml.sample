@@ -2,8 +2,47 @@
 <quickbooks-windows:create realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
-    <quickbooks:account-parent-id ref="#[map-payload:parentId]"/>
-            
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+                           type="#[map-payload:type]"
+                           requestId="#[map-payload:requestId]"
+                           draft="#[map-payload:draft]"
+                           fullResponse="#[map-payload:fullResponse]">
+    <quickbooks:obj ref="#[map-payload:obj]"/>
 </quickbooks-windows:create>
 <!-- END_INCLUDE(quickbooks-windows:create) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:update) -->
+<quickbooks-windows:update realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+                           type="#[map-payload:type]"
+                           requestId="#[map-payload:requestId]"
+                           draft="#[map-payload:draft]"
+                           fullResponse="#[map-payload:fullResponse]">
+    <quickbooks:obj ref="#[map-payload:obj]"/>
+            
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:update) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:delete) -->
+<quickbooks-windows:delete realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+                           type="#[map-payload:type]">
+    <quickbooks:obj ref="#[map-payload:obj]"/>
+            
+</quickbooks-windows:delete>
+<!-- END_INCLUDE(quickbooks-windows:delete) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:get-object) -->
+<quickbooks-windows:get-object realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+                           type="#[map-payload:type]"">
+    <quickbooks:id ref="#[map-payload:id]"/>
+            
+</quickbooks-windows:get-object>
+<!-- END_INCLUDE(quickbooks-windows:get-object) -->

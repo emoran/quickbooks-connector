@@ -11,61 +11,7 @@
 package org.mule.modules.quickbooks.windows;
 
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
-import org.mule.modules.quickbooks.windows.schema.Account;
-import org.mule.modules.quickbooks.windows.schema.BOMComponent;
-import org.mule.modules.quickbooks.windows.schema.BalanceSheetStd;
-import org.mule.modules.quickbooks.windows.schema.Bill;
-import org.mule.modules.quickbooks.windows.schema.BillPayment;
-import org.mule.modules.quickbooks.windows.schema.BillPaymentCreditCard;
-import org.mule.modules.quickbooks.windows.schema.BuildAssembly;
-import org.mule.modules.quickbooks.windows.schema.Charge;
-import org.mule.modules.quickbooks.windows.schema.Check;
-import org.mule.modules.quickbooks.windows.schema.CreditCardCharge;
-import org.mule.modules.quickbooks.windows.schema.CreditCardCredit;
-import org.mule.modules.quickbooks.windows.schema.CreditCardRefund;
-import org.mule.modules.quickbooks.windows.schema.CreditMemo;
-import org.mule.modules.quickbooks.windows.schema.CurrencyInfo;
-import org.mule.modules.quickbooks.windows.schema.CustomTxnDetail;
-import org.mule.modules.quickbooks.windows.schema.Customer;
-import org.mule.modules.quickbooks.windows.schema.CustomerMsg;
-import org.mule.modules.quickbooks.windows.schema.CustomerType;
-import org.mule.modules.quickbooks.windows.schema.Deposit;
-import org.mule.modules.quickbooks.windows.schema.Discount;
-import org.mule.modules.quickbooks.windows.schema.Employee;
-import org.mule.modules.quickbooks.windows.schema.Estimate;
-import org.mule.modules.quickbooks.windows.schema.FixedAsset;
-import org.mule.modules.quickbooks.windows.schema.InventoryAdjustment;
-import org.mule.modules.quickbooks.windows.schema.InventorySite;
-import org.mule.modules.quickbooks.windows.schema.InventoryTransfer;
-import org.mule.modules.quickbooks.windows.schema.Invoice;
-import org.mule.modules.quickbooks.windows.schema.Item;
-import org.mule.modules.quickbooks.windows.schema.ItemConsolidated;
-import org.mule.modules.quickbooks.windows.schema.ItemReceipt;
-import org.mule.modules.quickbooks.windows.schema.Job;
-import org.mule.modules.quickbooks.windows.schema.JobType;
-import org.mule.modules.quickbooks.windows.schema.OtherName;
-import org.mule.modules.quickbooks.windows.schema.Payment;
-import org.mule.modules.quickbooks.windows.schema.PaymentMethod;
-import org.mule.modules.quickbooks.windows.schema.PayrollItem;
-import org.mule.modules.quickbooks.windows.schema.Preferences;
-import org.mule.modules.quickbooks.windows.schema.PurchaseOrder;
-import org.mule.modules.quickbooks.windows.schema.SalesOrder;
-import org.mule.modules.quickbooks.windows.schema.SalesReceipt;
-import org.mule.modules.quickbooks.windows.schema.SalesRep;
-import org.mule.modules.quickbooks.windows.schema.SalesTax;
-import org.mule.modules.quickbooks.windows.schema.SalesTaxCode;
-import org.mule.modules.quickbooks.windows.schema.SalesTaxGroup;
-import org.mule.modules.quickbooks.windows.schema.SalesTaxPaymentCheck;
-import org.mule.modules.quickbooks.windows.schema.SalesTerm;
-import org.mule.modules.quickbooks.windows.schema.ShipMethod;
-import org.mule.modules.quickbooks.windows.schema.Summary1099;
-import org.mule.modules.quickbooks.windows.schema.Task;
-import org.mule.modules.quickbooks.windows.schema.TemplateName;
-import org.mule.modules.quickbooks.windows.schema.TimeActivity;
-import org.mule.modules.quickbooks.windows.schema.UOM;
-import org.mule.modules.quickbooks.windows.schema.Vendor;
-import org.mule.modules.quickbooks.windows.schema.VendorCredit;
-import org.mule.modules.quickbooks.windows.schema.VendorType;
+import org.mule.modules.quickbooks.windows.schema.*;
 
 /**
  * The supported objects for Data Services for QuickBooks Online.
@@ -76,63 +22,118 @@ import org.mule.modules.quickbooks.windows.schema.VendorType;
 
 public enum WindowsEntityType
 {
-    ACCOUNT(Account.class),
-    /** Report */
-    BALANCESHEETSTD(BalanceSheetStd.class),
-    BILL(Bill.class),
-    BILLPAYMENT(BillPayment.class),
-    BILLPAYMENTCREDITCARD(BillPaymentCreditCard.class),
-    BOMBCOMPONENT(BOMComponent.class),
-    BUILDASSEMBLY(BuildAssembly.class),
-    CHARGE(Charge.class),
-    CHECK(Check.class),
-    CLASS(org.mule.modules.quickbooks.windows.schema.Class.class),
-    CREDITCARDCHARGE(CreditCardCharge.class),
-    CREDITCARDCREDIT(CreditCardCredit.class),
-    CREDITCARDREDUND(CreditCardRefund.class),
-    CREDITMEMO(CreditMemo.class),
-    CURRENCYINFO(CurrencyInfo.class),
-    CUSTOMER(Customer.class),
-    CUSTOMERMSG(CustomerMsg.class),
-    CUSTOMERTYPE(CustomerType.class),
-    CUSTOMERTXNDETAIL(CustomTxnDetail.class),
-    DEPOSIT(Deposit.class),
-    DISCOUNT(Discount.class),
-    EMPLOYEE(Employee.class),
-    ESTIMATE(Estimate.class),
-    FIXEDASSET(FixedAsset.class),
-    INVENTORYADJUSTMENT(InventoryAdjustment.class),
-    INVENTORYSITE(InventorySite.class),
-    INVENTORYTRANSFER(InventoryTransfer.class),
-    INVOICE(Invoice.class),
-    ITEM(Item.class),
-    ITEMCONSOLIDATED(ItemConsolidated.class),
-    ITEMRECEIPET(ItemReceipt.class),
-    JOB(Job.class),
-    JOBTYPE(JobType.class),
-    OTHERNAME(OtherName.class),
-    PAYMENT(Payment.class),
-    PAYMENTMETHOD(PaymentMethod.class),
-    PAYROLLITEM(PayrollItem.class),
-    PREFERENCES(Preferences.class),
-    PURCHASEORDER(PurchaseOrder.class),
-    SALESORDER(SalesOrder.class),
-    SALESRECEIPT(SalesReceipt.class),
-    SALESREP(SalesRep.class),
-    SALESTAX(SalesTax.class),
-    SALESTAXCODE(SalesTaxCode.class),
-    SALESTAXGROUP(SalesTaxGroup.class),
-    SALESTAXPAYMENTCHECK(SalesTaxPaymentCheck.class),
-    SALESTERM(SalesTerm.class),
-    SHIPMETHOD(ShipMethod.class),
-    SUMMARY1099(Summary1099.class),
-    TASK(Task.class),
-    TEMPLATENAME(TemplateName.class),
-    TIMEACTIVITY(TimeActivity.class),
-    UOM(UOM.class),
-    VENDOR(Vendor.class),
-    VENDORCREDIT(VendorCredit.class),
-    VENDORTYPE(VendorType.class);
+    /** Has Query **/
+    ACCOUNT(Account.class, AccountQuery.class),
+    /** Report. Do not have Query*/
+    BALANCESHEETSTD(BalanceSheetStd.class, null),
+    /** Has Query **/
+    BILL(Bill.class, BillQuery.class),
+    /** Has Query **/
+    BILLPAYMENT(BillPayment.class, BillPaymentQuery.class),
+    /** Has Query **/
+    BILLPAYMENTCREDITCARD(BillPaymentCreditCard.class, BillPaymentCreditCardQuery.class),
+    /** Has Query **/
+    BOMBCOMPONENT(BOMComponent.class, BOMComponentQuery.class),
+    /** Has Query **/
+    BUILDASSEMBLY(BuildAssembly.class, BuildAssemblyQuery.class),
+    /** Has Query **/
+    CHARGE(Charge.class, ChargeQuery.class),
+    /** Has Query **/
+    CHECK(Check.class, CheckQuery.class),
+    /** Has Query **/
+    CLASS(org.mule.modules.quickbooks.windows.schema.Class.class, org.mule.modules.quickbooks.windows.schema.ClassQuery.class),
+    /** Has Query **/
+    CREDITCARDCHARGE(CreditCardCharge.class, CreditCardChargeQuery.class),
+    /** Has Query **/
+    CREDITCARDCREDIT(CreditCardCredit.class, CreditCardCreditQuery.class),
+    /** Has Query **/
+    CREDITCARDREDUND(CreditCardRefund.class, CreditCardRefundQuery.class),
+    /** Has Query **/
+    CREDITMEMO(CreditMemo.class, CreditMemoQuery.class),
+    /** Has Query **/
+    CURRENCYINFO(CurrencyInfo.class, CurrencyInfoQuery.class),
+    /** Has Query **/
+    CUSTOMER(Customer.class, CustomerQuery.class),
+    /** Has Query **/
+    CUSTOMERMSG(CustomerMsg.class, CustomerMsgQuery.class),
+    /** Has Query **/
+    CUSTOMERTYPE(CustomerType.class, CustomerTypeQuery.class),
+    /** Do not have Query */
+    CUSTOMERTXNDETAIL(CustomTxnDetail.class, null),
+    /** Has Query **/
+    DEPOSIT(Deposit.class, DepositQuery.class),
+    /** Has Query **/
+    DISCOUNT(Discount.class, DiscountQuery.class),
+    /** Has Query **/
+    EMPLOYEE(Employee.class, EmployeeQuery.class),
+    /** Has Query **/
+    ESTIMATE(Estimate.class, EstimateQuery.class),
+    /** Has Query **/
+    FIXEDASSET(FixedAsset.class, FixedAssetQuery.class),
+    /** Has Query **/
+    INVENTORYADJUSTMENT(InventoryAdjustment.class, InventoryAdjustmentQuery.class),
+    /** Has Query **/
+    INVENTORYSITE(InventorySite.class, InventorySiteQuery.class),
+    /** Has Query **/
+    INVENTORYTRANSFER(InventoryTransfer.class, InventoryTransferQuery.class),
+    /** Has Query **/
+    INVOICE(Invoice.class, InvoiceQuery.class),
+    /** Has Query **/
+    ITEM(Item.class, ItemQuery.class),
+    /** Has Query **/
+    ITEMCONSOLIDATED(ItemConsolidated.class, ItemConsolidatedQuery.class),
+    /** Has Query **/
+    ITEMRECEIPET(ItemReceipt.class, ItemReceiptQuery.class),
+    /** Has Query **/
+    JOB(Job.class, JobQuery.class),
+    /** Has Query **/
+    JOBTYPE(JobType.class, JobTypeQuery.class),
+    /** Has Query **/
+    OTHERNAME(OtherName.class, OtherNameQuery.class),
+    /** Has Query **/
+    PAYMENT(Payment.class, PaymentQuery.class),
+    /** Has Query **/
+    PAYMENTMETHOD(PaymentMethod.class, PaymentMethodQuery.class),
+    /** Has Query **/
+    PAYROLLITEM(PayrollItem.class, PayrollItemQuery.class),
+    /** Do not have Query */
+    PREFERENCES(Preferences.class, null),
+    /** Has Query **/
+    PURCHASEORDER(PurchaseOrder.class, PurchaseOrderQuery.class),
+    /** Has Query **/
+    SALESORDER(SalesOrder.class, SalesOrderQuery.class),
+    /** Has Query **/
+    SALESRECEIPT(SalesReceipt.class, SalesReceiptQuery.class),
+    /** Has Query **/
+    SALESREP(SalesRep.class, SalesRepQuery.class),
+    /** Has Query **/
+    SALESTAX(SalesTax.class, SalesTaxQuery.class),
+    /** Has Query **/
+    SALESTAXCODE(SalesTaxCode.class, SalesTaxCodeQuery.class),
+    /** Has Query **/
+    SALESTAXGROUP(SalesTaxGroup.class, SalesTaxGroupQuery.class),
+    /** Has Query **/
+    SALESTAXPAYMENTCHECK(SalesTaxPaymentCheck.class, SalesTaxPaymentCheckQuery.class),
+    /** Do not have Query */
+    SALESTERM(SalesTerm.class, null),
+    /** Has Query **/
+    SHIPMETHOD(ShipMethod.class, ShipMethodQuery.class),
+    /** Do not have Query */
+    SUMMARY1099(Summary1099.class, null),
+    /** Has Query **/
+    TASK(Task.class, TaskQuery.class),
+    /** Has Query **/
+    TEMPLATENAME(TemplateName.class, TemplateNameQuery.class),
+    /** Has Query **/
+    TIMEACTIVITY(TimeActivity.class, TimeActivityQuery.class),
+    /** Has Query **/
+    UOM(UOM.class, UOMQuery.class),
+    /** Has Query **/
+    VENDOR(Vendor.class, VendorQuery.class),
+    /** Has Query **/
+    VENDORCREDIT(VendorCredit.class, VendorCreditQuery.class),
+    /** Has Query **/
+    VENDORTYPE(VendorType.class, VendorTypeQuery.class);
 //    /**
 //     * The Account object represents the accounts that you keep to track your business.
 //     * Account is a component of a chart of accounts, and is part of a ledger. 
@@ -232,11 +233,13 @@ public enum WindowsEntityType
 //     */
 //    VENDOR(Vendor.class);
     
-    private final Class<?> type;
+    private final java.lang.Class<?> type;
+    private final java.lang.Class<?> query;
     
-    private WindowsEntityType(Class<?> type)
+    private WindowsEntityType(java.lang.Class<?> type, java.lang.Class<?> query)
     {
         this.type = type;
+        this.query = query;
     }
     
     @SuppressWarnings("unchecked")
@@ -266,9 +269,9 @@ public enum WindowsEntityType
      * @return
      */
     @SuppressWarnings("unchecked")
-    public <A> Class<A> getType()
+    public <A> java.lang.Class<A> getType()
     {
-        return (Class<A>) type;
+        return (java.lang.Class<A>) type;
     }
 
     /**
@@ -277,5 +280,10 @@ public enum WindowsEntityType
     public String getSimpleName()
     {
         return getType().getSimpleName();
+    }
+    
+    public <A> java.lang.Class<A> getQueryType()
+    {
+        return (java.lang.Class<A>) query;
     }
 }

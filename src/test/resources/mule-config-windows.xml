@@ -32,7 +32,8 @@
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
                                    authIdPseudonym="dasdasda"
-                                   type="ACCOUNT">
+                                   type="ACCOUNT"
+                                   requestId="12345678901234567890123456789012">
             <quickbooks-windows:obj ref="#[variable:foo]"/>               
         </quickbooks-windows:create>             
     </flow>

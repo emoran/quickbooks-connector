@@ -139,7 +139,7 @@ public abstract class AbstractQuickBooksClient
             statusCode = response.getStatusLine().getStatusCode();
             if ( statusCode != HttpStatus.SC_OK)
             {
-                FaultInfo fault = (FaultInfo) getMessageUtilsInstance().parseResponse(responseBody.toString());
+                FaultInfo fault = getFaultInfo(responseBody.toString());
                 throw new QuickBooksRuntimeException(fault);
             }   
         } 
@@ -170,6 +170,8 @@ public abstract class AbstractQuickBooksClient
             throw MuleSoftException.soften(e);
         }
     }
+    
+    protected abstract FaultInfo getFaultInfo(String str) throws JAXBException;
     
     protected abstract MessageUtils getMessageUtilsInstance();
     

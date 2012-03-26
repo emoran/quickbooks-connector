@@ -54,15 +54,15 @@ public class QuickBooksWindowsModuleTestDriver
     @Test
     public void createAccount()
     {   
-        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QW 78")
-                                                         .with("type", AccountTypeEnum.EQUITY)
-                                                         .with("subtype", AccountSubtypeEnum.EQUITY)
+        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QW 88")
+                                                         .with("active", true)
+                                                         .with("type", AccountTypeEnum.EXPENSE)
+                                                         .with("subtype", AccountSubtypeEnum.EXPENSE.value())
                                                          .with("acctNum", "9919823")
                                                          .with("openingBalance", 0)
                                                          .with("openingBalanceDate", "2012-02-02T00:00:00Z")
                                                          .build();
-        Object acc = module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, mapAccount, "09876543210987654321098765432101", null, null);
-                
+        Object acc = module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, mapAccount, "09876543210987654321098765432116", null, true);
         System.out.println(acc);
     }
 
