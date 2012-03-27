@@ -81,6 +81,7 @@ public class QuickBooksWindowsModule
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:create}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:create2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks, the Company ID  appears on the My Account page.

@@ -11,6 +11,28 @@
 </quickbooks-windows:create>
 <!-- END_INCLUDE(quickbooks-windows:create) -->
 
+<!-- BEGIN_ICNLUDE(quickbooks-windows:create2) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:create realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="ACCOUNT"
+                           draft="false"
+                           fullResponse="true">
+    <quickbooks-windows:requestId ref="#[payload]" />
+    <quickbooks-windows:obj>
+        <name>Test Account QW 91</name>
+        <active>true</active>
+        <type>EXPENSE<type>
+        <subtype>expense</subtype>
+        <acctNum>9919823</acctNum>
+        <openingBalance>0</openingBalance>
+        <openingBalanceDate>2012-02-02T00:00:00Z</openingBalanceDate>
+    </quickbooks-windows:obj>
+</quickbooks-windows:create>
+<!-- END_INCLUDE(quickbooks-windows:create2) -->
+
 <!-- BEGIN_INCLUDE(quickbooks-windows:update) -->
 <quickbooks-windows:update realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
