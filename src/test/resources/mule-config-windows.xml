@@ -27,15 +27,73 @@
     
     <quickbooks-windows:config />
 
-    <flow name="Create">
-        <quickbooks-windows:create realmId="dasda"
-                                   appKey="dasdasd"
-                                   realmIdPseudonym="dadadada"
-                                   authIdPseudonym="dasdasda"
-                                   type="ACCOUNT"
-                                   requestId="12345678901234567890123456789012">
-            <quickbooks-windows:obj ref="#[variable:foo]"/>               
-        </quickbooks-windows:create>             
-    </flow>
-
+    <flow name="create">
+		<quickbooks-windows:create realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]"
+		                           requestId="#[map-payload:requestId]"
+		                           draft="#[map-payload:draft]"
+		                           fullResponse="#[map-payload:fullResponse]">
+		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+		</quickbooks-windows:create>
+	</flow>
+	<flow name="update">
+		<quickbooks-windows:update realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]"
+		                           requestId="#[map-payload:requestId]"
+		                           draft="#[map-payload:draft]"
+		                           fullResponse="#[map-payload:fullResponse]">
+		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+		            
+		</quickbooks-windows:update>
+	</flow>
+	<flow name="delete">
+		<quickbooks-windows:delete realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]"
+		                           requestId="#[map-payload:requestId]">
+		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+		            
+		</quickbooks-windows:delete>
+	</flow>
+	<flow name="get-object">
+		<quickbooks-windows:get-object realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]">
+		    <quickbooks-windows:id ref="#[map-payload:id]"/>
+		            
+		</quickbooks-windows:get-object>
+	</flow>
+	<flow name="find-objects">
+		<quickbooks-windows:find-objects realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]">
+		    <quickbooks-windows:query ref="#[map-payload:query]"/>
+		            
+		</quickbooks-windows:find-objects>
+	</flow>
+	<flow name="generate-a-new-request-id">
+		<quickbooks-windows:generate-a-new-request-id />
+	</flow>
+	<flow name="revert">
+		<quickbooks-windows:revert realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]"
+		                           requestId="#[map-payload:requestId]">
+		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+		</quickbooks-windows:revert>
+	</flow>
 </mule>

@@ -7,7 +7,7 @@
                            requestId="#[map-payload:requestId]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]">
-    <quickbooks:obj ref="#[map-payload:obj]"/>
+    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
 </quickbooks-windows:create>
 <!-- END_INCLUDE(quickbooks-windows:create) -->
 
@@ -20,7 +20,7 @@
                            requestId="#[map-payload:requestId]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]">
-    <quickbooks:obj ref="#[map-payload:obj]"/>
+    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
             
 </quickbooks-windows:update>
 <!-- END_INCLUDE(quickbooks-windows:update) -->
@@ -30,8 +30,9 @@
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
                            authIdPseudonym="#[map-payload:authIdPseudonym]" 
-                           type="#[map-payload:type]">
-    <quickbooks:obj ref="#[map-payload:obj]"/>
+                           type="#[map-payload:type]"
+                           requestId="#[map-payload:requestId]">
+    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
             
 </quickbooks-windows:delete>
 <!-- END_INCLUDE(quickbooks-windows:delete) -->
@@ -41,8 +42,34 @@
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
                            authIdPseudonym="#[map-payload:authIdPseudonym]" 
-                           type="#[map-payload:type]"">
-    <quickbooks:id ref="#[map-payload:id]"/>
+                           type="#[map-payload:type]">
+    <quickbooks-windows:id ref="#[map-payload:id]"/>
             
 </quickbooks-windows:get-object>
 <!-- END_INCLUDE(quickbooks-windows:get-object) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:find-objects) -->
+<quickbooks-windows:find-objects realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+                           type="#[map-payload:type]">
+    <quickbooks-windows:query ref="#[map-payload:query]"/>
+            
+</quickbooks-windows:find-objects>
+<!-- END_INCLUDE(quickbooks-windows:find-objects) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
+<quickbooks-windows:generate-a-new-request-id />
+<!-- END_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:revert) -->
+<quickbooks-windows:revert realmId="#[map-payload:realmId]"
+                           appKey="#[map-payload:appKey]"
+                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+                           type="#[map-payload:type]"
+                           requestId="#[map-payload:requestId]">
+    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+</quickbooks-windows:revert>
+<!-- END_INCLUDE(quickbooks-windows:revert) -->

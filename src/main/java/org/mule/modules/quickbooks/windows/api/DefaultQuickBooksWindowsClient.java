@@ -10,6 +10,11 @@
 
 package org.mule.modules.quickbooks.windows.api;
 
+import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.Validate;
@@ -29,7 +34,10 @@ import org.mule.modules.quickbooks.windows.schema.DelRequest;
 import org.mule.modules.quickbooks.windows.schema.ErrorResponse;
 import org.mule.modules.quickbooks.windows.schema.IdType;
 import org.mule.modules.quickbooks.windows.schema.ModRequest;
+import org.mule.modules.quickbooks.windows.schema.QueryBase;
+import org.mule.modules.quickbooks.windows.schema.RevertRequest;
 import org.mule.modules.quickbooks.windows.schema.SuccessResponse;
+import org.mule.modules.utils.pagination.PaginatedIterable;
 
 public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient implements QuickBooksWindowsClient
 {
@@ -255,18 +263,126 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     }
 
     @Override
-    public Iterable findObjects(String realmId,
-                            String appKey,
-                            String realmIdPseudonym,
-                            String authIdPseudonym,
-                            WindowsEntityType type,
-                            Object query)
+    public Iterable findObjects(final String realmId,
+                                final String appKey,
+                                final String realmIdPseudonym,
+                                final String authIdPseudonym,
+                                final WindowsEntityType type,
+                                final Object query)
     {
-        
-        // TODO Auto-generated method stub
-        return null;
+        Validate.notNull(type);
+        return new PaginatedIterable<Object, List<Object>>()
+        {
+            private Integer countPage = 1;
+
+            @Override
+            protected List<Object> firstPage()
+            {
+                loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+                return askAnEspecificPage(countPage);
+            }
+
+            @Override
+            protected boolean hasNextPage(List<Object> arg0)
+            {
+                return arg0.isEmpty();
+            }
+
+            @Override
+            protected List<Object> nextPage(List<Object> arg0)
+            {
+                countPage = countPage + 1;
+                return askAnEspecificPage(countPage);
+            }
+
+            @Override
+            protected Iterator<Object> pageIterator(List<Object> arg0)
+            {
+                return arg0.iterator();
+            }
+          
+            private List<Object> askAnEspecificPage(Integer pageNumber)
+            {
+                String str = String.format("%s/%s/v2/%s",
+                    getBaseUri(realmId), type.getResouceName(), realmId);
+                
+                HttpUriRequest httpRequest = new HttpPost(str);
+                httpRequest.addHeader("Content-Type", "text/xml");
+                
+                ((QueryBase) query).setStartPage(BigInteger.valueOf(pageNumber));
+                ((QueryBase) query).setChunkSize(getResultsPerPage());
+                
+                prepareToPost(query, httpRequest);
+                
+                try
+                {
+                    return (List<Object>) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                }
+                catch(QuickBooksRuntimeException e)
+                {
+                    if(e.isAExpiredTokenFault())
+                    {
+                        destroyAccessToken(realmId);
+                        return askAnEspecificPage(pageNumber);
+                    } 
+                    else 
+                    {
+                        throw e;
+                    }
+                }
+            }
+        };
     }
 
+    @Override
+    public void revert(final String realmId, final String appKey, 
+                final String realmIdPseudonym, final String authIdPseudonym, 
+                WindowsEntityType type, Object obj, String requestId)
+    {
+        Validate.notNull(type);
+        
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
+        String str = String.format("%s/%s/v2/%s",
+            getBaseUri(realmId), type.getResouceName(), realmId);
+
+        HttpUriRequest httpRequest = new HttpPost(str);
+        httpRequest.addHeader("Content-Type", "text/xml");
+        
+        RevertRequest revertRequest = new RevertRequest();
+        revertRequest.setRequestId(requestId);
+        revertRequest.setCdmObject(getMessageUtilsInstance().createJaxbElement(obj));
+        
+        prepareToPost(revertRequest, httpRequest);
+        
+        try
+        {
+            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            if(respObj instanceof ErrorResponse)
+            {
+                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+            }
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                destroyAccessToken(realmId);
+                revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
+    }
+    
+    @Override
+    public String generateARequestId()
+    {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+    
     
     @Override
     protected FaultInfo getFaultInfo(String str) throws JAXBException

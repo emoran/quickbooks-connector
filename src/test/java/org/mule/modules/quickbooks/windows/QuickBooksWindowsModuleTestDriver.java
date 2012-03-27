@@ -20,8 +20,12 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
+import org.mule.modules.quickbooks.windows.schema.Account;
 import org.mule.modules.quickbooks.windows.schema.AccountSubtypeEnum;
 import org.mule.modules.quickbooks.windows.schema.AccountTypeEnum;
+import org.mule.modules.utils.mom.JaxbMapObjectMappers;
+
+import com.zauberlabs.commons.mom.MapObjectMapper;
 
 
 /**
@@ -39,6 +43,7 @@ public class QuickBooksWindowsModuleTestDriver
     private final String realmId = System.getenv("realmId");
     private final String realmIdPseudonym = System.getenv("realmIdPseudonym");
     private final String authIdPseudonym = System.getenv("authIdPseudonym");
+    private final MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.windows.schema").build();
     
     /**
      * 
@@ -52,9 +57,9 @@ public class QuickBooksWindowsModuleTestDriver
     }
 
     @Test
-    public void createAccount()
+    public void createAccountAskingForFullResponse()
     {   
-        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QW 88")
+        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QW 91")
                                                          .with("active", true)
                                                          .with("type", AccountTypeEnum.EXPENSE)
                                                          .with("subtype", AccountSubtypeEnum.EXPENSE.value())
@@ -62,9 +67,12 @@ public class QuickBooksWindowsModuleTestDriver
                                                          .with("openingBalance", 0)
                                                          .with("openingBalanceDate", "2012-02-02T00:00:00Z")
                                                          .build();
-        Object acc = module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, mapAccount, "09876543210987654321098765432116", null, true);
+        Account acc = (Account) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, mapAccount, module.generateANewRequestId(), null, true);
+        
         System.out.println(acc);
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, (Map<String, Object>) mom.map(acc), module.generateANewRequestId());
     }
+    
 
 //    @Test
 //    public void createCustomerAnswersNonNullCustomerWithId() throws Exception

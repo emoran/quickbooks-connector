@@ -29,6 +29,7 @@ import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.windows.api.DefaultQuickBooksWindowsClient;
 import org.mule.modules.quickbooks.windows.api.QuickBooksWindowsClient;
 import org.mule.modules.quickbooks.windows.schema.IdType;
+import org.mule.modules.quickbooks.windows.schema.ObjectRef;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
@@ -91,8 +92,14 @@ public class QuickBooksWindowsModule
      * @param obj Map that represents the object to be created.
      * @param requestId the unique request Id
      * @param draft Boolean draft
-     * @param fullResponse Boolean fullResponse
-     * @return The created Object.
+     *      <p>Saving an IDS object in a draft state prevents it from being synchronized with Quickbooks. Your app 
+     *      might want to save an object in a draft state if the user has not finished entering data, or for some other 
+     *      reason the user does not want to commit the object for synchronization. You may save an object in draft state 
+     *      during a create or update operation by specifying the draft="true" attribute. By default, the Draft attribute 
+     *      is false, which means that the saved object will be synchronized with Quickbooks.</p>
+     * @param fullResponse Boolean fullResponse. If this flag is true, it will return the created object, otherwise, it
+     *                     will return an {@link ObjectRef}.
+     * @return The created Object or an {@link ObjectRef} if the fullResponse flag was null of false.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
@@ -115,7 +122,7 @@ public class QuickBooksWindowsModule
     /**
      * Retrieve objects by ID.
      * 
-     * For details of the supported objects: 
+     * For details of the supported objects:
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
@@ -148,12 +155,17 @@ public class QuickBooksWindowsModule
     /**
      * Updates.
      * 
-     * Specify all the parameters for the object, not just the new or changed elements.
-     * If you omit an element, it is removed from the object by the update operation.
+     * <p>Specify all the parameters for the object, not just the new or changed elements.
+     * If you omit an element, it is removed from the object by the update operation.</p>
      * 
      * For details of the supported objects and its fields: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
+     * 
+     * <p>When updating transaction objects (such as Estimate or Invoice), note the following:</p>
+     * <p>* To retain existing line items, specify them in the request XML body and do not change their order. </p>
+     * <p>* To remove a line item, omit it. </p>
+     * <p>* To add a new line item, insert a new one in the list.</p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:update}
      *
@@ -166,29 +178,41 @@ public class QuickBooksWindowsModule
      * @param type WindowsEntityType of the object.
      * @param obj Map that represents the object to be created.
      * @param requestId the unique request Id
-     * @param draft Boolean draft
-     * @param fullResponse Boolean fullResponse
-     * @return The updated Object.
+     * @param draft Boolean draft 
+     *      <p>Saving an IDS object in a draft state prevents it from being synchronized with Quickbooks. Your app 
+     *      might want to save an object in a draft state if the user has not finished entering data, or for some other 
+     *      reason the user does not want to commit the object for synchronization. You may save an object in draft state 
+     *      during a create or update operation by specifying the draft="true" attribute. By default, the Draft attribute 
+     *      is false, which means that the saved object will be synchronized with Quickbooks.</p>
+     * @param fullResponse Boolean fullResponse. If this flag is true, it will return the created object, otherwise, it
+     *                     will return an {@link ObjectRef}.
+     * @return The updated Object or an {@link ObjectRef} if the fullResponse flag was null of false.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Object updateVendor(String realmId,
-                             String appKey,
-                             String realmIdPseudonym, 
-                             String authIdPseudonym,
-                             WindowsEntityType type,
-                             Map<String, Object> obj,
-                             String requestId,
-                             @Optional @Default("false") Boolean draft,
-                             @Optional @Default("false") Boolean fullResponse)
+    public Object update(String realmId,
+                         String appKey,
+                         String realmIdPseudonym, 
+                         String authIdPseudonym,
+                         WindowsEntityType type,
+                         Map<String, Object> obj,
+                         String requestId,
+                         @Optional @Default("false") Boolean draft,
+                         @Optional @Default("false") Boolean fullResponse)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId, draft, fullResponse);
     }
     
     /**
      * Deletes an object.
+     * <p>Most objects cannot be deleted by calling Data Services.  An object can be deleted with Data Services 
+     * only if it meets one of the following conditions:</p>
+     * <p>The object is in a Draft state.  (See Saving Draft Data.)</p>
+     * <p>  OR</p>
+     * <p>The object was created by calling Data Services (<Add> operation) in a non-Draft state and the 
+     * object failed to sync with QuickBooks.</p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:delete}
      *
@@ -205,61 +229,106 @@ public class QuickBooksWindowsModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public void deleteObject(String realmId,
-                             String appKey,
-                             String realmIdPseudonym, String authIdPseudonym,
-                             WindowsEntityType type,
-                             Map<String, Object> obj,
-                             String requestId)
+    public void delete(String realmId,
+                       String appKey,
+                       String realmIdPseudonym, String authIdPseudonym,
+                       WindowsEntityType type,
+                       Map<String, Object> obj,
+                       String requestId)
     {
-        client.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId);
+        client.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId);
     }
-//
-//    /**
-//     * Lazily retrieves Objects
-//     *
-//     * For details see: 
-//     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-//     * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
-//     * 
-//     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects}
-//     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects2}
-//     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects3}
-//     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects4}
-//     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects5}
-//     *
-//     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-//     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-//     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-//     * @param appKey Application Id.
-//     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-//     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-//     * @param type EntityType of the object.
-//     * @param queryFilter String with a filter format (see details). Each type of object to be 
-//     *                    retrieved, has a list of attributes for which it can be filtered (See this 
-//     *                    list following the link in the details of the documentation of the create
-//     *                    or update method of that object).
-//     * @param querySort String with a sort format (see details). Each type of object to be 
-//     *                    retrieved, has a list of attributes for which it can be sorted (See this 
-//     *                    list following the link in the details of the documentation of the create
-//     *                    or update method of that object).
-//     * @return Iterable of the objects to be retrieved.
-//     * 
-//     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-//     *         and a message provided by quickbooks about the error.
-//     */
-//    @SuppressWarnings("rawtypes")
-//    @Processor
-//    public Iterable findObjects(String realmId,
-//                                String appKey,
-//                                String realmIdPseudonym, String authIdPseudonym,
-//                                //EntityType type, 
-//                                @Optional String queryFilter,
-//                                @Optional String querySort)
-//    {
-//        //return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, queryFilter, querySort);
-//        return null;
-//    }
+
+    /**
+     * Lazily retrieves Objects
+     *
+     * For details on how to generate a query see: 
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/0500_QuickBooks_Windows/
+     * 0100_Calling_Data_Services/0015_Retrieving_Objects">Retrieve Especification</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:find-objects}
+     *
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param type WindowsEntityType of the object.
+     * @param query Map that represents every filter and sort for the objects retrieved. Each type of object to be 
+     *              retrieved, has a TheObjectQuery class that has the attributes for which it can be filtered 
+     *              <p>(Follow this link to know whitch attributes are acepted in every ObjectQuery, changing the word
+     *              OBJECT for the object that you requiere, for example Account: 
+     *              <p>https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     *              0500_QuickBooks_Windows/0600_Object_Reference/OBJECT</p>).</p>
+     * @return Iterable of the objects to be retrieved.
+     * 
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
+     *         and a message provided by quickbooks about the error.
+     */
+    @SuppressWarnings("rawtypes")
+    @Processor
+    public Iterable findObjects(String realmId,
+                                String appKey,
+                                String realmIdPseudonym, 
+                                String authIdPseudonym,
+                                WindowsEntityType type, 
+                                @Optional Map<String, Object> query)
+    {
+        if (query == null)
+        {
+            query = new HashMap<String, Object>();
+        }
+        
+        return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getQueryType(), query));
+    }
+    
+    /**
+     * Generate a new GUID for the requestId
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:generate-a-new-request-id}
+     * 
+     * @return a GUID for the requestId
+     */
+    @Processor
+    public String generateANewRequestId()
+    {
+        return client.generateARequestId();
+    }
+    
+    /**
+     * Revert.
+     * The revert operation discards all updates made to the object since its last sync to QuickBooks. An object can
+     * be reverted only if it has been synched with QuickBooks at least once. This implies that the object has been 
+     * updated by  Data Services (that is, by a <Mod> operation). The object may be in the Draft state or not.
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:revert}
+     * 
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param type WindowsEntityType of the object.
+     * @param obj Map that represents the object to be created.
+     * @param requestId the unique request Id
+     * 
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
+     *         and a message provided by quickbooks about the error.
+     */
+    @Processor
+    public void revert(String realmId,
+                       String appKey,
+                       String realmIdPseudonym, 
+                       String authIdPseudonym,
+                       WindowsEntityType type, 
+                       Map<String, Object> obj,
+                       String requestId)
+    {
+        client.revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId);
+    }
+    
     /**
      * post construct
      */
