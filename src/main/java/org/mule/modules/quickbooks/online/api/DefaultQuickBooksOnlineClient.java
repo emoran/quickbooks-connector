@@ -245,7 +245,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                 @Override
                 protected SearchResults firstPage()
                 {
-                    loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
                     return askAnEspecificPage(1);
                 }
 
@@ -287,6 +286,8 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                 
                 private SearchResults askAnEspecificPage(Integer pageNumber)
                 {
+                    loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                     if (queryFilter != null)
                     {
