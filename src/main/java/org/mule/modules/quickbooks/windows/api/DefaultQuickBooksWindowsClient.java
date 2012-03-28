@@ -17,6 +17,8 @@ import java.util.UUID;
 
 import javax.xml.bind.JAXBException;
 
+import net.sf.staccatocommons.collections.stream.Streams;
+
 import org.apache.commons.lang.Validate;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -37,6 +39,7 @@ import org.mule.modules.quickbooks.windows.schema.ModRequest;
 import org.mule.modules.quickbooks.windows.schema.QueryBase;
 import org.mule.modules.quickbooks.windows.schema.RevertRequest;
 import org.mule.modules.quickbooks.windows.schema.SuccessResponse;
+import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
 
 public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient implements QuickBooksWindowsClient
@@ -131,7 +134,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             {
                 throw new QuickBooksRuntimeException((ErrorResponse)respObj);
             }
-            return ((SuccessResponse) respObj).getCdmObject().getValue();
+            return Streams.from(getListFromIntuitResponse(respObj, type)).anyOrNull();
         }
         catch(QuickBooksRuntimeException e)
         {
@@ -147,6 +150,17 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         }
     }
 
+    private List getListFromIntuitResponse(Object response, WindowsEntityType type)
+    {
+        try
+        {
+            return (List) response.getClass().getMethod("get" + type.getType().getSimpleName()).invoke(response);
+        }
+        catch (Exception e)
+        {
+            throw MuleSoftException.soften(e);
+        }
+    }
     @Override
     public Object update(String realmId,
                          String appKey,
@@ -278,7 +292,6 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             @Override
             protected List<Object> firstPage()
             {
-                loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
                 return askAnEspecificPage(countPage);
             }
 
@@ -303,6 +316,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
           
             private List<Object> askAnEspecificPage(Integer pageNumber)
             {
+                loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+                
                 String str = String.format("%s/%s/v2/%s",
                     getBaseUri(realmId), type.getResouceName(), realmId);
                 
@@ -313,10 +328,15 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
                 ((QueryBase) query).setChunkSize(getResultsPerPage());
                 
                 prepareToPost(query, httpRequest);
-                
+
                 try
                 {
-                    return (List<Object>) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                    Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                    if(respObj instanceof ErrorResponse)
+                    {
+                        throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                    }
+                    return getListFromIntuitResponse(respObj, type);
                 }
                 catch(QuickBooksRuntimeException e)
                 {

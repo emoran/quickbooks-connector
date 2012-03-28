@@ -15,14 +15,23 @@
 
 package org.mule.modules.quickbooks.windows;
 
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
+import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.windows.schema.Account;
 import org.mule.modules.quickbooks.windows.schema.AccountSubtypeEnum;
 import org.mule.modules.quickbooks.windows.schema.AccountTypeEnum;
+import org.mule.modules.quickbooks.windows.schema.Customer;
+import org.mule.modules.quickbooks.windows.schema.PartyType;
+import org.mule.modules.quickbooks.windows.schema.PhysicalAddress;
+import org.mule.modules.quickbooks.windows.schema.SalesTerm;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
@@ -74,156 +83,77 @@ public class QuickBooksWindowsModuleTestDriver
     }
     
 
+    @Test
+    public void createCustomerAnswersNonNullCustomerWithIdFullResponse() throws Exception
+    {
+        Customer customer = createJaneDoe();
+        Customer responseCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer), module.generateANewRequestId(), null, true);
+        
+        assertEquals("Jane Doe QBW", responseCustomer.getName());
+
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>)mom.map(responseCustomer), 
+            module.generateANewRequestId()); 
+    }
+    
+    @Test
+    public void getCustomerAnswersNonNullCustomerWithId() throws Exception
+    {
+        Customer janeDoe = createJaneDoe();
+        
+        Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(janeDoe), module.generateANewRequestId(), null, true);
+
+        Customer retrievedCustomer = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createdCustomer.getId()));
+        
+        assertEquals(janeDoe.getName(), retrievedCustomer.getName());
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>)mom.map(retrievedCustomer), 
+            module.generateANewRequestId()); 
+    }
+    
+    @Test
+    public void modifyCustomer()
+    {
+        Customer janeDoe = createJaneDoe();
+        Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(janeDoe), module.generateANewRequestId(), null, true);
+        
+        assertEquals(janeDoe.getName(), createdCustomer.getName());
+        
+        createdCustomer.setName("Jane Doe Modified");
+        
+        Customer updatedCustomer = (Customer) module.update(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createdCustomer), 
+            module.generateANewRequestId(), null, true);
+        
+        assertEquals("Jane Doe Modified", updatedCustomer.getName());
+        
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>)mom.map(updatedCustomer), 
+            module.generateANewRequestId()); 
+    }
+    
+    @Test
+    public void getAllAccountsAnswersNonNullListWithCustomers() throws Exception
+    {
+        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, null);
+        
+        for (Object c : it)
+        {
+            System.out.println(((Account) c).getName());
+        }
+    }
+    
 //    @Test
-//    public void createCustomerAnswersNonNullCustomerWithId() throws Exception
+//    public void getSomeAccountsAnswersNonNullListWithCustomers() throws Exception
 //    {
-//        List<Map<String, Object>> auxList = new ArrayList<Map<String, Object>>();
-//        
-//        Map<String, Object> auxMap = new HashMap<String, Object>();
-//        
-//        auxMap.put("Line1", null);
-//        auxMap.put("Line2", null);
-//        auxMap.put("City", null);
-//        auxMap.put("CountrySubDivisionCode", null);
-//        auxMap.put("PostalCode", null);
-//        auxMap.put("Tag", "Billing");
-//        
-//        auxList.add(auxMap);
-//
-//        Customer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-//            "Susana", 
-//            "Susana", 
-//            "Melina", 
-//            "Perez",
-//            null, null, null, 
-//            new ArrayList<Map<String, Object>>(), 
-//            null, null, new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>()
-////            auxList
-////            Arrays.<Map<String, Object>>asList(new HashMap<String, Object>()
-////                {
-////                    {
-////                        put("Line1", null);
-////                        put("Line2", null);
-////                        put("City", null);
-////                        put("CountrySubDivisionCode", null);
-////                        put("PostalCode", null);
-////                        put("Tag", "Billing");
-////                    } 
-////               }
-////            )
-//        );
-//        
-//        assertEquals("Susana", c.getName());
-//        assertNotNull(c.getId());
-//
-//        Map<String, Object> idType = new HashMap<String, Object>();
-//        idType.put("value", c.getId().getValue());
-//        //idType.put("idDomain", c.getId().getIdDomain());
-//        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType, c.getSyncToken());
-//    }
-//    
-//    @Test
-//    @Ignore
-//    public void testname() throws Exception
-//    {
-//        
-//     List<Map<String, Object>> auxList = new ArrayList<Map<String, Object>>();
-//        
-//        Map<String, Object> auxMap = new HashMap<String, Object>();
-//        
-//        auxMap.put("Line1", null);
-//        auxMap.put("Line2", null);
-//        auxMap.put("City", null);
-//        auxMap.put("CountrySubDivisionCode", null);
-//        auxMap.put("PostalCode", null);
-//        auxMap.put("Tag", "Billing");
-//        
-//        auxList.add(auxMap);
-//
-//        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.schema").build();
-//        Customer c = (Customer) mom.unmap(
-//                new MapBuilder()
-//                .with("name", "Susana")
-//                .with("givenName", "Susana")
-//                .with("middleName", "Melina")
-//                .with("familyName", "Perez")
-//                .with("suffix", null)
-//                .with("DBAName", null)
-//                .with("showAs", null)
-//                .with("webSite", new ArrayList<Map<String, Object>>())
-//                .with("salesTermId", null)
-//                .with("salesTaxCodeId", null)
-//                .with("email", new ArrayList<String>())
-//                .with("phone", new ArrayList<Map<String, Object>>())
-//                .with("address", auxList)
-//                .build(), Customer.class
-//                );
-//        
-//        PhysicalAddress ph = c.getAddress().get(0);
-//        
-//        assertEquals(ph.getTag(), "Billing");
-//    }
-//    
-//    @Test
-//    public void getCustomerAnswersNonNullCustomerWithId() throws Exception
-//    {
-//        Map<String, Object> idType = new HashMap<String, Object>();
-//        idType.put("value", "1");
-//        //idType.put("idDomain", c.getId().getIdDomain());
-//        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType);
-//        
-//        assertEquals("Ricardo (deleted)", c.getName());
-//        assertNotNull(c.getId());
-//    }
-//    
-//    @Test
-//    public void modifyCustomer()
-//    {
-//        Customer c1 = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-//            "Paul M. Jonhson", 
-//            "Paul", 
-//            "Mark", 
-//            "Jhonson",
-//            null, null, null, 
-//            new ArrayList<Map<String, Object>>(), 
-//            null, null, new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>()
-//        );
-//        
-//        assertEquals("Jhonson", c1.getFamilyName());
-//        
-//        Map<String, Object> idType = new HashMap<String, Object>();
-//        idType.put("value", c1.getId().getValue());
-//        
-//        Customer c2 = module.updateCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-//            idType, 
-//            c1.getSyncToken(), 
-//            c1.getName(), 
-//            c1.getGivenName(), 
-//            c1.getMiddleName(), 
-//            "Smith", 
-//            null, null, null, 
-//            new ArrayList<Map<String, Object>>(), 
-//            null, null, new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>()
-//        );
-//        
-//        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType);
-//        
-//        assertEquals("Smith", c3.getFamilyName());
-//        
-//        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType, null);
-//    }
-//    
-//    @Test
-//    public void getAllCustomersAnswersNonNullListWithCustomers() throws Exception
-//    {
-//        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, null, null);
-//        
+//        CustomerQuery query = new CustomerQuery();
+//        //query.
+//        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(query));
 //        
 //        for (Object c : it)
 //        {
@@ -231,37 +161,25 @@ public class QuickBooksWindowsModuleTestDriver
 //        }
 //    }
 //    
-//    @Test
-//    public void getSomeCustomersAnswersNonNullListWithCustomers() throws Exception
-//    {
-//        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
-//        
-//        for (Object c : it)
-//        {
-//            System.out.println(((Customer) c).getName());
-//        }
-//    }
-//    
-//    @Test
-//    public void createSalesTermAnswersNonNullSalesTermWithId()
-//    {
-//        SalesTerm salesTerm = module.createSalesTerm(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-//            "SalesTerm1",
-//            3,
-//            null,
-//            null,
-//            2,
-//            null,
-//            null,
-//            null);
-//        
-//        assertEquals("SalesTerm1", salesTerm.getName());
-//        Map<String, Object> idType = new HashMap<String, Object>();
-//        idType.put("value", salesTerm.getId().getValue());
-//        
-//        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.SALESTERM, idType, null);
-//    }
-//
+    @Test
+    public void createSalesTermAnswersNonNullSalesTermWithId()
+    {
+        SalesTerm salesTerm = new SalesTerm(){{
+           setName("Net 3");
+           setType("Standard");
+           setDiscountDays(BigInteger.valueOf(3));
+           setDiscountPercent(BigDecimal.valueOf(15));
+        }};
+        SalesTerm createdSalesTerm = (SalesTerm) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.SALESTERM, (Map<String, Object>) mom.map(salesTerm), 
+            module.generateANewRequestId(), null, true);
+        
+        assertEquals("Net 3", createdSalesTerm.getName());
+        
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.SALESTERM, 
+            (Map<String, Object>) mom.map(createdSalesTerm), module.generateANewRequestId());
+    }
+
 //    @Test
 //    public void retrievesAEmptyIterable()
 //    {
@@ -345,16 +263,34 @@ public class QuickBooksWindowsModuleTestDriver
 //        assertEquals("DOC-NEW:001111111101", invoice.getHeader().getDocNumber());
 //    }
 //    
-//    @Test(expected = QuickBooksRuntimeException.class)
-//    public void createAccountThrowingExceptionForWrongCredentials()
-//    {
-//        QuickBooksModule module2;
-//        module2 = new QuickBooksModule();
-//        module2.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
-//        module2.init();
-//        
-//        Account acc = module2.createAccount("wrongRealmId", appKey, realmIdPseudonym, authIdPseudonym,
-//            "Test Account", null, AccountDetail.SAVINGS, "3654", "0", new Date(), null);
-//    }
+    @Test(expected = QuickBooksRuntimeException.class)
+    public void createAccountThrowingExceptionForWrongCredentials()
+    {
+        QuickBooksWindowsModule module2;
+        module2 = new QuickBooksWindowsModule();
+        module2.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
+        module2.init();
+        
+        Customer responseCustomer = (Customer) module2.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createJaneDoe()), module.generateANewRequestId(), null, true);
+    }
     
+    private Customer createJaneDoe()
+    {
+        return new Customer(){{
+            setTypeOf(PartyType.PERSON);
+            setName("Jane Doe QBW");
+            getAddress().add(new PhysicalAddress(){{
+                setLine1("5720 Peachtree Pkwy. 1");
+                line2 = "Norcross";
+                city = "Mountain View, CA 94043, CA 940";
+                country = "USA";
+                countrySubDivisionCode = "ON";
+                postalCode = "94043";
+                getTag().add("Billing");
+            }});
+            setDBAName("Mint");
+            setAcctNum("23423423");
+        }};
+    }
 }
