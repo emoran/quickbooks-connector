@@ -81,7 +81,14 @@ public class QuickBooksWindowsModule
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:create}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:create2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createJob}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createCheck}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createBill}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createEmployee}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createPayment}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createItem}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createCustomer}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createAccount}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks, the Company ID  appears on the My Account page.
@@ -128,7 +135,9 @@ public class QuickBooksWindowsModule
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-object}
-     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-object2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-object3}
+     * 
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks, the Company ID  appears on the My Account page.
      *                In Data Services for QuickBooks, the realmID is required in the URL for most calls.
