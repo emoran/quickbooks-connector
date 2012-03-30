@@ -29,6 +29,16 @@ import org.mule.modules.quickbooks.windows.schema.Account;
 import org.mule.modules.quickbooks.windows.schema.AccountSubtypeEnum;
 import org.mule.modules.quickbooks.windows.schema.AccountTypeEnum;
 import org.mule.modules.quickbooks.windows.schema.Customer;
+import org.mule.modules.quickbooks.windows.schema.CustomerQuery;
+import org.mule.modules.quickbooks.windows.schema.DraftFilterEnumType;
+import org.mule.modules.quickbooks.windows.schema.IdSet;
+import org.mule.modules.quickbooks.windows.schema.Invoice;
+import org.mule.modules.quickbooks.windows.schema.InvoiceHeader;
+import org.mule.modules.quickbooks.windows.schema.InvoiceLine;
+import org.mule.modules.quickbooks.windows.schema.Item;
+import org.mule.modules.quickbooks.windows.schema.ItemTypeEnum;
+import org.mule.modules.quickbooks.windows.schema.Money;
+import org.mule.modules.quickbooks.windows.schema.ObjectRef;
 import org.mule.modules.quickbooks.windows.schema.PartyType;
 import org.mule.modules.quickbooks.windows.schema.PhysicalAddress;
 import org.mule.modules.quickbooks.windows.schema.SalesTerm;
@@ -66,6 +76,76 @@ public class QuickBooksWindowsModuleTestDriver
     }
 
     @Test
+    public void deleteCustomerSomeSpeficificCustomers()
+    {
+        Customer customerJane = createJaneDoe();
+        //non draft
+        final Customer createdNonDraftCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), 
+            module.generateANewRequestId(), null, true);
+        
+        //draft
+        customerJane.setName("Jane Doe QBW DRAFT 1");
+        final ObjectRef objRefDraft1 = (ObjectRef) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), 
+            module.generateANewRequestId(), true, null);
+        
+        //draft
+        customerJane.setName("Jane Doe QBW DRAFT 2");
+        final ObjectRef objRefDraft2 = (ObjectRef) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), 
+            module.generateANewRequestId(), true, null);
+              
+        CustomerQuery query = new CustomerQuery();
+        
+        //retrieve an especific list of Customers
+        query.setListIdSet(new IdSet(){{
+            getId().add(createdNonDraftCustomer.getId());
+            getId().add(objRefDraft1.getId());
+            getId().add(objRefDraft2.getId());
+        }});
+        
+        //retrieve only the ones of that list that are draft Customers
+        query.setDraftFilter(DraftFilterEnumType.DRAFT_ONLY);
+        
+        Iterable<Customer> iterableCust = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(query));
+        for (Customer customer: iterableCust)
+        {
+            System.out.println(customer);
+            assertTrue(customer.getName().contains("DRAFT"));
+            module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer), module.generateANewRequestId());
+        }
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER, 
+            (Map<String, Object>) mom.map(createdNonDraftCustomer), module.generateANewRequestId());
+    }
+    
+    @Test
+    public void deleteACustomerWithItsIdType()
+    {
+        Customer customerJane = createJaneDoe();
+        
+        customerJane.setName("Jane Doe QBW Test delete 3");
+        final ObjectRef objRef = (ObjectRef) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), 
+            module.generateANewRequestId(), null, null);
+        
+        Customer aux = new Customer(){{
+            setId(objRef.getId());
+        }};
+        
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(aux), module.generateANewRequestId());
+              
+        Customer customer = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(objRef.getId()));
+
+        //was deleted before...
+        assertNull(customer);
+    }
+    
+    @Test
     public void createAccountAskingForFullResponse()
     {   
         Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QW 91")
@@ -90,7 +170,7 @@ public class QuickBooksWindowsModuleTestDriver
         Customer responseCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
             WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer), module.generateANewRequestId(), null, true);
         
-        assertEquals("Jane Doe QBW", responseCustomer.getName());
+        assertEquals(customer.getName(), responseCustomer.getName());
 
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
             WindowsEntityType.CUSTOMER, (Map<String, Object>)mom.map(responseCustomer), 
@@ -129,7 +209,7 @@ public class QuickBooksWindowsModuleTestDriver
             WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createdCustomer), 
             module.generateANewRequestId(), null, true);
         
-        assertEquals("Jane Doe Modified", updatedCustomer.getName());
+        assertEquals(createdCustomer.getName(), updatedCustomer.getName());
         
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
             WindowsEntityType.CUSTOMER, (Map<String, Object>)mom.map(updatedCustomer), 
@@ -146,21 +226,7 @@ public class QuickBooksWindowsModuleTestDriver
             System.out.println(((Account) c).getName());
         }
     }
-    
-//    @Test
-//    public void getSomeAccountsAnswersNonNullListWithCustomers() throws Exception
-//    {
-//        CustomerQuery query = new CustomerQuery();
-//        //query.
-//        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-//            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(query));
-//        
-//        for (Object c : it)
-//        {
-//            System.out.println(((Customer) c).getName());
-//        }
-//    }
-//    
+     
     @Test
     public void createSalesTermAnswersNonNullSalesTermWithId()
     {
@@ -174,95 +240,78 @@ public class QuickBooksWindowsModuleTestDriver
             WindowsEntityType.SALESTERM, (Map<String, Object>) mom.map(salesTerm), 
             module.generateANewRequestId(), null, true);
         
-        assertEquals("Net 3", createdSalesTerm.getName());
+        assertEquals(salesTerm.getName(), createdSalesTerm.getName());
         
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.SALESTERM, 
             (Map<String, Object>) mom.map(createdSalesTerm), module.generateANewRequestId());
     }
 
-//    @Test
-//    public void retrievesAEmptyIterable()
-//    {
-//        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "Name :EQUALS: MFASDAEAEAAASS", null);
-//
-//        assertEquals(false, it.iterator().hasNext());
-//    }
-//    
-////    @Test
-////    public void deleteCustomer()
-////    {
-////        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.online.schema").build();
-////        
-////        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
-////        
-////        for (Customer customer: it)
-////        {
-////            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
-////        }
-////    }
-//    
-//    @Test
-//    public void createInvoiceRetrieveAndUpdateIt()
-//    {
-//        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.online.schema").build();
-//
-//        //creates a customer
-//        Customer customer = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-//            "Paul M. Jenkins 4", 
-//            "Paul", 
-//            "Mark", 
-//            "Jenkins",
-//            null, null, null, 
-//            new ArrayList<Map<String, Object>>(), 
-//            null, null, new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>(),
-//            new ArrayList<Map<String, Object>>()
-//        );
-//        
-//        //create an item
-//        Map<String, Object> unitPrice = new HashMap<String, Object>(){{
-//            put("amount", 100);
-//        }};
-//        
-//        Item item = module.createItem(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-//            "ItemTest0057", unitPrice, null, false, null, null, null, null, null, null);
-//        
-//        //create an invoice with the customer and item created before
-//        InvoiceHeader invHeader = new InvoiceHeader();
-//        invHeader.setCustomerId(customer.getId());
-//        invHeader.setDocNumber("DOC-00000010101");
-//        
-//        List<InvoiceLine> lines = new ArrayList<InvoiceLine>();
-//        InvoiceLine invoiceLine = new InvoiceLine();
-//        invoiceLine.setAmount(new BigDecimal(100));
-//        invoiceLine.setItemId(item.getId());
-//        lines.add(invoiceLine);
-//        Invoice invoice = module.createInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, (Map<String, Object>) mom.map(invHeader), (List<Map<String, Object>>) mom.map(lines));
-//        
-//        //retrieve the invoices of our customer
-//        String filter = "CustomerId :EQUALS: " + customer.getId().getValue();
-//        Iterable<Invoice> iterableInv = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, filter, null);
-//
-//        //We know that only has one invoice, because we have created him
-//        invoice = iterableInv.iterator().next();
-//        
-//        //change the docNumber and update it
-//        invoice.getHeader().setDocNumber("DOC-NEW:001111111101");
-//        invoice = module.updateInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-//                             (Map<String, Object>) mom.map(invoice.getId()), 
-//                             invoice.getSyncToken(), 
-//                             (Map<String, Object>) mom.map(invoice.getHeader()), 
-//                             (List<Map<String, Object>>) mom.map(invoice.getLine()));
-//        
-//        //delete everything
-//        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, (Map<String, Object>) mom.map(invoice.getId()), invoice.getSyncToken());
-//        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
-//        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
-//    
-//        //verify the change
-//        assertEquals("DOC-NEW:001111111101", invoice.getHeader().getDocNumber());
-//    }
-//    
+    @Test
+    public void retrievesAEmptyIterable()
+    {
+        CustomerQuery query = new CustomerQuery();
+        query.setFirstLastName("MFASDAEAEAAASS091823j09as");
+        
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(query));
+
+        assertEquals(false, it.iterator().hasNext());
+    }
+    
+    @Test
+    public void createInvoiceAndUpdateIt()
+    {
+        //creates a customer
+        final Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createJaneDoe()), 
+            module.generateANewRequestId(), null, true);
+        
+        //create an item
+        final Item item = new Item(){{
+            setName("ItemTestQBW0058");
+            setType(ItemTypeEnum.GROUP);
+            setUnitPrice(new Money(){{
+                setAmount(BigDecimal.valueOf(100));
+            }});
+            setTaxable(false);
+        }};
+        
+        final Item createdItem = (Item) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+            WindowsEntityType.ITEM, (Map<String, Object>) mom.map(item),
+            module.generateANewRequestId(), null, true);
+        
+        //create an invoice with the customer and item created before
+        Invoice invoice = new Invoice(){{
+            setHeader(new InvoiceHeader(){{
+                setCustomerId(createdCustomer.getId());
+                setDocNumber("DOC-QBW:001");
+            }});
+            getLine().add(new InvoiceLine(){{
+                setAmount(BigDecimal.valueOf(100));
+                setItemId(createdItem.getId());
+            }});
+        }};
+        
+        Invoice createdInvoice = (Invoice) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.INVOICE, (Map<String, Object>) mom.map(invoice),
+            module.generateANewRequestId(), null, true);
+ 
+        
+        //change the docNumber and update it
+        createdInvoice.getHeader().setDocNumber("DOC-QBW:N02");
+        Invoice updatedInvoice = (Invoice) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.INVOICE, (Map<String, Object>) mom.map(createdInvoice),
+            module.generateANewRequestId(), null, true);
+        
+        //delete everything
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.INVOICE, (Map<String, Object>) mom.map(updatedInvoice), module.generateANewRequestId());
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ITEM, (Map<String, Object>) mom.map(createdItem), module.generateANewRequestId());
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createdCustomer), module.generateANewRequestId());
+    
+        //verify the change
+        assertEquals(createdInvoice.getHeader().getDocNumber(), updatedInvoice.getHeader().getDocNumber());
+    }
+    
     @Test(expected = QuickBooksRuntimeException.class)
     public void createAccountThrowingExceptionForWrongCredentials()
     {
@@ -279,7 +328,7 @@ public class QuickBooksWindowsModuleTestDriver
     {
         return new Customer(){{
             setTypeOf(PartyType.PERSON);
-            setName("Jane Doe QBW");
+            setName("Jane Doe QBW 1");
             getAddress().add(new PhysicalAddress(){{
                 setLine1("5720 Peachtree Pkwy. 1");
                 line2 = "Norcross";

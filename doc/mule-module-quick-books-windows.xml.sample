@@ -18,9 +18,9 @@
                            realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
                            authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
                            type="ACCOUNT"
+                           requestId="#[payload]"
                            draft="false"
                            fullResponse="true">
-    <quickbooks-windows:requestId ref="#[payload]" />
     <quickbooks-windows:obj>
         <name>Test Account QW 91</name>
         <active>true</active>

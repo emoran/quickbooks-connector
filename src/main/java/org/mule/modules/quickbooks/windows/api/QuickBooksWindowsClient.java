@@ -17,7 +17,7 @@ public interface QuickBooksWindowsClient
 {
     Object create(final String realmId, final String appKey, 
                    final String realmIdPseudonym, final String authIdPseudonym,
-                   Object obj, final String requestId, 
+                   final WindowsEntityType type, Object obj, final String requestId, 
                    final Boolean draft, final Boolean fullResponse);
     
     Object getObject(final String realmId, final String appKey, 

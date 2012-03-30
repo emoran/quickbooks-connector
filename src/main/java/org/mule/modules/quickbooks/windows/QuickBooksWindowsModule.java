@@ -116,7 +116,7 @@ public class QuickBooksWindowsModule
                          @Optional @Default("false") Boolean draft,
                          @Optional @Default("false") Boolean fullResponse)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, type,
                              unmap(type.getType(), obj), requestId, draft, fullResponse);
     }
     

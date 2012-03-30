@@ -24,7 +24,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.mule.modules.quickbooks.api.AbstractQuickBooksClient;
-import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.schema.FaultInfo;
 import org.mule.modules.quickbooks.utils.MessageUtils;
@@ -57,6 +56,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
                          String appKey,
                          String realmIdPseudonym,
                          String authIdPseudonym,
+                         WindowsEntityType type,
                          Object obj,
                          String requestId,
                          Boolean draft,
@@ -68,7 +68,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         
         String str = String.format("%s/%s/v2/%s",
             getBaseUri(realmId),
-            QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
+            type.getResouceName(),
             realmId);
         
         HttpUriRequest httpRequest = new HttpPost(str);
@@ -100,7 +100,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             if(e.isAExpiredTokenFault())
             {
                 destroyAccessToken(realmId);
-                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, obj, requestId, draft, fullResponse);
+                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId, draft, fullResponse);
             } 
             else 
             {
@@ -183,7 +183,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         
         String str = String.format("%s/%s/v2/%s",
             getBaseUri(realmId),
-            QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
+            type.getResouceName(),
             realmId);
         
         HttpUriRequest httpRequest = new HttpPost(str);
@@ -238,9 +238,9 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         
         loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
-        if (((CdmBase)obj).getSyncToken() == null)
+        if (((CdmBase)obj).getSyncToken() == null || ((CdmBase)obj).getMetaData() == null)
         {
-            ((CdmBase)obj).setSyncToken(((CdmBase)getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, ((CdmBase)obj).getId())).getSyncToken());
+            obj = getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, ((CdmBase)obj).getId());
         }
         
         String str = String.format("%s/%s/v2/%s",
