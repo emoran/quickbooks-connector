@@ -259,6 +259,344 @@
 </quickbooks-windows:update>
 <!-- END_INCLUDE(quickbooks-windows:update) -->
 
+<!-- BEGIN_INCLUDE(quickbooks-windows:updateAccount) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="ACCOUNT"
+                           requestId="#[payload]"
+                           draft="false"
+                           fullResponse="true">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <name>Test Account QW 91 Updated</name>
+        <active>true</active>
+        <type>EXPENSE<type>
+        <subtype>expense</subtype>
+        <acctNum>9919823</acctNum>
+        <openingBalance>0</openingBalance>
+        <openingBalanceDate>2012-02-02T00:00:00Z</openingBalanceDate>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updateAccount) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:updateCustomer) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="CUSTOMER"
+                           requestId="#[payload]"
+                           draft="false"
+                           fullResponse="true">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <typeOf>Person</typeOf>
+        <name>Jane Doe Updated</name>
+        <address>#[groovy: [
+            'line1' : '5720 Peachtree Pkwy. 1',
+            'line2' : 'Norcross',
+            'city' : 'Mountain View, CA 94043, CA 940',
+            'country' : 'USA',
+            'countrySubDivisionCode' : 'ON',
+            'postalCode' : '94043',
+            'tag' : 'Billing'
+        ] ]</address>
+        <dbaName>Mint</dbaName>
+        <acctNum>23423423</acctNum>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updateCustomer) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:updateItem) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="ITEM"
+                           requestId="#[payload]"
+                           draft="false"
+                           fullResponse="true">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <name>Dusting Updated</name>
+        <desc>Dusting labor</desc>
+        <taxable>false</taxable>
+        <active>true</active>
+        <unitPrice>#[groovy: [
+           'currencyCode' : 'USD</CurrencyCode>
+           'amount' : '55</Amount>
+        ] ]</unitPrice>
+        <type>Service</type>
+        <incomeAccountRef>#[groovy: [
+           'accountId' : [ 
+                'idDomain': 'QB',
+                'value' : '25' ],
+           'accountName' : 'Labor Income',
+           'accountType' : 'Revenue'
+        ] ]</incomeAccountRef>
+        <purchaseCost>#[groovy: [
+           'currencyCode' : 'USD',
+           'amount' : '0'
+        ] ]</purchaseCost>
+        <avgCost>#[groovy: [
+           'currencyCode' : 'USD',
+           'amount' : '0'
+        ] ]</avgCost>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updateItem) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:updatePayment) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="PAYMENT"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+         <header>#[groovy: [
+             'docNumber' : '543216789',
+             'txnDate' : '2010-10-20',
+             'currency' : 'USD',
+             'customerId' : [
+                    'idDomain' : 'QB',
+                    'value' : '283' ],
+             'totalAmt' : '100'
+         ] ]</header>
+         <line>#[groovy: [
+             'desc' : 'Line 1 of payment Updated',
+             'amount' : '200',
+             'txnId' : [ 
+                    'idDomain' : 'QB',
+                    'value' : '64134' ]
+         ] ]</line>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updatePayment) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:updateEmployee) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="EMPLOYEE"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <typeOf>Person</TypeOf>
+        <name>John Simpson Updated</Name>
+        <address>#[groovy: [
+          'line1' : '21215 Burbank Boulevard, Ste. 100',
+          'city' : 'Woodland Hills',
+          'countrySubDivisionCode' : 'CA',
+          'postalCode' : '91367',
+          'tag' : 'Billing'
+        ] ]</address>
+        <phone>#[groovy: [
+          'deviceType' : 'Mobile',
+          'freeFormNumber' : '(818) 936-7800',
+          'tag' : 'Mobile'
+        ] ]</phone>
+        <email>#[groovy: [
+          'address' : 'john.simpson@mint.com',
+          'tag' : 'Business'
+        ] ]</email>
+        <givenName>John</givenName>
+        <familyName>Simpson</familyName>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updateEmployee) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:updateBill) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="BILL"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <header>#[groovy: [
+            'docNumber' : '1001',
+            'txnDate' : '2010-09-27',
+            'note' : '4 Pens',
+            'vendorId' : [
+                    'idDomain' : 'QB',
+                    'value' : '272' ]
+            'vendorName' : 'Seirra',
+            'totalAmt' : '50',
+            'salesTermId' : [ 
+                    'idDomain' : 'QB',
+                    'value' : '9' ],
+            'salesTermName' : '30thDateDriven',
+            'dueDate' : '2010-10-02'
+        ] ]</header>
+        <line>#[groovy: [
+            'desc' : 'Pens Updated',
+            'amount' : '25',
+            'billableStatus' : 'NotBillable'
+        ] ]</line>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updateBill) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:updateCheck) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="CHECK"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <header>#[groovy: [ 
+            'docNumber' : '33', 
+            'txnDate' : '2010-11-18', 
+            'bankAccountId' : '146',  
+            'entityId' : '283',
+            'totalAmt' : '7000'        
+        ] ]</header> 
+        <line> 
+            'desc' : 'Test Updated',
+            'amount' : '2000',
+            'accountId' : '146'   
+        </line>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updateCheck) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:updateJob) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:update realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+                           type="JOB"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <typeOf>Person</typeOf>
+        <name>Bathroom Remodel Updated</name>
+        <openBalance>#[groovy: [
+            'currencyCode' : 'USD',
+            'amount' : '100',
+        ] ]</openBalance>
+        <jobInfo>#[groovy: [
+            'startDate' : '2010-01-01',
+            'projectedEndDate' : '2010-11-12',
+            'description' : 'remodel bathroom',
+            'jobTypeName' : 'Residential'
+        ] ]</jobInfo>
+    </quickbooks-windows:obj>
+</quickbooks-windows:update>
+<!-- END_INCLUDE(quickbooks-windows:updateJob) -->
+
 <!-- BEGIN_INCLUDE(quickbooks-windows:delete) -->
 <quickbooks-windows:delete realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
@@ -270,6 +608,144 @@
             
 </quickbooks-windows:delete>
 <!-- END_INCLUDE(quickbooks-windows:delete) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:deleteAccount) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:delete realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+                           type="ACCOUNT"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <name>Test Account QW 91</name>
+        <active>true</active>
+        <type>EXPENSE<type>
+        <subtype>expense</subtype>
+        <acctNum>9919823</acctNum>
+        <openingBalance>0</openingBalance>
+        <openingBalanceDate>2012-02-02T00:00:00Z</openingBalanceDate>
+    </quickbooks-windows:obj>
+            
+</quickbooks-windows:delete>
+<!-- END_INCLUDE(quickbooks-windows:deleteAccount) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:deleteAccount2) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:delete realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+                           type="ACCOUNT"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+    </quickbooks-windows:obj>
+    <!-- Remember that this will first retrieve the object, and then delete it -->
+</quickbooks-windows:delete>
+<!-- END_INCLUDE(quickbooks-windows:deleteAccount2) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:deleteCustomer) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:delete realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+                           type="CUSTOMER"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <typeOf>Person</typeOf>
+        <name>Jane Doe</name>
+        <address>#[groovy: [
+            'line1' : '5720 Peachtree Pkwy. 1',
+            'line2' : 'Norcross',
+            'city' : 'Mountain View, CA 94043, CA 940',
+            'country' : 'USA',
+            'countrySubDivisionCode' : 'ON',
+            'postalCode' : '94043',
+            'tag' : 'Billing'
+        ] ]</address>
+        <dbaName>Mint</dbaName>
+        <acctNum>23423423</acctNum>
+    </quickbooks-windows:obj>
+            
+</quickbooks-windows:delete>
+<!-- END_INCLUDE(quickbooks-windows:deleteCustomer) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:deleteBill) -->
+<quickbooks-windows:generate-a-new-request-id />
+<quickbooks-windows:delete realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+                           type="BILL"
+                           requestId="#[payload]">
+    <quickbooks-windows:obj>
+        <id>#[groovy: [
+                'value' : '4042'
+        ] ]</id>
+        <syncToken>1</syncToken>
+        <metaData>#[groovy: [
+            'createdBy' : 'app',
+            'createdById' : '1',
+            'createTime' : '2010-06-18T02:17:29',
+            'lastModifiedBy' : 'app',
+            'lastModifiedById' : '1',
+            'lastUpdatedTime' : '2010-06-18T02:17:291',
+        ] ]</metaData>
+        <synchronized>false</synchronized>
+        <header>#[groovy: [
+            'docNumber' : '1001',
+            'txnDate' : '2010-09-27',
+            'note' : '4 Pens',
+            'vendorId' : [
+                    'idDomain' : 'QB',
+                    'value' : '272' ]
+            'vendorName' : 'Seirra',
+            'totalAmt' : '50',
+            'salesTermId' : [ 
+                    'idDomain' : 'QB',
+                    'value' : '9' ],
+            'salesTermName' : '30thDateDriven',
+            'dueDate' : '2010-10-02'
+        ] ]</header>
+        <line>#[groovy: [
+            'desc' : 'Pens',
+            'amount' : '25',
+            'billableStatus' : 'NotBillable'
+        ] ]</line>
+    </quickbooks-windows:obj>
+            
+</quickbooks-windows:delete>
+<!-- END_INCLUDE(quickbooks-windows:deleteBill) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:get-object) -->
 <quickbooks-windows:get-object realmId="#[map-payload:realmId]"

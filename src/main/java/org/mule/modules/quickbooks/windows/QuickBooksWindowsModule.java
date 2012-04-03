@@ -178,6 +178,14 @@ public class QuickBooksWindowsModule
      * <p>* To add a new line item, insert a new one in the list.</p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:update}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateJob}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateCheck}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateBill}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateEmployee}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updatePayment}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateItem}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateCustomer}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateAccount}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -225,6 +233,9 @@ public class QuickBooksWindowsModule
      * object failed to sync with QuickBooks.</p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:delete}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:deleteAccount}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:deleteCustomer}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:deleteBill}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.

@@ -57,6 +57,7 @@ public class QuickBooksOnlineModuleTestDriver
     private final String realmId = System.getenv("realmId");
     private final String realmIdPseudonym = System.getenv("realmIdPseudonym");
     private final String authIdPseudonym = System.getenv("authIdPseudonym");
+    private final MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.online.schema").build();
     
     /**
      * 
@@ -148,7 +149,6 @@ public class QuickBooksOnlineModuleTestDriver
         
         auxList.add(auxMap);
 
-        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.schema").build();
         Customer c = (Customer) mom.unmap(
                 new MapBuilder()
                 .with("name", "Susana")
@@ -227,9 +227,8 @@ public class QuickBooksOnlineModuleTestDriver
     
     @Test
     public void getAllCustomersAnswersNonNullListWithCustomers() throws Exception
-    {
+    {       
         Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, null, null);
-        
         
         for (Object c : it)
         {
@@ -278,22 +277,29 @@ public class QuickBooksOnlineModuleTestDriver
     
 //    @Test
 //    public void deleteCustomer()
-//    {
-//        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.online.schema").build();
-//        
-//        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
+//    {        
+//        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
 //        
 //        for (Customer customer: it)
 //        {
-//            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, EntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+//            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+//        }
+//    }
+//    
+//    @Test
+//    public void deleteItem()
+//    {        
+//        Iterable<Item> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, "Name :EQUALS: ItemTest0057", null);
+//        
+//        for (Item item: it)
+//        {
+//            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
 //        }
 //    }
     
     @Test
     public void createInvoiceRetrieveAndUpdateIt()
     {
-        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.online.schema").build();
-
         //creates a customer
         Customer customer = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             "Paul M. Jenkins 4", 
