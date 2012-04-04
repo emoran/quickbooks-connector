@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule QuickBooks Connector
+
+    Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+
+-->
+
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/1.0/mule-quickbooks-windows.xsd">
+        
+    <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
+    
+    <quickbooks-windows:config />
+
+    <flow name="CreateCustomers">
+        <description>Create customers.</description>
+        <http:inbound-endpoint host="localhost" port="9091" path="demoCreateCustomers"/>
+		<quickbooks-windows:generate-a-new-request-id />
+		<quickbooks-windows:create realmId="${quickbooksRealmId}"
+		                           appKey="${quickbooksAppKey}"
+		                           realmIdPseudonym="${quickbooksRealmIdPseudonym}" 
+		                           authIdPseudonym="${quickbooksAuthIdPseudonym}"                         
+		                           type="CUSTOMER"
+		                           requestId="#[payload]"
+		                           draft="false"
+		                           fullResponse="true">
+		    <quickbooks-windows:obj>
+		        <typeOf>Person</typeOf>
+		        <name>Jane Doe</name>
+		        <address>#[groovy: [
+		            'line1' : '5720 Peachtree Pkwy. 1',
+		            'line2' : 'Norcross',
+		            'city' : 'Mountain View, CA 94043, CA 940',
+		            'country' : 'USA',
+		            'countrySubDivisionCode' : 'ON',
+		            'postalCode' : '94043',
+		            'tag' : 'Billing'
+		        ] ]</address>
+		        <dbaName>Mint</dbaName>
+		        <acctNum>23423423</acctNum>
+		    </quickbooks-windows:obj>
+		</quickbooks-windows:create>
+<!--         <quickbooks:create-customer realmId="${quickbooksRealmId}"
+                                    authIdPseudonym="${quickbooksAuthIdPseudonym}" 
+                                    realmIdPseudonym="${quickbooksRealmIdPseudonym}" 
+                                    appKey="${quickbooksAppKey}"
+                                    givenName="Richard"
+                                    middleName="Ted"
+                                    familyName="Tex"
+                                    suffix="Jr." />
+        <quickbooks:create-customer realmId="${quickbooksRealmId}"
+                                    authIdPseudonym="${quickbooksAuthIdPseudonym}" 
+                                    realmIdPseudonym="${quickbooksRealmIdPseudonym}" 
+                                    appKey="${quickbooksAppKey}"
+                                    givenName="Lisa"
+                                    middleName="Margaret"
+                                    familyName="Williams"
+                                    suffix="Miss" /> -->
+    </flow>
+</mule>

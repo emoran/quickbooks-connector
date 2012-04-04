@@ -21,22 +21,32 @@
         
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     
-    <quickbooks:config consumerKey="${quickbooksConsumerKey}"
-        consumerSecret="${quickbooksConsumerSecret}"
-        realmId="${quickbooksRealmId}" />
+    <quickbooks:config />
 
     <flow name="CreateCustomers">
         <description>Create customers.</description>
         <http:inbound-endpoint host="localhost" port="9091" path="demoCreateCustomers"/>
-        <quickbooks:create-customer givenName="John"
+        <quickbooks:create-customer realmId="${quickbooksRealmId}"
+                                    appKey="${quickbooksAppKey}"
+                                    realmIdPseudonym="${quickbooksRealmIdPseudonym}"
+                                    authIdPseudonym="${quickbooksAuthIdPseudonym}" 
+                                    givenName="John"
                                     middleName="Steve"
                                     familyName="Doe"
                                     suffix="Sr." />
-        <quickbooks:create-customer givenName="Richard"
+        <quickbooks:create-customer realmId="${quickbooksRealmId}"
+                                    appKey="${quickbooksAppKey}"
+                                    realmIdPseudonym="${quickbooksRealmIdPseudonym}"
+                                    authIdPseudonym="${quickbooksAuthIdPseudonym}" 
+                                    givenName="Richard"
                                     middleName="Ted"
                                     familyName="Tex"
                                     suffix="Jr." />
-        <quickbooks:create-customer givenName="Lisa"
+        <quickbooks:create-customer realmId="${quickbooksRealmId}"
+                                    appKey="${quickbooksAppKey}"
+                                    realmIdPseudonym="${quickbooksRealmIdPseudonym}"
+                                    authIdPseudonym="${quickbooksAuthIdPseudonym}" 
+                                    givenName="Lisa"
                                     middleName="Margaret"
                                     familyName="Williams"
                                     suffix="Miss" />
