@@ -797,6 +797,57 @@
 </quickbooks-windows:find-objects>
 <!-- END_INCLUDE(quickbooks-windows:find-objects) -->
 
+<!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-list-of-id) -->
+<quickbooks-windows:find-objects realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+                           type="ACCOUNT">
+    <quickbooks-windows:query>
+        <listIdSet>#[groovy: [
+            'id' : [
+                [ 'value' : '12345',
+                  'idDomain' : 'QB' ],
+                [ 'value' : '8589'
+                  'idDomain' : 'QB' ],
+                [ 'value' : '5321'
+                  'idDomain' : 'QB' ],
+                [ 'value' : '51'
+                  'idDomain' : 'QB' ],
+                [ 'value' : '19822'
+                  'idDomain' : 'QB' ] ]
+        ] ]</listIdSet>
+    </quickbooks-windows:query>
+            
+</quickbooks-windows:find-objects>
+<!-- END_INCLUDE(quickbooks-windows:find-objects-list-of-id) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-all-accounts) -->
+<!-- retrieves all the accounts -->
+<quickbooks-windows:find-objects realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+                           type="ACCOUNT" />
+<!-- END_INCLUDE(quickbooks-windows:find-objects-all-accounts) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-bill) -->
+<quickbooks-windows:find-objects realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+                           type="BILL">
+    <quickbooks-windows:query>
+        <draftFilter>DRAFT_ONLY</draftFilter>
+        <minimumAmount>230</minimumAmount>
+        <minimumBalance>500</minimumBalance>
+        <startCreatedTMS>2010-06-18T02:17:29</startCreatedTMS>
+        <endCreatedTMS>2011-06-18T02:17:29</endCreatedTMS>
+    </quickbooks-windows:query>
+            
+</quickbooks-windows:find-objects>
+<!-- END_INCLUDE(quickbooks-windows:find-objects-bill) -->
+
 <!-- BEGIN_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
 <quickbooks-windows:generate-a-new-request-id />
 <!-- END_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
