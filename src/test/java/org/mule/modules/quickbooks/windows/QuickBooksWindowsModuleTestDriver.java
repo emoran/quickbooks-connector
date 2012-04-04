@@ -54,6 +54,7 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  * @since Sep 9, 2011
  */
 
+@SuppressWarnings("unchecked")
 public class QuickBooksWindowsModuleTestDriver
 {
 
@@ -148,7 +149,7 @@ public class QuickBooksWindowsModuleTestDriver
     @Test
     public void createAccountAskingForFullResponse()
     {   
-        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QW 91")
+        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QBW")
                                                          .with("active", true)
                                                          .with("type", AccountTypeEnum.EXPENSE)
                                                          .with("subtype", AccountSubtypeEnum.EXPENSE.value())
@@ -156,10 +157,12 @@ public class QuickBooksWindowsModuleTestDriver
                                                          .with("openingBalance", 0)
                                                          .with("openingBalanceDate", "2012-02-02T00:00:00Z")
                                                          .build();
-        Account acc = (Account) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, mapAccount, module.generateANewRequestId(), null, true);
+        Account acc = (Account) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, 
+            mapAccount, module.generateANewRequestId(), null, true);
         
         System.out.println(acc);
-        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, (Map<String, Object>) mom.map(acc), module.generateANewRequestId());
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, 
+            (Map<String, Object>) mom.map(acc), module.generateANewRequestId());
     }
     
 
@@ -219,11 +222,11 @@ public class QuickBooksWindowsModuleTestDriver
     @Test
     public void getAllAccountsAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, null);
+        Iterable<Account> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, null);
         
-        for (Object c : it)
+        for (Account c : it)
         {
-            System.out.println(((Account) c).getName());
+            System.out.println(c.getName());
         }
     }
      
@@ -304,13 +307,92 @@ public class QuickBooksWindowsModuleTestDriver
             module.generateANewRequestId(), null, true);
         
         //delete everything
-        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.INVOICE, (Map<String, Object>) mom.map(updatedInvoice), module.generateANewRequestId());
-        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ITEM, (Map<String, Object>) mom.map(createdItem), module.generateANewRequestId());
-        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createdCustomer), module.generateANewRequestId());
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.INVOICE, 
+            (Map<String, Object>) mom.map(updatedInvoice), module.generateANewRequestId());
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ITEM, 
+            (Map<String, Object>) mom.map(createdItem), module.generateANewRequestId());
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER, 
+            (Map<String, Object>) mom.map(createdCustomer), module.generateANewRequestId());
     
         //verify the change
         assertEquals(createdInvoice.getHeader().getDocNumber(), updatedInvoice.getHeader().getDocNumber());
     }
+    
+//    @Test
+//    public void revertObject()
+//    {
+//        Vendor vendor = new Vendor(){{
+//            setTypeOf(PartyType.PERSON);
+//            setName("John Doe");
+//            setDBAName("John");
+//            setAcctNum("9001");
+//        }};
+//        
+//        final Vendor createdVendor = (Vendor) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.VENDOR, (Map<String, Object>) mom.map(vendor), module.generateANewRequestId(), null, true);
+//        
+//        Item item = new Item(){{
+//            setName("ItemTestQBW0054");
+//            setType(ItemTypeEnum.GROUP);
+//            setUnitPrice(new Money(){{
+//                setAmount(BigDecimal.valueOf(100));
+//            }});
+//            setTaxable(false);
+//        }};
+//        
+//        final Item createdItem = (Item) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.ITEM, (Map<String, Object>) mom.map(item), 
+//            module.generateANewRequestId(), null, true);
+//        
+//        final Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createJaneDoe()), 
+//            module.generateANewRequestId(), null, true);
+//        
+//        TimeActivity timeActivity = new TimeActivity(){{
+//            setNameOf(TimeActivityTypeEnum.VENDOR);
+//            setEmployee(new EmployeeRef(){{
+//                setEmployeeId(createdVendor.getId());
+//            }});
+//            setCustomerId(createdCustomer.getId());
+//            setItemId(createdItem.getId());
+//            setDescription("Some Description");
+//        }};
+//        
+//        
+//        TimeActivity createdTimeActivity = (TimeActivity) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.TIMEACTIVITY, (Map<String, Object>) mom.map(timeActivity), module.generateANewRequestId(), true, true);
+//        
+//        String auxName = createdTimeActivity.getDescription();
+//        
+//        createdTimeActivity.setDescription("Changing the description");
+//        TimeActivity updatedTimeActivity = (TimeActivity) module.update(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.TIMEACTIVITY, (Map<String, Object>) mom.map(createdTimeActivity), 
+//            module.generateANewRequestId(), true, true);
+//        
+//        updatedTimeActivity.setDescription("Changing the description 2nd");
+//        TimeActivity updatedTimeActivity2 = (TimeActivity) module.update(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.TIMEACTIVITY, (Map<String, Object>) mom.map(updatedTimeActivity), 
+//            module.generateANewRequestId(), false, true);
+//        
+//        assertFalse(auxName.equals(updatedTimeActivity2.getDescription()));
+//        
+//        module.revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.TIMEACTIVITY, 
+//            (Map<String, Object>) mom.map(updatedTimeActivity2), module.generateANewRequestId());
+//        
+//        TimeActivity retrievedTimeActivity = (TimeActivity) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+//            WindowsEntityType.TIMEACTIVITY, (Map<String, Object>) mom.map(updatedTimeActivity2.getId()));
+//        
+//        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.TIMEACTIVITY, 
+//            (Map<String, Object>) mom.map(retrievedTimeActivity), module.generateANewRequestId());
+//        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ITEM, 
+//            (Map<String, Object>) mom.map(createdItem), module.generateANewRequestId());
+//        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.VENDOR, 
+//            (Map<String, Object>) mom.map(createdVendor), module.generateANewRequestId());
+//        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER, 
+//            (Map<String, Object>) mom.map(createdCustomer), module.generateANewRequestId());
+//        
+//        assertEquals(auxName, retrievedTimeActivity.getDescription());
+//    }
     
     @Test(expected = QuickBooksRuntimeException.class)
     public void createAccountThrowingExceptionForWrongCredentials()
@@ -320,15 +402,15 @@ public class QuickBooksWindowsModuleTestDriver
         module2.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module2.init();
         
-        Customer responseCustomer = (Customer) module2.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createJaneDoe()), module.generateANewRequestId(), null, true);
+        module2.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER, 
+            (Map<String, Object>) mom.map(createJaneDoe()), module.generateANewRequestId(), null, true);
     }
     
     private Customer createJaneDoe()
     {
         return new Customer(){{
             setTypeOf(PartyType.PERSON);
-            setName("Jane Doe QBW 1");
+            setName("Jane Doe QBW test106");
             getAddress().add(new PhysicalAddress(){{
                 setLine1("5720 Peachtree Pkwy. 1");
                 line2 = "Norcross";

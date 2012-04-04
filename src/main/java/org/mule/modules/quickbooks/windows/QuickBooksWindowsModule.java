@@ -229,8 +229,14 @@ public class QuickBooksWindowsModule
      * only if it meets one of the following conditions:</p>
      * <p>The object is in a Draft state.  (See Saving Draft Data.)</p>
      * <p>  OR</p>
-     * <p>The object was created by calling Data Services (<Add> operation) in a non-Draft state and the 
+     * <p>The object was created by calling Data Services (create operation) in a non-Draft state and the 
      * object failed to sync with QuickBooks.</p>
+     * <p>If the obj map do not have the MetaData field or the SyncToken, internally, will retrieve the
+     * object at first, to delete it. So be careful, because it will need two request instead of one, which 
+     * could make it slower.</p>
+     * <p>For details of the supported objects and its fields: 
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a></p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:delete}
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:deleteAccount}
@@ -268,6 +274,9 @@ public class QuickBooksWindowsModule
      * 0100_Calling_Data_Services/0015_Retrieving_Objects">Retrieve Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:find-objects}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:find-objects-bill}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:find-objects-all-accounts}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:find-objects-list-of-id}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -278,10 +287,13 @@ public class QuickBooksWindowsModule
      * @param type WindowsEntityType of the object.
      * @param query Map that represents every filter and sort for the objects retrieved. Each type of object to be 
      *              retrieved, has a TheObjectQuery class that has the attributes for which it can be filtered 
-     *              <p>(Follow this link to know whitch attributes are acepted in every ObjectQuery, changing the word
-     *              OBJECT for the object that you requiere, for example Account: 
+     *              <p>(To know which attributes are accepted in every ObjectQuery, you could follow the link in 
+     *              the documentation of the WindowsEntityType that you require, or you can follow the link changing 
+     *              the word OBJECT for the object that you required, for example Account: 
      *              <p>https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      *              0500_QuickBooks_Windows/0600_Object_Reference/OBJECT</p>).</p>
+     *              <p>Do not complete the fields chunkSize and startPage, because are need it for the "lazily retrieve".</p>
+     *              If query is null, it will retrieve all the objects of that WindowsEntityType.
      * @return Iterable of the objects to be retrieved.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
@@ -321,7 +333,10 @@ public class QuickBooksWindowsModule
      * Revert.
      * The revert operation discards all updates made to the object since its last sync to QuickBooks. An object can
      * be reverted only if it has been synched with QuickBooks at least once. This implies that the object has been 
-     * updated by  Data Services (that is, by a <Mod> operation). The object may be in the Draft state or not.
+     * updated by Data Services (that is, by an update operation). The object may be in the Draft state or not.
+     * <p>For details of the supported objects and its fields: 
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a></p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:revert}
      * 
@@ -347,7 +362,7 @@ public class QuickBooksWindowsModule
                        Map<String, Object> obj,
                        String requestId)
     {
-        client.revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId);
+        client.revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId);
     }
     
     /**
