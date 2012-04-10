@@ -1,9 +1,9 @@
 Mule Quickbooks Connector
 =========================
 
-The Quickbooks Connector provides you financial management and accounting solutions using the Intuit Quickbooks-Online platform http://quickbooksonline.intuit.com/finance-accounting-solutions/ 
-
-**QUICKBOOKS WINDOWS UNDER CONSTRUCTION**
+<p>The Quickbooks Connector provides you financial management and accounting solutions using:</p>
+<p>* The Intuit Quickbooks-Online platform http://quickbooksonline.intuit.com/finance-accounting-solutions/ </p>
+<p>* Or The Intuit Quickbooks-Windows http://quickbooks.intuit.com/product/accounting\_software/windows\_financial\_management\_software.jsp </p>
 
 Installation and Usage
 ----------------------
