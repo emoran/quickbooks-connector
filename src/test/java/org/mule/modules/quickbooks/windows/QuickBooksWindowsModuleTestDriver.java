@@ -77,6 +77,21 @@ public class QuickBooksWindowsModuleTestDriver
     }
 
     @Test
+    public void deleteCustomers()
+    {
+        CustomerQuery query = new CustomerQuery();
+        
+        Iterable<Customer> iterableCust = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(query));
+        for (Customer customer: iterableCust)
+        {
+            System.out.println(customer);
+            module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer), module.generateANewRequestId());
+        }
+    }
+    
+    @Test
     public void deleteCustomerSomeSpeficificCustomers()
     {
         Customer customerJane = createJaneDoe();

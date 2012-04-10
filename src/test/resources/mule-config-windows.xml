@@ -86,14 +86,4 @@
 	<flow name="generate-a-new-request-id">
 		<quickbooks-windows:generate-a-new-request-id />
 	</flow>
-	<flow name="revert">
-		<quickbooks-windows:revert realmId="#[map-payload:realmId]"
-		                           appKey="#[map-payload:appKey]"
-		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
-		                           type="#[map-payload:type]"
-		                           requestId="#[map-payload:requestId]">
-		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
-		</quickbooks-windows:revert>
-	</flow>
 </mule>

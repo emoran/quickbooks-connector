@@ -44,18 +44,18 @@
                            draft="false"
                            fullResponse="true">
     <quickbooks-windows:obj>
-        <typeOf>Person</typeOf>
+        <typeOf>PERSON</typeOf>
         <name>Jane Doe</name>
-        <address>#[groovy: [
+        <address>#[groovy: [ [
             'line1' : '5720 Peachtree Pkwy. 1',
             'line2' : 'Norcross',
             'city' : 'Mountain View, CA 94043, CA 940',
             'country' : 'USA',
             'countrySubDivisionCode' : 'ON',
             'postalCode' : '94043',
-            'tag' : 'Billing'
-        ] ]</address>
-        <dbaName>Mint</dbaName>
+            'tag' : ['Billing']
+        ] ] ]</address>
+        <DBAName>Mint</DBAName>
         <acctNum>23423423</acctNum>
     </quickbooks-windows:obj>
 </quickbooks-windows:create>
@@ -77,8 +77,8 @@
         <taxable>false</taxable>
         <active>true</active>
         <unitPrice>#[groovy: [
-           'currencyCode' : 'USD</CurrencyCode>
-           'amount' : '55</Amount>
+           'currencyCode' : 'USD',
+           'amount' : '55'
         ] ]</unitPrice>
         <type>Service</type>
         <incomeAccountRef>#[groovy: [
@@ -86,7 +86,7 @@
                 'idDomain': 'QB',
                 'value' : '25' ],
            'accountName' : 'Labor Income',
-           'accountType' : 'Revenue'
+           'accountType' : 'REVENUE'
         ] ]</incomeAccountRef>
         <purchaseCost>#[groovy: [
            'currencyCode' : 'USD',
@@ -118,13 +118,13 @@
                     'value' : '283' ],
              'totalAmt' : '100'
          ] ]</header>
-         <line>#[groovy: [
+         <line>#[groovy: [ [
              'desc' : 'Line 1 of payment',
              'amount' : '200',
              'txnId' : [ 
                     'idDomain' : 'QB',
                     'value' : '64134' ]
-         ] ]</line>
+         ] ] ]</line>
     </quickbooks-windows:obj>
 </quickbooks-windows:create>
 <!-- END_INCLUDE(quickbooks-windows:createPayment) -->
@@ -138,24 +138,24 @@
                            type="EMPLOYEE"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
-        <typeOf>Person</TypeOf>
+        <typeOf>PERSON</TypeOf>
         <name>John Simpson</Name>
-        <address>#[groovy: [
+        <address>#[groovy: [ [
           'line1' : '21215 Burbank Boulevard, Ste. 100',
           'city' : 'Woodland Hills',
           'countrySubDivisionCode' : 'CA',
           'postalCode' : '91367',
-          'tag' : 'Billing'
-        ] ]</address>
-        <phone>#[groovy: [
+          'tag' : ['Billing']
+        ] ] ]</address>
+        <phone>#[groovy: [ [
           'deviceType' : 'Mobile',
           'freeFormNumber' : '(818) 936-7800',
-          'tag' : 'Mobile'
-        ] ]</phone>
-        <email>#[groovy: [
+          'tag' : ['Mobile']
+        ] ] ]</phone>
+        <email>#[groovy: [ [
           'address' : 'john.simpson@mint.com',
-          'tag' : 'Business'
-        ] ]</email>
+          'tag' : ['Business']
+        ] ] ]</email>
         <givenName>John</givenName>
         <familyName>Simpson</familyName>
     </quickbooks-windows:obj>
@@ -186,11 +186,11 @@
             'salesTermName' : '30thDateDriven',
             'dueDate' : '2010-10-02'
         ] ]</header>
-        <line>#[groovy: [
+        <line>#[groovy: [ [
             'desc' : 'Pens',
             'amount' : '25',
-            'billableStatus' : 'NotBillable'
-        ] ]</line>
+            'billableStatus' : 'NOT_BILLABLE'
+        ] ] ]</line>
     </quickbooks-windows:obj>
 </quickbooks-windows:create>
 <!-- END_INCLUDE(quickbooks-windows:createBill) -->
@@ -211,11 +211,12 @@
             'entityId' : '283',
             'totalAmt' : '7000'        
         ] ]</header> 
-        <line> 
+        <line>#[groovy: [ [
             'desc' : 'Test',
             'amount' : '2000',
-            'accountId' : '146'   
-        </line>
+            'accountId' : [
+                'value' : '146' ]   
+        ] ] ]</line>
     </quickbooks-windows:obj>
 </quickbooks-windows:create>
 <!-- END_INCLUDE(quickbooks-windows:createCheck) -->
@@ -229,7 +230,7 @@
                            type="JOB"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
-        <typeOf>Person</typeOf>
+        <typeOf>PERSON</typeOf>
         <name>Bathroom Remodel</name>
         <openBalance>#[groovy: [
             'currencyCode' : 'USD',
@@ -318,18 +319,18 @@
             'lastUpdatedTime' : '2010-06-18T02:17:291',
         ] ]</metaData>
         <synchronized>false</synchronized>
-        <typeOf>Person</typeOf>
+        <typeOf>PERSON</typeOf>
         <name>Jane Doe Updated</name>
-        <address>#[groovy: [
+        <address>#[groovy: [ [
             'line1' : '5720 Peachtree Pkwy. 1',
             'line2' : 'Norcross',
             'city' : 'Mountain View, CA 94043, CA 940',
             'country' : 'USA',
             'countrySubDivisionCode' : 'ON',
             'postalCode' : '94043',
-            'tag' : 'Billing'
-        ] ]</address>
-        <dbaName>Mint</dbaName>
+            'tag' : ['Billing']
+        ] ] ]</address>
+        <DBAName>Mint</DBAName>
         <acctNum>23423423</acctNum>
     </quickbooks-windows:obj>
 </quickbooks-windows:update>
@@ -364,8 +365,8 @@
         <taxable>false</taxable>
         <active>true</active>
         <unitPrice>#[groovy: [
-           'currencyCode' : 'USD</CurrencyCode>
-           'amount' : '55</Amount>
+           'currencyCode' : 'USD',
+           'amount' : '55'
         ] ]</unitPrice>
         <type>Service</type>
         <incomeAccountRef>#[groovy: [
@@ -373,7 +374,7 @@
                 'idDomain': 'QB',
                 'value' : '25' ],
            'accountName' : 'Labor Income',
-           'accountType' : 'Revenue'
+           'accountType' : 'REVENUE'
         ] ]</incomeAccountRef>
         <purchaseCost>#[groovy: [
            'currencyCode' : 'USD',
@@ -418,13 +419,13 @@
                     'value' : '283' ],
              'totalAmt' : '100'
          ] ]</header>
-         <line>#[groovy: [
+         <line>#[groovy: [ [
              'desc' : 'Line 1 of payment Updated',
              'amount' : '200',
              'txnId' : [ 
                     'idDomain' : 'QB',
                     'value' : '64134' ]
-         ] ]</line>
+         ] ] ]</line>
     </quickbooks-windows:obj>
 </quickbooks-windows:update>
 <!-- END_INCLUDE(quickbooks-windows:updatePayment) -->
@@ -451,24 +452,24 @@
             'lastUpdatedTime' : '2010-06-18T02:17:291',
         ] ]</metaData>
         <synchronized>false</synchronized>
-        <typeOf>Person</TypeOf>
+        <typeOf>PERSON</TypeOf>
         <name>John Simpson Updated</Name>
-        <address>#[groovy: [
+        <address>#[groovy: [ [
           'line1' : '21215 Burbank Boulevard, Ste. 100',
           'city' : 'Woodland Hills',
           'countrySubDivisionCode' : 'CA',
           'postalCode' : '91367',
-          'tag' : 'Billing'
-        ] ]</address>
-        <phone>#[groovy: [
+          'tag' : ['Billing']
+        ] ] ]</address>
+        <phone>#[groovy: [ [
           'deviceType' : 'Mobile',
           'freeFormNumber' : '(818) 936-7800',
-          'tag' : 'Mobile'
-        ] ]</phone>
-        <email>#[groovy: [
+          'tag' : ['Mobile']
+        ] ] ]</phone>
+        <email>#[groovy: [ [
           'address' : 'john.simpson@mint.com',
-          'tag' : 'Business'
-        ] ]</email>
+          'tag' : ['Business']
+        ] ] ]</email>
         <givenName>John</givenName>
         <familyName>Simpson</familyName>
     </quickbooks-windows:obj>
@@ -512,11 +513,11 @@
             'salesTermName' : '30thDateDriven',
             'dueDate' : '2010-10-02'
         ] ]</header>
-        <line>#[groovy: [
+        <line>#[groovy: [ [
             'desc' : 'Pens Updated',
             'amount' : '25',
-            'billableStatus' : 'NotBillable'
-        ] ]</line>
+            'billableStatus' : 'NOT_BILLABLE'
+        ] ] ]</line>
     </quickbooks-windows:obj>
 </quickbooks-windows:update>
 <!-- END_INCLUDE(quickbooks-windows:updateBill) -->
@@ -550,11 +551,12 @@
             'entityId' : '283',
             'totalAmt' : '7000'        
         ] ]</header> 
-        <line> 
+        <line>#[groovy: [ [
             'desc' : 'Test Updated',
-            'amount' : '2000',
-            'accountId' : '146'   
-        </line>
+            'amount' : 2000,
+            'accountId' : [
+                'value' : '146' ]  
+        ] ] ]</line>
     </quickbooks-windows:obj>
 </quickbooks-windows:update>
 <!-- END_INCLUDE(quickbooks-windows:updateCheck) -->
@@ -581,7 +583,7 @@
             'lastUpdatedTime' : '2010-06-18T02:17:291',
         ] ]</metaData>
         <synchronized>false</synchronized>
-        <typeOf>Person</typeOf>
+        <typeOf>PERSON</typeOf>
         <name>Bathroom Remodel Updated</name>
         <openBalance>#[groovy: [
             'currencyCode' : 'USD',
@@ -682,18 +684,18 @@
             'lastUpdatedTime' : '2010-06-18T02:17:291',
         ] ]</metaData>
         <synchronized>false</synchronized>
-        <typeOf>Person</typeOf>
+        <typeOf>PERSON</typeOf>
         <name>Jane Doe</name>
-        <address>#[groovy: [
+        <address>#[groovy: [ [
             'line1' : '5720 Peachtree Pkwy. 1',
             'line2' : 'Norcross',
             'city' : 'Mountain View, CA 94043, CA 940',
             'country' : 'USA',
             'countrySubDivisionCode' : 'ON',
             'postalCode' : '94043',
-            'tag' : 'Billing'
-        ] ]</address>
-        <dbaName>Mint</dbaName>
+            'tag' : ['Billing']
+        ] ] ]</address>
+        <DBAName>Mint</DBAName>
         <acctNum>23423423</acctNum>
     </quickbooks-windows:obj>
             
@@ -737,11 +739,11 @@
             'salesTermName' : '30thDateDriven',
             'dueDate' : '2010-10-02'
         ] ]</header>
-        <line>#[groovy: [
+        <line>#[groovy: [ [
             'desc' : 'Pens',
             'amount' : '25',
-            'billableStatus' : 'NotBillable'
-        ] ]</line>
+            'billableStatus' : 'NOT_BILLABLE'
+        ] ] ]</line>
     </quickbooks-windows:obj>
             
 </quickbooks-windows:delete>
@@ -851,14 +853,3 @@
 <!-- BEGIN_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
 <quickbooks-windows:generate-a-new-request-id />
 <!-- END_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
-
-<!-- BEGIN_INCLUDE(quickbooks-windows:revert) -->
-<quickbooks-windows:revert realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
-                           type="#[map-payload:type]"
-                           requestId="#[map-payload:requestId]">
-    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
-</quickbooks-windows:revert>
-<!-- END_INCLUDE(quickbooks-windows:revert) -->

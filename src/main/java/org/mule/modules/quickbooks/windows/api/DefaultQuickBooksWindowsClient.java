@@ -235,6 +235,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     {
         Validate.notNull(type);
         Validate.notNull(obj);
+        Validate.notNull(((CdmBase)obj).getId());
+        Validate.isTrue(((CdmBase)obj).getId().getValue()!=null && !((CdmBase)obj).getId().getValue().equals(""));
         
         loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         

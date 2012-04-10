@@ -225,12 +225,7 @@ public class QuickBooksWindowsModule
     
     /**
      * Deletes an object.
-     * <p>Most objects cannot be deleted by calling Data Services.  An object can be deleted with Data Services 
-     * only if it meets one of the following conditions:</p>
-     * <p>The object is in a Draft state.  (See Saving Draft Data.)</p>
-     * <p>  OR</p>
-     * <p>The object was created by calling Data Services (create operation) in a non-Draft state and the 
-     * object failed to sync with QuickBooks.</p>
+     * <p>Most objects cannot be deleted by calling Data Services.</p>
      * <p>If the obj map do not have the MetaData field or the SyncToken, internally, will retrieve the
      * object at first, to delete it. So be careful, because it will need two request instead of one, which 
      * could make it slower.</p>
@@ -329,41 +324,41 @@ public class QuickBooksWindowsModule
         return client.generateARequestId();
     }
     
-    /**
-     * Revert.
-     * The revert operation discards all updates made to the object since its last sync to QuickBooks. An object can
-     * be reverted only if it has been synched with QuickBooks at least once. This implies that the object has been 
-     * updated by Data Services (that is, by an update operation). The object may be in the Draft state or not.
-     * <p>For details of the supported objects and its fields: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a></p>
-     * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:revert}
-     * 
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param type WindowsEntityType of the object.
-     * @param obj Map that represents the object to be created.
-     * @param requestId the unique request Id
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
-     */
-    @Processor
-    public void revert(String realmId,
-                       String appKey,
-                       String realmIdPseudonym, 
-                       String authIdPseudonym,
-                       WindowsEntityType type, 
-                       Map<String, Object> obj,
-                       String requestId)
-    {
-        client.revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId);
-    }
+//    /**
+//     * Revert.
+//     * The revert operation discards all updates made to the object since its last sync to QuickBooks. An object can
+//     * be reverted only if it has been synched with QuickBooks at least once. This implies that the object has been 
+//     * updated by Data Services (that is, by an update operation). The object may be in the Draft state or not.
+//     * <p>For details of the supported objects and its fields: 
+//     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+//     * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a></p>
+//     * 
+//     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:revert}
+//     * 
+//     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+//     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+//     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+//     * @param appKey Application Id.
+//     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+//     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+//     * @param type WindowsEntityType of the object.
+//     * @param obj Map that represents the object to be created.
+//     * @param requestId the unique request Id
+//     * 
+//     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
+//     *         and a message provided by quickbooks about the error.
+//     */
+//    @Processor
+//    public void revert(String realmId,
+//                       String appKey,
+//                       String realmIdPseudonym, 
+//                       String authIdPseudonym,
+//                       WindowsEntityType type, 
+//                       Map<String, Object> obj,
+//                       String requestId)
+//    {
+//        client.revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId);
+//    }
     
     /**
      * post construct
