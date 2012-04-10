@@ -22,6 +22,7 @@ import java.math.BigInteger;
 import java.util.Map;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
@@ -77,6 +78,7 @@ public class QuickBooksWindowsModuleTestDriver
     }
 
     @Test
+    @Ignore
     public void deleteCustomers()
     {
         CustomerQuery query = new CustomerQuery();
