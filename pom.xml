@@ -54,6 +54,20 @@
                     <useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
                     <generatePackage>org.mule.modules.quickbooks.windows.schema</generatePackage>
                     <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
+                    <schemaIncludes>
+                        <include>ActionScriptObjGen.xsd</include>
+                        <include>CompanyMedaData.xsd</include>
+                        <include>CustomerCdmTypes.xsd</include>
+                        <include>Finance.xsd</include>
+                        <include>Groups.xsd</include>
+                        <include>IntuitCdmBaseTypes.xsd</include>
+                        <include>IntuitCustomFieldCdmTypes.xsd</include>
+                        <include>MetaData.xsd</include>
+                        <include>PartyCdmTypes.xsd</include>
+                        <include>Report.xsd</include>
+                        <include>RestDataFilter.xsd</include>
+                        <include>search.xsd</include>
+                    </schemaIncludes>
                     <schemaExcludes>
                         <exclude>Employee.xsd</exclude>
                         <exclude>EmployeeTypes.xsd</exclude>
