@@ -62,7 +62,7 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  * Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_5462311_quickbooks-accounting-tutorial.html#ixzz1csaydwxl
  * @author MuleSoft, inc.
  */
-@Module(name = "quickbooks")
+@Module(name = "quickbooks", schemaVersion= "2.0")
 public class QuickBooksModule
 {   
     /**

@@ -17,7 +17,7 @@
       xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows"
       xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
         http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
-        http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/1.0/mule-quickbooks-windows.xsd">
+        http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/2.0/mule-quickbooks-windows.xsd">
         
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     
