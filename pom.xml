@@ -20,7 +20,7 @@
 
 	<build>
 		<plugins>
-<!-- 			<plugin>
+ 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
 				<executions>
@@ -33,49 +33,12 @@
                 <configuration>
                     <packageName>org.mule.modules.quickbooks.windows.schema</packageName>
                     <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
---><!-- Employee.xsd,EmployeeTypes.xsd,PayrollItem.xsd *not included* - EmployeeType has some missing groups-->
-<!--                    <schemaFiles>
+<!-- Employee.xsd,EmployeeTypes.xsd,PayrollItem.xsd *not included* - EmployeeType has some missing groups-->
+                    <schemaFiles>
                         ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd
                     </schemaFiles>
                 </configuration>
 			</plugin>
--->			<plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <extension>true</extension>
-                    <useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
-                    <generatePackage>org.mule.modules.quickbooks.windows.schema</generatePackage>
-                    <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
-                    <schemaIncludes>
-                        <include>ActionScriptObjGen.xsd</include>
-                        <include>CompanyMedaData.xsd</include>
-                        <include>CustomerCdmTypes.xsd</include>
-                        <include>Finance.xsd</include>
-                        <include>Groups.xsd</include>
-                        <include>IntuitCdmBaseTypes.xsd</include>
-                        <include>IntuitCustomFieldCdmTypes.xsd</include>
-                        <include>MetaData.xsd</include>
-                        <include>PartyCdmTypes.xsd</include>
-                        <include>Report.xsd</include>
-                        <include>RestDataFilter.xsd</include>
-                        <include>search.xsd</include>
-                    </schemaIncludes>
-                    <schemaExcludes>
-                        <exclude>Employee.xsd</exclude>
-                        <exclude>EmployeeTypes.xsd</exclude>
-                        <exclude>PayrollItem.xsd</exclude>
-                    </schemaExcludes>
-<!-- Employee.xsd,EmployeeTypes.xsd,PayrollItem.xsd *not included* - EmployeeType has some missing groups-->
-                </configuration>
-            </plugin>
 		</plugins>
 	</build>
 
