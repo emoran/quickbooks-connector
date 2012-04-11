@@ -31,6 +31,7 @@ import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.schema.Account;
 import org.mule.modules.quickbooks.online.schema.Customer;
+import org.mule.modules.quickbooks.online.schema.GenericEntity;
 import org.mule.modules.quickbooks.online.schema.Invoice;
 import org.mule.modules.quickbooks.online.schema.InvoiceHeader;
 import org.mule.modules.quickbooks.online.schema.InvoiceLine;
@@ -355,6 +356,22 @@ public class QuickBooksOnlineModuleTestDriver
     
         //verify the change
         assertEquals("DOC-NEW:001111111101", invoice.getHeader().getDocNumber());
+    }
+    
+    @Test
+    public void findChangeDataDeleted()
+    {
+        Iterable<GenericEntity> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            OnlineEntityType.CHANGEDATADELETED, 
+            "Entity :in: (Customer, Invoice, Item) :and: LastUpdatedTime :after: 2011-06-30T01:00:00-0700", null);
+        
+        for(GenericEntity ge : it)
+        {
+            System.out.println("ID: " + ge.getId().getValue());
+            System.out.println("ObjName: " + ge.getEntityType().value());
+            System.out.println("Date: " + ge.getLastUpdatedTime().toString());
+            System.out.println();
+        }
     }
     
     @Test(expected = QuickBooksRuntimeException.class)

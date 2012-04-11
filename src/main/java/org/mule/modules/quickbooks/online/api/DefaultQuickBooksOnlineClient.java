@@ -267,7 +267,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     try
                     {          
                         return ((List<T>) page.getCdmCollections().getClass()
-                                        .getMethod("get" + type.getSimpleName(), null)
+                                        .getMethod("get" + type.getCdmCollectionName(), null)
                                         .invoke(page.getCdmCollections())).iterator();
                     }
                     catch (IllegalAccessException e)
@@ -299,8 +299,8 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     }
                     nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
                     nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
-                    HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%ss/v2/%s", 
-                        getBaseUri(realmId), type.getResouceName(), realmId));
+                    HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
+                        getBaseUri(realmId), type.getResouceNameForFind(), realmId));
                     
                     httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
                     try

@@ -91,6 +91,9 @@ public class ObjectFactory {
  private final static QName _QboUser_QNAME = new QName("http://www.intuit.com/sb/cdm/qbo", "QboUser");
  private final static QName _FaultInfo_QNAME = new QName("http://www.intuit.com/sb/cdm/baseexceptionmodel/xsd", "FaultInfo");
  private final static QName _SearchResults_QNAME = new QName("http://www.intuit.com/sb/cdm/qbo", "SearchResults");
+ 
+ private final static QName _DeletedEntities_QNAME = new QName("http://www.intuit.com/sb/cdm/qbo", "DeletedEntities");
+ private final static QName _GenericEntity_QNAME = new QName("http://www.intuit.com/sb/cdm/qbo", "GenericEntity");
 
  /**
   * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.mule.modules.quickbooks.schema
@@ -1740,6 +1743,22 @@ public class ObjectFactory {
  }
 
  /**
+  * Create an instance of {@link DeletedEntities }
+  * 
+  */
+ public DeletedEntities createDeletedEntities() {
+     return new DeletedEntities();
+ }
+ 
+ /**
+  * Create an instance of {@link GenericEntity }
+  * 
+  */
+ public GenericEntity createGenericEntity() {
+     return new GenericEntity();
+ }
+ 
+ /**
   * Create an instance of {@link JAXBElement }{@code <}{@link Discount }{@code >}}
   * 
   */
@@ -2223,6 +2242,24 @@ public class ObjectFactory {
  @XmlElementDecl(namespace = "http://www.intuit.com/sb/cdm/qbo", name = "SearchResults")
  public JAXBElement<SearchResults> createSearchResults(SearchResults value) {
      return new JAXBElement<SearchResults>(_SearchResults_QNAME, SearchResults.class, null, value);
+ }
+ 
+ /**
+  * Create an instance of {@link JAXBElement }{@code <}{@link DeletedEntities }{@code >}}
+  * 
+  */
+ @XmlElementDecl(namespace = "http://www.intuit.com/sb/cdm/qbo", name = "DeletedEntities")
+ public JAXBElement<DeletedEntities> createDeletedEntities(DeletedEntities value) {
+     return new JAXBElement<DeletedEntities>(_DeletedEntities_QNAME, DeletedEntities.class, null, value);
+ }
+ 
+ /**
+  * Create an instance of {@link JAXBElement }{@code <}{@link GenericEntity }{@code >}}
+  * 
+  */
+ @XmlElementDecl(namespace = "http://www.intuit.com/sb/cdm/qbo", name = "GenericEntity")
+ public JAXBElement<GenericEntity> createGenericEntity(GenericEntity value) {
+     return new JAXBElement<GenericEntity>(_GenericEntity_QNAME, GenericEntity.class, null, value);
  }
 }
 

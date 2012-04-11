@@ -18,6 +18,7 @@ import org.mule.modules.quickbooks.online.schema.CashPurchase;
 import org.mule.modules.quickbooks.online.schema.Check;
 import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
 import org.mule.modules.quickbooks.online.schema.Customer;
+import org.mule.modules.quickbooks.online.schema.DeletedEntities;
 import org.mule.modules.quickbooks.online.schema.Estimate;
 import org.mule.modules.quickbooks.online.schema.Invoice;
 import org.mule.modules.quickbooks.online.schema.Item;
@@ -133,13 +134,77 @@ public enum OnlineEntityType
      * The Vendor object represents the buyer from whom you purchase any service or 
      * product for your organization.
      */
-    VENDOR(Vendor.class);
+    VENDOR(Vendor.class),
+    
+    /**
+     * ChangeDataDeleted (Beta) ONLY FOR FIND-OBJECTS PROCESSOR
+     * <p>Use this service to get all of the transactions and objects that have been deleted 
+     * on the Data Serices server. Your application may consume QBO data by getting a 
+     * snapshot of the data and caching it for later use. You can do this on an object-specific 
+     * basis, querying for the object and applying a filter. However, this service provides a 
+     * quick update of only those objects deleted, saving you the trouble of coding a lengthy 
+     * query. Since the deleted object list is intended only for clearing the local cache, 
+     * the returned information is a subset of the object fields: Id, EntityType, and L
+     * astUpdatedTime (when the object was deleted).</p>
+     * <p>Supported Objects:</p>
+     * <p> * Account</p>
+     * <p> * Item</p>
+     * <p> * Customer</p>
+     * <p> * Vendor</p>
+     * <p> * Term (a.k.a SalesTerm)</p>
+     * <p> * PaymentMethod</p>
+     * <p> * Employee</p>
+     * <p> * Class</p>
+     * <p> * Job</p>
+     * <p> * Invoice</p>
+     * <p> * Estimate</p>
+     * <p> * SalesReceipt</p>
+     * <p> * QboStatementCharge</p>
+     * <p> * Bill</p>
+     * <p> * Check</p>
+     * <p> * BillPayment</p>
+     * <p> * CreditCardCharge</p>
+     * <p> * CreditCardCredit</p>
+     * <p> * VendorCredit</p>
+     * <p> * Payment</p>
+     * <p> * CashPurchase</p>
+     * <p> * Journal (a.k.a JournalEntry)</p>
+     * <p>Limitations:</p>
+     * <p> * If the request filter includes Job, the return value may contain a Customer as a 
+     * Job. (QBO treats Job as sub-Customer.)</p>
+     * <p> * Only objects that are supported can be requested at this time. Other objects will 
+     * cause a validation error.</p>
+     * <p> * The "Sort" parameter is not supported for this filter.</p>
+     * <p> * By default, the most recently deleted objects are returned first 
+     * (descending order for LastUpdatedTime).</p>
+     * <p>The Filter parameter in the body of the request must have the following format:</p>
+     * <p>Entity :in: ( {entity-type} [, {entity-type}]* ) [:and: LastUpdatedTime :after: {date-time}]</p>
+     * <p>For example:
+     * Entity :in: (Customer, Invoice, Item) :and: LastUpdatedTime :after: 2011-06-30T01:00:00-0700</p>
+     * <p>If the Filter is not specified, the query will return all deleted data.</p>
+     * <p>Entity and LastUpdatedTime are the only parameters allowed in the filter.</p>
+     * <p>All characters used in the filter syntax are case insensitive.</p>
+     */
+    CHANGEDATADELETED(DeletedEntities.class, "changedatadeleted", "Entity");
     
     private final Class<?> type;
+    private final String simpleName;
+    private final String cdmCollectionName;
     
     private OnlineEntityType(Class<?> type)
     {
         this.type = type;
+        this.simpleName = getType().getSimpleName();
+        this.cdmCollectionName = this.simpleName;
+    }
+    
+    //this one is needed because of the ChangeDataDeleted that is beta in intuit, and they did not use
+    //the same criteria of the other classes
+    private OnlineEntityType(Class<?> type, String simpleName, String cdmCollectionName)
+    {
+        this.type = type;
+        this.simpleName = simpleName;
+        this.cdmCollectionName = cdmCollectionName;
     }
     
     @SuppressWarnings("unchecked")
@@ -164,7 +229,30 @@ public enum OnlineEntityType
     {
         return  QuickBooksConventions.toQuickBooksPathVariable(getSimpleName());
     }
+    
+    /**
+     * Answers the resource name of this entity type as present in the entity uri
+     * 
+     * @return
+     */
+    public String getResouceNameForFind()
+    {
+        String str = QuickBooksConventions.toQuickBooksPathVariable(getSimpleName());
+        
+        //this one is needed because of the ChangeDataDeleted that is beta in intuit, and they did not use
+        //the same criteria of the other classes
+        if(!type.equals(DeletedEntities.class))
+        {
+            str += "s";
+        }
+        
+        return str;
+    }
 
+    public String getCdmCollectionName()
+    {
+        return cdmCollectionName;
+    }
     /**
      * @return
      */
@@ -179,6 +267,6 @@ public enum OnlineEntityType
      */
     public String getSimpleName()
     {
-        return getType().getSimpleName();
+        return simpleName;
     }
 }

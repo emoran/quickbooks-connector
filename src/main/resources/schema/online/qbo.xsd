@@ -249,5 +249,109 @@
 		</xs:sequence>
 	</xs:complexType>
 
+<!-- Added for the ChangeDataDeleted (Beta) support -->
+
+ 	<xs:complexType name="GenericEntity">
+	    <xs:annotation>
+	        <xs:documentation>Defines the List of Generic entities</xs:documentation>
+	    </xs:annotation>
+	    <xs:sequence>
+	        <xs:element name="Id" type="sb:IdType" minOccurs="0">
+	            <xs:annotation>
+	                <xs:documentation xml:lang="en">
+	                    Defines the ID of the object
+	                </xs:documentation>
+	            </xs:annotation>
+	        </xs:element>
+	        <xs:element name="EntityType" type="qboObjectName" minOccurs="0">
+	            <xs:annotation>
+	                <xs:documentation xml:lang="en">
+	                    Defines the EntityType as defined in "objectName" enumeration
+	                </xs:documentation>
+	            </xs:annotation>
+	        </xs:element>
+	        <xs:element name="LastUpdatedTime" type="xs:dateTime" minOccurs="0">
+	            <xs:annotation>
+	                <xs:documentation xml:lang="en">
+	                    LastUpdatedTime of the entity
+	                </xs:documentation>
+	            </xs:annotation>
+	        </xs:element>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="DeletedEntities">
+	    <xs:annotation>
+	        <xs:documentation>Provides collection of Generic entities as deleted entities</xs:documentation>
+	    </xs:annotation>
+	    <xs:complexContent>
+	        <xs:extension base="sb:CdmCollections">
+	            <xs:sequence>
+	                <xs:element name="Entity" type="GenericEntity" minOccurs="0" maxOccurs="unbounded"/>
+	            </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+	</xs:complexType>
+	
+	
+	<!-- The list of object names can be taken from the following enumeration: -->
+	
+ 	<xs:simpleType name="qboObjectName">
+	    <xs:annotation>
+	        <xs:documentation>
+	            Supported QBO object names
+	        </xs:documentation>
+	    </xs:annotation>
+	    <xs:restriction base="xs:string">
+	        <xs:enumeration value="Account"/>
+	        <xs:enumeration value="Bill"/>
+	        <xs:enumeration value="BillPayment"/>
+	        <xs:enumeration value="BillPaymentCreditCard"/>
+	        <xs:enumeration value="Charge"/>
+	        <xs:enumeration value="Check"/>
+	        <xs:enumeration value="Class"/>
+	        <xs:enumeration value="Company"/>
+	        <xs:enumeration value="CreditCardCharge"/>
+	        <xs:enumeration value="CreditCardCredit"/>
+	        <xs:enumeration value="CreditMemo"/>
+	        <xs:enumeration value="Customer"/>
+	        <xs:enumeration value="CustomerMsg"/>
+	        <xs:enumeration value="CustomerType"/>
+	        <xs:enumeration value="Discount"/>
+	        <xs:enumeration value="Employee"/>
+	        <xs:enumeration value="Estimate"/>
+	        <xs:enumeration value="FixedAsset"/>
+	        <xs:enumeration value="InventoryAdjustment"/>
+	        <xs:enumeration value="Invoice"/>
+	        <xs:enumeration value="Item"/>
+	        <xs:enumeration value="ItemReceipt"/>
+	        <xs:enumeration value="Job"/>
+	        <xs:enumeration value="JobType"/>
+	        <xs:enumeration value="JournalEntry"/>
+	        <xs:enumeration value="OtherName"/>
+	        <xs:enumeration value="Payment"/>
+	        <xs:enumeration value="PaymentMethod"/>
+	        <xs:enumeration value="PayrollItem"/>
+	        <xs:enumeration value="Preferences"/>
+	        <xs:enumeration value="PurchaseOrder"/>
+	        <xs:enumeration value="SalesOrder"/>
+	        <xs:enumeration value="SalesReceipt"/>
+	        <xs:enumeration value="SalesRep"/>
+	        <xs:enumeration value="SalesTax"/>
+	        <xs:enumeration value="SalesTaxCode"/>
+	        <xs:enumeration value="SalesTaxGroup"/>
+	        <xs:enumeration value="SalesTaxPaymentCheck"/>
+	        <xs:enumeration value="ShipMethod"/>
+	        <xs:enumeration value="TemplateName"/>
+	        <xs:enumeration value="Term"/>
+	        <xs:enumeration value="TimeActivity"/>
+	        <xs:enumeration value="UOM"/>
+	        <xs:enumeration value="Vendor"/>
+	        <xs:enumeration value="VendorCredit"/>
+	        <xs:enumeration value="VendorType"/>
+	        <xs:enumeration value="CashPurchase"/>
+	        <xs:enumeration value="QboStatementCharge"/>
+	    </xs:restriction>
+	</xs:simpleType>
 			
 </xs:schema>

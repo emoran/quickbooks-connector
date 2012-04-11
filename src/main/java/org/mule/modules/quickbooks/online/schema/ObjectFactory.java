@@ -1739,6 +1739,22 @@ public class ObjectFactory {
     public Classes createClasses() {
         return new Classes();
     }
+    
+    /**
+     * Create an instance of {@link DeletedEntities }
+     * 
+     */
+    public DeletedEntities createDeletedEntities() {
+        return new DeletedEntities();
+    }
+    
+    /**
+     * Create an instance of {@link GenericEntity }
+     * 
+     */
+    public GenericEntity createGenericEntity() {
+        return new GenericEntity();
+    }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Discount }{@code >}}
