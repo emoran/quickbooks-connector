@@ -72,7 +72,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../../favicon.ico" />
 <title>
 
-  Person
+  GenericEntity
 
 
 | QuickBooks Cloud Connector
@@ -299,7 +299,7 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Estimates.html">Estimates</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/ExternalKey.html">ExternalKey</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/FaultInfo.html">FaultInfo</a></li>
-          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/HeaderBase.html">HeaderBase</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/HeaderPurchase.html">HeaderPurchase</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/HeaderSales.html">HeaderSales</a></li>
@@ -361,7 +361,7 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PayrollTxnBase.html">PayrollTxnBase</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PayrollTxnHeader.html">PayrollTxnHeader</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PayrollTxnLine.html">PayrollTxnLine</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Persons.html">Persons</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PhysicalAddress.html">PhysicalAddress</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Preferences.html">Preferences</a></li>
@@ -536,15 +536,6 @@
   
   
   
-   
-  
-  
-
-  
-   
-  
-  
-  
   
 
 
@@ -562,9 +553,6 @@ Summary:
   <a href="#lfields">Fields</a>
   
 
-
-  &#124; <a href="#inhfields">Inherited Fields</a>
-  
 
 
   &#124; <a href="#pubctors">Ctors</a>
@@ -601,16 +589,12 @@ Summary:
      
     
     class
-<h1>Person</h1>
+<h1>GenericEntity</h1>
 
 
 
   
-  
-  
-
-  
-    extends <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/CdmBase.html">CdmBase</a><br/>
+    extends Object<br/>
   
   
   
@@ -630,7 +614,7 @@ Summary:
 
     <tr>
         
-        <td colspan="3" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
@@ -638,17 +622,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="2" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/CdmBase.html">org.mule.modules.quickbooks.online.schema.CdmBase</a></td>
-    </tr>
-    
-
-    <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
-        
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.online.schema.Person</td>
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.online.schema.GenericEntity</td>
     </tr>
     
 
@@ -664,23 +638,22 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>Shared type that can be extended by domain specific viewes
+<p>Defines the List of Generic entities
  
- <p>Java class for Person complex type.
+ <p>Java class for GenericEntity complex type.
  
  <p>The following schema fragment specifies the expected content contained within this class.
  
  <pre>
- &lt;complexType name="Person">
+ &lt;complexType name="GenericEntity">
    &lt;complexContent>
-     &lt;extension base="{http://www.intuit.com/sb/cdm/v2}CdmBase">
+     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
        &lt;sequence>
-         &lt;group ref="{http://www.intuit.com/sb/cdm/v2}PersonGroup"/>
-         &lt;element name="TaxId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         &lt;group ref="{http://www.intuit.com/sb/cdm/v2}ContactInfoGroup"/>
-         &lt;element name="Role" type="{http://www.intuit.com/sb/cdm/v2}roleType" maxOccurs="unbounded" minOccurs="0"/>
+         &lt;element name="Id" type="{http://www.intuit.com/sb/cdm/v2}IdType" minOccurs="0"/>
+         &lt;element name="EntityType" type="{http://www.intuit.com/sb/cdm/qbo}qboObjectName" minOccurs="0"/>
+         &lt;element name="LastUpdatedTime" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
        &lt;/sequence>
-     &lt;/extension>
+     &lt;/restriction>
    &lt;/complexContent>
  &lt;/complexType>
  </pre>
@@ -741,151 +714,30 @@ Summary:
           protected
           
           
-          List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PhysicalAddress.html">PhysicalAddress</a>&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#address">address</a></td>
+          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#entityType">entityType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
       <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#id">id</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
           
           XMLGregorianCalendar</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#birthDate">birthDate</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/EmailAddress.html">EmailAddress</a>&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#email">email</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#familyName">familyName</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#gender">gender</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#givenName">givenName</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#middleName">middleName</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/TelephoneNumber.html">TelephoneNumber</a>&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#phone">phone</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/RoleType.html">RoleType</a>&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#role">role</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#suffix">suffix</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#taxId">taxId</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#title">title</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#userId">userId</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/WebSiteAddress.html">WebSiteAddress</a>&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#webSite">webSite</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#lastUpdatedTime">lastUpdatedTime</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -895,106 +747,6 @@ Summary:
 
 
 
-
-
-<!-- =========== FIELD SUMMARY =========== -->
-<table id="inhfields" class="jd-sumtable"><tr><th>
-  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
-  <div style="clear:left;">Inherited Fields</div></th></tr>
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.modules.quickbooks.online.schema.CdmBase" class="jd-expando-trigger closed"
-          ><img id="inherited-fields-org.mule.modules.quickbooks.online.schema.CdmBase-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From class
-<a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html">org.mule.modules.quickbooks.online.schema.CdmBase</a>
-<div id="inherited-fields-org.mule.modules.quickbooks.online.schema.CdmBase">
-  <div id="inherited-fields-org.mule.modules.quickbooks.online.schema.CdmBase-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-fields-org.mule.modules.quickbooks.online.schema.CdmBase-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Boolean</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#_synchronized">_synchronized</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/NameValue.html">NameValue</a>&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#alternateId">alternateId</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#externalKey">externalKey</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#id">id</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/ModificationMetaData.html">ModificationMetaData</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#metaData">metaData</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#syncToken">syncToken</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-
-</table>
 
 
 
@@ -1015,7 +767,7 @@ Summary:
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#Person()">Person</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#GenericEntity()">GenericEntity</a></span>()</nobr>
         
   </td></tr>
 
@@ -1041,18 +793,36 @@ Summary:
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PhysicalAddress.html">PhysicalAddress</a>&gt;</nobr>
+            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getAddress()">getAddress</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#getEntityType()">getEntityType</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Gets the value of the address property.</div>
+        <div class="jd-descrdiv">Gets the value of the entityType property.</div>
   
   </td></tr>
 
 
 	 
     <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#getId()">getId</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Gets the value of the id property.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1062,243 +832,9 @@ Summary:
             XMLGregorianCalendar</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getBirthDate()">getBirthDate</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#getLastUpdatedTime()">getLastUpdatedTime</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Gets the value of the birthDate property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/EmailAddress.html">EmailAddress</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getEmail()">getEmail</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the email property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getFamilyName()">getFamilyName</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the familyName property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getGender()">getGender</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the gender property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getGivenName()">getGivenName</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the givenName property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getMiddleName()">getMiddleName</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the middleName property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/TelephoneNumber.html">TelephoneNumber</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getPhone()">getPhone</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the phone property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/RoleType.html">RoleType</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getRole()">getRole</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the role property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getSuffix()">getSuffix</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the suffix property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getTaxId()">getTaxId</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the taxId property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getTitle()">getTitle</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the title property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getUserId()">getUserId</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the userId property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/WebSiteAddress.html">WebSiteAddress</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#getWebSite()">getWebSite</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the webSite property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setBirthDate(javax.xml.datatype.XMLGregorianCalendar)">setBirthDate</a></span>(XMLGregorianCalendar value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the birthDate property.</div>
+        <div class="jd-descrdiv">Gets the value of the lastUpdatedTime property.</div>
   
   </td></tr>
 
@@ -1314,9 +850,9 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setFamilyName(java.lang.String)">setFamilyName</a></span>(String value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#setEntityType(org.mule.modules.quickbooks.online.schema.QboObjectName)">setEntityType</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a> value)</nobr>
         
-        <div class="jd-descrdiv">Sets the value of the familyName property.</div>
+        <div class="jd-descrdiv">Sets the value of the entityType property.</div>
   
   </td></tr>
 
@@ -1332,9 +868,9 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setGender(org.mule.modules.quickbooks.online.schema.Gender)">setGender</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a> value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#setId(org.mule.modules.quickbooks.online.schema.IdType)">setId</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a> value)</nobr>
         
-        <div class="jd-descrdiv">Sets the value of the gender property.</div>
+        <div class="jd-descrdiv">Sets the value of the id property.</div>
   
   </td></tr>
 
@@ -1350,99 +886,9 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setGivenName(java.lang.String)">setGivenName</a></span>(String value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/GenericEntity.html#setLastUpdatedTime(javax.xml.datatype.XMLGregorianCalendar)">setLastUpdatedTime</a></span>(XMLGregorianCalendar value)</nobr>
         
-        <div class="jd-descrdiv">Sets the value of the givenName property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setMiddleName(java.lang.String)">setMiddleName</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the middleName property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setSuffix(java.lang.String)">setSuffix</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the suffix property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setTaxId(java.lang.String)">setTaxId</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the taxId property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setTitle(java.lang.String)">setTitle</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the title property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/Person.html#setUserId(java.lang.String)">setUserId</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the userId property.</div>
+        <div class="jd-descrdiv">Sets the value of the lastUpdatedTime property.</div>
   
   </td></tr>
 
@@ -1460,230 +906,6 @@ Summary:
 <table id="inhmethods" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Methods</div></th></tr>
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.quickbooks.online.schema.CdmBase" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.modules.quickbooks.online.schema.CdmBase-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From class
-
-  <a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html">org.mule.modules.quickbooks.online.schema.CdmBase</a>
-
-<div id="inherited-methods-org.mule.modules.quickbooks.online.schema.CdmBase">
-  <div id="inherited-methods-org.mule.modules.quickbooks.online.schema.CdmBase-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.modules.quickbooks.online.schema.CdmBase-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/NameValue.html">NameValue</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#getAlternateId()">getAlternateId</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the alternateId property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#getExternalKey()">getExternalKey</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the externalKey property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#getId()">getId</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the id property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/ModificationMetaData.html">ModificationMetaData</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#getMetaData()">getMetaData</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the metaData property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#getSyncToken()">getSyncToken</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the syncToken property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#isSynchronized()">isSynchronized</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the synchronized property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#setExternalKey(org.mule.modules.quickbooks.online.schema.IdType)">setExternalKey</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a> value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the externalKey property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#setId(org.mule.modules.quickbooks.online.schema.IdType)">setId</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a> value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the id property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#setMetaData(org.mule.modules.quickbooks.online.schema.ModificationMetaData)">setMetaData</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/ModificationMetaData.html">ModificationMetaData</a> value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the metaData property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#setSyncToken(java.lang.String)">setSyncToken</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the syncToken property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/CdmBase.html#setSynchronized(java.lang.Boolean)">setSynchronized</a></span>(Boolean value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the synchronized property.</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
 
 
 <tr class="api apilevel-" >
@@ -1919,7 +1141,7 @@ From class
 
 
 
-<A NAME="address"></A>
+<A NAME="entityType"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1927,9 +1149,9 @@ From class
         protected 
          
          
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PhysicalAddress.html">PhysicalAddress</a>&gt;
+        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a>
       </span>
-        address
+        entityType
     </h4>
       <div class="api-level">
         
@@ -1949,7 +1171,37 @@ From class
 
 
 
-<A NAME="birthDate"></A>
+<A NAME="id"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a>
+      </span>
+        id
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="lastUpdatedTime"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1959,367 +1211,7 @@ From class
          
         XMLGregorianCalendar
       </span>
-        birthDate
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="email"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/EmailAddress.html">EmailAddress</a>&gt;
-      </span>
-        email
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="familyName"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        familyName
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="gender"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a>
-      </span>
-        gender
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="givenName"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        givenName
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="middleName"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        middleName
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="phone"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/TelephoneNumber.html">TelephoneNumber</a>&gt;
-      </span>
-        phone
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="role"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/RoleType.html">RoleType</a>&gt;
-      </span>
-        role
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="suffix"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        suffix
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="taxId"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        taxId
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="title"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        title
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="userId"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        userId
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="webSite"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/WebSiteAddress.html">WebSiteAddress</a>&gt;
-      </span>
-        webSite
+        lastUpdatedTime
     </h4>
       <div class="api-level">
         
@@ -2348,7 +1240,7 @@ From class
 
 
 
-<A NAME="Person()"></A>
+<A NAME="GenericEntity()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2360,7 +1252,7 @@ From class
          
         
       </span>
-      <span class="sympad">Person</span>
+      <span class="sympad">GenericEntity</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2394,7 +1286,7 @@ From class
 
 
 
-<A NAME="getAddress()"></A>
+<A NAME="getEntityType()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2404,9 +1296,9 @@ From class
          
          
          
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PhysicalAddress.html">PhysicalAddress</a>&gt;
+        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a>
       </span>
-      <span class="sympad">getAddress</span>
+      <span class="sympad">getEntityType</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2419,33 +1311,58 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the address property.
- 
- <p>
- This accessor method returns a reference to the live list,
- not a snapshot. Therefore any modification you make to the
- returned list will be present inside the JAXB object.
- This is why there is not a <CODE>set</CODE> method for the address property.
- 
- <p>
- For example, to add a new item, do as follows:
- <pre>
-    getAddress().add(newItem);
- </pre>
- 
- 
- <p>
- Objects of the following type(s) are allowed in the list
- <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/PhysicalAddress.html">PhysicalAddress</a></code>
- 
- 
-</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the entityType property.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>possible object is
+     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a></code>
+     
+</li></ul>
+  </div>
 
     </div>
 </div>
 
 
-<A NAME="getBirthDate()"></A>
+<A NAME="getId()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a>
+      </span>
+      <span class="sympad">getId</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the id property.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>possible object is
+     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></code>
+     
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getLastUpdatedTime()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2457,7 +1374,7 @@ From class
          
         XMLGregorianCalendar
       </span>
-      <span class="sympad">getBirthDate</span>
+      <span class="sympad">getLastUpdatedTime</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2470,7 +1387,7 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the birthDate property.</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the lastUpdatedTime property.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>possible object is
@@ -2483,515 +1400,7 @@ From class
 </div>
 
 
-<A NAME="getEmail()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/EmailAddress.html">EmailAddress</a>&gt;
-      </span>
-      <span class="sympad">getEmail</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the email property.
- 
- <p>
- This accessor method returns a reference to the live list,
- not a snapshot. Therefore any modification you make to the
- returned list will be present inside the JAXB object.
- This is why there is not a <CODE>set</CODE> method for the email property.
- 
- <p>
- For example, to add a new item, do as follows:
- <pre>
-    getEmail().add(newItem);
- </pre>
- 
- 
- <p>
- Objects of the following type(s) are allowed in the list
- <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/EmailAddress.html">EmailAddress</a></code>
- 
- 
-</p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getFamilyName()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getFamilyName</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the familyName property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getGender()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a>
-      </span>
-      <span class="sympad">getGender</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the gender property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a></code>
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getGivenName()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getGivenName</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the givenName property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getMiddleName()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getMiddleName</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the middleName property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getPhone()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/TelephoneNumber.html">TelephoneNumber</a>&gt;
-      </span>
-      <span class="sympad">getPhone</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the phone property.
- 
- <p>
- This accessor method returns a reference to the live list,
- not a snapshot. Therefore any modification you make to the
- returned list will be present inside the JAXB object.
- This is why there is not a <CODE>set</CODE> method for the phone property.
- 
- <p>
- For example, to add a new item, do as follows:
- <pre>
-    getPhone().add(newItem);
- </pre>
- 
- 
- <p>
- Objects of the following type(s) are allowed in the list
- <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/TelephoneNumber.html">TelephoneNumber</a></code>
- 
- 
-</p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getRole()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/RoleType.html">RoleType</a>&gt;
-      </span>
-      <span class="sympad">getRole</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the role property.
- 
- <p>
- This accessor method returns a reference to the live list,
- not a snapshot. Therefore any modification you make to the
- returned list will be present inside the JAXB object.
- This is why there is not a <CODE>set</CODE> method for the role property.
- 
- <p>
- For example, to add a new item, do as follows:
- <pre>
-    getRole().add(newItem);
- </pre>
- 
- 
- <p>
- Objects of the following type(s) are allowed in the list
- <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/RoleType.html">RoleType</a></code>
- 
- 
-</p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getSuffix()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getSuffix</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the suffix property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getTaxId()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getTaxId</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the taxId property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getTitle()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getTitle</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the title property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getUserId()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getUserId</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the userId property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getWebSite()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/WebSiteAddress.html">WebSiteAddress</a>&gt;
-      </span>
-      <span class="sympad">getWebSite</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the webSite property.
- 
- <p>
- This accessor method returns a reference to the live list,
- not a snapshot. Therefore any modification you make to the
- returned list will be present inside the JAXB object.
- This is why there is not a <CODE>set</CODE> method for the webSite property.
- 
- <p>
- For example, to add a new item, do as follows:
- <pre>
-    getWebSite().add(newItem);
- </pre>
- 
- 
- <p>
- Objects of the following type(s) are allowed in the list
- <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/WebSiteAddress.html">WebSiteAddress</a></code>
- 
- 
-</p></div>
-
-    </div>
-</div>
-
-
-<A NAME="setBirthDate(javax.xml.datatype.XMLGregorianCalendar)"></A>
+<A NAME="setEntityType(org.mule.modules.quickbooks.online.schema.QboObjectName)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -3003,7 +1412,93 @@ From class
          
         void
       </span>
-      <span class="sympad">setBirthDate</span>
+      <span class="sympad">setEntityType</span>
+      <span class="normal">(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a> value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the entityType property.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Allowed object is
+     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a></code>
+     
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setId(org.mule.modules.quickbooks.online.schema.IdType)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setId</span>
+      <span class="normal">(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a> value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the id property.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Allowed object is
+     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/IdType.html">IdType</a></code>
+     
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setLastUpdatedTime(javax.xml.datatype.XMLGregorianCalendar)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setLastUpdatedTime</span>
       <span class="normal">(XMLGregorianCalendar value)</span>
     </h4>
       <div class="api-level">
@@ -3016,7 +1511,7 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the birthDate property.</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the lastUpdatedTime property.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
@@ -3024,350 +1519,6 @@ From class
           <th>value</td>
           <td>Allowed object is
      XMLGregorianCalendar
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setFamilyName(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setFamilyName</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the familyName property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setGender(org.mule.modules.quickbooks.online.schema.Gender)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setGender</span>
-      <span class="normal">(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a> value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the gender property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Gender.html">Gender</a></code>
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setGivenName(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setGivenName</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the givenName property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setMiddleName(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setMiddleName</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the middleName property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setSuffix(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setSuffix</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the suffix property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setTaxId(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setTaxId</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the taxId property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setTitle(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setTitle</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the title property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setUserId(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setUserId</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the userId property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
      
 </td>
         </tr>

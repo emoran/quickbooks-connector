@@ -72,7 +72,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../../favicon.ico" />
 <title>
 
-  QboCompanyReport
+  DeletedEntities
 
 
 | QuickBooks Cloud Connector
@@ -286,7 +286,7 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/CustomFieldDefinitions.html">CustomFieldDefinitions</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/DateTypeCustomField.html">DateTypeCustomField</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/DateTypeCustomFieldDefinition.html">DateTypeCustomFieldDefinition</a></li>
-          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/DeletedEntities.html">DeletedEntities</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/DeletedEntities.html">DeletedEntities</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Discount.html">Discount</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Discounts.html">Discounts</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/EmailAddress.html">EmailAddress</a></li>
@@ -379,7 +379,7 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboBalanceSheetReportResponse.LiabilitiesAndEquity.Liabilities.CurrentLiabilities.html">QboBalanceSheetReportResponse.LiabilitiesAndEquity.Liabilities.CurrentLiabilities</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboBulkResult.html">QboBulkResult</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompanyReport.html">QboCompanyReport</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompanyReport.html">QboCompanyReport</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboListReportRequest.html">QboListReportRequest</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboListReportResponse.html">QboListReportResponse</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboListReportResponse.ReportRow.html">QboListReportResponse.ReportRow</a></li>
@@ -532,6 +532,16 @@
 
 
   
+  
+  
+  
+
+  
+  
+  
+  
+
+  
    
   
   
@@ -589,12 +599,20 @@ Summary:
      
     
     class
-<h1>QboCompanyReport</h1>
+<h1>DeletedEntities</h1>
 
 
 
   
-    extends Object<br/>
+  
+  
+
+  
+  
+  
+
+  
+    extends <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/CdmCollections.html">CdmCollections</a><br/>
   
   
   
@@ -614,7 +632,7 @@ Summary:
 
     <tr>
         
-        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="4" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
@@ -622,7 +640,29 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.online.schema.QboCompanyReport</td>
+        <td colspan="3" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/CdmComplexBase.html">org.mule.modules.quickbooks.online.schema.CdmComplexBase</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="2" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/CdmCollections.html">org.mule.modules.quickbooks.online.schema.CdmCollections</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.online.schema.DeletedEntities</td>
     </tr>
     
 
@@ -638,31 +678,20 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p><p>Java class for QboCompanyReport complex type.
+<p>Provides collection of Generic entities as deleted entities
+ 
+ <p>Java class for DeletedEntities complex type.
  
  <p>The following schema fragment specifies the expected content contained within this class.
  
  <pre>
- &lt;complexType name="QboCompanyReport">
+ &lt;complexType name="DeletedEntities">
    &lt;complexContent>
-     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     &lt;extension base="{http://www.intuit.com/sb/cdm/v2}CdmCollections">
        &lt;sequence>
-         &lt;element name="CompanyInfo" type="{http://www.intuit.com/sb/cdm/qbo}QboCompany" minOccurs="0"/>
-         &lt;element name="PersonInfo" type="{http://www.intuit.com/sb/cdm/v2}Person" minOccurs="0"/>
-         &lt;element name="Trial" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
-         &lt;element name="Subscription" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
-         &lt;element name="SKU" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         &lt;element name="Z0NCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         &lt;element name="NoOfLogins" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
-         &lt;element name="NoOfCustomers" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
-         &lt;element name="MaxCustomers" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
-         &lt;element name="CreationDate" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/>
-         &lt;element name="SubscriptionDate" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/>
-         &lt;element name="PayrollTrial" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
-         &lt;element name="PayrollSubscription" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
-         &lt;element name="MASUser" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+         &lt;element name="Entity" type="{http://www.intuit.com/sb/cdm/qbo}GenericEntity" maxOccurs="unbounded" minOccurs="0"/>
        &lt;/sequence>
-     &lt;/restriction>
+     &lt;/extension>
    &lt;/complexContent>
  &lt;/complexType>
  </pre>
@@ -723,151 +752,8 @@ Summary:
           protected
           
           
-          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#companyInfo">companyInfo</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          XMLGregorianCalendar</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#creationDate">creationDate</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Boolean</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#masUser">masUser</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Long</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#maxCustomers">maxCustomers</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Long</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#noOfCustomers">noOfCustomers</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Long</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#noOfLogins">noOfLogins</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Boolean</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#payrollSubscription">payrollSubscription</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Boolean</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#payrollTrial">payrollTrial</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#personInfo">personInfo</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#sku">sku</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Boolean</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#subscription">subscription</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          XMLGregorianCalendar</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#subscriptionDate">subscriptionDate</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Boolean</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#trial">trial</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#z0NCode">z0NCode</a></td>
+          List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a>&gt;</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/DeletedEntities.html#entity">entity</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -897,7 +783,7 @@ Summary:
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#QboCompanyReport()">QboCompanyReport</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/DeletedEntities.html#DeletedEntities()">DeletedEntities</a></span>()</nobr>
         
   </td></tr>
 
@@ -923,498 +809,12 @@ Summary:
             
             
             
-            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a></nobr>
+            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getCompanyInfo()">getCompanyInfo</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/DeletedEntities.html#getEntity()">getEntity</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Gets the value of the companyInfo property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            XMLGregorianCalendar</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getCreationDate()">getCreationDate</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the creationDate property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Long</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getMaxCustomers()">getMaxCustomers</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the maxCustomers property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Long</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getNoOfCustomers()">getNoOfCustomers</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the noOfCustomers property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Long</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getNoOfLogins()">getNoOfLogins</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the noOfLogins property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getPersonInfo()">getPersonInfo</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the personInfo property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getSKU()">getSKU</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the sku property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            XMLGregorianCalendar</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getSubscriptionDate()">getSubscriptionDate</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the subscriptionDate property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#getZ0NCode()">getZ0NCode</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the z0NCode property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#isMASUser()">isMASUser</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the masUser property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#isPayrollSubscription()">isPayrollSubscription</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the payrollSubscription property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#isPayrollTrial()">isPayrollTrial</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the payrollTrial property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#isSubscription()">isSubscription</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the subscription property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#isTrial()">isTrial</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the trial property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setCompanyInfo(org.mule.modules.quickbooks.online.schema.QboCompany)">setCompanyInfo</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a> value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the companyInfo property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setCreationDate(javax.xml.datatype.XMLGregorianCalendar)">setCreationDate</a></span>(XMLGregorianCalendar value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the creationDate property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setMASUser(java.lang.Boolean)">setMASUser</a></span>(Boolean value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the masUser property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setMaxCustomers(java.lang.Long)">setMaxCustomers</a></span>(Long value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the maxCustomers property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setNoOfCustomers(java.lang.Long)">setNoOfCustomers</a></span>(Long value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the noOfCustomers property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setNoOfLogins(java.lang.Long)">setNoOfLogins</a></span>(Long value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the noOfLogins property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setPayrollSubscription(java.lang.Boolean)">setPayrollSubscription</a></span>(Boolean value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the payrollSubscription property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setPayrollTrial(java.lang.Boolean)">setPayrollTrial</a></span>(Boolean value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the payrollTrial property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setPersonInfo(org.mule.modules.quickbooks.online.schema.Person)">setPersonInfo</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a> value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the personInfo property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setSKU(java.lang.String)">setSKU</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the sku property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setSubscription(java.lang.Boolean)">setSubscription</a></span>(Boolean value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the subscription property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setSubscriptionDate(javax.xml.datatype.XMLGregorianCalendar)">setSubscriptionDate</a></span>(XMLGregorianCalendar value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the subscriptionDate property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setTrial(java.lang.Boolean)">setTrial</a></span>(Boolean value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the trial property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/schema/QboCompanyReport.html#setZ0NCode(java.lang.String)">setZ0NCode</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the z0NCode property.</div>
+        <div class="jd-descrdiv">Gets the value of the entity property.</div>
   
   </td></tr>
 
@@ -1432,6 +832,10 @@ Summary:
 <table id="inhmethods" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Methods</div></th></tr>
+
+
+
+
 
 
 <tr class="api apilevel-" >
@@ -1667,7 +1071,7 @@ From class
 
 
 
-<A NAME="companyInfo"></A>
+<A NAME="entity"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1675,399 +1079,9 @@ From class
         protected 
          
          
-        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a>
+        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a>&gt;
       </span>
-        companyInfo
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="creationDate"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        XMLGregorianCalendar
-      </span>
-        creationDate
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="masUser"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Boolean
-      </span>
-        masUser
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="maxCustomers"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Long
-      </span>
-        maxCustomers
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="noOfCustomers"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Long
-      </span>
-        noOfCustomers
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="noOfLogins"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Long
-      </span>
-        noOfLogins
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="payrollSubscription"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Boolean
-      </span>
-        payrollSubscription
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="payrollTrial"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Boolean
-      </span>
-        payrollTrial
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="personInfo"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a>
-      </span>
-        personInfo
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="sku"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        sku
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="subscription"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Boolean
-      </span>
-        subscription
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="subscriptionDate"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        XMLGregorianCalendar
-      </span>
-        subscriptionDate
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="trial"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Boolean
-      </span>
-        trial
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="z0NCode"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        z0NCode
+        entity
     </h4>
       <div class="api-level">
         
@@ -2096,7 +1110,7 @@ From class
 
 
 
-<A NAME="QboCompanyReport()"></A>
+<A NAME="DeletedEntities()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2108,7 +1122,7 @@ From class
          
         
       </span>
-      <span class="sympad">QboCompanyReport</span>
+      <span class="sympad">DeletedEntities</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2142,7 +1156,7 @@ From class
 
 
 
-<A NAME="getCompanyInfo()"></A>
+<A NAME="getEntity()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2152,9 +1166,9 @@ From class
          
          
          
-        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a>
+        List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a>&gt;
       </span>
-      <span class="sympad">getCompanyInfo</span>
+      <span class="sympad">getEntity</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2167,1110 +1181,27 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the companyInfo property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a></code>
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getCreationDate()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        XMLGregorianCalendar
-      </span>
-      <span class="sympad">getCreationDate</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the creationDate property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     XMLGregorianCalendar
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getMaxCustomers()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Long
-      </span>
-      <span class="sympad">getMaxCustomers</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the maxCustomers property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Long
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getNoOfCustomers()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Long
-      </span>
-      <span class="sympad">getNoOfCustomers</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the noOfCustomers property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Long
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getNoOfLogins()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Long
-      </span>
-      <span class="sympad">getNoOfLogins</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the noOfLogins property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Long
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getPersonInfo()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a>
-      </span>
-      <span class="sympad">getPersonInfo</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the personInfo property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a></code>
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getSKU()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getSKU</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the sku property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getSubscriptionDate()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        XMLGregorianCalendar
-      </span>
-      <span class="sympad">getSubscriptionDate</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the subscriptionDate property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     XMLGregorianCalendar
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getZ0NCode()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getZ0NCode</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the z0NCode property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     String
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="isMASUser()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Boolean
-      </span>
-      <span class="sympad">isMASUser</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the masUser property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Boolean
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="isPayrollSubscription()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Boolean
-      </span>
-      <span class="sympad">isPayrollSubscription</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the payrollSubscription property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Boolean
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="isPayrollTrial()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Boolean
-      </span>
-      <span class="sympad">isPayrollTrial</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the payrollTrial property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Boolean
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="isSubscription()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Boolean
-      </span>
-      <span class="sympad">isSubscription</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the subscription property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Boolean
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="isTrial()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        Boolean
-      </span>
-      <span class="sympad">isTrial</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the trial property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     Boolean
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setCompanyInfo(org.mule.modules.quickbooks.online.schema.QboCompany)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setCompanyInfo</span>
-      <span class="normal">(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a> value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the companyInfo property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/QboCompany.html">QboCompany</a></code>
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setCreationDate(javax.xml.datatype.XMLGregorianCalendar)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setCreationDate</span>
-      <span class="normal">(XMLGregorianCalendar value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the creationDate property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     XMLGregorianCalendar
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setMASUser(java.lang.Boolean)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setMASUser</span>
-      <span class="normal">(Boolean value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the masUser property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Boolean
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setMaxCustomers(java.lang.Long)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setMaxCustomers</span>
-      <span class="normal">(Long value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the maxCustomers property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Long
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setNoOfCustomers(java.lang.Long)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setNoOfCustomers</span>
-      <span class="normal">(Long value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the noOfCustomers property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Long
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setNoOfLogins(java.lang.Long)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setNoOfLogins</span>
-      <span class="normal">(Long value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the noOfLogins property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Long
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setPayrollSubscription(java.lang.Boolean)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setPayrollSubscription</span>
-      <span class="normal">(Boolean value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the payrollSubscription property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Boolean
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setPayrollTrial(java.lang.Boolean)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setPayrollTrial</span>
-      <span class="normal">(Boolean value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the payrollTrial property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Boolean
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setPersonInfo(org.mule.modules.quickbooks.online.schema.Person)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setPersonInfo</span>
-      <span class="normal">(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a> value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the personInfo property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/Person.html">Person</a></code>
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setSKU(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setSKU</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the sku property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setSubscription(java.lang.Boolean)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setSubscription</span>
-      <span class="normal">(Boolean value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the subscription property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Boolean
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setSubscriptionDate(javax.xml.datatype.XMLGregorianCalendar)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setSubscriptionDate</span>
-      <span class="normal">(XMLGregorianCalendar value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the subscriptionDate property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     XMLGregorianCalendar
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setTrial(java.lang.Boolean)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setTrial</span>
-      <span class="normal">(Boolean value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the trial property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     Boolean
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setZ0NCode(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setZ0NCode</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the z0NCode property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     String
-     
-</td>
-        </tr>
-      </table>
-  </div>
+  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the entity property.
+ 
+ <p>
+ This accessor method returns a reference to the live list,
+ not a snapshot. Therefore any modification you make to the
+ returned list will be present inside the JAXB object.
+ This is why there is not a <CODE>set</CODE> method for the entity property.
+ 
+ <p>
+ For example, to add a new item, do as follows:
+ <pre>
+    getEntity().add(newItem);
+ </pre>
+ 
+ 
+ <p>
+ Objects of the following type(s) are allowed in the list
+ <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a></code>
+ 
+ 
+</p></div>
 
     </div>
 </div>
