@@ -72,7 +72,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../../favicon.ico" />
 <title>
 
-  QuickBooksWindowsModuleLifecycleAdapter
+  StatusMessageProcessor
 
 
 | QuickBooks Cloud Connector
@@ -233,8 +233,8 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/GenerateANewRequestIdMessageProcessor.html">GenerateANewRequestIdMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleCapabilitiesAdapter.html">QuickBooksWindowsModuleCapabilitiesAdapter</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html">QuickBooksWindowsModuleLifecycleAdapter</a></li>
-          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html">StatusMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html">QuickBooksWindowsModuleLifecycleAdapter</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html">StatusMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/SyncActivityMessageProcessor.html">SyncActivityMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/UpdateMessageProcessor.html">UpdateMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/WindowsEntityTypeEnumTransformer.html">WindowsEntityTypeEnumTransformer</a></li>
@@ -293,15 +293,6 @@
   
   
   
-   
-  
-  
-
-  
-   
-  
-  
-  
   
 
   
@@ -343,6 +334,13 @@
   
   
    
+  
+  
+  
+
+  
+   
+  
   
   
   
@@ -362,9 +360,9 @@ Summary:
   
 
 
-
-  &#124; <a href="#inhfields">Inherited Fields</a>
+  &#124; <a href="#lfields">Fields</a>
   
+
 
 
   &#124; <a href="#pubctors">Ctors</a>
@@ -401,20 +399,12 @@ Summary:
      
     
     class
-<h1>QuickBooksWindowsModuleLifecycleAdapter</h1>
+<h1>StatusMessageProcessor</h1>
 
 
 
   
-  
-  
-
-  
-  
-  
-
-  
-    extends <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleCapabilitiesAdapter.html">QuickBooksWindowsModuleCapabilitiesAdapter</a><br/>
+    extends Object<br/>
   
   
   
@@ -423,6 +413,10 @@ Summary:
   
       implements 
       
+        FlowConstructAware 
+      
+        MuleContextAware 
+      
         Disposable 
       
         Initialisable 
@@ -430,6 +424,8 @@ Summary:
         Startable 
       
         Stoppable 
+      
+        MessageProcessor 
       
   
   
@@ -445,7 +441,7 @@ Summary:
 
     <tr>
         
-        <td colspan="4" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
@@ -453,29 +449,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="3" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">org.mule.modules.quickbooks.windows.QuickBooksWindowsModule</a></td>
-    </tr>
-    
-
-    <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
-        
-        <td colspan="2" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleCapabilitiesAdapter.html">org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleCapabilitiesAdapter</a></td>
-    </tr>
-    
-
-    <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
-        
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleLifecycleAdapter</td>
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.windows.config.StatusMessageProcessor</td>
     </tr>
     
 
@@ -491,7 +465,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>A <code>QuickBooksWindowsModuleLifecycleAdapter</code> is a wrapper around <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code> that adds lifecycle methods to the pojo.
+<p>StatusMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map)</a></code> method in <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -540,8 +514,6 @@ Summary:
 <table id="inhconstants" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Constants</div></th></tr>
-
-
 
 
 
@@ -673,37 +645,16 @@ org.mule.api.lifecycle.Stoppable
 </td></tr>
 
 
+
+
 </table>
 
 
 
 
-
-
-
 <!-- =========== FIELD SUMMARY =========== -->
-<table id="inhfields" class="jd-sumtable"><tr><th>
-  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
-  <div style="clear:left;">Inherited Fields</div></th></tr>
+<table id="lfields" class="jd-sumtable"><tr><th colspan="12">Fields</th></tr>
 
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule" class="jd-expando-trigger closed"
-          ><img id="inherited-fields-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From class
-<a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">org.mule.modules.quickbooks.windows.QuickBooksWindowsModule</a>
-<div id="inherited-fields-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule">
-  <div id="inherited-fields-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-fields-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
 
     
       <tr class="alt-color api apilevel-" >
@@ -712,9 +663,8 @@ org.mule.api.lifecycle.Stoppable
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#baseUri">baseUri</a></td>
-          <td class="jd-descrcol" width="100%">The base uri of the quickbooks endpoint,
- used to fetch the company uri.</td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#_appKeyType">_appKeyType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
@@ -723,9 +673,9 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/api/QuickBooksWindowsClient.html">QuickBooksWindowsClient</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#client">client</a></td>
-          <td class="jd-descrcol" width="100%">Quick-Books client.</td>
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#_authIdPseudonymType">_authIdPseudonymType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
@@ -733,32 +683,195 @@ org.mule.api.lifecycle.Stoppable
           <td class="jd-typecol"><nobr>
           private
           
-          final
-          MapObjectMapper</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#mom">mom</a></td>
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#_realmIdPseudonymType">_realmIdPseudonymType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#_realmIdType">_realmIdType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Map&lt;String,&nbsp;Object&gt;</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#_syncStatusRequestType">_syncStatusRequestType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#appKey">appKey</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#authIdPseudonym">authIdPseudonym</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          ExpressionManager</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#expressionManager">expressionManager</a></td>
+          <td class="jd-descrcol" width="100%">Mule Expression Manager
+ 
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          FlowConstruct</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#flowConstruct">flowConstruct</a></td>
+          <td class="jd-descrcol" width="100%">Flow construct
+ 
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          static
+          
+          Logger</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#logger">logger</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#moduleObject">moduleObject</a></td>
+          <td class="jd-descrcol" width="100%">Module object
+ 
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          MuleContext</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#muleContext">muleContext</a></td>
+          <td class="jd-descrcol" width="100%">Mule Context
+ 
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          TemplateParser.PatternInfo</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#patternInfo">patternInfo</a></td>
+          <td class="jd-descrcol" width="100%">Mule Pattern Info
+ 
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#realmId">realmId</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#realmIdPseudonym">realmIdPseudonym</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          AtomicInteger</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#retryCount">retryCount</a></td>
+          <td class="jd-descrcol" width="100%">Variable used to track how many retries we have attempted on this message processor
+ 
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          int</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#retryMax">retryMax</a></td>
+          <td class="jd-descrcol" width="100%">Maximum number of retries that can be attempted.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#syncStatusRequest">syncStatusRequest</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+
 </table>
-  </div>
-</div>
-</td></tr>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-</table>
 
 
 
@@ -779,7 +892,7 @@ org.mule.api.lifecycle.Stoppable
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html#QuickBooksWindowsModuleLifecycleAdapter()">QuickBooksWindowsModuleLifecycleAdapter</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#StatusMessageProcessor()">StatusMessageProcessor</a></span>()</nobr>
         
   </td></tr>
 
@@ -808,7 +921,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html#dispose()">dispose</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#dispose()">dispose</a></span>()</nobr>
         
   </td></tr>
 
@@ -824,8 +937,46 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html#initialise()">initialise</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#initialise()">initialise</a></span>()</nobr>
         
+        <div class="jd-descrdiv">Obtains the expression manager from the Mule context and initialises the connector.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            MuleEvent</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#process(org.mule.api.MuleEvent)">process</a></span>(MuleEvent event)</nobr>
+        
+        <div class="jd-descrdiv">Invokes the MessageProcessor.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setAppKey(java.lang.Object)">setAppKey</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets appKey</div>
+  
   </td></tr>
 
 
@@ -840,7 +991,151 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html#start()">start</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setAuthIdPseudonym(java.lang.Object)">setAuthIdPseudonym</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets authIdPseudonym</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
+        
+        <div class="jd-descrdiv">Sets flow construct</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setModuleObject(java.lang.Object)">setModuleObject</a></span>(Object moduleObject)</nobr>
+        
+        <div class="jd-descrdiv">Sets the instance of the object under which the processor will execute</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext context)</nobr>
+        
+        <div class="jd-descrdiv">Set the Mule context</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setRealmId(java.lang.Object)">setRealmId</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets realmId</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setRealmIdPseudonym(java.lang.Object)">setRealmIdPseudonym</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets realmIdPseudonym</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setRetryMax(int)">setRetryMax</a></span>(int value)</nobr>
+        
+        <div class="jd-descrdiv">Sets retryMax</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#setSyncStatusRequest(java.lang.Object)">setSyncStatusRequest</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets syncStatusRequest</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#start()">start</a></span>()</nobr>
         
   </td></tr>
 
@@ -856,7 +1151,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html#stop()">stop</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html#stop()">stop</a></span>()</nobr>
         
   </td></tr>
 
@@ -874,288 +1169,6 @@ org.mule.api.lifecycle.Stoppable
 <table id="inhmethods" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Methods</div></th></tr>
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleCapabilitiesAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleCapabilitiesAdapter-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From class
-
-  <a href="../../../../../../../org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleCapabilitiesAdapter.html">org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleCapabilitiesAdapter</a>
-
-<div id="inherited-methods-org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleCapabilitiesAdapter">
-  <div id="inherited-methods-org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleCapabilitiesAdapter-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.modules.quickbooks.windows.config.QuickBooksWindowsModuleCapabilitiesAdapter-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleCapabilitiesAdapter.html#isCapableOf(org.mule.api.Capability)">isCapableOf</a></span>(Capability capability)</nobr>
-        
-        <div class="jd-descrdiv">Returns true if this module implements such capability
- 
-</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From class
-
-  <a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">org.mule.modules.quickbooks.windows.QuickBooksWindowsModule</a>
-
-<div id="inherited-methods-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule">
-  <div id="inherited-methods-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.modules.quickbooks.windows.QuickBooksWindowsModule-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Object</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#create(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.Boolean, java.lang.Boolean)">create</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Map&lt;String,&nbsp;Object&gt; obj, String requestId, Boolean draft, Boolean fullResponse)</nobr>
-        
-        <div class="jd-descrdiv">Creates.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#delete(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String)">delete</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Map&lt;String,&nbsp;Object&gt; obj, String requestId)</nobr>
-        
-        <div class="jd-descrdiv">Deletes an object.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Iterable</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">findObjects</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Map&lt;String,&nbsp;Object&gt; query)</nobr>
-        
-        <div class="jd-descrdiv">Lazily retrieves Objects
-
- For details on how to generate a query see: 
- <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/0500_QuickBooks_Windows/
- 0100_Calling_Data_Services/0015_Retrieving_Objects">Retrieve Especification</a>
- 
- 
- 
- 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#generateANewRequestId()">generateANewRequestId</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Generate a new GUID for the requestId
- 
- </div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getBaseUri()">getBaseUri</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Object</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">getObject</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Map&lt;String,&nbsp;Object&gt; id)</nobr>
-        
-        <div class="jd-descrdiv">Retrieve objects by ID.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#init()">init</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">post construct
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setBaseUri(java.lang.String)">setBaseUri</a></span>(String baseUri)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">status</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncStatusRequest)</nobr>
-        
-        <div class="jd-descrdiv">Retrieve the Status
- 
- <p>Retrieves information about the sync status of Quickbooks entities.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#syncActivity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">syncActivity</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncActivityRequest)</nobr>
-        
-        <div class="jd-descrdiv">Retrieve the SyncActivities
- 
- <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Object</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#update(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.Boolean, java.lang.Boolean)">update</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Map&lt;String,&nbsp;Object&gt; obj, String requestId, Boolean draft, Boolean fullResponse)</nobr>
-        
-        <div class="jd-descrdiv">Updates.</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
 
 
 <tr class="api apilevel-" >
@@ -1362,19 +1375,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.Capabilities" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.Capabilities-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.construct.FlowConstructAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.construct.FlowConstructAware-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.Capabilities
+  org.mule.api.construct.FlowConstructAware
 
-<div id="inherited-methods-org.mule.api.Capabilities">
-  <div id="inherited-methods-org.mule.api.Capabilities-list"
+<div id="inherited-methods-org.mule.api.construct.FlowConstructAware">
+  <div id="inherited-methods-org.mule.api.construct.FlowConstructAware-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.Capabilities-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.api.construct.FlowConstructAware-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -1387,10 +1400,52 @@ From interface
             
             
             
-            boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">isCapableOf</span>(Capability arg0)</nobr>
+        <span class="sympad">setFlowConstruct</span>(FlowConstruct arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.context.MuleContextAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.context.MuleContextAware-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.context.MuleContextAware
+
+<div id="inherited-methods-org.mule.api.context.MuleContextAware">
+  <div id="inherited-methods-org.mule.api.context.MuleContextAware-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.context.MuleContextAware-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setMuleContext</span>(MuleContext arg0)</nobr>
         
   </td></tr>
 
@@ -1569,6 +1624,48 @@ From interface
 </td></tr>
 
 
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.processor.MessageProcessor" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.processor.MessageProcessor-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.processor.MessageProcessor
+
+<div id="inherited-methods-org.mule.api.processor.MessageProcessor">
+  <div id="inherited-methods-org.mule.api.processor.MessageProcessor-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.processor.MessageProcessor-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            MuleEvent</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">process</span>(MuleEvent arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
 </table>
 
 
@@ -1595,6 +1692,567 @@ From interface
 <!-- Fields -->
 
 
+<!-- ========= FIELD DETAIL ======== -->
+<h2>Fields</h2>
+
+
+
+
+<A NAME="_appKeyType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        _appKeyType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_authIdPseudonymType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        _authIdPseudonymType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_realmIdPseudonymType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        _realmIdPseudonymType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_realmIdType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        _realmIdType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_syncStatusRequestType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Map&lt;String,&nbsp;Object&gt;
+      </span>
+        _syncStatusRequestType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="appKey"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Object
+      </span>
+        appKey
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="authIdPseudonym"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Object
+      </span>
+        authIdPseudonym
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="expressionManager"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        ExpressionManager
+      </span>
+        expressionManager
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Mule Expression Manager
+ 
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="flowConstruct"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        FlowConstruct
+      </span>
+        flowConstruct
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Flow construct
+ 
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="logger"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+        static 
+         
+        Logger
+      </span>
+        logger
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="moduleObject"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Object
+      </span>
+        moduleObject
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Module object
+ 
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="muleContext"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        MuleContext
+      </span>
+        muleContext
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Mule Context
+ 
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="patternInfo"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        TemplateParser.PatternInfo
+      </span>
+        patternInfo
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Mule Pattern Info
+ 
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="realmId"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Object
+      </span>
+        realmId
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="realmIdPseudonym"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Object
+      </span>
+        realmIdPseudonym
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="retryCount"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        AtomicInteger
+      </span>
+        retryCount
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Variable used to track how many retries we have attempted on this message processor
+ 
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="retryMax"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        int
+      </span>
+        retryMax
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Maximum number of retries that can be attempted.
+ 
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="syncStatusRequest"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Object
+      </span>
+        syncStatusRequest
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+
 <!-- Public ctors -->
 
 
@@ -1603,7 +2261,7 @@ From interface
 
 
 
-<A NAME="QuickBooksWindowsModuleLifecycleAdapter()"></A>
+<A NAME="StatusMessageProcessor()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1615,7 +2273,7 @@ From interface
          
         
       </span>
-      <span class="sympad">QuickBooksWindowsModuleLifecycleAdapter</span>
+      <span class="sympad">StatusMessageProcessor</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -1705,7 +2363,434 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Obtains the expression manager from the Mule context and initialises the connector. If a target object  has not been set already it will search the Mule registry for a default one.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>InitialisationException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="process(org.mule.api.MuleEvent)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        MuleEvent
+      </span>
+      <span class="sympad">process</span>
+      <span class="normal">(MuleEvent event)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Invokes the MessageProcessor.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>event</td>
+          <td>MuleEvent to be processed</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>MuleException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setAppKey(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAppKey</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets appKey</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setAuthIdPseudonym(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAuthIdPseudonym</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets authIdPseudonym</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setFlowConstruct(org.mule.api.construct.FlowConstruct)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setFlowConstruct</span>
+      <span class="normal">(FlowConstruct flowConstruct)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets flow construct</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>flowConstruct</td>
+          <td>Flow construct to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setModuleObject(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setModuleObject</span>
+      <span class="normal">(Object moduleObject)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets the instance of the object under which the processor will execute</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>moduleObject</td>
+          <td>Instace of the module
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setMuleContext(org.mule.api.MuleContext)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setMuleContext</span>
+      <span class="normal">(MuleContext context)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Set the Mule context</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>context</td>
+          <td>Mule context to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setRealmId(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setRealmId</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets realmId</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setRealmIdPseudonym(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setRealmIdPseudonym</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets realmIdPseudonym</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setRetryMax(int)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setRetryMax</span>
+      <span class="normal">(int value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets retryMax</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setSyncStatusRequest(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setSyncStatusRequest</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets syncStatusRequest</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>

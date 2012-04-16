@@ -336,6 +336,30 @@ Summary:
 	 
     <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows.html#status">&lt;quickbooks-windows:status&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Retrieve the Status
+ 
+ <p>Retrieves information about the sync status of Quickbooks entities.<br/></div>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows.html#sync-activity">&lt;quickbooks-windows:sync-activity&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Retrieve the SyncActivities
+ 
+ <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations.<br/></div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows.html#update">&lt;quickbooks-windows:update&gt;</a></nobr>
         
         <div class="jd-descrdiv">Updates.<br/></div>
@@ -1463,6 +1487,276 @@ specify which configuration to use.</p>
         </tr>
       </table>
   </div>
+
+    </div>
+</div>
+
+
+<A NAME="status"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:status&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieve the Status
+ 
+ <p>Retrieves information about the sync status of Quickbooks entities. You can also query 
+ specific entity types for either synchronized or unsynchronized objects with filters. You can get information 
+ on recent synchronizations using the syncActivity operation.</p>
+ <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. 
+ Of those operations older than 30 days, only the last operation's synch status will be maintained.</p>
+ 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="#[map-payload:realmId]"
+                                  appKey="#[map-payload:appKey]"
+                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                                  authIdPseudonym="#[map-payload:authIdPseudonym]"&gt;
+    &lt;quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/&gt;
+&lt;/quickbooks-windows:status&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" /&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"&gt;
+    &lt;quickbooks-windows:sync-status-request&gt;
+        &lt;ngIdSet&gt;#[groovy: [ 
+            [   'ngObjectType' : 'CUSTOMER',
+                'ngId' : '2948729' ]
+        ] ]&lt;/ngIdSet&gt;
+    &lt;/quickbooks-windows:sync-status-request&gt;
+&lt;/quickbooks-windows:status&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"&gt;
+    &lt;quickbooks-windows:sync-status-request&gt;
+        &lt;requestId&gt;#[groovy: [ 
+            [   '81283818123912398123981723981239' ]
+        ] ]&lt;/requestId&gt;
+    &lt;/quickbooks-windows:sync-status-request&gt;
+&lt;/quickbooks-windows:status&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+          
+          
+                
+                <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">The realmID, also known as the Company ID, uniquely identifies the data for a company.
+                In QuickBooks Online, the Company ID  appears on the My Account page.
+                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>appKey</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Application Id.</td>
+                </tr>
+                
+                
+          
+                
+                <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+                </tr>
+                
+                
+          
+                
+          
+          
+          
+        </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Child Elements</h5>
+        <table id="lconfig" class="jd-sumtable">
+          
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+            <tr><th colspan="12"><nobr>&lt;quickbooks-windows:syncStatusRequest&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Map that represents a <code><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncStatusRequest.html">SyncStatusRequest</a></code> object. It has the specifications
+                          of the syncStatuses to be retrieved. (like a filter)</span></th></tr>
+            
+            
+          
+      </table>
+  </div>
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Return Payload</h5>
+      <ul class="nolist"><li>list of <code><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a></code>
+</li></ul>
+  </div>
+    
+  
+
+    </div>
+</div>
+
+
+<A NAME="sync-activity"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:sync-activity&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieve the SyncActivities
+ 
+ <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations. To get the sync 
+ status of another type of object, for example, a customer, use the status operation.  To filter a query based 
+ on whether or not an object  is synchronized, use a filter.</p>
+ <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. Of those 
+ operations older than 30 days, only the last operation's synch status will be maintained.</p>
+ 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity realmId="#[map-payload:realmId]"
+                                  appKey="#[map-payload:appKey]"
+                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                                  authIdPseudonym="#[map-payload:authIdPseudonym]"&gt;
+    &lt;quickbooks-windows:sync-activity-request ref="#[map-payload:syncActivityRequest]"/&gt;
+&lt;/quickbooks-windows:sync-activity&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                                  authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" /&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                                  authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" &gt;
+    &lt;quickbooks-windows:sync-activity-request&gt;
+        &lt;startCreatedTMS&gt;2010-06-18T02:17:29&lt;/startCreatedTMS&gt;
+        &lt;endCreatedTMS&gt;2011-06-18T02:17:29&lt;/endCreatedTMS&gt;
+    &lt;/quickbooks-windows:sync-activity-request&gt;
+&lt;/quickbooks-windows:sync-activity&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+          
+          
+                
+                <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">The realmID, also known as the Company ID, uniquely identifies the data for a company.
+                In QuickBooks Online, the Company ID  appears on the My Account page.
+                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>appKey</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Application Id.</td>
+                </tr>
+                
+                
+          
+                
+                <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+                </tr>
+                
+                
+          
+                
+          
+          
+          
+        </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Child Elements</h5>
+        <table id="lconfig" class="jd-sumtable">
+          
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+            <tr><th colspan="12"><nobr>&lt;quickbooks-windows:syncActivityRequest&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Map that represents a <code><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncActivityRequest.html">SyncActivityRequest</a></code> object. It has the specifications
+                            of the SyncActivities to be retrieved. (like a filter)</span></th></tr>
+            
+            
+          
+      </table>
+  </div>
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Return Payload</h5>
+      <ul class="nolist"><li>list of <code><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a></code>
+</li></ul>
+  </div>
+    
+  
 
     </div>
 </div>

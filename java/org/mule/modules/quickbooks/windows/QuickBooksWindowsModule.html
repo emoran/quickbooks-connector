@@ -738,6 +738,46 @@ Summary:
             
             
             
+            List&lt;<a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">status</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncStatusRequest)</nobr>
+        
+        <div class="jd-descrdiv">Retrieve the Status
+ 
+ <p>Retrieves information about the sync status of Quickbooks entities.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            List&lt;<a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#syncActivity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">syncActivity</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncActivityRequest)</nobr>
+        
+        <div class="jd-descrdiv">Retrieve the SyncActivities
+ 
+ <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1661,6 +1701,155 @@ From class
           <td></td>
         </tr>
       </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        List&lt;<a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a>&gt;
+      </span>
+      <span class="sympad">status</span>
+      <span class="normal">(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncStatusRequest)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieve the Status
+ 
+ <p>Retrieves information about the sync status of Quickbooks entities. You can also query 
+ specific entity types for either synchronized or unsynchronized objects with filters. You can get information 
+ on recent synchronizations using the syncActivity operation.</p>
+ <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. 
+ Of those operations older than 30 days, only the last operation's synch status will be maintained.</p>
+ 
+ 
+ 
+ 
+ </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>realmId</td>
+          <td>The realmID, also known as the Company ID, uniquely identifies the data for a company.
+                In QuickBooks Online, the Company ID  appears on the My Account page.
+                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+        </tr>
+        <tr>
+          <th>appKey</td>
+          <td>Application Id.</td>
+        </tr>
+        <tr>
+          <th>realmIdPseudonym</td>
+          <td>Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
+        </tr>
+        <tr>
+          <th>authIdPseudonym</td>
+          <td>Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+        </tr>
+        <tr>
+          <th>syncStatusRequest</td>
+          <td>Map that represents a <code><a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncStatusRequest.html">SyncStatusRequest</a></code> object. It has the specifications
+                          of the syncStatuses to be retrieved. (like a filter)</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>list of <code><a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a></code>
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="syncActivity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        List&lt;<a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a>&gt;
+      </span>
+      <span class="sympad">syncActivity</span>
+      <span class="normal">(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncActivityRequest)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieve the SyncActivities
+ 
+ <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations. To get the sync 
+ status of another type of object, for example, a customer, use the status operation.  To filter a query based 
+ on whether or not an object  is synchronized, use a filter.</p>
+ <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. Of those 
+ operations older than 30 days, only the last operation's synch status will be maintained.</p>
+ 
+ 
+ 
+ </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>realmId</td>
+          <td>The realmID, also known as the Company ID, uniquely identifies the data for a company.
+                In QuickBooks Online, the Company ID  appears on the My Account page.
+                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+        </tr>
+        <tr>
+          <th>appKey</td>
+          <td>Application Id.</td>
+        </tr>
+        <tr>
+          <th>realmIdPseudonym</td>
+          <td>Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
+        </tr>
+        <tr>
+          <th>authIdPseudonym</td>
+          <td>Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+        </tr>
+        <tr>
+          <th>syncActivityRequest</td>
+          <td>Map that represents a <code><a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityRequest.html">SyncActivityRequest</a></code> object. It has the specifications
+                            of the SyncActivities to be retrieved. (like a filter)</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>list of <code><a href="../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a></code>
+</li></ul>
   </div>
 
     </div>

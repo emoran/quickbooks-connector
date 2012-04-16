@@ -234,6 +234,8 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></li>
           <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleCapabilitiesAdapter.html">QuickBooksWindowsModuleCapabilitiesAdapter</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html">QuickBooksWindowsModuleLifecycleAdapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html">StatusMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/SyncActivityMessageProcessor.html">SyncActivityMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/UpdateMessageProcessor.html">UpdateMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/WindowsEntityTypeEnumTransformer.html">WindowsEntityTypeEnumTransformer</a></li>
       </ul>
@@ -811,6 +813,46 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setBaseUri(java.lang.String)">setBaseUri</a></span>(String baseUri)</nobr>
         
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">status</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncStatusRequest)</nobr>
+        
+        <div class="jd-descrdiv">Retrieve the Status
+ 
+ <p>Retrieves information about the sync status of Quickbooks entities.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#syncActivity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">syncActivity</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncActivityRequest)</nobr>
+        
+        <div class="jd-descrdiv">Retrieve the SyncActivities
+ 
+ <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations.</div>
+  
   </td></tr>
 
 
