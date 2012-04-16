@@ -853,3 +853,74 @@
 <!-- BEGIN_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
 <quickbooks-windows:generate-a-new-request-id />
 <!-- END_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:status) -->
+<quickbooks-windows:status realmId="#[map-payload:realmId]"
+                                  appKey="#[map-payload:appKey]"
+                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+    <quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/>
+</quickbooks-windows:status>
+<!-- END_INCLUDE(quickbooks-windows:status) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:status2) -->
+<quickbooks-windows:status realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" />
+<!-- END_INCLUDE(quickbooks-windows:status2) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:status3) -->
+<quickbooks-windows:status realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c">
+    <quickbooks-windows:sync-status-request>
+        <ngIdSet>#[groovy: [ 
+            [   'ngObjectType' : 'CUSTOMER',
+                'ngId' : '2948729' ]
+        ] ]</ngIdSet>
+    </quickbooks-windows:sync-status-request>
+</quickbooks-windows:status>
+<!-- END_INCLUDE(quickbooks-windows:status3) -->
+    
+<!-- BEGIN_INCLUDE(quickbooks-windows:status4) -->
+<quickbooks-windows:status realmId="33221157"
+                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c">
+    <quickbooks-windows:sync-status-request>
+        <requestId>#[groovy: [ 
+            [   '81283818123912398123981723981239' ]
+        ] ]</requestId>
+    </quickbooks-windows:sync-status-request>
+</quickbooks-windows:status>
+<!-- END_INCLUDE(quickbooks-windows:status4) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity) -->
+<quickbooks-windows:sync-activity realmId="#[map-payload:realmId]"
+                                  appKey="#[map-payload:appKey]"
+                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+    <quickbooks-windows:sync-activity-request ref="#[map-payload:syncActivityRequest]"/>
+</quickbooks-windows:sync-activity>
+<!-- END_INCLUDE(quickbooks-windows:sync-activity) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity2) -->
+<quickbooks-windows:sync-activity realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                                  authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" />
+<!-- END_INCLUDE(quickbooks-windows:sync-activity2) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity3) -->
+<quickbooks-windows:sync-activity realmId="33221157"
+                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
+                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
+                                  authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" >
+    <quickbooks-windows:sync-activity-request>
+        <startCreatedTMS>2010-06-18T02:17:29</startCreatedTMS>
+        <endCreatedTMS>2011-06-18T02:17:29</endCreatedTMS>
+    </quickbooks-windows:sync-activity-request>
+</quickbooks-windows:sync-activity>
+<!-- END_INCLUDE(quickbooks-windows:sync-activity3) -->

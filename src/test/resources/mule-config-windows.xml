@@ -86,4 +86,21 @@
 	<flow name="generate-a-new-request-id">
 		<quickbooks-windows:generate-a-new-request-id />
 	</flow>
+	<flow name="status">
+		<quickbooks-windows:status realmId="#[map-payload:realmId]"
+		                                  appKey="#[map-payload:appKey]"
+		                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+		    <quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/>
+		</quickbooks-windows:status>
+    </flow>
+
+    <flow name="sync-activity">
+		<quickbooks-windows:sync-activity realmId="#[map-payload:realmId]"
+		                                  appKey="#[map-payload:appKey]"
+		                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+		    <quickbooks-windows:sync-activity-request ref="#[map-payload:syncActivityRequest]"/>
+		</quickbooks-windows:sync-activity>
+    </flow>
 </mule>

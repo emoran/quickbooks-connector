@@ -30,6 +30,12 @@ import org.mule.modules.quickbooks.windows.api.DefaultQuickBooksWindowsClient;
 import org.mule.modules.quickbooks.windows.api.QuickBooksWindowsClient;
 import org.mule.modules.quickbooks.windows.schema.IdType;
 import org.mule.modules.quickbooks.windows.schema.ObjectRef;
+import org.mule.modules.quickbooks.windows.schema.SyncActivityRequest;
+import org.mule.modules.quickbooks.windows.schema.SyncActivityResponse;
+import org.mule.modules.quickbooks.windows.schema.SyncActivityResponses;
+import org.mule.modules.quickbooks.windows.schema.SyncStatusRequest;
+import org.mule.modules.quickbooks.windows.schema.SyncStatusResponse;
+import org.mule.modules.quickbooks.windows.schema.SyncStatusResponses;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
@@ -324,6 +330,84 @@ public class QuickBooksWindowsModule
         return client.generateARequestId();
     }
     
+    /**
+     * Retrieve the Status
+     * 
+     * <p>Retrieves information about the sync status of Quickbooks entities. You can also query 
+     * specific entity types for either synchronized or unsynchronized objects with filters. You can get information 
+     * on recent synchronizations using the syncActivity operation.</p>
+     * <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. 
+     * Of those operations older than 30 days, only the last operation's synch status will be maintained.</p>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:status}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:status2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:status3}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:status4}
+     * 
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param syncStatusRequest Map that represents a {@link SyncStatusRequest} object. It has the specifications
+     *                          of the syncStatuses to be retrieved. (like a filter)
+     * @return list of {@link SyncStatusResponse}
+     */
+    @Processor
+    public List<SyncStatusResponse> status(String realmId,
+                         String appKey,
+                         String realmIdPseudonym, 
+                         String authIdPseudonym,
+                         @Optional Map<String, Object> syncStatusRequest)
+    {
+        if (syncStatusRequest == null)
+        {
+            syncStatusRequest = new HashMap<String, Object>();
+        }
+        
+        return ((SyncStatusResponses) client.retrieveWithoutUsingQueryObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            unmap(SyncStatusRequest.class, syncStatusRequest), "status")).getSyncStatusResponse();
+    }
+    
+    /**
+     * Retrieve the SyncActivities
+     * 
+     * <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations. To get the sync 
+     * status of another type of object, for example, a customer, use the status operation.  To filter a query based 
+     * on whether or not an object  is synchronized, use a filter.</p>
+     * <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. Of those 
+     * operations older than 30 days, only the last operation's synch status will be maintained.</p>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:sync-activity}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:sync-activity2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:sync-activity3}
+     * 
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param syncActivityRequest Map that represents a {@link SyncActivityRequest} object. It has the specifications
+     *                            of the SyncActivities to be retrieved. (like a filter)
+     * @return list of {@link SyncActivityResponse}
+     */
+    @Processor
+    public List<SyncActivityResponse> syncActivity(String realmId,
+                         String appKey,
+                         String realmIdPseudonym, 
+                         String authIdPseudonym,
+                         @Optional Map<String, Object> syncActivityRequest)
+    {
+        if (syncActivityRequest == null)
+        {
+            syncActivityRequest = new HashMap<String, Object>();
+        }
+        
+        return ((SyncActivityResponses) client.retrieveWithoutUsingQueryObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            unmap(SyncActivityRequest.class, syncActivityRequest), "syncActivity")).getSyncActivityResponse();
+    }
 //    /**
 //     * Revert.
 //     * The revert operation discards all updates made to the object since its last sync to QuickBooks. An object can

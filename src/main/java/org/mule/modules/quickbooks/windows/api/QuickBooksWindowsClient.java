@@ -41,5 +41,9 @@ public interface QuickBooksWindowsClient
                 final String realmIdPseudonym, final String authIdPseudonym, 
                 final WindowsEntityType type, final Object obj, final String requestId);
     
+    Object retrieveWithoutUsingQueryObjects(final String realmId, final String appKey, 
+                  final String realmIdPseudonym, final String authIdPseudonym, 
+                  final Object syncStatusRequest, final String objectName);
+    
     String generateARequestId();
 }

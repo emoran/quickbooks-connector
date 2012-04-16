@@ -357,6 +357,48 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     }
 
     @Override
+    public Object retrieveWithoutUsingQueryObjects(String realmId,
+                                           String appKey,
+                                           String realmIdPseudonym,
+                                           String authIdPseudonym,
+                                           Object syncStatusRequest,
+                                           String objectName)
+    { 
+        Validate.notNull(syncStatusRequest);
+        
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
+        String str = String.format("%s/%s/v2/%s",
+            getBaseUri(realmId), objectName, realmId);
+
+        HttpUriRequest httpRequest = new HttpPost(str);
+        httpRequest.addHeader("Content-Type", "text/xml");
+        
+        prepareToPost(syncStatusRequest, httpRequest);
+        try
+        {
+            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            if(respObj instanceof ErrorResponse)
+            {
+                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+            }
+            return respObj;
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                destroyAccessToken(realmId);
+                return retrieveWithoutUsingQueryObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, syncStatusRequest, objectName);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
+    }
+    
+    @Override
     public void revert(final String realmId, final String appKey, 
                 final String realmIdPseudonym, final String authIdPseudonym, 
                 WindowsEntityType type, Object obj, String requestId)

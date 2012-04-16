@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.BeforeClass;
@@ -39,10 +40,16 @@ import org.mule.modules.quickbooks.windows.schema.InvoiceLine;
 import org.mule.modules.quickbooks.windows.schema.Item;
 import org.mule.modules.quickbooks.windows.schema.ItemTypeEnum;
 import org.mule.modules.quickbooks.windows.schema.Money;
+import org.mule.modules.quickbooks.windows.schema.NgIdSet;
+import org.mule.modules.quickbooks.windows.schema.ObjectName;
 import org.mule.modules.quickbooks.windows.schema.ObjectRef;
 import org.mule.modules.quickbooks.windows.schema.PartyType;
 import org.mule.modules.quickbooks.windows.schema.PhysicalAddress;
 import org.mule.modules.quickbooks.windows.schema.SalesTerm;
+import org.mule.modules.quickbooks.windows.schema.SyncActivityRequest;
+import org.mule.modules.quickbooks.windows.schema.SyncActivityResponse;
+import org.mule.modules.quickbooks.windows.schema.SyncStatusRequest;
+import org.mule.modules.quickbooks.windows.schema.SyncStatusResponse;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
@@ -335,6 +342,84 @@ public class QuickBooksWindowsModuleTestDriver
         assertEquals(createdInvoice.getHeader().getDocNumber(), updatedInvoice.getHeader().getDocNumber());
     }
     
+    @Test
+    public void retrieveStatusFromASpecificCustomer()
+    {
+        SyncStatusRequest syncStatusRequest =  new SyncStatusRequest();
+        syncStatusRequest.getNgIdSet().add(new NgIdSet() {{
+            setNgObjectType(ObjectName.CUSTOMER);
+            setNgId("2948729");
+        }});
+        List<SyncStatusResponse> list = module.status(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            (Map<String, Object>) mom.map(syncStatusRequest));
+        
+        for(SyncStatusResponse sr : list)
+        {
+            System.out.println("MessageCode: " + sr.getMessageCode());
+            System.out.println("MessageDesc: " + sr.getMessageDesc());
+            System.out.println("StateCode: " + sr.getStateCode());
+            System.out.println("StateDesc: " + sr.getStateDesc() + "\n");
+            assertEquals("2948729", sr.getNgIdSet().getNgId());
+            assertEquals(ObjectName.CUSTOMER, sr.getNgIdSet().getNgObjectType());
+        }
+    }
+    
+    @Test
+    public void retrieveAllStatus()
+    {
+        SyncStatusRequest syncStatusRequest =  new SyncStatusRequest();
+
+        List<SyncStatusResponse> list = module.status(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            (Map<String, Object>) mom.map(syncStatusRequest));
+        
+        for(SyncStatusResponse sr : list)
+        {
+            System.out.println("MessageCode: " + sr.getMessageCode());
+            System.out.println("MessageDesc: " + sr.getMessageDesc());
+            System.out.println("StateCode: " + sr.getStateCode());
+            System.out.println("StateDesc: " + sr.getStateDesc() + "\n");
+        }
+    }
+    
+    @Test
+    public void followTheRequestId()
+    {
+        String requestId = module.generateANewRequestId();
+        Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createJaneDoe()), requestId, null, true);
+        
+        SyncStatusRequest syncStatusRequest =  new SyncStatusRequest();
+        syncStatusRequest.getRequestId().add(requestId);
+        
+        List<SyncStatusResponse> list = module.status(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            (Map<String, Object>) mom.map(syncStatusRequest));
+        
+        for(SyncStatusResponse sr : list)
+        {
+            System.out.println("MessageCode: " + sr.getMessageCode());
+            System.out.println("MessageDesc: " + sr.getMessageDesc());
+            System.out.println("StateCode: " + sr.getStateCode());
+            System.out.println("StateDesc: " + sr.getStateDesc() + "\n");
+        }
+        
+        module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER, 
+            (Map<String, Object>) mom.map(createdCustomer), module.generateANewRequestId());
+    }
+    
+    @Test
+    public void retrieveSyncActivity()
+    {
+        SyncActivityRequest syncActivityRequest =  new SyncActivityRequest();
+
+        List<SyncActivityResponse> list = module.syncActivity(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+            (Map<String, Object>) mom.map(syncActivityRequest));
+        
+        for(SyncActivityResponse sr : list)
+        {
+            System.out.println("SyncType: " + sr.getSyncType());
+            System.out.println("EntityName: " + sr.getEntityName() + "\n");
+        }
+    }
 //    @Test
 //    public void revertObject()
 //    {
