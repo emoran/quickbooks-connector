@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
@@ -85,7 +84,6 @@ public class QuickBooksWindowsModuleTestDriver
     }
 
     @Test
-    @Ignore
     public void deleteCustomers()
     {
         CustomerQuery query = new CustomerQuery();
@@ -102,7 +100,7 @@ public class QuickBooksWindowsModuleTestDriver
     
     @Test
     public void deleteCustomerSomeSpeficificCustomers()
-    {
+    {        
         Customer customerJane = createJaneDoe();
         //non draft
         final Customer createdNonDraftCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
@@ -173,7 +171,7 @@ public class QuickBooksWindowsModuleTestDriver
     @Test
     public void createAccountAskingForFullResponse()
     {   
-        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account QBW")
+        Map<String, Object> mapAccount = new MapBuilder().with("name", "Test Account 2 QBW")
                                                          .with("active", true)
                                                          .with("type", AccountTypeEnum.EXPENSE)
                                                          .with("subtype", AccountSubtypeEnum.EXPENSE.value())
@@ -514,12 +512,12 @@ public class QuickBooksWindowsModuleTestDriver
             setTypeOf(PartyType.PERSON);
             setName("Jane Doe QBW test106");
             getAddress().add(new PhysicalAddress(){{
-                setLine1("5720 Peachtree Pkwy. 1");
-                line2 = "Norcross";
-                city = "Mountain View, CA 94043, CA 940";
-                country = "USA";
-                countrySubDivisionCode = "ON";
-                postalCode = "94043";
+                setLine1("5720 Peachtree Pkwy. 2");
+                setLine2("Norcross1");
+                setCity("Mountain View, CA 94043, CA 940");
+                setCountry("USA");
+                setCountrySubDivisionCode("ON");
+                setPostalCode("94042");
                 getTag().add("Billing");
             }});
             setDBAName("Mint");

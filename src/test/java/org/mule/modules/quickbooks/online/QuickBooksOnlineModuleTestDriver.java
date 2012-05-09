@@ -276,27 +276,29 @@ public class QuickBooksOnlineModuleTestDriver
         assertEquals(false, it.iterator().hasNext());
     }
     
-//    @Test
-//    public void deleteCustomer()
-//    {        
-//        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
-//        
-//        for (Customer customer: it)
-//        {
-//            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
-//        }
-//    }
-//    
-//    @Test
-//    public void deleteItem()
-//    {        
-//        Iterable<Item> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, "Name :EQUALS: ItemTest0057", null);
-//        
-//        for (Item item: it)
-//        {
-//            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
-//        }
-//    }
+    @Test
+    @Ignore
+    public void deleteCustomer()
+    {        
+        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
+        
+        for (Customer customer: it)
+        {
+            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+        }
+    }
+    
+    @Test
+    @Ignore
+    public void deleteItem()
+    {        
+        Iterable<Item> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, "Name :EQUALS: ItemTest0057", null);
+        
+        for (Item item: it)
+        {
+            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
+        }
+    }
     
     @Test
     public void createInvoiceRetrieveAndUpdateIt()
@@ -332,6 +334,8 @@ public class QuickBooksOnlineModuleTestDriver
         invoiceLine.setAmount(new BigDecimal(100));
         invoiceLine.setItemId(item.getId());
         lines.add(invoiceLine);
+        Map<String, Object> mapAux = (Map<String, Object>) mom.map(invHeader);
+        List<Map<String, Object>> listAux = (List<Map<String, Object>>) mom.map(lines);
         Invoice invoice = module.createInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, (Map<String, Object>) mom.map(invHeader), (List<Map<String, Object>>) mom.map(lines));
         
         //retrieve the invoices of our customer
