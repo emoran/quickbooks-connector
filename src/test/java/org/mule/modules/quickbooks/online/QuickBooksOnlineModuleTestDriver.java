@@ -229,22 +229,22 @@ public class QuickBooksOnlineModuleTestDriver
     @Test
     public void getAllCustomersAnswersNonNullListWithCustomers() throws Exception
     {       
-        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, null, null);
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, null, null);
         
-        for (Object c : it)
+        for (Customer c : it)
         {
-            System.out.println(((Customer) c).getName());
+            assertNotNull(c.getId());
         }
     }
     
     @Test
     public void getSomeCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
         
-        for (Object c : it)
+        for (Customer c : it)
         {
-            System.out.println(((Customer) c).getName());
+            assertNotNull(c.getId());
         }
     }
     
@@ -371,10 +371,8 @@ public class QuickBooksOnlineModuleTestDriver
         
         for(GenericEntity ge : it)
         {
-            System.out.println("ID: " + ge.getId().getValue());
-            System.out.println("ObjName: " + ge.getEntityType().value());
-            System.out.println("Date: " + ge.getLastUpdatedTime().toString());
-            System.out.println();
+            assertTrue(ge.getEntityType().value().equals("Customer") || ge.getEntityType().value().equals("Invoice") 
+                    || ge.getEntityType().value().equals("Item"));
         }
     }
     
