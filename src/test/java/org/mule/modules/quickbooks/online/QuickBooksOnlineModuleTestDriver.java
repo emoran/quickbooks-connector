@@ -15,32 +15,19 @@
 
 package org.mule.modules.quickbooks.online;
 
-import static org.junit.Assert.*;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.zauberlabs.commons.mom.MapObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.online.schema.Account;
-import org.mule.modules.quickbooks.online.schema.Customer;
-import org.mule.modules.quickbooks.online.schema.GenericEntity;
-import org.mule.modules.quickbooks.online.schema.Invoice;
-import org.mule.modules.quickbooks.online.schema.InvoiceHeader;
-import org.mule.modules.quickbooks.online.schema.InvoiceLine;
-import org.mule.modules.quickbooks.online.schema.Item;
-import org.mule.modules.quickbooks.online.schema.PhysicalAddress;
-import org.mule.modules.quickbooks.online.schema.SalesTerm;
+import org.mule.modules.quickbooks.online.schema.*;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
-import com.zauberlabs.commons.mom.MapObjectMapper;
+import java.math.BigDecimal;
+import java.util.*;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -216,7 +203,8 @@ public class QuickBooksOnlineModuleTestDriver
             new ArrayList<Map<String, Object>>(), 
             null, null, new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>()
+            new ArrayList<Map<String, Object>>(),
+                new ArrayList<Map<String, Object>>()
         );
         
         Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType);
