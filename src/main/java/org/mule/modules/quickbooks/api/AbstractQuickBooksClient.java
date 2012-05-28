@@ -256,12 +256,12 @@ public abstract class AbstractQuickBooksClient
     
     protected void destroyAccessToken(String realmId)
     {
-        connectionDatas.get(realmId).setAccessToken("");
+        connectionDatas.get(realmId).invalidateToken();
     }
     
     protected void loadCompanyData(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym)
     {
-        if(!connectionDatas.containsKey(realmId) || connectionDatas.get(realmId).getAccessToken().equals("invalidToken"))
+        if(!connectionDatas.containsKey(realmId) || !connectionDatas.get(realmId).isTokenValid())
         {
             String accessToken = getAccessTokensFromSaml(appKey, realmIdPseudonym, authIdPseudonym);
             if(!connectionDatas.containsKey(realmId))
@@ -285,7 +285,7 @@ public abstract class AbstractQuickBooksClient
         
         protected CompanyConnectionData()
         {
-            this.accessToken = "invalidToken";
+            invalidateToken();
         }
         
         public String getBaseUri()
@@ -306,6 +306,16 @@ public abstract class AbstractQuickBooksClient
         public void setAccessToken(String accessToken)
         {
             this.accessToken = accessToken;
+        }
+        
+        public void invalidateToken()
+        {
+            this.accessToken = "invalidToken";
+        }
+        
+        public boolean isTokenValid()
+        {
+            return this.accessToken.equals("invalidToken");
         }
     }
 }
