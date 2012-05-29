@@ -376,6 +376,7 @@
     <quickbooks:emails ref="#[variable:email]"></quickbooks:emails>
     <quickbooks:phones ref="#[variable:phone]"></quickbooks:phones>
     <quickbooks:addresses ref="#[variable:address]"></quickbooks:addresses>
+    <quickbooks:notes ref="#[variable:notes]"></quickbooks:notes>
 </quickbooks:create-customer>
 <!-- END_INCLUDE(quickbooks:create-customer) -->
 
@@ -420,6 +421,11 @@
             <postalCode>91367</postalCode>
         </quickbooks:address>
     </quickbooks:addresses>
+    <quickbooks:notes>
+        <quickbooks:note>
+            <content>Our most valuable Customer!!!<content>
+        </quickbooks:note>
+    </quickbooks:notes>
 </quickbooks:create-customer>
 <!-- END_INCLUDE(quickbooks:create-customer2) -->
 
@@ -710,6 +716,7 @@
     <quickbooks:emails ref="#[variable:emails]"></quickbooks:emails>
     <quickbooks:phones ref="#[variable:phones]"></quickbooks:phones>
     <quickbooks:addresses ref="#[variable:addresses]"></quickbooks:addresses>
+    <quickbooks:notes ref="#[variable:notes]"></quickbooks:notes>
 </quickbooks:create-vendor>
 <!-- END_INCLUDE(quickbooks:create-vendor) -->
 
@@ -749,6 +756,11 @@
             <postalCode>91367</postalCode>
         </quickbooks:address>
     </quickbooks:addresses>
+    <quickbooks:notes>
+        <quickbooks:note>
+            <content>Our most valuable Vendor!!<content>
+        </quickbooks:note>
+    </quickbooks:notes>
 </quickbooks:create-vendor>
 <!-- END_INCLUDE(quickbooks:create-vendor2) -->
 
@@ -1205,6 +1217,7 @@
     <quickbooks:emails ref="#[variable:email]"></quickbooks:emails>
     <quickbooks:phones ref="#[variable:phone]"></quickbooks:phones>
     <quickbooks:addresses ref="#[variable:address]"></quickbooks:addresses>
+    <quickbooks:notes ref="#[variable:notes]"></quickbooks:notes>
 </quickbooks:update-customer>
 <!-- END_INCLUDE(quickbooks:update-customer) -->
 
@@ -1253,6 +1266,11 @@
             <postalCode>91367</postalCode>
         </quickbooks:address>
     </quickbooks:addresses>
+    <quickbooks:notes>
+        <quickbooks:note>
+            <content>Our most valuable Customer!!<content>
+        </quickbooks:note>
+    </quickbooks:notes>
 </quickbooks:update-customer>
 <!-- END_INCLUDE(quickbooks:update-customer2) -->
 
@@ -1589,6 +1607,7 @@
     <quickbooks:emails ref="#[variable:emails]"></quickbooks:emails>
     <quickbooks:phones ref="#[variable:phones]"></quickbooks:phones>
     <quickbooks:addresses ref="#[variable:addresses]"></quickbooks:addresses>
+    <quickbooks:notes ref="#[variable:notes]"></quickbooks:notes>
 </quickbooks:update-vendor>
 <!-- END_INCLUDE(quickbooks:update-vendor) -->
 
@@ -1632,6 +1651,11 @@
             <postalCode>91367</postalCode>
         </quickbooks:address>
     </quickbooks:addresses>
+    <quickbooks:notes>
+        <quickbooks:note>
+            <content>Our most valuable Vendor!!<content>
+        </quickbooks:note>
+    </quickbooks:notes>
 </quickbooks:update-vendor>
 <!-- END_INCLUDE(quickbooks:update-vendor2) -->
 

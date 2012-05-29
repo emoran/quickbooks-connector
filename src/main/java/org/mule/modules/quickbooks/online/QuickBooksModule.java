@@ -13,7 +13,14 @@
  */
 package org.mule.modules.quickbooks.online;
 
-import com.zauberlabs.commons.mom.MapObjectMapper;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -23,12 +30,25 @@ import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
-import org.mule.modules.quickbooks.online.schema.*;
+import org.mule.modules.quickbooks.online.schema.Account;
+import org.mule.modules.quickbooks.online.schema.Bill;
+import org.mule.modules.quickbooks.online.schema.BillPayment;
+import org.mule.modules.quickbooks.online.schema.CashPurchase;
+import org.mule.modules.quickbooks.online.schema.Check;
+import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
+import org.mule.modules.quickbooks.online.schema.Customer;
+import org.mule.modules.quickbooks.online.schema.Estimate;
+import org.mule.modules.quickbooks.online.schema.IdType;
+import org.mule.modules.quickbooks.online.schema.Invoice;
+import org.mule.modules.quickbooks.online.schema.Item;
+import org.mule.modules.quickbooks.online.schema.Payment;
+import org.mule.modules.quickbooks.online.schema.PaymentMethod;
+import org.mule.modules.quickbooks.online.schema.SalesReceipt;
+import org.mule.modules.quickbooks.online.schema.SalesTerm;
+import org.mule.modules.quickbooks.online.schema.Vendor;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
-import javax.annotation.PostConstruct;
-import java.util.*;
-import java.lang.Class;
+import com.zauberlabs.commons.mom.MapObjectMapper;
 
 
 
@@ -385,6 +405,7 @@ public class QuickBooksModule
      * @param phones Optional. Specifies the phone numbers of the customer. QBO allows mapping of up to 5 phone 
      *              numbers but only one phone number is permitted for one device type.
      * @param addresses Optional. Specifies the physical addresses.
+     * @param notes Optional. Specifies any notes that needs to be added to this customer.
      * @return The created Customer.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
@@ -406,13 +427,15 @@ public class QuickBooksModule
                                    @Optional String salesTaxCodeId,
                                    @Optional List<Map<String, Object>> emails,
                                    @Optional List<Map<String, Object>> phones,
-                                   @Optional List<Map<String, Object>> addresses)
+                                   @Optional List<Map<String, Object>> addresses,
+                                   @Optional List<Map<String, Object>> notes)
     {
         salesTermId = coalesceMap(salesTermId);
         webSites = coalesceList(webSites);
         emails = coalesceList(emails);
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
+        notes = coalesceList(notes);
 
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Customer.class,
@@ -430,6 +453,7 @@ public class QuickBooksModule
                 .with("email", emails)
                 .with("phone", phones)
                 .with("address", addresses)
+                .with("notes", notes)
                 .build()
             )
         );
@@ -836,6 +860,7 @@ public class QuickBooksModule
      * @param phones Optional. Specifies the phone numbers of the vendor. QBO allows mapping of up to 
      *              5 phone numbers but only one phone number is permitted for one device type.
      * @param addresses Optional. Specifies the physical addresses.
+     * @param notes Optional. Specifies any notes that needs to be added to this vendor.
      * @return The created Vendor.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
@@ -857,12 +882,14 @@ public class QuickBooksModule
                                @Optional Boolean vendor1099,
                                @Optional List<Map<String, Object>> emails,
                                @Optional List<Map<String, Object>> phones,
-                               @Optional List<Map<String, Object>> addresses)
+                               @Optional List<Map<String, Object>> addresses,
+                               @Optional List<Map<String, Object>> notes)
     {
         webSites = coalesceList(webSites);
         emails = coalesceList(emails);
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
+        notes = coalesceList(notes);
         
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Vendor.class,
@@ -880,6 +907,7 @@ public class QuickBooksModule
                 .with("email", emails)
                 .with("phone", phones)
                 .with("address", addresses)
+                .with("notes", notes)
                 .build()
             )
         );
@@ -1309,7 +1337,7 @@ public class QuickBooksModule
      * @param phones Optional. Specifies the phone numbers of the customer. QBO allows mapping of up to 5 phone 
      *              numbers but only one phone number is permitted for one device type.
      * @param addresses Optional. Specifies the physical addresses.
-     * @param addresses Optional. Specifies any notes that needs to be added to this customer.
+     * @param notes Optional. Specifies any notes that needs to be added to this customer.
      * @return The updated Customer.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
@@ -1341,6 +1369,7 @@ public class QuickBooksModule
         emails = coalesceList(emails);
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
+        notes = coalesceList(notes);
         
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER,
             unmap(Customer.class,
@@ -1850,6 +1879,7 @@ public class QuickBooksModule
      * @param phones Optional. Specifies the phone numbers of the vendor. QBO allows mapping of up to 
      *              5 phone numbers but only one phone number is permitted for one device type.
      * @param addresses Optional. Specifies the physical addresses.
+     * @param notes Optional. Specifies any notes that needs to be added to this vendor.
      * @return The updated Vendor.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
@@ -1873,12 +1903,14 @@ public class QuickBooksModule
                                @Optional Boolean vendor1099,
                                @Optional List<Map<String, Object>> emails, 
                                @Optional List<Map<String, Object>> phones, 
-                               @Optional List<Map<String, Object>> addresses)
+                               @Optional List<Map<String, Object>> addresses,
+                               @Optional List<Map<String, Object>> notes)
     {
         webSites = coalesceList(webSites);
         emails = coalesceList(emails);
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
+        notes = coalesceList(notes);
         
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.VENDOR,
             unmap(Vendor.class,
@@ -1898,6 +1930,7 @@ public class QuickBooksModule
                 .with("email", emails)
                 .with("phone", phones)
                 .with("address", addresses)
+                .with("notes", notes)
                 .build()
             )
         );

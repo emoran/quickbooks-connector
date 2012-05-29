@@ -15,19 +15,32 @@
 
 package org.mule.modules.quickbooks.online;
 
-import com.zauberlabs.commons.mom.MapObjectMapper;
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.online.schema.*;
+import org.mule.modules.quickbooks.online.schema.Account;
+import org.mule.modules.quickbooks.online.schema.Customer;
+import org.mule.modules.quickbooks.online.schema.GenericEntity;
+import org.mule.modules.quickbooks.online.schema.Invoice;
+import org.mule.modules.quickbooks.online.schema.InvoiceHeader;
+import org.mule.modules.quickbooks.online.schema.InvoiceLine;
+import org.mule.modules.quickbooks.online.schema.Item;
+import org.mule.modules.quickbooks.online.schema.PhysicalAddress;
+import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
-import java.math.BigDecimal;
-import java.util.*;
-
-import static org.junit.Assert.*;
+import com.zauberlabs.commons.mom.MapObjectMapper;
 
 
 /**
@@ -93,6 +106,7 @@ public class QuickBooksOnlineModuleTestDriver
             null, null, null, 
             new ArrayList<Map<String, Object>>(), 
             null, null, new ArrayList<Map<String, Object>>(),
+            new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>()
 //            auxList
@@ -184,7 +198,8 @@ public class QuickBooksOnlineModuleTestDriver
             new ArrayList<Map<String, Object>>(), 
             null, null, new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>()
+            new ArrayList<Map<String, Object>>(),
+            null
         );
         
         assertEquals("Jhonson", c1.getFamilyName());
@@ -301,7 +316,8 @@ public class QuickBooksOnlineModuleTestDriver
             new ArrayList<Map<String, Object>>(), 
             null, null, new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>()
+            new ArrayList<Map<String, Object>>(),
+            null
         );
         
         //create an item
@@ -362,6 +378,31 @@ public class QuickBooksOnlineModuleTestDriver
             assertTrue(ge.getEntityType().value().equals("Customer") || ge.getEntityType().value().equals("Invoice") 
                     || ge.getEntityType().value().equals("Item"));
         }
+    }
+    
+    @Test
+    public void testIfTheNotesHasBeenSaved()
+    {
+        List<Map<String, Object>> notes = new ArrayList<Map<String, Object>>();
+        Map<String, Object> note = new HashMap<String, Object>();
+        note.put("content", "This is a test note");
+        notes.add(note);
+        
+        Customer customer = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                "Mr test for notes 2", 
+                "Test", 
+                "Notes", 
+                "James",
+                null, null, null, 
+                null, null, null,
+                null, null, null,
+                notes
+            );
+        
+        assertEquals(1, customer.getNotes().size());
+        assertEquals("This is a test note", customer.getNotes().get(0).getContent());
+        
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
     }
     
     @Test(expected = QuickBooksRuntimeException.class)
