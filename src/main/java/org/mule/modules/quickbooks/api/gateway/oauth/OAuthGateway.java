@@ -164,6 +164,12 @@ public class OAuthGateway
         {
             str += "\n" + line;
         }
+        
+        if(response.getStatusLine().getStatusCode() != 200)
+        {
+            throw new RuntimeException(str);
+        }
+        
         return str;
     }
 
