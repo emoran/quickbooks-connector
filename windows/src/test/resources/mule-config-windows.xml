@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule QuickBooks Connector
+
+    Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+
+-->
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:spring="http://www.springframework.org/schema/beans"
+  xmlns:http="http://www.mulesoft.org/schema/mule/http"
+  xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows"
+  xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.1/mule-scripting.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/2.0/mule-quickbooks-windows.xsd">
+    
+    <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
+    
+    <quickbooks-windows:config />
+
+    <flow name="create">
+		<quickbooks-windows:create realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]"
+		                           requestId="#[map-payload:requestId]"
+		                           draft="#[map-payload:draft]"
+		                           fullResponse="#[map-payload:fullResponse]">
+		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+		</quickbooks-windows:create>
+	</flow>
+	<flow name="update">
+		<quickbooks-windows:update realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]"
+		                           requestId="#[map-payload:requestId]"
+		                           draft="#[map-payload:draft]"
+		                           fullResponse="#[map-payload:fullResponse]">
+		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+		            
+		</quickbooks-windows:update>
+	</flow>
+	<flow name="delete">
+		<quickbooks-windows:delete realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]"
+		                           requestId="#[map-payload:requestId]">
+		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
+		            
+		</quickbooks-windows:delete>
+	</flow>
+	<flow name="get-object">
+		<quickbooks-windows:get-object realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]">
+		    <quickbooks-windows:id ref="#[map-payload:id]"/>
+		            
+		</quickbooks-windows:get-object>
+	</flow>
+	<flow name="find-objects">
+		<quickbooks-windows:find-objects realmId="#[map-payload:realmId]"
+		                           appKey="#[map-payload:appKey]"
+		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		                           type="#[map-payload:type]">
+		    <quickbooks-windows:query ref="#[map-payload:query]"/>
+		            
+		</quickbooks-windows:find-objects>
+	</flow>
+	<flow name="generate-a-new-request-id">
+		<quickbooks-windows:generate-a-new-request-id />
+	</flow>
+	<flow name="status">
+		<quickbooks-windows:status realmId="#[map-payload:realmId]"
+		                                  appKey="#[map-payload:appKey]"
+		                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+		    <quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/>
+		</quickbooks-windows:status>
+    </flow>
+
+    <flow name="sync-activity">
+		<quickbooks-windows:sync-activity realmId="#[map-payload:realmId]"
+		                                  appKey="#[map-payload:appKey]"
+		                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
+		                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+		    <quickbooks-windows:sync-activity-request ref="#[map-payload:syncActivityRequest]"/>
+		</quickbooks-windows:sync-activity>
+    </flow>
+</mule>

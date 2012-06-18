@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule QuickBooks Connector
+
+    Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+
+-->
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:spring="http://www.springframework.org/schema/beans"
+  xmlns:http="http://www.mulesoft.org/schema/mule/http"
+  xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks"
+  xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.1/mule-scripting.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/2.0/mule-quickbooks.xsd">
+    
+    <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
+    
+    <quickbooks:config />
+
+     <!--<flow name="GetProfileByUrl">
+        <http:inbound-endpoint host="localhost" port="9091" path="pointsOfInterest"/>
+        <quickbooks:get-object type="INVOICE">
+            <quickbooks:id>
+                <value>10</value>
+            </quickbooks:id>
+        </quickbooks:get-object>
+    </flow>-->
+    
+    <flow name="TestForTheAccessPower">
+        <quickbooks:create-account realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String Unique"
+                                   subtype="VEHICLES"
+                                   openingBalanceDate="2010-09-13T01:18:14-07:00">
+        </quickbooks:create-account>
+    </flow>
+
+    <flow name="Create">
+        
+        <quickbooks:create-account realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                                   authIdPseudonym="dasdasda"
+                                   name="String Unique"
+                                   desc="String Optional"
+                                   subtype="VEHICLES"
+                                   acctNum="String Optional"
+                                   openingBalance="99"
+                                   openingBalanceDate="2010-09-13T01:18:14-07:00">
+                                   <!--openningBalance Decimal Optional
+                                   openingBalanceDate Date Optional-->
+            <quickbooks:account-parent-id ref="#[variable:foo]"/>
+        </quickbooks:create-account>
+                                   
+        <quickbooks:create-bill realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header >
+                <quickbooks:doc-number>31233123</quickbooks:doc-number>
+                <quickbooks:msg>dfsd</quickbooks:msg>
+                <quickbooks:sales-term-id>asdasd</quickbooks:sales-term-id>
+                <quickbooks:txn-date>dfasda</quickbooks:txn-date>
+                <quickbooks:due-date>dasd</quickbooks:due-date> 
+                <quickbooks:total-amt>aasd</quickbooks:total-amt>   
+                <quickbooks:vendor-id>ddasd</quickbooks:vendor-id>
+            </quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-bill>
+                                
+        <quickbooks:create-bill-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-bill-payment>
+                                        
+        <quickbooks:create-cash-purchase realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-cash-purchase>
+                                         
+        <quickbooks:create-check realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-check>                     
+        
+        <quickbooks:create-credit-card-charge realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-credit-card-charge>
+                                              
+        <quickbooks:create-customer realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String Optional"
+                                    givenName="String Optional"
+						            middleName="String Optional"
+						            familyName="String Optional"
+						            suffix="String Optional"
+						            dBAName="String Optional"
+						            showAs="String Optional"
+						            salesTaxCodeId="String Optional">
+            <quickbooks:web-sites ref=" "></quickbooks:web-sites>
+            <quickbooks:sales-term-id ref=" "></quickbooks:sales-term-id>
+            <quickbooks:emails ref=" "></quickbooks:emails>
+            <quickbooks:phones ref=" "></quickbooks:phones>
+            <quickbooks:addresses ref=" "></quickbooks:addresses>
+            <!--webSite="List<Uri>"
+            email="List<String>"
+            phone="{List, Map}"
+            address="Map"
+            salesTermId="idType Optional"-->
+        </quickbooks:create-customer>
+        
+        <quickbooks:create-estimate realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-estimate>
+                                    
+        <quickbooks:create-invoice realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-invoice>
+                                   
+        <quickbooks:create-item realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String EmptyDefault"
+                                desc="String Optional"
+                                taxable="true"
+                                itemParentName="String N/A"
+                                purchaseDesc="String Optional">
+                                <!--tasable boolean defaultFalse-->
+            <quickbooks:unit-price ref="#[map-paylaod:unitPrice]"/>
+            <quickbooks:income-account ref=" "></quickbooks:income-account>
+            <quickbooks:item-parent-id ref="#[map-paylaod:itemParentId]"/>
+            <quickbooks:purchase-cost ref=" "></quickbooks:purchase-cost>
+            <quickbooks:expense-account ref=" "></quickbooks:expense-account>
+            <!--itemParentId="IdType N/A"
+            unitPrice="Map"
+            incomeAccountRef="Map"
+            purchaseCost="Map"
+            expenseAccountRef="Map"> -->        
+        </quickbooks:create-item>
+                        
+        <quickbooks:create-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-payment>
+                                   
+        <quickbooks:create-payment-method realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String"
+                                          type="String Optional NON_CREDIT_CARDdefault"/>
+                                          
+        <quickbooks:create-sales-receipt realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   >
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:create-sales-receipt>
+                                         
+        <quickbooks:create-sales-term realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String"
+                                      dueDays="2"
+                                      discountDays="2"
+                                      discountPercent="9"
+                                      dayOfMonthDue="2"
+                                      dueNextMonthDays="2"
+                                      discountDayOfMonth="2"
+                                      dateDiscountPercent="9"/>
+                                      <!--dueDays Integer Positive
+                                      discountDays Integer Positive Optional
+                                      discountPercent Decimal Optional
+                                      dayOfMonthDue Integer Positive
+                                      dueNextMonthDays Integer Positive Optional
+                                      discountDayOfMonth Integer Positive Optional
+                                      dateDiscountPercent Decimal Optional-->
+                                      
+        <quickbooks:create-vendor realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String"
+                                  givenName="String"
+                                  middleName="String Optional"
+                                  familyName="String Optional"
+                                  dBAName="String Optional"
+                                  showAs="String Optional"
+                                  taxIdentifier="2"
+                                  acctNum="String Optional"
+                                  vendor1099="true">
+                                  <!--taxIdentifier Integer Positive Optional
+                                  vendor1099 Boolean Optional  -->
+            <quickbooks:web-sites ref=" "></quickbooks:web-sites>
+            <quickbooks:emails ref=" "></quickbooks:emails>
+            <quickbooks:phones ref=" "></quickbooks:phones>
+            <quickbooks:addresses ref=" "></quickbooks:addresses>
+            <!--webSite="List<Uri>"
+            email="List<String>"
+            phone="{List, Map}"
+            address="Map"-->
+        </quickbooks:create-vendor>
+                                  
+    </flow>
+    
+    <flow name="GetObject">
+        <quickbooks:get-object realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   type="INVOICE">
+            <quickbooks:id ref="#[variable:id]"></quickbooks:id>
+        </quickbooks:get-object>
+    </flow>
+    
+    <flow name="Update">
+        <!-- El update pisa el objeto, osea, si falta un campo en el update ese
+        objeto va a dejar de tenerlo -->
+        <quickbooks:update-account realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String Unique"
+                                   desc="String Optional"
+                                   subtype="VEHICLES"
+                                   acctNum="String Optional"
+                                   openingBalance="99"
+                                   openingBalanceDate="2010-09-13T01:18:14-07:00"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:account-parent-id ref=" "></quickbooks:account-parent-id>
+        </quickbooks:update-account>
+                                   
+        <quickbooks:update-bill realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header >
+                <quickbooks:doc-number>31233123</quickbooks:doc-number>
+                <quickbooks:msg>dfsd</quickbooks:msg>
+                <quickbooks:sales-term-id>asdasd</quickbooks:sales-term-id>
+                <quickbooks:txn-date>dfasda</quickbooks:txn-date>
+                <quickbooks:due-date>dasd</quickbooks:due-date> 
+                <quickbooks:total-amt>aasd</quickbooks:total-amt>   
+                <quickbooks:vendor-id>ddasd</quickbooks:vendor-id>
+            </quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-bill>
+                                
+        <quickbooks:update-bill-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-bill-payment>
+                                        
+        <quickbooks:update-cash-purchase realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-cash-purchase>
+                                         
+        <quickbooks:update-check realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-check>                     
+        
+        <quickbooks:update-credit-card-charge realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-credit-card-charge>
+                                              
+        <quickbooks:update-customer realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String Optional"
+                                    givenName="String Optional"
+                                    middleName="String Optional"
+                                    familyName="String Optional"
+                                    suffix="String Optional"
+                                    dBAName="String Optional"
+                                    showAs="String Optional"
+                                    salesTaxCodeId="String Optional"
+                                    syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:web-sites ref=" "></quickbooks:web-sites>
+            <quickbooks:sales-term-id ref=" "></quickbooks:sales-term-id>
+            <quickbooks:emails ref=" "></quickbooks:emails>
+            <quickbooks:phones ref=" "></quickbooks:phones>
+            <quickbooks:addresses ref=" "></quickbooks:addresses>
+            </quickbooks:update-customer>
+        
+        <quickbooks:update-estimate realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-estimate>
+                                    
+        <quickbooks:update-invoice realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-invoice>
+                                   
+        <quickbooks:update-item realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String EmptyDefault"
+                                desc="String Optional"
+                                taxable="true"
+                                itemParentName="String N/A"
+                                purchaseDesc="String Optional"
+                                syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:unit-price ref="#[variable:unitPrice]"></quickbooks:unit-price>
+            <quickbooks:income-account ref=" "></quickbooks:income-account>
+            <quickbooks:item-parent-id ref=" "></quickbooks:item-parent-id>
+            <quickbooks:purchase-cost ref=" "></quickbooks:purchase-cost> 
+            <quickbooks:expense-account ref=" "></quickbooks:expense-account>
+        </quickbooks:update-item>
+                        
+        <quickbooks:update-payment realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-payment>
+                                   
+        <quickbooks:update-payment-method realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String"
+                                          type="String Optional NON_CREDIT_CARDdefault"
+                                          syncToken="1">
+            <quickbooks:id ref=" "/>
+        </quickbooks:update-payment-method>
+                                          
+        <quickbooks:update-sales-receipt realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   syncToken="1">
+            <quickbooks:id ref=" "/>
+            <quickbooks:header ref=" "></quickbooks:header>
+            <quickbooks:lines ref=" "></quickbooks:lines>
+        </quickbooks:update-sales-receipt>
+                                         
+        <quickbooks:update-sales-term realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String"
+                                      dueDays="2"
+                                      discountDays="2"
+                                      discountPercent="9"
+                                      dayOfMonthDue="2"
+                                      dueNextMonthDays="2"
+                                      discountDayOfMonth="2"
+                                      dateDiscountPercent="9"
+                                      syncToken="1">
+            <quickbooks:id ref=" "/>
+        </quickbooks:update-sales-term>
+                                      
+        <quickbooks:update-vendor realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   name="String"
+                                  givenName="String"
+                                  middleName="String Optional"
+                                  familyName="String Optional"
+                                  dBAName="String Optional"
+                                  showAs="String Optional"
+                                  taxIdentifier="2"
+                                  acctNum="String Optional"
+                                  vendor1099="true">
+            <quickbooks:id ref=" "/>
+            <quickbooks:web-sites ref=" "></quickbooks:web-sites>
+            <quickbooks:emails ref=" "></quickbooks:emails>
+            <quickbooks:phones ref=" "></quickbooks:phones>
+            <quickbooks:addresses ref=" "></quickbooks:addresses>
+        </quickbooks:update-vendor>
+    </flow>
+
+    <flow name="DeleteObject">
+        <quickbooks:delete-object realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   type="INVOICE" syncToken="2">
+            <quickbooks:id ref="#[variable:id]"></quickbooks:id>
+        </quickbooks:delete-object>
+    </flow>
+    
+    <flow name="FindObjects">
+        <quickbooks:find-objects realmId="dasda"
+                                   appKey="dasdasd"
+                                   realmIdPseudonym="dadadada"
+                           authIdPseudonym="dasdasda"
+                                   type="ACCOUNT"
+                                 queryFilter="#[header:queryFilterString]"
+                                 querySort="#[header:querySortString]"/>
+    </flow>
+</mule>

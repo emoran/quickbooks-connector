@@ -15,12 +15,14 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:http="http://www.mulesoft.org/schema/mule/http"
       xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows"
+      xmlns:context="http://www.springframework.org/schema/context"
       xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
-        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
-        http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/2.0/mule-quickbooks-windows.xsd">
+      http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
+      http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/2.0/mule-quickbooks-windows.xsd
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
-    
+    <context:property-placeholder location="mule.properties" />
     <quickbooks-windows:config />
 
     <flow name="CreateCustomers">
