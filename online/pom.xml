@@ -12,13 +12,12 @@
     </parent>
     
     <properties>
-        <mule.module.utils.version>1.0</mule.module.utils.version>
         <category>Community</category>        
     </properties>
 
 	<dependencies>
         <dependency>
-            <groupId>org.mule.modules</groupId>
+            <groupId>com.mulesoft.modules</groupId>
             <artifactId>mule-module-quick-books-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -102,13 +101,4 @@
 			</snapshots> </repository> -->
 
 	</repositories>
-
-	<scm>
-		<connection>scm:git:git://github.com:mulesoft/quickbooks-connector.git</connection>
-		<developerConnection>
-            scm:git:git@github.com:mulesoft/quickbooks-connector.git
-        </developerConnection>
-		<url>http://github.com/mulesoft/quickbooks-connector</url>
-	</scm>
-
 </project>

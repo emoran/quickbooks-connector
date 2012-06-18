@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mulesoft.modules</groupId>
 	<artifactId>mule-module-quick-books-commons</artifactId>
 	<packaging>jar</packaging>
 	<name>QuickBooks Cloud Connector Commons Libraries</name>
@@ -12,7 +13,6 @@
     </parent>
     
 	<properties>
-		<mule.module.utils.version>1.0</mule.module.utils.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
@@ -79,6 +79,11 @@
 	</build>
 
 	<dependencies>
+	   <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-modules-utils</artifactId>
+            <version>${mule.module.utils.version}</version>
+        </dependency>
         <dependency>
             <groupId>oauth.signpost</groupId>
             <artifactId>signpost-core</artifactId>
@@ -154,13 +159,4 @@
 			</snapshots> </repository> -->
 
 	</repositories>
-
-	<scm>
-		<connection>scm:git:git://github.com:mulesoft/quickbooks-connector.git</connection>
-		<developerConnection>
-            scm:git:git@github.com:mulesoft/quickbooks-connector.git
-        </developerConnection>
-		<url>http://github.com/mulesoft/quickbooks-connector</url>
-	</scm>
-
 </project>
