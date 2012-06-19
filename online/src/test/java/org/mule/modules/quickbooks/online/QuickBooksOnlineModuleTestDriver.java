@@ -106,7 +106,7 @@ public class QuickBooksOnlineModuleTestDriver
             "Perez",
             null, null, null, 
             new ArrayList<Map<String, Object>>(), 
-            null, null, new ArrayList<Map<String, Object>>(),
+            null, null, null, new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>()
@@ -191,13 +191,13 @@ public class QuickBooksOnlineModuleTestDriver
     public void modifyCustomer()
     {
         Customer c1 = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "Paul M. Jonhson", 
+            "Paul M. Jonhson3", 
             "Paul", 
             "Mark", 
             "Jhonson",
             null, null, null, 
             new ArrayList<Map<String, Object>>(), 
-            null, null, new ArrayList<Map<String, Object>>(),
+            null, null, null, new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             null
@@ -217,7 +217,7 @@ public class QuickBooksOnlineModuleTestDriver
             "Smith", 
             null, null, null, 
             new ArrayList<Map<String, Object>>(), 
-            null, null, new ArrayList<Map<String, Object>>(),
+            null, new HashMap<String, Object>(), null, new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
                 new ArrayList<Map<String, Object>>()
@@ -315,7 +315,7 @@ public class QuickBooksOnlineModuleTestDriver
             "Jenkins",
             null, null, null, 
             new ArrayList<Map<String, Object>>(), 
-            null, null, new ArrayList<Map<String, Object>>(),
+            null, null, null, new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             new ArrayList<Map<String, Object>>(),
             null
@@ -396,7 +396,7 @@ public class QuickBooksOnlineModuleTestDriver
                 "James",
                 null, null, null, 
                 null, null, null,
-                null, null, null,
+                null, null, null, null,
                 notes
             );
         

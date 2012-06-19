@@ -369,8 +369,9 @@
                             familyName="doe"
                             suffix="sr"
                             dBAName="mint"
-                            showAs="j doe"
-                            salesTaxCodeId="5">
+                            showAs="j doe">
+    <quickbooks:sales-tax-code-id ref="#[variable:salesTaxCodeId]"></quickbooks:sales-tax-code-id>
+    <quickbooks:payment-method-id ref="#[variable:paymentMethodId]"></quickbooks:payment-method-id>
     <quickbooks:web-sites ref="#[variable:website]"></quickbooks:web-sites>
     <quickbooks:sales-term-id ref="#[variable:salestermid]"></quickbooks:sales-term-id>
     <quickbooks:emails ref="#[variable:email]"></quickbooks:emails>
@@ -1209,9 +1210,10 @@
                             familyName="doe"
                             suffix="sr"
                             dBAName="mint"
-                            showAs="j doe"
-                            salesTaxCodeId="5">
+                            showAs="j doe">
     <quickbooks:id ref="#[variable:id]" />
+    <quickbooks:sales-tax-code-id ref="#[variable:salesTaxCodeId]"></quickbooks:sales-tax-code-id>
+    <quickbooks:payment-method-id ref="#[variable:paymentMethodId]"></quickbooks:payment-method-id>
     <quickbooks:web-sites ref="#[variable:website]"></quickbooks:web-sites>
     <quickbooks:sales-term-id ref="#[variable:salestermid]"></quickbooks:sales-term-id>
     <quickbooks:emails ref="#[variable:email]"></quickbooks:emails>

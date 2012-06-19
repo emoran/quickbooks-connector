@@ -127,10 +127,11 @@
 						            familyName="String Optional"
 						            suffix="String Optional"
 						            dBAName="String Optional"
-						            showAs="String Optional"
-						            salesTaxCodeId="String Optional">
+						            showAs="String Optional">
             <quickbooks:web-sites ref=" "></quickbooks:web-sites>
             <quickbooks:sales-term-id ref=" "></quickbooks:sales-term-id>
+            <quickbooks:payment-method-id ref=""></quickbooks:payment-method-id>
+            <quickbooks:sales-tax-code-id ref=""></quickbooks:sales-tax-code-id>
             <quickbooks:emails ref=" "></quickbooks:emails>
             <quickbooks:phones ref=" "></quickbooks:phones>
             <quickbooks:addresses ref=" "></quickbooks:addresses>
@@ -350,11 +351,12 @@
                                     suffix="String Optional"
                                     dBAName="String Optional"
                                     showAs="String Optional"
-                                    salesTaxCodeId="String Optional"
                                     syncToken="1">
             <quickbooks:id ref=" "/>
             <quickbooks:web-sites ref=" "></quickbooks:web-sites>
             <quickbooks:sales-term-id ref=" "></quickbooks:sales-term-id>
+            <quickbooks:payment-method-id ref=""></quickbooks:payment-method-id>
+            <quickbooks:sales-tax-code-id ref=""></quickbooks:sales-tax-code-id>
             <quickbooks:emails ref=" "></quickbooks:emails>
             <quickbooks:phones ref=" "></quickbooks:phones>
             <quickbooks:addresses ref=" "></quickbooks:addresses>

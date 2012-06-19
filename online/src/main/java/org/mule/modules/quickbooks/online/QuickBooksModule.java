@@ -21,6 +21,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -398,6 +399,8 @@ public class QuickBooksModule
      * @param showAs Optional. Specifies the name of the vendor to be displayed.
      * @param webSites Valid URI strings. Specifies the customers's Web sites.
      * @param salesTermId Optional. Specifies the default sales term ID that is to be associated with the customer.
+     * @param paymentMethodId Optional. ID of the PaymentMethod. For Customer, this is the Id associated with the 
+     *          customer as set in the request.
      * @param salesTaxCodeId QBO only supports the customers being taxable or not, so if this field is "1", the job 
      *                       is taxable. If the field value is null, the job is not taxable. All other values are 
      *                       invalid.
@@ -424,19 +427,26 @@ public class QuickBooksModule
                                    @Optional String showAs,
                                    @Optional List<Map<String, Object>> webSites,
                                    @Optional Map<String, Object> salesTermId,
-                                   @Optional String salesTaxCodeId,
+                                   @Optional Map<String, Object> paymentMethodId,
+                                   @Optional Map<String, Object> salesTaxCodeId,
                                    @Optional List<Map<String, Object>> emails,
                                    @Optional List<Map<String, Object>> phones,
                                    @Optional List<Map<String, Object>> addresses,
                                    @Optional List<Map<String, Object>> notes)
     {
         salesTermId = coalesceMap(salesTermId);
+        salesTaxCodeId = coalesceMap(salesTaxCodeId);
         webSites = coalesceList(webSites);
         emails = coalesceList(emails);
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         notes = coalesceList(notes);
 
+        if(paymentMethodId != null && (paymentMethodId.isEmpty() || paymentMethodId.containsKey("value") && StringUtils.isBlank((String)paymentMethodId.get("value"))))
+        {
+            paymentMethodId = null;
+        }
+        
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Customer.class,
                 new MapBuilder()
@@ -449,6 +459,7 @@ public class QuickBooksModule
                 .with("showAs", showAs)
                 .with("webSite", webSites)
                 .with("salesTermId", salesTermId)
+                .with("paymentMethodId", paymentMethodId)
                 .with("salesTaxCodeId", salesTaxCodeId)
                 .with("email", emails)
                 .with("phone", phones)
@@ -1330,6 +1341,8 @@ public class QuickBooksModule
      * @param showAs Optional. Specifies the name of the vendor to be displayed.
      * @param webSites Valid URI strings. Specifies the customers's Web sites.
      * @param salesTermId Optional. Specifies the default sales term ID that is to be associated with the customer.
+     * @param paymentMethodId Optional. ID of the PaymentMethod. For Customer, this is the Id associated with the 
+     *          customer as set in the request.
      * @param salesTaxCodeId QBO only supports the customers being taxable or not, so if this field is "1", the job 
      *                       is taxable. If the field value is null, the job is not taxable. All other values are 
      *                       invalid.
@@ -1358,18 +1371,24 @@ public class QuickBooksModule
                                    @Optional String showAs,
                                    @Optional List<Map<String, Object>> webSites,
                                    @Optional Map<String, Object> salesTermId,
-                                   @Optional String salesTaxCodeId,
+                                   @Optional Map<String, Object> paymentMethodId,
+                                   @Optional Map<String, Object> salesTaxCodeId,
                                    @Optional List<Map<String, Object>> emails, 
                                    @Optional List<Map<String, Object>> phones,
                                    @Optional List<Map<String, Object>> addresses,
                                    @Optional List<Map<String, Object>> notes)
     {
         salesTermId = coalesceMap(salesTermId);
+        salesTaxCodeId = coalesceMap(salesTaxCodeId);
         webSites = coalesceList(webSites);
         emails = coalesceList(emails);
         phones = coalesceList(phones);
         addresses = coalesceList(addresses);
         notes = coalesceList(notes);
+        if(paymentMethodId != null && (paymentMethodId.isEmpty() || paymentMethodId.containsKey("value") && StringUtils.isBlank((String)paymentMethodId.get("value"))))
+        {
+            paymentMethodId = null;
+        }
         
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER,
             unmap(Customer.class,
@@ -1385,6 +1404,7 @@ public class QuickBooksModule
                 .with("showAs", showAs)
                 .with("webSite", webSites)
                 .with("salesTermId", salesTermId)
+                .with("paymentMethodId", paymentMethodId)
                 .with("salesTaxCodeId", salesTaxCodeId)
                 .with("email", emails)
                 .with("phone", phones)
