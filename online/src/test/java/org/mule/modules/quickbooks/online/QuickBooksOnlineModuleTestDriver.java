@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -70,12 +71,12 @@ public class QuickBooksOnlineModuleTestDriver
         module.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module.init();
     }
-
+    
     @Test
     public void createAccount()
     {
         Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "Test Account78", null, AccountOnlineDetail.SAVINGS, "3654", "0", new Date(), null);
+            "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
                 
         Map<String, Object> idType = new HashMap<String, Object>();
         idType.put("value", acc.getId().getValue());
@@ -405,6 +406,110 @@ public class QuickBooksOnlineModuleTestDriver
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
     }
     
+    @Test
+    @Ignore
+    public void testASecondCompany()
+    {
+        String appKey2 = System.getenv("appKey");
+        String realmId2 = System.getenv("realmId2");
+        String realmIdPseudonym2 = System.getenv("realmIdPseudonym2");
+        String authIdPseudonym2 = System.getenv("authIdPseudonym2");
+                
+        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
+                    
+        Map<String, Object> idType = new HashMap<String, Object>();
+        idType.put("value", acc.getId().getValue());
+        
+        Account acc2 = module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
+                    
+        Map<String, Object> idType2 = new HashMap<String, Object>();
+        idType2.put("value", acc2.getId().getValue());
+            
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
+            
+        module.deleteObject(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, OnlineEntityType.ACCOUNT, idType2, acc2.getSyncToken());
+    }
+    
+    @Test
+    @Ignore
+    public void testCallBetweenLazyRetrieve()
+    {
+        String appKey2 = System.getenv("appKey");
+        String realmId2 = System.getenv("realmId2");
+        String realmIdPseudonym2 = System.getenv("realmIdPseudonym2");
+        String authIdPseudonym2 = System.getenv("authIdPseudonym2");
+        
+        Iterable<Account> it = module.findObjects(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, 
+                OnlineEntityType.ACCOUNT, null, null);
+        
+        Iterator<Account> itAcc = it.iterator();
+        assertNotNull(itAcc.next().getId());
+        
+        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
+        
+        while(itAcc.hasNext()) {
+            assertNotNull(itAcc.next().getId());
+        }
+        
+        Map<String, Object> idType = new HashMap<String, Object>();
+        idType.put("value", acc.getId().getValue());
+            
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
+    }
+    
+    @Test
+    @Ignore
+    public void testCreate20Accounts()
+    {
+        String appKey2 = System.getenv("appKey");
+        String realmId2 = System.getenv("realmId2");
+        String realmIdPseudonym2 = System.getenv("realmIdPseudonym2");
+        String authIdPseudonym2 = System.getenv("authIdPseudonym2");
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account01", null, AccountOnlineDetail.SAVINGS, "0001", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account02", null, AccountOnlineDetail.SAVINGS, "0002", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account03", null, AccountOnlineDetail.SAVINGS, "0003", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account04", null, AccountOnlineDetail.SAVINGS, "0004", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account05", null, AccountOnlineDetail.SAVINGS, "0005", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account06", null, AccountOnlineDetail.SAVINGS, "0006", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account07", null, AccountOnlineDetail.SAVINGS, "0007", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account08", null, AccountOnlineDetail.SAVINGS, "0008", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account09", null, AccountOnlineDetail.SAVINGS, "0009", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account10", null, AccountOnlineDetail.SAVINGS, "0010", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account11", null, AccountOnlineDetail.SAVINGS, "0011", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account12", null, AccountOnlineDetail.SAVINGS, "0012", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account13", null, AccountOnlineDetail.SAVINGS, "0013", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account14", null, AccountOnlineDetail.SAVINGS, "0014", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account15", null, AccountOnlineDetail.SAVINGS, "0015", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account16", null, AccountOnlineDetail.SAVINGS, "0016", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account17", null, AccountOnlineDetail.SAVINGS, "0017", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account18", null, AccountOnlineDetail.SAVINGS, "0018", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account19", null, AccountOnlineDetail.SAVINGS, "0019", "0", new Date(), null);
+        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
+                "Test Account20", null, AccountOnlineDetail.SAVINGS, "0020", "0", new Date(), null);
+    }
+    
     @Test(expected = QuickBooksRuntimeException.class)
     public void createAccountThrowingExceptionForWrongCredentials()
     {
@@ -414,7 +519,7 @@ public class QuickBooksOnlineModuleTestDriver
         module2.init();
         
         Account acc = module2.createAccount("wrongRealmId", appKey, realmIdPseudonym, authIdPseudonym,
-            "Test Account", null, AccountOnlineDetail.SAVINGS, "3654", "0", new Date(), null);
+            "Test Account", null, AccountOnlineDetail.SAVINGS, "36547", "0", new Date(), null);
     }
     
 }
