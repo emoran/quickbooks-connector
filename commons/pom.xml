@@ -59,7 +59,7 @@
 
 	<dependencies>
 	   <dependency>
-            <groupId>org.mule.modules</groupId>
+            <groupId>com.mulesoft.modules</groupId>
             <artifactId>mule-modules-utils</artifactId>
             <version>${mule.module.utils.version}</version>
         </dependency>
