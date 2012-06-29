@@ -1,9 +1,8 @@
-org.mule.modules.quickbooks
-org.mule.modules.quickbooks.api
-org.mule.modules.quickbooks.api.exception
-org.mule.modules.quickbooks.api.gateway
-org.mule.modules.quickbooks.api.gateway.oauth
-org.mule.modules.quickbooks.online.schema
-org.mule.modules.quickbooks.utils
-org.mule.modules.quickbooks.windows.schema
+org.mule.modules.quickbooks.windows
+org.mule.modules.quickbooks.windows.adapters
+org.mule.modules.quickbooks.windows.api
+org.mule.modules.quickbooks.windows.config
+org.mule.modules.quickbooks.windows.objectfactory
+org.mule.modules.quickbooks.windows.processors
+org.mule.modules.quickbooks.windows.transformers
 
