@@ -377,6 +377,7 @@
     <quickbooks:phones ref="#[variable:phone]"></quickbooks:phones>
     <quickbooks:addresses ref="#[variable:address]"></quickbooks:addresses>
     <quickbooks:notes ref="#[variable:notes]"></quickbooks:notes>
+    <quickbooks:payment-method-id ref="#[variable:paymentMethodId]"></quickbooks:payment-method-id>
 </quickbooks:create-customer>
 <!-- END_INCLUDE(quickbooks:create-customer) -->
 
@@ -426,6 +427,9 @@
             <content>Our most valuable Customer!!!<content>
         </quickbooks:note>
     </quickbooks:notes>
+    <quickbooks:payment-method-id>
+      	<value>2</value>
+    </quickbooks:payment-method-id>
 </quickbooks:create-customer>
 <!-- END_INCLUDE(quickbooks:create-customer2) -->
 
@@ -1218,6 +1222,7 @@
     <quickbooks:phones ref="#[variable:phone]"></quickbooks:phones>
     <quickbooks:addresses ref="#[variable:address]"></quickbooks:addresses>
     <quickbooks:notes ref="#[variable:notes]"></quickbooks:notes>
+    <quickbooks:payment-method-id ref="#[variable:paymentMethodId]"></quickbooks:payment-method-id>
 </quickbooks:update-customer>
 <!-- END_INCLUDE(quickbooks:update-customer) -->
 
@@ -1271,6 +1276,9 @@
             <content>Our most valuable Customer!!<content>
         </quickbooks:note>
     </quickbooks:notes>
+    <quickbooks:payment-method-id>
+      	<value>2</value>
+    </quickbooks:payment-method-id>
 </quickbooks:update-customer>
 <!-- END_INCLUDE(quickbooks:update-customer2) -->
 
