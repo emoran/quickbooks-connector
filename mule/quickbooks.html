@@ -64,13 +64,11 @@
 
 
 
-
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-  <meta name="description" content="Documentation for QuickBooks Online Cloud Connector." />
+  <meta name="description" content="Documentation for QuickBooks Cloud Connector." />
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
 <title>
@@ -78,7 +76,7 @@
   QuickBooksModule
 
 
-| QuickBooks Online Cloud Connector
+| QuickBooks Cloud Connector
 
 </title>
 <link href="../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
@@ -87,7 +85,6 @@
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 <script src="../assets/search_autocomplete.js" type="text/javascript"></script>
 <script src="../assets/jquery-resizable.min.js" type="text/javascript"></script>
-<script src="../assets/jquery-toc.js" type="text/javascript"></script>
 <script src="../assets/mule-developer-docs.js" type="text/javascript"></script>
 <script src="../assets/prettify.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -104,27 +101,6 @@
     #resize-packages-nav{border-bottom:3px solid #666;}
   </style>
 </noscript>
-<script type="text/javascript" charset="utf-8">
-  var is_ssl = ("https:" == document.location.protocol);
-  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  var feedback_widget_options = {};
-
-  feedback_widget_options.display = "overlay";
-  feedback_widget_options.company = "mulesoft";
-  feedback_widget_options.placement = "right";
-  feedback_widget_options.color = "#2F74AE";
-  feedback_widget_options.style = "question";
-
-  feedback_widget_options.tag = "QuickBooks Online Cloud Connector";
-
-  feedback_widget_options.limit = "3";
-
-  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-</script>
 </head>
 
 <body class="">
@@ -132,7 +108,7 @@
 <div id="header">
     <div id="headerLeft">
     
-      <span id="masthead-title">QuickBooks Online Cloud Connector</span>
+      <span id="masthead-title">QuickBooks Cloud Connector</span>
     
     <ul id="header-tabs" class="mule">
     
@@ -219,7 +195,8 @@ Summary:
 
 <div id="jd-header">
     org.mule.modules
-<h1>mule-module-quick-books-online</h1>
+<h1>mule-module-quick-books</h1>
+    2.1-SNAPSHOT
 
 </div><!-- end header -->
 
@@ -228,17 +205,15 @@ Summary:
 <div id="jd-content" class="api apilevel-">
 
 
-<br/>
-
 <div class="jd-tagdata">
       <table class="jd-tagtable">
         <tbody><tr>
           <th>Namespace</th><td>http://www.mulesoft.org/schema/mule/quickbooks</td>
         </tr><tr>
-          <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/quickbooks/current/mule-quickbooks.xsd&nbsp;&nbsp;(<a href="quickbooks-schema.html">View Schema</a>)</td>
+          <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/quickbooks/2.0/mule-quickbooks.xsd</td>
         </tr>
 <tr>
-          <th>Schema Version</th><td>2.0</td>
+          <th>Version</th><td>2.0</td>
         </tr>
 <tr>
           <th>Minimum Mule Version</th><td>3.2</td>
@@ -302,7 +277,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-account">&lt;quickbooks:create-account&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates an Account.</div>
+        <div class="jd-descrdiv">Creates an Account.<br/></div>
         
   </td></tr>
 
@@ -312,7 +287,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-bill">&lt;quickbooks:create-bill&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a Bill.</div>
+        <div class="jd-descrdiv">Creates a Bill.<br/></div>
         
   </td></tr>
 
@@ -322,7 +297,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-bill-payment">&lt;quickbooks:create-bill-payment&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a BillPayment.</div>
+        <div class="jd-descrdiv">Creates a BillPayment.<br/></div>
         
   </td></tr>
 
@@ -332,7 +307,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-cash-purchase">&lt;quickbooks:create-cash-purchase&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a CashPurchase.</div>
+        <div class="jd-descrdiv">Creates a CashPurchase.<br/></div>
         
   </td></tr>
 
@@ -342,7 +317,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-check">&lt;quickbooks:create-check&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a Check.</div>
+        <div class="jd-descrdiv">Creates a Check.<br/></div>
         
   </td></tr>
 
@@ -352,7 +327,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-credit-card-charge">&lt;quickbooks:create-credit-card-charge&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a CreditCardCharge.</div>
+        <div class="jd-descrdiv">Creates a CreditCardCharge.<br/></div>
         
   </td></tr>
 
@@ -362,7 +337,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-customer">&lt;quickbooks:create-customer&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a Customer.</div>
+        <div class="jd-descrdiv">Creates a Customer.<br/></div>
         
   </td></tr>
 
@@ -372,7 +347,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-estimate">&lt;quickbooks:create-estimate&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates an Estimate.</div>
+        <div class="jd-descrdiv">Creates an Estimate.<br/></div>
         
   </td></tr>
 
@@ -382,7 +357,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-invoice">&lt;quickbooks:create-invoice&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates an Invoice.</div>
+        <div class="jd-descrdiv">Creates an Invoice.<br/></div>
         
   </td></tr>
 
@@ -392,7 +367,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-item">&lt;quickbooks:create-item&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates an Item.</div>
+        <div class="jd-descrdiv">Creates an Item.<br/></div>
         
   </td></tr>
 
@@ -402,7 +377,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-payment">&lt;quickbooks:create-payment&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a Payment.</div>
+        <div class="jd-descrdiv">Creates a Payment.<br/></div>
         
   </td></tr>
 
@@ -412,7 +387,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-payment-method">&lt;quickbooks:create-payment-method&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a PaymentMethod.</div>
+        <div class="jd-descrdiv">Creates a PaymentMethod.<br/></div>
         
   </td></tr>
 
@@ -422,7 +397,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-sales-receipt">&lt;quickbooks:create-sales-receipt&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a SalesReceipt.</div>
+        <div class="jd-descrdiv">Creates a SalesReceipt.<br/></div>
         
   </td></tr>
 
@@ -432,7 +407,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-sales-term">&lt;quickbooks:create-sales-term&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a SalesTerm.</div>
+        <div class="jd-descrdiv">Creates a SalesTerm.<br/></div>
         
   </td></tr>
 
@@ -442,7 +417,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#create-vendor">&lt;quickbooks:create-vendor&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Creates a Vendor.</div>
+        <div class="jd-descrdiv">Creates a Vendor.<br/></div>
         
   </td></tr>
 
@@ -452,7 +427,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#delete-object">&lt;quickbooks:delete-object&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Deletes an object.</div>
+        <div class="jd-descrdiv">Deletes an object.<br/></div>
         
   </td></tr>
 
@@ -468,11 +443,11 @@ Summary:
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
  0400_QuickBooks_Online/Vendor">Vendor Especification</a>
  
- 
- 
- 
- 
- </div>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/></div>
         
   </td></tr>
 
@@ -482,7 +457,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#get-object">&lt;quickbooks:get-object&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Retrieve objects by ID.</div>
+        <div class="jd-descrdiv">Retrieve objects by ID.<br/></div>
         
   </td></tr>
 
@@ -493,7 +468,7 @@ Summary:
         <span class="sympad"><a href="../mule/quickbooks.html#update-account">&lt;quickbooks:update-account&gt;</a></nobr>
         
         <div class="jd-descrdiv">Updates an Account
- The Account object represents the accounts that you keep to track your business.</div>
+ The Account object represents the accounts that you keep to track your business.<br/></div>
         
   </td></tr>
 
@@ -504,7 +479,7 @@ Summary:
         <span class="sympad"><a href="../mule/quickbooks.html#update-bill">&lt;quickbooks:update-bill&gt;</a></nobr>
         
         <div class="jd-descrdiv">Updates a Bill
- The Bill object represents an expense to the business.</div>
+ The Bill object represents an expense to the business.<br/></div>
         
   </td></tr>
 
@@ -516,7 +491,7 @@ Summary:
         
         <div class="jd-descrdiv">Updates a BillPayment
  BillPayment represents the financial transaction of payment of bills that the business owner receives
- from a vendor for goods or services purchased from the vendor.</div>
+ from a vendor for goods or services purchased from the vendor.<br/></div>
         
   </td></tr>
 
@@ -526,7 +501,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-cash-purchase">&lt;quickbooks:update-cash-purchase&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a CashPurchase.</div>
+        <div class="jd-descrdiv">Updates a CashPurchase.<br/></div>
         
   </td></tr>
 
@@ -536,7 +511,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-check">&lt;quickbooks:update-check&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a Check.</div>
+        <div class="jd-descrdiv">Updates a Check.<br/></div>
         
   </td></tr>
 
@@ -546,7 +521,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-credit-card-charge">&lt;quickbooks:update-credit-card-charge&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a CreditCardCharge.</div>
+        <div class="jd-descrdiv">Updates a CreditCardCharge.<br/></div>
         
   </td></tr>
 
@@ -556,7 +531,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-customer">&lt;quickbooks:update-customer&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a Customer.</div>
+        <div class="jd-descrdiv">Updates a Customer.<br/></div>
         
   </td></tr>
 
@@ -566,7 +541,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-estimate">&lt;quickbooks:update-estimate&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates an Estimate.</div>
+        <div class="jd-descrdiv">Updates an Estimate.<br/></div>
         
   </td></tr>
 
@@ -576,7 +551,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-invoice">&lt;quickbooks:update-invoice&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates an Invoice.</div>
+        <div class="jd-descrdiv">Updates an Invoice.<br/></div>
         
   </td></tr>
 
@@ -586,7 +561,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-item">&lt;quickbooks:update-item&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates an Item.</div>
+        <div class="jd-descrdiv">Updates an Item.<br/></div>
         
   </td></tr>
 
@@ -596,7 +571,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-payment">&lt;quickbooks:update-payment&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a Payment.</div>
+        <div class="jd-descrdiv">Updates a Payment.<br/></div>
         
   </td></tr>
 
@@ -606,7 +581,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-payment-method">&lt;quickbooks:update-payment-method&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a PaymentMethod.</div>
+        <div class="jd-descrdiv">Updates a PaymentMethod.<br/></div>
         
   </td></tr>
 
@@ -616,7 +591,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-sales-receipt">&lt;quickbooks:update-sales-receipt&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a SalesReceipt.</div>
+        <div class="jd-descrdiv">Updates a SalesReceipt.<br/></div>
         
   </td></tr>
 
@@ -626,7 +601,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-sales-term">&lt;quickbooks:update-sales-term&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a SalesTerm.</div>
+        <div class="jd-descrdiv">Updates a SalesTerm.<br/></div>
         
   </td></tr>
 
@@ -636,7 +611,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks.html#update-vendor">&lt;quickbooks:update-vendor&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Updates a Vendor.</div>
+        <div class="jd-descrdiv">Updates a Vendor.<br/></div>
         
   </td></tr>
 
@@ -654,6 +629,7 @@ Summary:
 </div><!-- jd-descr (summary) -->
 
 
+
 <!-- ========= CONFIGURATION DETAIL ======== -->
 <A NAME="config"></A>
 <h2>Configuration</h2>
@@ -667,15 +643,14 @@ similar to the following:</p>
                http://www.mulesoft.org/schema/mule/core
                http://www.mulesoft.org/schema/mule/core/current/mule.xsd
                http://www.mulesoft.org/schema/mule/quickbooks
-               http://www.mulesoft.org/schema/mule/quickbooks/current/mule-quickbooks.xsd"&gt;
+               http://www.mulesoft.org/schema/mule/quickbooks/2.0/mule-quickbooks.xsd"&gt;
 
       &lt;!-- here goes your flows and configuration elements --&gt;
 
 &lt;/mule&gt;
 </pre>
-
 <p>This module is configured using the <i>config</i> element. This element must be placed outside of your flows and at
-the root of your Mule application. You can create as many configurations as you deem necessary as long as each carries
+the root of your Mule application. You can create as many configurations as you deem necesary as long as each carries
 its own name.</p>
 <p>Each message processor, message source or transformer carries a <i>config-ref</i> attribute that allows the invoker to
 specify which configuration to use.</p>
@@ -708,7 +683,6 @@ specify which configuration to use.</p>
       
     
 </table>
-
 
 
 
@@ -923,7 +897,7 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:account-parent-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. If the account is a subaccount, AccountParentId is used to 
+            <tr><th colspan="12"><nobr>&lt;quickbooks:accountParentId&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. If the account is a subaccount, AccountParentId is used to 
                         store the ID of the parent account.</span></th></tr>
             
             
@@ -938,12 +912,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -1154,12 +1126,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -1341,12 +1311,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -1533,12 +1501,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -1693,12 +1659,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -1855,12 +1819,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -1903,9 +1865,8 @@ specify which configuration to use.</p>
                             familyName="doe"
                             suffix="sr"
                             dBAName="mint"
-                            showAs="j doe"&gt;
-    &lt;quickbooks:sales-tax-code-id ref="#[variable:salesTaxCodeId]"&gt;&lt;/quickbooks:sales-tax-code-id&gt;
-    &lt;quickbooks:payment-method-id ref="#[variable:paymentMethodId]"&gt;&lt;/quickbooks:payment-method-id&gt;
+                            showAs="j doe"
+                            salesTaxCodeId="5"&gt;
     &lt;quickbooks:web-sites ref="#[variable:website]"&gt;&lt;/quickbooks:web-sites&gt;
     &lt;quickbooks:sales-term-id ref="#[variable:salestermid]"&gt;&lt;/quickbooks:sales-term-id&gt;
     &lt;quickbooks:emails ref="#[variable:email]"&gt;&lt;/quickbooks:emails&gt;
@@ -2079,7 +2040,14 @@ specify which configuration to use.</p>
                 
           
                 
-          
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>salesTaxCodeId</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>QBO only supports the customers being taxable or not, so if this field is "1", the job 
+                       is taxable. If the field value is null, the job is not taxable. All other values are 
+                       invalid.</td>
+                </tr>
+                
                 
           
                 
@@ -2122,26 +2090,15 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:web-sites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Valid URI strings. Specifies the customers's Web sites.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:webSites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Valid URI strings. Specifies the customers's Web sites.</span></th></tr>
             
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:sales-term-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Specifies the default sales term ID that is to be associated with the customer.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:salesTermId&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Specifies the default sales term ID that is to be associated with the customer.</span></th></tr>
             
             
           
-            
-            <tr><th colspan="12"><nobr>&lt;quickbooks:payment-method-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. ID of the PaymentMethod. For Customer, this is the Id associated with the 
-          customer as set in the request.</span></th></tr>
-            
-            
-          
-            
-            <tr><th colspan="12"><nobr>&lt;quickbooks:sales-tax-code-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>QBO only supports the customers being taxable or not, so if this field is "1", the job 
-                       is taxable. If the field value is null, the job is not taxable. All other values are 
-                       invalid.</span></th></tr>
-            
             
           
             
@@ -2175,12 +2132,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -2342,12 +2297,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -2513,12 +2466,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -2664,7 +2615,7 @@ specify which configuration to use.</p>
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>taxable</nobr></td>
-                    <td class="jd-descrcol">false</td>
+                    <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Optional. Indicates whether the item is subject to tax.</td>
                 </tr>
                 
@@ -2717,7 +2668,7 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:unit-price&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Monetary values of the service or product</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:unitPrice&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Monetary values of the service or product</span></th></tr>
             
             
           
@@ -2726,12 +2677,12 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:income-account&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the sales item.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:incomeAccount&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the sales item.</span></th></tr>
             
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:item-parent-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The parent item id of current item.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:itemParentId&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The parent item id of current item.</span></th></tr>
             
             
           
@@ -2740,12 +2691,12 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:purchase-cost&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The monetary value of the service or product.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:purchaseCost&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The monetary value of the service or product.</span></th></tr>
             
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:expense-account&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the purchase item.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:expenseAccount&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the purchase item.</span></th></tr>
             
             
           
@@ -2759,12 +2710,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -2921,12 +2870,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -3028,7 +2975,7 @@ specify which configuration to use.</p>
                 
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>type</nobr></td>
-                    <td class="jd-descrcol">NON_CREDIT_CARD</td>
+                    <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Type of payment. Specifies if it is a credit card payment type or a 
              non-credit card payment type. It must specify either of the following:<br/>
              * CREDIT_CARD<br/>
@@ -3068,12 +3015,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -3229,12 +3174,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -3468,12 +3411,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -3744,7 +3685,7 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:web-sites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Valid URI strings. Specifies the vendor's Web site.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:webSites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Valid URI strings. Specifies the vendor's Web site.</span></th></tr>
             
             
           
@@ -3785,12 +3726,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -3938,12 +3877,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -4121,12 +4058,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -4255,12 +4190,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -4503,7 +4436,7 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:account-parent-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. If the account is a subaccount, AccountParentId is used to 
+            <tr><th colspan="12"><nobr>&lt;quickbooks:accountParentId&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. If the account is a subaccount, AccountParentId is used to 
                         store the ID of the parent account.</span></th></tr>
             
             
@@ -4518,12 +4451,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -4768,12 +4699,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -4989,12 +4918,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -5215,12 +5142,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -5405,12 +5330,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -5596,12 +5519,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -5648,10 +5569,9 @@ specify which configuration to use.</p>
                             familyName="doe"
                             suffix="sr"
                             dBAName="mint"
-                            showAs="j doe"&gt;
+                            showAs="j doe"
+                            salesTaxCodeId="5"&gt;
     &lt;quickbooks:id ref="#[variable:id]" /&gt;
-    &lt;quickbooks:sales-tax-code-id ref="#[variable:salesTaxCodeId]"&gt;&lt;/quickbooks:sales-tax-code-id&gt;
-    &lt;quickbooks:payment-method-id ref="#[variable:paymentMethodId]"&gt;&lt;/quickbooks:payment-method-id&gt;
     &lt;quickbooks:web-sites ref="#[variable:website]"&gt;&lt;/quickbooks:web-sites&gt;
     &lt;quickbooks:sales-term-id ref="#[variable:salestermid]"&gt;&lt;/quickbooks:sales-term-id&gt;
     &lt;quickbooks:emails ref="#[variable:email]"&gt;&lt;/quickbooks:emails&gt;
@@ -5842,7 +5762,14 @@ specify which configuration to use.</p>
                 
           
                 
-          
+                <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>salesTaxCodeId</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>QBO only supports the customers being taxable or not, so if this field is "1", the job 
+                       is taxable. If the field value is null, the job is not taxable. All other values are 
+                       invalid.</td>
+                </tr>
+                
                 
           
                 
@@ -5892,26 +5819,15 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:web-sites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Valid URI strings. Specifies the customers's Web sites.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:webSites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Valid URI strings. Specifies the customers's Web sites.</span></th></tr>
             
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:sales-term-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Specifies the default sales term ID that is to be associated with the customer.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:salesTermId&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Specifies the default sales term ID that is to be associated with the customer.</span></th></tr>
             
             
           
-            
-            <tr><th colspan="12"><nobr>&lt;quickbooks:payment-method-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. ID of the PaymentMethod. For Customer, this is the Id associated with the 
-          customer as set in the request.</span></th></tr>
-            
-            
-          
-            
-            <tr><th colspan="12"><nobr>&lt;quickbooks:sales-tax-code-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>QBO only supports the customers being taxable or not, so if this field is "1", the job 
-                       is taxable. If the field value is null, the job is not taxable. All other values are 
-                       invalid.</span></th></tr>
-            
             
           
             
@@ -5945,12 +5861,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -6142,12 +6056,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -6342,12 +6254,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -6515,7 +6425,7 @@ specify which configuration to use.</p>
                 
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>taxable</nobr></td>
-                    <td class="jd-descrcol">false</td>
+                    <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Optional. Indicates whether the item is subject to tax.</td>
                 </tr>
                 
@@ -6575,7 +6485,7 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:unit-price&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Monetary values of the service or product</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:unitPrice&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Monetary values of the service or product</span></th></tr>
             
             
           
@@ -6584,12 +6494,12 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:income-account&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the sales item.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:incomeAccount&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the sales item.</span></th></tr>
             
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:item-parent-id&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The parent item id of current item.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:itemParentId&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The parent item id of current item.</span></th></tr>
             
             
           
@@ -6598,12 +6508,12 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:purchase-cost&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The monetary value of the service or product.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:purchaseCost&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. The monetary value of the service or product.</span></th></tr>
             
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:expense-account&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the purchase item.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:expenseAccount&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Income account reference to be associated with the purchase item.</span></th></tr>
             
             
           
@@ -6617,12 +6527,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -6808,12 +6716,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -6943,7 +6849,7 @@ specify which configuration to use.</p>
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>type</nobr></td>
-                    <td class="jd-descrcol">NON_CREDIT_CARD</td>
+                    <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Optional. Type of payment. Specifies if it is a credit card payment type or a 
              non-credit card payment type.</td>
                 </tr>
@@ -6988,12 +6894,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -7178,12 +7082,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -7448,12 +7350,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
@@ -7709,7 +7609,7 @@ specify which configuration to use.</p>
             
           
             
-            <tr><th colspan="12"><nobr>&lt;quickbooks:web-sites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Valid URI strings. Specifies the vendor's Web site.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;quickbooks:webSites&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Optional. Valid URI strings. Specifies the vendor's Web site.</span></th></tr>
             
             
           
@@ -7750,12 +7650,10 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payloads</h5>
-      <table class="jd-sumtable">
-        <tr><th>Payload Class</th><th>Description</th></tr>
-        
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
         <tr>
-            <td>QuickBooksRuntimeException</td>
+            <th><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
 </td>
