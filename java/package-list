@@ -3,19 +3,7 @@ org.mule.modules.quickbooks.api
 org.mule.modules.quickbooks.api.exception
 org.mule.modules.quickbooks.api.gateway
 org.mule.modules.quickbooks.api.gateway.oauth
-org.mule.modules.quickbooks.config
-org.mule.modules.quickbooks.config.spring
-org.mule.modules.quickbooks.online
-org.mule.modules.quickbooks.online.api
-org.mule.modules.quickbooks.online.config
-org.mule.modules.quickbooks.online.config.spring
-org.mule.modules.quickbooks.online.objectfactory
 org.mule.modules.quickbooks.online.schema
 org.mule.modules.quickbooks.utils
-org.mule.modules.quickbooks.windows
-org.mule.modules.quickbooks.windows.api
-org.mule.modules.quickbooks.windows.config
-org.mule.modules.quickbooks.windows.config.spring
-org.mule.modules.quickbooks.windows.objectfactory
 org.mule.modules.quickbooks.windows.schema
 
