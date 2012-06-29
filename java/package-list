@@ -1,8 +1,8 @@
-org.mule.modules.quickbooks.windows
-org.mule.modules.quickbooks.windows.adapters
-org.mule.modules.quickbooks.windows.api
-org.mule.modules.quickbooks.windows.config
-org.mule.modules.quickbooks.windows.objectfactory
-org.mule.modules.quickbooks.windows.processors
-org.mule.modules.quickbooks.windows.transformers
+org.mule.modules.quickbooks.online
+org.mule.modules.quickbooks.online.adapters
+org.mule.modules.quickbooks.online.api
+org.mule.modules.quickbooks.online.config
+org.mule.modules.quickbooks.online.objectfactory
+org.mule.modules.quickbooks.online.processors
+org.mule.modules.quickbooks.online.transformers
 
