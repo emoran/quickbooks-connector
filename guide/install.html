@@ -70,13 +70,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-  <meta name="description" content="Documentation for QuickBooks Cloud Connector Commons Libraries." />
+  <meta name="description" content="Documentation for QuickBooks Windows Cloud Connector." />
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
 <title>
 
 
-| QuickBooks Cloud Connector Commons Libraries
+| QuickBooks Windows Cloud Connector
 
 </title>
 <link href="../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
@@ -117,7 +117,7 @@
   feedback_widget_options.color = "#2F74AE";
   feedback_widget_options.style = "question";
 
-  feedback_widget_options.tag = "QuickBooks Cloud Connector Commons Libraries";
+  feedback_widget_options.tag = "QuickBooks Windows Cloud Connector";
 
   feedback_widget_options.limit = "3";
 
@@ -130,7 +130,7 @@
 <div id="header">
     <div id="headerLeft">
     
-      <span id="masthead-title">QuickBooks Cloud Connector Commons Libraries</span>
+      <span id="masthead-title">QuickBooks Windows Cloud Connector</span>
     
     <ul id="header-tabs" class="guide">
     
@@ -140,6 +140,10 @@
     
     	<li id="java"><a href="../java/packages.html">
 	    	<span class="en">Java API Reference</span>
+    	</a></li>
+    
+    	<li id="mule"><a href="../mule/modules.html">
+	    	<span class="en">Mule API Reference</span>
     	</a></li>
     
     </ul>
@@ -224,8 +228,8 @@ element your POM:
 
 <pre>
 &lt;dependency&gt;
-    &lt;groupId&gt;com.mulesoft.modules&lt;/groupId&gt;
-    &lt;artifactId&gt;mule-module-quick-books-commons&lt;/artifactId&gt;
+    &lt;groupId&gt;org.mule.modules&lt;/groupId&gt;
+    &lt;artifactId&gt;mule-module-quick-books-windows&lt;/artifactId&gt;
     &lt;version&gt;RELEASE&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
@@ -234,8 +238,8 @@ or if  you want to be on the bleeding edge
 
 <pre>
 &lt;dependency&gt;
-    &lt;groupId&gt;com.mulesoft.modules&lt;/groupId&gt;
-    &lt;artifactId&gt;mule-module-quick-books-commons&lt;/artifactId&gt;
+    &lt;groupId&gt;org.mule.modules&lt;/groupId&gt;
+    &lt;artifactId&gt;mule-module-quick-books-windows&lt;/artifactId&gt;
     &lt;version&gt;LATEST&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
@@ -254,8 +258,8 @@ Add an special inclusion to the configuration of the Mule Maven plugin for this 
         &lt;excludeMuleDependencies&gt;false&lt;/excludeMuleDependencies&gt;
         &lt;inclusions&gt;
             &lt;inclusion&gt;
-                &lt;groupId&gt;com.mulesoft.modules&lt;/groupId&gt;
-                &lt;artifactId&gt;mule-module-quick-books-commons&lt;/artifactId&gt;
+                &lt;groupId&gt;org.mule.modules&lt;/groupId&gt;
+                &lt;artifactId&gt;mule-module-quick-books-windows&lt;/artifactId&gt;
             &lt;/inclusion&gt;
         &lt;/inclusions&gt;
     &lt;/configuration&gt;
