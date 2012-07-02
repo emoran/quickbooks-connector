@@ -302,10 +302,10 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
                         getBaseUri(realmId), type.getResouceNameForFind(), realmId));
                     
-                    httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                    httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                     try
                     {
-                        ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                        ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
                     }
                     catch (UnsupportedEncodingException e)
                     {
