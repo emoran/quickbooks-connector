@@ -1,5 +1,5 @@
 var NAVTREE_DATA =
-[ [ "org.mule.modules.quickbooks.online", "org/mule/modules/quickbooks/online/package-summary.html", [ [ "Classes", null, [ [ "QuickBooksModule", "org/mule/modules/quickbooks/online/QuickBooksModule.html", null, "" ] ]
+[ [ "org.mule.modules.quickbooks.online", "org/mule/modules/quickbooks/online/package-summary.html", [ [ "Classes", null, [ [ "QuickBooksModule", "org/mule/modules/quickbooks/online/QuickBooksModule.html", null, "" ], [ "Test", "org/mule/modules/quickbooks/online/Test.html", null, "" ] ]
 , "" ], [ "Enums", null, [ [ "AccountOnlineDetail", "org/mule/modules/quickbooks/online/AccountOnlineDetail.html", null, "" ], [ "OnlineEntityType", "org/mule/modules/quickbooks/online/OnlineEntityType.html", null, "" ] ]
 , "" ] ]
 , "" ], [ "org.mule.modules.quickbooks.online.adapters", "org/mule/modules/quickbooks/online/adapters/package-summary.html", [ [ "Classes", null, [ [ "QuickBooksModuleCapabilitiesAdapter", "org/mule/modules/quickbooks/online/adapters/QuickBooksModuleCapabilitiesAdapter.html", null, "" ], [ "QuickBooksModuleLifecycleAdapter", "org/mule/modules/quickbooks/online/adapters/QuickBooksModuleLifecycleAdapter.html", null, "" ] ]
