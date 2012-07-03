@@ -64,11 +64,13 @@
 
 
 
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-  <meta name="description" content="Documentation for QuickBooks Cloud Connector." />
+  <meta name="description" content="Documentation for QuickBooks Cloud Connector Commons Libraries." />
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
 <title>
@@ -76,7 +78,7 @@
   Class Index
 
 
-| QuickBooks Cloud Connector
+| QuickBooks Cloud Connector Commons Libraries
 
 </title>
 <link href="../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
@@ -85,6 +87,7 @@
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 <script src="../assets/search_autocomplete.js" type="text/javascript"></script>
 <script src="../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../assets/jquery-toc.js" type="text/javascript"></script>
 <script src="../assets/mule-developer-docs.js" type="text/javascript"></script>
 <script src="../assets/prettify.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -103,13 +106,34 @@
     #resize-packages-nav{border-bottom:3px solid #666;}
   </style>
 </noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "QuickBooks Cloud Connector Commons Libraries";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
 </head>
 
 
 <div id="header">
     <div id="headerLeft">
     
-      <span id="masthead-title">QuickBooks Cloud Connector</span>
+      <span id="masthead-title">QuickBooks Cloud Connector Commons Libraries</span>
     
     <ul id="header-tabs" class="java">
     
@@ -119,10 +143,6 @@
     
     	<li id="java"><a href="../java/packages.html">
 	    	<span class="en">Java API Reference</span>
-    	</a></li>
-    
-    	<li id="mule"><a href="../mule/modules.html">
-	    	<span class="en">Mule API Reference</span>
     	</a></li>
     
     </ul>
@@ -189,33 +209,9 @@
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/api/gateway/oauth/package-summary.html">org.mule.modules.quickbooks.api.gateway.oauth</a></li>
     <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/config/package-summary.html">org.mule.modules.quickbooks.config</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/config/spring/package-summary.html">org.mule.modules.quickbooks.config.spring</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/online/package-summary.html">org.mule.modules.quickbooks.online</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/online/api/package-summary.html">org.mule.modules.quickbooks.online.api</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/online/config/package-summary.html">org.mule.modules.quickbooks.online.config</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/online/config/spring/package-summary.html">org.mule.modules.quickbooks.online.config.spring</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/online/objectfactory/package-summary.html">org.mule.modules.quickbooks.online.objectfactory</a></li>
-    <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/online/schema/package-summary.html">org.mule.modules.quickbooks.online.schema</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/utils/package-summary.html">org.mule.modules.quickbooks.utils</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/windows/package-summary.html">org.mule.modules.quickbooks.windows</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/windows/api/package-summary.html">org.mule.modules.quickbooks.windows.api</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/windows/config/package-summary.html">org.mule.modules.quickbooks.windows.config</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/windows/config/spring/package-summary.html">org.mule.modules.quickbooks.windows.config.spring</a></li>
-    <li class="api apilevel-">
-  <a href="../java/org/mule/modules/quickbooks/windows/objectfactory/package-summary.html">org.mule.modules.quickbooks.windows.objectfactory</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/windows/schema/package-summary.html">org.mule.modules.quickbooks.windows.schema</a></li>
               </ul><br/>
@@ -332,42 +328,24 @@
     
     
         <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/AccountDetailEnumTransformer.html">AccountDetailEnumTransformer</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/AccountOnlineDetail.html">AccountOnlineDetail</a></td>
-            <td class="jd-descrcol" width="100%">Enumeration that contains the sub-types of accounts.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/AccountOnlineDetailEnumTransformer.html">AccountOnlineDetailEnumTransformer</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AccountQuery.html">AccountQuery</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AccountQuery complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/AccountRef.html">AccountRef</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AccountRef complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AccountRef.html">AccountRef</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AccountRef complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Accounts.html">Accounts</a></td>
             <td class="jd-descrcol" width="100%">Provides the definition that allows bulk data transfer of Accounts
  
@@ -375,7 +353,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/Accounts.html">Accounts</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
          Description: Provides the definition that allows bulk data transfer of Accounts
@@ -385,37 +363,37 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/AccountSubtypeEnum.html">AccountSubtypeEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AccountSubtypeEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AccountSubtypeEnum.html">AccountSubtypeEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AccountSubtypeEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/AccountTypeEnum.html">AccountTypeEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AccountTypeEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AccountTypeEnum.html">AccountTypeEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AccountTypeEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AcquiredAsEnum.html">AcquiredAsEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AcquiredAsEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AddRequest.html">AddRequest</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Request type to add new data to the system
@@ -425,39 +403,27 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AdvancedReportQuery.html">AdvancedReportQuery</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AdvancedReportQuery complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AdvDetailReportParam.html">AdvDetailReportParam</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AdvDetailReportParam complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AdvReportParamBase.html">AdvReportParamBase</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AdvReportParamBase complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/AdvSummaryReportParam.html">AdvSummaryReportParam</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for AdvSummaryReportParam complex type.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/AuthorizeDefinitionParser.html">AuthorizeDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/AuthorizeMessageProcessor.html">AuthorizeMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
@@ -1264,378 +1230,6 @@
     
     
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateAccountDefinitionParser.html">CreateAccountDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateAccountDefinitionParser.html">CreateAccountDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateAccountMessageProcessor.html">CreateAccountMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateAccountMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.AccountDetail, java.lang.String, java.lang.String, java.util.Date, java.util.Map) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateAccountMessageProcessor.html">CreateAccountMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateAccountMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.AccountOnlineDetail, java.lang.String, java.lang.String, java.util.Date, java.util.Map<java.lang.String, java.lang.Object>)">createAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.AccountOnlineDetail, java.lang.String, java.lang.String, java.util.Date, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateBillDefinitionParser.html">CreateBillDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateBillDefinitionParser.html">CreateBillDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateBillMessageProcessor.html">CreateBillMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateBillMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createBill(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateBillMessageProcessor.html">CreateBillMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateBillMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createBill(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createBill(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateBillPaymentDefinitionParser.html">CreateBillPaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateBillPaymentDefinitionParser.html">CreateBillPaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateBillPaymentMessageProcessor.html">CreateBillPaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateBillPaymentMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createBillPayment(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateBillPaymentMessageProcessor.html">CreateBillPaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateBillPaymentMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createBillPayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createBillPayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateCashPurchaseDefinitionParser.html">CreateCashPurchaseDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateCashPurchaseDefinitionParser.html">CreateCashPurchaseDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateCashPurchaseMessageProcessor.html">CreateCashPurchaseMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCashPurchaseMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createCashPurchase(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateCashPurchaseMessageProcessor.html">CreateCashPurchaseMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCashPurchaseMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createCashPurchase(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createCashPurchase(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateCheckDefinitionParser.html">CreateCheckDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateCheckDefinitionParser.html">CreateCheckDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateCheckMessageProcessor.html">CreateCheckMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCheckMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createCheck(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateCheckMessageProcessor.html">CreateCheckMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCheckMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createCheck(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createCheck(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateCreditCardChargeDefinitionParser.html">CreateCreditCardChargeDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateCreditCardChargeDefinitionParser.html">CreateCreditCardChargeDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateCreditCardChargeMessageProcessor.html">CreateCreditCardChargeMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCreditCardChargeMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createCreditCardCharge(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateCreditCardChargeMessageProcessor.html">CreateCreditCardChargeMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCreditCardChargeMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createCreditCardCharge(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createCreditCardCharge(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateCustomerDefinitionParser.html">CreateCustomerDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateCustomerDefinitionParser.html">CreateCustomerDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateCustomerMessageProcessor.html">CreateCustomerMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCustomerMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createCustomer(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.Map, java.lang.String, java.util.List, java.util.List, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateCustomerMessageProcessor.html">CreateCustomerMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateCustomerMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createCustomer(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createCustomer(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.Map, java.lang.String, java.util.List, java.util.List, java.util.List, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/CreateDefinitionParser.html">CreateDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateEstimateDefinitionParser.html">CreateEstimateDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateEstimateDefinitionParser.html">CreateEstimateDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateEstimateMessageProcessor.html">CreateEstimateMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateEstimateMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createEstimate(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateEstimateMessageProcessor.html">CreateEstimateMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateEstimateMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createEstimate(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createEstimate(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateInvoiceDefinitionParser.html">CreateInvoiceDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateInvoiceDefinitionParser.html">CreateInvoiceDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateInvoiceMessageProcessor.html">CreateInvoiceMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateInvoiceMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createInvoice(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateInvoiceMessageProcessor.html">CreateInvoiceMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateInvoiceMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createInvoice(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createInvoice(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateItemDefinitionParser.html">CreateItemDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateItemDefinitionParser.html">CreateItemDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateItemMessageProcessor.html">CreateItemMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateItemMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createItem(java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.Boolean, java.util.Map, java.util.Map, java.lang.String, java.lang.String, java.util.Map, java.util.Map) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateItemMessageProcessor.html">CreateItemMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateItemMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createItem(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.Boolean, java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>)">createItem(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.Boolean, java.util.Map, java.util.Map, java.lang.String, java.lang.String, java.util.Map, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/CreateMessageProcessor.html">CreateMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#create(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.Boolean, java.lang.Boolean)">create(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map, java.lang.String, java.lang.Boolean, java.lang.Boolean)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreatePaymentDefinitionParser.html">CreatePaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreatePaymentDefinitionParser.html">CreatePaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreatePaymentMessageProcessor.html">CreatePaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreatePaymentMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createPayment(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreatePaymentMessageProcessor.html">CreatePaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreatePaymentMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createPayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createPayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreatePaymentMethodDefinitionParser.html">CreatePaymentMethodDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreatePaymentMethodDefinitionParser.html">CreatePaymentMethodDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreatePaymentMethodMessageProcessor.html">CreatePaymentMethodMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreatePaymentMethodMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createPaymentMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreatePaymentMethodMessageProcessor.html">CreatePaymentMethodMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreatePaymentMethodMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createPaymentMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">createPaymentMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateSalesReceiptDefinitionParser.html">CreateSalesReceiptDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateSalesReceiptDefinitionParser.html">CreateSalesReceiptDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateSalesReceiptMessageProcessor.html">CreateSalesReceiptMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateSalesReceiptMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createSalesReceipt(java.lang.String, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateSalesReceiptMessageProcessor.html">CreateSalesReceiptMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateSalesReceiptMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createSalesReceipt(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createSalesReceipt(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateSalesTermDefinitionParser.html">CreateSalesTermDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateSalesTermDefinitionParser.html">CreateSalesTermDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateSalesTermMessageProcessor.html">CreateSalesTermMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateSalesTermMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createSalesTerm(java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer, java.lang.String) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateSalesTermMessageProcessor.html">CreateSalesTermMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateSalesTermMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createSalesTerm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer, java.lang.String)">createSalesTerm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/CreateVendorDefinitionParser.html">CreateVendorDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/CreateVendorDefinitionParser.html">CreateVendorDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/CreateVendorMessageProcessor.html">CreateVendorMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateVendorMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#createVendor(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.lang.String, java.lang.String, java.lang.Boolean, java.util.List, java.util.List, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/CreateVendorMessageProcessor.html">CreateVendorMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">CreateVendorMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#createVendor(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.lang.String, java.lang.String, java.lang.Boolean, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">createVendor(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.lang.String, java.lang.String, java.lang.Boolean, java.util.List, java.util.List, java.util.List, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/CreditCardCharge.html">CreditCardCharge</a></td>
             <td class="jd-descrcol" width="100%">Financial transaction representing a charge for purchase of goods or services.&nbsp;</td>
         </tr>
@@ -2235,82 +1829,10 @@
     
     
         <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/DefaultHttpCallback.html">DefaultHttpCallback</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/DefaultHttpCallback.FlowRefMessageProcessor.html">DefaultHttpCallback.FlowRefMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/api/DefaultQuickBooksOnlineClient.html">DefaultQuickBooksOnlineClient</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.html">DefaultQuickBooksWindowsClient</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/DefaultRestoreAccessTokenCallback.html">DefaultRestoreAccessTokenCallback</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/DefaultSaveAccessTokenCallback.html">DefaultSaveAccessTokenCallback</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/DeleteDefinitionParser.html">DeleteDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/DeletedEntities.html">DeletedEntities</a></td>
             <td class="jd-descrcol" width="100%">Provides collection of Generic entities as deleted entities
  
  <p>Java class for DeletedEntities complex type.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/DeleteMessageProcessor.html">DeleteMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">DeleteMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#delete(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String)">delete(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/DeleteObjectDefinitionParser.html">DeleteObjectDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/DeleteObjectDefinitionParser.html">DeleteObjectDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/DeleteObjectMessageProcessor.html">DeleteObjectMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">DeleteObjectMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#deleteObject(java.lang.String, java.lang.String, org.mule.modules.quickbooks.EntityType, java.util.Map, java.lang.String) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/DeleteObjectMessageProcessor.html">DeleteObjectMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">DeleteObjectMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#deleteObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.OnlineEntityType, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String)">deleteObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.OnlineEntityType, java.util.Map, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
         </tr>
     
     
@@ -2535,37 +2057,31 @@
     
     
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/EntityTypeEnumTransformer.html">EntityTypeEnumTransformer</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ErrorCodeEnum.html">ErrorCodeEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for ErrorCodeEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ErrorResponse.html">ErrorResponse</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for ErrorResponse complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Estimate.html">Estimate</a></td>
             <td class="jd-descrcol" width="100%">A proposal for a FinancialTransaction from a business to a customer for goods or services proposed to be sold, including proposed pricing.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/Estimate.html">Estimate</a></td>
             <td class="jd-descrcol" width="100%">Product: QBO
          Description: The Estimate represents a proposal for a financial transaction from a business to a customer for goods or services proposed to be sold, including proposed pricing.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/EstimateHeader.html">EstimateHeader</a></td>
             <td class="jd-descrcol" width="100%">Information that pertains to the entire Estimate
  
@@ -2573,7 +2089,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/EstimateHeader.html">EstimateHeader</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
          Description: Information that pertains to the entire Estimate
@@ -2583,26 +2099,26 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/EstimateLine.html">EstimateLine</a></td>
             <td class="jd-descrcol" width="100%">A service or product proposed to be sold along with quantity, price and other descriptive information.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/EstimateLine.html">EstimateLine</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
          Description: A service or product proposed to be sold along with quantity, price and other descriptive information.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/EstimateQuery.html">EstimateQuery</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for EstimateQuery complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Estimates.html">Estimates</a></td>
             <td class="jd-descrcol" width="100%">Provides the definition that allows bulk data transfer of Estimates
  
@@ -2610,7 +2126,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/Estimates.html">Estimates</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
          Description: Provides the definition that allows bulk data transfer of Estimates
@@ -2620,25 +2136,25 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/EstimateStatusEnum.html">EstimateStatusEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for EstimateStatusEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/EstimateStatusEnum.html">EstimateStatusEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for EstimateStatusEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/EstimateStatusFilterEnumType.html">EstimateStatusFilterEnumType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for EstimateStatusFilterEnumType.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ExternalKey.html">ExternalKey</a></td>
             <td class="jd-descrcol" width="100%">ExternalKey type allows to associate ExternalID like QuickBooks ID to be represented in the cloud
  
@@ -2646,27 +2162,27 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ExternalKey.html">ExternalKey</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW 
  			Description: ExternalKey type allows to associate ExternalID like QuickBooks ID to be represented in the cloud.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ExternalRole.html">ExternalRole</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Object that allows adding a role that will allow for filtering data pertaining only to the requestor.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ExternalRole.RoleId.html">ExternalRole.RoleId</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for anonymous complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ExternalRoleQuery.html">ExternalRoleQuery</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for ExternalRoleQuery complex type.&nbsp;</td>
         </tr>
@@ -2702,42 +2218,6 @@
             <td class="jd-descrcol" width="100%">FaultInfo represents an exception condition
  
  <p>Java class for FaultInfo complex type.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/FindObjectsDefinitionParser.html">FindObjectsDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/FindObjectsDefinitionParser.html">FindObjectsDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/FindObjectsDefinitionParser.html">FindObjectsDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/FindObjectsMessageProcessor.html">FindObjectsMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">FindObjectsMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#findObjects(java.lang.String, java.lang.String, org.mule.modules.quickbooks.EntityType, java.lang.String, java.lang.String) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/FindObjectsMessageProcessor.html">FindObjectsMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">FindObjectsMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#findObjects(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.OnlineEntityType, java.lang.String, java.lang.String)">findObjects(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.OnlineEntityType, java.lang.String, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/FindObjectsMessageProcessor.html">FindObjectsMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">FindObjectsMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">findObjects(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
         </tr>
     
     
@@ -2784,58 +2264,10 @@
     
     
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/GenerateANewRequestIdDefinitionParser.html">GenerateANewRequestIdDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/GenerateANewRequestIdMessageProcessor.html">GenerateANewRequestIdMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">GenerateANewRequestIdMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#generateANewRequestId()">generateANewRequestId()</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/GenericEntity.html">GenericEntity</a></td>
             <td class="jd-descrcol" width="100%">Defines the List of Generic entities
  
  <p>Java class for GenericEntity complex type.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/GetObjectDefinitionParser.html">GetObjectDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/GetObjectDefinitionParser.html">GetObjectDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/GetObjectDefinitionParser.html">GetObjectDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">GetObjectMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#getObject(java.lang.String, java.lang.String, org.mule.modules.quickbooks.EntityType, java.util.Map) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">GetObjectMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#getObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.OnlineEntityType, java.util.Map<java.lang.String, java.lang.Object>)">getObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.OnlineEntityType, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">GetObjectMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">getObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
         </tr>
     
     
@@ -3756,26 +3188,10 @@
     
     
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/objectfactory/ObjectFactory.html">ObjectFactory</a></td>
-            <td class="jd-descrcol" width="100%">This object contains factory methods for each 
- Java content interface and Java element interface 
- generated in the org.mule.modules.quickbooks.schema package.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ObjectFactory.html">ObjectFactory</a></td>
             <td class="jd-descrcol" width="100%">This object contains factory methods for each 
  Java content interface and Java element interface 
  generated in the org.mule.modules.quickbooks.schema.online package.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.html">ObjectFactory</a></td>
-            <td class="jd-descrcol" width="100%">This object contains factory methods for each 
- Java content interface and Java element interface 
- generated in the org.mule.modules.quickbooks.windows.schema package.&nbsp;</td>
         </tr>
     
     
@@ -3838,18 +3254,6 @@
         <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/OfferingId.html">OfferingId</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for offeringId.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a></td>
-            <td class="jd-descrcol" width="100%">The supported objects for Data Services for QuickBooks Online.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/OnlineEntityTypeEnumTransformer.html">OnlineEntityTypeEnumTransformer</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
@@ -4591,18 +3995,12 @@
     
     
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/objectfactory/QBOMessageUtils.html">QBOMessageUtils</a></td>
-            <td class="jd-descrcol" width="100%">The MessageUtils helps to manage marshaling and unmarshaling of QBO objects.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/QboObjectName.html">QboObjectName</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for qboObjectName.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/QboUser.html">QboUser</a></td>
             <td class="jd-descrcol" width="100%">Represents a QboUser
  
@@ -4610,17 +4008,11 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/QboUserCompanyMapping.html">QboUserCompanyMapping</a></td>
             <td class="jd-descrcol" width="100%">Construct for user and company mapping
  
  <p>Java class for QboUserCompanyMapping complex type.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/objectfactory/QBWMessageUtils.html">QBWMessageUtils</a></td>
-            <td class="jd-descrcol" width="100%">The MessageUtils helps to manage marshaling and unmarshaling of QBO objects.&nbsp;</td>
         </tr>
     
     
@@ -4649,118 +4041,8 @@
     
     
         <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></td>
-            <td class="jd-descrcol" width="100%">QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
- making the accounting process more comfortable for the average business owner or manager.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/QuickBooksModuleCapabilitiesAdapter.html">QuickBooksModuleCapabilitiesAdapter</a></td>
-            <td class="jd-descrcol" width="100%">A <code>QuickBooksModuleCapabilitiesAdapter</code> is a wrapper around org.mule.modules.quickbooks.QuickBooksModule that implements org.mule.api.Capabilities interface.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/QuickBooksModuleCapabilitiesAdapter.html">QuickBooksModuleCapabilitiesAdapter</a></td>
-            <td class="jd-descrcol" width="100%">A <code>QuickBooksModuleCapabilitiesAdapter</code> is a wrapper around <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code> that implements org.mule.api.Capabilities interface.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/QuickBooksModuleConfigDefinitionParser.html">QuickBooksModuleConfigDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/QuickBooksModuleConfigDefinitionParser.html">QuickBooksModuleConfigDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/QuickBooksModuleHttpCallbackAdapter.html">QuickBooksModuleHttpCallbackAdapter</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/QuickBooksModuleLifecycleAdapter.html">QuickBooksModuleLifecycleAdapter</a></td>
-            <td class="jd-descrcol" width="100%">A <code>QuickBooksModuleLifecycleAdapter</code> is a wrapper around QuickBooksModule that adds lifecycle methods to the pojo.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/QuickBooksModuleLifecycleAdapter.html">QuickBooksModuleLifecycleAdapter</a></td>
-            <td class="jd-descrcol" width="100%">A <code>QuickBooksModuleLifecycleAdapter</code> is a wrapper around <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code> that adds lifecycle methods to the pojo.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/QuickBooksModuleNamespaceHandler.html">QuickBooksModuleNamespaceHandler</a></td>
-            <td class="jd-descrcol" width="100%">Registers bean definitions parsers for handling elements in <code>http://www.mulesoft.org/schema/mule/quickbooks</code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/QuickBooksModuleNamespaceHandler.html">QuickBooksModuleNamespaceHandler</a></td>
-            <td class="jd-descrcol" width="100%">Registers bean definitions parsers for handling elements in <code>http://www.mulesoft.org/schema/mule/quickbooks</code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/QuickBooksModuleOAuth1Adapter.html">QuickBooksModuleOAuth1Adapter</a></td>
-            <td class="jd-descrcol" width="100%">A <code>QuickBooksModuleOAuth1Adapter</code> is a wrapper around QuickBooksModule that adds OAuth capabilites to the pojo.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html">QuickBooksOnlineClient</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/api/exception/QuickBooksRuntimeException.html">QuickBooksRuntimeException</a></td>
             <td class="jd-descrcol" width="100%">Quickbook's runtime exception.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/api/QuickBooksWindowsClient.html">QuickBooksWindowsClient</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></td>
-            <td class="jd-descrcol" width="100%">QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
- making the accounting process more comfortable for the average business owner or manager.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleCapabilitiesAdapter.html">QuickBooksWindowsModuleCapabilitiesAdapter</a></td>
-            <td class="jd-descrcol" width="100%">A <code>QuickBooksWindowsModuleCapabilitiesAdapter</code> is a wrapper around <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code> that implements org.mule.api.Capabilities interface.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/QuickBooksWindowsModuleConfigDefinitionParser.html">QuickBooksWindowsModuleConfigDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/QuickBooksWindowsModuleLifecycleAdapter.html">QuickBooksWindowsModuleLifecycleAdapter</a></td>
-            <td class="jd-descrcol" width="100%">A <code>QuickBooksWindowsModuleLifecycleAdapter</code> is a wrapper around <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code> that adds lifecycle methods to the pojo.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/QuickBooksWindowsModuleNamespaceHandler.html">QuickBooksWindowsModuleNamespaceHandler</a></td>
-            <td class="jd-descrcol" width="100%">Registers bean definitions parsers for handling elements in <code>http://www.mulesoft.org/schema/mule/quickbooks-windows</code>.&nbsp;</td>
         </tr>
     
     
@@ -4930,18 +4212,12 @@
     
     
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/RestoreAccessTokenCallbackFactoryBean.html">RestoreAccessTokenCallbackFactoryBean</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RestResponse.html">RestResponse</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for anonymous complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RevertRequest.html">RevertRequest</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Request type to revert the changes in the existing data in the system
@@ -4951,7 +4227,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/RoleBase.html">RoleBase</a></td>
             <td class="jd-descrcol" width="100%">Describes Role of a Party, Generally the role can be Customer, Vendor, EmployeeWorker 
  
@@ -4959,20 +4235,20 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RoleBase.html">RoleBase</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW 
  			Description: Describes Role of a Party.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/RoleType.html">RoleType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for roleType.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RoleType.html">RoleType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for roleType.&nbsp;</td>
         </tr>
@@ -5438,18 +4714,12 @@
     
     
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/SaveAccessTokenCallbackFactoryBean.html">SaveAccessTokenCallbackFactoryBean</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SearchDoc.html">SearchDoc</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SearchDoc complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SearchDocs.html">SearchDocs</a></td>
             <td class="jd-descrcol" width="100%">Description: This is the enclosing envelope for all Search Documents in sorted order
        
@@ -5458,56 +4728,56 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SearchRestResponse.html">SearchRestResponse</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SearchRestResponse complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/SearchResults.html">SearchResults</a></td>
             <td class="jd-descrcol" width="100%">Wrapper for search results.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/SeatType.html">SeatType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for seatType.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SeatType.html">SeatType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for seatType.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SeparatorEnum.html">SeparatorEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for separatorEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ShipMethod.html">ShipMethod</a></td>
             <td class="jd-descrcol" width="100%">Method of shipment of sold or purchased goods.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ShipMethod.html">ShipMethod</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: You can use the ShipMethod object to specify a method to ship the goods that are purchased or sold.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ShipMethodQuery.html">ShipMethodQuery</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for ShipMethodQuery complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ShipMethods.html">ShipMethods</a></td>
             <td class="jd-descrcol" width="100%">Provides the definition that allows bulk data transfer of Ship Methods
  
@@ -5515,7 +4785,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ShipMethods.html">ShipMethods</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Provides the definition that allows bulk data transfer of Ship Methods
@@ -5525,13 +4795,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortBy.html">SortBy</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortBy complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumn.html">SortByColumn</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Allowed sort options for Advanced Reports queries, also specifying ascending/descending order as an attribute
@@ -5541,13 +4811,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnAccount.html">SortByColumnAccount</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnAccount.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnAccountWithOrder.html">SortByColumnAccountWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Account queries also specifying ascending/descending order as an attribute
@@ -5557,19 +4827,19 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBill.html">SortByColumnBill</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnBill.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBillPayment.html">SortByColumnBillPayment</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnBillPayment.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBillPaymentWithOrder.html">SortByColumnBillPaymentWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Bill Payment queries also specifying ascending/descending order as an attribute
@@ -5579,7 +4849,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBillWithOrder.html">SortByColumnBillWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Allowed sort options for Bill queries also specifying ascending/descending order as an attribute
@@ -5589,13 +4859,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBuildAssembly.html">SortByColumnBuildAssembly</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnBuildAssembly.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBuildAssemblyWithOrder.html">SortByColumnBuildAssemblyWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Adjustment queries also specifying ascending/descending order as an attribute
@@ -5605,13 +4875,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCharge.html">SortByColumnCharge</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCharge.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnChargeWithOrder.html">SortByColumnChargeWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Charge queries also specifying ascending/descending order as an attribute
@@ -5621,13 +4891,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCreditMemo.html">SortByColumnCreditMemo</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCreditMemo.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCreditMemoWithOrder.html">SortByColumnCreditMemoWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Credit Memo queries also specifying ascending/descending order as an attribute
@@ -5637,13 +4907,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCurrencyInfo.html">SortByColumnCurrencyInfo</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCurrencyInfo.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCurrencyInfoWithOrder.html">SortByColumnCurrencyInfoWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Customer queries also specifying ascending/descending order as an attribute
@@ -5653,13 +4923,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCustomer.html">SortByColumnCustomer</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCustomer.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCustomerWithOrder.html">SortByColumnCustomerWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Customer queries also specifying ascending/descending order as an attribute
@@ -5669,13 +4939,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnDeposit.html">SortByColumnDeposit</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnDeposit.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnDepositWithOrder.html">SortByColumnDepositWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Deposit queries also specifying ascending/descending order as an attribute
@@ -5685,13 +4955,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEmployee.html">SortByColumnEmployee</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnEmployee.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEmployeeWithOrder.html">SortByColumnEmployeeWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Employee queries also specifying ascending/descending order as an attribute
@@ -5701,19 +4971,19 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEnum.html">SortByColumnEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEstimate.html">SortByColumnEstimate</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnEstimate.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEstimateWithOrder.html">SortByColumnEstimateWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Estimate queries also specifying ascending/descending order as an attribute
@@ -5723,13 +4993,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnFixedAsset.html">SortByColumnFixedAsset</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnFixedAsset.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnFixedAssetWithOrder.html">SortByColumnFixedAssetWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Fixed Asset queries also specifying ascending/descending order as an attribute
@@ -5739,13 +5009,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryAdjustment.html">SortByColumnInventoryAdjustment</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInventoryAdjustment.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryAdjustmentWithOrder.html">SortByColumnInventoryAdjustmentWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Adjustment queries also specifying ascending/descending order as an attribute
@@ -5755,13 +5025,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventorySite.html">SortByColumnInventorySite</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInventorySite.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventorySiteWithOrder.html">SortByColumnInventorySiteWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Site queries also specifying ascending/descending order as an attribute
@@ -5771,13 +5041,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryTransfer.html">SortByColumnInventoryTransfer</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInventoryTransfer.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryTransferWithOrder.html">SortByColumnInventoryTransferWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Transfer queries also specifying ascending/descending order as an attribute
@@ -5787,13 +5057,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInvoice.html">SortByColumnInvoice</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInvoice.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInvoiceWithOrder.html">SortByColumnInvoiceWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Invoice queries also specifying ascending/descending order as an attribute
@@ -5803,19 +5073,19 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItem.html">SortByColumnItem</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnItem.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItemReceipt.html">SortByColumnItemReceipt</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnItemReceipt.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItemReceiptWithOrder.html">SortByColumnItemReceiptWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Item Receipt queries also specifying ascending/descending order as an attribute
@@ -5825,7 +5095,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItemWithOrder.html">SortByColumnItemWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Item queries also specifying ascending/descending order as an attribute
@@ -5835,13 +5105,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnJournalEntry.html">SortByColumnJournalEntry</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnJournalEntry.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnJournalEntryWithOrder.html">SortByColumnJournalEntryWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Journal Entry queries also specifying ascending/descending order as an attribute
@@ -5851,25 +5121,25 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameAmount.html">SortByColumnNameAmount</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for sortByColumnNameAmount.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameAmountDueDate.html">SortByColumnNameAmountDueDate</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for sortByColumnNameAmountDueDate.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameDate.html">SortByColumnNameDate</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnNameDate.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameDateWithOrder.html">SortByColumnNameDateWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for JobType/VendorType queries also specifying ascending/descending order as an attribute
@@ -5879,13 +5149,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnOtherName.html">SortByColumnOtherName</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnOtherName.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnOtherNameWithOrder.html">SortByColumnOtherNameWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Other Name queries also specifying ascending/descending order as an attribute
@@ -5895,13 +5165,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPayment.html">SortByColumnPayment</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnPayment.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPaymentWithOrder.html">SortByColumnPaymentWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Payment queries also specifying ascending/descending order as an attribute
@@ -5911,13 +5181,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPayrollNonWageItem.html">SortByColumnPayrollNonWageItem</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnPayrollNonWageItem.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPayrollNonWageItemWithOrder.html">SortByColumnPayrollNonWageItemWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for PayrollNonWageItem queries also specifying ascending/descending order as an attribute
@@ -5927,13 +5197,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPurchaseOrder.html">SortByColumnPurchaseOrder</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnPurchaseOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPurchaseOrderWithOrder.html">SortByColumnPurchaseOrderWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Purchase Order queries also specifying ascending/descending order as an attribute
@@ -5943,13 +5213,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesOrder.html">SortByColumnSalesOrder</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnSalesOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesOrderWithOrder.html">SortByColumnSalesOrderWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Sales Order queries also specifying ascending/descending order as an attribute
@@ -5959,13 +5229,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesReceipt.html">SortByColumnSalesReceipt</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnSalesReceipt.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesReceiptWithOrder.html">SortByColumnSalesReceiptWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Sales Receipt queries also specifying ascending/descending order as an attribute
@@ -5975,13 +5245,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTask.html">SortByColumnTask</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnTask.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTaskWithOrder.html">SortByColumnTaskWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Task queries also specifying ascending/descending order as an attribute
@@ -5991,13 +5261,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTimeActivity.html">SortByColumnTimeActivity</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnTimeActivity.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTimeActivityWithOrder.html">SortByColumnTimeActivityWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Time Activity queries also specifying ascending/descending order as an attribute
@@ -6007,13 +5277,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnVendor.html">SortByColumnVendor</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnVendor.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnVendorWithOrder.html">SortByColumnVendorWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Allowed sort options for Vendor queries also specifying ascending/descending order as an attribute
@@ -6023,43 +5293,19 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortOrder.html">SortOrder</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for sortOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Status.html">Status</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for Status.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/StatusDefinitionParser.html">StatusDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
         <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/StatusMessageProcessor.html">StatusMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">StatusMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/StringToDateTransformer.html">StringToDateTransformer</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/StringToDateTransformer.html">StringToDateTransformer</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/StringTypeCustomField.html">StringTypeCustomField</a></td>
             <td class="jd-descrcol" width="100%">If StringTypeCustomFieldDefinition is defined, the StringTypeCustomField specifies the strongly typed field value 
  
@@ -6067,7 +5313,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/StringTypeCustomField.html">StringTypeCustomField</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
  			Description: If StringTypeCustomFieldDefinition is defined, the StringTypeCustomField specifies the strongly typed field value 
@@ -6077,7 +5323,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/StringTypeCustomFieldDefinition.html">StringTypeCustomFieldDefinition</a></td>
             <td class="jd-descrcol" width="100%">Specifies the strongly typed version of StringTypeCustomFieldDefinition 
  
@@ -6085,7 +5331,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/StringTypeCustomFieldDefinition.html">StringTypeCustomFieldDefinition</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL 
  			Description: Specifies the strongly typed version of StringTypeCustomFieldDefinition 
@@ -6095,37 +5341,25 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SuccessResponse.html">SuccessResponse</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SuccessResponse complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SummarizeColumnsByEnum.html">SummarizeColumnsByEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SummarizeColumnsByEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/Summary1099.html">Summary1099</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for Summary1099 complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/SyncActivityDefinitionParser.html">SyncActivityDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
         <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/SyncActivityMessageProcessor.html">SyncActivityMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">SyncActivityMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#syncActivity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">syncActivity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncActivityRequest.html">SyncActivityRequest</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: request for sync activity report
@@ -6135,7 +5369,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: sync activity response object
@@ -6145,7 +5379,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponses.html">SyncActivityResponses</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: unbound set of responses of sync activity
@@ -6155,13 +5389,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SynchronizedFilterEnumType.html">SynchronizedFilterEnumType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SynchronizedFilterEnumType.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncStatusDrillDown.html">SyncStatusDrillDown</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: sync status detail down to object ID and error message
@@ -6171,14 +5405,14 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncStatusParam.html">SyncStatusParam</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Contains the Id and the type of object.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncStatusRequest.html">SyncStatusRequest</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: request responses passing one or more of ids of 3 types
@@ -6188,7 +5422,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: generic meta data response for any add mod
@@ -6198,7 +5432,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponses.html">SyncStatusResponses</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: unbound set of responses per request batch ng pk id sets
@@ -6208,7 +5442,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SyncType.html">SyncType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for syncType.&nbsp;</td>
         </tr>
@@ -6605,378 +5839,6 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateAccountDefinitionParser.html">UpdateAccountDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateAccountDefinitionParser.html">UpdateAccountDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateAccountMessageProcessor.html">UpdateAccountMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateAccountMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateAccount(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.AccountDetail, java.lang.String, java.lang.String, java.util.Date, java.util.Map) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateAccountMessageProcessor.html">UpdateAccountMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateAccountMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.AccountOnlineDetail, java.lang.String, java.lang.String, java.util.Date, java.util.Map<java.lang.String, java.lang.Object>)">updateAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.online.AccountOnlineDetail, java.lang.String, java.lang.String, java.util.Date, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateBillDefinitionParser.html">UpdateBillDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateBillDefinitionParser.html">UpdateBillDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateBillMessageProcessor.html">UpdateBillMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateBillMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateBill(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateBillMessageProcessor.html">UpdateBillMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateBillMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateBill(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateBill(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateBillPaymentDefinitionParser.html">UpdateBillPaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateBillPaymentDefinitionParser.html">UpdateBillPaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateBillPaymentMessageProcessor.html">UpdateBillPaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateBillPaymentMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateBillPayment(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateBillPaymentMessageProcessor.html">UpdateBillPaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateBillPaymentMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateBillPayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateBillPayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateCashPurchaseDefinitionParser.html">UpdateCashPurchaseDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateCashPurchaseDefinitionParser.html">UpdateCashPurchaseDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateCashPurchaseMessageProcessor.html">UpdateCashPurchaseMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCashPurchaseMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateCashPurchase(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateCashPurchaseMessageProcessor.html">UpdateCashPurchaseMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCashPurchaseMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateCashPurchase(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateCashPurchase(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateCheckDefinitionParser.html">UpdateCheckDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateCheckDefinitionParser.html">UpdateCheckDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateCheckMessageProcessor.html">UpdateCheckMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCheckMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateCheck(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateCheckMessageProcessor.html">UpdateCheckMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCheckMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateCheck(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateCheck(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateCreditCardChargeDefinitionParser.html">UpdateCreditCardChargeDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateCreditCardChargeDefinitionParser.html">UpdateCreditCardChargeDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateCreditCardChargeMessageProcessor.html">UpdateCreditCardChargeMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCreditCardChargeMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateCreditCardCharge(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateCreditCardChargeMessageProcessor.html">UpdateCreditCardChargeMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCreditCardChargeMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateCreditCardCharge(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateCreditCardCharge(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateCustomerDefinitionParser.html">UpdateCustomerDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateCustomerDefinitionParser.html">UpdateCustomerDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateCustomerMessageProcessor.html">UpdateCustomerMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCustomerMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateCustomer(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.Map, java.lang.String, java.util.List, java.util.List, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateCustomerMessageProcessor.html">UpdateCustomerMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateCustomerMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateCustomer(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateCustomer(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.Map, java.lang.String, java.util.List, java.util.List, java.util.List, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/spring/UpdateDefinitionParser.html">UpdateDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateEstimateDefinitionParser.html">UpdateEstimateDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateEstimateDefinitionParser.html">UpdateEstimateDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateEstimateMessageProcessor.html">UpdateEstimateMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateEstimateMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateEstimate(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateEstimateMessageProcessor.html">UpdateEstimateMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateEstimateMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateEstimate(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateEstimate(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateInvoiceDefinitionParser.html">UpdateInvoiceDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateInvoiceDefinitionParser.html">UpdateInvoiceDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateInvoiceMessageProcessor.html">UpdateInvoiceMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateInvoiceMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateInvoice(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateInvoiceMessageProcessor.html">UpdateInvoiceMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateInvoiceMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateInvoice(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateInvoice(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateItemDefinitionParser.html">UpdateItemDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateItemDefinitionParser.html">UpdateItemDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateItemMessageProcessor.html">UpdateItemMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateItemMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateItem(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.Boolean, java.util.Map, java.util.Map, java.lang.String, java.lang.String, java.util.Map, java.util.Map) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateItemMessageProcessor.html">UpdateItemMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateItemMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateItem(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.Boolean, java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>)">updateItem(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.Boolean, java.util.Map, java.util.Map, java.lang.String, java.lang.String, java.util.Map, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/UpdateMessageProcessor.html">UpdateMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#update(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.Boolean, java.lang.Boolean)">update(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map, java.lang.String, java.lang.Boolean, java.lang.Boolean)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdatePaymentDefinitionParser.html">UpdatePaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdatePaymentDefinitionParser.html">UpdatePaymentDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdatePaymentMessageProcessor.html">UpdatePaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdatePaymentMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updatePayment(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdatePaymentMessageProcessor.html">UpdatePaymentMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdatePaymentMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updatePayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updatePayment(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdatePaymentMethodDefinitionParser.html">UpdatePaymentMethodDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdatePaymentMethodDefinitionParser.html">UpdatePaymentMethodDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdatePaymentMethodMessageProcessor.html">UpdatePaymentMethodMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdatePaymentMethodMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updatePaymentMethod(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdatePaymentMethodMessageProcessor.html">UpdatePaymentMethodMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdatePaymentMethodMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updatePaymentMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.lang.String)">updatePaymentMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateSalesReceiptDefinitionParser.html">UpdateSalesReceiptDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateSalesReceiptDefinitionParser.html">UpdateSalesReceiptDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateSalesReceiptMessageProcessor.html">UpdateSalesReceiptMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateSalesReceiptMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateSalesReceipt(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateSalesReceiptMessageProcessor.html">UpdateSalesReceiptMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateSalesReceiptMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateSalesReceipt(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateSalesReceipt(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.util.Map, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateSalesTermDefinitionParser.html">UpdateSalesTermDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateSalesTermDefinitionParser.html">UpdateSalesTermDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateSalesTermMessageProcessor.html">UpdateSalesTermMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateSalesTermMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateSalesTerm(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer, java.lang.String) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateSalesTermMessageProcessor.html">UpdateSalesTermMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateSalesTermMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateSalesTerm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer, java.lang.String)">updateSalesTerm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/spring/UpdateVendorDefinitionParser.html">UpdateVendorDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/spring/UpdateVendorDefinitionParser.html">UpdateVendorDefinitionParser</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/config/UpdateVendorMessageProcessor.html">UpdateVendorMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateVendorMessageProcessor invokes the org.mule.modules.quickbooks.QuickBooksModule#updateVendor(java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.lang.String, java.lang.String, java.lang.Boolean, java.util.List, java.util.List, java.util.List) method in QuickBooksModule.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/config/UpdateVendorMessageProcessor.html">UpdateVendorMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">UpdateVendorMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html#updateVendor(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.lang.String, java.lang.String, java.lang.Boolean, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>)">updateVendor(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.lang.String, java.lang.String, java.lang.Boolean, java.util.List, java.util.List, java.util.List, java.util.List)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksModule.html">QuickBooksModule</a></code>.&nbsp;</td>
-        </tr>
-    
-    
 </table>
 
 
@@ -7183,18 +6045,6 @@
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/WebSiteAddress.html">WebSiteAddress</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW 
  			Description: Describes the website address, this object is always manipulated in context of another parent object like Person, Organization etc.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a></td>
-            <td class="jd-descrcol" width="100%">The supported objects for Data Services for QuickBooks Online.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/WindowsEntityTypeEnumTransformer.html">WindowsEntityTypeEnumTransformer</a></td>
-            <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     

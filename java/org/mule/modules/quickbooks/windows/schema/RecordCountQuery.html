@@ -63,11 +63,13 @@
 
 
 
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-  <meta name="description" content="Documentation for QuickBooks Cloud Connector." />
+  <meta name="description" content="Documentation for QuickBooks Cloud Connector Commons Libraries." />
 
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../../favicon.ico" />
 <title>
@@ -75,7 +77,7 @@
   RecordCountQuery
 
 
-| QuickBooks Cloud Connector
+| QuickBooks Cloud Connector Commons Libraries
 
 </title>
 <link href="../../../../../../../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
@@ -84,6 +86,7 @@
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 <script src="../../../../../../../assets/search_autocomplete.js" type="text/javascript"></script>
 <script src="../../../../../../../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/jquery-toc.js" type="text/javascript"></script>
 <script src="../../../../../../../assets/mule-developer-docs.js" type="text/javascript"></script>
 <script src="../../../../../../../assets/prettify.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -102,6 +105,27 @@
     #resize-packages-nav{border-bottom:3px solid #666;}
   </style>
 </noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "QuickBooks Cloud Connector Commons Libraries";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
 </head>
 
 <body class="">
@@ -109,7 +133,7 @@
 <div id="header">
     <div id="headerLeft">
     
-      <span id="masthead-title">QuickBooks Cloud Connector</span>
+      <span id="masthead-title">QuickBooks Cloud Connector Commons Libraries</span>
     
     <ul id="header-tabs" class="">
     
@@ -119,10 +143,6 @@
     
     	<li id="java"><a href="../../../../../../../java/packages.html">
 	    	<span class="en">Java API Reference</span>
-    	</a></li>
-    
-    	<li id="mule"><a href="../../../../../../../mule/modules.html">
-	    	<span class="en">Mule API Reference</span>
     	</a></li>
     
     </ul>
@@ -189,33 +209,9 @@
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/api/gateway/oauth/package-summary.html">org.mule.modules.quickbooks.api.gateway.oauth</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/config/package-summary.html">org.mule.modules.quickbooks.config</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/config/spring/package-summary.html">org.mule.modules.quickbooks.config.spring</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/package-summary.html">org.mule.modules.quickbooks.online</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/api/package-summary.html">org.mule.modules.quickbooks.online.api</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/config/package-summary.html">org.mule.modules.quickbooks.online.config</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/config/spring/package-summary.html">org.mule.modules.quickbooks.online.config.spring</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/objectfactory/package-summary.html">org.mule.modules.quickbooks.online.objectfactory</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/online/schema/package-summary.html">org.mule.modules.quickbooks.online.schema</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/utils/package-summary.html">org.mule.modules.quickbooks.utils</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/package-summary.html">org.mule.modules.quickbooks.windows</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/api/package-summary.html">org.mule.modules.quickbooks.windows.api</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/package-summary.html">org.mule.modules.quickbooks.windows.config</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/spring/package-summary.html">org.mule.modules.quickbooks.windows.config.spring</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/objectfactory/package-summary.html">org.mule.modules.quickbooks.windows.objectfactory</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/package-summary.html">org.mule.modules.quickbooks.windows.schema</a></li>
               </ul><br/>
@@ -1754,63 +1750,63 @@ From class
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>possible object is
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemGroupComponentQuery.html">ItemGroupComponentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesReceiptQuery.html">SalesReceiptQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillQuery.html">BillQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxQuery.html">SalesTaxQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EmployeeQuery.html">EmployeeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentQuery.html">PaymentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/FixedAssetQuery.html">FixedAssetQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrderQuery.html">PurchaseOrderQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxGroupQuery.html">SalesTaxGroupQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ChargeQuery.html">ChargeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillPaymentQuery.html">BillPaymentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollItemQuery.html">PayrollItemQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryTransferQuery.html">InventoryTransferQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryAdjustmentQuery.html">InventoryAdjustmentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BuildAssemblyQuery.html">BuildAssemblyQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/UOMQuery.html">UOMQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ExternalRoleQuery.html">ExternalRoleQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TimeActivityQuery.html">TimeActivityQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentMethodQuery.html">PaymentMethodQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemReceiptQuery.html">ItemReceiptQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerMsgQuery.html">CustomerMsgQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JournalEntryQuery.html">JournalEntryQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerQuery.html">CustomerQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/QueryBase.html">QueryBase</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ShipMethodQuery.html">ShipMethodQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollNonWageItemQuery.html">PayrollNonWageItemQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BOMComponentQuery.html">BOMComponentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesRepQuery.html">SalesRepQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InvoiceQuery.html">InvoiceQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemGroupComponentQuery.html">ItemGroupComponentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardCreditQuery.html">CreditCardCreditQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TaskQuery.html">TaskQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorCreditQuery.html">VendorCreditQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobTypeQuery.html">JobTypeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorTypeQuery.html">VendorTypeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventorySiteQuery.html">InventorySiteQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TermQuery.html">TermQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemQuery.html">ItemQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CheckQuery.html">CheckQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemConsolidatedQuery.html">ItemConsolidatedQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ClassQuery.html">ClassQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardChargeQuery.html">CreditCardChargeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobQuery.html">JobQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CurrencyInfoQuery.html">CurrencyInfoQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorQuery.html">VendorQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EstimateQuery.html">EstimateQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesReceiptQuery.html">SalesReceiptQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditMemoQuery.html">CreditMemoQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DepositQuery.html">DepositQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesOrderQuery.html">SalesOrderQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardRefundQuery.html">CreditCardRefundQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DiscountQuery.html">DiscountQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxPaymentCheckQuery.html">SalesTaxPaymentCheckQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TemplateNameQuery.html">TemplateNameQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerTypeQuery.html">CustomerTypeQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/OtherNameQuery.html">OtherNameQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillPaymentCreditCardQuery.html">BillPaymentCreditCardQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/AccountQuery.html">AccountQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollItemQuery.html">PayrollItemQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditMemoQuery.html">CreditMemoQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryAdjustmentQuery.html">InventoryAdjustmentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentMethodQuery.html">PaymentMethodQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobTypeQuery.html">JobTypeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorCreditQuery.html">VendorCreditQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ClassQuery.html">ClassQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorTypeQuery.html">VendorTypeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ShipMethodQuery.html">ShipMethodQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BOMComponentQuery.html">BOMComponentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemConsolidatedQuery.html">ItemConsolidatedQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrderQuery.html">PurchaseOrderQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ExternalRoleQuery.html">ExternalRoleQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JournalEntryQuery.html">JournalEntryQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesRepQuery.html">SalesRepQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardRefundQuery.html">CreditCardRefundQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillQuery.html">BillQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TimeActivityQuery.html">TimeActivityQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxQuery.html">SalesTaxQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryTransferQuery.html">InventoryTransferQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InvoiceQuery.html">InvoiceQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxGroupQuery.html">SalesTaxGroupQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/UOMQuery.html">UOMQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentQuery.html">PaymentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BuildAssemblyQuery.html">BuildAssemblyQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ChargeQuery.html">ChargeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EstimateQuery.html">EstimateQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventorySiteQuery.html">InventorySiteQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemQuery.html">ItemQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TermQuery.html">TermQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/QueryBase.html">QueryBase</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxPaymentCheckQuery.html">SalesTaxPaymentCheckQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/FixedAssetQuery.html">FixedAssetQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobQuery.html">JobQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TaskQuery.html">TaskQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EmployeeQuery.html">EmployeeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemReceiptQuery.html">ItemReceiptQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardCreditQuery.html">CreditCardCreditQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollNonWageItemQuery.html">PayrollNonWageItemQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerMsgQuery.html">CustomerMsgQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TemplateNameQuery.html">TemplateNameQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxCodeQuery.html">SalesTaxCodeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerTypeQuery.html">CustomerTypeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CurrencyInfoQuery.html">CurrencyInfoQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DiscountQuery.html">DiscountQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DepositQuery.html">DepositQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorQuery.html">VendorQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillPaymentQuery.html">BillPaymentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CheckQuery.html">CheckQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesOrderQuery.html">SalesOrderQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/AccountQuery.html">AccountQuery</a></code><code>&gt;</code>
      
 </li></ul>
   </div>
@@ -1851,63 +1847,63 @@ From class
         <tr>
           <th>value</td>
           <td>Allowed object is
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemGroupComponentQuery.html">ItemGroupComponentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesReceiptQuery.html">SalesReceiptQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillQuery.html">BillQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxQuery.html">SalesTaxQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EmployeeQuery.html">EmployeeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentQuery.html">PaymentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/FixedAssetQuery.html">FixedAssetQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrderQuery.html">PurchaseOrderQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxGroupQuery.html">SalesTaxGroupQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ChargeQuery.html">ChargeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillPaymentQuery.html">BillPaymentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollItemQuery.html">PayrollItemQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryTransferQuery.html">InventoryTransferQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryAdjustmentQuery.html">InventoryAdjustmentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BuildAssemblyQuery.html">BuildAssemblyQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/UOMQuery.html">UOMQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ExternalRoleQuery.html">ExternalRoleQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TimeActivityQuery.html">TimeActivityQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentMethodQuery.html">PaymentMethodQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemReceiptQuery.html">ItemReceiptQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerMsgQuery.html">CustomerMsgQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JournalEntryQuery.html">JournalEntryQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerQuery.html">CustomerQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/QueryBase.html">QueryBase</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ShipMethodQuery.html">ShipMethodQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollNonWageItemQuery.html">PayrollNonWageItemQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BOMComponentQuery.html">BOMComponentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesRepQuery.html">SalesRepQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InvoiceQuery.html">InvoiceQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemGroupComponentQuery.html">ItemGroupComponentQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardCreditQuery.html">CreditCardCreditQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TaskQuery.html">TaskQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorCreditQuery.html">VendorCreditQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobTypeQuery.html">JobTypeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorTypeQuery.html">VendorTypeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventorySiteQuery.html">InventorySiteQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TermQuery.html">TermQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemQuery.html">ItemQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CheckQuery.html">CheckQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemConsolidatedQuery.html">ItemConsolidatedQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ClassQuery.html">ClassQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardChargeQuery.html">CreditCardChargeQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobQuery.html">JobQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CurrencyInfoQuery.html">CurrencyInfoQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorQuery.html">VendorQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EstimateQuery.html">EstimateQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesReceiptQuery.html">SalesReceiptQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditMemoQuery.html">CreditMemoQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DepositQuery.html">DepositQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesOrderQuery.html">SalesOrderQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardRefundQuery.html">CreditCardRefundQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DiscountQuery.html">DiscountQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxPaymentCheckQuery.html">SalesTaxPaymentCheckQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TemplateNameQuery.html">TemplateNameQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerTypeQuery.html">CustomerTypeQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/OtherNameQuery.html">OtherNameQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillPaymentCreditCardQuery.html">BillPaymentCreditCardQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/AccountQuery.html">AccountQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollItemQuery.html">PayrollItemQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditMemoQuery.html">CreditMemoQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryAdjustmentQuery.html">InventoryAdjustmentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentMethodQuery.html">PaymentMethodQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobTypeQuery.html">JobTypeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorCreditQuery.html">VendorCreditQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ClassQuery.html">ClassQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorTypeQuery.html">VendorTypeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ShipMethodQuery.html">ShipMethodQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BOMComponentQuery.html">BOMComponentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemConsolidatedQuery.html">ItemConsolidatedQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrderQuery.html">PurchaseOrderQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ExternalRoleQuery.html">ExternalRoleQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JournalEntryQuery.html">JournalEntryQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesRepQuery.html">SalesRepQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardRefundQuery.html">CreditCardRefundQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillQuery.html">BillQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TimeActivityQuery.html">TimeActivityQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxQuery.html">SalesTaxQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventoryTransferQuery.html">InventoryTransferQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InvoiceQuery.html">InvoiceQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxGroupQuery.html">SalesTaxGroupQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/UOMQuery.html">UOMQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PaymentQuery.html">PaymentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BuildAssemblyQuery.html">BuildAssemblyQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ChargeQuery.html">ChargeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EstimateQuery.html">EstimateQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/InventorySiteQuery.html">InventorySiteQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemQuery.html">ItemQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TermQuery.html">TermQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/QueryBase.html">QueryBase</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxPaymentCheckQuery.html">SalesTaxPaymentCheckQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/FixedAssetQuery.html">FixedAssetQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/JobQuery.html">JobQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TaskQuery.html">TaskQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/EmployeeQuery.html">EmployeeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/ItemReceiptQuery.html">ItemReceiptQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CreditCardCreditQuery.html">CreditCardCreditQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/PayrollNonWageItemQuery.html">PayrollNonWageItemQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerMsgQuery.html">CustomerMsgQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/TemplateNameQuery.html">TemplateNameQuery</a></code><code>&gt;</code>
      JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesTaxCodeQuery.html">SalesTaxCodeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CustomerTypeQuery.html">CustomerTypeQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CurrencyInfoQuery.html">CurrencyInfoQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DiscountQuery.html">DiscountQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/DepositQuery.html">DepositQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/VendorQuery.html">VendorQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/BillPaymentQuery.html">BillPaymentQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/CheckQuery.html">CheckQuery</a></code><code>&gt;</code>
-     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SalesOrderQuery.html">SalesOrderQuery</a></code><code>&gt;</code>
+     JAXBElement<code>&lt;</code><code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/AccountQuery.html">AccountQuery</a></code><code>&gt;</code>
      
 </td>
         </tr>
