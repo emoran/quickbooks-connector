@@ -13,10 +13,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createAccount) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="ACCOUNT"
                            requestId="#[payload]"
                            draft="false"
@@ -35,10 +35,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createCustomer) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="CUSTOMER"
                            requestId="#[payload]"
                            draft="false"
@@ -63,10 +63,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createItem) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="ITEM"
                            requestId="#[payload]"
                            draft="false"
@@ -102,10 +102,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createPayment) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="PAYMENT"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -131,10 +131,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createEmployee) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="EMPLOYEE"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -164,10 +164,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createBill) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="BILL"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -197,10 +197,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createCheck) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="CHECK"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -223,10 +223,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:createJob) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:create realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:create realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="JOB"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -262,10 +262,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updateAccount) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="ACCOUNT"
                            requestId="#[payload]"
                            draft="false"
@@ -297,10 +297,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updateCustomer) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="CUSTOMER"
                            requestId="#[payload]"
                            draft="false"
@@ -338,10 +338,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updateItem) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="ITEM"
                            requestId="#[payload]"
                            draft="false"
@@ -390,10 +390,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updatePayment) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="PAYMENT"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -432,10 +432,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updateEmployee) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="EMPLOYEE"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -478,10 +478,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updateBill) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="BILL"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -524,10 +524,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updateCheck) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="CHECK"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -563,10 +563,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:updateJob) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:update realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"                         
+<quickbooks-windows:update realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"                         
                            type="JOB"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -613,10 +613,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:deleteAccount) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:delete realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+<quickbooks-windows:delete realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"
                            type="ACCOUNT"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -647,10 +647,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:deleteAccount2) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:delete realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+<quickbooks-windows:delete realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"
                            type="ACCOUNT"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -664,10 +664,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:deleteCustomer) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:delete realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+<quickbooks-windows:delete realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"
                            type="CUSTOMER"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -704,10 +704,10 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:deleteBill) -->
 <quickbooks-windows:generate-a-new-request-id />
-<quickbooks-windows:delete realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c"
+<quickbooks-windows:delete realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym"
                            type="BILL"
                            requestId="#[payload]">
     <quickbooks-windows:obj>
@@ -761,10 +761,10 @@
 <!-- END_INCLUDE(quickbooks-windows:get-object) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:get-object2) -->
-<quickbooks-windows:get-object realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+<quickbooks-windows:get-object realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym" 
                            type="CUSTOMER">
     <quickbooks-windows:id>
         <idDomain>NG</idDomain>
@@ -775,10 +775,10 @@
 <!-- END_INCLUDE(quickbooks-windows:get-object2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:get-object3) -->
-<quickbooks-windows:get-object realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+<quickbooks-windows:get-object realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym" 
                            type="ACCOUNT">
     <quickbooks-windows:id>
         <idDomain>QB</idDomain>
@@ -800,10 +800,10 @@
 <!-- END_INCLUDE(quickbooks-windows:find-objects) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-list-of-id) -->
-<quickbooks-windows:find-objects realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+<quickbooks-windows:find-objects realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym" 
                            type="ACCOUNT">
     <quickbooks-windows:query>
         <listIdSet>#[groovy: [
@@ -826,18 +826,18 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-all-accounts) -->
 <!-- retrieves all the accounts -->
-<quickbooks-windows:find-objects realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+<quickbooks-windows:find-objects realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym" 
                            type="ACCOUNT" />
 <!-- END_INCLUDE(quickbooks-windows:find-objects-all-accounts) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-bill) -->
-<quickbooks-windows:find-objects realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" 
+<quickbooks-windows:find-objects realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym" 
                            type="BILL">
     <quickbooks-windows:query>
         <draftFilter>DRAFT_ONLY</draftFilter>
@@ -864,17 +864,17 @@
 <!-- END_INCLUDE(quickbooks-windows:status) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:status2) -->
-<quickbooks-windows:status realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" />
+<quickbooks-windows:status realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym" />
 <!-- END_INCLUDE(quickbooks-windows:status2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:status3) -->
-<quickbooks-windows:status realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c">
+<quickbooks-windows:status realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym">
     <quickbooks-windows:sync-status-request>
         <ngIdSet>#[groovy: [ 
             [   'ngObjectType' : 'CUSTOMER',
@@ -885,10 +885,10 @@
 <!-- END_INCLUDE(quickbooks-windows:status3) -->
     
 <!-- BEGIN_INCLUDE(quickbooks-windows:status4) -->
-<quickbooks-windows:status realmId="33221157"
-                           appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                           realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                           authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c">
+<quickbooks-windows:status realmId="realmId"
+                           appKey="appKey"
+                           realmIdPseudonym="reamIdPseudonym"
+                           authIdPseudonym="authIdPseudonym">
     <quickbooks-windows:sync-status-request>
         <requestId>#[groovy: [ 
             [   '81283818123912398123981723981239' ]
@@ -907,17 +907,17 @@
 <!-- END_INCLUDE(quickbooks-windows:sync-activity) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity2) -->
-<quickbooks-windows:sync-activity realmId="33221157"
-                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                                  authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" />
+<quickbooks-windows:sync-activity realmId="realmId"
+                                  appKey="appKey"
+                                  realmIdPseudonym="reamIdPseudonym"
+                                  authIdPseudonym="authIdPseudonym" />
 <!-- END_INCLUDE(quickbooks-windows:sync-activity2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity3) -->
-<quickbooks-windows:sync-activity realmId="33221157"
-                                  appKey="e52dixcj2r7s2buxrd6gdujhd7v"
-                                  realmIdPseudonym="5f729f9c-a2d6-4727-124e-ecad796da0a5"
-                                  authIdPseudonym="6f3d72f2-525b-4309-ac2b-f7c2dfbb903c" >
+<quickbooks-windows:sync-activity realmId="realmId"
+                                  appKey="appKey"
+                                  realmIdPseudonym="reamIdPseudonym"
+                                  authIdPseudonym="authIdPseudonym" >
     <quickbooks-windows:sync-activity-request>
         <startCreatedTMS>2010-06-18T02:17:29</startCreatedTMS>
         <endCreatedTMS>2011-06-18T02:17:29</endCreatedTMS>
