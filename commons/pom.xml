@@ -14,6 +14,7 @@
     
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<github.merge>true</github.merge>
 	</properties>
 	
 	<build>
@@ -54,6 +55,20 @@
 <!--                     </schemaFiles> -->
 <!--                 </configuration> -->
 <!--             </plugin> 			 -->
+            <plugin>
+                <groupId>org.mule.tools.devkit</groupId>
+                <artifactId>mule-devkit-maven-plugin</artifactId>
+                <configuration>
+                    <path>commons</path>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>github-upload-doc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
