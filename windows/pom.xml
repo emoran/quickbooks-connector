@@ -11,6 +11,29 @@
         <version>2.1-SNAPSHOT</version>
     </parent>
 
+    <properties>
+        <github.merge>true</github.merge>
+    </properties>
+
+    <build>
+    <plugins>
+            <plugin>
+                <groupId>org.mule.tools.devkit</groupId>
+                <artifactId>mule-devkit-maven-plugin</artifactId>
+                <configuration>
+                    <path>windows</path>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>github-upload-doc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+    </plugins>
+    </build>
+
 	<dependencies>
         <dependency>
             <groupId>com.mulesoft.modules</groupId>

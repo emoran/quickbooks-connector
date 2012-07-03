@@ -8,7 +8,9 @@ Mule Quickbooks Connector
 Installation and Usage
 ----------------------
 
-For information about usage and installation you can check our documentation at http://mulesoft.github.com/quickbooks-connector.
+For information about usage and installation you can check our documentation: 
+<p> Quickbooks-Online at http://mulesoft.github.com/quickbooks-connector/online </p>
+<p> Quickbooks-Windows at http://mulesoft.github.com/quickbooks-connector/windows </p>
 
 Reporting Issues
 ----------------

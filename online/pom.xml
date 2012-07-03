@@ -12,10 +12,30 @@
     </parent>
     
     <properties>
-        <category>Community</category>        
+        <category>Community</category>
+        <github.merge>true</github.merge>        
     </properties>
-
-	<dependencies>
+    
+    <build>
+    <plugins>
+            <plugin>
+                <groupId>org.mule.tools.devkit</groupId>
+                <artifactId>mule-devkit-maven-plugin</artifactId>
+                <configuration>
+                    <path>online</path>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>github-upload-doc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+    </plugins>
+    </build>
+    
+    <dependencies>
         <dependency>
             <groupId>com.mulesoft.modules</groupId>
             <artifactId>mule-module-quick-books-commons</artifactId>
