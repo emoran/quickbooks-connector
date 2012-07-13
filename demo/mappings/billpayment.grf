@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="josesahad" created="Fri Jul 13 11:20:01 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1342190227815" licenseCode="Unlicensed" licenseType="Unknown" modified="Fri Jul 13 11:20:01 GMT-03:00 2012" modifiedBy="josesahad" name="BillPayment" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/object/billPayment/line" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="1" _type="Input" id="Metadata2">
+<Record fieldDelimiter="|" name="BillPaymentLine" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/amount" label="amount" name="amount" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/line/balance" label="balance" name="balance" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/line/desc" label="desc" name="desc" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/discountAccountId/idDomain" label="idDomain" name="idDomain3" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/discountAccountId/value" label="value" name="value3" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/discountAccountName" label="discountAccountName" name="discountAccountName" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/discountAmt" label="discountAmt" name="discountAmt" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/line/discountId/idDomain" label="idDomain" name="idDomain4" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/discountId/value" label="value" name="value4" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/discountName" label="discountName" name="discountName" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/id/idDomain" label="idDomain" name="idDomain5" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/id/value" label="value" name="value5" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/txnId/idDomain" label="idDomain" name="idDomain6" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/txnId/value" label="value" name="value6" type="string"/>
+<Field __sourcePath="{}/object/billPayment/line/txnNum" label="txnNum" name="txnNum" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/billPayment/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="0" _type="Input" id="Metadata1">
+<Record fieldDelimiter="|" name="NameValue" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/billPayment/alternateId/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/billPayment/alternateId/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="QBBillPayment" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/billPayment/externalKey/idDomain" label="idDomain" name="idDomain6" type="string"/>
+<Field __sourcePath="{}/object/billPayment/externalKey/value" label="value" name="value6" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/APAccountId/idDomain" label="idDomain" name="idDomain7" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/APAccountId/value" label="value" name="value7" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/APAccountName" label="APAccountName" name="APAccountName" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCAccountId/idDomain" label="idDomain" name="idDomain8" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCAccountId/value" label="value" name="value8" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCAccountName" label="CCAccountName" name="CCAccountName" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/CCTxnMode" label="CCTxnMode" name="CCTxnMode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/CCTxnType" label="CCTxnType" name="CCTxnType" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/billAddrStreet" label="billAddrStreet" name="billAddrStreet" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/ccExpirMn" label="ccExpirMn" name="ccExpirMn" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/ccExpirYr" label="ccExpirYr" name="ccExpirYr" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/commercialCardCode" label="commercialCardCode" name="commercialCardCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/cvv" label="cvv" name="cvv" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/nameOnAcct" label="nameOnAcct" name="nameOnAcct" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/number" label="number" name="number" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/token" label="token" name="token" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/type" label="type" name="type" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeInfo/zipCode" label="zipCode" name="zipCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/CCTransId" label="CCTransId" name="CCTransId" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/authCode" label="authCode" name="authCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/avsStreet" label="avsStreet" name="avsStreet" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/avsZip" label="avsZip" name="avsZip" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/cardSecurityCodeMatch" label="cardSecurityCodeMatch" name="cardSecurityCodeMatch" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/clientTransID" label="clientTransID" name="clientTransID" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/merchantAcctNum" label="merchantAcctNum" name="merchantAcctNum" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/paymentGroupingCode" label="paymentGroupingCode" name="paymentGroupingCode" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/reconBatchId" label="reconBatchId" name="reconBatchId" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/resultCode" label="resultCode" name="resultCode" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/resultMsg" label="resultMsg" name="resultMsg" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/securityCode" label="securityCode" name="securityCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/status" label="status" name="status2" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationStamp" label="txnAuthorizationStamp" name="txnAuthorizationStamp" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/XMLSchemaType/localPart" label="localPart" name="localPart4" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI4" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/XMLSchemaType/prefix" label="prefix" name="prefix4" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/day" label="day" name="day4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/eon" label="eon" name="eon4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/eonAndYear" label="eonAndYear" name="eonAndYear4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond4" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/hour" label="hour" name="hour4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/millisecond" label="millisecond" name="millisecond4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/minute" label="minute" name="minute4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/month" label="month" name="month4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/second" label="second" name="second4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/timezone" label="timezone" name="timezone4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/valid" label="valid" name="valid4" type="boolean"/>
+<Field __sourcePath="{}/object/billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/year" label="year" name="year4" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/bankAccountId/idDomain" label="idDomain" name="idDomain9" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/bankAccountId/value" label="value" name="value9" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/bankAccountName" label="bankAccountName" name="bankAccountName" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/checkDetail/acctNum" label="acctNum" name="acctNum" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/checkDetail/bankName" label="bankName" name="bankName" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/checkDetail/checkNum" label="checkNum" name="checkNum" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/checkDetail/nameOnAcct" label="nameOnAcct" name="nameOnAcct2" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/checkDetail/routingNum" label="routingNum" name="routingNum" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/checkDetail/status" label="status" name="status3" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/currency" label="currency" name="currency" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/docNumber" label="docNumber" name="docNumber" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/entityId/idDomain" label="idDomain" name="idDomain10" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/entityId/value" label="value" name="value10" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/entityName" label="entityName" name="entityName" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/entityType" label="entityType" name="entityType" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/msg" label="msg" name="msg" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/note" label="note" name="note" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/city" label="city" name="city" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/country" label="country" name="country" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/countryCode" label="countryCode" name="countryCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/countrySubDivisionCode" label="countrySubDivisionCode" name="countrySubDivisionCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/county" label="county" name="county" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/countyCode" label="countyCode" name="countyCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/XMLSchemaType/localPart" label="localPart" name="localPart5" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI5" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/XMLSchemaType/prefix" label="prefix" name="prefix5" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/day" label="day" name="day5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/eon" label="eon" name="eon5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/eonAndYear" label="eonAndYear" name="eonAndYear5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/fractionalSecond" label="fractionalSecond" name="fractionalSecond5" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/hour" label="hour" name="hour5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/millisecond" label="millisecond" name="millisecond5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/minute" label="minute" name="minute5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/month" label="month" name="month5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/second" label="second" name="second5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/timezone" label="timezone" name="timezone5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/valid" label="valid" name="valid5" type="boolean"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/dateLastVerified/year" label="year" name="year5" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/geoCode" label="geoCode" name="geoCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/id/idDomain" label="idDomain" name="idDomain11" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/id/value" label="value" name="value11" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/line1" label="line1" name="line1" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/line2" label="line2" name="line2" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/line3" label="line3" name="line3" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/line4" label="line4" name="line4" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/line5" label="line5" name="line5" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/postalCode" label="postalCode" name="postalCode" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/postalCodeSuffix" label="postalCodeSuffix" name="postalCodeSuffix" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/payeeAddr/tag" containerType="list" label="tag" name="tag" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/status" label="status" name="status4" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/totalAmt" label="totalAmt" name="totalAmt" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/XMLSchemaType/localPart" label="localPart" name="localPart6" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI6" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/XMLSchemaType/prefix" label="prefix" name="prefix6" type="string"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/day" label="day" name="day6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/eon" label="eon" name="eon6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/eonAndYear" label="eonAndYear" name="eonAndYear6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/fractionalSecond" label="fractionalSecond" name="fractionalSecond6" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/hour" label="hour" name="hour6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/millisecond" label="millisecond" name="millisecond6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/minute" label="minute" name="minute6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/month" label="month" name="month6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/second" label="second" name="second6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/timezone" label="timezone" name="timezone6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/valid" label="valid" name="valid6" type="boolean"/>
+<Field __sourcePath="{}/object/billPayment/header/txnDate/year" label="year" name="year6" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/id/idDomain" label="idDomain" name="idDomain12" type="string"/>
+<Field __sourcePath="{}/object/billPayment/id/value" label="value" name="value12" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/XMLSchemaType/localPart" label="localPart" name="localPart7" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI7" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/XMLSchemaType/prefix" label="prefix" name="prefix7" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/day" label="day" name="day7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/eon" label="eon" name="eon7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/eonAndYear" label="eonAndYear" name="eonAndYear7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond7" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/hour" label="hour" name="hour7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/millisecond" label="millisecond" name="millisecond7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/minute" label="minute" name="minute7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/month" label="month" name="month7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/second" label="second" name="second7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/timezone" label="timezone" name="timezone7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/valid" label="valid" name="valid7" type="boolean"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createTime/year" label="year" name="year7" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/XMLSchemaType/localPart" label="localPart" name="localPart8" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI8" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/XMLSchemaType/prefix" label="prefix" name="prefix8" type="string"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/day" label="day" name="day8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/eon" label="eon" name="eon8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/eonAndYear" label="eonAndYear" name="eonAndYear8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond8" type="decimal"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/hour" label="hour" name="hour8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/millisecond" label="millisecond" name="millisecond8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/minute" label="minute" name="minute8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/month" label="month" name="month8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/second" label="second" name="second8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/timezone" label="timezone" name="timezone8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/valid" label="valid" name="valid8" type="boolean"/>
+<Field __sourcePath="{}/object/billPayment/metaData/lastUpdatedTime/year" label="year" name="year8" type="integer"/>
+<Field __sourcePath="{}/object/billPayment/syncToken" label="syncToken" name="syncToken" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="Metadata3">
+<Record fieldDelimiter="|" name="QBIdType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/idType/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/idType/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="JAVA Reader" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="idDomain6" trim="true" xpath="billPayment/externalKey/idDomain"/>
+  <Mapping cloverField="value6" trim="true" xpath="billPayment/externalKey/value"/>
+  <Mapping cloverField="idDomain7" trim="true" xpath="billPayment/header/APAccountId/idDomain"/>
+  <Mapping cloverField="value7" trim="true" xpath="billPayment/header/APAccountId/value"/>
+  <Mapping cloverField="APAccountName" trim="true" xpath="billPayment/header/APAccountName"/>
+  <Mapping cloverField="idDomain8" trim="true" xpath="billPayment/header/CCAccountId/idDomain"/>
+  <Mapping cloverField="value8" trim="true" xpath="billPayment/header/CCAccountId/value"/>
+  <Mapping cloverField="CCAccountName" trim="true" xpath="billPayment/header/CCAccountName"/>
+  <Mapping cloverField="CCTxnMode" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/CCTxnMode"/>
+  <Mapping cloverField="CCTxnType" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/CCTxnType"/>
+  <Mapping cloverField="billAddrStreet" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/billAddrStreet"/>
+  <Mapping cloverField="ccExpirMn" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/ccExpirMn"/>
+  <Mapping cloverField="ccExpirYr" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/ccExpirYr"/>
+  <Mapping cloverField="commercialCardCode" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/commercialCardCode"/>
+  <Mapping cloverField="cvv" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/cvv"/>
+  <Mapping cloverField="nameOnAcct" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/nameOnAcct"/>
+  <Mapping cloverField="number" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/number"/>
+  <Mapping cloverField="token" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/token"/>
+  <Mapping cloverField="type" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/type"/>
+  <Mapping cloverField="zipCode" trim="true" xpath="billPayment/header/CCDetail/creditChargeInfo/zipCode"/>
+  <Mapping cloverField="CCTransId" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/CCTransId"/>
+  <Mapping cloverField="authCode" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/authCode"/>
+  <Mapping cloverField="avsStreet" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/avsStreet"/>
+  <Mapping cloverField="avsZip" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/avsZip"/>
+  <Mapping cloverField="cardSecurityCodeMatch" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/cardSecurityCodeMatch"/>
+  <Mapping cloverField="clientTransID" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/clientTransID"/>
+  <Mapping cloverField="merchantAcctNum" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/merchantAcctNum"/>
+  <Mapping cloverField="paymentGroupingCode" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/paymentGroupingCode"/>
+  <Mapping cloverField="reconBatchId" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/reconBatchId"/>
+  <Mapping cloverField="resultCode" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/resultCode"/>
+  <Mapping cloverField="resultMsg" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/resultMsg"/>
+  <Mapping cloverField="securityCode" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/securityCode"/>
+  <Mapping cloverField="status2" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/status"/>
+  <Mapping cloverField="txnAuthorizationStamp" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationStamp"/>
+  <Mapping cloverField="localPart4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/day"/>
+  <Mapping cloverField="eon4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/eon"/>
+  <Mapping cloverField="eonAndYear4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/fractionalSecond"/>
+  <Mapping cloverField="hour4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/hour"/>
+  <Mapping cloverField="millisecond4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/millisecond"/>
+  <Mapping cloverField="minute4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/minute"/>
+  <Mapping cloverField="month4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/month"/>
+  <Mapping cloverField="second4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/second"/>
+  <Mapping cloverField="timezone4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/timezone"/>
+  <Mapping cloverField="valid4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/valid"/>
+  <Mapping cloverField="year4" trim="true" xpath="billPayment/header/CCDetail/creditChargeResponse/txnAuthorizationTime/year"/>
+  <Mapping cloverField="idDomain9" trim="true" xpath="billPayment/header/bankAccountId/idDomain"/>
+  <Mapping cloverField="value9" trim="true" xpath="billPayment/header/bankAccountId/value"/>
+  <Mapping cloverField="bankAccountName" trim="true" xpath="billPayment/header/bankAccountName"/>
+  <Mapping cloverField="acctNum" trim="true" xpath="billPayment/header/checkDetail/acctNum"/>
+  <Mapping cloverField="bankName" trim="true" xpath="billPayment/header/checkDetail/bankName"/>
+  <Mapping cloverField="checkNum" trim="true" xpath="billPayment/header/checkDetail/checkNum"/>
+  <Mapping cloverField="nameOnAcct2" trim="true" xpath="billPayment/header/checkDetail/nameOnAcct"/>
+  <Mapping cloverField="routingNum" trim="true" xpath="billPayment/header/checkDetail/routingNum"/>
+  <Mapping cloverField="status3" trim="true" xpath="billPayment/header/checkDetail/status"/>
+  <Mapping cloverField="currency" trim="true" xpath="billPayment/header/currency"/>
+  <Mapping cloverField="docNumber" trim="true" xpath="billPayment/header/docNumber"/>
+  <Mapping cloverField="idDomain10" trim="true" xpath="billPayment/header/entityId/idDomain"/>
+  <Mapping cloverField="value10" trim="true" xpath="billPayment/header/entityId/value"/>
+  <Mapping cloverField="entityName" trim="true" xpath="billPayment/header/entityName"/>
+  <Mapping cloverField="entityType" trim="true" xpath="billPayment/header/entityType"/>
+  <Mapping cloverField="msg" trim="true" xpath="billPayment/header/msg"/>
+  <Mapping cloverField="note" trim="true" xpath="billPayment/header/note"/>
+  <Mapping cloverField="city" trim="true" xpath="billPayment/header/payeeAddr/city"/>
+  <Mapping cloverField="country" trim="true" xpath="billPayment/header/payeeAddr/country"/>
+  <Mapping cloverField="countryCode" trim="true" xpath="billPayment/header/payeeAddr/countryCode"/>
+  <Mapping cloverField="countrySubDivisionCode" trim="true" xpath="billPayment/header/payeeAddr/countrySubDivisionCode"/>
+  <Mapping cloverField="county" trim="true" xpath="billPayment/header/payeeAddr/county"/>
+  <Mapping cloverField="countyCode" trim="true" xpath="billPayment/header/payeeAddr/countyCode"/>
+  <Mapping cloverField="localPart5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/day"/>
+  <Mapping cloverField="eon5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/eon"/>
+  <Mapping cloverField="eonAndYear5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/fractionalSecond"/>
+  <Mapping cloverField="hour5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/hour"/>
+  <Mapping cloverField="millisecond5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/millisecond"/>
+  <Mapping cloverField="minute5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/minute"/>
+  <Mapping cloverField="month5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/month"/>
+  <Mapping cloverField="second5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/second"/>
+  <Mapping cloverField="timezone5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/timezone"/>
+  <Mapping cloverField="valid5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/valid"/>
+  <Mapping cloverField="year5" trim="true" xpath="billPayment/header/payeeAddr/dateLastVerified/year"/>
+  <Mapping cloverField="geoCode" trim="true" xpath="billPayment/header/payeeAddr/geoCode"/>
+  <Mapping cloverField="idDomain11" trim="true" xpath="billPayment/header/payeeAddr/id/idDomain"/>
+  <Mapping cloverField="value11" trim="true" xpath="billPayment/header/payeeAddr/id/value"/>
+  <Mapping cloverField="line1" trim="true" xpath="billPayment/header/payeeAddr/line1"/>
+  <Mapping cloverField="line2" trim="true" xpath="billPayment/header/payeeAddr/line2"/>
+  <Mapping cloverField="line3" trim="true" xpath="billPayment/header/payeeAddr/line3"/>
+  <Mapping cloverField="line4" trim="true" xpath="billPayment/header/payeeAddr/line4"/>
+  <Mapping cloverField="line5" trim="true" xpath="billPayment/header/payeeAddr/line5"/>
+  <Mapping cloverField="postalCode" trim="true" xpath="billPayment/header/payeeAddr/postalCode"/>
+  <Mapping cloverField="postalCodeSuffix" trim="true" xpath="billPayment/header/payeeAddr/postalCodeSuffix"/>
+  <Mapping cloverField="tag" trim="true" xpath="billPayment/header/payeeAddr/tag"/>
+  <Mapping cloverField="status4" trim="true" xpath="billPayment/header/status"/>
+  <Mapping cloverField="totalAmt" trim="true" xpath="billPayment/header/totalAmt"/>
+  <Mapping cloverField="localPart6" trim="true" xpath="billPayment/header/txnDate/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI6" trim="true" xpath="billPayment/header/txnDate/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix6" trim="true" xpath="billPayment/header/txnDate/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day6" trim="true" xpath="billPayment/header/txnDate/day"/>
+  <Mapping cloverField="eon6" trim="true" xpath="billPayment/header/txnDate/eon"/>
+  <Mapping cloverField="eonAndYear6" trim="true" xpath="billPayment/header/txnDate/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond6" trim="true" xpath="billPayment/header/txnDate/fractionalSecond"/>
+  <Mapping cloverField="hour6" trim="true" xpath="billPayment/header/txnDate/hour"/>
+  <Mapping cloverField="millisecond6" trim="true" xpath="billPayment/header/txnDate/millisecond"/>
+  <Mapping cloverField="minute6" trim="true" xpath="billPayment/header/txnDate/minute"/>
+  <Mapping cloverField="month6" trim="true" xpath="billPayment/header/txnDate/month"/>
+  <Mapping cloverField="second6" trim="true" xpath="billPayment/header/txnDate/second"/>
+  <Mapping cloverField="timezone6" trim="true" xpath="billPayment/header/txnDate/timezone"/>
+  <Mapping cloverField="valid6" trim="true" xpath="billPayment/header/txnDate/valid"/>
+  <Mapping cloverField="year6" trim="true" xpath="billPayment/header/txnDate/year"/>
+  <Mapping cloverField="idDomain12" trim="true" xpath="billPayment/id/idDomain"/>
+  <Mapping cloverField="value12" trim="true" xpath="billPayment/id/value"/>
+  <Mapping cloverField="localPart7" trim="true" xpath="billPayment/metaData/createTime/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI7" trim="true" xpath="billPayment/metaData/createTime/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix7" trim="true" xpath="billPayment/metaData/createTime/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day7" trim="true" xpath="billPayment/metaData/createTime/day"/>
+  <Mapping cloverField="eon7" trim="true" xpath="billPayment/metaData/createTime/eon"/>
+  <Mapping cloverField="eonAndYear7" trim="true" xpath="billPayment/metaData/createTime/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond7" trim="true" xpath="billPayment/metaData/createTime/fractionalSecond"/>
+  <Mapping cloverField="hour7" trim="true" xpath="billPayment/metaData/createTime/hour"/>
+  <Mapping cloverField="millisecond7" trim="true" xpath="billPayment/metaData/createTime/millisecond"/>
+  <Mapping cloverField="minute7" trim="true" xpath="billPayment/metaData/createTime/minute"/>
+  <Mapping cloverField="month7" trim="true" xpath="billPayment/metaData/createTime/month"/>
+  <Mapping cloverField="second7" trim="true" xpath="billPayment/metaData/createTime/second"/>
+  <Mapping cloverField="timezone7" trim="true" xpath="billPayment/metaData/createTime/timezone"/>
+  <Mapping cloverField="valid7" trim="true" xpath="billPayment/metaData/createTime/valid"/>
+  <Mapping cloverField="year7" trim="true" xpath="billPayment/metaData/createTime/year"/>
+  <Mapping cloverField="createdBy" trim="true" xpath="billPayment/metaData/createdBy"/>
+  <Mapping cloverField="createdById" trim="true" xpath="billPayment/metaData/createdById"/>
+  <Mapping cloverField="lastModifiedBy" trim="true" xpath="billPayment/metaData/lastModifiedBy"/>
+  <Mapping cloverField="lastModifiedById" trim="true" xpath="billPayment/metaData/lastModifiedById"/>
+  <Mapping cloverField="localPart8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/day"/>
+  <Mapping cloverField="eon8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/eon"/>
+  <Mapping cloverField="eonAndYear8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/fractionalSecond"/>
+  <Mapping cloverField="hour8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/hour"/>
+  <Mapping cloverField="millisecond8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/millisecond"/>
+  <Mapping cloverField="minute8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/minute"/>
+  <Mapping cloverField="month8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/month"/>
+  <Mapping cloverField="second8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/second"/>
+  <Mapping cloverField="timezone8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/timezone"/>
+  <Mapping cloverField="valid8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/valid"/>
+  <Mapping cloverField="year8" trim="true" xpath="billPayment/metaData/lastUpdatedTime/year"/>
+  <Mapping cloverField="syncToken" trim="true" xpath="billPayment/syncToken"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.model.QBBillPayment"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.BillPaymentHeader">
+    <typed-object-ref name="APAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="APAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="CCAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="CCAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="CCDetail" type-ref="org.mule.modules.quickbooks.online.schema.CreditCardPayment"/>
+    <typed-object-ref name="bankAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="bankAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="checkDetail" type-ref="org.mule.modules.quickbooks.online.schema.CheckPayment"/>
+    <typed-object-ref name="currency" type-ref="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+    <typed-object-ref name="docNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="entityId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="entityName" type-ref="java.lang.String"/>
+    <typed-object-ref name="entityType" type-ref="org.mule.modules.quickbooks.online.schema.EntityTypeEnum"/>
+    <typed-object-ref name="msg" type-ref="java.lang.String"/>
+    <typed-object-ref name="note" type-ref="java.lang.String"/>
+    <typed-object-ref name="payeeAddr" type-ref="org.mule.modules.quickbooks.online.schema.PhysicalAddress"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+    <typed-object-ref name="totalAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="txnDate" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+  </typed-object>
+  <typed-object type="javax.xml.namespace.QName">
+    <typed-object-ref name="localPart" type-ref="java.lang.String"/>
+    <typed-object-ref name="namespaceURI" type-ref="java.lang.String"/>
+    <typed-object-ref name="prefix" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PhysicalAddress">
+    <typed-object-ref name="city" type-ref="java.lang.String"/>
+    <typed-object-ref name="country" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countrySubDivisionCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="county" type-ref="java.lang.String"/>
+    <typed-object-ref name="countyCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="geoCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="line1" type-ref="java.lang.String"/>
+    <typed-object-ref name="line2" type-ref="java.lang.String"/>
+    <typed-object-ref name="line3" type-ref="java.lang.String"/>
+    <typed-object-ref name="line4" type-ref="java.lang.String"/>
+    <typed-object-ref name="line5" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCodeSuffix" type-ref="java.lang.String"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CCTxnTypeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CCTxnModeEnum"/>
+  <typed-object type="java.math.BigInteger"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.BillPayment">
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="header" type-ref="org.mule.modules.quickbooks.online.schema.BillPaymentHeader"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="line" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.BillPaymentLine"/>
+    </schema-collection>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.NameValue">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CCSecurityCodeMatchEnum"/>
+  <typed-object type="boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CheckPayment">
+    <typed-object-ref name="acctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="bankName" type-ref="java.lang.String"/>
+    <typed-object-ref name="checkNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="nameOnAcct" type-ref="java.lang.String"/>
+    <typed-object-ref name="routingNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.model.QBBillPayment">
+    <typed-object-ref name="billPayment" type-ref="org.mule.modules.quickbooks.online.schema.BillPayment"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.BillPaymentLine">
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="balance" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="discountAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="discountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="discountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="txnId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="txnNum" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditCardPayment">
+    <typed-object-ref name="creditChargeInfo" type-ref="org.mule.modules.quickbooks.online.schema.CreditChargeInfo"/>
+    <typed-object-ref name="creditChargeResponse" type-ref="org.mule.modules.quickbooks.online.schema.CreditChargeResponse"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.EntityTypeEnum"/>
+  <typed-object type="int"/>
+  <typed-object type="javax.xml.datatype.XMLGregorianCalendar">
+    <typed-object-ref name="XMLSchemaType" type-ref="javax.xml.namespace.QName"/>
+    <typed-object-ref name="day" type-ref="int"/>
+    <typed-object-ref name="eon" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="eonAndYear" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="fractionalSecond" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="hour" type-ref="int"/>
+    <typed-object-ref name="millisecond" type-ref="int"/>
+    <typed-object-ref name="minute" type-ref="int"/>
+    <typed-object-ref name="month" type-ref="int"/>
+    <typed-object-ref name="second" type-ref="int"/>
+    <typed-object-ref name="timezone" type-ref="int"/>
+    <typed-object-ref name="valid" type-ref="boolean"/>
+    <typed-object-ref name="year" type-ref="int"/>
+  </typed-object>
+  <typed-object type="java.lang.Integer"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditCardTypeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditChargeInfo">
+    <typed-object-ref name="CCTxnMode" type-ref="org.mule.modules.quickbooks.online.schema.CCTxnModeEnum"/>
+    <typed-object-ref name="CCTxnType" type-ref="org.mule.modules.quickbooks.online.schema.CCTxnTypeEnum"/>
+    <typed-object-ref name="billAddrStreet" type-ref="java.lang.String"/>
+    <typed-object-ref name="ccExpirMn" type-ref="java.lang.Integer"/>
+    <typed-object-ref name="ccExpirYr" type-ref="java.lang.Integer"/>
+    <typed-object-ref name="commercialCardCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="cvv" type-ref="java.lang.String"/>
+    <typed-object-ref name="nameOnAcct" type-ref="java.lang.String"/>
+    <typed-object-ref name="number" type-ref="java.lang.String"/>
+    <typed-object-ref name="token" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="org.mule.modules.quickbooks.online.schema.CreditCardTypeEnum"/>
+    <typed-object-ref name="zipCode" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditChargeResponse">
+    <typed-object-ref name="CCTransId" type-ref="java.lang.String"/>
+    <typed-object-ref name="authCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="avsStreet" type-ref="java.lang.String"/>
+    <typed-object-ref name="avsZip" type-ref="java.lang.String"/>
+    <typed-object-ref name="cardSecurityCodeMatch" type-ref="org.mule.modules.quickbooks.online.schema.CCSecurityCodeMatchEnum"/>
+    <typed-object-ref name="clientTransID" type-ref="java.lang.String"/>
+    <typed-object-ref name="merchantAcctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="paymentGroupingCode" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="reconBatchId" type-ref="java.lang.String"/>
+    <typed-object-ref name="resultCode" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="resultMsg" type-ref="java.lang.String"/>
+    <typed-object-ref name="securityCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+    <typed-object-ref name="txnAuthorizationStamp" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="txnAuthorizationTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="JAVA Writer" guiWidth="0" guiX="460" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <idType>
+    <idDomain>$0.idDomain</idDomain>
+    <value>$0.value</value>
+  </idType>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.model.QBIdType"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.model.QBIdType">
+    <typed-object-ref name="idType" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="object_to_object" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.value = $in.0.value12;
+	$out.0.idDomain = $in.0.idDomain12;
+$out.0.__id=$in.0.__id;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="Metadata3" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>
