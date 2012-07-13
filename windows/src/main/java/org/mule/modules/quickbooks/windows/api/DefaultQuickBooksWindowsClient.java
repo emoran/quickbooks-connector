@@ -155,6 +155,10 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     {
         try
         {
+            if (type.getType().getSimpleName().equals("Class")) {
+                return (List) response.getClass().getMethod("getClazz").invoke(response);
+            }
+
             return (List) response.getClass().getMethod("get" + type.getType().getSimpleName()).invoke(response);
         }
         catch (Exception e)
