@@ -1,0 +1,9 @@
+org.mule.modules.quickbooks
+org.mule.modules.quickbooks.api
+org.mule.modules.quickbooks.api.exception
+org.mule.modules.quickbooks.api.gateway
+org.mule.modules.quickbooks.api.gateway.oauth
+org.mule.modules.quickbooks.online.schema
+org.mule.modules.quickbooks.utils
+org.mule.modules.quickbooks.windows.schema
+
