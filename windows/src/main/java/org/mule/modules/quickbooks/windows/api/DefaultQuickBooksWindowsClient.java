@@ -11,6 +11,7 @@
 package org.mule.modules.quickbooks.windows.api;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -154,6 +155,10 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     {
         try
         {
+            if (type.getType().getSimpleName().equals("Class")) {
+                return (List) response.getClass().getMethod("getClazz").invoke(response);
+            }
+
             return (List) response.getClass().getMethod("get" + type.getType().getSimpleName()).invoke(response);
         }
         catch (Exception e)
@@ -278,8 +283,13 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         }
     }
 
+    /**
+     * Returns the list of results pages from QB
+     * 
+     * @return List of pages with results
+     */
     @Override
-    public Iterable findObjects(final String realmId,
+    public Iterable findObjectsGetPages(final String realmId,
                                 final String appKey,
                                 final String realmIdPseudonym,
                                 final String authIdPseudonym,
@@ -354,6 +364,77 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
                 }
             }
         };
+    }
+    
+    /**
+     * Returns all the results from QB
+     * 
+     * @return List with all the results
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
+    public Iterable findObjects(final String realmId,
+                                final String appKey,
+                                final String realmIdPseudonym,
+                                final String authIdPseudonym,
+                                final WindowsEntityType type,
+                                final Object query)
+    {
+        Validate.notNull(type);
+        
+        List<Object> listOfResults = new ArrayList<Object>();
+        Boolean hasMoreResults = true;
+        Integer pageNumber = 0;
+        HttpUriRequest httpRequest;
+        Object responseObject;
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
+        String str = String.format("%s/%s/v2/%s",
+                getBaseUri(realmId), type.getResouceName(), realmId);
+            
+        while (hasMoreResults) {
+            pageNumber++;
+            httpRequest = new HttpPost(str);
+            httpRequest.addHeader("Content-Type", "text/xml");
+            
+            ((QueryBase) query).setStartPage(BigInteger.valueOf(pageNumber));
+            ((QueryBase) query).setChunkSize(getResultsPerPage());
+        
+            prepareToPost(query, httpRequest);
+
+            try
+            {
+                responseObject = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                if(responseObject instanceof ErrorResponse)
+                {
+                    throw new QuickBooksRuntimeException((ErrorResponse) responseObject);
+                }                
+            } 
+            catch(QuickBooksRuntimeException e)
+            {
+                if(e.isAExpiredTokenFault())
+                {
+                    destroyAccessToken(realmId);
+                    responseObject = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));                    
+                } 
+                else 
+                {
+                    throw e;
+                }
+            }
+
+            List intuitList = getListFromIntuitResponse(responseObject, type);
+            
+            if (intuitList != null) {
+                hasMoreResults = intuitList.size() >= getResultsPerPage();
+                listOfResults.addAll(intuitList);
+            }
+            else {
+                hasMoreResults = false;
+            }
+        }
+        
+        return listOfResults;
     }
 
     @Override

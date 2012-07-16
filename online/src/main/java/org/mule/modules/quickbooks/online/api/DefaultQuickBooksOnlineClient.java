@@ -51,6 +51,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
         Validate.notEmpty(baseUri);
         
         init(baseUri);
+        setResultsPerPage(200);
     }
     
     /** @throws QuickBooksRuntimeException 
@@ -226,11 +227,15 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
         }
     }
 
-    /** @param query 
+    /** 
+     * Returns the list of result pages from Quickbooks
+     * 
+     * @param query 
      * @param type 
-     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#findObjects() */
+     * @return List of pages
+     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#findObjectsGetPages() */
     @Override
-    public <T extends CdmBase> Iterable<T> findObjects(final String realmId, 
+    public <T extends CdmBase> Iterable<T> findObjectsGetPages(final String realmId, 
                                                        final String appKey,
                                                        final String realmIdPseudonym, 
                                                        final String authIdPseudonym,
@@ -330,6 +335,106 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     }
                 }
             };
+    }
+    
+    /** 
+     * Return all the results from Quickbooks.
+     *
+     * 
+     * @param query 
+     * @param type
+     * @return List with all the results 
+     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#findObjects() */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends CdmBase> Iterable<T> findObjects(final String realmId, 
+                                                       final String appKey,
+                                                       final String realmIdPseudonym, 
+                                                       final String authIdPseudonym,
+                                                       final OnlineEntityType type, 
+                                                       final String queryFilter, 
+                                                       final String querySort)
+    {
+        Validate.notNull(type);
+        
+        List<T> listOfResults = new ArrayList<T>();
+        Integer pageNumber = 0;
+        Boolean hasMoreResults = true;
+        List<NameValuePair> nameValuePairs;
+        SearchResults searchResults;
+        
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+
+        while(hasMoreResults) {
+            
+            pageNumber++;
+            nameValuePairs = new ArrayList<NameValuePair>();
+            
+            if (queryFilter != null)
+            {
+                nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
+            }
+            
+            if (querySort != null)
+            {
+                nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
+            }
+            
+            nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
+            nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
+            
+            HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
+                getBaseUri(realmId), type.getResouceNameForFind(), realmId));
+            
+            httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            try
+            {
+                ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
+            }
+            catch (UnsupportedEncodingException e)
+            {
+                throw MuleSoftException.soften(e);
+            }
+            
+            try
+            {
+                searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            }
+            catch(QuickBooksRuntimeException e)
+            {
+                if(e.isAExpiredTokenFault())
+                {
+                    destroyAccessToken(realmId);
+                    searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                } 
+                else 
+                {
+                    throw e;
+                }
+            }
+            
+            hasMoreResults = searchResults.getCount() >= getResultsPerPage();
+            
+            try {                
+                listOfResults.addAll((List<T>) searchResults.getCdmCollections().getClass()
+                        .getMethod("get" + type.getCdmCollectionName(), null)
+                        .invoke(searchResults.getCdmCollections()));            
+            }
+            catch (IllegalAccessException e)
+            {
+                throw new AssertionError(e);
+            }
+            catch (InvocationTargetException e)
+            {
+                throw new AssertionError(e);
+            }
+            catch (NoSuchMethodException e)
+            {
+                throw new AssertionError(e);
+            }
+        }
+        
+        return listOfResults;
     }
     
     @Override

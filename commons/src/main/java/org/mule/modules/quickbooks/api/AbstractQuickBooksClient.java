@@ -53,7 +53,7 @@ public abstract class AbstractQuickBooksClient
     private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway.properties";
     protected Properties properties;
 
-    protected Integer resultsPerPage = 100;
+    protected Integer resultsPerPage = 999;
     protected PrivateKey privateKey;
     
     protected String serviceProviderId;
@@ -209,9 +209,9 @@ public abstract class AbstractQuickBooksClient
     
     public void setResultsPerPage(Integer resultsPerPage)
     {   
-        if ( resultsPerPage > 100 || resultsPerPage < 10 )
+        if ( resultsPerPage > 999 || resultsPerPage < 10 )
         {
-            throw new IllegalArgumentException("Results Per Page must be a number between 10 and 100");
+            throw new IllegalArgumentException("Results Per Page must be a number between 10 and 999");
         }    
         this.resultsPerPage = resultsPerPage;
     }

@@ -37,6 +37,10 @@ public interface QuickBooksWindowsClient
                          final String realmIdPseudonym, final String authIdPseudonym, 
                          final WindowsEntityType type, final Object query);
     
+    Iterable findObjectsGetPages(final String realmId, final String appKey, 
+            final String realmIdPseudonym, final String authIdPseudonym, 
+            final WindowsEntityType type, final Object query);
+    
     void revert(final String realmId, final String appKey, 
                 final String realmIdPseudonym, final String authIdPseudonym, 
                 final WindowsEntityType type, final Object obj, final String requestId);

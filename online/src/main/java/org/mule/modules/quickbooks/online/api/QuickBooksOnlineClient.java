@@ -34,5 +34,7 @@ public interface QuickBooksOnlineClient
     <T extends CdmBase> void deleteObject(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final IdType id, String syncToken);
 
     <T extends CdmBase> Iterable<T> findObjects(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final String queryFilter, final String querySort);
+
+    <T extends CdmBase> Iterable<T> findObjectsGetPages(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, OnlineEntityType type, String queryFilter, String querySort);
 }
 
