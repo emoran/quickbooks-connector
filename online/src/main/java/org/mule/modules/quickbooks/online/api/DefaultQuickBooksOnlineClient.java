@@ -51,7 +51,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
         Validate.notEmpty(baseUri);
         
         init(baseUri);
-        setResultsPerPage(200);
+        setResultsPerPage(100);
     }
     
     /** @throws QuickBooksRuntimeException 
