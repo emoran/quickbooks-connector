@@ -23,6 +23,7 @@ import javax.annotation.PostConstruct;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
@@ -124,7 +125,7 @@ public class QuickBooksWindowsModule
                          String realmIdPseudonym, 
                          String authIdPseudonym,
                          WindowsEntityType type,
-                         Map<String, Object> obj,
+                         @Placement(group = "Object") Map<String, Object> obj,
                          String requestId,
                          @Optional @Default("false") Boolean draft,
                          @Optional @Default("false") Boolean fullResponse)
@@ -163,7 +164,7 @@ public class QuickBooksWindowsModule
                             String realmIdPseudonym,
                             String authIdPseudonym,
                             WindowsEntityType type,
-                            Map<String, Object> id)
+                            @Placement(group = "Id") Map<String, Object> id)
     {
         return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(IdType.class,id));
     }
@@ -221,7 +222,7 @@ public class QuickBooksWindowsModule
                          String realmIdPseudonym, 
                          String authIdPseudonym,
                          WindowsEntityType type,
-                         Map<String, Object> obj,
+                         @Placement(group = "Object") Map<String, Object> obj,
                          String requestId,
                          @Optional @Default("false") Boolean draft,
                          @Optional @Default("false") Boolean fullResponse)
@@ -261,7 +262,7 @@ public class QuickBooksWindowsModule
                        String appKey,
                        String realmIdPseudonym, String authIdPseudonym,
                        WindowsEntityType type,
-                       Map<String, Object> obj,
+                       @Placement(group = "Object") Map<String, Object> obj,
                        String requestId)
     {
         client.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId);
@@ -306,8 +307,8 @@ public class QuickBooksWindowsModule
                                 String appKey,
                                 String realmIdPseudonym, 
                                 String authIdPseudonym,
-                                WindowsEntityType type, 
-                                @Optional Map<String, Object> query)
+                                WindowsEntityType type,
+                                @Placement(group = "Query") @Optional Map<String, Object> query)
     {
         if (query == null)
         {
@@ -359,7 +360,7 @@ public class QuickBooksWindowsModule
                          String appKey,
                          String realmIdPseudonym, 
                          String authIdPseudonym,
-                         @Optional Map<String, Object> syncStatusRequest)
+                         @Placement(group = "Sync Status Request") @Optional Map<String, Object> syncStatusRequest)
     {
         if (syncStatusRequest == null)
         {
@@ -398,7 +399,7 @@ public class QuickBooksWindowsModule
                          String appKey,
                          String realmIdPseudonym, 
                          String authIdPseudonym,
-                         @Optional Map<String, Object> syncActivityRequest)
+                         @Placement(group = "Sync Activity Request") @Optional Map<String, Object> syncActivityRequest)
     {
         if (syncActivityRequest == null)
         {
@@ -438,7 +439,7 @@ public class QuickBooksWindowsModule
 //                       String realmIdPseudonym, 
 //                       String authIdPseudonym,
 //                       WindowsEntityType type, 
-//                       Map<String, Object> obj,
+//                       @Placement(group = "Object") Map<String, Object> obj,
 //                       String requestId)
 //    {
 //        client.revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId);

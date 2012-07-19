@@ -25,6 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.quickbooks.MapBuilder;
@@ -139,7 +140,7 @@ public class QuickBooksModule
                                  @Optional String acctNum,
                                  @Optional String openingBalance,
                                  Date openingBalanceDate,
-                                 @Optional Map<String, Object> accountParentId)
+                                 @Placement(group = "Account Parent Id") @Optional Map<String, Object> accountParentId)
     {
         
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
@@ -186,8 +187,8 @@ public class QuickBooksModule
     public Bill createBill(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           Map<String, Object> header,
-                           List<Map<String, Object>> lines)
+                           @Placement(group = "Header") Map<String, Object> header,
+                           @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Bill.class,
@@ -229,8 +230,8 @@ public class QuickBooksModule
     public BillPayment createBillPayment(String realmId,
                                          String appKey,
                                          String realmIdPseudonym, String authIdPseudonym,
-                                         Map<String, Object> header,
-                                         List<Map<String, Object>> lines)
+                                         @Placement(group = "Header") Map<String, Object> header,
+                                         @Placement(group = "Lines") List<Map<String, Object>> lines)
     {    
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(BillPayment.class,
@@ -271,8 +272,8 @@ public class QuickBooksModule
     public CashPurchase createCashPurchase(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           Map<String, Object> header,
-                                           List<Map<String, Object>> lines)
+                                           @Placement(group = "Header") Map<String, Object> header,
+                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(CashPurchase.class,
@@ -312,8 +313,8 @@ public class QuickBooksModule
     public Check createCheck(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             Map<String, Object> header,
-                             List<Map<String, Object>> lines)
+                             @Placement(group = "Header") Map<String, Object> header,
+                             @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Check.class,
@@ -356,8 +357,8 @@ public class QuickBooksModule
     public CreditCardCharge createCreditCardCharge(String realmId,
                                                    String appKey,
                                                    String realmIdPseudonym, String authIdPseudonym,
-                                                   Map<String, Object> header,
-                                                   List<Map<String, Object>> lines)
+                                                   @Placement(group = "Header") Map<String, Object> header,
+                                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(CreditCardCharge.class,
@@ -425,14 +426,14 @@ public class QuickBooksModule
                                    @Optional String suffix,
                                    @Optional String dBAName,
                                    @Optional String showAs,
-                                   @Optional List<Map<String, Object>> webSites,
-                                   @Optional Map<String, Object> salesTermId,
-                                   @Optional Map<String, Object> paymentMethodId,
-                                   @Optional Map<String, Object> salesTaxCodeId,
-                                   @Optional List<Map<String, Object>> emails,
-                                   @Optional List<Map<String, Object>> phones,
-                                   @Optional List<Map<String, Object>> addresses,
-                                   @Optional List<Map<String, Object>> notes)
+                                   @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
+                                   @Placement(group = "Sales Term Id") @Optional Map<String, Object> salesTermId,
+                                   @Placement(group = "Payment Method Id") @Optional Map<String, Object> paymentMethodId,
+                                   @Placement(group = "Sales Tax Code Id") @Optional Map<String, Object> salesTaxCodeId,
+                                   @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
+                                   @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
+                                   @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
+                                   @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
     {
         salesTermId = coalesceMap(salesTermId);
         salesTaxCodeId = coalesceMap(salesTaxCodeId);
@@ -498,8 +499,8 @@ public class QuickBooksModule
     public Estimate createEstimate(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   Map<String, Object> header,
-                                   List<Map<String, Object>> lines)
+                                   @Placement(group = "Header") Map<String, Object> header,
+                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Estimate.class,
@@ -541,8 +542,8 @@ public class QuickBooksModule
     public Invoice createInvoice(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 Map<String, Object> header,
-                                 List<Map<String, Object>> lines)
+                                 @Placement(group = "Header") Map<String, Object> header,
+                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Invoice.class,
@@ -594,15 +595,15 @@ public class QuickBooksModule
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
                            @Optional @Default("") String name,
-                           @Optional Map<String, Object> unitPrice,
+                           @Placement(group = "Unit Price") @Optional Map<String, Object> unitPrice,
                            @Optional String desc,
                            @Optional @Default("false") Boolean taxable,
-                           @Optional Map<String, Object> incomeAccount,
-                           @Optional Map<String, Object> itemParentId,
+                           @Placement(group = "Income Account") @Optional Map<String, Object> incomeAccount,
+                           @Placement(group = "Item Parent Id") @Optional Map<String, Object> itemParentId,
                            @Optional String itemParentName,
                            @Optional String purchaseDesc,
-                           @Optional Map<String, Object> purchaseCost,
-                           @Optional Map<String, Object> expenseAccount)
+                           @Placement(group = "Purchase Cost") @Optional Map<String, Object> purchaseCost,
+                           @Placement(group = "Expense Account") @Optional Map<String, Object> expenseAccount)
     {
         unitPrice = coalesceMap(unitPrice);
         incomeAccount = coalesceMap(incomeAccount);
@@ -657,8 +658,8 @@ public class QuickBooksModule
     public Payment createPayment(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 Map<String, Object> header,
-                                 List<Map<String, Object>> lines)
+                                 @Placement(group = "Header") Map<String, Object> header,
+                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(Payment.class,
@@ -744,8 +745,8 @@ public class QuickBooksModule
     public SalesReceipt createSalesReceipt(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           Map<String, Object> header,
-                                           List<Map<String, Object>> lines)
+                                           @Placement(group = "Header") Map<String, Object> header,
+                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
             unmap(SalesReceipt.class,
@@ -887,14 +888,14 @@ public class QuickBooksModule
                                @Optional String familyName,
                                @Optional String dBAName,
                                @Optional String showAs,
-                               @Optional List<Map<String, Object>> webSites,
+                               @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
                                @Optional String taxIdentifier,
                                @Optional String acctNum,
                                @Optional Boolean vendor1099,
-                               @Optional List<Map<String, Object>> emails,
-                               @Optional List<Map<String, Object>> phones,
-                               @Optional List<Map<String, Object>> addresses,
-                               @Optional List<Map<String, Object>> notes)
+                               @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
+                               @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
+                               @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
+                               @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
     {
         webSites = coalesceList(webSites);
         emails = coalesceList(emails);
@@ -948,7 +949,7 @@ public class QuickBooksModule
                             String appKey,
                             String realmIdPseudonym, String authIdPseudonym,
                             OnlineEntityType type,
-                            Map<String, Object> id)
+                            @Placement(group = "Id") Map<String, Object> id)
     {
         return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, unmap(IdType.class, id));
     }
@@ -1005,7 +1006,7 @@ public class QuickBooksModule
     public Account updateAccount(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 Map<String, Object> id, 
+                                 @Placement(group = "Id") Map<String, Object> id,
                                  @Optional String syncToken,
                                  String name,
                                  @Optional String desc,
@@ -1013,7 +1014,7 @@ public class QuickBooksModule
                                  @Optional String acctNum,
                                  @Optional String openingBalance,
                                  @Optional Date openingBalanceDate,
-                                 @Optional Map<String, Object> accountParentId)
+                                 @Placement(group = "Account Parent Id") @Optional Map<String, Object> accountParentId)
     {   
         
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ACCOUNT,
@@ -1070,10 +1071,10 @@ public class QuickBooksModule
     public Bill updateBill(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           Map<String, Object> id, 
+                           @Placement(group = "Id") Map<String, Object> id,
                            @Optional String syncToken,
-                           Map<String, Object> header,
-                           List<Map<String, Object>> lines)
+                           @Placement(group = "Header") Map<String, Object> header,
+                           @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILL,
             unmap(Bill.class,
@@ -1125,10 +1126,10 @@ public class QuickBooksModule
     public BillPayment updateBillPayment(String realmId,
                                          String appKey,
                                          String realmIdPseudonym, String authIdPseudonym,
-                                         Map<String, Object> id, 
+                                         @Placement(group = "Id") Map<String, Object> id,
                                          @Optional String syncToken,
-                                         Map<String, Object> header,
-                                         List<Map<String, Object>> lines)
+                                         @Placement(group = "Header") Map<String, Object> header,
+                                         @Placement(group = "Lines") List<Map<String, Object>> lines)
     {    
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILLPAYMENT,
             unmap(BillPayment.class,
@@ -1179,10 +1180,10 @@ public class QuickBooksModule
     public CashPurchase updateCashPurchase(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           Map<String, Object> id, 
+                                           @Placement(group = "Id") Map<String, Object> id,
                                            @Optional String syncToken,
-                                           Map<String, Object> header,
-                                           List<Map<String, Object>> lines)
+                                           @Placement(group = "Header") Map<String, Object> header,
+                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CASHPURCHASE,
             unmap(CashPurchase.class,
@@ -1232,10 +1233,10 @@ public class QuickBooksModule
     public Check updateCheck(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             Map<String, Object> id, 
+                             @Placement(group = "Id") Map<String, Object> id,
                              @Optional String syncToken,
-                             Map<String, Object> header,
-                             List<Map<String, Object>> lines)
+                             @Placement(group = "Header") Map<String, Object> header,
+                             @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CHECK,
             unmap(Check.class,
@@ -1287,10 +1288,10 @@ public class QuickBooksModule
     public CreditCardCharge updateCreditCardCharge(String realmId,
                                                    String appKey,
                                                    String realmIdPseudonym, String authIdPseudonym,
-                                                   Map<String, Object> id, 
+                                                   @Placement(group = "Id") Map<String, Object> id,
                                                    @Optional String syncToken,
-                                                   Map<String, Object> header,
-                                                   List<Map<String, Object>> lines)
+                                                   @Placement(group = "Header") Map<String, Object> header,
+                                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CREDITCARDCHARGE,
             unmap(CreditCardCharge.class,
@@ -1360,7 +1361,7 @@ public class QuickBooksModule
     public Customer updateCustomer(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   Map<String, Object> id, 
+                                   @Placement(group = "Id") Map<String, Object> id,
                                    @Optional String syncToken,
                                    @Optional String name,
                                    @Optional String givenName,
@@ -1369,14 +1370,14 @@ public class QuickBooksModule
                                    @Optional String suffix,
                                    @Optional String dBAName,
                                    @Optional String showAs,
-                                   @Optional List<Map<String, Object>> webSites,
-                                   @Optional Map<String, Object> salesTermId,
-                                   @Optional Map<String, Object> paymentMethodId,
-                                   @Optional Map<String, Object> salesTaxCodeId,
-                                   @Optional List<Map<String, Object>> emails, 
-                                   @Optional List<Map<String, Object>> phones,
-                                   @Optional List<Map<String, Object>> addresses,
-                                   @Optional List<Map<String, Object>> notes)
+                                   @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
+                                   @Placement(group = "Sales Term Id") @Optional Map<String, Object> salesTermId,
+                                   @Placement(group = "Payment Method Id") @Optional Map<String, Object> paymentMethodId,
+                                   @Placement(group = "Sales Tax Code Id") @Optional Map<String, Object> salesTaxCodeId,
+                                   @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
+                                   @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
+                                   @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
+                                   @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
     {
         salesTermId = coalesceMap(salesTermId);
         salesTaxCodeId = coalesceMap(salesTaxCodeId);
@@ -1451,10 +1452,10 @@ public class QuickBooksModule
     public Estimate updateEstimate(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   Map<String, Object> id, 
+                                   @Placement(group = "Id") Map<String, Object> id,
                                    @Optional String syncToken,
-                                   Map<String, Object> header,
-                                   List<Map<String, Object>> lines)
+                                   @Placement(group = "Header") Map<String, Object> header,
+                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ESTIMATE,
             unmap(Estimate.class,
@@ -1505,10 +1506,10 @@ public class QuickBooksModule
     public Invoice updateInvoice(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 Map<String, Object> id, 
+                                 @Placement(group = "Id") Map<String, Object> id,
                                  @Optional String syncToken,
-                                 Map<String, Object> header,
-                                 List<Map<String, Object>> lines)
+                                 @Placement(group = "Header") Map<String, Object> header,
+                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.INVOICE,
             unmap(Invoice.class,
@@ -1568,18 +1569,18 @@ public class QuickBooksModule
     public Item updateItem(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           Map<String, Object> id, 
+                           @Placement(group = "Id") Map<String, Object> id,
                            @Optional String syncToken,
-                           @Optional @Default("") String name, 
-                           @Optional Map<String, Object> unitPrice,
+                           @Optional @Default("") String name,
+                           @Placement(group = "Unit Price") @Optional Map<String, Object> unitPrice,
                            @Optional String desc,
                            @Optional @Default("false") Boolean taxable,
-                           @Optional Map<String, Object> incomeAccount,
-                           @Optional Map<String, Object> itemParentId,
+                           @Placement(group = "Income Account") @Optional Map<String, Object> incomeAccount,
+                           @Placement(group = "Item Parent Id") @Optional Map<String, Object> itemParentId,
                            @Optional String itemParentName,
                            @Optional String purchaseDesc,
-                           @Optional Map<String, Object> purchaseCost,
-                           @Optional Map<String, Object> expenseAccount)
+                           @Placement(group = "Purchase Cost") @Optional Map<String, Object> purchaseCost,
+                           @Placement(group = "Expense Account") @Optional Map<String, Object> expenseAccount)
     {
         unitPrice = coalesceMap(unitPrice);
         incomeAccount = coalesceMap(incomeAccount);
@@ -1643,10 +1644,10 @@ public class QuickBooksModule
     public Payment updatePayment(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 Map<String, Object> id, 
+                                 @Placement(group = "Id") Map<String, Object> id,
                                  @Optional String syncToken,
-                                 Map<String, Object> header,
-                                 List<Map<String, Object>> lines)
+                                 @Placement(group = "Header") Map<String, Object> header,
+                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENT,
             unmap(Payment.class,
@@ -1697,7 +1698,7 @@ public class QuickBooksModule
     public PaymentMethod updatePaymentMethod(String realmId,
                                              String appKey,
                                              String realmIdPseudonym, String authIdPseudonym,
-                                             Map<String, Object> id, 
+                                             @Placement(group = "Id") Map<String, Object> id,
                                              @Optional String syncToken,
                                              String name, 
                                              @Optional @Default("NON_CREDIT_CARD") String type)
@@ -1750,10 +1751,10 @@ public class QuickBooksModule
     public SalesReceipt updateSalesReceipt(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           Map<String, Object> id, 
+                                           @Placement(group = "Id") Map<String, Object> id,
                                            @Optional String syncToken,
-                                           Map<String, Object> header, 
-                                           List<Map<String, Object>> lines)
+                                           @Placement(group = "Header") Map<String, Object> header,
+                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
     {
         return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESRECEIPT,
             unmap(SalesReceipt.class,
@@ -1822,7 +1823,7 @@ public class QuickBooksModule
     public SalesTerm updateSalesTerm(String realmId,
                                      String appKey,
                                      String realmIdPseudonym, String authIdPseudonym,
-                                     Map<String, Object> id, 
+                                     @Placement(group = "Id") Map<String, Object> id,
                                      @Optional String syncToken,
                                      String name, 
                                      Integer dueDays, 
@@ -1909,22 +1910,22 @@ public class QuickBooksModule
     public Vendor updateVendor(String realmId,
                                String appKey,
                                String realmIdPseudonym, String authIdPseudonym,
-                               Map<String, Object> id, 
+                               @Placement(group = "Id") Map<String, Object> id,
                                @Optional String syncToken,
                                @Optional String name, 
                                @Optional String givenName, 
                                @Optional String middleName, 
                                @Optional String familyName,
                                @Optional String dBAName, 
-                               @Optional String showAs, 
-                               @Optional List<Map<String, Object>> webSites,
+                               @Optional String showAs,
+                               @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
                                @Optional String taxIdentifier, 
                                @Optional String acctNum, 
                                @Optional Boolean vendor1099,
-                               @Optional List<Map<String, Object>> emails, 
-                               @Optional List<Map<String, Object>> phones, 
-                               @Optional List<Map<String, Object>> addresses,
-                               @Optional List<Map<String, Object>> notes)
+                               @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
+                               @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
+                               @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
+                               @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
     {
         webSites = coalesceList(webSites);
         emails = coalesceList(emails);
@@ -1981,8 +1982,8 @@ public class QuickBooksModule
     public void deleteObject(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             OnlineEntityType type, 
-                             Map<String, Object> id, 
+                             OnlineEntityType type,
+                             @Placement(group = "Id") Map<String, Object> id,
                              @Optional String syncToken)
     {
         client.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, unmap(IdType.class, id), syncToken);
