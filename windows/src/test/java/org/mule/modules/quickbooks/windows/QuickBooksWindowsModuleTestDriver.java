@@ -93,7 +93,7 @@ public class QuickBooksWindowsModuleTestDriver {
                 authIdPseudonym, WindowsEntityType.INVOICE, (Map<String, Object>) mom.map(query));
         for (Invoice invoice : iterable) {
             module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.INVOICE,
-                    (Map<String, Object>) mom.map(invoice), module.generateANewRequestId());
+                    (Map<String, Object>) mom.map(invoice));
         }
     }
     
@@ -106,7 +106,7 @@ public class QuickBooksWindowsModuleTestDriver {
                 authIdPseudonym, WindowsEntityType.ITEM, (Map<String, Object>) mom.map(query));
         for (Item item : iterable) {
             module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ITEM,
-                    (Map<String, Object>) mom.map(item), module.generateANewRequestId());
+                    (Map<String, Object>) mom.map(item));
         }
     }
     
@@ -119,7 +119,7 @@ public class QuickBooksWindowsModuleTestDriver {
                 authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(query));
         for (Customer customer : iterableCust) {
             module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                    (Map<String, Object>) mom.map(customer), module.generateANewRequestId());
+                    (Map<String, Object>) mom.map(customer));
         }
     }
     
@@ -132,7 +132,7 @@ public class QuickBooksWindowsModuleTestDriver {
                 authIdPseudonym, WindowsEntityType.ACCOUNT, (Map<String, Object>) mom.map(query));
         for (Account account : iterable) {
             module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT,
-                    (Map<String, Object>) mom.map(account), module.generateANewRequestId());
+                    (Map<String, Object>) mom.map(account));
         }
     }
 
@@ -149,12 +149,12 @@ public class QuickBooksWindowsModuleTestDriver {
         account.setOpeningBalanceDate("2012-04-04T00:00:00Z");
         
         Account createdAccount = (Account) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                WindowsEntityType.ACCOUNT, (Map<String, Object>) mom.map(account), module.generateANewRequestId(), false, true);
+                WindowsEntityType.ACCOUNT, (Map<String, Object>) mom.map(account), false, true);
         
         assertEquals(account.getName(), createdAccount.getName());
         
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT, (
-                Map<String, Object>) mom.map(createdAccount), module.generateANewRequestId());
+                Map<String, Object>) mom.map(createdAccount));
     }
     
     @Test
@@ -162,20 +162,17 @@ public class QuickBooksWindowsModuleTestDriver {
         Customer customerJane = createJaneDoe();
         // non draft
         final Customer createdNonDraftCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym,
-                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane),
-                module.generateANewRequestId(), null, true);
+                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), null, true);
 
         // draft
         customerJane.setName("Jane Doe QBW DRAFT 1");
         final ObjectRef objRefDraft1 = (ObjectRef) module.create(realmId, appKey, realmIdPseudonym,
-                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane),
-                module.generateANewRequestId(), true, null);
+                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), true, null);
 
         // draft
         customerJane.setName("Jane Doe QBW DRAFT 2");
         final ObjectRef objRefDraft2 = (ObjectRef) module.create(realmId, appKey, realmIdPseudonym,
-                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane),
-                module.generateANewRequestId(), true, null);
+                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), true, null);
 
         CustomerQuery query = new CustomerQuery();
 
@@ -196,10 +193,10 @@ public class QuickBooksWindowsModuleTestDriver {
         for (Customer customer : iterableCust) {
             assertTrue(customer.getName().contains("DRAFT"));
             module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                    (Map<String, Object>) mom.map(customer), module.generateANewRequestId());
+                    (Map<String, Object>) mom.map(customer));
         }
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(createdNonDraftCustomer), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(createdNonDraftCustomer));
     }
 
     @Test
@@ -208,8 +205,7 @@ public class QuickBooksWindowsModuleTestDriver {
 
         customerJane.setName("Jane Doe QBW Test delete 3");
         final ObjectRef objRef = (ObjectRef) module.create(realmId, appKey, realmIdPseudonym,
-                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane),
-                module.generateANewRequestId(), null, null);
+                authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customerJane), null, null);
 
         Customer aux = new Customer() {
             {
@@ -218,7 +214,7 @@ public class QuickBooksWindowsModuleTestDriver {
         };
 
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(aux), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(aux));
 
         Customer customer = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,
                 WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(objRef.getId()));
@@ -234,11 +230,11 @@ public class QuickBooksWindowsModuleTestDriver {
                 .with("subtype", AccountSubtypeEnum.EXPENSE.value()).with("acctNum", "9919823")
                 .with("openingBalance", 0).with("openingBalanceDate", "2012-02-02T00:00:00Z").build();
         Account acc = (Account) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                WindowsEntityType.ACCOUNT, mapAccount, module.generateANewRequestId(), null, true);
+                WindowsEntityType.ACCOUNT, mapAccount, null, true);
 
         assertNotNull(acc.getId());
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ACCOUNT,
-                (Map<String, Object>) mom.map(acc), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(acc));
     }
 
     @Test
@@ -246,12 +242,12 @@ public class QuickBooksWindowsModuleTestDriver {
         Customer customer = createJaneDoe();
         Customer responseCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         assertEquals(customer.getName(), responseCustomer.getName());
 
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(responseCustomer), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(responseCustomer));
     }
 
     @Test
@@ -260,7 +256,7 @@ public class QuickBooksWindowsModuleTestDriver {
 
         Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(janeDoe),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         Customer retrievedCustomer = (Customer) module.getObject(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.CUSTOMER,
@@ -268,7 +264,7 @@ public class QuickBooksWindowsModuleTestDriver {
 
         assertEquals(janeDoe.getName(), retrievedCustomer.getName());
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(retrievedCustomer), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(retrievedCustomer));
     }
 
     @Test
@@ -276,7 +272,7 @@ public class QuickBooksWindowsModuleTestDriver {
         Customer janeDoe = createJaneDoe();
         Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(janeDoe),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         assertEquals(janeDoe.getName(), createdCustomer.getName());
 
@@ -284,12 +280,12 @@ public class QuickBooksWindowsModuleTestDriver {
 
         Customer updatedCustomer = (Customer) module.update(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createdCustomer),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         assertEquals(createdCustomer.getName(), updatedCustomer.getName());
 
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(updatedCustomer), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(updatedCustomer));
     }
 
     @Test
@@ -314,12 +310,12 @@ public class QuickBooksWindowsModuleTestDriver {
         };
         SalesTerm createdSalesTerm = (SalesTerm) module.create(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.SALESTERM, (Map<String, Object>) mom.map(salesTerm),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         assertEquals(salesTerm.getName(), createdSalesTerm.getName());
 
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.SALESTERM,
-                (Map<String, Object>) mom.map(createdSalesTerm), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(createdSalesTerm));
     }
 
     @Test
@@ -338,7 +334,7 @@ public class QuickBooksWindowsModuleTestDriver {
         // creates a customer
         final Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createJaneDoe()),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         // create an item
         final Item item = new Item() {
@@ -355,7 +351,7 @@ public class QuickBooksWindowsModuleTestDriver {
         };
 
         final Item createdItem = (Item) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                WindowsEntityType.ITEM, (Map<String, Object>) mom.map(item), module.generateANewRequestId(),
+                WindowsEntityType.ITEM, (Map<String, Object>) mom.map(item),
                 null, true);
 
         // create an invoice with the customer and item created before
@@ -378,21 +374,21 @@ public class QuickBooksWindowsModuleTestDriver {
 
         Invoice createdInvoice = (Invoice) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
                 WindowsEntityType.INVOICE, (Map<String, Object>) mom.map(invoice),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         // change the docNumber and update it
         createdInvoice.getHeader().setDocNumber("DOC-QBW:N02");
         Invoice updatedInvoice = (Invoice) module.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
                 WindowsEntityType.INVOICE, (Map<String, Object>) mom.map(createdInvoice),
-                module.generateANewRequestId(), null, true);
+                null, true);
 
         // delete everything
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.INVOICE,
-                (Map<String, Object>) mom.map(updatedInvoice), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(updatedInvoice));
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.ITEM,
-                (Map<String, Object>) mom.map(createdItem), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(createdItem));
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(createdCustomer), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(createdCustomer));
 
         // verify the change
         assertEquals(createdInvoice.getHeader().getDocNumber(), updatedInvoice.getHeader().getDocNumber());
@@ -430,12 +426,13 @@ public class QuickBooksWindowsModuleTestDriver {
         }
     }
 
+    @Ignore
     @Test
     public void followTheRequestId() {
         String requestId = module.generateANewRequestId();
         Customer createdCustomer = (Customer) module.create(realmId, appKey, realmIdPseudonym,
                 authIdPseudonym, WindowsEntityType.CUSTOMER, (Map<String, Object>) mom.map(createJaneDoe()),
-                requestId, null, true);
+                null, true);
 
         SyncStatusRequest syncStatusRequest = new SyncStatusRequest();
         syncStatusRequest.getRequestId().add(requestId);
@@ -448,7 +445,7 @@ public class QuickBooksWindowsModuleTestDriver {
         }
 
         module.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(createdCustomer), module.generateANewRequestId());
+                (Map<String, Object>) mom.map(createdCustomer));
     }
 
     @Test
@@ -571,7 +568,7 @@ public class QuickBooksWindowsModuleTestDriver {
         module2.init();
 
         module2.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, WindowsEntityType.CUSTOMER,
-                (Map<String, Object>) mom.map(createJaneDoe()), module.generateANewRequestId(), null, true);
+                (Map<String, Object>) mom.map(createJaneDoe()), null, true);
     }
 
     private Customer createJaneDoe() {

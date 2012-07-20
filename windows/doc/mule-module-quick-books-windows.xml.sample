@@ -4,7 +4,6 @@
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
                            authIdPseudonym="#[map-payload:authIdPseudonym]" 
                            type="#[map-payload:type]"
-                           requestId="#[map-payload:requestId]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]">
     <quickbooks-windows:obj ref="#[map-payload:obj]"/>
@@ -18,7 +17,6 @@
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
                            type="ACCOUNT"
-                           requestId="#[payload]"
                            draft="false"
                            fullResponse="true">
     <quickbooks-windows:obj>
@@ -40,7 +38,6 @@
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
                            type="CUSTOMER"
-                           requestId="#[payload]"
                            draft="false"
                            fullResponse="true">
     <quickbooks-windows:obj>
@@ -68,7 +65,6 @@
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
                            type="ITEM"
-                           requestId="#[payload]"
                            draft="false"
                            fullResponse="true">
     <quickbooks-windows:obj>
@@ -106,8 +102,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="PAYMENT"
-                           requestId="#[payload]">
+                           type="PAYMENT">
     <quickbooks-windows:obj>
          <header>#[groovy: [
              'docNumber' : '543216789',
@@ -135,8 +130,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="EMPLOYEE"
-                           requestId="#[payload]">
+                           type="EMPLOYEE">
     <quickbooks-windows:obj>
         <typeOf>PERSON</TypeOf>
         <name>John Simpson</Name>
@@ -168,8 +162,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="BILL"
-                           requestId="#[payload]">
+                           type="BILL">
     <quickbooks-windows:obj>
         <header>#[groovy: [
             'docNumber' : '1001',
@@ -201,8 +194,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="CHECK"
-                           requestId="#[payload]">
+                           type="CHECK">
     <quickbooks-windows:obj>
         <header>#[groovy: [ 
             'docNumber' : '33', 
@@ -227,8 +219,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="JOB"
-                           requestId="#[payload]">
+                           type="JOB">
     <quickbooks-windows:obj>
         <typeOf>PERSON</typeOf>
         <name>Bathroom Remodel</name>
@@ -252,7 +243,6 @@
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
                            authIdPseudonym="#[map-payload:authIdPseudonym]" 
                            type="#[map-payload:type]"
-                           requestId="#[map-payload:requestId]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]">
     <quickbooks-windows:obj ref="#[map-payload:obj]"/>
@@ -267,7 +257,6 @@
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
                            type="ACCOUNT"
-                           requestId="#[payload]"
                            draft="false"
                            fullResponse="true">
     <quickbooks-windows:obj>
@@ -302,7 +291,6 @@
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
                            type="CUSTOMER"
-                           requestId="#[payload]"
                            draft="false"
                            fullResponse="true">
     <quickbooks-windows:obj>
@@ -343,7 +331,6 @@
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
                            type="ITEM"
-                           requestId="#[payload]"
                            draft="false"
                            fullResponse="true">
     <quickbooks-windows:obj>
@@ -394,8 +381,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="PAYMENT"
-                           requestId="#[payload]">
+                           type="PAYMENT">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -436,8 +422,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="EMPLOYEE"
-                           requestId="#[payload]">
+                           type="EMPLOYEE">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -482,8 +467,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="BILL"
-                           requestId="#[payload]">
+                           type="BILL">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -528,8 +512,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="CHECK"
-                           requestId="#[payload]">
+                           type="CHECK">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -567,8 +550,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"                         
-                           type="JOB"
-                           requestId="#[payload]">
+                           type="JOB">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -604,8 +586,7 @@
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
                            authIdPseudonym="#[map-payload:authIdPseudonym]" 
-                           type="#[map-payload:type]"
-                           requestId="#[map-payload:requestId]">
+                           type="#[map-payload:type]">
     <quickbooks-windows:obj ref="#[map-payload:obj]"/>
             
 </quickbooks-windows:delete>
@@ -617,8 +598,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"
-                           type="ACCOUNT"
-                           requestId="#[payload]">
+                           type="ACCOUNT">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -651,8 +631,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"
-                           type="ACCOUNT"
-                           requestId="#[payload]">
+                           type="ACCOUNT">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -668,8 +647,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"
-                           type="CUSTOMER"
-                           requestId="#[payload]">
+                           type="CUSTOMER">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'
@@ -708,8 +686,7 @@
                            appKey="appKey"
                            realmIdPseudonym="reamIdPseudonym"
                            authIdPseudonym="authIdPseudonym"
-                           type="BILL"
-                           requestId="#[payload]">
+                           type="BILL">
     <quickbooks-windows:obj>
         <id>#[groovy: [
                 'value' : '4042'

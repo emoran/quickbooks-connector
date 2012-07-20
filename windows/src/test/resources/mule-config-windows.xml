@@ -33,7 +33,6 @@
 		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
 		                           type="#[map-payload:type]"
-		                           requestId="#[map-payload:requestId]"
 		                           draft="#[map-payload:draft]"
 		                           fullResponse="#[map-payload:fullResponse]"
 		                           entityObject-ref="#[payload]"/>
@@ -44,7 +43,6 @@
 		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
 		                           type="#[map-payload:type]"
-		                           requestId="#[map-payload:requestId]"
 		                           draft="#[map-payload:draft]"
 		                           fullResponse="#[map-payload:fullResponse]"
 		                           entityObject-ref="#[payload]"/>
@@ -55,7 +53,6 @@
 		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
 		                           type="#[map-payload:type]"
-		                           requestId="#[map-payload:requestId]"
 		                           entityObject-ref="#[payload]" />
 	</flow>
 	<flow name="get-object">
