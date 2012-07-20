@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="sebastiangramano" created="Thu Jul 19 19:33:46 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1342795539929" licenseCode="Unlicensed" licenseType="Unknown" modified="Thu Jul 19 19:33:46 GMT-03:00 2012" modifiedBy="sebastiangramano" name="updateAcc" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="Account" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/accountParentId/idDomain" label="idDomain" name="idDomain2" type="string"/>
+<Field __sourcePath="{}/object/accountParentId/value" label="value" name="value2" type="string"/>
+<Field __sourcePath="{}/object/accountParentName" label="accountParentName" name="accountParentName" type="string"/>
+<Field __sourcePath="{}/object/acctNum" label="acctNum" name="acctNum" type="string"/>
+<Field __sourcePath="{}/object/active" label="active" name="active" type="boolean"/>
+<Field __sourcePath="{}/object/bankNum" label="bankNum" name="bankNum" type="string"/>
+<Field __sourcePath="{}/object/currentBalance" label="currentBalance" name="currentBalance" type="decimal"/>
+<Field __sourcePath="{}/object/currentBalanceWithSubAccounts" label="currentBalanceWithSubAccounts" name="currentBalanceWithSubAccounts" type="decimal"/>
+<Field __sourcePath="{}/object/desc" label="desc" name="desc" type="string"/>
+<Field __sourcePath="{}/object/draft" label="draft" name="draft" type="boolean"/>
+<Field __sourcePath="{}/object/externalKey/idDomain" label="idDomain" name="idDomain3" type="string"/>
+<Field __sourcePath="{}/object/externalKey/value" label="value" name="value3" type="string"/>
+<Field __sourcePath="{}/object/id/idDomain" label="idDomain" name="idDomain4" type="string"/>
+<Field __sourcePath="{}/object/id/value" label="value" name="value4" type="string"/>
+<Field __sourcePath="{}/object/metaData/createTime/XMLSchemaType/localPart" label="localPart" name="localPart" type="string"/>
+<Field __sourcePath="{}/object/metaData/createTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI" type="string"/>
+<Field __sourcePath="{}/object/metaData/createTime/XMLSchemaType/prefix" label="prefix" name="prefix" type="string"/>
+<Field __sourcePath="{}/object/metaData/createTime/day" label="day" name="day" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/eon" label="eon" name="eon" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/eonAndYear" label="eonAndYear" name="eonAndYear" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond" type="decimal"/>
+<Field __sourcePath="{}/object/metaData/createTime/hour" label="hour" name="hour" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/millisecond" label="millisecond" name="millisecond" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/minute" label="minute" name="minute" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/month" label="month" name="month" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/second" label="second" name="second" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/timezone" label="timezone" name="timezone" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/valid" label="valid" name="valid" type="boolean"/>
+<Field __sourcePath="{}/object/metaData/createTime/year" label="year" name="year" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/XMLSchemaType/localPart" label="localPart" name="localPart2" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI2" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/XMLSchemaType/prefix" label="prefix" name="prefix2" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/day" label="day" name="day2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/eon" label="eon" name="eon2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/eonAndYear" label="eonAndYear" name="eonAndYear2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond2" type="decimal"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/hour" label="hour" name="hour2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/millisecond" label="millisecond" name="millisecond2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/minute" label="minute" name="minute2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/month" label="month" name="month2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/second" label="second" name="second2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/timezone" label="timezone" name="timezone2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/valid" label="valid" name="valid2" type="boolean"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/year" label="year" name="year2" type="integer"/>
+<Field __sourcePath="{}/object/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/objectState" label="objectState" name="objectState" type="string"/>
+<Field __sourcePath="{}/object/openingBalance" label="openingBalance" name="openingBalance" type="decimal"/>
+<Field __sourcePath="{}/object/openingBalanceDate" label="openingBalanceDate" name="openingBalanceDate" type="string"/>
+<Field __sourcePath="{}/object/routingNum" label="routingNum" name="routingNum" type="string"/>
+<Field __sourcePath="{}/object/subtype" label="subtype" name="subtype" type="string"/>
+<Field __sourcePath="{}/object/syncToken" label="syncToken" name="syncToken" type="string"/>
+<Field __sourcePath="{}/object/synchronized" label="synchronized" name="synchronized" type="boolean"/>
+<Field __sourcePath="{}/object/type" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="Metadata3">
+<Record fieldDelimiter="|" name="Account" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/accountParentId/idDomain" label="idDomain" name="idDomain2" type="string"/>
+<Field __sourcePath="{}/object/accountParentId/value" label="value" name="value2" type="string"/>
+<Field __sourcePath="{}/object/accountParentName" label="accountParentName" name="accountParentName" type="string"/>
+<Field __sourcePath="{}/object/acctNum" label="acctNum" name="acctNum" type="string"/>
+<Field __sourcePath="{}/object/active" label="active" name="active" type="boolean"/>
+<Field __sourcePath="{}/object/bankNum" label="bankNum" name="bankNum" type="string"/>
+<Field __sourcePath="{}/object/currentBalance" label="currentBalance" name="currentBalance" type="decimal"/>
+<Field __sourcePath="{}/object/currentBalanceWithSubAccounts" label="currentBalanceWithSubAccounts" name="currentBalanceWithSubAccounts" type="decimal"/>
+<Field __sourcePath="{}/object/desc" label="desc" name="desc" type="string"/>
+<Field __sourcePath="{}/object/draft" label="draft" name="draft" type="boolean"/>
+<Field __sourcePath="{}/object/externalKey/idDomain" label="idDomain" name="idDomain3" type="string"/>
+<Field __sourcePath="{}/object/externalKey/value" label="value" name="value3" type="string"/>
+<Field __sourcePath="{}/object/id/idDomain" label="idDomain" name="idDomain4" type="string"/>
+<Field __sourcePath="{}/object/id/value" label="value" name="value4" type="string"/>
+<Field __sourcePath="{}/object/metaData/createTime/day" label="day" name="day" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond" type="decimal"/>
+<Field __sourcePath="{}/object/metaData/createTime/hour" label="hour" name="hour" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/millisecond" label="millisecond" name="millisecond" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/minute" label="minute" name="minute" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/month" label="month" name="month" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/second" label="second" name="second" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/timezone" label="timezone" name="timezone" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime/year" label="year" name="year" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/day" label="day" name="day2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond2" type="decimal"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/hour" label="hour" name="hour2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/millisecond" label="millisecond" name="millisecond2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/minute" label="minute" name="minute2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/month" label="month" name="month2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/second" label="second" name="second2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/timezone" label="timezone" name="timezone2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime/year" label="year" name="year2" type="integer"/>
+<Field __sourcePath="{}/object/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/objectState" label="objectState" name="objectState" type="string"/>
+<Field __sourcePath="{}/object/openingBalance" label="openingBalance" name="openingBalance" type="decimal"/>
+<Field __sourcePath="{}/object/openingBalanceDate" label="openingBalanceDate" name="openingBalanceDate" type="string"/>
+<Field __sourcePath="{}/object/routingNum" label="routingNum" name="routingNum" type="string"/>
+<Field __sourcePath="{}/object/subtype" label="subtype" name="subtype" type="string"/>
+<Field __sourcePath="{}/object/syncToken" label="syncToken" name="syncToken" type="string"/>
+<Field __sourcePath="{}/object/synchronized" label="synchronized" name="synchronized" type="boolean"/>
+<Field __sourcePath="{}/object/type" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/customField" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="1" _type="Input" id="Metadata2">
+<Record fieldDelimiter="|" name="CustomField" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/customField/definitionId/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/customField/definitionId/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/customField/name" label="name" name="name" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="0" _type="Input" id="Metadata1">
+<Record fieldDelimiter="|" name="NameValue" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/alternateId/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/alternateId/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="Pojo READER" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="idDomain2" trim="true" xpath="accountParentId/idDomain"/>
+  <Mapping cloverField="value2" trim="true" xpath="accountParentId/value"/>
+  <Mapping cloverField="accountParentName" trim="true" xpath="accountParentName"/>
+  <Mapping cloverField="acctNum" trim="true" xpath="acctNum"/>
+  <Mapping cloverField="active" trim="true" xpath="active"/>
+  <Mapping cloverField="bankNum" trim="true" xpath="bankNum"/>
+  <Mapping cloverField="currentBalance" trim="true" xpath="currentBalance"/>
+  <Mapping cloverField="currentBalanceWithSubAccounts" trim="true" xpath="currentBalanceWithSubAccounts"/>
+  <Mapping cloverField="desc" trim="true" xpath="desc"/>
+  <Mapping cloverField="draft" trim="true" xpath="draft"/>
+  <Mapping cloverField="idDomain3" trim="true" xpath="externalKey/idDomain"/>
+  <Mapping cloverField="value3" trim="true" xpath="externalKey/value"/>
+  <Mapping cloverField="idDomain4" trim="true" xpath="id/idDomain"/>
+  <Mapping cloverField="value4" trim="true" xpath="id/value"/>
+  <Mapping cloverField="localPart" trim="true" xpath="metaData/createTime/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI" trim="true" xpath="metaData/createTime/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix" trim="true" xpath="metaData/createTime/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day" trim="true" xpath="metaData/createTime/day"/>
+  <Mapping cloverField="eon" trim="true" xpath="metaData/createTime/eon"/>
+  <Mapping cloverField="eonAndYear" trim="true" xpath="metaData/createTime/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond" trim="true" xpath="metaData/createTime/fractionalSecond"/>
+  <Mapping cloverField="hour" trim="true" xpath="metaData/createTime/hour"/>
+  <Mapping cloverField="millisecond" trim="true" xpath="metaData/createTime/millisecond"/>
+  <Mapping cloverField="minute" trim="true" xpath="metaData/createTime/minute"/>
+  <Mapping cloverField="month" trim="true" xpath="metaData/createTime/month"/>
+  <Mapping cloverField="second" trim="true" xpath="metaData/createTime/second"/>
+  <Mapping cloverField="timezone" trim="true" xpath="metaData/createTime/timezone"/>
+  <Mapping cloverField="valid" trim="true" xpath="metaData/createTime/valid"/>
+  <Mapping cloverField="year" trim="true" xpath="metaData/createTime/year"/>
+  <Mapping cloverField="createdBy" trim="true" xpath="metaData/createdBy"/>
+  <Mapping cloverField="createdById" trim="true" xpath="metaData/createdById"/>
+  <Mapping cloverField="lastModifiedBy" trim="true" xpath="metaData/lastModifiedBy"/>
+  <Mapping cloverField="lastModifiedById" trim="true" xpath="metaData/lastModifiedById"/>
+  <Mapping cloverField="localPart2" trim="true" xpath="metaData/lastUpdatedTime/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI2" trim="true" xpath="metaData/lastUpdatedTime/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix2" trim="true" xpath="metaData/lastUpdatedTime/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day2" trim="true" xpath="metaData/lastUpdatedTime/day"/>
+  <Mapping cloverField="eon2" trim="true" xpath="metaData/lastUpdatedTime/eon"/>
+  <Mapping cloverField="eonAndYear2" trim="true" xpath="metaData/lastUpdatedTime/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond2" trim="true" xpath="metaData/lastUpdatedTime/fractionalSecond"/>
+  <Mapping cloverField="hour2" trim="true" xpath="metaData/lastUpdatedTime/hour"/>
+  <Mapping cloverField="millisecond2" trim="true" xpath="metaData/lastUpdatedTime/millisecond"/>
+  <Mapping cloverField="minute2" trim="true" xpath="metaData/lastUpdatedTime/minute"/>
+  <Mapping cloverField="month2" trim="true" xpath="metaData/lastUpdatedTime/month"/>
+  <Mapping cloverField="second2" trim="true" xpath="metaData/lastUpdatedTime/second"/>
+  <Mapping cloverField="timezone2" trim="true" xpath="metaData/lastUpdatedTime/timezone"/>
+  <Mapping cloverField="valid2" trim="true" xpath="metaData/lastUpdatedTime/valid"/>
+  <Mapping cloverField="year2" trim="true" xpath="metaData/lastUpdatedTime/year"/>
+  <Mapping cloverField="name" trim="true" xpath="name"/>
+  <Mapping cloverField="objectState" trim="true" xpath="objectState"/>
+  <Mapping cloverField="openingBalance" trim="true" xpath="openingBalance"/>
+  <Mapping cloverField="openingBalanceDate" trim="true" xpath="openingBalanceDate"/>
+  <Mapping cloverField="routingNum" trim="true" xpath="routingNum"/>
+  <Mapping cloverField="subtype" trim="true" xpath="subtype"/>
+  <Mapping cloverField="syncToken" trim="true" xpath="syncToken"/>
+  <Mapping cloverField="synchronized" trim="true" xpath="synchronized"/>
+  <Mapping cloverField="type" trim="true" xpath="type"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.windows.schema.Account"/>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.NameValue">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="int"/>
+  <typed-object type="javax.xml.datatype.XMLGregorianCalendar">
+    <typed-object-ref name="XMLSchemaType" type-ref="javax.xml.namespace.QName"/>
+    <typed-object-ref name="day" type-ref="int"/>
+    <typed-object-ref name="eon" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="eonAndYear" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="fractionalSecond" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="hour" type-ref="int"/>
+    <typed-object-ref name="millisecond" type-ref="int"/>
+    <typed-object-ref name="minute" type-ref="int"/>
+    <typed-object-ref name="month" type-ref="int"/>
+    <typed-object-ref name="second" type-ref="int"/>
+    <typed-object-ref name="timezone" type-ref="int"/>
+    <typed-object-ref name="valid" type-ref="boolean"/>
+    <typed-object-ref name="year" type-ref="int"/>
+  </typed-object>
+  <typed-object type="javax.xml.namespace.QName">
+    <typed-object-ref name="localPart" type-ref="java.lang.String"/>
+    <typed-object-ref name="namespaceURI" type-ref="java.lang.String"/>
+    <typed-object-ref name="prefix" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.CustomField">
+    <typed-object-ref name="definitionId" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.ObjectStateEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.math.BigInteger"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.Account">
+    <typed-object-ref name="accountParentId" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="accountParentName" type-ref="java.lang.String"/>
+    <typed-object-ref name="acctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="active" type-ref="java.lang.Boolean"/>
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.windows.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="bankNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="currentBalance" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="currentBalanceWithSubAccounts" type-ref="java.math.BigDecimal"/>
+    <schema-collection name="customField" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.windows.schema.CustomField"/>
+    </schema-collection>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="draft" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.windows.schema.ModificationMetaData"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="objectState" type-ref="org.mule.modules.quickbooks.windows.schema.ObjectStateEnum"/>
+    <typed-object-ref name="openingBalance" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="openingBalanceDate" type-ref="java.lang.String"/>
+    <typed-object-ref name="routingNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="subtype" type-ref="java.lang.String"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="type" type-ref="org.mule.modules.quickbooks.windows.schema.AccountTypeEnum"/>
+  </typed-object>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.AccountTypeEnum"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="Pojo WRITER" guiWidth="0" guiX="680" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <accountParentId>
+    <idDomain>$0.idDomain2</idDomain>
+    <value>$0.value2</value>
+  </accountParentId>
+  <accountParentName>$0.accountParentName</accountParentName>
+  <acctNum>$0.acctNum</acctNum>
+  <active>$0.active</active>
+  <bankNum>$0.bankNum</bankNum>
+  <currentBalance>$0.currentBalance</currentBalance>
+  <currentBalanceWithSubAccounts>$0.currentBalanceWithSubAccounts</currentBalanceWithSubAccounts>
+  <desc>$0.desc</desc>
+  <draft>$0.draft</draft>
+  <externalKey>
+    <idDomain>$0.idDomain3</idDomain>
+    <value>$0.value3</value>
+  </externalKey>
+  <id>
+    <idDomain>$0.idDomain4</idDomain>
+    <value>$0.value4</value>
+  </id>
+  <metaData>
+    <createTime>
+      <day>$0.day</day>
+      <fractionalSecond>$0.fractionalSecond</fractionalSecond>
+      <hour>$0.hour</hour>
+      <millisecond>$0.millisecond</millisecond>
+      <minute>$0.minute</minute>
+      <month>$0.month</month>
+      <second>$0.second</second>
+      <timezone>$0.timezone</timezone>
+      <year>$0.year</year>
+    </createTime>
+    <createdBy>$0.createdBy</createdBy>
+    <createdById>$0.createdById</createdById>
+    <lastModifiedBy>$0.lastModifiedBy</lastModifiedBy>
+    <lastModifiedById>$0.lastModifiedById</lastModifiedById>
+    <lastUpdatedTime>
+      <day>$0.day2</day>
+      <fractionalSecond>$0.fractionalSecond2</fractionalSecond>
+      <hour>$0.hour2</hour>
+      <millisecond>$0.millisecond2</millisecond>
+      <minute>$0.minute2</minute>
+      <month>$0.month2</month>
+      <second>$0.second2</second>
+      <timezone>$0.timezone2</timezone>
+      <year>$0.year2</year>
+    </lastUpdatedTime>
+  </metaData>
+  <name>$0.name</name>
+  <objectState>$0.objectState</objectState>
+  <openingBalance>$0.openingBalance</openingBalance>
+  <openingBalanceDate>$0.openingBalanceDate</openingBalanceDate>
+  <routingNum>$0.routingNum</routingNum>
+  <subtype>$0.subtype</subtype>
+  <syncToken>$0.syncToken</syncToken>
+  <synchronized>$0.synchronized</synchronized>
+  <type>$0.type</type>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.windows.schema.Account"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="int"/>
+  <typed-object type="javax.xml.datatype.XMLGregorianCalendar">
+    <typed-object-ref name="day" type-ref="int"/>
+    <typed-object-ref name="fractionalSecond" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="hour" type-ref="int"/>
+    <typed-object-ref name="millisecond" type-ref="int"/>
+    <typed-object-ref name="minute" type-ref="int"/>
+    <typed-object-ref name="month" type-ref="int"/>
+    <typed-object-ref name="second" type-ref="int"/>
+    <typed-object-ref name="timezone" type-ref="int"/>
+    <typed-object-ref name="year" type-ref="int"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.Account">
+    <typed-object-ref name="accountParentId" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="accountParentName" type-ref="java.lang.String"/>
+    <typed-object-ref name="acctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="active" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="bankNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="currentBalance" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="currentBalanceWithSubAccounts" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="draft" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.windows.schema.ModificationMetaData"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="objectState" type-ref="org.mule.modules.quickbooks.windows.schema.ObjectStateEnum"/>
+    <typed-object-ref name="openingBalance" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="openingBalanceDate" type-ref="java.lang.String"/>
+    <typed-object-ref name="routingNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="subtype" type-ref="java.lang.String"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="type" type-ref="org.mule.modules.quickbooks.windows.schema.AccountTypeEnum"/>
+  </typed-object>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.ObjectStateEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.AccountTypeEnum"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="object_to_object" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.name = "Test Account Datamapper";
+	$out.0.__id=$in.0.__id;
+	$out.0.idDomain2=$in.0.idDomain2;
+	$out.0.value2=$in.0.value2;
+	$out.0.accountParentName=$in.0.accountParentName;
+	$out.0.acctNum=$in.0.acctNum;
+	$out.0.active=$in.0.active;
+	$out.0.bankNum=$in.0.bankNum;
+	$out.0.currentBalance=$in.0.currentBalance;
+	$out.0.currentBalanceWithSubAccounts=$in.0.currentBalanceWithSubAccounts;
+	$out.0.desc=$in.0.desc;
+	$out.0.draft=$in.0.draft;
+	$out.0.idDomain3=$in.0.idDomain3;
+	$out.0.value3=$in.0.value3;
+	$out.0.idDomain4=$in.0.idDomain4;
+	$out.0.value4=$in.0.value4;
+																								$out.0.objectState=$in.0.objectState;
+	$out.0.openingBalance=$in.0.openingBalance;
+	$out.0.openingBalanceDate=$in.0.openingBalanceDate;
+	$out.0.routingNum=$in.0.routingNum;
+	$out.0.subtype=$in.0.subtype;
+	$out.0.syncToken=$in.0.syncToken;
+	$out.0.synchronized=$in.0.synchronized;
+	$out.0.type=$in.0.type;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="Metadata3" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>
