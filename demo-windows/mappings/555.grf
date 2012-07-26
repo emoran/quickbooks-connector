@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Graph author="sebastiangramano" created="Thu Jul 19 19:33:46 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1342795539929" licenseCode="Unlicensed" licenseType="Unknown" modified="Thu Jul 19 19:33:46 GMT-03:00 2012" modifiedBy="sebastiangramano" name="updateAcc" revision="1.0" showComponentDetails="false">
+<Graph author="sebastiangramano" created="Thu Jul 26 16:48:59 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1343332201473" licenseCode="Unlicensed" licenseType="Unknown" modified="Thu Jul 26 16:48:59 GMT-03:00 2012" modifiedBy="sebastiangramano" name="555" revision="1.0" showComponentDetails="false">
 <Global>
 <Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
 <Record fieldDelimiter="|" name="Account" recordDelimiter="&#10;" type="delimited">
@@ -18,40 +18,12 @@
 <Field __sourcePath="{}/object/externalKey/value" label="value" name="value3" type="string"/>
 <Field __sourcePath="{}/object/id/idDomain" label="idDomain" name="idDomain4" type="string"/>
 <Field __sourcePath="{}/object/id/value" label="value" name="value4" type="string"/>
-<Field __sourcePath="{}/object/metaData/createTime/XMLSchemaType/localPart" label="localPart" name="localPart" type="string"/>
-<Field __sourcePath="{}/object/metaData/createTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI" type="string"/>
-<Field __sourcePath="{}/object/metaData/createTime/XMLSchemaType/prefix" label="prefix" name="prefix" type="string"/>
-<Field __sourcePath="{}/object/metaData/createTime/day" label="day" name="day" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/eon" label="eon" name="eon" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/eonAndYear" label="eonAndYear" name="eonAndYear" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond" type="decimal"/>
-<Field __sourcePath="{}/object/metaData/createTime/hour" label="hour" name="hour" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/millisecond" label="millisecond" name="millisecond" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/minute" label="minute" name="minute" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/month" label="month" name="month" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/second" label="second" name="second" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/timezone" label="timezone" name="timezone" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/valid" label="valid" name="valid" type="boolean"/>
-<Field __sourcePath="{}/object/metaData/createTime/year" label="year" name="year" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime" label="createTime" name="createTime" type="date"/>
 <Field __sourcePath="{}/object/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
 <Field __sourcePath="{}/object/metaData/createdById" label="createdById" name="createdById" type="string"/>
 <Field __sourcePath="{}/object/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
 <Field __sourcePath="{}/object/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/XMLSchemaType/localPart" label="localPart" name="localPart2" type="string"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI2" type="string"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/XMLSchemaType/prefix" label="prefix" name="prefix2" type="string"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/day" label="day" name="day2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/eon" label="eon" name="eon2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/eonAndYear" label="eonAndYear" name="eonAndYear2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond2" type="decimal"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/hour" label="hour" name="hour2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/millisecond" label="millisecond" name="millisecond2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/minute" label="minute" name="minute2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/month" label="month" name="month2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/second" label="second" name="second2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/timezone" label="timezone" name="timezone2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/valid" label="valid" name="valid2" type="boolean"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/year" label="year" name="year2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
 <Field __sourcePath="{}/object/name" label="name" name="name" type="string"/>
 <Field __sourcePath="{}/object/objectState" label="objectState" name="objectState" type="string"/>
 <Field __sourcePath="{}/object/openingBalance" label="openingBalance" name="openingBalance" type="decimal"/>
@@ -80,28 +52,12 @@
 <Field __sourcePath="{}/object/externalKey/value" label="value" name="value3" type="string"/>
 <Field __sourcePath="{}/object/id/idDomain" label="idDomain" name="idDomain4" type="string"/>
 <Field __sourcePath="{}/object/id/value" label="value" name="value4" type="string"/>
-<Field __sourcePath="{}/object/metaData/createTime/day" label="day" name="day" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond" type="decimal"/>
-<Field __sourcePath="{}/object/metaData/createTime/hour" label="hour" name="hour" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/millisecond" label="millisecond" name="millisecond" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/minute" label="minute" name="minute" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/month" label="month" name="month" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/second" label="second" name="second" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/timezone" label="timezone" name="timezone" type="integer"/>
-<Field __sourcePath="{}/object/metaData/createTime/year" label="year" name="year" type="integer"/>
+<Field __sourcePath="{}/object/metaData/createTime" label="createTime" name="createTime" type="date"/>
 <Field __sourcePath="{}/object/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
 <Field __sourcePath="{}/object/metaData/createdById" label="createdById" name="createdById" type="string"/>
 <Field __sourcePath="{}/object/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
 <Field __sourcePath="{}/object/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/day" label="day" name="day2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond2" type="decimal"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/hour" label="hour" name="hour2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/millisecond" label="millisecond" name="millisecond2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/minute" label="minute" name="minute2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/month" label="month" name="month2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/second" label="second" name="second2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/timezone" label="timezone" name="timezone2" type="integer"/>
-<Field __sourcePath="{}/object/metaData/lastUpdatedTime/year" label="year" name="year2" type="integer"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
 <Field __sourcePath="{}/object/name" label="name" name="name" type="string"/>
 <Field __sourcePath="{}/object/objectState" label="objectState" name="objectState" type="string"/>
 <Field __sourcePath="{}/object/openingBalance" label="openingBalance" name="openingBalance" type="decimal"/>
@@ -153,40 +109,12 @@
   <Mapping cloverField="value3" trim="true" xpath="externalKey/value"/>
   <Mapping cloverField="idDomain4" trim="true" xpath="id/idDomain"/>
   <Mapping cloverField="value4" trim="true" xpath="id/value"/>
-  <Mapping cloverField="localPart" trim="true" xpath="metaData/createTime/XMLSchemaType/localPart"/>
-  <Mapping cloverField="namespaceURI" trim="true" xpath="metaData/createTime/XMLSchemaType/namespaceURI"/>
-  <Mapping cloverField="prefix" trim="true" xpath="metaData/createTime/XMLSchemaType/prefix"/>
-  <Mapping cloverField="day" trim="true" xpath="metaData/createTime/day"/>
-  <Mapping cloverField="eon" trim="true" xpath="metaData/createTime/eon"/>
-  <Mapping cloverField="eonAndYear" trim="true" xpath="metaData/createTime/eonAndYear"/>
-  <Mapping cloverField="fractionalSecond" trim="true" xpath="metaData/createTime/fractionalSecond"/>
-  <Mapping cloverField="hour" trim="true" xpath="metaData/createTime/hour"/>
-  <Mapping cloverField="millisecond" trim="true" xpath="metaData/createTime/millisecond"/>
-  <Mapping cloverField="minute" trim="true" xpath="metaData/createTime/minute"/>
-  <Mapping cloverField="month" trim="true" xpath="metaData/createTime/month"/>
-  <Mapping cloverField="second" trim="true" xpath="metaData/createTime/second"/>
-  <Mapping cloverField="timezone" trim="true" xpath="metaData/createTime/timezone"/>
-  <Mapping cloverField="valid" trim="true" xpath="metaData/createTime/valid"/>
-  <Mapping cloverField="year" trim="true" xpath="metaData/createTime/year"/>
+  <Mapping cloverField="createTime" trim="true" xpath="metaData/createTime"/>
   <Mapping cloverField="createdBy" trim="true" xpath="metaData/createdBy"/>
   <Mapping cloverField="createdById" trim="true" xpath="metaData/createdById"/>
   <Mapping cloverField="lastModifiedBy" trim="true" xpath="metaData/lastModifiedBy"/>
   <Mapping cloverField="lastModifiedById" trim="true" xpath="metaData/lastModifiedById"/>
-  <Mapping cloverField="localPart2" trim="true" xpath="metaData/lastUpdatedTime/XMLSchemaType/localPart"/>
-  <Mapping cloverField="namespaceURI2" trim="true" xpath="metaData/lastUpdatedTime/XMLSchemaType/namespaceURI"/>
-  <Mapping cloverField="prefix2" trim="true" xpath="metaData/lastUpdatedTime/XMLSchemaType/prefix"/>
-  <Mapping cloverField="day2" trim="true" xpath="metaData/lastUpdatedTime/day"/>
-  <Mapping cloverField="eon2" trim="true" xpath="metaData/lastUpdatedTime/eon"/>
-  <Mapping cloverField="eonAndYear2" trim="true" xpath="metaData/lastUpdatedTime/eonAndYear"/>
-  <Mapping cloverField="fractionalSecond2" trim="true" xpath="metaData/lastUpdatedTime/fractionalSecond"/>
-  <Mapping cloverField="hour2" trim="true" xpath="metaData/lastUpdatedTime/hour"/>
-  <Mapping cloverField="millisecond2" trim="true" xpath="metaData/lastUpdatedTime/millisecond"/>
-  <Mapping cloverField="minute2" trim="true" xpath="metaData/lastUpdatedTime/minute"/>
-  <Mapping cloverField="month2" trim="true" xpath="metaData/lastUpdatedTime/month"/>
-  <Mapping cloverField="second2" trim="true" xpath="metaData/lastUpdatedTime/second"/>
-  <Mapping cloverField="timezone2" trim="true" xpath="metaData/lastUpdatedTime/timezone"/>
-  <Mapping cloverField="valid2" trim="true" xpath="metaData/lastUpdatedTime/valid"/>
-  <Mapping cloverField="year2" trim="true" xpath="metaData/lastUpdatedTime/year"/>
+  <Mapping cloverField="lastUpdatedTime" trim="true" xpath="metaData/lastUpdatedTime"/>
   <Mapping cloverField="name" trim="true" xpath="name"/>
   <Mapping cloverField="objectState" trim="true" xpath="objectState"/>
   <Mapping cloverField="openingBalance" trim="true" xpath="openingBalance"/>
@@ -202,52 +130,15 @@
 <attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <schema-object>
   <typed-object-ref type-ref="org.mule.modules.quickbooks.windows.schema.Account"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
   <typed-object type="java.lang.Boolean"/>
   <typed-object type="org.mule.modules.quickbooks.windows.schema.NameValue">
     <typed-object-ref name="name" type-ref="java.lang.String"/>
     <typed-object-ref name="value" type-ref="java.lang.String"/>
   </typed-object>
-  <typed-object type="int"/>
-  <typed-object type="javax.xml.datatype.XMLGregorianCalendar">
-    <typed-object-ref name="XMLSchemaType" type-ref="javax.xml.namespace.QName"/>
-    <typed-object-ref name="day" type-ref="int"/>
-    <typed-object-ref name="eon" type-ref="java.math.BigInteger"/>
-    <typed-object-ref name="eonAndYear" type-ref="java.math.BigInteger"/>
-    <typed-object-ref name="fractionalSecond" type-ref="java.math.BigDecimal"/>
-    <typed-object-ref name="hour" type-ref="int"/>
-    <typed-object-ref name="millisecond" type-ref="int"/>
-    <typed-object-ref name="minute" type-ref="int"/>
-    <typed-object-ref name="month" type-ref="int"/>
-    <typed-object-ref name="second" type-ref="int"/>
-    <typed-object-ref name="timezone" type-ref="int"/>
-    <typed-object-ref name="valid" type-ref="boolean"/>
-    <typed-object-ref name="year" type-ref="int"/>
-  </typed-object>
-  <typed-object type="javax.xml.namespace.QName">
-    <typed-object-ref name="localPart" type-ref="java.lang.String"/>
-    <typed-object-ref name="namespaceURI" type-ref="java.lang.String"/>
-    <typed-object-ref name="prefix" type-ref="java.lang.String"/>
-  </typed-object>
-  <typed-object type="java.lang.String"/>
-  <typed-object type="org.mule.modules.quickbooks.windows.schema.CustomField">
-    <typed-object-ref name="definitionId" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
-    <typed-object-ref name="name" type-ref="java.lang.String"/>
-  </typed-object>
-  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
-  <typed-object type="org.mule.modules.quickbooks.windows.schema.ModificationMetaData">
-    <typed-object-ref name="createTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
-    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
-    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
-    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
-    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
-    <typed-object-ref name="lastUpdatedTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
-  </typed-object>
-  <typed-object type="org.mule.modules.quickbooks.windows.schema.ObjectStateEnum"/>
-  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdType">
-    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
-    <typed-object-ref name="value" type-ref="java.lang.String"/>
-  </typed-object>
-  <typed-object type="java.math.BigInteger"/>
   <typed-object type="org.mule.modules.quickbooks.windows.schema.Account">
     <typed-object-ref name="accountParentId" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
     <typed-object-ref name="accountParentName" type-ref="java.lang.String"/>
@@ -277,8 +168,23 @@
     <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
     <typed-object-ref name="type" type-ref="org.mule.modules.quickbooks.windows.schema.AccountTypeEnum"/>
   </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.CustomField">
+    <typed-object-ref name="definitionId" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+  </typed-object>
   <typed-object type="java.math.BigDecimal"/>
-  <typed-object type="boolean"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="java.util.Date"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="java.util.Date"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.windows.schema.ObjectStateEnum"/>
   <typed-object type="org.mule.modules.quickbooks.windows.schema.AccountTypeEnum"/>
 </schema-object>
 ]]></attr>
@@ -307,32 +213,12 @@
     <value>$0.value4</value>
   </id>
   <metaData>
-    <createTime>
-      <day>$0.day</day>
-      <fractionalSecond>$0.fractionalSecond</fractionalSecond>
-      <hour>$0.hour</hour>
-      <millisecond>$0.millisecond</millisecond>
-      <minute>$0.minute</minute>
-      <month>$0.month</month>
-      <second>$0.second</second>
-      <timezone>$0.timezone</timezone>
-      <year>$0.year</year>
-    </createTime>
+    <createTime>$0.createTime</createTime>
     <createdBy>$0.createdBy</createdBy>
     <createdById>$0.createdById</createdById>
     <lastModifiedBy>$0.lastModifiedBy</lastModifiedBy>
     <lastModifiedById>$0.lastModifiedById</lastModifiedById>
-    <lastUpdatedTime>
-      <day>$0.day2</day>
-      <fractionalSecond>$0.fractionalSecond2</fractionalSecond>
-      <hour>$0.hour2</hour>
-      <millisecond>$0.millisecond2</millisecond>
-      <minute>$0.minute2</minute>
-      <month>$0.month2</month>
-      <second>$0.second2</second>
-      <timezone>$0.timezone2</timezone>
-      <year>$0.year2</year>
-    </lastUpdatedTime>
+    <lastUpdatedTime>$0.lastUpdatedTime</lastUpdatedTime>
   </metaData>
   <name>$0.name</name>
   <objectState>$0.objectState</objectState>
@@ -353,18 +239,6 @@
     <typed-object-ref name="value" type-ref="java.lang.String"/>
   </typed-object>
   <typed-object type="java.lang.Boolean"/>
-  <typed-object type="int"/>
-  <typed-object type="javax.xml.datatype.XMLGregorianCalendar">
-    <typed-object-ref name="day" type-ref="int"/>
-    <typed-object-ref name="fractionalSecond" type-ref="java.math.BigDecimal"/>
-    <typed-object-ref name="hour" type-ref="int"/>
-    <typed-object-ref name="millisecond" type-ref="int"/>
-    <typed-object-ref name="minute" type-ref="int"/>
-    <typed-object-ref name="month" type-ref="int"/>
-    <typed-object-ref name="second" type-ref="int"/>
-    <typed-object-ref name="timezone" type-ref="int"/>
-    <typed-object-ref name="year" type-ref="int"/>
-  </typed-object>
   <typed-object type="org.mule.modules.quickbooks.windows.schema.Account">
     <typed-object-ref name="accountParentId" type-ref="org.mule.modules.quickbooks.windows.schema.IdType"/>
     <typed-object-ref name="accountParentName" type-ref="java.lang.String"/>
@@ -390,13 +264,14 @@
   </typed-object>
   <typed-object type="java.math.BigDecimal"/>
   <typed-object type="java.lang.String"/>
+  <typed-object type="java.util.Date"/>
   <typed-object type="org.mule.modules.quickbooks.windows.schema.ModificationMetaData">
-    <typed-object-ref name="createTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="createTime" type-ref="java.util.Date"/>
     <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
     <typed-object-ref name="createdById" type-ref="java.lang.String"/>
     <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
     <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
-    <typed-object-ref name="lastUpdatedTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="java.util.Date"/>
   </typed-object>
   <typed-object type="org.mule.modules.quickbooks.windows.schema.IdDomainEnum"/>
   <typed-object type="org.mule.modules.quickbooks.windows.schema.ObjectStateEnum"/>
@@ -409,8 +284,7 @@
 
 // Transforms input record into output record.
 function integer transform() {
-	$out.0.name = "Test Account Datamapper";
-	$out.0.__id=$in.0.__id;
+$out.0.__id=$in.0.__id;
 	$out.0.idDomain2=$in.0.idDomain2;
 	$out.0.value2=$in.0.value2;
 	$out.0.accountParentName=$in.0.accountParentName;
@@ -425,7 +299,14 @@ function integer transform() {
 	$out.0.value3=$in.0.value3;
 	$out.0.idDomain4=$in.0.idDomain4;
 	$out.0.value4=$in.0.value4;
-																								$out.0.objectState=$in.0.objectState;
+	$out.0.createTime=$in.0.createTime;
+	$out.0.createdBy=$in.0.createdBy;
+	$out.0.createdById=$in.0.createdById;
+	$out.0.lastModifiedBy=$in.0.lastModifiedBy;
+	$out.0.lastModifiedById=$in.0.lastModifiedById;
+	$out.0.lastUpdatedTime=$in.0.lastUpdatedTime;
+	$out.0.name=$in.0.name;
+	$out.0.objectState=$in.0.objectState;
 	$out.0.openingBalance=$in.0.openingBalance;
 	$out.0.openingBalanceDate=$in.0.openingBalanceDate;
 	$out.0.routingNum=$in.0.routingNum;
