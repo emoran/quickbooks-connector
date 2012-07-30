@@ -55,7 +55,7 @@ import org.mule.modules.quickbooks.online.schema.IdType;
  * Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_5462311_quickbooks-accounting-tutorial.html#ixzz1csaydwxl
  * @author MuleSoft, inc.
  */
-@Module(name = "quickbooks", schemaVersion= "2.0")
+@Module(name = "quickbooks-online", schemaVersion= "2.0", friendlyName = "Quickbooks Online")
 public class QuickBooksModule
 {   
     /**
