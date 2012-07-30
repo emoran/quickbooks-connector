@@ -21,52 +21,6 @@
 	<build>
 	   <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>schema-windows-xjc</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                        <configuration>
-                            <staleFile>${project.build.directory}/jaxb2/.schemaWindowsXjcStaleFlag</staleFile>
-                            <enableIntrospection>true</enableIntrospection>
-                            <packageName>org.mule.modules.quickbooks.windows.schema</packageName>
-                            <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
-                            <schemaFiles>
-                                ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,
-                                IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd
-                            </schemaFiles>
-                            <extension>true</extension>
-                            <bindingDirectory>src/main/resources/schema/windows</bindingDirectory>
-                            <bindingFiles>GlobalBindings.xjb</bindingFiles>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>schema-online-xjc</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-	                    <configuration>
-	                        <staleFile>${project.build.directory}/jaxb2/.schemaOnlineXjcStaleFlag</staleFile>
-		                    <enableIntrospection>true</enableIntrospection>
-		                    <packageName>org.mule.modules.quickbooks.online.schema</packageName>
-		                    <schemaDirectory>src/main/resources/schema/online</schemaDirectory>
-		                    <schemaFiles>
-		                        CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitBaseExceptionTypes.xsd, 
-		                        IntuitCdmBaseTypes.xsd,IntuitCustomFieldCdmTypes.xsd,PartyCdmTypes.xsd,QboReports.xsd,qbo.xsd,qbopayroll.xsd
-		                    </schemaFiles>
-		                    <bindingDirectory>src/main/resources/schema/online</bindingDirectory>
-		                    <bindingFiles>GlobalBindings.xjb</bindingFiles>
-		                    <extension>true</extension>
-		                    <nv>true</nv>
-		                    <clearOutputDir>false</clearOutputDir>
-	                    </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.mule.tools.devkit</groupId>
                 <artifactId>mule-devkit-maven-plugin</artifactId>
                 <configuration>

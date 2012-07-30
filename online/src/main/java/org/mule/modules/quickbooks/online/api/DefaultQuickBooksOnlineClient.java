@@ -27,11 +27,11 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
 import org.mule.modules.quickbooks.api.AbstractQuickBooksClient;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
+import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
-import org.mule.modules.quickbooks.online.schema.FaultInfo;
 import org.mule.modules.quickbooks.online.schema.IdType;
 import org.mule.modules.quickbooks.online.schema.QboUser;
 import org.mule.modules.quickbooks.online.schema.SearchResults;
@@ -448,11 +448,11 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     }
 
     @Override
-    protected FaultInfo getFaultInfo(String str) throws JAXBException
+    protected ExceptionInfo getFaultInfo(String str) throws JAXBException
     {
         //This use of the QBWMessageUtils is because, in QBW it's not defined FaultInfo, 
         //but if the tokens expired of if they are wrong, they send us this object.
-        return (FaultInfo) getMessageUtilsInstance().parseResponse(str);
+        return new ExceptionInfo(getMessageUtilsInstance().parseResponse(str));
     }
     
     @Override
