@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="josesahad" created="Fri Jul 13 11:20:01 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1342190161081" licenseCode="Unlicensed" licenseType="Unknown" modified="Fri Jul 13 11:20:01 GMT-03:00 2012" modifiedBy="josesahad" name="Check" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/object/check/line" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="1" _type="Input" id="Metadata2">
+<Record fieldDelimiter="|" name="CheckLine" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/check/line/UOMAbbrv" label="UOMAbbrv" name="UOMAbbrv" type="string"/>
+<Field __sourcePath="{}/object/check/line/UOMId/idDomain" label="idDomain" name="idDomain7" type="string"/>
+<Field __sourcePath="{}/object/check/line/UOMId/value" label="value" name="value7" type="string"/>
+<Field __sourcePath="{}/object/check/line/accountId/idDomain" label="idDomain" name="idDomain8" type="string"/>
+<Field __sourcePath="{}/object/check/line/accountId/value" label="value" name="value8" type="string"/>
+<Field __sourcePath="{}/object/check/line/accountName" label="accountName" name="accountName" type="string"/>
+<Field __sourcePath="{}/object/check/line/accountType" label="accountType" name="accountType" type="string"/>
+<Field __sourcePath="{}/object/check/line/amount" label="amount" name="amount" type="decimal"/>
+<Field __sourcePath="{}/object/check/line/billableStatus" label="billableStatus" name="billableStatus" type="string"/>
+<Field __sourcePath="{}/object/check/line/classId/idDomain" label="idDomain" name="idDomain9" type="string"/>
+<Field __sourcePath="{}/object/check/line/classId/value" label="value" name="value9" type="string"/>
+<Field __sourcePath="{}/object/check/line/className" label="className" name="className" type="string"/>
+<Field __sourcePath="{}/object/check/line/desc" label="desc" name="desc" type="string"/>
+<Field __sourcePath="{}/object/check/line/id/idDomain" label="idDomain" name="idDomain10" type="string"/>
+<Field __sourcePath="{}/object/check/line/id/value" label="value" name="value10" type="string"/>
+<Field __sourcePath="{}/object/check/line/itemId/idDomain" label="idDomain" name="idDomain11" type="string"/>
+<Field __sourcePath="{}/object/check/line/itemId/value" label="value" name="value11" type="string"/>
+<Field __sourcePath="{}/object/check/line/itemName" label="itemName" name="itemName" type="string"/>
+<Field __sourcePath="{}/object/check/line/itemType" label="itemType" name="itemType" type="string"/>
+<Field __sourcePath="{}/object/check/line/overrideItemAccountId/idDomain" label="idDomain" name="idDomain12" type="string"/>
+<Field __sourcePath="{}/object/check/line/overrideItemAccountId/value" label="value" name="value12" type="string"/>
+<Field __sourcePath="{}/object/check/line/overrideItemAccountName" label="overrideItemAccountName" name="overrideItemAccountName" type="string"/>
+<Field __sourcePath="{}/object/check/line/qty" label="qty" name="qty" type="decimal"/>
+<Field __sourcePath="{}/object/check/line/reimbursableInfo/customerId/idDomain" label="idDomain" name="idDomain13" type="string"/>
+<Field __sourcePath="{}/object/check/line/reimbursableInfo/customerId/value" label="value" name="value13" type="string"/>
+<Field __sourcePath="{}/object/check/line/reimbursableInfo/customerName" label="customerName" name="customerName" type="string"/>
+<Field __sourcePath="{}/object/check/line/reimbursableInfo/jobId/idDomain" label="idDomain" name="idDomain14" type="string"/>
+<Field __sourcePath="{}/object/check/line/reimbursableInfo/jobId/value" label="value" name="value14" type="string"/>
+<Field __sourcePath="{}/object/check/line/reimbursableInfo/jobName" label="jobName" name="jobName" type="string"/>
+<Field __sourcePath="{}/object/check/line/unitPrice" label="unitPrice" name="unitPrice" type="decimal"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/check/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="0" _type="Input" id="Metadata1">
+<Record fieldDelimiter="|" name="NameValue" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/check/alternateId/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/check/alternateId/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="QBCheck" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/check/externalKey/idDomain" label="idDomain" name="idDomain5" type="string"/>
+<Field __sourcePath="{}/object/check/externalKey/value" label="value" name="value5" type="string"/>
+<Field __sourcePath="{}/object/check/header/bankAccountId/idDomain" label="idDomain" name="idDomain6" type="string"/>
+<Field __sourcePath="{}/object/check/header/bankAccountId/value" label="value" name="value6" type="string"/>
+<Field __sourcePath="{}/object/check/header/bankAccountName" label="bankAccountName" name="bankAccountName" type="string"/>
+<Field __sourcePath="{}/object/check/header/currency" label="currency" name="currency" type="string"/>
+<Field __sourcePath="{}/object/check/header/docNumber" label="docNumber" name="docNumber" type="string"/>
+<Field __sourcePath="{}/object/check/header/entityId/idDomain" label="idDomain" name="idDomain7" type="string"/>
+<Field __sourcePath="{}/object/check/header/entityId/value" label="value" name="value7" type="string"/>
+<Field __sourcePath="{}/object/check/header/entityName" label="entityName" name="entityName" type="string"/>
+<Field __sourcePath="{}/object/check/header/entityType" label="entityType" name="entityType" type="string"/>
+<Field __sourcePath="{}/object/check/header/msg" label="msg" name="msg" type="string"/>
+<Field __sourcePath="{}/object/check/header/note" label="note" name="note" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/city" label="city" name="city" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/country" label="country" name="country" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/countryCode" label="countryCode" name="countryCode" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/countrySubDivisionCode" label="countrySubDivisionCode" name="countrySubDivisionCode" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/county" label="county" name="county" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/countyCode" label="countyCode" name="countyCode" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/XMLSchemaType/localPart" label="localPart" name="localPart3" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI3" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/XMLSchemaType/prefix" label="prefix" name="prefix3" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/day" label="day" name="day3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/eon" label="eon" name="eon3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/eonAndYear" label="eonAndYear" name="eonAndYear3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/fractionalSecond" label="fractionalSecond" name="fractionalSecond3" type="decimal"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/hour" label="hour" name="hour3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/millisecond" label="millisecond" name="millisecond3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/minute" label="minute" name="minute3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/month" label="month" name="month3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/second" label="second" name="second3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/timezone" label="timezone" name="timezone3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/valid" label="valid" name="valid3" type="boolean"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/dateLastVerified/year" label="year" name="year3" type="integer"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/geoCode" label="geoCode" name="geoCode" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/id/idDomain" label="idDomain" name="idDomain8" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/id/value" label="value" name="value8" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/line1" label="line1" name="line1" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/line2" label="line2" name="line2" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/line3" label="line3" name="line3" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/line4" label="line4" name="line4" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/line5" label="line5" name="line5" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/postalCode" label="postalCode" name="postalCode" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/postalCodeSuffix" label="postalCodeSuffix" name="postalCodeSuffix" type="string"/>
+<Field __sourcePath="{}/object/check/header/payeeAddr/tag" containerType="list" label="tag" name="tag" type="string"/>
+<Field __sourcePath="{}/object/check/header/status" label="status" name="status" type="string"/>
+<Field __sourcePath="{}/object/check/header/totalAmt" label="totalAmt" name="totalAmt" type="decimal"/>
+<Field __sourcePath="{}/object/check/header/txnDate/XMLSchemaType/localPart" label="localPart" name="localPart4" type="string"/>
+<Field __sourcePath="{}/object/check/header/txnDate/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI4" type="string"/>
+<Field __sourcePath="{}/object/check/header/txnDate/XMLSchemaType/prefix" label="prefix" name="prefix4" type="string"/>
+<Field __sourcePath="{}/object/check/header/txnDate/day" label="day" name="day4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/eon" label="eon" name="eon4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/eonAndYear" label="eonAndYear" name="eonAndYear4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/fractionalSecond" label="fractionalSecond" name="fractionalSecond4" type="decimal"/>
+<Field __sourcePath="{}/object/check/header/txnDate/hour" label="hour" name="hour4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/millisecond" label="millisecond" name="millisecond4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/minute" label="minute" name="minute4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/month" label="month" name="month4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/second" label="second" name="second4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/timezone" label="timezone" name="timezone4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnDate/valid" label="valid" name="valid4" type="boolean"/>
+<Field __sourcePath="{}/object/check/header/txnDate/year" label="year" name="year4" type="integer"/>
+<Field __sourcePath="{}/object/check/header/txnId/idDomain" label="idDomain" name="idDomain9" type="string"/>
+<Field __sourcePath="{}/object/check/header/txnId/value" label="value" name="value9" type="string"/>
+<Field __sourcePath="{}/object/check/header/txnNum" label="txnNum" name="txnNum" type="string"/>
+<Field __sourcePath="{}/object/check/id/idDomain" label="idDomain" name="idDomain10" type="string"/>
+<Field __sourcePath="{}/object/check/id/value" label="value" name="value10" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/XMLSchemaType/localPart" label="localPart" name="localPart5" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI5" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/XMLSchemaType/prefix" label="prefix" name="prefix5" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/day" label="day" name="day5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/eon" label="eon" name="eon5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/eonAndYear" label="eonAndYear" name="eonAndYear5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond5" type="decimal"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/hour" label="hour" name="hour5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/millisecond" label="millisecond" name="millisecond5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/minute" label="minute" name="minute5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/month" label="month" name="month5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/second" label="second" name="second5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/timezone" label="timezone" name="timezone5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/valid" label="valid" name="valid5" type="boolean"/>
+<Field __sourcePath="{}/object/check/metaData/createTime/year" label="year" name="year5" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/XMLSchemaType/localPart" label="localPart" name="localPart6" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/XMLSchemaType/namespaceURI" label="namespaceURI" name="namespaceURI6" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/XMLSchemaType/prefix" label="prefix" name="prefix6" type="string"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/day" label="day" name="day6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/eon" label="eon" name="eon6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/eonAndYear" label="eonAndYear" name="eonAndYear6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/fractionalSecond" label="fractionalSecond" name="fractionalSecond6" type="decimal"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/hour" label="hour" name="hour6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/millisecond" label="millisecond" name="millisecond6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/minute" label="minute" name="minute6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/month" label="month" name="month6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/second" label="second" name="second6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/timezone" label="timezone" name="timezone6" type="integer"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/valid" label="valid" name="valid6" type="boolean"/>
+<Field __sourcePath="{}/object/check/metaData/lastUpdatedTime/year" label="year" name="year6" type="integer"/>
+<Field __sourcePath="{}/object/check/syncToken" label="syncToken" name="syncToken" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="Metadata3">
+<Record fieldDelimiter="|" name="QBIdType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/idType/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/idType/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="JAVA Reader" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="idDomain5" trim="true" xpath="check/externalKey/idDomain"/>
+  <Mapping cloverField="value5" trim="true" xpath="check/externalKey/value"/>
+  <Mapping cloverField="idDomain6" trim="true" xpath="check/header/bankAccountId/idDomain"/>
+  <Mapping cloverField="value6" trim="true" xpath="check/header/bankAccountId/value"/>
+  <Mapping cloverField="bankAccountName" trim="true" xpath="check/header/bankAccountName"/>
+  <Mapping cloverField="currency" trim="true" xpath="check/header/currency"/>
+  <Mapping cloverField="docNumber" trim="true" xpath="check/header/docNumber"/>
+  <Mapping cloverField="idDomain7" trim="true" xpath="check/header/entityId/idDomain"/>
+  <Mapping cloverField="value7" trim="true" xpath="check/header/entityId/value"/>
+  <Mapping cloverField="entityName" trim="true" xpath="check/header/entityName"/>
+  <Mapping cloverField="entityType" trim="true" xpath="check/header/entityType"/>
+  <Mapping cloverField="msg" trim="true" xpath="check/header/msg"/>
+  <Mapping cloverField="note" trim="true" xpath="check/header/note"/>
+  <Mapping cloverField="city" trim="true" xpath="check/header/payeeAddr/city"/>
+  <Mapping cloverField="country" trim="true" xpath="check/header/payeeAddr/country"/>
+  <Mapping cloverField="countryCode" trim="true" xpath="check/header/payeeAddr/countryCode"/>
+  <Mapping cloverField="countrySubDivisionCode" trim="true" xpath="check/header/payeeAddr/countrySubDivisionCode"/>
+  <Mapping cloverField="county" trim="true" xpath="check/header/payeeAddr/county"/>
+  <Mapping cloverField="countyCode" trim="true" xpath="check/header/payeeAddr/countyCode"/>
+  <Mapping cloverField="localPart3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/day"/>
+  <Mapping cloverField="eon3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/eon"/>
+  <Mapping cloverField="eonAndYear3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/fractionalSecond"/>
+  <Mapping cloverField="hour3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/hour"/>
+  <Mapping cloverField="millisecond3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/millisecond"/>
+  <Mapping cloverField="minute3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/minute"/>
+  <Mapping cloverField="month3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/month"/>
+  <Mapping cloverField="second3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/second"/>
+  <Mapping cloverField="timezone3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/timezone"/>
+  <Mapping cloverField="valid3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/valid"/>
+  <Mapping cloverField="year3" trim="true" xpath="check/header/payeeAddr/dateLastVerified/year"/>
+  <Mapping cloverField="geoCode" trim="true" xpath="check/header/payeeAddr/geoCode"/>
+  <Mapping cloverField="idDomain8" trim="true" xpath="check/header/payeeAddr/id/idDomain"/>
+  <Mapping cloverField="value8" trim="true" xpath="check/header/payeeAddr/id/value"/>
+  <Mapping cloverField="line1" trim="true" xpath="check/header/payeeAddr/line1"/>
+  <Mapping cloverField="line2" trim="true" xpath="check/header/payeeAddr/line2"/>
+  <Mapping cloverField="line3" trim="true" xpath="check/header/payeeAddr/line3"/>
+  <Mapping cloverField="line4" trim="true" xpath="check/header/payeeAddr/line4"/>
+  <Mapping cloverField="line5" trim="true" xpath="check/header/payeeAddr/line5"/>
+  <Mapping cloverField="postalCode" trim="true" xpath="check/header/payeeAddr/postalCode"/>
+  <Mapping cloverField="postalCodeSuffix" trim="true" xpath="check/header/payeeAddr/postalCodeSuffix"/>
+  <Mapping cloverField="tag" trim="true" xpath="check/header/payeeAddr/tag"/>
+  <Mapping cloverField="status" trim="true" xpath="check/header/status"/>
+  <Mapping cloverField="totalAmt" trim="true" xpath="check/header/totalAmt"/>
+  <Mapping cloverField="localPart4" trim="true" xpath="check/header/txnDate/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI4" trim="true" xpath="check/header/txnDate/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix4" trim="true" xpath="check/header/txnDate/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day4" trim="true" xpath="check/header/txnDate/day"/>
+  <Mapping cloverField="eon4" trim="true" xpath="check/header/txnDate/eon"/>
+  <Mapping cloverField="eonAndYear4" trim="true" xpath="check/header/txnDate/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond4" trim="true" xpath="check/header/txnDate/fractionalSecond"/>
+  <Mapping cloverField="hour4" trim="true" xpath="check/header/txnDate/hour"/>
+  <Mapping cloverField="millisecond4" trim="true" xpath="check/header/txnDate/millisecond"/>
+  <Mapping cloverField="minute4" trim="true" xpath="check/header/txnDate/minute"/>
+  <Mapping cloverField="month4" trim="true" xpath="check/header/txnDate/month"/>
+  <Mapping cloverField="second4" trim="true" xpath="check/header/txnDate/second"/>
+  <Mapping cloverField="timezone4" trim="true" xpath="check/header/txnDate/timezone"/>
+  <Mapping cloverField="valid4" trim="true" xpath="check/header/txnDate/valid"/>
+  <Mapping cloverField="year4" trim="true" xpath="check/header/txnDate/year"/>
+  <Mapping cloverField="idDomain9" trim="true" xpath="check/header/txnId/idDomain"/>
+  <Mapping cloverField="value9" trim="true" xpath="check/header/txnId/value"/>
+  <Mapping cloverField="txnNum" trim="true" xpath="check/header/txnNum"/>
+  <Mapping cloverField="idDomain10" trim="true" xpath="check/id/idDomain"/>
+  <Mapping cloverField="value10" trim="true" xpath="check/id/value"/>
+  <Mapping cloverField="localPart5" trim="true" xpath="check/metaData/createTime/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI5" trim="true" xpath="check/metaData/createTime/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix5" trim="true" xpath="check/metaData/createTime/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day5" trim="true" xpath="check/metaData/createTime/day"/>
+  <Mapping cloverField="eon5" trim="true" xpath="check/metaData/createTime/eon"/>
+  <Mapping cloverField="eonAndYear5" trim="true" xpath="check/metaData/createTime/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond5" trim="true" xpath="check/metaData/createTime/fractionalSecond"/>
+  <Mapping cloverField="hour5" trim="true" xpath="check/metaData/createTime/hour"/>
+  <Mapping cloverField="millisecond5" trim="true" xpath="check/metaData/createTime/millisecond"/>
+  <Mapping cloverField="minute5" trim="true" xpath="check/metaData/createTime/minute"/>
+  <Mapping cloverField="month5" trim="true" xpath="check/metaData/createTime/month"/>
+  <Mapping cloverField="second5" trim="true" xpath="check/metaData/createTime/second"/>
+  <Mapping cloverField="timezone5" trim="true" xpath="check/metaData/createTime/timezone"/>
+  <Mapping cloverField="valid5" trim="true" xpath="check/metaData/createTime/valid"/>
+  <Mapping cloverField="year5" trim="true" xpath="check/metaData/createTime/year"/>
+  <Mapping cloverField="createdBy" trim="true" xpath="check/metaData/createdBy"/>
+  <Mapping cloverField="createdById" trim="true" xpath="check/metaData/createdById"/>
+  <Mapping cloverField="lastModifiedBy" trim="true" xpath="check/metaData/lastModifiedBy"/>
+  <Mapping cloverField="lastModifiedById" trim="true" xpath="check/metaData/lastModifiedById"/>
+  <Mapping cloverField="localPart6" trim="true" xpath="check/metaData/lastUpdatedTime/XMLSchemaType/localPart"/>
+  <Mapping cloverField="namespaceURI6" trim="true" xpath="check/metaData/lastUpdatedTime/XMLSchemaType/namespaceURI"/>
+  <Mapping cloverField="prefix6" trim="true" xpath="check/metaData/lastUpdatedTime/XMLSchemaType/prefix"/>
+  <Mapping cloverField="day6" trim="true" xpath="check/metaData/lastUpdatedTime/day"/>
+  <Mapping cloverField="eon6" trim="true" xpath="check/metaData/lastUpdatedTime/eon"/>
+  <Mapping cloverField="eonAndYear6" trim="true" xpath="check/metaData/lastUpdatedTime/eonAndYear"/>
+  <Mapping cloverField="fractionalSecond6" trim="true" xpath="check/metaData/lastUpdatedTime/fractionalSecond"/>
+  <Mapping cloverField="hour6" trim="true" xpath="check/metaData/lastUpdatedTime/hour"/>
+  <Mapping cloverField="millisecond6" trim="true" xpath="check/metaData/lastUpdatedTime/millisecond"/>
+  <Mapping cloverField="minute6" trim="true" xpath="check/metaData/lastUpdatedTime/minute"/>
+  <Mapping cloverField="month6" trim="true" xpath="check/metaData/lastUpdatedTime/month"/>
+  <Mapping cloverField="second6" trim="true" xpath="check/metaData/lastUpdatedTime/second"/>
+  <Mapping cloverField="timezone6" trim="true" xpath="check/metaData/lastUpdatedTime/timezone"/>
+  <Mapping cloverField="valid6" trim="true" xpath="check/metaData/lastUpdatedTime/valid"/>
+  <Mapping cloverField="year6" trim="true" xpath="check/metaData/lastUpdatedTime/year"/>
+  <Mapping cloverField="syncToken" trim="true" xpath="check/syncToken"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.model.QBCheck"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.BillableStatusEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.EntityTypeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CheckLine">
+    <typed-object-ref name="UOMAbbrv" type-ref="java.lang.String"/>
+    <typed-object-ref name="UOMId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="accountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="accountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="accountType" type-ref="org.mule.modules.quickbooks.online.schema.AccountTypeEnum"/>
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="billableStatus" type-ref="org.mule.modules.quickbooks.online.schema.BillableStatusEnum"/>
+    <typed-object-ref name="classId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="className" type-ref="java.lang.String"/>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="itemId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="itemName" type-ref="java.lang.String"/>
+    <typed-object-ref name="itemType" type-ref="org.mule.modules.quickbooks.online.schema.ItemTypeEnum"/>
+    <typed-object-ref name="overrideItemAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="overrideItemAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="qty" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="reimbursableInfo" type-ref="org.mule.modules.quickbooks.online.schema.ReimbursableInfo"/>
+    <typed-object-ref name="unitPrice" type-ref="java.math.BigDecimal"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Check">
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="header" type-ref="org.mule.modules.quickbooks.online.schema.CheckHeader"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="line" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.CheckLine"/>
+    </schema-collection>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="int"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+  </typed-object>
+  <typed-object type="javax.xml.datatype.XMLGregorianCalendar">
+    <typed-object-ref name="XMLSchemaType" type-ref="javax.xml.namespace.QName"/>
+    <typed-object-ref name="day" type-ref="int"/>
+    <typed-object-ref name="eon" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="eonAndYear" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="fractionalSecond" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="hour" type-ref="int"/>
+    <typed-object-ref name="millisecond" type-ref="int"/>
+    <typed-object-ref name="minute" type-ref="int"/>
+    <typed-object-ref name="month" type-ref="int"/>
+    <typed-object-ref name="second" type-ref="int"/>
+    <typed-object-ref name="timezone" type-ref="int"/>
+    <typed-object-ref name="valid" type-ref="boolean"/>
+    <typed-object-ref name="year" type-ref="int"/>
+  </typed-object>
+  <typed-object type="javax.xml.namespace.QName">
+    <typed-object-ref name="localPart" type-ref="java.lang.String"/>
+    <typed-object-ref name="namespaceURI" type-ref="java.lang.String"/>
+    <typed-object-ref name="prefix" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PhysicalAddress">
+    <typed-object-ref name="city" type-ref="java.lang.String"/>
+    <typed-object-ref name="country" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countrySubDivisionCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="county" type-ref="java.lang.String"/>
+    <typed-object-ref name="countyCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="geoCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="line1" type-ref="java.lang.String"/>
+    <typed-object-ref name="line2" type-ref="java.lang.String"/>
+    <typed-object-ref name="line3" type-ref="java.lang.String"/>
+    <typed-object-ref name="line4" type-ref="java.lang.String"/>
+    <typed-object-ref name="line5" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCodeSuffix" type-ref="java.lang.String"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.AccountTypeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ItemTypeEnum"/>
+  <typed-object type="java.math.BigInteger"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.NameValue">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.model.QBCheck">
+    <typed-object-ref name="check" type-ref="org.mule.modules.quickbooks.online.schema.Check"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CheckHeader">
+    <typed-object-ref name="bankAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="bankAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="currency" type-ref="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+    <typed-object-ref name="docNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="entityId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="entityName" type-ref="java.lang.String"/>
+    <typed-object-ref name="entityType" type-ref="org.mule.modules.quickbooks.online.schema.EntityTypeEnum"/>
+    <typed-object-ref name="msg" type-ref="java.lang.String"/>
+    <typed-object-ref name="note" type-ref="java.lang.String"/>
+    <typed-object-ref name="payeeAddr" type-ref="org.mule.modules.quickbooks.online.schema.PhysicalAddress"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+    <typed-object-ref name="totalAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="txnDate" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="txnId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="txnNum" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ReimbursableInfo">
+    <typed-object-ref name="customerId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="customerName" type-ref="java.lang.String"/>
+    <typed-object-ref name="jobId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="jobName" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="JAVA Writer" guiWidth="0" guiX="460" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <idType>
+    <idDomain>$0.idDomain</idDomain>
+    <value>$0.value</value>
+  </idType>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.model.QBIdType"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.model.QBIdType">
+    <typed-object-ref name="idType" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="object_to_object" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.value = $in.0.value10;
+	$out.0.idDomain = $in.0.idDomain10;
+$out.0.__id=$in.0.__id;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="Metadata3" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>

@@ -14,47 +14,12 @@
     
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<joda.time.version>1.6</joda.time.version>
 		<github.merge>true</github.merge>
 	</properties>
 	
 	<build>
 	   <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <packageName>org.mule.modules.quickbooks.windows.schema</packageName>
-                    <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
-                    <schemaFiles>
-                        ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd
-                    </schemaFiles>
-                </configuration>
-            </plugin>
-<!--             <plugin> -->
-<!--                 <groupId>org.codehaus.mojo</groupId> -->
-<!--                 <artifactId>jaxb2-maven-plugin</artifactId> -->
-<!--                 <executions> -->
-<!--                     <execution> -->
-<!--                         <goals> -->
-<!--                             <goal>xjc</goal> -->
-<!--                         </goals> -->
-<!--                     </execution> -->
-<!--                 </executions> -->
-<!--                 <configuration> -->
-<!--                     <packageName>org.mule.modules.quickbooks.online.schema</packageName> -->
-<!--                     <schemaDirectory>src/main/resources/schema/online</schemaDirectory> -->
-<!--                     <schemaFiles> -->
-<!--                         CompanyMetaData.xsd, CustomerCdmTypes.xsd, Finance.xsd, Groups.xsd, IntuitBaseExceptionTypes.xsd, IntuitCdmBaseTypes.xsd, IntuitCustomFieldCdmTypes.xsd, PartyCdmTypes.xsd, qbo.xsd, qbopayroll.xsd, QboReports.xsd -->
-<!--                     </schemaFiles> -->
-<!--                 </configuration> -->
-<!--             </plugin> 			 -->
             <plugin>
                 <groupId>org.mule.tools.devkit</groupId>
                 <artifactId>mule-devkit-maven-plugin</artifactId>
@@ -119,6 +84,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda.time.version}</version>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 
 	<repositories>

@@ -8,5 +8,4 @@
 target
 bin/
 internal-gateway/deploy.bat
-.idea
 .DS_Store

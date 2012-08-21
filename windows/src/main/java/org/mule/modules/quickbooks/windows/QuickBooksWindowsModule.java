@@ -104,8 +104,7 @@ public class QuickBooksWindowsModule
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type WindowsEntityType of the object.
-     * @param obj Map that represents the object to be created.
-     * @param requestId the unique request Id
+     * @param entityObject represents the object to be created.
      * @param draft Boolean draft
      *      <p>Saving an IDS object in a draft state prevents it from being synchronized with Quickbooks. Your app 
      *      might want to save an object in a draft state if the user has not finished entering data, or for some other 
@@ -125,13 +124,12 @@ public class QuickBooksWindowsModule
                          String realmIdPseudonym, 
                          String authIdPseudonym,
                          WindowsEntityType type,
-                         @Placement(group = "Object") Map<String, Object> obj,
-                         String requestId,
+                         @Optional @Default("#[payload]") Object entityObject,
                          @Optional @Default("false") Boolean draft,
                          @Optional @Default("false") Boolean fullResponse)
     {
         return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, type,
-                             unmap(type.getType(), obj), requestId, draft, fullResponse);
+                             entityObject, generateANewRequestId(), draft, fullResponse);
     }
     
     /**
@@ -152,7 +150,7 @@ public class QuickBooksWindowsModule
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type WindowsEntityType of the object.
-     * @param id Id which is assigned by Data Services when the object is created.
+     * @param idType Id {@link IdType} which is assigned by Data Services when the object is created.
      * @return The object.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
@@ -164,9 +162,9 @@ public class QuickBooksWindowsModule
                             String realmIdPseudonym,
                             String authIdPseudonym,
                             WindowsEntityType type,
-                            @Placement(group = "Id") Map<String, Object> id)
+                            @Optional @Default("#[payload]") Object idType)
     {
-        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(IdType.class,id));
+        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, (IdType) idType);
     }
     
     /**
@@ -201,8 +199,7 @@ public class QuickBooksWindowsModule
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type WindowsEntityType of the object.
-     * @param obj Map that represents the object to be created.
-     * @param requestId the unique request Id
+     * @param entityObject represents the object to be updated.
      * @param draft Boolean draft 
      *      <p>Saving an IDS object in a draft state prevents it from being synchronized with Quickbooks. Your app 
      *      might want to save an object in a draft state if the user has not finished entering data, or for some other 
@@ -222,12 +219,12 @@ public class QuickBooksWindowsModule
                          String realmIdPseudonym, 
                          String authIdPseudonym,
                          WindowsEntityType type,
-                         @Placement(group = "Object") Map<String, Object> obj,
-                         String requestId,
+                         @Optional @Default("#[payload]") Object entityObject,
                          @Optional @Default("false") Boolean draft,
                          @Optional @Default("false") Boolean fullResponse)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId, draft, fullResponse);
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, entityObject, 
+                generateANewRequestId(), draft, fullResponse);
     }
     
     /**
@@ -252,8 +249,7 @@ public class QuickBooksWindowsModule
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type WindowsEntityType of the object.
-     * @param obj Map that represents the object to be created.
-     * @param requestId the unique request Id
+     * @param entityObject represents the object to be deleted.
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
@@ -262,10 +258,9 @@ public class QuickBooksWindowsModule
                        String appKey,
                        String realmIdPseudonym, String authIdPseudonym,
                        WindowsEntityType type,
-                       @Placement(group = "Object") Map<String, Object> obj,
-                       String requestId)
+                       @Optional @Default("#[payload]") Object entityObject)
     {
-        client.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, unmap(type.getType(), obj), requestId);
+        client.delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, entityObject, generateANewRequestId());
     }
 
     /**

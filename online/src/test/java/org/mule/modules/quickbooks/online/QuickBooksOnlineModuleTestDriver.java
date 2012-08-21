@@ -18,8 +18,8 @@ package org.mule.modules.quickbooks.online;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -30,13 +30,22 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
+import org.mule.modules.quickbooks.online.model.QBAccount;
+import org.mule.modules.quickbooks.online.model.QBCustomer;
+import org.mule.modules.quickbooks.online.model.QBIdType;
+import org.mule.modules.quickbooks.online.model.QBInvoice;
+import org.mule.modules.quickbooks.online.model.QBItem;
+import org.mule.modules.quickbooks.online.model.QBSalesTerm;
 import org.mule.modules.quickbooks.online.schema.Account;
 import org.mule.modules.quickbooks.online.schema.Customer;
 import org.mule.modules.quickbooks.online.schema.GenericEntity;
+import org.mule.modules.quickbooks.online.schema.IdType;
 import org.mule.modules.quickbooks.online.schema.Invoice;
 import org.mule.modules.quickbooks.online.schema.InvoiceHeader;
 import org.mule.modules.quickbooks.online.schema.InvoiceLine;
 import org.mule.modules.quickbooks.online.schema.Item;
+import org.mule.modules.quickbooks.online.schema.Money;
+import org.mule.modules.quickbooks.online.schema.Note;
 import org.mule.modules.quickbooks.online.schema.PhysicalAddress;
 import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
@@ -75,63 +84,37 @@ public class QuickBooksOnlineModuleTestDriver
     @Test
     public void createAccount()
     {
-        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
+        Account newAccount = new Account();
+        newAccount.setName("Test Account82");
+        newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
+        newAccount.setAcctNum("36544");
+        newAccount.setOpeningBalance(new BigDecimal(0));
+        QBAccount acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
                 
-        Map<String, Object> idType = new HashMap<String, Object>();
-        idType.put("value", acc.getId().getValue());
+        IdType idType = new IdType();
+        idType.setValue(acc.getAccount().getId().getValue());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, new QBIdType(idType), acc.getAccount().getSyncToken());
     }
     @Test
     public void createCustomerAnswersNonNullCustomerWithId() throws Exception
     {
-        List<Map<String, Object>> auxList = new ArrayList<Map<String, Object>>();
+        Customer customer = new Customer();
         
-        Map<String, Object> auxMap = new HashMap<String, Object>();
+        customer.setName("Name");
+        customer.setGivenName("GivenName");
+        customer.setMiddleName("MiddleName");
+        customer.setFamilyName("FamilyName");
         
-        auxMap.put("Line1", null);
-        auxMap.put("Line2", null);
-        auxMap.put("City", null);
-        auxMap.put("CountrySubDivisionCode", null);
-        auxMap.put("PostalCode", null);
-        auxMap.put("Tag", "Billing");
+        QBCustomer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                new QBCustomer(customer));
         
-        auxList.add(auxMap);
+        assertEquals("Name", c.getCustomer().getName());
+        assertNotNull(c.getCustomer().getId());
 
-        Customer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "Susana", 
-            "Susana", 
-            "Melina", 
-            "Perez",
-            null, null, null, 
-            new ArrayList<Map<String, Object>>(), 
-            null, null, null, new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>()
-//            auxList
-//            Arrays.<Map<String, Object>>asList(new HashMap<String, Object>()
-//                {
-//                    {
-//                        put("Line1", null);
-//                        put("Line2", null);
-//                        put("City", null);
-//                        put("CountrySubDivisionCode", null);
-//                        put("PostalCode", null);
-//                        put("Tag", "Billing");
-//                    } 
-//               }
-//            )
-        );
-        
-        assertEquals("Susana", c.getName());
-        assertNotNull(c.getId());
-
-        Map<String, Object> idType = new HashMap<String, Object>();
-        idType.put("value", c.getId().getValue());
-        //idType.put("idDomain", c.getId().getIdDomain());
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType, c.getSyncToken());
+        IdType idType = new IdType();
+        idType.setValue(c.getCustomer().getId().getValue());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType), c.getCustomer().getSyncToken());
     }
     
     @Test
@@ -178,10 +161,9 @@ public class QuickBooksOnlineModuleTestDriver
     @Test
     public void getCustomerAnswersNonNullCustomerWithId() throws Exception
     {
-        Map<String, Object> idType = new HashMap<String, Object>();
-        idType.put("value", "1");
-        //idType.put("idDomain", c.getId().getIdDomain());
-        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType);
+        IdType idType = new IdType();
+        idType.setValue("1");
+        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType));
         
         assertEquals("Ricardo (deleted)", c.getName());
         assertNotNull(c.getId());
@@ -190,50 +172,38 @@ public class QuickBooksOnlineModuleTestDriver
     @Test
     public void modifyCustomer()
     {
-        Customer c1 = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "Paul M. Jonhson3", 
-            "Paul", 
-            "Mark", 
-            "Jhonson",
-            null, null, null, 
-            new ArrayList<Map<String, Object>>(), 
-            null, null, null, new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-            null
-        );
         
-        assertEquals("Jhonson", c1.getFamilyName());
+        Customer customer = new Customer();
         
-        Map<String, Object> idType = new HashMap<String, Object>();
-        idType.put("value", c1.getId().getValue());
+        customer.setName("Name");
+        customer.setGivenName("GivenName");
+        customer.setMiddleName("MiddleName");
+        customer.setFamilyName("FamilyName");
         
-        Customer c2 = module.updateCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            idType, 
-            c1.getSyncToken(), 
-            c1.getName(), 
-            c1.getGivenName(), 
-            c1.getMiddleName(), 
-            "Smith", 
-            null, null, null, 
-            new ArrayList<Map<String, Object>>(), 
-            null, new HashMap<String, Object>(), null, new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-                new ArrayList<Map<String, Object>>()
-        );
+        QBCustomer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                new QBCustomer(customer));
         
-        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType);
+        assertEquals("FamilyName", c.getCustomer().getFamilyName());
         
-        assertEquals("Smith", c3.getFamilyName());
+        IdType idType = new IdType();
+        idType.setValue(c.getCustomer().getId().getValue());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType, null);
+        c.getCustomer().setFamilyName("NewFamilyName");
+        
+        module.updateCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym, c);
+        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType));
+        
+        assertEquals("NewFamilyName", c3.getFamilyName());
+        
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType), null);
     }
     
+    @SuppressWarnings("unchecked")
     @Test
     public void getAllCustomersAnswersNonNullListWithCustomers() throws Exception
     {       
-        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, null, null);
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.CUSTOMER, null, null);
         
         for (Customer c : it)
         {
@@ -241,10 +211,12 @@ public class QuickBooksOnlineModuleTestDriver
         }
     }
     
+    @SuppressWarnings("unchecked")
     @Test
     public void getSomeCustomersAnswersNonNullListWithCustomers() throws Exception
     {
-        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.CUSTOMER, "GivenName :EQUALS: Susana", null);
         
         for (Customer c : it)
         {
@@ -255,79 +227,84 @@ public class QuickBooksOnlineModuleTestDriver
     @Test
     public void createSalesTermAnswersNonNullSalesTermWithId()
     {
-        SalesTerm salesTerm = module.createSalesTerm(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "SalesTerm1",
-            3,
-            null,
-            null,
-            2,
-            null,
-            null,
-            null);
+        SalesTerm salesTerm = new SalesTerm();
+        salesTerm.setName("SalesTerm");
+        salesTerm.setDueDays(BigInteger.valueOf(3));
+        salesTerm.setDayOfMonthDue(BigInteger.valueOf(2));
         
-        assertEquals("SalesTerm1", salesTerm.getName());
-        Map<String, Object> idType = new HashMap<String, Object>();
-        idType.put("value", salesTerm.getId().getValue());
+        QBSalesTerm qbSalesTerm = module.createSalesTerm(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBSalesTerm(salesTerm));
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.SALESTERM, idType, null);
+        assertEquals("SalesTerm", qbSalesTerm.getSalesTerm().getName());
+        IdType idType = new IdType();
+        idType.setValue(qbSalesTerm.getSalesTerm().getId().getValue());
+        
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.SALESTERM, new QBIdType(idType), null);
     }
 
     @Test
     public void retrievesAEmptyIterable()
     {
-        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "Name :EQUALS: MFASDAEAEAAASS", null);
+        @SuppressWarnings("unchecked")
+        Iterable<Customer> it = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.CUSTOMER, "Name :EQUALS: MFASDAEAEAAASS", null);
 
         assertEquals(false, it.iterator().hasNext());
     }
     
+    @SuppressWarnings("unchecked")
     @Test
     @Ignore
     public void deleteCustomer()
     {        
-        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
+        Iterable<Customer> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.CUSTOMER, "Name :EQUALS: Paul M. Jenkins 4", null);
         
         for (Customer customer: it)
         {
-            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                    OnlineEntityType.CUSTOMER, new QBIdType(customer.getId()), customer.getSyncToken());
         }
     }
     
+    @SuppressWarnings("unchecked")
     @Test
     @Ignore
     public void deleteItem()
     {        
-        Iterable<Item> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, "Name :EQUALS: ItemTest0057", null);
+        Iterable<Item> it= module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.ITEM, "Name :EQUALS: ItemTest0057", null);
         
         for (Item item: it)
         {
-            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
+            module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                    OnlineEntityType.ITEM, new QBIdType(item.getId()), item.getSyncToken());
         }
     }
     
+    @SuppressWarnings("unchecked")
     @Test
     public void createInvoiceRetrieveAndUpdateIt()
     {
-        //creates a customer
-        Customer customer = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "Paul M. Jenkins 4", 
-            "Paul", 
-            "Mark", 
-            "Jenkins",
-            null, null, null, 
-            new ArrayList<Map<String, Object>>(), 
-            null, null, null, new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-            new ArrayList<Map<String, Object>>(),
-            null
-        );
         
-        //create an item
-        Map<String, Object> unitPrice = new HashMap<String, Object>(){{
-            put("amount", 100);
-        }};
+        Customer customer = new Customer();
         
-        Item item = module.createItem(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            "ItemTest0057", unitPrice, null, false, null, null, null, null, null, null);
+        customer.setName("Paul M. Jenkins 4");
+        customer.setGivenName("Paul");
+        customer.setMiddleName("Mark");
+        customer.setFamilyName("Jenkins");
+        
+        module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                new QBCustomer(customer));
+        
+        Item item = new Item();
+        item.setName("ItemTest0057");
+        
+        Money money = new Money();
+        money.setAmount(BigDecimal.valueOf(100));
+        item.setUnitPrice(money);
+        
+        QBItem qbItem = module.createItem(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBItem(item));
         
         //create an invoice with the customer and item created before
         InvoiceHeader invHeader = new InvoiceHeader();
@@ -337,36 +314,38 @@ public class QuickBooksOnlineModuleTestDriver
         List<InvoiceLine> lines = new ArrayList<InvoiceLine>();
         InvoiceLine invoiceLine = new InvoiceLine();
         invoiceLine.setAmount(new BigDecimal(100));
-        invoiceLine.setItemId(item.getId());
+        invoiceLine.setItemId(qbItem.getItem().getId());
         lines.add(invoiceLine);
-        Map<String, Object> mapAux = (Map<String, Object>) mom.map(invHeader);
-        List<Map<String, Object>> listAux = (List<Map<String, Object>>) mom.map(lines);
-        Invoice invoice = module.createInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, (Map<String, Object>) mom.map(invHeader), (List<Map<String, Object>>) mom.map(lines));
+        
+        Invoice invoice = new Invoice();
+        invoice.getLine().addAll(lines);
+        invoice.setHeader(invHeader);
         
         //retrieve the invoices of our customer
         String filter = "CustomerId :EQUALS: " + customer.getId().getValue();
-        Iterable<Invoice> iterableInv = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, filter, null);
+        Iterable<Invoice> iterableInv = module.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.INVOICE, filter, null);
 
         //We know that only has one invoice, because we have created him
         invoice = iterableInv.iterator().next();
         
         //change the docNumber and update it
         invoice.getHeader().setDocNumber("DOC-NEW:001111111101");
-        invoice = module.updateInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                             (Map<String, Object>) mom.map(invoice.getId()), 
-                             invoice.getSyncToken(), 
-                             (Map<String, Object>) mom.map(invoice.getHeader()), 
-                             (List<Map<String, Object>>) mom.map(invoice.getLine()));
+        module.updateInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBInvoice(invoice));
         
         //delete everything
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, (Map<String, Object>) mom.map(invoice.getId()), invoice.getSyncToken());
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, (Map<String, Object>) mom.map(item.getId()), item.getSyncToken());
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, 
+                new QBIdType(invoice.getId()), invoice.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, 
+                new QBIdType(qbItem.getItem().getId()), item.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, 
+                new QBIdType(customer.getId()), customer.getSyncToken());
     
         //verify the change
         assertEquals("DOC-NEW:001111111101", invoice.getHeader().getDocNumber());
     }
     
+    @SuppressWarnings("unchecked")
     @Test
     public void findChangeDataDeleted()
     {
@@ -384,26 +363,27 @@ public class QuickBooksOnlineModuleTestDriver
     @Test
     public void testIfTheNotesHasBeenSaved()
     {
-        List<Map<String, Object>> notes = new ArrayList<Map<String, Object>>();
-        Map<String, Object> note = new HashMap<String, Object>();
-        note.put("content", "This is a test note");
+        List<Note> notes = new ArrayList<Note>();
+        Note note = new Note();
+        note.setContent("This is a test note");
         notes.add(note);
         
-        Customer customer = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                "Mr test for notes 2", 
-                "Test", 
-                "Notes", 
-                "James",
-                null, null, null, 
-                null, null, null,
-                null, null, null, null,
-                notes
-            );
+        Customer customer = new Customer();
+        
+        customer.setName("Name");
+        customer.setGivenName("GivenName");
+        customer.setMiddleName("MiddleName");
+        customer.setFamilyName("FamilyName");
+        customer.getNotes().addAll(notes);
+        
+        module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                new QBCustomer(customer));
         
         assertEquals(1, customer.getNotes().size());
         assertEquals("This is a test note", customer.getNotes().get(0).getContent());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, (Map<String, Object>) mom.map(customer.getId()), customer.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.CUSTOMER, new QBIdType(customer.getId()), customer.getSyncToken());
     }
     
     @Test
@@ -414,24 +394,34 @@ public class QuickBooksOnlineModuleTestDriver
         String realmId2 = System.getenv("realmId2");
         String realmIdPseudonym2 = System.getenv("realmIdPseudonym2");
         String authIdPseudonym2 = System.getenv("authIdPseudonym2");
-                
-        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
+
+        Account newAccount = new Account();
+        newAccount.setName("Test Account82");
+        newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
+        newAccount.setAcctNum("36544");
+        newAccount.setOpeningBalance(new BigDecimal(0));
+        QBAccount acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
                     
-        Map<String, Object> idType = new HashMap<String, Object>();
-        idType.put("value", acc.getId().getValue());
+        IdType idType = new IdType();
+        idType.setValue(acc.getAccount().getId().getValue());
         
-        Account acc2 = module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
+        newAccount = new Account();
+        newAccount.setName("Test Account82");
+        newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
+        newAccount.setAcctNum("36544");
+        newAccount.setOpeningBalance(new BigDecimal(0));
+        QBAccount acc2 = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
                     
-        Map<String, Object> idType2 = new HashMap<String, Object>();
-        idType2.put("value", acc2.getId().getValue());
+        IdType idType2 = new IdType();
+        idType2.setValue(acc2.getAccount().getId().getValue());
             
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
-            
-        module.deleteObject(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, OnlineEntityType.ACCOUNT, idType2, acc2.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.ACCOUNT, new QBIdType(idType), acc.getAccount().getSyncToken());
+        module.deleteObject(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, 
+                OnlineEntityType.ACCOUNT, new QBIdType(idType2), acc2.getAccount().getSyncToken());
     }
     
+    @SuppressWarnings("unchecked")
     @Test
     @Ignore
     public void testCallBetweenLazyRetrieve()
@@ -447,17 +437,22 @@ public class QuickBooksOnlineModuleTestDriver
         Iterator<Account> itAcc = it.iterator();
         assertNotNull(itAcc.next().getId());
         
-        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                "Test Account82", null, AccountOnlineDetail.SAVINGS, "36544", "0", new Date(), null);
+        Account newAccount = new Account();
+        newAccount.setName("Test Account82");
+        newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
+        newAccount.setAcctNum("36544");
+        newAccount.setOpeningBalance(new BigDecimal(0));
+        QBAccount acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
         
         while(itAcc.hasNext()) {
             assertNotNull(itAcc.next().getId());
         }
         
-        Map<String, Object> idType = new HashMap<String, Object>();
-        idType.put("value", acc.getId().getValue());
+        IdType idType = new IdType();
+        idType.setValue(acc.getAccount().getId().getValue());
             
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.ACCOUNT, new QBIdType(idType), acc.getAccount().getSyncToken());
     }
     
     @Test
@@ -468,46 +463,16 @@ public class QuickBooksOnlineModuleTestDriver
         String realmId2 = System.getenv("realmId2");
         String realmIdPseudonym2 = System.getenv("realmIdPseudonym2");
         String authIdPseudonym2 = System.getenv("authIdPseudonym2");
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account01", null, AccountOnlineDetail.SAVINGS, "0001", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account02", null, AccountOnlineDetail.SAVINGS, "0002", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account03", null, AccountOnlineDetail.SAVINGS, "0003", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account04", null, AccountOnlineDetail.SAVINGS, "0004", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account05", null, AccountOnlineDetail.SAVINGS, "0005", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account06", null, AccountOnlineDetail.SAVINGS, "0006", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account07", null, AccountOnlineDetail.SAVINGS, "0007", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account08", null, AccountOnlineDetail.SAVINGS, "0008", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account09", null, AccountOnlineDetail.SAVINGS, "0009", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account10", null, AccountOnlineDetail.SAVINGS, "0010", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account11", null, AccountOnlineDetail.SAVINGS, "0011", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account12", null, AccountOnlineDetail.SAVINGS, "0012", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account13", null, AccountOnlineDetail.SAVINGS, "0013", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account14", null, AccountOnlineDetail.SAVINGS, "0014", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account15", null, AccountOnlineDetail.SAVINGS, "0015", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account16", null, AccountOnlineDetail.SAVINGS, "0016", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account17", null, AccountOnlineDetail.SAVINGS, "0017", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account18", null, AccountOnlineDetail.SAVINGS, "0018", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account19", null, AccountOnlineDetail.SAVINGS, "0019", "0", new Date(), null);
-        module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2,
-                "Test Account20", null, AccountOnlineDetail.SAVINGS, "0020", "0", new Date(), null);
+        
+        Account acc = new Account();
+        
+        for (int i = 0;i<20;i++) {
+            acc.setName("Test Account" + i);
+            acc.setSubtype(AccountOnlineDetail.SAVINGS.toString());
+            acc.setAcctNum("000" + i);
+            acc.setOpeningBalance(new BigDecimal(0));
+            module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, new QBAccount(acc));
+        }
     }
     
     @Test(expected = QuickBooksRuntimeException.class)
@@ -518,8 +483,11 @@ public class QuickBooksOnlineModuleTestDriver
         module2.setBaseUri("https://qbo.intuit.com/qbo1/rest/user/v2");
         module2.init();
         
-        Account acc = module2.createAccount("wrongRealmId", appKey, realmIdPseudonym, authIdPseudonym,
-            "Test Account", null, AccountOnlineDetail.SAVINGS, "36547", "0", new Date(), null);
+        Account acc = new Account();
+        acc.setName("Test Account");
+        acc.setSubtype(AccountOnlineDetail.SAVINGS.toString());
+        acc.setAcctNum("36547");
+        acc.setOpeningBalance(new BigDecimal(0));       
     }
     
 }

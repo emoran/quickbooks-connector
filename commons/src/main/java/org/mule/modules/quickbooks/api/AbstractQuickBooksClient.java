@@ -37,10 +37,10 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpParams;
+import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.gateway.MuleOAuthCredentialStorage;
 import org.mule.modules.quickbooks.api.gateway.oauth.OAuthGateway;
-import org.mule.modules.quickbooks.online.schema.FaultInfo;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.springframework.core.io.ClassPathResource;
@@ -154,7 +154,7 @@ public abstract class AbstractQuickBooksClient
             statusCode = response.getStatusLine().getStatusCode();
             if ( statusCode != HttpStatus.SC_OK)
             {
-                FaultInfo fault = getFaultInfo(responseBody.toString());
+                ExceptionInfo fault = getFaultInfo(responseBody.toString());
                 throw new QuickBooksRuntimeException(fault);
             }   
         } 
@@ -186,7 +186,7 @@ public abstract class AbstractQuickBooksClient
         }
     }
     
-    protected abstract FaultInfo getFaultInfo(String str) throws JAXBException;
+    protected abstract ExceptionInfo getFaultInfo(String str) throws JAXBException;
     
     protected abstract MessageUtils getMessageUtilsInstance();
     

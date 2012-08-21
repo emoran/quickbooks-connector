@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:context="http://www.springframework.org/schema/context" xmlns:debugger="http://www.mulesoft.org/schema/mule/debugger" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/2.0/mule-quickbooks-windows.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/debugger http://www.mulesoft.org/schema/mule/debugger/current/mule-debugger.xsd ">
+    <quickbooks-windows:config name="Quickbooks_Windows" doc:name="Quickbooks Windows"/>
+    <data-mapper:config name="dateTest" transformationGraphPath="555.grf" doc:name="DataMapper"/>
+    <context:property-placeholder location="mule.properties"/>
+    <flow name="create" doc:name="create">
+        <http:inbound-endpoint exchange-pattern="one-way" host="localhost" port="8081" path="create" doc:name="HTTP"/>
+        <scripting:component doc:name="Groovy">
+            <scripting:script engine="Groovy">
+                <scripting:text><![CDATA[new org.mule.modules.quickbooks.windows.schema.Account(
+                                                                                                                                                                        name: "Test Account 00A1 QBW",
+                                                                                                                                                                        type: "EXPENSE",
+                                                                                                                                                                        subtype: "Expense",
+                                                                                                                                                                        active: false
+                                                                                                                                                                        )]]></scripting:text>
+            </scripting:script>
+        </scripting:component>
+        <quickbooks-windows:create config-ref="Quickbooks_Windows" appKey="${quickbooksWindosAppKey}" authIdPseudonym="${quickbooksWindosAuthIdPseudonym}" realmId="${quickbooksWindowsRealmId}" realmIdPseudonym="${quickbooksWindowsRealmIdPseudonym}" type="ACCOUNT" fullResponse="true" doc:name="Create account"/>
+        <logger message="account created  #[payload.name] #[payload.id.value]" level="INFO" doc:name="account created"/>
+        <data-mapper:transform config-ref="dateTest" doc:name="DataMapper"/>
+        <quickbooks-windows:update config-ref="Quickbooks_Windows" appKey="${quickbooksWindosAppKey}" authIdPseudonym="${quickbooksWindosAuthIdPseudonym}" realmId="${quickbooksWindowsRealmId}" realmIdPseudonym="${quickbooksWindowsRealmIdPseudonym}" type="ACCOUNT" fullResponse="true" doc:name="Update Account"/>
+        <logger message="account updated #[payload.name]  #[payload.id.value]" level="INFO" doc:name="Logger"/>
+        <message-properties-transformer overwrite="true" doc:name="persist account name" scope="invocation">
+            <add-message-property key="accountName" value="#[payload.name]"/>
+        </message-properties-transformer>
+        <flow-ref name="get-delete" doc:name="get-delete"/>
+    </flow>
+    <flow name="get-delete" doc:name="get-delete">
+        <quickbooks-windows:find-objects config-ref="Quickbooks_Windows" appKey="${quickbooksWindosAppKey}" authIdPseudonym="${quickbooksWindosAuthIdPseudonym}" realmId="${quickbooksWindowsRealmId}" realmIdPseudonym="${quickbooksWindowsRealmIdPseudonym}" type="ACCOUNT" doc:name="find all the accounts"/>
+        <foreach doc:name="Foreach">
+            <choice doc:name="Choice">
+                <when expression="#[groovy:payload.name.equals(message.getInvocationProperty('accountName'))]">
+                    <processor-chain>
+                        <logger message="account found" level="INFO" doc:name="account found"/>
+                        <quickbooks-windows:delete config-ref="Quickbooks_Windows" appKey="${quickbooksWindosAppKey}" authIdPseudonym="${quickbooksWindosAuthIdPseudonym}" realmId="${quickbooksWindowsRealmId}" realmIdPseudonym="${quickbooksWindowsRealmIdPseudonym}" type="ACCOUNT" doc:name="delete the account"/>
+                        <logger message="account deleted" level="INFO" doc:name="Logger"/>
+                        <flow-ref name="verifyDeletion" doc:name="verify deletion"/>
+                    </processor-chain>
+                </when>
+                <otherwise>
+                    <processor-chain>
+                        <logger message="account not found" level="DEBUG" doc:name="account not found"/>
+                    </processor-chain>
+                </otherwise>
+            </choice>
+        </foreach>
+    </flow>
+    <sub-flow name="verifyDeletion" doc:name="verifyDeletion">
+        <quickbooks-windows:find-objects config-ref="Quickbooks_Windows" appKey="${quickbooksWindosAppKey}" authIdPseudonym="${quickbooksWindosAuthIdPseudonym}" realmId="${quickbooksWindowsRealmId}" realmIdPseudonym="${quickbooksWindowsRealmIdPseudonym}" type="ACCOUNT" doc:name="Quickbooks Windows"/>
+        <choice doc:name="Choice">
+            <when expression="#[groovy:payload.name.equals(message.getInvocationProperty('accountName'))]">
+                <processor-chain>
+                    <logger message="verification of delete FAIL" level="INFO" doc:name="success"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="verification of delete SUCCESS" level="INFO" doc:name="fail"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </sub-flow>
+</mule>

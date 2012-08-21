@@ -13,12 +13,6 @@
  */
 package org.mule.modules.quickbooks.online;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,29 +22,27 @@ import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
-import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
-import org.mule.modules.quickbooks.online.schema.Account;
-import org.mule.modules.quickbooks.online.schema.Bill;
-import org.mule.modules.quickbooks.online.schema.BillPayment;
-import org.mule.modules.quickbooks.online.schema.CashPurchase;
-import org.mule.modules.quickbooks.online.schema.Check;
-import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
+import org.mule.modules.quickbooks.online.model.QBAccount;
+import org.mule.modules.quickbooks.online.model.QBBill;
+import org.mule.modules.quickbooks.online.model.QBBillPayment;
+import org.mule.modules.quickbooks.online.model.QBCashPurchase;
+import org.mule.modules.quickbooks.online.model.QBCheck;
+import org.mule.modules.quickbooks.online.model.QBCreditCardCharge;
+import org.mule.modules.quickbooks.online.model.QBCustomer;
+import org.mule.modules.quickbooks.online.model.QBEstimate;
+import org.mule.modules.quickbooks.online.model.QBIdType;
+import org.mule.modules.quickbooks.online.model.QBInvoice;
+import org.mule.modules.quickbooks.online.model.QBItem;
+import org.mule.modules.quickbooks.online.model.QBPayment;
+import org.mule.modules.quickbooks.online.model.QBPaymentMethod;
+import org.mule.modules.quickbooks.online.model.QBSalesReceipt;
+import org.mule.modules.quickbooks.online.model.QBSalesTerm;
+import org.mule.modules.quickbooks.online.model.QBVendor;
 import org.mule.modules.quickbooks.online.schema.Customer;
-import org.mule.modules.quickbooks.online.schema.Estimate;
 import org.mule.modules.quickbooks.online.schema.IdType;
-import org.mule.modules.quickbooks.online.schema.Invoice;
-import org.mule.modules.quickbooks.online.schema.Item;
-import org.mule.modules.quickbooks.online.schema.Payment;
-import org.mule.modules.quickbooks.online.schema.PaymentMethod;
-import org.mule.modules.quickbooks.online.schema.SalesReceipt;
-import org.mule.modules.quickbooks.online.schema.SalesTerm;
-import org.mule.modules.quickbooks.online.schema.Vendor;
-import org.mule.modules.utils.mom.JaxbMapObjectMappers;
-
-import com.zauberlabs.commons.mom.MapObjectMapper;
 
 
 
@@ -64,7 +56,7 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  * Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_5462311_quickbooks-accounting-tutorial.html#ixzz1csaydwxl
  * @author MuleSoft, inc.
  */
-@Module(name = "quickbooks", schemaVersion= "2.0")
+@Module(name = "quickbooks", schemaVersion= "2.0", friendlyName = "Quickbooks Online")
 public class QuickBooksModule
 {   
     /**
@@ -73,8 +65,6 @@ public class QuickBooksModule
     @Configurable
     @Optional
     private QuickBooksOnlineClient client;
-    
-    private final MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("org.mule.modules.quickbooks.online.schema").build();
 
     /**
      * The base uri of the quickbooks endpoint,
@@ -100,8 +90,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Account">Account Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-account}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-account2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-account3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -109,53 +97,20 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param name User-recognizable name for the account. This name must be unique.
-     *             When you create a company, you get some default accounts.
-     *             If you want to create an account, you must provide an account name that does not
-     *             match the name of any default account.
-     * @param desc Optional. User-entered description of the account.
-     *             This description helps the book keepers or accountants to decide which journal
-     *             entries should be posted to this account.
-     * @param subtype Detailed classification of the account that specifies the use of this account.
-     *                The accepted values are defined in QboAccountDetailTypeEnum.
-     * @param acctNum Optional. User-specified account number that help the user to identify the
-     *                account within the chart of accounts and decide what should be posted to the account.
-     * @param openingBalance Optional. Opening balance amount when you create a new balance sheet account.
-     * @param openingBalanceDate Optional. Date of the opening balance amount when creating a new balance
-     *                           sheet account.
-     * @param accountParentId Optional. If the account is a subaccount, AccountParentId is used to 
-     *                        store the ID of the parent account.
+     * @param account   The Quickbooks account to be created.
      * @return The created Account.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Account createAccount(String realmId,
+    public QBAccount createAccount(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 String name,
-                                 @Optional String desc,
-                                 AccountOnlineDetail subtype,
-                                 @Optional String acctNum,
-                                 @Optional String openingBalance,
-                                 Date openingBalanceDate,
-                                 @Placement(group = "Account Parent Id") @Optional Map<String, Object> accountParentId)
+                                 @Optional @Default("#[payload]") QBAccount account)
     {
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Account.class,            
-                new MapBuilder()
-                .with("name", name)
-                .with("accountParentId", accountParentId)
-                .with("desc", desc)
-                .with("subtype", subtype.toQboAccountDetail().value())
-                .with("acctNum", acctNum)
-                .with("openingBalance", openingBalance)
-                .with("openingBalanceDate", openingBalanceDate)
-                .build()
-            )
-        );
+        return new QBAccount(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, account.getAccount()));
     }
     
     /**
@@ -166,8 +121,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Bill">Bill Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -175,29 +128,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Information on the financial transaction of the Bill.
-     * @param lines Information about a specific good or service purchased for which the payment is demanded
-     *             as a part of the bill. A bill can have multiple lines.
+     * @param bill The bill to be created
      * @return The created Bill.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Bill createBill(String realmId,
+    public QBBill createBill(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Placement(group = "Header") Map<String, Object> header,
-                           @Placement(group = "Lines") List<Map<String, Object>> lines)
+                           @Optional @Default("#[payload]") QBBill bill)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Bill.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBBill(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, bill.getBill()));
     }
     
     /**
@@ -210,8 +153,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/BillPayment">BillPayment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill-payment}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill-payment2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill-payment3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -219,28 +160,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Header information about the BillPayment.
-     * @param lines List of lines. Specifies the line details for the bill payment.
+     * @param billPayment The bill payment object
      * @return The created BillPayment.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public BillPayment createBillPayment(String realmId,
+    public QBBillPayment createBillPayment(String realmId,
                                          String appKey,
                                          String realmIdPseudonym, String authIdPseudonym,
-                                         @Placement(group = "Header") Map<String, Object> header,
-                                         @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                         @Optional @Default("#[payload]") QBBillPayment billPayment)
     {    
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(BillPayment.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBBillPayment(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, billPayment.getBillPayment()));
     }
     
     /**
@@ -251,8 +183,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/CashPurchase">CashPurchase Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-cash-purchase}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-cash-purchase2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-cash-purchase3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -260,29 +190,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Information about the financial transaction of the entire CashPurchase.
-     * @param lines List of lines. Information about a specific good or service purchased for which 
-     *             the payment is demanded as a part of the CashPurchase.
+     * @param cashPurchase The cash purchase to be created
      * @return The created CashPurchase.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase createCashPurchase(String realmId,
+    public QBCashPurchase createCashPurchase(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Placement(group = "Header") Map<String, Object> header,
-                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                           @Optional @Default("#[payload]") QBCashPurchase cashPurchase)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(CashPurchase.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBCashPurchase(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, cashPurchase.getCashPurchase()));
     }
     
     /**
@@ -293,7 +213,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Check">Check Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-check}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-check2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -301,29 +220,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Financial Transaction information that pertains to the entire CheckHeader.
-     * @param lines List of lines. Information about a specific good or service purchased for which 
-     *             the payment is demanded as a part of the check.
+     * @param check The check to be created
      * @return The created Check.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Check createCheck(String realmId,
+    public QBCheck createCheck(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             @Placement(group = "Header") Map<String, Object> header,
-                             @Placement(group = "Lines") List<Map<String, Object>> lines)
+                             @Optional @Default("#[payload]") QBCheck check)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Check.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBCheck(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, check.getCheck()));
     }
     
     /**
@@ -337,7 +246,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-credit-card-charge}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-credit-card-charge2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -345,29 +253,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Financial Transaction information that pertains to the entire CreditCardChargeHeader.
-     * @param lines List of lines. Information about a specific good or service purchased for which the 
-     *             payment is demanded as a part of the CreditCardCharge purchase.
+     * @param creditCardCharge The credit card charge to be created
      * @return The created CreditCardCharge.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CreditCardCharge createCreditCardCharge(String realmId,
+    public QBCreditCardCharge createCreditCardCharge(String realmId,
                                                    String appKey,
                                                    String realmIdPseudonym, String authIdPseudonym,
-                                                   @Placement(group = "Header") Map<String, Object> header,
-                                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                                   @Optional @Default("#[payload]") QBCreditCardCharge creditCardCharge)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(CreditCardCharge.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBCreditCardCharge(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, creditCardCharge.getCreditCardCharge()));
     }
 
     /**
@@ -380,7 +278,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Customer">Customer Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-customer}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-customer2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -388,87 +285,26 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param name Optional. Specifies the full name of the customer. If the Name is specified, then GivenName,
-     *             MiddleName, and FamilyName values are ignored.
-     * @param givenName Specifies the given name or first name of a person. GivenName is a required field only if 
-     *        Name is not sent in the request. If a Name is sent, then the GivenName field is optional.
-     * @param middleName Optional. Specifies the middle name of the person. A person can have zero or more middle 
-     *                   names.
-     * @param familyName Optional. Specifies the family name or the last name of the customer.
-     * @param suffix Optional. Suffix appended to the name, Jr., Sr., etc.
-     * @param dBAName Optional. Specifies the "Doing Business As" name of the customer.
-     * @param showAs Optional. Specifies the name of the vendor to be displayed.
-     * @param webSites Valid URI strings. Specifies the customers's Web sites.
-     * @param salesTermId Optional. Specifies the default sales term ID that is to be associated with the customer.
-     * @param paymentMethodId Optional. ID of the PaymentMethod. For Customer, this is the Id associated with the 
-     *          customer as set in the request.
-     * @param salesTaxCodeId QBO only supports the customers being taxable or not, so if this field is "1", the job 
-     *                       is taxable. If the field value is null, the job is not taxable. All other values are 
-     *                       invalid.
-     * @param emails Optional. Valid email. Specifies the customers's email addresses.
-     * @param phones Optional. Specifies the phone numbers of the customer. QBO allows mapping of up to 5 phone 
-     *              numbers but only one phone number is permitted for one device type.
-     * @param addresses Optional. Specifies the physical addresses.
-     * @param notes Optional. Specifies any notes that needs to be added to this customer.
+     * @param customer The customer to be created
      * @return The created Customer.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Customer createCustomer(String realmId,
+    public QBCustomer createCustomer(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Optional String name,
-                                   @Optional String givenName,
-                                   @Optional String middleName,
-                                   @Optional String familyName,
-                                   @Optional String suffix,
-                                   @Optional String dBAName,
-                                   @Optional String showAs,
-                                   @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
-                                   @Placement(group = "Sales Term Id") @Optional Map<String, Object> salesTermId,
-                                   @Placement(group = "Payment Method Id") @Optional Map<String, Object> paymentMethodId,
-                                   @Placement(group = "Sales Tax Code Id") @Optional Map<String, Object> salesTaxCodeId,
-                                   @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
-                                   @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
-                                   @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
-                                   @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
+                                   @Optional @Default("#[payload]") QBCustomer customer)
     {
-        salesTermId = coalesceMap(salesTermId);
-        salesTaxCodeId = coalesceMap(salesTaxCodeId);
-        webSites = coalesceList(webSites);
-        emails = coalesceList(emails);
-        phones = coalesceList(phones);
-        addresses = coalesceList(addresses);
-        notes = coalesceList(notes);
-
-        if(paymentMethodId != null && (paymentMethodId.isEmpty() || paymentMethodId.containsKey("value") && StringUtils.isBlank((String)paymentMethodId.get("value"))))
+        Customer customerToCreate = customer.getCustomer();
+        if(customerToCreate.getPaymentMethodId() != null && (customerToCreate.getPaymentMethodId().getValue().isEmpty() 
+                || StringUtils.isEmpty(customerToCreate.getPaymentMethodId().getValue())))
         {
-            paymentMethodId = null;
+            customerToCreate.setPaymentMethodId(new IdType());
         }
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Customer.class,
-                new MapBuilder()
-                .with("name", name)
-                .with("givenName", givenName)
-                .with("middleName", middleName)
-                .with("familyName", familyName)
-                .with("suffix", suffix)
-                .with("DBAName", dBAName)
-                .with("showAs", showAs)
-                .with("webSite", webSites)
-                .with("salesTermId", salesTermId)
-                .with("paymentMethodId", paymentMethodId)
-                .with("salesTaxCodeId", salesTaxCodeId)
-                .with("email", emails)
-                .with("phone", phones)
-                .with("address", addresses)
-                .with("notes", notes)
-                .build()
-            )
-        );
+        return new QBCustomer(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, customerToCreate));
     }
     
     /**
@@ -480,7 +316,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Estimate">Estimate Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-estimate}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-estimate2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -488,28 +323,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Financial transaction information that pertains to the entire Estimate.
-     * @param lines Information about a specific good or service for which the estimate is being issued.
+     * @param estimate The estimate to be created
      * @return The created Estimate.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Estimate createEstimate(String realmId,
+    public QBEstimate createEstimate(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Placement(group = "Header") Map<String, Object> header,
-                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                   @Optional @Default("#[payload]") QBEstimate estimate)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Estimate.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBEstimate(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, estimate.getEstimate()));
     }
     
     /**
@@ -523,7 +349,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Invoice">Invoice Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-invoice}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-invoice2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -531,28 +356,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Provides information that pertains to the entire Invoice.
-     * @param lines Information about a specific good or service for which the Invoice is being issued.
+     * @param invoice The invoice to be created
      * @return The created Invoice.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Invoice createInvoice(String realmId,
+    public QBInvoice createInvoice(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Placement(group = "Header") Map<String, Object> header,
-                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                 @Optional @Default("#[payload]") QBInvoice invoice)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Invoice.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBInvoice(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, invoice.getInvoice()));
     }
     
     /**
@@ -565,7 +381,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Item">Item Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-item}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-item2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -573,60 +388,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param name Optional. User recognizable name of the Item.
-     * @param unitPrice Optional. Monetary values of the service or product
-     * @param desc Optional. User entered description for the item to further describe the details 
-     *             of service or product.
-     * @param taxable Optional. Indicates whether the item is subject to tax.
-     * @param incomeAccount Optional. Income account reference to be associated with the sales item.
-     * @param itemParentId Optional. The parent item id of current item.
-     * @param itemParentName Optional. Name of parent Item. This field is output only.
-     * @param purchaseDesc Optional. User entered purchase description for the item to further describe 
-     *                     the details of the purchase.
-     * @param purchaseCost Optional. The monetary value of the service or product.
-     * @param expenseAccount Optional. Income account reference to be associated with the purchase item.
+     * @param item The item to be created
      * @return The created Item.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Item createItem(String realmId,
+    public QBItem createItem(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Optional @Default("") String name,
-                           @Placement(group = "Unit Price") @Optional Map<String, Object> unitPrice,
-                           @Optional String desc,
-                           @Optional @Default("false") Boolean taxable,
-                           @Placement(group = "Income Account") @Optional Map<String, Object> incomeAccount,
-                           @Placement(group = "Item Parent Id") @Optional Map<String, Object> itemParentId,
-                           @Optional String itemParentName,
-                           @Optional String purchaseDesc,
-                           @Placement(group = "Purchase Cost") @Optional Map<String, Object> purchaseCost,
-                           @Placement(group = "Expense Account") @Optional Map<String, Object> expenseAccount)
+                           @Optional @Default("#[payload]") QBItem item)
     {
-        unitPrice = coalesceMap(unitPrice);
-        incomeAccount = coalesceMap(incomeAccount);
-        itemParentId = coalesceMap(itemParentId);
-        purchaseCost = coalesceMap(purchaseCost);
-        expenseAccount = coalesceMap(expenseAccount);
-
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Item.class,
-                new MapBuilder()
-                .with("name", name)
-                .with("unitPrice", unitPrice)
-                .with("desc", desc)
-                .with("taxable", taxable)
-                .with("incomeAccountRef", incomeAccount)
-                .with("itemParentId", itemParentId)
-                .with("itemParentName", itemParentName)
-                .with("purchaseDesc", purchaseDesc)
-                .with("purchaseCost", purchaseCost)
-                .with("expenseAccountRef", expenseAccount)
-                .build()
-            )
-        );
+        return new QBItem(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, item.getItem()));
     }
     
     /**
@@ -639,7 +413,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Payment">Payment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-payment}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-payment2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -647,28 +420,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Information that pertains to the entire payment.
-     * @param lines Line details of the receive payment. A receive payment can have multiple lines.
+     * @param payment The payment to be created
      * @return The created Payment.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Payment createPayment(String realmId,
+    public QBPayment createPayment(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Placement(group = "Header") Map<String, Object> header,
-                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                 @Optional @Default("#[payload]") QBPayment payment)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Payment.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBPayment(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, payment.getPayment()));
     }
     
     /**
@@ -681,7 +445,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-payment-method}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-payment-method2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -689,31 +452,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param name User recognizable name for the payment method.
-     * @param type Type of payment. Specifies if it is a credit card payment type or a 
-     *             non-credit card payment type. It must specify either of the following:<br/>
-     *             * CREDIT_CARD<br/>
-     *             * NON_CREDIT_CARD
+     * @param paymentMethod The payment method to be created
      * @return The created PaymentMethod.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public PaymentMethod createPaymentMethod(String realmId,
+    public QBPaymentMethod createPaymentMethod(String realmId,
                                              String appKey,
                                              String realmIdPseudonym, String authIdPseudonym,
-                                             String name,
-                                             @Optional @Default("NON_CREDIT_CARD") String type)
+                                             @Optional @Default("#[payload]") QBPaymentMethod paymentMethod)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(PaymentMethod.class,
-                new MapBuilder()
-                .with("name", name)
-                .with("type", type)
-                .build()
-            )
-        );
+        return new QBPaymentMethod(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, paymentMethod.getPaymentMethod()));
     }
     
     /**
@@ -726,7 +477,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-sales-receipt}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-sales-receipt2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -734,28 +484,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param header Groups the elements that are common to the SalesReceipt transaction.
-     * @param lines Groups the line items for the sales receipt.
+     * @param salesReceipt The sales receipt to be created
      * @return The created SalesReceipt.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesReceipt createSalesReceipt(String realmId,
+    public QBSalesReceipt createSalesReceipt(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Placement(group = "Header") Map<String, Object> header,
-                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                           @Optional @Default("#[payload]") QBSalesReceipt salesReceipt)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(SalesReceipt.class,
-                new MapBuilder()
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBSalesReceipt(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesReceipt.getSalesReceipt()));
     }
     
     /**
@@ -770,7 +511,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/SalesTerm">SalesTerm Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-sales-term}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-sales-term2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -778,58 +518,20 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param name Specifies the user recognizable name for the salesterm.
-     * @param dueDays Number of days from the delivery of goods or services till the payment is due.
-     *                If DueDays is specified, only DiscountDays and DiscountPercent can be 
-     *                additionally specified.
-     * @param discountDays Optional. Number of days for which the discount is applicable, if the 
-     *                     payment is made within these days. This value is used only when DueDays 
-     *                     is specified.
-     * @param discountPercent Optional. Percentage of discount that is available against a price, if 
-     *                                  paid within the days specified by DiscountDays. This value is 
-     *                                  used only when DueDays is specified. 
-     * @param dayOfMonthDue Payment must be received by the day of the month specified by DayOfMonthDue. 
-     *                      This value is used only when DueDays is not specified.
-     * @param dueNextMonthDays Optional. Payment due next month if issued that many days before the 
-     *                         DayOfMonthDue. This value is used only when DueDays is not specified.
-     * @param discountDayOfMonth Optional. Discount applies if paid before that day of month. This value 
-     *                           is used only when DueDays is not specified.
-     * @param dateDiscountPercent Optional. Percentage of discount that is available against a price, if 
-     *                            paid before DiscountDayofMonth. This value is used only when DueDays is 
-     *                            not specified.
+     * @param salesTerm The sales term to be created
      * @return The created SalesTerm.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm createSalesTerm(String realmId,
+    public QBSalesTerm createSalesTerm(String realmId,
                                      String appKey,
                                      String realmIdPseudonym, String authIdPseudonym,
-                                     String name,
-                                     Integer dueDays,
-                                     @Optional Integer discountDays,
-                                     @Optional String discountPercent,
-                                     Integer dayOfMonthDue,
-                                     @Optional Integer dueNextMonthDays,
-                                     @Optional Integer discountDayOfMonth,
-                                     @Optional String dateDiscountPercent)
+                                     @Optional @Default("#[payload]") QBSalesTerm salesTerm)
     {
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(SalesTerm.class,
-                new MapBuilder()
-                .with("name", name)
-                .with("dueDays", dueDays)
-                .with("discountDays", discountDays)
-                .with("discountPercent", discountPercent)
-                .with("dayOfMonthDue", dayOfMonthDue)
-                .with("dueNextMonthDays", dueNextMonthDays)
-                .with("discountDayOfMonth", discountDayOfMonth)
-                .with("dateDiscountPercent", dateDiscountPercent)
-                .build()
-            )
-        );
+        return new QBSalesTerm(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesTerm.getSalesTerm()));
     }
     
     /**
@@ -842,7 +544,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-vendor}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-vendor2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -850,86 +551,25 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param name Optional. Specifies the full name of the vendor. If the FullName is specified, 
-     *             then GivenName, MiddleName, and FamilyName values are ignored.
-     * @param givenName Specifies the given name or first name of a person. GivenName is a required 
-     *                  field only if Name is not sent in the request. If a Name is sent, then the 
-     *                  GivenName field is optional.
-     * @param middleName Optional. Specifies the middle name of the vendor. A person can have zero 
-     *                   or more middle names.
-     * @param familyName Optional. Specifies the family name or the last name of the vendor.
-     * @param dBAName Optional. Specifies the "Doing Business As" name of the vendor.
-     * @param showAs Optional. Specifies the name of the vendor to be displayed.
-     * @param webSites Optional. Valid URI strings. Specifies the vendor's Web site.
-     * @param taxIdentifier Optional. Specifies the Tax ID of the person or the organization. This 
-     *                      is a Personally Identifiable Information (PII) attribute.
-     * @param acctNum Optional. Specifies the account name or the account number that is associated 
-     *                with the vendor.
-     * @param vendor1099 Optional. Specifies that the Vendor is an independent contractor, someone 
-     *                   who is given a 1099-MISC form at the end of the year. The "1099 Vendor" is 
-     *                   paid with regular checks, and taxes are not withheld on the vendor's behalf.
-     * @param emails Optional. Valid email. Specifies the vendors's email addresses.
-     * @param phones Optional. Specifies the phone numbers of the vendor. QBO allows mapping of up to 
-     *              5 phone numbers but only one phone number is permitted for one device type.
-     * @param addresses Optional. Specifies the physical addresses.
-     * @param notes Optional. Specifies any notes that needs to be added to this vendor.
+     * @param vendor The vendor to be created
      * @return The created Vendor.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Vendor createVendor(String realmId,
+    public QBVendor createVendor(String realmId,
                                String appKey,
                                String realmIdPseudonym, String authIdPseudonym,
-                               @Optional String name,
-                               @Optional String givenName,
-                               @Optional String middleName,
-                               @Optional String familyName,
-                               @Optional String dBAName,
-                               @Optional String showAs,
-                               @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
-                               @Optional String taxIdentifier,
-                               @Optional String acctNum,
-                               @Optional Boolean vendor1099,
-                               @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
-                               @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
-                               @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
-                               @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
+                               @Optional @Default("#[payload]") QBVendor vendor)
     {
-        webSites = coalesceList(webSites);
-        emails = coalesceList(emails);
-        phones = coalesceList(phones);
-        addresses = coalesceList(addresses);
-        notes = coalesceList(notes);
-        
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-            unmap(Vendor.class,
-                new MapBuilder()
-                .with("name", name)
-                .with("givenName", givenName)
-                .with("middleName", middleName)
-                .with("familyName", familyName)
-                .with("DBAName", dBAName)
-                .with("showAs", showAs)
-                .with("webSite", webSites)
-                .with("taxIdentifier", taxIdentifier)
-                .with("acctNum", acctNum)
-                .with("vendor1099", vendor1099)
-                .with("email", emails)
-                .with("phone", phones)
-                .with("address", addresses)
-                .with("notes", notes)
-                .build()
-            )
-        );
+        return new QBVendor(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, vendor.getVendor()));
     }
     
     /**
      * Retrieve objects by ID.
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-object}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-object2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -949,9 +589,9 @@ public class QuickBooksModule
                             String appKey,
                             String realmIdPseudonym, String authIdPseudonym,
                             OnlineEntityType type,
-                            @Placement(group = "Id") Map<String, Object> id)
+                            @Optional @Default("#[payload]") QBIdType id)
     {
-        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, unmap(IdType.class, id));
+        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id.getIdType());
     }
 
     /**
@@ -968,8 +608,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Account">Account Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-account}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-account2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-account3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -977,61 +615,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param name User-recognizable name for the account. This name must be unique.
-     *             When you create a company, you get some default accounts.
-     *             If you want to create an account, you must provide an account name that does not
-     *             match the name of any default account.
-     * @param desc Optional. User-entered description of the account.
-     *             This description helps the book keepers or accountants to decide which journal
-     *             entries should be posted to this account.
-     * @param subtype Detailed classification of the account that specifies the use of this account.
-     *                The accepted values are defined in QboAccountDetailTypeEnum.
-     * @param acctNum Optional. User-specified account number that help the user to identify the
-     *                account within the chart of accounts and decide what should be posted to the account.
-     * @param openingBalance Optional. Opening balance amount when you create a new balance sheet account.
-     * @param openingBalanceDate Optional. Date of the opening balance amount when creating a new balance
-     *                           sheet account.
-     * @param accountParentId Optional. If the account is a subaccount, AccountParentId is used to 
-     *                        store the ID of the parent account.
+     * @param account The account to be updated
      * @return The updated Account.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Account updateAccount(String realmId,
+    public QBAccount updateAccount(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Placement(group = "Id") Map<String, Object> id,
-                                 @Optional String syncToken,
-                                 String name,
-                                 @Optional String desc,
-                                 AccountOnlineDetail subtype,
-                                 @Optional String acctNum,
-                                 @Optional String openingBalance,
-                                 @Optional Date openingBalanceDate,
-                                 @Placement(group = "Account Parent Id") @Optional Map<String, Object> accountParentId)
+                                 @Optional @Default("#[payload]") QBAccount account)
     {   
-        
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ACCOUNT,
-            unmap(Account.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("name", name)
-                .with("accountParentId", accountParentId)
-                .with("desc", desc)
-                .with("subtype", subtype.toQboAccountDetail().value())
-                .with("acctNum", acctNum)
-                .with("openingBalance", openingBalance)
-                .with("openingBalanceDate", openingBalanceDate)
-                .build()
-            )
-        );
+        return new QBAccount(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ACCOUNT, account.getAccount()));
     }
     
     /**
@@ -1046,8 +642,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Bill">Bill Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1055,37 +649,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Information on the financial transaction of the Bill.
-     * @param lines Information about a specific good or service purchased for which the payment is demanded
-     *             as a part of the bill. A bill can have multiple lines.
-     * @return The created Bill.
+     * @param bill The bill to be updated
+     * @return The updated Bill.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Bill updateBill(String realmId,
+    public QBBill updateBill(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Placement(group = "Id") Map<String, Object> id,
-                           @Optional String syncToken,
-                           @Placement(group = "Header") Map<String, Object> header,
-                           @Placement(group = "Lines") List<Map<String, Object>> lines)
+                           @Optional @Default("#[payload]") QBBill bill)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILL,
-            unmap(Bill.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBBill(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILL, bill.getBill()));
     }
     
     /**
@@ -1102,8 +678,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/BillPayment">BillPayment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill-payment}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill-payment2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill-payment3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1111,36 +685,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Header information about the BillPayment.
-     * @param lines Specifies the line details for the bill payment. A bill payment can have multiple lines.
+     * @param billPayment Bill payment to be updated
      * @return The updated BillPayment.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public BillPayment updateBillPayment(String realmId,
+    public QBBillPayment updateBillPayment(String realmId,
                                          String appKey,
                                          String realmIdPseudonym, String authIdPseudonym,
-                                         @Placement(group = "Id") Map<String, Object> id,
-                                         @Optional String syncToken,
-                                         @Placement(group = "Header") Map<String, Object> header,
-                                         @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                         @Optional @Default("#[payload]") QBBillPayment billPayment)
     {    
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILLPAYMENT,
-            unmap(BillPayment.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBBillPayment(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILLPAYMENT, billPayment.getBillPayment()));
     }
     
     /**
@@ -1155,8 +712,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/CashPurchase">CashPurchase Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-cash-purchase}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-cash-purchase2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-cash-purchase3}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1164,37 +719,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Information about the financial transaction of the entire CashPurchase.
-     * @param lines List of lines. Information about a specific good or service purchased for which 
-     *             the payment is demanded as a part of the CashPurchase.
+     * @param cashPurchase The cash purchase to be updated
      * @return The updated CashPurchase.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase updateCashPurchase(String realmId,
+    public QBCashPurchase updateCashPurchase(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Placement(group = "Id") Map<String, Object> id,
-                                           @Optional String syncToken,
-                                           @Placement(group = "Header") Map<String, Object> header,
-                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                           @Optional @Default("#[payload]") QBCashPurchase cashPurchase)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CASHPURCHASE,
-            unmap(CashPurchase.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBCashPurchase(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CASHPURCHASE, cashPurchase.getCashPurchase()));
     }
     
     /**
@@ -1209,7 +746,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Check">Check Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-check}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-check2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1217,37 +753,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Financial Transaction information that pertains to the entire CheckHeader.
-     * @param lines List of lines. Information about a specific good or service purchased for which 
-     *             the payment is demanded as a part of the check.
+     * @param check The check to be updated
      * @return The updated Check.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Check updateCheck(String realmId,
+    public QBCheck updateCheck(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             @Placement(group = "Id") Map<String, Object> id,
-                             @Optional String syncToken,
-                             @Placement(group = "Header") Map<String, Object> header,
-                             @Placement(group = "Lines") List<Map<String, Object>> lines)
+                             @Optional @Default("#[payload]") QBCheck check)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CHECK,
-            unmap(Check.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBCheck(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CHECK, check.getCheck()));
     }
     
     /**
@@ -1264,7 +782,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-credit-card-charge}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-credit-card-charge2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1272,37 +789,20 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Financial Transaction information that pertains to the entire CreditCardChargeHeader.
-     * @param lines List of lines. Information about a specific good or service purchased for which the 
-     *             payment is demanded as a part of the CreditCardCharge purchase.
+     * @param creditCardCharge The credit card charge to be updated
      * @return The updated CreditCardCharge.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CreditCardCharge updateCreditCardCharge(String realmId,
+    public QBCreditCardCharge updateCreditCardCharge(String realmId,
                                                    String appKey,
                                                    String realmIdPseudonym, String authIdPseudonym,
-                                                   @Placement(group = "Id") Map<String, Object> id,
-                                                   @Optional String syncToken,
-                                                   @Placement(group = "Header") Map<String, Object> header,
-                                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                                   @Optional @Default("#[payload]") QBCreditCardCharge creditCardCharge)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CREDITCARDCHARGE,
-            unmap(CreditCardCharge.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBCreditCardCharge(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CREDITCARDCHARGE, 
+                creditCardCharge.getCreditCardCharge()));
     }
 
     /**
@@ -1318,7 +818,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Customer">Customer Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-customer}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-customer2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1326,94 +825,26 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param name Optional. Specifies the full name of the customer. If the Name is specified, then GivenName,
-     *             MiddleName, and FamilyName values are ignored.
-     * @param givenName Specifies the given name or first name of a person. GivenName is a required field only if 
-     *        Name is not sent in the request. If a Name is sent, then the GivenName field is optional.
-     * @param middleName Optional. Specifies the middle name of the person. A person can have zero or more middle 
-     *                   names.
-     * @param familyName Optional. Specifies the family name or the last name of the customer.
-     * @param suffix Optional. Suffix appended to the name, Jr., Sr., etc.
-     * @param dBAName Optional. Specifies the "Doing Business As" name of the customer.
-     * @param showAs Optional. Specifies the name of the vendor to be displayed.
-     * @param webSites Valid URI strings. Specifies the customers's Web sites.
-     * @param salesTermId Optional. Specifies the default sales term ID that is to be associated with the customer.
-     * @param paymentMethodId Optional. ID of the PaymentMethod. For Customer, this is the Id associated with the 
-     *          customer as set in the request.
-     * @param salesTaxCodeId QBO only supports the customers being taxable or not, so if this field is "1", the job 
-     *                       is taxable. If the field value is null, the job is not taxable. All other values are 
-     *                       invalid.
-     * @param emails Optional. Valid email. Specifies the customers's email addresses.
-     * @param phones Optional. Specifies the phone numbers of the customer. QBO allows mapping of up to 5 phone 
-     *              numbers but only one phone number is permitted for one device type.
-     * @param addresses Optional. Specifies the physical addresses.
-     * @param notes Optional. Specifies any notes that needs to be added to this customer.
+     * @param customer The customer to be updated
      * @return The updated Customer.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Customer updateCustomer(String realmId,
+    public QBCustomer updateCustomer(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Placement(group = "Id") Map<String, Object> id,
-                                   @Optional String syncToken,
-                                   @Optional String name,
-                                   @Optional String givenName,
-                                   @Optional String middleName,
-                                   @Optional String familyName,
-                                   @Optional String suffix,
-                                   @Optional String dBAName,
-                                   @Optional String showAs,
-                                   @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
-                                   @Placement(group = "Sales Term Id") @Optional Map<String, Object> salesTermId,
-                                   @Placement(group = "Payment Method Id") @Optional Map<String, Object> paymentMethodId,
-                                   @Placement(group = "Sales Tax Code Id") @Optional Map<String, Object> salesTaxCodeId,
-                                   @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
-                                   @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
-                                   @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
-                                   @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
+                                   @Optional @Default("#[payload]") QBCustomer customer)
     {
-        salesTermId = coalesceMap(salesTermId);
-        salesTaxCodeId = coalesceMap(salesTaxCodeId);
-        webSites = coalesceList(webSites);
-        emails = coalesceList(emails);
-        phones = coalesceList(phones);
-        addresses = coalesceList(addresses);
-        notes = coalesceList(notes);
-        if(paymentMethodId != null && (paymentMethodId.isEmpty() || paymentMethodId.containsKey("value") && StringUtils.isBlank((String)paymentMethodId.get("value"))))
+        Customer customerToUpdate = customer.getCustomer();
+        if(customerToUpdate.getPaymentMethodId() != null && (customerToUpdate.getPaymentMethodId().getValue().isEmpty() 
+                || StringUtils.isEmpty(customerToUpdate.getPaymentMethodId().getValue())))
         {
-            paymentMethodId = null;
+            customerToUpdate.setPaymentMethodId(new IdType());
         }
-        
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER,
-            unmap(Customer.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("name", name)
-                .with("givenName", givenName)
-                .with("middleName", middleName)
-                .with("familyName", familyName)
-                .with("suffix", suffix)
-                .with("DBAName", dBAName)
-                .with("showAs", showAs)
-                .with("webSite", webSites)
-                .with("salesTermId", salesTermId)
-                .with("paymentMethodId", paymentMethodId)
-                .with("salesTaxCodeId", salesTaxCodeId)
-                .with("email", emails)
-                .with("phone", phones)
-                .with("address", addresses)
-                .with("notes", notes)
-                .build()
-            )
-        );
+
+        return new QBCustomer(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER, customerToUpdate));        
     }
     
     /**
@@ -1429,7 +860,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Estimate">Estimate Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-estimate}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-estimate2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1437,36 +867,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Financial transaction information that pertains to the entire Estimate.
-     * @param lines Information about a specific good or service for which the estimate is being issued.
+     * @param estimate The estimate to be updated
      * @return The updated Estimate.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Estimate updateEstimate(String realmId,
+    public QBEstimate updateEstimate(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Placement(group = "Id") Map<String, Object> id,
-                                   @Optional String syncToken,
-                                   @Placement(group = "Header") Map<String, Object> header,
-                                   @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                   @Optional @Default("#[payload]") QBEstimate estimate)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ESTIMATE,
-            unmap(Estimate.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBEstimate(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ESTIMATE, estimate.getEstimate()));
     }
     
     /**
@@ -1483,7 +896,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Invoice">Invoice Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-invoice}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-invoice2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1491,36 +903,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Provides information that pertains to the entire Invoice.
-     * @param lines Information about a specific good or service for which the Invoice is being issued.
+     * @param invoice The invoice to be updated
      * @return The updated Invoice.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Invoice updateInvoice(String realmId,
+    public QBInvoice updateInvoice(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Placement(group = "Id") Map<String, Object> id,
-                                 @Optional String syncToken,
-                                 @Placement(group = "Header") Map<String, Object> header,
-                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                 @Optional @Default("#[payload]") QBInvoice invoice)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.INVOICE,
-            unmap(Invoice.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBInvoice(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.INVOICE, invoice.getInvoice()));
     }
     
     /**
@@ -1536,7 +931,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Item">Item Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-item}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-item2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1544,68 +938,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param name Optional. User recognizable name of the Item.
-     * @param unitPrice Optional. Monetary values of the service or product
-     * @param desc Optional. User entered description for the item to further describe the details 
-     *             of service or product.
-     * @param taxable Optional. Indicates whether the item is subject to tax.
-     * @param incomeAccount Optional. Income account reference to be associated with the sales item.
-     * @param itemParentId Optional. The parent item id of current item.
-     * @param itemParentName Optional. Name of parent Item. This field is output only.
-     * @param purchaseDesc Optional. User entered purchase description for the item to further describe 
-     *                     the details of the purchase.
-     * @param purchaseCost Optional. The monetary value of the service or product.
-     * @param expenseAccount Optional. Income account reference to be associated with the purchase item.
+     * @param item The item to be updated
      * @return The updated Item.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Item updateItem(String realmId,
+    public QBItem updateItem(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Placement(group = "Id") Map<String, Object> id,
-                           @Optional String syncToken,
-                           @Optional @Default("") String name,
-                           @Placement(group = "Unit Price") @Optional Map<String, Object> unitPrice,
-                           @Optional String desc,
-                           @Optional @Default("false") Boolean taxable,
-                           @Placement(group = "Income Account") @Optional Map<String, Object> incomeAccount,
-                           @Placement(group = "Item Parent Id") @Optional Map<String, Object> itemParentId,
-                           @Optional String itemParentName,
-                           @Optional String purchaseDesc,
-                           @Placement(group = "Purchase Cost") @Optional Map<String, Object> purchaseCost,
-                           @Placement(group = "Expense Account") @Optional Map<String, Object> expenseAccount)
+                           @Optional @Default("#[payload]") QBItem item)
     {
-        unitPrice = coalesceMap(unitPrice);
-        incomeAccount = coalesceMap(incomeAccount);
-        itemParentId = coalesceMap(itemParentId);
-        purchaseCost = coalesceMap(purchaseCost);
-        expenseAccount = coalesceMap(expenseAccount);
-        
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ITEM,
-            unmap(Item.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("name", name)
-                .with("unitPrice", unitPrice)
-                .with("desc", desc)
-                .with("taxable", taxable)
-                .with("incomeAccountRef", incomeAccount)
-                .with("itemParentId", itemParentId)
-                .with("itemParentName", itemParentName)
-                .with("purchaseDesc", purchaseDesc)
-                .with("purchaseCost", purchaseCost)
-                .with("expenseAccountRef", expenseAccount)
-                .build()
-            )
-        );
+        return new QBItem(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ITEM, item.getItem()));
     }
     
     /**
@@ -1621,7 +966,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Payment">Payment Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-payment}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-payment2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1629,36 +973,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Information that pertains to the entire payment.
-     * @param lines Line details of the receive payment. A receive payment can have multiple lines.
+     * @param payment The payment to be updated
      * @return The updated Payment.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Payment updatePayment(String realmId,
+    public QBPayment updatePayment(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Placement(group = "Id") Map<String, Object> id,
-                                 @Optional String syncToken,
-                                 @Placement(group = "Header") Map<String, Object> header,
-                                 @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                 @Optional @Default("#[payload]") QBPayment payment)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENT,
-            unmap(Payment.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBPayment(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENT, payment.getPayment()));
     }
     
     /**
@@ -1674,7 +1001,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-payment-method}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-payment-method2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1682,37 +1008,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param name User recognizable name for the payment method.
-     * @param type Optional. Type of payment. Specifies if it is a credit card payment type or a 
-     *             non-credit card payment type.
+     * @param paymentMethod The payment method to be updated
      * @return The updated PaymentMethod.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public PaymentMethod updatePaymentMethod(String realmId,
+    public QBPaymentMethod updatePaymentMethod(String realmId,
                                              String appKey,
                                              String realmIdPseudonym, String authIdPseudonym,
-                                             @Placement(group = "Id") Map<String, Object> id,
-                                             @Optional String syncToken,
-                                             String name, 
-                                             @Optional @Default("NON_CREDIT_CARD") String type)
+                                             @Optional @Default("#[payload]") QBPaymentMethod paymentMethod)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENTMETHOD,
-            unmap(PaymentMethod.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("name", name)
-                .with("type", type)
-                .build()
-            )
-        );
+        return new QBPaymentMethod(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENTMETHOD, paymentMethod.getPaymentMethod()));
     }
     
     /**
@@ -1728,7 +1036,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-sales-receipt}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-sales-receipt2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1736,36 +1043,19 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param header Groups the elements that are common to the SalesReceipt transaction.
-     * @param lines Groups the line items for the sales receipt.
+     * @param salesReceipt The sales receipt
      * @return The updated SalesReceipt.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesReceipt updateSalesReceipt(String realmId,
+    public QBSalesReceipt updateSalesReceipt(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Placement(group = "Id") Map<String, Object> id,
-                                           @Optional String syncToken,
-                                           @Placement(group = "Header") Map<String, Object> header,
-                                           @Placement(group = "Lines") List<Map<String, Object>> lines)
+                                           @Optional @Default("#[payload]") QBSalesReceipt salesReceipt)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESRECEIPT,
-            unmap(SalesReceipt.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("header", header)
-                .with("line", lines)
-                .build()
-            )
-        );
+        return new QBSalesReceipt(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESRECEIPT, salesReceipt.getSalesReceipt()));
     }
     
     /**
@@ -1783,7 +1073,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/SalesTerm">SalesTerm Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-sales-term}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-sales-term2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1791,66 +1080,20 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param name Specifies the user recognizable name for the salesterm.
-     * @param dueDays Number of days from the delivery of goods or services till the payment is due.
-     *                If DueDays is specified, only DiscountDays and DiscountPercent can be 
-     *                additionally specified.
-     * @param discountDays Optional. Number of days for which the discount is applicable, if the 
-     *                     payment is made within these days. This value is used only when DueDays 
-     *                     is specified.
-     * @param discountPercent Optional. Percentage of discount that is available against a price, if 
-     *                                  paid within the days specified by DiscountDays. This value is 
-     *                                  used only when DueDays is specified. 
-     * @param dayOfMonthDue Payment must be received by the day of the month specified by DayOfMonthDue. 
-     *                      This value is used only when DueDays is not specified.
-     * @param dueNextMonthDays Optional. Payment due next month if issued that many days before the 
-     *                         DayOfMonthDue. This value is used only when DueDays is not specified.
-     * @param discountDayOfMonth Optional. Discount applies if paid before that day of month. This value 
-     *                           is used only when DueDays is not specified.
-     * @param dateDiscountPercent Optional. Percentage of discount that is available against a price, if 
-     *                            paid before DiscountDayofMonth. This value is used only when DueDays is 
-     *                            not specified.
+     * @param salesTerm The sales term to be updated
      * @return The updated SalesTerm.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm updateSalesTerm(String realmId,
+    public QBSalesTerm updateSalesTerm(String realmId,
                                      String appKey,
                                      String realmIdPseudonym, String authIdPseudonym,
-                                     @Placement(group = "Id") Map<String, Object> id,
-                                     @Optional String syncToken,
-                                     String name, 
-                                     Integer dueDays, 
-                                     @Optional Integer discountDays,
-                                     @Optional String discountPercent, 
-                                     Integer dayOfMonthDue,
-                                     @Optional Integer dueNextMonthDays, 
-                                     @Optional Integer discountDayOfMonth,
-                                     @Optional String dateDiscountPercent)
+                                     @Optional @Default("#[payload]") QBSalesTerm salesTerm)
     {
         
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESTERM,
-            unmap(SalesTerm.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("name", name)
-                .with("dueDays", dueDays)
-                .with("discountDays", discountDays)
-                .with("discountPercent", discountPercent)
-                .with("dayOfMonthDue", dayOfMonthDue)
-                .with("dueNextMonthDays", dueNextMonthDays)
-                .with("discountDayOfMonth", discountDayOfMonth)
-                .with("dateDiscountPercent", dateDiscountPercent)
-                .build()
-            )
-        );
+        return new QBSalesTerm(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESTERM, salesTerm.getSalesTerm()));
     }
     
     /**
@@ -1866,7 +1109,6 @@ public class QuickBooksModule
      * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-vendor}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-vendor2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1874,94 +1116,25 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
-     *                  Before performing the update, Data Services verifies that the SyncToken in the
-     *                  request has the same value as the SyncToken in the Data Service's repository.
-     * @param name Optional. Specifies the full name of the vendor. If the FullName is specified, 
-     *             then GivenName, MiddleName, and FamilyName values are ignored.
-     * @param givenName Specifies the given name or first name of a person. GivenName is a required 
-     *                  field only if Name is not sent in the request. If a Name is sent, then the 
-     *                  GivenName field is optional.
-     * @param middleName Optional. Specifies the middle name of the vendor. A person can have zero 
-     *                   or more middle names.
-     * @param familyName Optional. Specifies the family name or the last name of the vendor.
-     * @param dBAName Optional. Specifies the "Doing Business As" name of the vendor.
-     * @param showAs Optional. Specifies the name of the vendor to be displayed.
-     * @param webSites Optional. Valid URI strings. Specifies the vendor's Web site.
-     * @param taxIdentifier Optional. Specifies the Tax ID of the person or the organization. This 
-     *                      is a Personally Identifiable Information (PII) attribute.
-     * @param acctNum Optional. Specifies the account name or the account number that is associated 
-     *                with the vendor.
-     * @param vendor1099 Optional. Specifies that the Vendor is an independent contractor, someone 
-     *                   who is given a 1099-MISC form at the end of the year. The "1099 Vendor" is 
-     *                   paid with regular checks, and taxes are not withheld on the vendor's behalf.
-     * @param emails Optional. Valid email. Specifies the vendors's email addresses.
-     * @param phones Optional. Specifies the phone numbers of the vendor. QBO allows mapping of up to 
-     *              5 phone numbers but only one phone number is permitted for one device type.
-     * @param addresses Optional. Specifies the physical addresses.
-     * @param notes Optional. Specifies any notes that needs to be added to this vendor.
+     * @param vendor The vendor to be updated
      * @return The updated Vendor.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Vendor updateVendor(String realmId,
+    public QBVendor updateVendor(String realmId,
                                String appKey,
                                String realmIdPseudonym, String authIdPseudonym,
-                               @Placement(group = "Id") Map<String, Object> id,
-                               @Optional String syncToken,
-                               @Optional String name, 
-                               @Optional String givenName, 
-                               @Optional String middleName, 
-                               @Optional String familyName,
-                               @Optional String dBAName, 
-                               @Optional String showAs,
-                               @Placement(group = "Web Sites") @Optional List<Map<String, Object>> webSites,
-                               @Optional String taxIdentifier, 
-                               @Optional String acctNum, 
-                               @Optional Boolean vendor1099,
-                               @Placement(group = "Emails") @Optional List<Map<String, Object>> emails,
-                               @Placement(group = "Phones") @Optional List<Map<String, Object>> phones,
-                               @Placement(group = "Addresses") @Optional List<Map<String, Object>> addresses,
-                               @Placement(group = "Notes") @Optional List<Map<String, Object>> notes)
+                               @Optional @Default("#[payload]") QBVendor vendor)
     {
-        webSites = coalesceList(webSites);
-        emails = coalesceList(emails);
-        phones = coalesceList(phones);
-        addresses = coalesceList(addresses);
-        notes = coalesceList(notes);
-        
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.VENDOR,
-            unmap(Vendor.class,
-                new MapBuilder()
-                .with("id", id)
-                .with("syncToken", syncToken)
-                .with("name", name)
-                .with("givenName", givenName)
-                .with("middleName", middleName)
-                .with("familyName", familyName)
-                .with("DBAName", dBAName)
-                .with("showAs", showAs)
-                .with("webSite", webSites)
-                .with("taxIdentifier", taxIdentifier)
-                .with("acctNum", acctNum)
-                .with("vendor1099", vendor1099)
-                .with("email", emails)
-                .with("phone", phones)
-                .with("address", addresses)
-                .with("notes", notes)
-                .build()
-            )
-        );
+        return new QBVendor(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.VENDOR, vendor.getVendor()));
     }
     
     /**
      * Deletes an object.
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:delete-object}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:delete-object2}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -1982,11 +1155,11 @@ public class QuickBooksModule
     public void deleteObject(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             OnlineEntityType type,
-                             @Placement(group = "Id") Map<String, Object> id,
+                             OnlineEntityType type, 
+                             @Optional @Default("#[payload]") QBIdType id, 
                              @Optional String syncToken)
     {
-        client.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, unmap(IdType.class, id), syncToken);
+        client.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id.getIdType(), syncToken);
     }
 
     /**
@@ -2060,17 +1233,6 @@ public class QuickBooksModule
             client = new DefaultQuickBooksOnlineClient(baseUri);
         }
     }
-        
-    @SuppressWarnings("unchecked")
-    private <T> List<T> coalesceList(List<T> list )
-    {
-        return (List<T>) (list == null ? Collections.emptyList() : list);
-    }
-    
-    private Map<String, Object> coalesceMap(Map<String, Object> map )
-    {
-        return map == null ? new HashMap<String, Object>() : map;
-    }
     
     public void setBaseUri(String baseUri)
     {
@@ -2080,11 +1242,5 @@ public class QuickBooksModule
     public String getBaseUri()
     {
         return baseUri;
-    }
-
-    @SuppressWarnings("unchecked")
-    private <A> A  unmap(Class<A> class1, Map<String, Object> id)
-    {
-        return (A) mom.unmap(id, class1);
     }
 }

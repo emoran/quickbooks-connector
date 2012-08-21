@@ -25,8 +25,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.mule.modules.quickbooks.api.AbstractQuickBooksClient;
+import org.mule.modules.quickbooks.api.exception.ErrorInfo;
+import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.online.schema.FaultInfo;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.objectfactory.QBWMessageUtils;
@@ -88,7 +89,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
             if(respObj instanceof ErrorResponse)
             {
-                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
             }
             if (fullResponse != null && fullResponse)
             {
@@ -133,7 +134,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
             if(respObj instanceof ErrorResponse)
             {
-                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
             }
             return Streams.from(getListFromIntuitResponse(respObj, type)).anyOrNull();
         }
@@ -207,7 +208,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
             if(respObj instanceof ErrorResponse)
             {
-                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
             }
             if (fullResponse != null && fullResponse)
             {
@@ -266,7 +267,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
             if(respObj instanceof ErrorResponse)
             {
-                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
             }
         }
         catch(QuickBooksRuntimeException e)
@@ -346,7 +347,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
                     Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
                     if(respObj instanceof ErrorResponse)
                     {
-                        throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                        throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
                     }
                     return getListFromIntuitResponse(respObj, type);
                 }
@@ -407,7 +408,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
                 responseObject = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
                 if(responseObject instanceof ErrorResponse)
                 {
-                    throw new QuickBooksRuntimeException((ErrorResponse) responseObject);
+                    throw new QuickBooksRuntimeException(new ErrorInfo(responseObject));
                 }                
             } 
             catch(QuickBooksRuntimeException e)
@@ -461,7 +462,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
             if(respObj instanceof ErrorResponse)
             {
-                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
             }
             return respObj;
         }
@@ -505,7 +506,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
             if(respObj instanceof ErrorResponse)
             {
-                throw new QuickBooksRuntimeException((ErrorResponse)respObj);
+                throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
             }
         }
         catch(QuickBooksRuntimeException e)
@@ -530,17 +531,17 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     
     
     @Override
-    protected FaultInfo getFaultInfo(String str) throws JAXBException
+    protected ExceptionInfo getFaultInfo(String str) throws JAXBException
     {
         if (str.contains("oauth_problem=token_rejected"))
         {
             //This use the QBO FaultInfo because, in QBW it's not defined FaultInfo, 
             //but if the tokens expired of if they are wrong, they send us this object.
-            FaultInfo fault = new FaultInfo();
-            fault.setCause("SERVER");
-            fault.setErrorCode("401");
-            fault.setMessage("Unauthorized OAuth Token: token_rejected");
-            return fault;
+            ExceptionInfo exceptionInfo = new ExceptionInfo();
+            exceptionInfo.setCause("SERVER");
+            exceptionInfo.setErrorCode("401");
+            exceptionInfo.setMessage("Unauthorized OAuth Token: token_rejected");
+            return exceptionInfo;
         }
         return null;
     }

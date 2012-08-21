@@ -33,11 +33,9 @@
 		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
 		                           type="#[map-payload:type]"
-		                           requestId="#[map-payload:requestId]"
 		                           draft="#[map-payload:draft]"
-		                           fullResponse="#[map-payload:fullResponse]">
-		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
-		</quickbooks-windows:create>
+		                           fullResponse="#[map-payload:fullResponse]"
+		                           entityObject-ref="#[payload]"/>
 	</flow>
 	<flow name="update">
 		<quickbooks-windows:update realmId="#[map-payload:realmId]"
@@ -45,12 +43,9 @@
 		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
 		                           type="#[map-payload:type]"
-		                           requestId="#[map-payload:requestId]"
 		                           draft="#[map-payload:draft]"
-		                           fullResponse="#[map-payload:fullResponse]">
-		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
-		            
-		</quickbooks-windows:update>
+		                           fullResponse="#[map-payload:fullResponse]"
+		                           entityObject-ref="#[payload]"/>
 	</flow>
 	<flow name="delete">
 		<quickbooks-windows:delete realmId="#[map-payload:realmId]"
@@ -58,20 +53,15 @@
 		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
 		                           type="#[map-payload:type]"
-		                           requestId="#[map-payload:requestId]">
-		    <quickbooks-windows:obj ref="#[map-payload:obj]"/>
-		            
-		</quickbooks-windows:delete>
+		                           entityObject-ref="#[payload]" />
 	</flow>
 	<flow name="get-object">
 		<quickbooks-windows:get-object realmId="#[map-payload:realmId]"
 		                           appKey="#[map-payload:appKey]"
 		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
-		                           type="#[map-payload:type]">
-		    <quickbooks-windows:id ref="#[map-payload:id]"/>
-		            
-		</quickbooks-windows:get-object>
+		                           type="#[map-payload:type]"
+		                           idType-ref="#[payload]" />
 	</flow>
 	<flow name="find-objects">
 		<quickbooks-windows:find-objects realmId="#[map-payload:realmId]"
