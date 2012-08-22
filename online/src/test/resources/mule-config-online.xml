@@ -21,7 +21,7 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
         http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.1/mule-scripting.xsd
         http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
-        http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/2.0/mule-quickbooks.xsd">
+        http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/3.0/mule-quickbooks.xsd">
     
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     
@@ -40,8 +40,8 @@
         <quickbooks:create-account realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                                   authIdPseudonym="dasdasda"
-                                   account-ref="#[payload]">
+                                   authIdPseudonym="dasdasda" >
+              <quickbooks:account ref="#[payload]"/>
         </quickbooks:create-account>
     </flow>
 
@@ -50,99 +50,85 @@
         <quickbooks:create-account realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                                   authIdPseudonym="dasdasda" 
-                                   account-ref="#[payload]">                         
+                                   authIdPseudonym="dasdasda" >                         
         </quickbooks:create-account>
                                    
         <quickbooks:create-bill realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                                    authIdPseudonym="dasdasda"
-                                bill-ref="#[payload]">
+                                    authIdPseudonym="dasdasda" >
         </quickbooks:create-bill>
                                 
         <quickbooks:create-bill-payment realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                            billPayment-ref="#[payload]">
+                           authIdPseudonym="dasdasda" >
         </quickbooks:create-bill-payment>
                                         
         <quickbooks:create-cash-purchase realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                                cashPurchase-ref="#[payload]">
+                           authIdPseudonym="dasdasda" >
         </quickbooks:create-cash-purchase>
                                          
         <quickbooks:create-check realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                            check-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:create-check>                     
         
         <quickbooks:create-credit-card-charge realmId="dasda"
                                     appKey="dasdasd"
                                     realmIdPseudonym="dadadada"
-                                    authIdPseudonym="dasdasda"
-                                    creditCardCharge-ref="#[payload]">
+                                    authIdPseudonym="dasdasda">
         </quickbooks:create-credit-card-charge>
                                               
         <quickbooks:create-customer realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                            customer-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:create-customer>
         
         <quickbooks:create-estimate realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           estimate-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:create-estimate>
                                     
         <quickbooks:create-invoice realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                            invoice-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:create-invoice>
                                    
         <quickbooks:create-item realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           item-ref="#[payload]">     
+                           authIdPseudonym="dasdasda">     
         </quickbooks:create-item>
                         
         <quickbooks:create-payment realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           payment-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:create-payment>
                                    
         <quickbooks:create-payment-method realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           paymentMethod-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:create-payment-method>
                                          
         <quickbooks:create-sales-term realmId="dasda"
                                     appKey="dasdasd"
                                     realmIdPseudonym="dadadada"
-                                    authIdPseudonym="dasdasda"
-                                    salesTerm-ref="#[payload]">
+                                    authIdPseudonym="dasdasda">
         </quickbooks:create-sales-term>
                                       
         <quickbooks:create-vendor realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           vendor-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:create-vendor>
                                   
     </flow>
@@ -152,8 +138,7 @@
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
                            authIdPseudonym="dasdasda"
-                                   type="INVOICE"
-                            id-ref="#[payload]">
+                                   type="INVOICE">
         </quickbooks:get-object>
     </flow>
     
@@ -161,106 +146,92 @@
         <quickbooks:update-account realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           account-ref="#[payload]">
+                           authIdPseudonym="dasdasda" >
+                           <quickbooks:account ref="#[payload]" />
         </quickbooks:update-account>
                                    
         <quickbooks:update-bill realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                                bill-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-bill>
                                 
         <quickbooks:update-bill-payment realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-	                           authIdPseudonym="dasdasda"
-	                           billPayment-ref="#[payload]">
+	                           authIdPseudonym="dasdasda">
         </quickbooks:update-bill-payment>
                                         
         <quickbooks:update-cash-purchase realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           cashPurchase-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-cash-purchase>
                                          
         <quickbooks:update-check realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           check-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-check>                     
         
         <quickbooks:update-credit-card-charge realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                            creditCardCharge-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-credit-card-charge>
                                               
         <quickbooks:update-customer realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           customer-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
             </quickbooks:update-customer>
         
         <quickbooks:update-estimate realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           estimate-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-estimate>
                                     
         <quickbooks:update-invoice realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           invoice-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-invoice>
                                    
         <quickbooks:update-item realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           item-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-item>
                         
         <quickbooks:update-payment realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           payment-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-payment>
                                    
         <quickbooks:update-payment-method realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           paymentMethod-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-payment-method>
                                           
         <quickbooks:update-sales-receipt realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           salesReceipt-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-sales-receipt>
                                          
         <quickbooks:update-sales-term realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           salesTerm-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-sales-term>
                                       
         <quickbooks:update-vendor realmId="dasda"
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
-                           authIdPseudonym="dasdasda"
-                           vendor-ref="#[payload]">
+                           authIdPseudonym="dasdasda">
         </quickbooks:update-vendor>
     </flow>
 
@@ -269,8 +240,7 @@
                                    appKey="dasdasd"
                                    realmIdPseudonym="dadadada"
                            authIdPseudonym="dasdasda"
-                                   type="INVOICE" syncToken="2"
-                                   id-ref="#[payload]">
+                                   type="INVOICE" syncToken="2">
         </quickbooks:delete-object>
     </flow>
     

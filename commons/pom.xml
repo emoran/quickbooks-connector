@@ -16,6 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<joda.time.version>1.6</joda.time.version>
 		<github.merge>true</github.merge>
+		<maven.javadoc.skip>true</maven.javadoc.skip>
 	</properties>
 	
 	<build>

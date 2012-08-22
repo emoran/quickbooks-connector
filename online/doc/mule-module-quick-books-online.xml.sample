@@ -2,8 +2,7 @@
 <quickbooks:create-account realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]"
-                           account-ref="#[payload]" >            
+                             authIdPseudonym="#[map-payload:authIdPseudonym]" >            
 </quickbooks:create-account>
 <!-- END_INCLUDE(quickbooks:create-account) -->
 
@@ -11,8 +10,7 @@
 <quickbooks:create-bill realmId="#[map-payload:realmId]"
                         appKey="#[map-payload:appKey]"
                         realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                        authIdPseudonym="#[map-payload:authIdPseudonym]" 
-                        bill-ref="#[payload]">
+                        authIdPseudonym="#[map-payload:authIdPseudonym]" >
                         
 </quickbooks:create-bill>
 <!-- END_INCLUDE(quickbooks:create-bill) -->
@@ -21,8 +19,7 @@
 <quickbooks:create-bill-payment realmId="#[map-payload:realmId]"
                                 appKey="#[map-payload:appKey]"
                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]"
-                                billPayment-ref="#[payload]">
+                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:create-bill-payment>
 <!-- END_INCLUDE(quickbooks:create-bill-payment) -->
 
@@ -30,8 +27,7 @@
 <quickbooks:create-cash-purchase realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]"
-                                cashPurchase-ref="#[payload]">
+                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:create-cash-purchase>
 <!-- END_INCLUDE(quickbooks:create-cash-purchase) -->
 
@@ -39,8 +35,7 @@
 <quickbooks:create-check realmId="#[map-payload:realmId]"
                          appKey="#[map-payload:appKey]"
                          realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                         authIdPseudonym="#[map-payload:authIdPseudonym]"
-                         check-ref=
+                         authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:create-check>
 <!-- END_INCLUDE(quickbooks:create-check) -->
 
@@ -48,8 +43,7 @@
 <quickbooks:create-credit-card-charge realmId="#[map-payload:realmId]"
                                       appKey="#[map-payload:appKey]"
                                       realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                    authIdPseudonym="#[map-payload:authIdPseudonym]"
-                                    creditCardCharge="#[payload]">                                    
+                                    authIdPseudonym="#[map-payload:authIdPseudonym]" >                                    
 </quickbooks:create-credit-card-charge>
 <!-- END_INCLUDE(quickbooks:create-credit-card-charge) -->
 
@@ -57,8 +51,7 @@
 <quickbooks:create-customer realmId="realmId"
                             appKey="appKey"
                             realmIdPseudonym="reamIdPseudonym"
-                            authIdPseudonym="authIdPseudonym"                         
-                            customer-ref="#[payload]">
+                            authIdPseudonym="authIdPseudonym" >
 </quickbooks:create-customer>
 <!-- END_INCLUDE(quickbooks:create-customer) -->
 
@@ -66,8 +59,7 @@
 <quickbooks:create-estimate realmId="#[map-payload:realmId]"
                             appKey="#[map-payload:appKey]"
                             realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                            authIdPseudonym="#[map-payload:authIdPseudonym]"
-                            estimate-ref="#[payload]">
+                            authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:create-estimate>
 <!-- END_INCLUDE(quickbooks:create-estimate) -->
 
@@ -75,8 +67,7 @@
 <quickbooks:create-invoice realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]"
-                           invoice-ref="#[payload]">
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:create-invoice>
 <!-- END_INCLUDE(quickbooks:create-invoice) -->
 
@@ -84,8 +75,7 @@
 <quickbooks:create-item realmId="realmId"
                         appKey="appKey"
                         realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym"                         
-                        item-ref="#[payload]">    
+                         authIdPseudonym="authIdPseudonym" >    
 </quickbooks:create-item>
 <!-- END_INCLUDE(quickbooks:create-item) -->
 
@@ -93,8 +83,7 @@
 <quickbooks:create-payment realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]"
-                           payment-ref="#[payload]">                            
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" >                            
 </quickbooks:create-payment>
 <!-- END_INCLUDE(quickbooks:create-payment) -->
 
@@ -102,8 +91,7 @@
 <quickbooks:create-payment-method realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]"
-                           paymentMethod-ref="#[payload]">                            
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" >                            
 </quickbooks:create-payment-method>
 <!-- END_INCLUDE(quickbooks:create-payment-method) -->
 
@@ -111,8 +99,7 @@
 <quickbooks:create-sales-receipt realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]"
-                            salesReceipt-ref="#[payload]">
+                             authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:create-sales-receipt>
 <!-- END_INCLUDE(quickbooks:create-sales-receipt) -->
 
@@ -120,16 +107,15 @@
 <quickbooks:create-sales-term realmId="#[map-payload:realmId]"
                               appKey="#[map-payload:appKey]"
                               realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]"
-                              salesTerm-ref="#[payload]">
+                             authIdPseudonym="#[map-payload:authIdPseudonym]" >
+</quickbooks:create-sales-term>
 <!-- END_INCLUDE(quickbooks:create-sales-term) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor) -->
 <quickbooks:create-vendor realmId="realmId"
                           appKey="appKey"
                           realmIdPseudonym="reamIdPseudonym"
-                          authIdPseudonym="authIdPseudonym"                         
-                          vendor-ref="#[payload]">
+                          authIdPseudonym="authIdPseudonym" >
 </quickbooks:create-vendor>
 <!-- END_INCLUDE(quickbooks:create-vendor) -->
 
@@ -138,8 +124,7 @@
                        appKey="#[map-payload:appKey]"
                        realmIdPseudonym="#[map-payload:realmIdPseudonym]"
                              authIdPseudonym="#[map-payload:authIdPseudonym]"
-                       type="INVOICE"
-                       id-ref="#[payload]">
+                       type="INVOICE" >
 </quickbooks:get-object>
 <!-- END_INCLUDE(quickbooks:get-object) -->
 
@@ -147,8 +132,7 @@
 <quickbooks:update-account realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]"
-                           account-ref="#[payload]">                           
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" >                           
 </quickbooks:update-account>
 <!-- END_INCLUDE(quickbooks:update-account) -->
 
@@ -156,8 +140,7 @@
 <quickbooks:update-bill realmId="#[map-payload:realmId]"
                         appKey="#[map-payload:appKey]"
                         realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                        authIdPseudonym="#[map-payload:authIdPseudonym]"
-                        bill-ref="#[payload]">
+                        authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:update-bill>
 <!-- END_INCLUDE(quickbooks:update-bill) -->
 
@@ -165,16 +148,15 @@
 <quickbooks:update-bill-payment realmId="#[map-payload:realmId]"
                                 appKey="#[map-payload:appKey]"
                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]"
-                                billPayment-ref="#[payload]">
+                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
+</quickbooks:update-bill-payment>
 <!-- END_INCLUDE(quickbooks:update-bill-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase) -->
 <quickbooks:update-cash-purchase realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]"
-                                 cashPurchase-ref="#[payload]">
+                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:update-cash-purchase>
 <!-- END_INCLUDE(quickbooks:update-cash-purchase) -->
 
@@ -182,8 +164,7 @@
 <quickbooks:update-check realmId="#[map-payload:realmId]"
                          appKey="#[map-payload:appKey]"
                          realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                         authIdPseudonym="#[map-payload:authIdPseudonym]"
-                         check-ref="#[payload]">
+                         authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:update-check>
 <!-- END_INCLUDE(quickbooks:update-check) -->
 
@@ -191,8 +172,7 @@
 <quickbooks:update-credit-card-charge realmId="#[map-payload:realmId]"
                                       appKey="#[map-payload:appKey]"
                                       realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                      authIdPseudonym="#[map-payload:authIdPseudonym]"
-                                      creditCardCharge-ref="#[payload]">  
+                                      authIdPseudonym="#[map-payload:authIdPseudonym]" >  
 </quickbooks:update-credit-card-charge>
 <!-- END_INCLUDE(quickbooks:update-credit-card-charge) -->
 
@@ -200,8 +180,7 @@
 <quickbooks:update-customer realmId="realmId"
                             appKey="appKey"
                             realmIdPseudonym="reamIdPseudonym"
-                            authIdPseudonym="authIdPseudonym"                         
-                            customer-ref="#[payload]">
+                            authIdPseudonym="authIdPseudonym" >
 </quickbooks:update-customer>
 <!-- END_INCLUDE(quickbooks:update-customer) -->
 
@@ -209,8 +188,7 @@
 <quickbooks:update-estimate realmId="#[map-payload:realmId]"
                             appKey="#[map-payload:appKey]"
                             realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]"
-                            estimate-ref="#[payload]">
+                             authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:update-estimate>
 <!-- END_INCLUDE(quickbooks:update-estimate) -->
 
@@ -218,16 +196,15 @@
 <quickbooks:update-invoice realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]"
-                           invoice-ref="#[payload]">
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
+</quickbooks:update-invoice>                                             
 <!-- END_INCLUDE(quickbooks:update-invoice) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-item) -->
 <quickbooks:update-item realmId="realmId"
                         appKey="appKey"
                         realmIdPseudonym="reamIdPseudonym"
-                        authIdPseudonym="authIdPseudonym"                         
-                        item-ref="#[payload]">    
+                        authIdPseudonym="authIdPseudonym" >    
 </quickbooks:update-item>
 <!-- END_INCLUDE(quickbooks:update-item) -->
 
@@ -235,8 +212,7 @@
 <quickbooks:update-payment realmId="#[map-payload:realmId]"
                            appKey="#[map-payload:appKey]"
                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]"
-                           payment-ref="#[payload]">
+                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:update-payment>
 <!-- END_INCLUDE(quickbooks:update-payment) -->
 
@@ -244,8 +220,7 @@
 <quickbooks:update-payment-method realmId="realmId"
                                   appKey="appKey"
                                   realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym"                         
-                                  paymentMethod-ref="#[payload]">
+                                  authIdPseudonym="authIdPseudonym" >
 </quickbooks:update-payment-method>
 <!-- END_INCLUDE(quickbooks:update-payment-method) -->
 
@@ -253,8 +228,7 @@
 <quickbooks:update-sales-receipt realmId="#[map-payload:realmId]"
                                  appKey="#[map-payload:appKey]"
                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                 authIdPseudonym="#[map-payload:authIdPseudonym]"
-                                 salesReceipt-ref="#[payload]">
+                                 authIdPseudonym="#[map-payload:authIdPseudonym]" >
 </quickbooks:update-sales-receipt>
 <!-- END_INCLUDE(quickbooks:update-sales-receipt) -->
 
@@ -262,8 +236,7 @@
 <quickbooks:update-sales-term realmId="realmId"
                               appKey="appKey"
                               realmIdPseudonym="reamIdPseudonym"
-                              authIdPseudonym="authIdPseudonym"                         
-                              salesTerm-ref="#[payload]">
+                              authIdPseudonym="authIdPseudonym" >
 </quickbooks:update-sales-term>
 <!-- END_INCLUDE(quickbooks:update-sales-term) -->
 
@@ -271,8 +244,7 @@
 <quickbooks:update-vendor realmId="realmId"
                           appKey="appKey"
                           realmIdPseudonym="reamIdPseudonym"
-                          authIdPseudonym="authIdPseudonym"                         
-                          vendor-ref="#[payload]">
+                          authIdPseudonym="authIdPseudonym" >
 </quickbooks:update-vendor>
 <!-- END_INCLUDE(quickbooks:update-vendor) -->
 
@@ -282,8 +254,7 @@
                           realmIdPseudonym="reamIdPseudonym"
                           authIdPseudonym="authIdPseudonym"                         
                           type="INVOICE"
-                          syncToken="2"
-                          id-ref="#[payload]">
+                          syncToken="2" >
 </quickbooks:delete-object>
 <!-- END_INCLUDE(quickbooks:delete-object) -->
 

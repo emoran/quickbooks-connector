@@ -19,32 +19,27 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
-import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
-import org.mule.modules.quickbooks.online.model.QBAccount;
-import org.mule.modules.quickbooks.online.model.QBBill;
-import org.mule.modules.quickbooks.online.model.QBBillPayment;
-import org.mule.modules.quickbooks.online.model.QBCashPurchase;
-import org.mule.modules.quickbooks.online.model.QBCheck;
-import org.mule.modules.quickbooks.online.model.QBCreditCardCharge;
-import org.mule.modules.quickbooks.online.model.QBCustomer;
-import org.mule.modules.quickbooks.online.model.QBEstimate;
-import org.mule.modules.quickbooks.online.model.QBIdType;
-import org.mule.modules.quickbooks.online.model.QBInvoice;
-import org.mule.modules.quickbooks.online.model.QBItem;
-import org.mule.modules.quickbooks.online.model.QBPayment;
-import org.mule.modules.quickbooks.online.model.QBPaymentMethod;
-import org.mule.modules.quickbooks.online.model.QBSalesReceipt;
-import org.mule.modules.quickbooks.online.model.QBSalesTerm;
-import org.mule.modules.quickbooks.online.model.QBVendor;
+import org.mule.modules.quickbooks.online.schema.Account;
+import org.mule.modules.quickbooks.online.schema.Bill;
+import org.mule.modules.quickbooks.online.schema.BillPayment;
+import org.mule.modules.quickbooks.online.schema.CashPurchase;
+import org.mule.modules.quickbooks.online.schema.Check;
+import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
 import org.mule.modules.quickbooks.online.schema.Customer;
+import org.mule.modules.quickbooks.online.schema.Estimate;
 import org.mule.modules.quickbooks.online.schema.IdType;
-
-
+import org.mule.modules.quickbooks.online.schema.Invoice;
+import org.mule.modules.quickbooks.online.schema.Item;
+import org.mule.modules.quickbooks.online.schema.Payment;
+import org.mule.modules.quickbooks.online.schema.PaymentMethod;
+import org.mule.modules.quickbooks.online.schema.SalesReceipt;
+import org.mule.modules.quickbooks.online.schema.SalesTerm;
+import org.mule.modules.quickbooks.online.schema.Vendor;
 
 /**
  * QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
@@ -56,7 +51,7 @@ import org.mule.modules.quickbooks.online.schema.IdType;
  * Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_5462311_quickbooks-accounting-tutorial.html#ixzz1csaydwxl
  * @author MuleSoft, inc.
  */
-@Module(name = "quickbooks", schemaVersion= "2.0", friendlyName = "Quickbooks Online")
+@Module(name = "quickbooks", schemaVersion= "3.0", friendlyName = "Quickbooks Online")
 public class QuickBooksModule
 {   
     /**
@@ -99,18 +94,15 @@ public class QuickBooksModule
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param account   The Quickbooks account to be created.
      * @return The created Account.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBAccount createAccount(String realmId,
+    public Account createAccount(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Optional @Default("#[payload]") QBAccount account)
+                                 @Optional @Default("#[payload]") Account account)
     {
         
-        return new QBAccount(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, account.getAccount()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, account);
     }
     
     /**
@@ -130,17 +122,14 @@ public class QuickBooksModule
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param bill The bill to be created
      * @return The created Bill.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBBill createBill(String realmId,
+    public Bill createBill(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Optional @Default("#[payload]") QBBill bill)
+                           @Optional @Default("#[payload]") Bill bill)
     {
-        return new QBBill(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, bill.getBill()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, bill);
     }
     
     /**
@@ -167,12 +156,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBBillPayment createBillPayment(String realmId,
+    public BillPayment createBillPayment(String realmId,
                                          String appKey,
                                          String realmIdPseudonym, String authIdPseudonym,
-                                         @Optional @Default("#[payload]") QBBillPayment billPayment)
+                                         @Optional @Default("#[payload]") BillPayment billPayment)
     {    
-        return new QBBillPayment(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, billPayment.getBillPayment()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, billPayment);
     }
     
     /**
@@ -197,12 +186,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCashPurchase createCashPurchase(String realmId,
+    public CashPurchase createCashPurchase(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Optional @Default("#[payload]") QBCashPurchase cashPurchase)
+                                           @Optional @Default("#[payload]") CashPurchase cashPurchase)
     {
-        return new QBCashPurchase(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, cashPurchase.getCashPurchase()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, cashPurchase);
     }
     
     /**
@@ -227,12 +216,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCheck createCheck(String realmId,
+    public Check createCheck(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             @Optional @Default("#[payload]") QBCheck check)
+                             @Optional @Default("#[payload]") Check check)
     {
-        return new QBCheck(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, check.getCheck()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, check);
     }
     
     /**
@@ -260,12 +249,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCreditCardCharge createCreditCardCharge(String realmId,
+    public CreditCardCharge createCreditCardCharge(String realmId,
                                                    String appKey,
                                                    String realmIdPseudonym, String authIdPseudonym,
-                                                   @Optional @Default("#[payload]") QBCreditCardCharge creditCardCharge)
+                                                   @Optional @Default("#[payload]") CreditCardCharge creditCardCharge)
     {
-        return new QBCreditCardCharge(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, creditCardCharge.getCreditCardCharge()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, creditCardCharge);
     }
 
     /**
@@ -292,19 +281,18 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCustomer createCustomer(String realmId,
+    public Customer createCustomer(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Optional @Default("#[payload]") QBCustomer customer)
+                                   @Optional @Default("#[payload]") Customer customer)
     {
-        Customer customerToCreate = customer.getCustomer();
-        if(customerToCreate.getPaymentMethodId() != null && (customerToCreate.getPaymentMethodId().getValue().isEmpty() 
-                || StringUtils.isEmpty(customerToCreate.getPaymentMethodId().getValue())))
+        if(customer.getPaymentMethodId() != null && (customer.getPaymentMethodId().getValue().isEmpty() 
+                || StringUtils.isEmpty(customer.getPaymentMethodId().getValue())))
         {
-            customerToCreate.setPaymentMethodId(new IdType());
+            customer.setPaymentMethodId(new IdType());
         }
         
-        return new QBCustomer(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, customerToCreate));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, customer);
     }
     
     /**
@@ -330,12 +318,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBEstimate createEstimate(String realmId,
+    public Estimate createEstimate(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Optional @Default("#[payload]") QBEstimate estimate)
+                                   @Optional @Default("#[payload]") Estimate estimate)
     {
-        return new QBEstimate(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, estimate.getEstimate()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, estimate);
     }
     
     /**
@@ -363,12 +351,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBInvoice createInvoice(String realmId,
+    public Invoice createInvoice(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Optional @Default("#[payload]") QBInvoice invoice)
+                                 @Optional @Default("#[payload]") Invoice invoice)
     {
-        return new QBInvoice(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, invoice.getInvoice()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, invoice);
     }
     
     /**
@@ -395,12 +383,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBItem createItem(String realmId,
+    public Item createItem(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Optional @Default("#[payload]") QBItem item)
+                           @Optional @Default("#[payload]") Item item)
     {
-        return new QBItem(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, item.getItem()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, item);
     }
     
     /**
@@ -427,12 +415,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBPayment createPayment(String realmId,
+    public Payment createPayment(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Optional @Default("#[payload]") QBPayment payment)
+                                 @Optional @Default("#[payload]") Payment payment)
     {
-        return new QBPayment(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, payment.getPayment()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, payment);
     }
     
     /**
@@ -459,12 +447,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBPaymentMethod createPaymentMethod(String realmId,
+    public PaymentMethod createPaymentMethod(String realmId,
                                              String appKey,
                                              String realmIdPseudonym, String authIdPseudonym,
-                                             @Optional @Default("#[payload]") QBPaymentMethod paymentMethod)
+                                             @Optional @Default("#[payload]") PaymentMethod paymentMethod)
     {
-        return new QBPaymentMethod(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, paymentMethod.getPaymentMethod()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, paymentMethod);
     }
     
     /**
@@ -491,12 +479,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBSalesReceipt createSalesReceipt(String realmId,
+    public SalesReceipt createSalesReceipt(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Optional @Default("#[payload]") QBSalesReceipt salesReceipt)
+                                           @Optional @Default("#[payload]") SalesReceipt salesReceipt)
     {
-        return new QBSalesReceipt(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesReceipt.getSalesReceipt()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesReceipt);
     }
     
     /**
@@ -525,13 +513,13 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBSalesTerm createSalesTerm(String realmId,
+    public SalesTerm createSalesTerm(String realmId,
                                      String appKey,
                                      String realmIdPseudonym, String authIdPseudonym,
-                                     @Optional @Default("#[payload]") QBSalesTerm salesTerm)
+                                     @Optional @Default("#[payload]") SalesTerm salesTerm)
     {
         
-        return new QBSalesTerm(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesTerm.getSalesTerm()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesTerm);
     }
     
     /**
@@ -558,12 +546,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBVendor createVendor(String realmId,
+    public Vendor createVendor(String realmId,
                                String appKey,
                                String realmIdPseudonym, String authIdPseudonym,
-                               @Optional @Default("#[payload]") QBVendor vendor)
+                               @Optional @Default("#[payload]") Vendor vendor)
     {
-        return new QBVendor(client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, vendor.getVendor()));
+        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, vendor);
     }
     
     /**
@@ -589,9 +577,9 @@ public class QuickBooksModule
                             String appKey,
                             String realmIdPseudonym, String authIdPseudonym,
                             OnlineEntityType type,
-                            @Optional @Default("#[payload]") QBIdType id)
+                            @Optional @Default("#[payload]") IdType id)
     {
-        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id.getIdType());
+        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id);
     }
 
     /**
@@ -622,12 +610,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBAccount updateAccount(String realmId,
+    public Account updateAccount(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Optional @Default("#[payload]") QBAccount account)
+                                 @Optional @Default("#[payload]") Account account)
     {   
-        return new QBAccount(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ACCOUNT, account.getAccount()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ACCOUNT, account);
     }
     
     /**
@@ -656,12 +644,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBBill updateBill(String realmId,
+    public Bill updateBill(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Optional @Default("#[payload]") QBBill bill)
+                           @Optional @Default("#[payload]") Bill bill)
     {
-        return new QBBill(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILL, bill.getBill()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILL, bill);
     }
     
     /**
@@ -692,12 +680,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBBillPayment updateBillPayment(String realmId,
+    public BillPayment updateBillPayment(String realmId,
                                          String appKey,
                                          String realmIdPseudonym, String authIdPseudonym,
-                                         @Optional @Default("#[payload]") QBBillPayment billPayment)
+                                         @Optional @Default("#[payload]") BillPayment billPayment)
     {    
-        return new QBBillPayment(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILLPAYMENT, billPayment.getBillPayment()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILLPAYMENT, billPayment);
     }
     
     /**
@@ -726,12 +714,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCashPurchase updateCashPurchase(String realmId,
+    public CashPurchase updateCashPurchase(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Optional @Default("#[payload]") QBCashPurchase cashPurchase)
+                                           @Optional @Default("#[payload]") CashPurchase cashPurchase)
     {
-        return new QBCashPurchase(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CASHPURCHASE, cashPurchase.getCashPurchase()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CASHPURCHASE, cashPurchase);
     }
     
     /**
@@ -760,12 +748,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCheck updateCheck(String realmId,
+    public Check updateCheck(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
-                             @Optional @Default("#[payload]") QBCheck check)
+                             @Optional @Default("#[payload]") Check check)
     {
-        return new QBCheck(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CHECK, check.getCheck()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CHECK, check);
     }
     
     /**
@@ -796,13 +784,13 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCreditCardCharge updateCreditCardCharge(String realmId,
+    public CreditCardCharge updateCreditCardCharge(String realmId,
                                                    String appKey,
                                                    String realmIdPseudonym, String authIdPseudonym,
-                                                   @Optional @Default("#[payload]") QBCreditCardCharge creditCardCharge)
+                                                   @Optional @Default("#[payload]") CreditCardCharge creditCardCharge)
     {
-        return new QBCreditCardCharge(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CREDITCARDCHARGE, 
-                creditCardCharge.getCreditCardCharge()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CREDITCARDCHARGE, 
+                creditCardCharge);
     }
 
     /**
@@ -832,19 +820,18 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBCustomer updateCustomer(String realmId,
+    public Customer updateCustomer(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Optional @Default("#[payload]") QBCustomer customer)
+                                   @Optional @Default("#[payload]") Customer customer)
     {
-        Customer customerToUpdate = customer.getCustomer();
-        if(customerToUpdate.getPaymentMethodId() != null && (customerToUpdate.getPaymentMethodId().getValue().isEmpty() 
-                || StringUtils.isEmpty(customerToUpdate.getPaymentMethodId().getValue())))
+        if(customer.getPaymentMethodId() != null && (customer.getPaymentMethodId().getValue().isEmpty() 
+                || StringUtils.isEmpty(customer.getPaymentMethodId().getValue())))
         {
-            customerToUpdate.setPaymentMethodId(new IdType());
+            customer.setPaymentMethodId(new IdType());
         }
 
-        return new QBCustomer(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER, customerToUpdate));        
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER, customer);        
     }
     
     /**
@@ -874,12 +861,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBEstimate updateEstimate(String realmId,
+    public Estimate updateEstimate(String realmId,
                                    String appKey,
                                    String realmIdPseudonym, String authIdPseudonym,
-                                   @Optional @Default("#[payload]") QBEstimate estimate)
+                                   @Optional @Default("#[payload]") Estimate estimate)
     {
-        return new QBEstimate(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ESTIMATE, estimate.getEstimate()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ESTIMATE, estimate);
     }
     
     /**
@@ -910,12 +897,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBInvoice updateInvoice(String realmId,
+    public Invoice updateInvoice(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Optional @Default("#[payload]") QBInvoice invoice)
+                                 @Optional @Default("#[payload]") Invoice invoice)
     {
-        return new QBInvoice(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.INVOICE, invoice.getInvoice()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.INVOICE, invoice);
     }
     
     /**
@@ -945,12 +932,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBItem updateItem(String realmId,
+    public Item updateItem(String realmId,
                            String appKey,
                            String realmIdPseudonym, String authIdPseudonym,
-                           @Optional @Default("#[payload]") QBItem item)
+                           @Optional @Default("#[payload]") Item item)
     {
-        return new QBItem(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ITEM, item.getItem()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ITEM, item);
     }
     
     /**
@@ -980,12 +967,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBPayment updatePayment(String realmId,
+    public Payment updatePayment(String realmId,
                                  String appKey,
                                  String realmIdPseudonym, String authIdPseudonym,
-                                 @Optional @Default("#[payload]") QBPayment payment)
+                                 @Optional @Default("#[payload]") Payment payment)
     {
-        return new QBPayment(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENT, payment.getPayment()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENT, payment);
     }
     
     /**
@@ -1015,12 +1002,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBPaymentMethod updatePaymentMethod(String realmId,
+    public PaymentMethod updatePaymentMethod(String realmId,
                                              String appKey,
                                              String realmIdPseudonym, String authIdPseudonym,
-                                             @Optional @Default("#[payload]") QBPaymentMethod paymentMethod)
+                                             @Optional @Default("#[payload]") PaymentMethod paymentMethod)
     {
-        return new QBPaymentMethod(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENTMETHOD, paymentMethod.getPaymentMethod()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENTMETHOD, paymentMethod);
     }
     
     /**
@@ -1050,12 +1037,12 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBSalesReceipt updateSalesReceipt(String realmId,
+    public SalesReceipt updateSalesReceipt(String realmId,
                                            String appKey,
                                            String realmIdPseudonym, String authIdPseudonym,
-                                           @Optional @Default("#[payload]") QBSalesReceipt salesReceipt)
+                                           @Optional @Default("#[payload]") SalesReceipt salesReceipt)
     {
-        return new QBSalesReceipt(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESRECEIPT, salesReceipt.getSalesReceipt()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESRECEIPT, salesReceipt);
     }
     
     /**
@@ -1087,13 +1074,13 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBSalesTerm updateSalesTerm(String realmId,
+    public SalesTerm updateSalesTerm(String realmId,
                                      String appKey,
                                      String realmIdPseudonym, String authIdPseudonym,
-                                     @Optional @Default("#[payload]") QBSalesTerm salesTerm)
+                                     @Optional @Default("#[payload]") SalesTerm salesTerm)
     {
         
-        return new QBSalesTerm(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESTERM, salesTerm.getSalesTerm()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESTERM, salesTerm);
     }
     
     /**
@@ -1118,17 +1105,14 @@ public class QuickBooksModule
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param vendor The vendor to be updated
      * @return The updated Vendor.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QBVendor updateVendor(String realmId,
+    public Vendor updateVendor(String realmId,
                                String appKey,
                                String realmIdPseudonym, String authIdPseudonym,
-                               @Optional @Default("#[payload]") QBVendor vendor)
+                               @Optional @Default("#[payload]") Vendor vendor)
     {
-        return new QBVendor(client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.VENDOR, vendor.getVendor()));
+        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.VENDOR, vendor);
     }
     
     /**
@@ -1144,22 +1128,19 @@ public class QuickBooksModule
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
-     * @param syncToken Optional. Integer that indicates how many times the object has been updated.
+     * @param syncToken Integer that indicates how many times the object has been updated.
      *                  Before performing the update, Data Services verifies that the SyncToken in the
      *                  request has the same value as the SyncToken in the Data Service's repository.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
      */
     @Processor
     public void deleteObject(String realmId,
                              String appKey,
                              String realmIdPseudonym, String authIdPseudonym,
                              OnlineEntityType type, 
-                             @Optional @Default("#[payload]") QBIdType id, 
+                             @Optional @Default("#[payload]") IdType id, 
                              @Optional String syncToken)
     {
-        client.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id.getIdType(), syncToken);
+        client.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id, syncToken);
     }
 
     /**
@@ -1242,5 +1223,13 @@ public class QuickBooksModule
     public String getBaseUri()
     {
         return baseUri;
+    }
+
+    public QuickBooksOnlineClient getClient() {
+        return client;
+    }
+
+    public void setClient(QuickBooksOnlineClient client) {
+        this.client = client;
     }
 }

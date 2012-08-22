@@ -53,7 +53,7 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  * Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_5462311_quickbooks-accounting-tutorial.html#ixzz1csaydwxl
  * @author MuleSoft, inc.
  */
-@Module(name = "quickbooks-windows", schemaVersion= "2.0", friendlyName = "Quickbooks Windows")
+@Module(name = "quickbooks-windows", schemaVersion= "3.0", friendlyName = "Quickbooks Windows")
 public class QuickBooksWindowsModule
 {   
     /**
@@ -88,14 +88,6 @@ public class QuickBooksWindowsModule
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:create}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createJob}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createCheck}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createBill}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createEmployee}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createPayment}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createItem}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createCustomer}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:createAccount}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks, the Company ID  appears on the My Account page.
@@ -140,8 +132,6 @@ public class QuickBooksWindowsModule
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-object}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-object2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-object3}
      * 
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks, the Company ID  appears on the My Account page.
@@ -183,14 +173,6 @@ public class QuickBooksWindowsModule
      * <p>* To add a new line item, insert a new one in the list.</p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:update}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateJob}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateCheck}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateBill}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateEmployee}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updatePayment}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateItem}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateCustomer}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:updateAccount}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -238,9 +220,6 @@ public class QuickBooksWindowsModule
      * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a></p>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:delete}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:deleteAccount}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:deleteCustomer}
-     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:deleteBill}
      *
      * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
      *                In QuickBooks Online, the Company ID  appears on the My Account page.
@@ -477,5 +456,13 @@ public class QuickBooksWindowsModule
     private <A> A  unmap(Class<A> class1, Map<String, Object> id)
     {
         return (A) mom.unmap(id, class1);
+    }
+
+    public QuickBooksWindowsClient getClient() {
+        return client;
+    }
+
+    public void setClient(QuickBooksWindowsClient client) {
+        this.client = client;
     }
 }

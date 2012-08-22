@@ -11,19 +11,11 @@
 
 -->
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:spring="http://www.springframework.org/schema/beans"
-  xmlns:http="http://www.mulesoft.org/schema/mule/http"
-  xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows"
-  xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
-  xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
-        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.1/mule-scripting.xsd
-        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
-        http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/2.0/mule-quickbooks-windows.xsd">
-    
-    <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
+<mule xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/3.0/mule-quickbooks-windows.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
     
     <quickbooks-windows:config />
 
@@ -34,8 +26,7 @@
 		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
 		                           type="#[map-payload:type]"
 		                           draft="#[map-payload:draft]"
-		                           fullResponse="#[map-payload:fullResponse]"
-		                           entityObject-ref="#[payload]"/>
+		                           fullResponse="#[map-payload:fullResponse]" />
 	</flow>
 	<flow name="update">
 		<quickbooks-windows:update realmId="#[map-payload:realmId]"
