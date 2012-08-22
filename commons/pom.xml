@@ -65,11 +65,6 @@
             <artifactId>aspectjtools</artifactId>
             <version>1.5.3</version>
         </dependency>
-		<!-- <dependency>
-			<groupId>com.intuit.code.devkit</groupId>
-			<artifactId>ipp-java-devkit</artifactId>
-			<version>2.0.4</version>
-		</dependency>-->
 		<dependency>
 			<groupId>com.intuit.code.oauth</groupId>
 			<artifactId>oAuthHelper-core</artifactId>
@@ -125,9 +120,5 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<!-- <repository> <id>intuit</id> <url>http://forge.code.intuit.com/nexus/content/groups/dev</url> 
-			<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> 
-			</snapshots> </repository> -->
-
 	</repositories>
 </project>

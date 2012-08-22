@@ -153,9 +153,5 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<!-- <repository> <id>intuit</id> <url>http://forge.code.intuit.com/nexus/content/groups/dev</url> 
-			<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> 
-			</snapshots> </repository> -->
-
 	</repositories>
 </project>
