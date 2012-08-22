@@ -30,12 +30,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.modules.quickbooks.MapBuilder;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.online.model.QBAccount;
-import org.mule.modules.quickbooks.online.model.QBCustomer;
-import org.mule.modules.quickbooks.online.model.QBIdType;
-import org.mule.modules.quickbooks.online.model.QBInvoice;
-import org.mule.modules.quickbooks.online.model.QBItem;
-import org.mule.modules.quickbooks.online.model.QBSalesTerm;
 import org.mule.modules.quickbooks.online.schema.Account;
 import org.mule.modules.quickbooks.online.schema.Customer;
 import org.mule.modules.quickbooks.online.schema.GenericEntity;
@@ -89,12 +83,12 @@ public class QuickBooksOnlineModuleTestDriver
         newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
         newAccount.setAcctNum("36544");
         newAccount.setOpeningBalance(new BigDecimal(0));
-        QBAccount acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
+        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, newAccount);
                 
         IdType idType = new IdType();
-        idType.setValue(acc.getAccount().getId().getValue());
+        idType.setValue(acc.getId().getValue());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, new QBIdType(idType), acc.getAccount().getSyncToken());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
     }
     @Test
     public void createCustomerAnswersNonNullCustomerWithId() throws Exception
@@ -106,15 +100,15 @@ public class QuickBooksOnlineModuleTestDriver
         customer.setMiddleName("MiddleName");
         customer.setFamilyName("FamilyName");
         
-        QBCustomer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                new QBCustomer(customer));
+        Customer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                customer);
         
-        assertEquals("Name", c.getCustomer().getName());
-        assertNotNull(c.getCustomer().getId());
+        assertEquals("Name", c.getName());
+        assertNotNull(c.getId());
 
         IdType idType = new IdType();
-        idType.setValue(c.getCustomer().getId().getValue());
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType), c.getCustomer().getSyncToken());
+        idType.setValue(c.getId().getValue());
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, idType, c.getSyncToken());
     }
     
     @Test
@@ -163,7 +157,8 @@ public class QuickBooksOnlineModuleTestDriver
     {
         IdType idType = new IdType();
         idType.setValue("1");
-        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType));
+        Customer c = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.CUSTOMER, idType);
         
         assertEquals("Ricardo (deleted)", c.getName());
         assertNotNull(c.getId());
@@ -180,22 +175,24 @@ public class QuickBooksOnlineModuleTestDriver
         customer.setMiddleName("MiddleName");
         customer.setFamilyName("FamilyName");
         
-        QBCustomer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                new QBCustomer(customer));
+        Customer c = module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
+                customer);
         
-        assertEquals("FamilyName", c.getCustomer().getFamilyName());
+        assertEquals("FamilyName", c.getFamilyName());
         
         IdType idType = new IdType();
-        idType.setValue(c.getCustomer().getId().getValue());
+        idType.setValue(c.getId().getValue());
         
-        c.getCustomer().setFamilyName("NewFamilyName");
+        c.setFamilyName("NewFamilyName");
         
         module.updateCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym, c);
-        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType));
+        Customer c3 = (Customer) module.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.CUSTOMER, idType);
         
         assertEquals("NewFamilyName", c3.getFamilyName());
         
-        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, new QBIdType(idType), null);
+        module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, 
+                idType, null);
     }
     
     @SuppressWarnings("unchecked")
@@ -232,14 +229,15 @@ public class QuickBooksOnlineModuleTestDriver
         salesTerm.setDueDays(BigInteger.valueOf(3));
         salesTerm.setDayOfMonthDue(BigInteger.valueOf(2));
         
-        QBSalesTerm qbSalesTerm = module.createSalesTerm(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBSalesTerm(salesTerm));
+        SalesTerm qbSalesTerm = module.createSalesTerm(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                salesTerm);
         
-        assertEquals("SalesTerm", qbSalesTerm.getSalesTerm().getName());
+        assertEquals("SalesTerm", qbSalesTerm.getName());
         IdType idType = new IdType();
-        idType.setValue(qbSalesTerm.getSalesTerm().getId().getValue());
+        idType.setValue(qbSalesTerm.getId().getValue());
         
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                OnlineEntityType.SALESTERM, new QBIdType(idType), null);
+                OnlineEntityType.SALESTERM, idType, null);
     }
 
     @Test
@@ -263,7 +261,7 @@ public class QuickBooksOnlineModuleTestDriver
         for (Customer customer: it)
         {
             module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                    OnlineEntityType.CUSTOMER, new QBIdType(customer.getId()), customer.getSyncToken());
+                    OnlineEntityType.CUSTOMER, customer.getId(), customer.getSyncToken());
         }
     }
     
@@ -278,7 +276,7 @@ public class QuickBooksOnlineModuleTestDriver
         for (Item item: it)
         {
             module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                    OnlineEntityType.ITEM, new QBIdType(item.getId()), item.getSyncToken());
+                    OnlineEntityType.ITEM, item.getId(), item.getSyncToken());
         }
     }
     
@@ -295,7 +293,7 @@ public class QuickBooksOnlineModuleTestDriver
         customer.setFamilyName("Jenkins");
         
         module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                new QBCustomer(customer));
+                customer);
         
         Item item = new Item();
         item.setName("ItemTest0057");
@@ -304,7 +302,7 @@ public class QuickBooksOnlineModuleTestDriver
         money.setAmount(BigDecimal.valueOf(100));
         item.setUnitPrice(money);
         
-        QBItem qbItem = module.createItem(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBItem(item));
+        Item qbItem = module.createItem(realmId, appKey, realmIdPseudonym, authIdPseudonym, item);
         
         //create an invoice with the customer and item created before
         InvoiceHeader invHeader = new InvoiceHeader();
@@ -314,7 +312,7 @@ public class QuickBooksOnlineModuleTestDriver
         List<InvoiceLine> lines = new ArrayList<InvoiceLine>();
         InvoiceLine invoiceLine = new InvoiceLine();
         invoiceLine.setAmount(new BigDecimal(100));
-        invoiceLine.setItemId(qbItem.getItem().getId());
+        invoiceLine.setItemId(qbItem.getId());
         lines.add(invoiceLine);
         
         Invoice invoice = new Invoice();
@@ -331,15 +329,15 @@ public class QuickBooksOnlineModuleTestDriver
         
         //change the docNumber and update it
         invoice.getHeader().setDocNumber("DOC-NEW:001111111101");
-        module.updateInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBInvoice(invoice));
+        module.updateInvoice(realmId, appKey, realmIdPseudonym, authIdPseudonym, invoice);
         
         //delete everything
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.INVOICE, 
-                new QBIdType(invoice.getId()), invoice.getSyncToken());
+                invoice.getId(), invoice.getSyncToken());
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.ITEM, 
-                new QBIdType(qbItem.getItem().getId()), item.getSyncToken());
+                qbItem.getId(), item.getSyncToken());
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CUSTOMER, 
-                new QBIdType(customer.getId()), customer.getSyncToken());
+                customer.getId(), customer.getSyncToken());
     
         //verify the change
         assertEquals("DOC-NEW:001111111101", invoice.getHeader().getDocNumber());
@@ -377,13 +375,13 @@ public class QuickBooksOnlineModuleTestDriver
         customer.getNotes().addAll(notes);
         
         module.createCustomer(realmId, appKey, realmIdPseudonym, authIdPseudonym,
-                new QBCustomer(customer));
+                customer);
         
         assertEquals(1, customer.getNotes().size());
         assertEquals("This is a test note", customer.getNotes().get(0).getContent());
         
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                OnlineEntityType.CUSTOMER, new QBIdType(customer.getId()), customer.getSyncToken());
+                OnlineEntityType.CUSTOMER, customer.getId(), customer.getSyncToken());
     }
     
     @Test
@@ -400,25 +398,25 @@ public class QuickBooksOnlineModuleTestDriver
         newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
         newAccount.setAcctNum("36544");
         newAccount.setOpeningBalance(new BigDecimal(0));
-        QBAccount acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
+        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, newAccount);
                     
         IdType idType = new IdType();
-        idType.setValue(acc.getAccount().getId().getValue());
+        idType.setValue(acc.getId().getValue());
         
         newAccount = new Account();
         newAccount.setName("Test Account82");
         newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
         newAccount.setAcctNum("36544");
         newAccount.setOpeningBalance(new BigDecimal(0));
-        QBAccount acc2 = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
+        Account acc2 = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, newAccount);
                     
         IdType idType2 = new IdType();
-        idType2.setValue(acc2.getAccount().getId().getValue());
+        idType2.setValue(acc2.getId().getValue());
             
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                OnlineEntityType.ACCOUNT, new QBIdType(idType), acc.getAccount().getSyncToken());
+                OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
         module.deleteObject(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, 
-                OnlineEntityType.ACCOUNT, new QBIdType(idType2), acc2.getAccount().getSyncToken());
+                OnlineEntityType.ACCOUNT, idType2, acc2.getSyncToken());
     }
     
     @SuppressWarnings("unchecked")
@@ -442,17 +440,17 @@ public class QuickBooksOnlineModuleTestDriver
         newAccount.setSubtype(AccountOnlineDetail.SAVINGS.toString());
         newAccount.setAcctNum("36544");
         newAccount.setOpeningBalance(new BigDecimal(0));
-        QBAccount acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, new QBAccount(newAccount));
+        Account acc = module.createAccount(realmId, appKey, realmIdPseudonym, authIdPseudonym, newAccount);
         
         while(itAcc.hasNext()) {
             assertNotNull(itAcc.next().getId());
         }
         
         IdType idType = new IdType();
-        idType.setValue(acc.getAccount().getId().getValue());
+        idType.setValue(acc.getId().getValue());
             
         module.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
-                OnlineEntityType.ACCOUNT, new QBIdType(idType), acc.getAccount().getSyncToken());
+                OnlineEntityType.ACCOUNT, idType, acc.getSyncToken());
     }
     
     @Test
@@ -471,7 +469,7 @@ public class QuickBooksOnlineModuleTestDriver
             acc.setSubtype(AccountOnlineDetail.SAVINGS.toString());
             acc.setAcctNum("000" + i);
             acc.setOpeningBalance(new BigDecimal(0));
-            module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, new QBAccount(acc));
+            module.createAccount(realmId2, appKey2, realmIdPseudonym2, authIdPseudonym2, acc);
         }
     }
     
