@@ -304,3 +304,12 @@
                          type="INVOICE"
                          queryFilter="LastUpdatedTime :AFTER: 2010-08-10T14:30:00-0700 :AND: LastUpdatedTime :BEFORE: 2010-08-10T15:30:00-0700" />
 <!-- END_INCLUDE(quickbooks:find-objects5) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:change-data-deleted) -->
+<quickbooks:change-data-deleted realmId="realmId"
+                         appKey="appKey"
+                         realmIdPseudonym="reamIdPseudonym"
+                         authIdPseudonym="authIdPseudonym"                         
+                         queryFilter="#[variable:queryfilterstring]"
+                         querySort="#[variable:querysortstring]"/>
+<!-- END_INCLUDE(quickbooks:change-data-deleted) -->

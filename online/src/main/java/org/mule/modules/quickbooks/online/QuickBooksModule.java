@@ -1188,6 +1188,46 @@ public class QuickBooksModule
         return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, queryFilter, querySort);
     }
     
+    /**
+     * Gets all of the transactions and objects that have been deleted on the Data Services server
+     *
+     * For details see: 
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * 0400_QuickBooks_Online/ChangeDataDeleted">ChangeDataDeleted</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:change-data-deleted}
+     *
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param type EntityType of the object.
+     * @param queryFilter String with a filter format (see details). Each type of object to be 
+     *                    retrieved, has a list of attributes for which it can be filtered (See this 
+     *                    list following the link in the details of the documentation of the create
+     *                    or update method of that object).
+     * @param querySort String with a sort format (see details). Each type of object to be 
+     *                    retrieved, has a list of attributes for which it can be sorted (See this 
+     *                    list following the link in the details of the documentation of the create
+     *                    or update method of that object).
+     * @return Iterable of the objects to be retrieved.
+     * 
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
+     *         and a message provided by quickbooks about the error.
+     */
+    @SuppressWarnings("rawtypes")
+    @Processor
+    public Iterable changeDataDeleted(String realmId,
+                                String appKey,
+                                String realmIdPseudonym, String authIdPseudonym,
+                                @Optional String queryFilter,
+                                @Optional String querySort)
+    {
+        return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CHANGEDATADELETED, queryFilter, querySort);
+    }
+    
 //    /**
 //     * Gets a new accessToken from Quickbooks. It will expire in an hour.
 //     * 
