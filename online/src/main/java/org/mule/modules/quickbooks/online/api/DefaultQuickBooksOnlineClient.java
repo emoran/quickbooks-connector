@@ -29,6 +29,7 @@ import org.mule.modules.quickbooks.api.AbstractQuickBooksClient;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
+import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
@@ -46,6 +47,7 @@ import org.mule.modules.utils.pagination.PaginatedIterable;
  */
 public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient implements QuickBooksOnlineClient
 {   
+    
     public DefaultQuickBooksOnlineClient(final String baseUri)
     {
         Validate.notEmpty(baseUri);
@@ -459,5 +461,11 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     protected MessageUtils getMessageUtilsInstance()
     {
         return QBOMessageUtils.getInstance();
+    }
+
+    @Override
+    public UserInformation getCurrentUserInformation(String realmId,
+            String appKey, String realmIdPseudonym, String authIdPseudonym) {        
+        return retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym).getUserInformation();
     }
 }

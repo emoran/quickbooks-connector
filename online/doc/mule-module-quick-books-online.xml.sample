@@ -313,3 +313,11 @@
                          queryFilter="#[variable:queryfilterstring]"
                          querySort="#[variable:querysortstring]"/>
 <!-- END_INCLUDE(quickbooks:change-data-deleted) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:get-current-user) -->
+<quickbooks:get-current-user realmId="realmId"
+                        appKey="appKey"
+                        realmIdPseudonym="reamIdPseudonym"
+                        authIdPseudonym="authIdPseudonym" >    
+</quickbooks:get-current-user>
+<!-- END_INCLUDE(quickbooks:get-current-user) -->

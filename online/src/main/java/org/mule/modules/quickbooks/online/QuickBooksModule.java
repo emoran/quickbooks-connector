@@ -22,6 +22,7 @@ import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
+import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.schema.Account;
@@ -1203,7 +1204,6 @@ public class QuickBooksModule
      * @param appKey Application Id.
      * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
      * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-     * @param type EntityType of the object.
      * @param queryFilter String with a filter format (see details). Each type of object to be 
      *                    retrieved, has a list of attributes for which it can be filtered (See this 
      *                    list following the link in the details of the documentation of the create
@@ -1226,6 +1226,32 @@ public class QuickBooksModule
                                 @Optional String querySort)
     {
         return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CHANGEDATADELETED, queryFilter, querySort);
+    }
+    
+    /**
+     * Returns current user information such as first name, last name, and email address.
+     *
+     * For details see: 
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/
+     * 0025_Intuit_Anywhere/0060_Reference/Current_User_API">CurrentUserAPI</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-current-user}
+     *
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @return current user information
+     * 
+     */
+    @Processor
+    public UserInformation getCurrentUser(String realmId,
+                                String appKey,
+                                String realmIdPseudonym, String authIdPseudonym)
+    {
+        return client.getCurrentUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym);
     }
     
 //    /**

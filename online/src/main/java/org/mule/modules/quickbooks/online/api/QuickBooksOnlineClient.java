@@ -10,6 +10,7 @@
 
 package org.mule.modules.quickbooks.online.api;
 
+import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
 import org.mule.modules.quickbooks.online.schema.IdType;
@@ -36,5 +37,10 @@ public interface QuickBooksOnlineClient
     <T extends CdmBase> Iterable<T> findObjects(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final String queryFilter, final String querySort);
 
     <T extends CdmBase> Iterable<T> findObjectsGetPages(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, OnlineEntityType type, String queryFilter, String querySort);
+    
+    UserInformation getCurrentUserInformation(final String realmId,
+            final String appKey,
+            final String realmIdPseudonym, 
+            final String authIdPseudonym);
 }
 

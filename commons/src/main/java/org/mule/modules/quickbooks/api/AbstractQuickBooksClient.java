@@ -30,6 +30,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ClientConnectionManager;
@@ -41,6 +42,7 @@ import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.gateway.MuleOAuthCredentialStorage;
 import org.mule.modules.quickbooks.api.gateway.oauth.OAuthGateway;
+import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.springframework.core.io.ClassPathResource;
@@ -51,6 +53,7 @@ import com.intuit.ipp.oauth.signing.XoAuthAuthorizationHeaderSigningStrategy;
 public abstract class AbstractQuickBooksClient
 {   
     private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway.properties";
+    private static final String APP_CENTER_URI = "https://appcenter.intuit.com/api/v1/user/current";
     protected Properties properties;
 
     protected Integer resultsPerPage = 999;
@@ -285,6 +288,40 @@ public abstract class AbstractQuickBooksClient
                 connectionDatas.get(realmId).setBaseUri(loadCompanyBaseUri(realmId, appKey, accessToken));
             }
             connectionDatas.get(realmId).setAccessToken(accessToken);
+        }
+    }
+    
+    /**
+     * Retrieves the current user information
+     * @param realmId
+     * @param appKey
+     * @param realmIdPseudonym
+     * @param authIdPseudonym
+     * @return
+     */
+    protected UserResponse retrieveUserInformation(final String realmId,
+                final String appKey,
+                final String realmIdPseudonym, 
+                final String authIdPseudonym)
+    {        
+        
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
+        HttpUriRequest httpRequest = new HttpGet(APP_CENTER_URI);
+        
+        try
+        {
+            return (UserResponse) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault()) {
+                destroyAccessToken(realmId);
+                return retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+            } 
+            else {
+                throw e;
+            }
         }
     }
     
