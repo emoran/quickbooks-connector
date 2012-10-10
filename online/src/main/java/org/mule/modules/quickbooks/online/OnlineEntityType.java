@@ -16,6 +16,7 @@ import org.mule.modules.quickbooks.online.schema.Bill;
 import org.mule.modules.quickbooks.online.schema.BillPayment;
 import org.mule.modules.quickbooks.online.schema.CashPurchase;
 import org.mule.modules.quickbooks.online.schema.Check;
+import org.mule.modules.quickbooks.online.schema.CompanyMetaData;
 import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
 import org.mule.modules.quickbooks.online.schema.Customer;
 import org.mule.modules.quickbooks.online.schema.DeletedEntities;
@@ -185,7 +186,14 @@ public enum OnlineEntityType
      * <p>Entity and LastUpdatedTime are the only parameters allowed in the filter.</p>
      * <p>All characters used in the filter syntax are case insensitive.</p>
      */
-    CHANGEDATADELETED(DeletedEntities.class, "changedatadeleted", "Entity");
+    CHANGEDATADELETED(DeletedEntities.class, "changedatadeleted", "Entity"),
+    
+    /**
+     * Reports information about the company, given the realm ID. 
+     * The information is read-only through this API. 
+     * The user may change values in the "Company/Preference/Company Contact Information" UI screen in QBO
+     */
+    COMPANY_METADATA(CompanyMetaData.class, "companymetadata", "Entity");
     
     private final Class<?> type;
     private final String simpleName;

@@ -468,4 +468,34 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
             String appKey, String realmIdPseudonym, String authIdPseudonym) {        
         return retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym).getUserInformation();
     }
+
+    @Override
+    public <T> T get(String realmId, String appKey, String realmIdPseudonym,
+            String authIdPseudonym, OnlineEntityType type) {
+        Validate.notNull(type);
+        
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
+        String str = String.format("%s/resource/%s/v2/%s",
+            getBaseUri(realmId), type.getResouceName(), realmId);
+
+        HttpUriRequest httpRequest = new HttpGet(str);
+        
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                destroyAccessToken(realmId);
+                return get(realmId, appKey, realmIdPseudonym, authIdPseudonym, type);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
+    }
 }

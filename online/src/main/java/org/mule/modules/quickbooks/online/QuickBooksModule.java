@@ -30,6 +30,7 @@ import org.mule.modules.quickbooks.online.schema.Bill;
 import org.mule.modules.quickbooks.online.schema.BillPayment;
 import org.mule.modules.quickbooks.online.schema.CashPurchase;
 import org.mule.modules.quickbooks.online.schema.Check;
+import org.mule.modules.quickbooks.online.schema.CompanyMetaData;
 import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
 import org.mule.modules.quickbooks.online.schema.Customer;
 import org.mule.modules.quickbooks.online.schema.Estimate;
@@ -1252,6 +1253,33 @@ public class QuickBooksModule
                                 String realmIdPseudonym, String authIdPseudonym)
     {
         return client.getCurrentUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+    }
+    
+    /**
+     * Returns company metadata information.
+     *
+     * For details see: 
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * 0400_QuickBooks_Online/CompanyMetaData">CompanyMetaData</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-company-metadata}
+     *
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @return company metadata
+     * 
+     */
+    @Processor
+    public Object getCompanyMetadata(String realmId,
+                                String appKey,
+                                String realmIdPseudonym, String authIdPseudonym)
+    {
+        return client.get(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                OnlineEntityType.COMPANY_METADATA);
     }
     
 //    /**

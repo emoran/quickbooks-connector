@@ -38,6 +38,8 @@ public interface QuickBooksOnlineClient
 
     <T extends CdmBase> Iterable<T> findObjectsGetPages(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, OnlineEntityType type, String queryFilter, String querySort);
     
+    <T extends Object> T get(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, OnlineEntityType type);
+    
     UserInformation getCurrentUserInformation(final String realmId,
             final String appKey,
             final String realmIdPseudonym, 

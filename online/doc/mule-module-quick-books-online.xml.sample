@@ -321,3 +321,11 @@
                         authIdPseudonym="authIdPseudonym" >    
 </quickbooks:get-current-user>
 <!-- END_INCLUDE(quickbooks:get-current-user) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:get-company-metadata) -->
+<quickbooks:get-company-metadata realmId="realmId"
+                        appKey="appKey"
+                        realmIdPseudonym="reamIdPseudonym"
+                        authIdPseudonym="authIdPseudonym" >    
+</quickbooks:get-company-metadata>
+<!-- END_INCLUDE(quickbooks:get-company-metadata) -->
