@@ -409,6 +409,29 @@ public class QuickBooksWindowsModule
         return client.getCurrentUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym);
     }
     
+    /**
+     * Returns company metadata information.
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-company-metadata}
+     *
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @return company metadata
+     * 
+     */
+    @Processor
+    public Object getCompanyMetadata(String realmId,
+                                String appKey,
+                                String realmIdPseudonym, String authIdPseudonym)
+    {
+        return client.get(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+                WindowsEntityType.COMPANY_METADATA);
+    }
+    
 //    /**
 //     * Revert.
 //     * The revert operation discards all updates made to the object since its last sync to QuickBooks. An object can

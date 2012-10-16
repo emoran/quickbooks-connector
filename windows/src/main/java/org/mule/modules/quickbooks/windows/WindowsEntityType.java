@@ -10,6 +10,7 @@
 
 package org.mule.modules.quickbooks.windows;
 
+import org.mule.modules.quickbooks.windows.schema.CompanyMetaData;
 import org.mule.modules.quickbooks.windows.schema.*;
 
 /**
@@ -152,6 +153,13 @@ public enum WindowsEntityType
      * 0500_QuickBooks_Windows/0600_Object_Reference/CreditCardCharge">CreditCardCharge</a></p>
      */
     CREDITCARDCHARGE(CreditCardCharge.class, CreditCardChargeQuery.class),
+    
+    /**
+     * Reports information about the company, given the realm ID. 
+     * The information is read-only through this API.
+     *  
+     */
+    COMPANY_METADATA(CompanyMetaData.class, CompanyRequest.class, "company"),
     /**   
      * <p>Financial transaction representing a credit for purchase of goods or services.</p>
      * <p>For details of the fields, and query: 

@@ -56,4 +56,6 @@ public interface QuickBooksWindowsClient
             final String appKey,
             final String realmIdPseudonym, 
             final String authIdPseudonym);
+    
+    Object get(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, WindowsEntityType type);
 }

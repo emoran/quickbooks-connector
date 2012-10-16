@@ -566,4 +566,43 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             String appKey, String realmIdPseudonym, String authIdPseudonym) {        
         return ((UserResponse) retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym)).getUser();
     }
+    
+    @Override
+    public Object get(String realmId,
+                            String appKey,
+                            String realmIdPseudonym,
+                            String authIdPseudonym,
+                            WindowsEntityType type)
+    {   
+        Validate.notNull(type);
+        
+        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        
+        String str = String.format("%s/%s/v2/%s",
+            getBaseUri(realmId), type.getResouceName(), realmId);
+
+        HttpUriRequest httpRequest = new HttpGet(str);
+        
+        try
+        {
+            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            if(respObj instanceof ErrorResponse)
+            {
+                throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
+            }
+            return Streams.from(getListFromIntuitResponse(respObj, type)).anyOrNull();
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                destroyAccessToken(realmId);
+                return get(realmId, appKey, realmIdPseudonym, authIdPseudonym, type);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
+    }
 }

@@ -184,3 +184,10 @@
                                   realmIdPseudonym="reamIdPseudonym"
                                   authIdPseudonym="authIdPseudonym" />
 <!-- END_INCLUDE(quickbooks-windows:get-current-user) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:get-company-metadata) -->
+<quickbooks-windows:get-company-metadata realmId="realmId"
+                                  appKey="appKey"
+                                  realmIdPseudonym="reamIdPseudonym"
+                                  authIdPseudonym="authIdPseudonym" />
+<!-- END_INCLUDE(quickbooks-windows:get-company-metadata) -->
