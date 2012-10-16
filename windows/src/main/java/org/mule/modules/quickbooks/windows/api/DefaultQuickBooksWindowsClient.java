@@ -40,6 +40,8 @@ import org.mule.modules.quickbooks.windows.schema.ModRequest;
 import org.mule.modules.quickbooks.windows.schema.QueryBase;
 import org.mule.modules.quickbooks.windows.schema.RevertRequest;
 import org.mule.modules.quickbooks.windows.schema.SuccessResponse;
+import org.mule.modules.quickbooks.windows.schema.UserInformation;
+import org.mule.modules.quickbooks.windows.schema.UserResponse;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
 
@@ -558,5 +560,10 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         //Not fields necessary. According to the documentation, it's the baseUri
         return baseUri;
     }
-
+    
+    @Override
+    public UserInformation getCurrentUserInformation(String realmId,
+            String appKey, String realmIdPseudonym, String authIdPseudonym) {        
+        return ((UserResponse) retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym)).getUser();
+    }
 }

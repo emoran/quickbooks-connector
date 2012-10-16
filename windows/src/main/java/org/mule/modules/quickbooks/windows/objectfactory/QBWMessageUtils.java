@@ -48,7 +48,7 @@ public class QBWMessageUtils extends MessageUtils {
         private static JAXBContext privContext = null;
         
         /**
-         * Create new or return existing JAXB context for QBO CdmBase classes.
+         * Create new or return existing JAXB context for QBW CdmBase classes.
          * @return JAXBContext to Marshall or Unmarshall object
          */
         public static JAXBContext getContext() {
@@ -80,13 +80,21 @@ public class QBWMessageUtils extends MessageUtils {
         return QBWMessageUtilsHelper.getObjectFactory();
     }
     
+    @SuppressWarnings("rawtypes")
     @Override
     public Object parseResponse(String responseString) throws JAXBException
     {
         Unmarshaller unmarshaller = createUnmarshaller();
         final Object unmarshalledObject = unmarshaller.unmarshal(new StringReader(responseString));
-        JAXBElement jaxb = ((RestResponse)unmarshalledObject).getSystemResponse();
-
+        
+        JAXBElement jaxb;
+        
+        if (RestResponse.class.isAssignableFrom(unmarshalledObject.getClass())) {
+            jaxb = ((RestResponse) unmarshalledObject).getSystemResponse();
+        } 
+        else {
+            jaxb = (JAXBElement) unmarshalledObject;
+        }
         return jaxb.getValue();
 
     }

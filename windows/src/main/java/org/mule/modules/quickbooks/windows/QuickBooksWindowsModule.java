@@ -13,7 +13,6 @@
  */
 package org.mule.modules.quickbooks.windows;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +36,7 @@ import org.mule.modules.quickbooks.windows.schema.SyncActivityResponses;
 import org.mule.modules.quickbooks.windows.schema.SyncStatusRequest;
 import org.mule.modules.quickbooks.windows.schema.SyncStatusResponse;
 import org.mule.modules.quickbooks.windows.schema.SyncStatusResponses;
+import org.mule.modules.quickbooks.windows.schema.UserInformation;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
@@ -383,6 +383,32 @@ public class QuickBooksWindowsModule
         return ((SyncActivityResponses) client.retrieveWithoutUsingQueryObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
             unmap(SyncActivityRequest.class, syncActivityRequest), "syncActivity")).getSyncActivityResponse();
     }
+    
+    /**
+     * Returns current user information such as first name, last name, and email address.
+     *
+     * For details see: 
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/
+     * 0025_Intuit_Anywhere/0060_Reference/Current_User_API">CurrentUserAPI</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-current-user}
+     *
+     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
+     *                In QuickBooks Online, the Company ID  appears on the My Account page.
+     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
+     * @param appKey Application Id.
+     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
+     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @return current user information
+     */
+    @Processor
+    public UserInformation getCurrentUser(String realmId,
+                                String appKey,
+                                String realmIdPseudonym, String authIdPseudonym)
+    {
+        return client.getCurrentUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+    }
+    
 //    /**
 //     * Revert.
 //     * The revert operation discards all updates made to the object since its last sync to QuickBooks. An object can
@@ -429,17 +455,6 @@ public class QuickBooksWindowsModule
         {
             client = new DefaultQuickBooksWindowsClient(baseUri);
         }
-    }
-        
-    @SuppressWarnings("unchecked")
-    private <T> List<T> coalesceList(List<T> list )
-    {
-        return (List<T>) (list == null ? Collections.emptyList() : list);
-    }
-    
-    private Map<String, Object> coalesceMap(Map<String, Object> map )
-    {
-        return map == null ? new HashMap<String, Object>() : map;
     }
     
     public void setBaseUri(String baseUri)

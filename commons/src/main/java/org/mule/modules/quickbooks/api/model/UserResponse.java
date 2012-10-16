@@ -25,7 +25,7 @@ public class UserResponse
 {
 
     @XmlElement(name = "User", namespace = "http://platform.intuit.com/api/v1")
-    protected UserInformation userInformation;
+    protected UserInformation user;
     @XmlElement(name = "ServerTime", namespace = "http://platform.intuit.com/api/v1")
     protected String serverTime;
     @XmlElement(name = "ErrorCode", namespace = "http://platform.intuit.com/api/v1")
@@ -46,11 +46,11 @@ public class UserResponse
         this.errorCode = errorCode;
     }
 
-    public UserInformation getUserInformation() {
-        return userInformation;
+    public UserInformation getUser() {
+        return user;
     }
 
-    public void setUserInformation(UserInformation userInformation) {
-        this.userInformation = userInformation;
+    public void setUser(UserInformation user) {
+        this.user = user;
     }
 }

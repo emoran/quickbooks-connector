@@ -12,6 +12,7 @@ package org.mule.modules.quickbooks.windows.api;
 
 import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.schema.IdType;
+import org.mule.modules.quickbooks.windows.schema.UserInformation;
 
 public interface QuickBooksWindowsClient
 {
@@ -50,4 +51,9 @@ public interface QuickBooksWindowsClient
                   final Object syncStatusRequest, final String objectName);
     
     String generateARequestId();
+    
+    UserInformation getCurrentUserInformation(final String realmId,
+            final String appKey,
+            final String realmIdPseudonym, 
+            final String authIdPseudonym);
 }

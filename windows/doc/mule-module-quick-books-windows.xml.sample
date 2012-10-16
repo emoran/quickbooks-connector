@@ -177,3 +177,10 @@
     </quickbooks-windows:sync-activity-request>
 </quickbooks-windows:sync-activity>
 <!-- END_INCLUDE(quickbooks-windows:sync-activity3) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:get-current-user) -->
+<quickbooks-windows:get-current-user realmId="realmId"
+                                  appKey="appKey"
+                                  realmIdPseudonym="reamIdPseudonym"
+                                  authIdPseudonym="authIdPseudonym" />
+<!-- END_INCLUDE(quickbooks-windows:get-current-user) -->

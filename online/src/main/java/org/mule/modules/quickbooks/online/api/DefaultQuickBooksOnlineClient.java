@@ -30,6 +30,7 @@ import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.model.UserInformation;
+import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
@@ -466,7 +467,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     @Override
     public UserInformation getCurrentUserInformation(String realmId,
             String appKey, String realmIdPseudonym, String authIdPseudonym) {        
-        return retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym).getUserInformation();
+        return ((UserResponse) retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym)).getUser();
     }
 
     @Override

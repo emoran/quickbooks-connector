@@ -42,7 +42,6 @@ import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.gateway.MuleOAuthCredentialStorage;
 import org.mule.modules.quickbooks.api.gateway.oauth.OAuthGateway;
-import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.springframework.core.io.ClassPathResource;
@@ -299,7 +298,8 @@ public abstract class AbstractQuickBooksClient
      * @param authIdPseudonym
      * @return
      */
-    protected UserResponse retrieveUserInformation(final String realmId,
+    @SuppressWarnings("unchecked")
+    protected <T> T retrieveUserInformation(final String realmId,
                 final String appKey,
                 final String realmIdPseudonym, 
                 final String authIdPseudonym)
@@ -311,7 +311,7 @@ public abstract class AbstractQuickBooksClient
         
         try
         {
-            return (UserResponse) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
         }
         catch(QuickBooksRuntimeException e)
         {
