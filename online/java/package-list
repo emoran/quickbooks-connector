@@ -1,0 +1,13 @@
+org.mule.modules.quickbooks.online
+org.mule.modules.quickbooks.online.adapters
+org.mule.modules.quickbooks.online.agents
+org.mule.modules.quickbooks.online.api
+org.mule.modules.quickbooks.online.config
+org.mule.modules.quickbooks.online.objectfactory
+org.mule.modules.quickbooks.online.process
+org.mule.modules.quickbooks.online.processors
+org.mule.modules.quickbooks.online.schema
+org.mule.modules.quickbooks.online.schema.holders
+org.mule.modules.quickbooks.online.schema.transformers
+org.mule.modules.quickbooks.online.transformers
+
