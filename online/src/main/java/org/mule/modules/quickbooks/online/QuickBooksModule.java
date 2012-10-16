@@ -30,7 +30,6 @@ import org.mule.modules.quickbooks.online.schema.Bill;
 import org.mule.modules.quickbooks.online.schema.BillPayment;
 import org.mule.modules.quickbooks.online.schema.CashPurchase;
 import org.mule.modules.quickbooks.online.schema.Check;
-import org.mule.modules.quickbooks.online.schema.CompanyMetaData;
 import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
 import org.mule.modules.quickbooks.online.schema.Customer;
 import org.mule.modules.quickbooks.online.schema.Estimate;
