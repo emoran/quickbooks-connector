@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="QuickbooksOnlineDemo">
+    <global-element type="http://www.mulesoft.org/schema/mule/quickbooks/config" name="Quickbooks Online" entity-id="Quickbooks Online#1">
+        <properties>
+            <property value="Quickbooks" name="name"/>
+            <property value="1" name="auxiliary;index"/>
+            <property name="client-ref"/>
+            <property name="baseUri"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+        </properties>
+    </global-element>
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="DataMapper" entity-id="DataMapper#1">
+        <properties>
+            <property value="update_customer" name="name"/>
+            <property value="update_customer.grf" name="transformationGraphPath"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="QuickbooksOnlineDemoFlow1" entity-id="bef75c9a-9024-4a6c-bef2-b5a4f6169888">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="3" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="3" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#1">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="httpLabel"/>
+                    <property value="localhost" name="host"/>
+                    <property value="8081" name="port"/>
+                    <property value="go" name="path"/>
+                    <property name="method"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="create-account" entity-id="Flow Reference#1">
+                <properties>
+                    <property value="create-account" name="name"/>
+                    <property value="5" name="auxiliary;index"/>
+                    <property value="5" name="auxiliary;index"/>
+                    <property value="5" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="create-customer" entity-id="Flow Reference#2">
+                <properties>
+                    <property value="create-customer" name="name"/>
+                    <property value="6" name="auxiliary;index"/>
+                    <property value="6" name="auxiliary;index"/>
+                    <property value="6" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="create-item" entity-id="Flow Reference#3">
+                <properties>
+                    <property value="create-item" name="name"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="create-invoice" entity-id="5343bab8-e7cd-4977-9e37-21160eb1e2e9">
+                <properties>
+                    <property value="create-invoince" name="name"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="update-customer" entity-id="8b63c46f-a20c-48c3-aba1-bd029b09a13d">
+                <properties>
+                    <property value="update-customer" name="name"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="delete-invoice" entity-id="3dbaeb75-9b73-45e6-b25a-67618d466074">
+                <properties>
+                    <property value="delete-invoice" name="name"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="detele-item" entity-id="Flow Reference#5">
+                <properties>
+                    <property value="delete-item" name="name"/>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="delete-customer" entity-id="Flow Reference#6">
+                <properties>
+                    <property value="delete-customer" name="name"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="delete-account" entity-id="Flow Reference#7">
+                <properties>
+                    <property value="delete-account" name="name"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="friendly web feedback" entity-id="Set Payload#1">
+                <properties>
+                    <property value="Done" name="value"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="Object to JSON#1">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property name="mapper-ref"/>
+                    <property name="sourceClass"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="create-account" entity-id="ba11351c-aa60-4605-853c-46f4042d2196">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="14" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="14" name="auxiliary;index"/>
+            <property value="14" name="auxiliary;index"/>
+            <property value="14" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
+            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="Create account object" entity-id="Groovy#1">
+                <properties>
+                    <property value="" name="ref"/>
+                    <property value="import org.mule.modules.quickbooks.online.schema.Account;&#xA;&#xA;Account account = new Account();&#xA;account.setName(&quot;QuickBooks Demo Test Account AAT111&quot;);&#xA;account.setAcctNum(&quot;99959&quot;);&#xA;account.setSubtype(&quot;Savings&quot;);&#xA;&#xA;return account;" name="text"/>
+                    <property value="15" name="auxiliary;index"/>
+                    <property name="updated"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;143348065">
+                        <property value="" name="ref"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;1485627162">
+                        <property value="import org.mule.modules.quickbooks.online.schema.Account;&#xA;&#xA;Account account = new Account();&#xA;account.setName(&quot;QuickBooks Demo Test Account AAT111&quot;);&#xA;account.setAcctNum(&quot;99959&quot;);&#xA;account.setSubtype(&quot;Savings&quot;);&#xA;&#xA;return account;" name="text"/>
+                        <property value="16" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="create account" entity-id="Quickbooks Online#2">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/create-account" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="account" entity-id="Session Variable#1">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="account" name="variableName"/>
+                    <property value="#[payload]" name="value"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#1">
+                <properties>
+                    <property value="[CREATED] Account #[groovy:payload.getName()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="create-customer" entity-id="cc08d50d-b33f-494a-8d35-d11f350bda15">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="21" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="21" name="auxiliary;index"/>
+            <property value="21" name="auxiliary;index"/>
+            <property value="21" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
+            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="create customer" entity-id="Groovy#2">
+                <properties>
+                    <property value="" name="ref"/>
+                    <property value="import org.mule.modules.quickbooks.online.schema.Customer;&#xA;&#xA;Customer customer = new Customer();&#xA;customer.setName(&quot;QuickBooks Demo Test Customer AAT111&quot;);&#xA;customer.setFamilyName(&quot;McFly&quot;);&#xA;&#xA;return customer;" name="text"/>
+                    <property value="22" name="auxiliary;index"/>
+                    <property name="updated"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;823251549">
+                        <property value="" name="ref"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;1439030409">
+                        <property value="import org.mule.modules.quickbooks.online.schema.Customer;&#xA;&#xA;Customer customer = new Customer();&#xA;customer.setName(&quot;QuickBooks Demo Test Customer AAT111&quot;);&#xA;customer.setFamilyName(&quot;McFly&quot;);&#xA;&#xA;return customer;" name="text"/>
+                        <property value="23" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="create customer" entity-id="Quickbooks Online#3">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/create-customer" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="customer" entity-id="Session Variable#2">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="customer" name="variableName"/>
+                    <property value="#[payload]" name="value"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#2">
+                <properties>
+                    <property value="[CREATED] Customer #[groovy:payload.getName()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property value="27" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="create-item" entity-id="d7c33e9f-f76c-4262-9e81-c60db62812ed">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="28" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="28" name="auxiliary;index"/>
+            <property value="28" name="auxiliary;index"/>
+            <property value="28" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#4">
+            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="create item" entity-id="Groovy#3">
+                <properties>
+                    <property value="" name="ref"/>
+                    <property value="import org.mule.modules.quickbooks.online.schema.Item;&#xA;import org.mule.modules.quickbooks.online.schema.Money;&#xA;&#xA;        Item item = new Item();&#xA;        item.setName(&quot;Quickbooks Demo Item Test AAT111&quot;);&#xA;        &#xA;        Money money = new Money();&#xA;        money.setAmount(BigDecimal.valueOf(100));&#xA;        item.setUnitPrice(money);&#xA;&#xA;return item;" name="text"/>
+                    <property value="29" name="auxiliary;index"/>
+                    <property name="updated"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;348768254">
+                        <property value="" name="ref"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;295815637">
+                        <property value="import org.mule.modules.quickbooks.online.schema.Item;&#xA;import org.mule.modules.quickbooks.online.schema.Money;&#xA;&#xA;        Item item = new Item();&#xA;        item.setName(&quot;Quickbooks Demo Item Test AAT111&quot;);&#xA;        &#xA;        Money money = new Money();&#xA;        money.setAmount(BigDecimal.valueOf(100));&#xA;        item.setUnitPrice(money);&#xA;&#xA;return item;" name="text"/>
+                        <property value="30" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="create item" entity-id="Quickbooks Online#4">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/create-item" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="32" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property value="32" name="auxiliary;index"/>
+                    <property value="32" name="auxiliary;index"/>
+                    <property value="32" name="auxiliary;index"/>
+                    <property value="32" name="auxiliary;index"/>
+                    <property value="32" name="auxiliary;index"/>
+                    <property value="32" name="auxiliary;index"/>
+                    <property value="32" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="item" entity-id="Session Variable#3">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="item" name="variableName"/>
+                    <property value="#[payload]" name="value"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#3">
+                <properties>
+                    <property value="[CREATED] Item #[groovy:payload.getName()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="34" name="auxiliary;index"/>
+                    <property value="34" name="auxiliary;index"/>
+                    <property value="34" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="create-invoince" entity-id="8467f141-1710-4570-87fe-0105fe5329cf">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="35" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="35" name="auxiliary;index"/>
+            <property value="35" name="auxiliary;index"/>
+            <property value="35" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#5">
+            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="create invoice" entity-id="Groovy#4">
+                <properties>
+                    <property value="" name="ref"/>
+                    <property value="import org.mule.modules.quickbooks.online.schema.Invoice;&#xA;import org.mule.modules.quickbooks.online.schema.InvoiceHeader;&#xA;import org.mule.modules.quickbooks.online.schema.InvoiceLine;&#xA;&#xA;def customer = message.getSessionProperty('customer');&#xA;def item = message.getSessionProperty('item');&#xA;&#xA;&#x9;     InvoiceHeader invHeader = new InvoiceHeader();&#xA;        invHeader.setCustomerId(customer.getId());&#xA;        invHeader.setDocNumber(&quot;DEMO-0001919101&quot;);&#xA;        &#xA;        List&lt;InvoiceLine&gt; lines = new ArrayList&lt;InvoiceLine&gt;();&#xA;        InvoiceLine invoiceLine = new InvoiceLine();&#xA;        invoiceLine.setAmount(new BigDecimal(100));&#xA;        invoiceLine.setItemId(item.getId());&#xA;        lines.add(invoiceLine);&#xA;        &#xA;        Invoice invoice = new Invoice();&#xA;        invoice.getLine().addAll(lines);&#xA;        invoice.setHeader(invHeader);&#xA;return invoice;" name="text"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property name="updated"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1664854101">
+                        <property value="" name="ref"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;779898706">
+                        <property value="import org.mule.modules.quickbooks.online.schema.Invoice;&#xA;import org.mule.modules.quickbooks.online.schema.InvoiceHeader;&#xA;import org.mule.modules.quickbooks.online.schema.InvoiceLine;&#xA;&#xA;def customer = message.getSessionProperty('customer');&#xA;def item = message.getSessionProperty('item');&#xA;&#xA;&#x9;     InvoiceHeader invHeader = new InvoiceHeader();&#xA;        invHeader.setCustomerId(customer.getId());&#xA;        invHeader.setDocNumber(&quot;DEMO-0001919101&quot;);&#xA;        &#xA;        List&lt;InvoiceLine&gt; lines = new ArrayList&lt;InvoiceLine&gt;();&#xA;        InvoiceLine invoiceLine = new InvoiceLine();&#xA;        invoiceLine.setAmount(new BigDecimal(100));&#xA;        invoiceLine.setItemId(item.getId());&#xA;        lines.add(invoiceLine);&#xA;        &#xA;        Invoice invoice = new Invoice();&#xA;        invoice.getLine().addAll(lines);&#xA;        invoice.setHeader(invHeader);&#xA;return invoice;" name="text"/>
+                        <property value="37" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="create invoice" entity-id="Quickbooks Online#5">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/create-invoice" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="invoice" entity-id="Session Variable#4">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="invoice" name="variableName"/>
+                    <property value="#[payload]" name="value"/>
+                    <property value="40" name="auxiliary;index"/>
+                    <property value="40" name="auxiliary;index"/>
+                    <property value="40" name="auxiliary;index"/>
+                    <property value="40" name="auxiliary;index"/>
+                    <property value="40" name="auxiliary;index"/>
+                    <property value="40" name="auxiliary;index"/>
+                    <property value="40" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#4">
+                <properties>
+                    <property value="[CREATED] Invoice #[groovy:payload]" name="message"/>
+                    <property value="" name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="update-customer" entity-id="2ce3868f-11c8-4695-b755-3b180d8f5d51">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="42" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="42" name="auxiliary;index"/>
+            <property value="42" name="auxiliary;index"/>
+            <property value="42" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#6">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="Set Payload" entity-id="Set Payload#2">
+                <properties>
+                    <property value="#[sessionVars['customer']]" name="value"/>
+                    <property value="43" name="auxiliary;index"/>
+                    <property value="43" name="auxiliary;index"/>
+                    <property value="43" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="DataMapper" entity-id="DataMapper#2">
+                <properties>
+                    <property value="update_customer" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="update_customer" name="config-ref"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property name="input-ref"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property value="44" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="create customer" entity-id="Quickbooks Online#6">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/update-customer" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="45" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property value="45" name="auxiliary;index"/>
+                    <property value="45" name="auxiliary;index"/>
+                    <property value="45" name="auxiliary;index"/>
+                    <property value="45" name="auxiliary;index"/>
+                    <property value="45" name="auxiliary;index"/>
+                    <property value="45" name="auxiliary;index"/>
+                    <property value="45" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#5">
+                <properties>
+                    <property value="[UPDATED] Customer #[groovy:payload.getName()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="46" name="auxiliary;index"/>
+                    <property value="46" name="auxiliary;index"/>
+                    <property value="46" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="Catch Exception Strategy#1">
+                <properties>
+                    <property name="labelConfigureConditionalExecutionUsingExpression"/>
+                    <property name="when"/>
+                    <property value="false" name="enableNotifications"/>
+                    <property value="47" name="auxiliary;index"/>
+                    <property value="47" name="auxiliary;index"/>
+                    <property value="47" name="auxiliary;index"/>
+                </properties>
+                <compartment entity-id="compartment#1">
+                    <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#7">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#6">
+                            <properties>
+<property value="ERROR!! ERROR!! ….." name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+<property value="48" name="auxiliary;index"/>
+<property value="48" name="auxiliary;index"/>
+<property value="48" name="auxiliary;index"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="delete-account" entity-id="ede6cbe9-a0a5-4dab-87af-451d2c0c551f">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="49" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="49" name="auxiliary;index"/>
+            <property value="49" name="auxiliary;index"/>
+            <property value="49" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#8">
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="delete account" entity-id="Quickbooks Online#7">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/delete-object" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property name="syncToken"/>
+                    <property value="ACCOUNT" name="type"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property value="50" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quickbooks/id;0">
+                        <property value="#[sessionVars['account'].getId()]" name="ref"/>
+                        <property value="51" name="auxiliary;wrapIn"/>
+                        <property value="51" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#7">
+                <properties>
+                    <property value="[DELETED] Account #[groovy:payload.getName()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="52" name="auxiliary;index"/>
+                    <property value="52" name="auxiliary;index"/>
+                    <property value="52" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="delete-customer" entity-id="9ad6dbb5-417d-4c49-88a3-3963a24a1ce6">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="53" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="53" name="auxiliary;index"/>
+            <property value="53" name="auxiliary;index"/>
+            <property value="53" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#9">
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="delete customer" entity-id="Quickbooks Online#8">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/delete-object" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property name="syncToken"/>
+                    <property value="CUSTOMER" name="type"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quickbooks/id;0">
+                        <property value="#[sessionVars['customer'].getId()]" name="ref"/>
+                        <property value="55" name="auxiliary;wrapIn"/>
+                        <property value="55" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#8">
+                <properties>
+                    <property value="[DELETED] Customer #[groovy:payload.getName()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="56" name="auxiliary;index"/>
+                    <property value="56" name="auxiliary;index"/>
+                    <property value="56" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="delete-item" entity-id="0ab1821f-c9c1-4cef-bbd1-34d2b21e68d6">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="57" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="57" name="auxiliary;index"/>
+            <property value="57" name="auxiliary;index"/>
+            <property value="57" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#10">
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="delete account" entity-id="Quickbooks Online#9">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/delete-object" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property name="syncToken"/>
+                    <property value="ITEM" name="type"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property value="58" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quickbooks/id;0">
+                        <property value="#[sessionVars['item'].getId()]" name="ref"/>
+                        <property value="59" name="auxiliary;wrapIn"/>
+                        <property value="59" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#9">
+                <properties>
+                    <property value="[DELETED] Item #[groovy:payload.getName()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="delete-invoice" entity-id="229c4c83-e0ec-4c3d-a776-ec5500c02537">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="61" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="61" name="auxiliary;index"/>
+            <property value="61" name="auxiliary;index"/>
+            <property value="61" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#11">
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="delete account" entity-id="Quickbooks Online#10">
+                <properties>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/delete-object" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks" name="config-ref"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="${quickbooksAppKey}" name="appKey"/>
+                    <property value="${quickbooksAuthIdPseudonym}" name="authIdPseudonym"/>
+                    <property value="${quickbooksRealmId}" name="realmId"/>
+                    <property value="${quickbooksRealmIdPseudonym}" name="realmIdPseudonym"/>
+                    <property name="syncToken"/>
+                    <property value="INVOICE" name="type"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quickbooks/id;0">
+                        <property value="#[sessionVars['invoice'].getId()]" name="ref"/>
+                        <property value="63" name="auxiliary;wrapIn"/>
+                        <property value="63" name="auxiliary;index"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#10">
+                <properties>
+                    <property value="[DELETED] Invoice #[groovy:payload]" name="message"/>
+                    <property value="" name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

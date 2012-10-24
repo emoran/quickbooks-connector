@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/3.0/mule-quickbooks.xsd 
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd ">
+    <quickbooks:config name="Quickbooks" doc:name="Quickbooks Online"/>
+    <data-mapper:config name="update_customer" transformationGraphPath="update_customer.grf" doc:name="DataMapper"/>
+    <flow name="QuickbooksOnlineDemoFlow1" doc:name="QuickbooksOnlineDemoFlow1">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="go"/>
+        <flow-ref name="create-account" doc:name="create-account"/>
+        <flow-ref name="create-customer" doc:name="create-customer"/>
+        <flow-ref name="create-item" doc:name="create-item"/>
+        <flow-ref name="create-invoince" doc:name="create-invoice"/>
+        <flow-ref name="update-customer" doc:name="update-customer"/>
+        <flow-ref name="delete-invoice" doc:name="delete-invoice"/>
+        <flow-ref name="delete-item" doc:name="detele-item"/>
+        <flow-ref name="delete-customer" doc:name="delete-customer"/>
+        <flow-ref name="delete-account" doc:name="delete-account"/>
+        <set-payload value="Done" doc:name="friendly web feedback"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <sub-flow name="create-account" doc:name="create-account">
+        <scripting:component doc:name="Create account object">
+            <scripting:script engine="Groovy">
+                <scripting:text><![CDATA[import org.mule.modules.quickbooks.online.schema.Account;
+
+Account account = new Account();
+account.setName("QuickBooks Demo Test Account AAT111");
+account.setAcctNum("99959");
+account.setSubtype("Savings");
+
+return account;]]></scripting:text>
+            </scripting:script>
+        </scripting:component>
+        <quickbooks:create-account config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" doc:name="create account"/>
+        <set-session-variable variableName="account" value="#[payload]" doc:name="account"/>
+        <logger message="[CREATED] Account #[groovy:payload.getName()]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+    <sub-flow name="create-customer" doc:name="create-customer">
+        <scripting:component doc:name="create customer">
+            <scripting:script engine="Groovy">
+                <scripting:text><![CDATA[import org.mule.modules.quickbooks.online.schema.Customer;
+
+Customer customer = new Customer();
+customer.setName("QuickBooks Demo Test Customer AAT111");
+customer.setFamilyName("McFly");
+
+return customer;]]></scripting:text>
+            </scripting:script>
+        </scripting:component>
+        <quickbooks:create-customer config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" doc:name="create customer"/>
+    	<set-session-variable variableName="customer" value="#[payload]" doc:name="customer"/>
+        <logger message="[CREATED] Customer #[groovy:payload.getName()]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+    <sub-flow name="create-item" doc:name="create-item">
+        <scripting:component doc:name="create item">
+            <scripting:script engine="Groovy">
+                <scripting:text><![CDATA[import org.mule.modules.quickbooks.online.schema.Item;
+import org.mule.modules.quickbooks.online.schema.Money;
+
+        Item item = new Item();
+        item.setName("Quickbooks Demo Item Test AAT111");
+        
+        Money money = new Money();
+        money.setAmount(BigDecimal.valueOf(100));
+        item.setUnitPrice(money);
+
+return item;]]></scripting:text>
+            </scripting:script>
+        </scripting:component>
+        <quickbooks:create-item config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" doc:name="create item"/>
+        <set-session-variable variableName="item" value="#[payload]" doc:name="item"/>
+        <logger message="[CREATED] Item #[groovy:payload.getName()]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+        <sub-flow name="create-invoince" doc:name="create-invoince">
+        <scripting:component doc:name="create invoice">
+            <scripting:script engine="Groovy">
+                <scripting:text><![CDATA[import org.mule.modules.quickbooks.online.schema.Invoice;
+import org.mule.modules.quickbooks.online.schema.InvoiceHeader;
+import org.mule.modules.quickbooks.online.schema.InvoiceLine;
+
+def customer = message.getSessionProperty('customer');
+def item = message.getSessionProperty('item');
+
+	     InvoiceHeader invHeader = new InvoiceHeader();
+        invHeader.setCustomerId(customer.getId());
+        invHeader.setDocNumber("DEMO-0001919101");
+        
+        List<InvoiceLine> lines = new ArrayList<InvoiceLine>();
+        InvoiceLine invoiceLine = new InvoiceLine();
+        invoiceLine.setAmount(new BigDecimal(100));
+        invoiceLine.setItemId(item.getId());
+        lines.add(invoiceLine);
+        
+        Invoice invoice = new Invoice();
+        invoice.getLine().addAll(lines);
+        invoice.setHeader(invHeader);
+return invoice;]]></scripting:text>
+            </scripting:script>
+        </scripting:component>
+        <quickbooks:create-invoice config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" doc:name="create invoice"/>
+    	<set-session-variable variableName="invoice" value="#[payload]" doc:name="invoice"/>
+        <logger message="[CREATED] Invoice #[groovy:payload]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+    <flow name="update-customer" doc:name="update-customer">
+        <set-payload value="#[sessionVars['customer']]" doc:name="Set Payload"/>
+        <data-mapper:transform config-ref="update_customer" doc:name="DataMapper"/>
+        <quickbooks:update-customer config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" doc:name="create customer"/>
+        <logger message="[UPDATED] Customer #[groovy:payload.getName()]" level="INFO" doc:name="Logger"/>
+        <catch-exception-strategy enableNotifications="false" doc:name="Catch Exception Strategy">
+            <logger message="ERROR!! ERROR!! ….." level="INFO" doc:name="Logger"/>
+        </catch-exception-strategy>
+    </flow>
+    <sub-flow name="delete-account" doc:name="delete-account">
+        <quickbooks:delete-object config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" type="ACCOUNT" doc:name="delete account">
+            <quickbooks:id ref="#[sessionVars['account'].getId()]"/>
+        </quickbooks:delete-object>
+        <logger message="[DELETED] Account #[groovy:payload.getName()]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+    <sub-flow name="delete-customer" doc:name="delete-customer">
+        <quickbooks:delete-object config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" type="CUSTOMER" doc:name="delete customer">
+            <quickbooks:id ref="#[sessionVars['customer'].getId()]"/>
+        </quickbooks:delete-object>
+        <logger message="[DELETED] Customer #[groovy:payload.getName()]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+    <sub-flow name="delete-item" doc:name="delete-item">
+        <quickbooks:delete-object config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" type="ITEM" doc:name="delete account">
+            <quickbooks:id ref="#[sessionVars['item'].getId()]"/>
+        </quickbooks:delete-object>
+        <logger message="[DELETED] Item #[groovy:payload.getName()]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+        <sub-flow name="delete-invoice" doc:name="delete-invoice">
+        <quickbooks:delete-object config-ref="Quickbooks" appKey="${quickbooksAppKey}" authIdPseudonym="${quickbooksAuthIdPseudonym}" realmId="${quickbooksRealmId}" realmIdPseudonym="${quickbooksRealmIdPseudonym}" type="INVOICE" doc:name="delete account">
+            <quickbooks:id ref="#[sessionVars['invoice'].getId()]"/>
+        </quickbooks:delete-object>
+        <logger message="[DELETED] Invoice #[groovy:payload]" level="INFO" doc:name="Logger"/>
+    </sub-flow>
+</mule>

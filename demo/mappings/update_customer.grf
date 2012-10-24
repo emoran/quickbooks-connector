@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="sebastiangramano" created="Wed Oct 24 14:42:42 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1351103235762" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed Oct 24 14:42:42 GMT-03:00 2012" modifiedBy="sebastiangramano" name="update_customer" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="Customer" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/DBAName" label="DBAName" name="DBAName" type="string"/>
+<Field __sourcePath="{}/object/acctNum" label="acctNum" name="acctNum" type="string"/>
+<Field __sourcePath="{}/object/active" label="active" name="active" type="boolean"/>
+<Field __sourcePath="{}/object/birthDate" label="birthDate" name="birthDate" type="date"/>
+<Field __sourcePath="{}/object/category" label="category" name="category" type="string"/>
+<Field __sourcePath="{}/object/creditLimit/amount" label="amount" name="amount5" type="decimal"/>
+<Field __sourcePath="{}/object/creditLimit/currencyCode" label="currencyCode" name="currencyCode5" type="string"/>
+<Field __sourcePath="{}/object/customerTypeId/idDomain" label="idDomain" name="idDomain11" type="string"/>
+<Field __sourcePath="{}/object/customerTypeId/value" label="value" name="value11" type="string"/>
+<Field __sourcePath="{}/object/customerTypeName" label="customerTypeName" name="customerTypeName" type="string"/>
+<Field __sourcePath="{}/object/externalId" label="externalId" name="externalId" type="string"/>
+<Field __sourcePath="{}/object/externalKey/idDomain" label="idDomain" name="idDomain12" type="string"/>
+<Field __sourcePath="{}/object/externalKey/value" label="value" name="value12" type="string"/>
+<Field __sourcePath="{}/object/familyName" label="familyName" name="familyName" type="string"/>
+<Field __sourcePath="{}/object/gender" label="gender" name="gender" type="string"/>
+<Field __sourcePath="{}/object/givenName" label="givenName" name="givenName" type="string"/>
+<Field __sourcePath="{}/object/id/idDomain" label="idDomain" name="idDomain13" type="string"/>
+<Field __sourcePath="{}/object/id/value" label="value" name="value13" type="string"/>
+<Field __sourcePath="{}/object/industry" label="industry" name="industry" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/description" label="description" name="description" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/endDate" label="endDate" name="endDate" type="date"/>
+<Field __sourcePath="{}/object/jobInfo/jobTypeId/idDomain" label="idDomain" name="idDomain14" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/jobTypeId/value" label="value" name="value14" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/jobTypeName" label="jobTypeName" name="jobTypeName" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/projectedEndDate" label="projectedEndDate" name="projectedEndDate" type="date"/>
+<Field __sourcePath="{}/object/jobInfo/startDate" label="startDate" name="startDate" type="date"/>
+<Field __sourcePath="{}/object/jobInfo/status" label="status" name="status" type="string"/>
+<Field __sourcePath="{}/object/legalName" label="legalName" name="legalName" type="string"/>
+<Field __sourcePath="{}/object/legalStructure" label="legalStructure" name="legalStructure" type="string"/>
+<Field __sourcePath="{}/object/metaData/createTime" label="createTime" name="createTime" type="date"/>
+<Field __sourcePath="{}/object/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
+<Field __sourcePath="{}/object/middleName" label="middleName" name="middleName" type="string"/>
+<Field __sourcePath="{}/object/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/nonProfit" label="nonProfit" name="nonProfit" type="boolean"/>
+<Field __sourcePath="{}/object/openBalance/amount" label="amount" name="amount6" type="decimal"/>
+<Field __sourcePath="{}/object/openBalance/currencyCode" label="currencyCode" name="currencyCode6" type="string"/>
+<Field __sourcePath="{}/object/openBalanceDate" label="openBalanceDate" name="openBalanceDate" type="date"/>
+<Field __sourcePath="{}/object/openBalanceWithJobs/amount" label="amount" name="amount7" type="decimal"/>
+<Field __sourcePath="{}/object/openBalanceWithJobs/currencyCode" label="currencyCode" name="currencyCode7" type="string"/>
+<Field __sourcePath="{}/object/orgId" label="orgId" name="orgId" type="string"/>
+<Field __sourcePath="{}/object/overDueBalance/amount" label="amount" name="amount8" type="decimal"/>
+<Field __sourcePath="{}/object/overDueBalance/currencyCode" label="currencyCode" name="currencyCode8" type="string"/>
+<Field __sourcePath="{}/object/partyReferenceId/idDomain" label="idDomain" name="idDomain15" type="string"/>
+<Field __sourcePath="{}/object/partyReferenceId/value" label="value" name="value15" type="string"/>
+<Field __sourcePath="{}/object/paymentMethodId/idDomain" label="idDomain" name="idDomain16" type="string"/>
+<Field __sourcePath="{}/object/paymentMethodId/value" label="value" name="value16" type="string"/>
+<Field __sourcePath="{}/object/paymentMethodName" label="paymentMethodName" name="paymentMethodName" type="string"/>
+<Field __sourcePath="{}/object/priceLevelId/idDomain" label="idDomain" name="idDomain17" type="string"/>
+<Field __sourcePath="{}/object/priceLevelId/value" label="value" name="value17" type="string"/>
+<Field __sourcePath="{}/object/priceLevelName" label="priceLevelName" name="priceLevelName" type="string"/>
+<Field __sourcePath="{}/object/salesRepId/idDomain" label="idDomain" name="idDomain18" type="string"/>
+<Field __sourcePath="{}/object/salesRepId/value" label="value" name="value18" type="string"/>
+<Field __sourcePath="{}/object/salesRepName" label="salesRepName" name="salesRepName" type="string"/>
+<Field __sourcePath="{}/object/salesTaxCodeId/idDomain" label="idDomain" name="idDomain19" type="string"/>
+<Field __sourcePath="{}/object/salesTaxCodeId/value" label="value" name="value19" type="string"/>
+<Field __sourcePath="{}/object/salesTaxCodeName" label="salesTaxCodeName" name="salesTaxCodeName" type="string"/>
+<Field __sourcePath="{}/object/salesTermId/idDomain" label="idDomain" name="idDomain20" type="string"/>
+<Field __sourcePath="{}/object/salesTermId/value" label="value" name="value20" type="string"/>
+<Field __sourcePath="{}/object/salesTermName" label="salesTermName" name="salesTermName" type="string"/>
+<Field __sourcePath="{}/object/showAs" label="showAs" name="showAs" type="string"/>
+<Field __sourcePath="{}/object/suffix" label="suffix" name="suffix" type="string"/>
+<Field __sourcePath="{}/object/syncToken" label="syncToken" name="syncToken" type="string"/>
+<Field __sourcePath="{}/object/synchronized" label="synchronized" name="synchronized" type="boolean"/>
+<Field __sourcePath="{}/object/taxGroupId/idDomain" label="idDomain" name="idDomain21" type="string"/>
+<Field __sourcePath="{}/object/taxGroupId/value" label="value" name="value21" type="string"/>
+<Field __sourcePath="{}/object/taxGroupName" label="taxGroupName" name="taxGroupName" type="string"/>
+<Field __sourcePath="{}/object/taxId/idDomain" label="idDomain" name="idDomain22" type="string"/>
+<Field __sourcePath="{}/object/taxId/value" label="value" name="value22" type="string"/>
+<Field __sourcePath="{}/object/taxIdentifier" label="taxIdentifier" name="taxIdentifier" type="string"/>
+<Field __sourcePath="{}/object/taxName" label="taxName" name="taxName" type="string"/>
+<Field __sourcePath="{}/object/title" label="title" name="title" type="string"/>
+<Field __sourcePath="{}/object/totalExpense/amount" label="amount" name="amount9" type="decimal"/>
+<Field __sourcePath="{}/object/totalExpense/currencyCode" label="currencyCode" name="currencyCode9" type="string"/>
+<Field __sourcePath="{}/object/totalRevenue/amount" label="amount" name="amount10" type="decimal"/>
+<Field __sourcePath="{}/object/totalRevenue/currencyCode" label="currencyCode" name="currencyCode10" type="string"/>
+<Field __sourcePath="{}/object/typeOf" label="typeOf" name="typeOf" type="string"/>
+<Field __sourcePath="{}/object/userId" label="userId" name="userId" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="Metadata9">
+<Record fieldDelimiter="|" name="Customer" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/DBAName" label="DBAName" name="DBAName" type="string"/>
+<Field __sourcePath="{}/object/acctNum" label="acctNum" name="acctNum" type="string"/>
+<Field __sourcePath="{}/object/active" label="active" name="active" type="boolean"/>
+<Field __sourcePath="{}/object/birthDate" label="birthDate" name="birthDate" type="date"/>
+<Field __sourcePath="{}/object/category" label="category" name="category" type="string"/>
+<Field __sourcePath="{}/object/creditLimit/amount" label="amount" name="amount5" type="decimal"/>
+<Field __sourcePath="{}/object/creditLimit/currencyCode" label="currencyCode" name="currencyCode5" type="string"/>
+<Field __sourcePath="{}/object/customerTypeId/idDomain" label="idDomain" name="idDomain11" type="string"/>
+<Field __sourcePath="{}/object/customerTypeId/value" label="value" name="value11" type="string"/>
+<Field __sourcePath="{}/object/customerTypeName" label="customerTypeName" name="customerTypeName" type="string"/>
+<Field __sourcePath="{}/object/externalId" label="externalId" name="externalId" type="string"/>
+<Field __sourcePath="{}/object/externalKey/idDomain" label="idDomain" name="idDomain12" type="string"/>
+<Field __sourcePath="{}/object/externalKey/value" label="value" name="value12" type="string"/>
+<Field __sourcePath="{}/object/familyName" label="familyName" name="familyName" type="string"/>
+<Field __sourcePath="{}/object/gender" label="gender" name="gender" type="string"/>
+<Field __sourcePath="{}/object/givenName" label="givenName" name="givenName" type="string"/>
+<Field __sourcePath="{}/object/id/idDomain" label="idDomain" name="idDomain13" type="string"/>
+<Field __sourcePath="{}/object/id/value" label="value" name="value13" type="string"/>
+<Field __sourcePath="{}/object/industry" label="industry" name="industry" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/description" label="description" name="description" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/endDate" label="endDate" name="endDate" type="date"/>
+<Field __sourcePath="{}/object/jobInfo/jobTypeId/idDomain" label="idDomain" name="idDomain14" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/jobTypeId/value" label="value" name="value14" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/jobTypeName" label="jobTypeName" name="jobTypeName" type="string"/>
+<Field __sourcePath="{}/object/jobInfo/projectedEndDate" label="projectedEndDate" name="projectedEndDate" type="date"/>
+<Field __sourcePath="{}/object/jobInfo/startDate" label="startDate" name="startDate" type="date"/>
+<Field __sourcePath="{}/object/jobInfo/status" label="status" name="status" type="string"/>
+<Field __sourcePath="{}/object/legalName" label="legalName" name="legalName" type="string"/>
+<Field __sourcePath="{}/object/legalStructure" label="legalStructure" name="legalStructure" type="string"/>
+<Field __sourcePath="{}/object/metaData/createTime" label="createTime" name="createTime" type="date"/>
+<Field __sourcePath="{}/object/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/metaData/lastUpdatedTime" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
+<Field __sourcePath="{}/object/middleName" label="middleName" name="middleName" type="string"/>
+<Field __sourcePath="{}/object/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/nonProfit" label="nonProfit" name="nonProfit" type="boolean"/>
+<Field __sourcePath="{}/object/openBalance/amount" label="amount" name="amount6" type="decimal"/>
+<Field __sourcePath="{}/object/openBalance/currencyCode" label="currencyCode" name="currencyCode6" type="string"/>
+<Field __sourcePath="{}/object/openBalanceDate" label="openBalanceDate" name="openBalanceDate" type="date"/>
+<Field __sourcePath="{}/object/openBalanceWithJobs/amount" label="amount" name="amount7" type="decimal"/>
+<Field __sourcePath="{}/object/openBalanceWithJobs/currencyCode" label="currencyCode" name="currencyCode7" type="string"/>
+<Field __sourcePath="{}/object/orgId" label="orgId" name="orgId" type="string"/>
+<Field __sourcePath="{}/object/overDueBalance/amount" label="amount" name="amount8" type="decimal"/>
+<Field __sourcePath="{}/object/overDueBalance/currencyCode" label="currencyCode" name="currencyCode8" type="string"/>
+<Field __sourcePath="{}/object/partyReferenceId/idDomain" label="idDomain" name="idDomain15" type="string"/>
+<Field __sourcePath="{}/object/partyReferenceId/value" label="value" name="value15" type="string"/>
+<Field __sourcePath="{}/object/paymentMethodId/idDomain" label="idDomain" name="idDomain16" type="string"/>
+<Field __sourcePath="{}/object/paymentMethodId/value" label="value" name="value16" type="string"/>
+<Field __sourcePath="{}/object/paymentMethodName" label="paymentMethodName" name="paymentMethodName" type="string"/>
+<Field __sourcePath="{}/object/priceLevelId/idDomain" label="idDomain" name="idDomain17" type="string"/>
+<Field __sourcePath="{}/object/priceLevelId/value" label="value" name="value17" type="string"/>
+<Field __sourcePath="{}/object/priceLevelName" label="priceLevelName" name="priceLevelName" type="string"/>
+<Field __sourcePath="{}/object/salesRepId/idDomain" label="idDomain" name="idDomain18" type="string"/>
+<Field __sourcePath="{}/object/salesRepId/value" label="value" name="value18" type="string"/>
+<Field __sourcePath="{}/object/salesRepName" label="salesRepName" name="salesRepName" type="string"/>
+<Field __sourcePath="{}/object/salesTaxCodeId/idDomain" label="idDomain" name="idDomain19" type="string"/>
+<Field __sourcePath="{}/object/salesTaxCodeId/value" label="value" name="value19" type="string"/>
+<Field __sourcePath="{}/object/salesTaxCodeName" label="salesTaxCodeName" name="salesTaxCodeName" type="string"/>
+<Field __sourcePath="{}/object/salesTermId/idDomain" label="idDomain" name="idDomain20" type="string"/>
+<Field __sourcePath="{}/object/salesTermId/value" label="value" name="value20" type="string"/>
+<Field __sourcePath="{}/object/salesTermName" label="salesTermName" name="salesTermName" type="string"/>
+<Field __sourcePath="{}/object/showAs" label="showAs" name="showAs" type="string"/>
+<Field __sourcePath="{}/object/suffix" label="suffix" name="suffix" type="string"/>
+<Field __sourcePath="{}/object/syncToken" label="syncToken" name="syncToken" type="string"/>
+<Field __sourcePath="{}/object/synchronized" label="synchronized" name="synchronized" type="boolean"/>
+<Field __sourcePath="{}/object/taxGroupId/idDomain" label="idDomain" name="idDomain21" type="string"/>
+<Field __sourcePath="{}/object/taxGroupId/value" label="value" name="value21" type="string"/>
+<Field __sourcePath="{}/object/taxGroupName" label="taxGroupName" name="taxGroupName" type="string"/>
+<Field __sourcePath="{}/object/taxId/idDomain" label="idDomain" name="idDomain22" type="string"/>
+<Field __sourcePath="{}/object/taxId/value" label="value" name="value22" type="string"/>
+<Field __sourcePath="{}/object/taxIdentifier" label="taxIdentifier" name="taxIdentifier" type="string"/>
+<Field __sourcePath="{}/object/taxName" label="taxName" name="taxName" type="string"/>
+<Field __sourcePath="{}/object/title" label="title" name="title" type="string"/>
+<Field __sourcePath="{}/object/totalExpense/amount" label="amount" name="amount9" type="decimal"/>
+<Field __sourcePath="{}/object/totalExpense/currencyCode" label="currencyCode" name="currencyCode9" type="string"/>
+<Field __sourcePath="{}/object/totalRevenue/amount" label="amount" name="amount10" type="decimal"/>
+<Field __sourcePath="{}/object/totalRevenue/currencyCode" label="currencyCode" name="currencyCode10" type="string"/>
+<Field __sourcePath="{}/object/typeOf" label="typeOf" name="typeOf" type="string"/>
+<Field __sourcePath="{}/object/userId" label="userId" name="userId" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/customField" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="2" _type="Input" id="Metadata3">
+<Record fieldDelimiter="|" name="CustomField" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/customField/definitionId" label="definitionId" name="definitionId" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/customField" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata9" _parent_id="__parent_id" _position="2" _type="Output" id="Metadata12">
+<Record fieldDelimiter="|" name="CustomField" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/customField/definitionId" label="definitionId" name="definitionId" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/email" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="3" _type="Input" id="Metadata4">
+<Record fieldDelimiter="|" name="EmailAddress" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/email/address" label="address" name="address" type="string"/>
+<Field __sourcePath="{}/object/email/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/email/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/email/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/email/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/email/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/email" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata9" _parent_id="__parent_id" _position="3" _type="Output" id="Metadata13">
+<Record fieldDelimiter="|" name="EmailAddress" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/email/address" label="address" name="address" type="string"/>
+<Field __sourcePath="{}/object/email/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/email/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/email/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/email/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/email/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="1" _type="Input" id="Metadata2">
+<Record fieldDelimiter="|" name="NameValue" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/alternateId/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/alternateId/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/notes/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata5" _parent_id="__parent_id" _position="0" _type="Input" id="Metadata6">
+<Record fieldDelimiter="|" name="NameValue" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/notes/alternateId/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/notes/alternateId/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata9" _parent_id="__parent_id" _position="1" _type="Output" id="Metadata11">
+<Record fieldDelimiter="|" name="NameValue" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/alternateId/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/alternateId/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/notes/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata14" _parent_id="__parent_id" _position="0" _type="Output" id="Metadata15">
+<Record fieldDelimiter="|" name="NameValue" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/notes/alternateId/name" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/notes/alternateId/value" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/notes" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="4" _type="Input" id="Metadata5">
+<Record fieldDelimiter="|" name="Note" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/notes/content" label="content" name="content" type="string"/>
+<Field __sourcePath="{}/object/notes/externalKey/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/notes/externalKey/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/notes/id/idDomain" label="idDomain" name="idDomain2" type="string"/>
+<Field __sourcePath="{}/object/notes/id/value" label="value" name="value2" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/createTime" label="createTime" name="createTime" type="date"/>
+<Field __sourcePath="{}/object/notes/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/lastUpdatedTime" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
+<Field __sourcePath="{}/object/notes/syncToken" label="syncToken" name="syncToken" type="string"/>
+<Field __sourcePath="{}/object/notes/synchronized" label="synchronized" name="synchronized" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/notes" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata9" _parent_id="__parent_id" _position="4" _type="Output" id="Metadata14">
+<Record fieldDelimiter="|" name="Note" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/notes/content" label="content" name="content" type="string"/>
+<Field __sourcePath="{}/object/notes/externalKey/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/notes/externalKey/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/notes/id/idDomain" label="idDomain" name="idDomain2" type="string"/>
+<Field __sourcePath="{}/object/notes/id/value" label="value" name="value2" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/createTime" label="createTime" name="createTime" type="date"/>
+<Field __sourcePath="{}/object/notes/metaData/createdBy" label="createdBy" name="createdBy" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/createdById" label="createdById" name="createdById" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/lastModifiedBy" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/lastModifiedById" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __sourcePath="{}/object/notes/metaData/lastUpdatedTime" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
+<Field __sourcePath="{}/object/notes/syncToken" label="syncToken" name="syncToken" type="string"/>
+<Field __sourcePath="{}/object/notes/synchronized" label="synchronized" name="synchronized" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/address" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="0" _type="Input" id="Metadata1">
+<Record fieldDelimiter="|" name="PhysicalAddress" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/address/city" label="city" name="city" type="string"/>
+<Field __sourcePath="{}/object/address/country" label="country" name="country" type="string"/>
+<Field __sourcePath="{}/object/address/countryCode" label="countryCode" name="countryCode" type="string"/>
+<Field __sourcePath="{}/object/address/countrySubDivisionCode" label="countrySubDivisionCode" name="countrySubDivisionCode" type="string"/>
+<Field __sourcePath="{}/object/address/county" label="county" name="county" type="string"/>
+<Field __sourcePath="{}/object/address/countyCode" label="countyCode" name="countyCode" type="string"/>
+<Field __sourcePath="{}/object/address/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/address/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/address/geoCode" label="geoCode" name="geoCode" type="string"/>
+<Field __sourcePath="{}/object/address/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/address/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/address/line1" label="line1" name="line1" type="string"/>
+<Field __sourcePath="{}/object/address/line2" label="line2" name="line2" type="string"/>
+<Field __sourcePath="{}/object/address/line3" label="line3" name="line3" type="string"/>
+<Field __sourcePath="{}/object/address/line4" label="line4" name="line4" type="string"/>
+<Field __sourcePath="{}/object/address/line5" label="line5" name="line5" type="string"/>
+<Field __sourcePath="{}/object/address/postalCode" label="postalCode" name="postalCode" type="string"/>
+<Field __sourcePath="{}/object/address/postalCodeSuffix" label="postalCodeSuffix" name="postalCodeSuffix" type="string"/>
+<Field __sourcePath="{}/object/address/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/address" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata9" _parent_id="__parent_id" _position="0" _type="Output" id="Metadata10">
+<Record fieldDelimiter="|" name="PhysicalAddress" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/address/city" label="city" name="city" type="string"/>
+<Field __sourcePath="{}/object/address/country" label="country" name="country" type="string"/>
+<Field __sourcePath="{}/object/address/countryCode" label="countryCode" name="countryCode" type="string"/>
+<Field __sourcePath="{}/object/address/countrySubDivisionCode" label="countrySubDivisionCode" name="countrySubDivisionCode" type="string"/>
+<Field __sourcePath="{}/object/address/county" label="county" name="county" type="string"/>
+<Field __sourcePath="{}/object/address/countyCode" label="countyCode" name="countyCode" type="string"/>
+<Field __sourcePath="{}/object/address/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/address/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/address/geoCode" label="geoCode" name="geoCode" type="string"/>
+<Field __sourcePath="{}/object/address/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/address/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/address/line1" label="line1" name="line1" type="string"/>
+<Field __sourcePath="{}/object/address/line2" label="line2" name="line2" type="string"/>
+<Field __sourcePath="{}/object/address/line3" label="line3" name="line3" type="string"/>
+<Field __sourcePath="{}/object/address/line4" label="line4" name="line4" type="string"/>
+<Field __sourcePath="{}/object/address/line5" label="line5" name="line5" type="string"/>
+<Field __sourcePath="{}/object/address/postalCode" label="postalCode" name="postalCode" type="string"/>
+<Field __sourcePath="{}/object/address/postalCodeSuffix" label="postalCodeSuffix" name="postalCodeSuffix" type="string"/>
+<Field __sourcePath="{}/object/address/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/phone" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata9" _parent_id="__parent_id" _position="5" _type="Output" id="Metadata16">
+<Record fieldDelimiter="|" name="TelephoneNumber" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/phone/PIN" label="PIN" name="PIN" type="string"/>
+<Field __sourcePath="{}/object/phone/areaCode" label="areaCode" name="areaCode" type="string"/>
+<Field __sourcePath="{}/object/phone/countryCode" label="countryCode" name="countryCode" type="string"/>
+<Field __sourcePath="{}/object/phone/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/phone/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/phone/deviceType" label="deviceType" name="deviceType" type="string"/>
+<Field __sourcePath="{}/object/phone/exchangeCode" label="exchangeCode" name="exchangeCode" type="string"/>
+<Field __sourcePath="{}/object/phone/extension" label="extension" name="extension" type="string"/>
+<Field __sourcePath="{}/object/phone/freeFormNumber" label="freeFormNumber" name="freeFormNumber" type="string"/>
+<Field __sourcePath="{}/object/phone/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/phone/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/phone/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/phone" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="5" _type="Input" id="Metadata7">
+<Record fieldDelimiter="|" name="TelephoneNumber" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/phone/PIN" label="PIN" name="PIN" type="string"/>
+<Field __sourcePath="{}/object/phone/areaCode" label="areaCode" name="areaCode" type="string"/>
+<Field __sourcePath="{}/object/phone/countryCode" label="countryCode" name="countryCode" type="string"/>
+<Field __sourcePath="{}/object/phone/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/phone/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/phone/deviceType" label="deviceType" name="deviceType" type="string"/>
+<Field __sourcePath="{}/object/phone/exchangeCode" label="exchangeCode" name="exchangeCode" type="string"/>
+<Field __sourcePath="{}/object/phone/extension" label="extension" name="extension" type="string"/>
+<Field __sourcePath="{}/object/phone/freeFormNumber" label="freeFormNumber" name="freeFormNumber" type="string"/>
+<Field __sourcePath="{}/object/phone/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/phone/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/phone/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/webSite" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata9" _parent_id="__parent_id" _position="6" _type="Output" id="Metadata17">
+<Record fieldDelimiter="|" name="WebSiteAddress" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/webSite/URI" label="URI" name="URI" type="string"/>
+<Field __sourcePath="{}/object/webSite/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/webSite/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/webSite/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/webSite/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/webSite/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/webSite" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="6" _type="Input" id="Metadata8">
+<Record fieldDelimiter="|" name="WebSiteAddress" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/webSite/URI" label="URI" name="URI" type="string"/>
+<Field __sourcePath="{}/object/webSite/dateLastVerified" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __sourcePath="{}/object/webSite/default" label="default" name="default" type="boolean"/>
+<Field __sourcePath="{}/object/webSite/id/idDomain" label="idDomain" name="idDomain" type="string"/>
+<Field __sourcePath="{}/object/webSite/id/value" label="value" name="value" type="string"/>
+<Field __sourcePath="{}/object/webSite/tag" containerType="list" label="tag" name="tag" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="Pojo READER" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="DBAName" trim="true" xpath="DBAName"/>
+  <Mapping cloverField="acctNum" trim="true" xpath="acctNum"/>
+  <Mapping cloverField="active" trim="true" xpath="active"/>
+  <Mapping cloverField="birthDate" trim="true" xpath="birthDate"/>
+  <Mapping cloverField="category" trim="true" xpath="category"/>
+  <Mapping cloverField="amount5" trim="true" xpath="creditLimit/amount"/>
+  <Mapping cloverField="currencyCode5" trim="true" xpath="creditLimit/currencyCode"/>
+  <Mapping cloverField="idDomain11" trim="true" xpath="customerTypeId/idDomain"/>
+  <Mapping cloverField="value11" trim="true" xpath="customerTypeId/value"/>
+  <Mapping cloverField="customerTypeName" trim="true" xpath="customerTypeName"/>
+  <Mapping cloverField="externalId" trim="true" xpath="externalId"/>
+  <Mapping cloverField="idDomain12" trim="true" xpath="externalKey/idDomain"/>
+  <Mapping cloverField="value12" trim="true" xpath="externalKey/value"/>
+  <Mapping cloverField="familyName" trim="true" xpath="familyName"/>
+  <Mapping cloverField="gender" trim="true" xpath="gender"/>
+  <Mapping cloverField="givenName" trim="true" xpath="givenName"/>
+  <Mapping cloverField="idDomain13" trim="true" xpath="id/idDomain"/>
+  <Mapping cloverField="value13" trim="true" xpath="id/value"/>
+  <Mapping cloverField="industry" trim="true" xpath="industry"/>
+  <Mapping cloverField="description" trim="true" xpath="jobInfo/description"/>
+  <Mapping cloverField="endDate" trim="true" xpath="jobInfo/endDate"/>
+  <Mapping cloverField="idDomain14" trim="true" xpath="jobInfo/jobTypeId/idDomain"/>
+  <Mapping cloverField="value14" trim="true" xpath="jobInfo/jobTypeId/value"/>
+  <Mapping cloverField="jobTypeName" trim="true" xpath="jobInfo/jobTypeName"/>
+  <Mapping cloverField="projectedEndDate" trim="true" xpath="jobInfo/projectedEndDate"/>
+  <Mapping cloverField="startDate" trim="true" xpath="jobInfo/startDate"/>
+  <Mapping cloverField="status" trim="true" xpath="jobInfo/status"/>
+  <Mapping cloverField="legalName" trim="true" xpath="legalName"/>
+  <Mapping cloverField="legalStructure" trim="true" xpath="legalStructure"/>
+  <Mapping cloverField="createTime" trim="true" xpath="metaData/createTime"/>
+  <Mapping cloverField="createdBy" trim="true" xpath="metaData/createdBy"/>
+  <Mapping cloverField="createdById" trim="true" xpath="metaData/createdById"/>
+  <Mapping cloverField="lastModifiedBy" trim="true" xpath="metaData/lastModifiedBy"/>
+  <Mapping cloverField="lastModifiedById" trim="true" xpath="metaData/lastModifiedById"/>
+  <Mapping cloverField="lastUpdatedTime" trim="true" xpath="metaData/lastUpdatedTime"/>
+  <Mapping cloverField="middleName" trim="true" xpath="middleName"/>
+  <Mapping cloverField="name" trim="true" xpath="name"/>
+  <Mapping cloverField="nonProfit" trim="true" xpath="nonProfit"/>
+  <Mapping cloverField="amount6" trim="true" xpath="openBalance/amount"/>
+  <Mapping cloverField="currencyCode6" trim="true" xpath="openBalance/currencyCode"/>
+  <Mapping cloverField="openBalanceDate" trim="true" xpath="openBalanceDate"/>
+  <Mapping cloverField="amount7" trim="true" xpath="openBalanceWithJobs/amount"/>
+  <Mapping cloverField="currencyCode7" trim="true" xpath="openBalanceWithJobs/currencyCode"/>
+  <Mapping cloverField="orgId" trim="true" xpath="orgId"/>
+  <Mapping cloverField="amount8" trim="true" xpath="overDueBalance/amount"/>
+  <Mapping cloverField="currencyCode8" trim="true" xpath="overDueBalance/currencyCode"/>
+  <Mapping cloverField="idDomain15" trim="true" xpath="partyReferenceId/idDomain"/>
+  <Mapping cloverField="value15" trim="true" xpath="partyReferenceId/value"/>
+  <Mapping cloverField="idDomain16" trim="true" xpath="paymentMethodId/idDomain"/>
+  <Mapping cloverField="value16" trim="true" xpath="paymentMethodId/value"/>
+  <Mapping cloverField="paymentMethodName" trim="true" xpath="paymentMethodName"/>
+  <Mapping cloverField="idDomain17" trim="true" xpath="priceLevelId/idDomain"/>
+  <Mapping cloverField="value17" trim="true" xpath="priceLevelId/value"/>
+  <Mapping cloverField="priceLevelName" trim="true" xpath="priceLevelName"/>
+  <Mapping cloverField="idDomain18" trim="true" xpath="salesRepId/idDomain"/>
+  <Mapping cloverField="value18" trim="true" xpath="salesRepId/value"/>
+  <Mapping cloverField="salesRepName" trim="true" xpath="salesRepName"/>
+  <Mapping cloverField="idDomain19" trim="true" xpath="salesTaxCodeId/idDomain"/>
+  <Mapping cloverField="value19" trim="true" xpath="salesTaxCodeId/value"/>
+  <Mapping cloverField="salesTaxCodeName" trim="true" xpath="salesTaxCodeName"/>
+  <Mapping cloverField="idDomain20" trim="true" xpath="salesTermId/idDomain"/>
+  <Mapping cloverField="value20" trim="true" xpath="salesTermId/value"/>
+  <Mapping cloverField="salesTermName" trim="true" xpath="salesTermName"/>
+  <Mapping cloverField="showAs" trim="true" xpath="showAs"/>
+  <Mapping cloverField="suffix" trim="true" xpath="suffix"/>
+  <Mapping cloverField="syncToken" trim="true" xpath="syncToken"/>
+  <Mapping cloverField="synchronized" trim="true" xpath="synchronized"/>
+  <Mapping cloverField="idDomain21" trim="true" xpath="taxGroupId/idDomain"/>
+  <Mapping cloverField="value21" trim="true" xpath="taxGroupId/value"/>
+  <Mapping cloverField="taxGroupName" trim="true" xpath="taxGroupName"/>
+  <Mapping cloverField="idDomain22" trim="true" xpath="taxId/idDomain"/>
+  <Mapping cloverField="value22" trim="true" xpath="taxId/value"/>
+  <Mapping cloverField="taxIdentifier" trim="true" xpath="taxIdentifier"/>
+  <Mapping cloverField="taxName" trim="true" xpath="taxName"/>
+  <Mapping cloverField="title" trim="true" xpath="title"/>
+  <Mapping cloverField="amount9" trim="true" xpath="totalExpense/amount"/>
+  <Mapping cloverField="currencyCode9" trim="true" xpath="totalExpense/currencyCode"/>
+  <Mapping cloverField="amount10" trim="true" xpath="totalRevenue/amount"/>
+  <Mapping cloverField="currencyCode10" trim="true" xpath="totalRevenue/currencyCode"/>
+  <Mapping cloverField="typeOf" trim="true" xpath="typeOf"/>
+  <Mapping cloverField="userId" trim="true" xpath="userId"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.Customer"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.EmailAddress">
+    <typed-object-ref name="address" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Gender"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="java.util.Date"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="java.util.Date"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PhysicalAddress">
+    <typed-object-ref name="city" type-ref="java.lang.String"/>
+    <typed-object-ref name="country" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countrySubDivisionCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="county" type-ref="java.lang.String"/>
+    <typed-object-ref name="countyCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="geoCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="line1" type-ref="java.lang.String"/>
+    <typed-object-ref name="line2" type-ref="java.lang.String"/>
+    <typed-object-ref name="line3" type-ref="java.lang.String"/>
+    <typed-object-ref name="line4" type-ref="java.lang.String"/>
+    <typed-object-ref name="line5" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCodeSuffix" type-ref="java.lang.String"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.JobInfo">
+    <typed-object-ref name="description" type-ref="java.lang.String"/>
+    <typed-object-ref name="endDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="jobTypeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="jobTypeName" type-ref="java.lang.String"/>
+    <typed-object-ref name="projectedEndDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="startDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="status" type-ref="org.mule.modules.quickbooks.online.schema.JobStatusEnum"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Money">
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="currencyCode" type-ref="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.WebSiteAddress">
+    <typed-object-ref name="URI" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PartyType"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Customer">
+    <typed-object-ref name="DBAName" type-ref="java.lang.String"/>
+    <typed-object-ref name="acctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="active" type-ref="java.lang.Boolean"/>
+    <schema-collection name="address" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.PhysicalAddress"/>
+    </schema-collection>
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="birthDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="category" type-ref="java.lang.String"/>
+    <typed-object-ref name="creditLimit" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <schema-collection name="customField" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.CustomField"/>
+    </schema-collection>
+    <typed-object-ref name="customerTypeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="customerTypeName" type-ref="java.lang.String"/>
+    <schema-collection name="email" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.EmailAddress"/>
+    </schema-collection>
+    <typed-object-ref name="externalId" type-ref="java.lang.String"/>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="familyName" type-ref="java.lang.String"/>
+    <typed-object-ref name="gender" type-ref="org.mule.modules.quickbooks.online.schema.Gender"/>
+    <typed-object-ref name="givenName" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="industry" type-ref="java.lang.String"/>
+    <typed-object-ref name="jobInfo" type-ref="org.mule.modules.quickbooks.online.schema.JobInfo"/>
+    <typed-object-ref name="legalName" type-ref="java.lang.String"/>
+    <typed-object-ref name="legalStructure" type-ref="java.lang.String"/>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="middleName" type-ref="java.lang.String"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="nonProfit" type-ref="java.lang.Boolean"/>
+    <schema-collection name="notes" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.Note"/>
+    </schema-collection>
+    <typed-object-ref name="openBalance" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="openBalanceDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="openBalanceWithJobs" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="orgId" type-ref="java.lang.String"/>
+    <typed-object-ref name="overDueBalance" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="partyReferenceId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="paymentMethodId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="paymentMethodName" type-ref="java.lang.String"/>
+    <schema-collection name="phone" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.TelephoneNumber"/>
+    </schema-collection>
+    <typed-object-ref name="priceLevelId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="priceLevelName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesRepId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesRepName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesTaxCodeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTaxCodeName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesTermId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTermName" type-ref="java.lang.String"/>
+    <typed-object-ref name="showAs" type-ref="java.lang.String"/>
+    <typed-object-ref name="suffix" type-ref="java.lang.String"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="taxGroupId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxGroupName" type-ref="java.lang.String"/>
+    <typed-object-ref name="taxId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxIdentifier" type-ref="java.lang.String"/>
+    <typed-object-ref name="taxName" type-ref="java.lang.String"/>
+    <typed-object-ref name="title" type-ref="java.lang.String"/>
+    <typed-object-ref name="totalExpense" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="totalRevenue" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="typeOf" type-ref="org.mule.modules.quickbooks.online.schema.PartyType"/>
+    <typed-object-ref name="userId" type-ref="java.lang.String"/>
+    <schema-collection name="webSite" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.WebSiteAddress"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.NameValue">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.TelephoneNumber">
+    <typed-object-ref name="PIN" type-ref="java.lang.String"/>
+    <typed-object-ref name="areaCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="deviceType" type-ref="java.lang.String"/>
+    <typed-object-ref name="exchangeCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="extension" type-ref="java.lang.String"/>
+    <typed-object-ref name="freeFormNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Note">
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="content" type-ref="java.lang.String"/>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.JobStatusEnum"/>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CustomField">
+    <typed-object-ref name="definitionId" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="Pojo WRITER" guiWidth="0" guiX="680" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <DBAName>$0.DBAName</DBAName>
+  <acctNum>$0.acctNum</acctNum>
+  <active>$0.active</active>
+  <birthDate>$0.birthDate</birthDate>
+  <category>$0.category</category>
+  <creditLimit>
+    <amount>$0.amount5</amount>
+    <currencyCode>$0.currencyCode5</currencyCode>
+  </creditLimit>
+  <customerTypeId>
+    <idDomain>$0.idDomain11</idDomain>
+    <value>$0.value11</value>
+  </customerTypeId>
+  <customerTypeName>$0.customerTypeName</customerTypeName>
+  <externalId>$0.externalId</externalId>
+  <externalKey>
+    <idDomain>$0.idDomain12</idDomain>
+    <value>$0.value12</value>
+  </externalKey>
+  <familyName>$0.familyName</familyName>
+  <gender>$0.gender</gender>
+  <givenName>$0.givenName</givenName>
+  <id>
+    <idDomain>$0.idDomain13</idDomain>
+    <value>$0.value13</value>
+  </id>
+  <industry>$0.industry</industry>
+  <jobInfo>
+    <description>$0.description</description>
+    <endDate>$0.endDate</endDate>
+    <jobTypeId>
+      <idDomain>$0.idDomain14</idDomain>
+      <value>$0.value14</value>
+    </jobTypeId>
+    <jobTypeName>$0.jobTypeName</jobTypeName>
+    <projectedEndDate>$0.projectedEndDate</projectedEndDate>
+    <startDate>$0.startDate</startDate>
+    <status>$0.status</status>
+  </jobInfo>
+  <legalName>$0.legalName</legalName>
+  <legalStructure>$0.legalStructure</legalStructure>
+  <metaData>
+    <createTime>$0.createTime</createTime>
+    <createdBy>$0.createdBy</createdBy>
+    <createdById>$0.createdById</createdById>
+    <lastModifiedBy>$0.lastModifiedBy</lastModifiedBy>
+    <lastModifiedById>$0.lastModifiedById</lastModifiedById>
+    <lastUpdatedTime>$0.lastUpdatedTime</lastUpdatedTime>
+  </metaData>
+  <middleName>$0.middleName</middleName>
+  <name>$0.name</name>
+  <nonProfit>$0.nonProfit</nonProfit>
+  <openBalance>
+    <amount>$0.amount6</amount>
+    <currencyCode>$0.currencyCode6</currencyCode>
+  </openBalance>
+  <openBalanceDate>$0.openBalanceDate</openBalanceDate>
+  <openBalanceWithJobs>
+    <amount>$0.amount7</amount>
+    <currencyCode>$0.currencyCode7</currencyCode>
+  </openBalanceWithJobs>
+  <orgId>$0.orgId</orgId>
+  <overDueBalance>
+    <amount>$0.amount8</amount>
+    <currencyCode>$0.currencyCode8</currencyCode>
+  </overDueBalance>
+  <partyReferenceId>
+    <idDomain>$0.idDomain15</idDomain>
+    <value>$0.value15</value>
+  </partyReferenceId>
+  <paymentMethodId>
+    <idDomain>$0.idDomain16</idDomain>
+    <value>$0.value16</value>
+  </paymentMethodId>
+  <paymentMethodName>$0.paymentMethodName</paymentMethodName>
+  <priceLevelId>
+    <idDomain>$0.idDomain17</idDomain>
+    <value>$0.value17</value>
+  </priceLevelId>
+  <priceLevelName>$0.priceLevelName</priceLevelName>
+  <salesRepId>
+    <idDomain>$0.idDomain18</idDomain>
+    <value>$0.value18</value>
+  </salesRepId>
+  <salesRepName>$0.salesRepName</salesRepName>
+  <salesTaxCodeId>
+    <idDomain>$0.idDomain19</idDomain>
+    <value>$0.value19</value>
+  </salesTaxCodeId>
+  <salesTaxCodeName>$0.salesTaxCodeName</salesTaxCodeName>
+  <salesTermId>
+    <idDomain>$0.idDomain20</idDomain>
+    <value>$0.value20</value>
+  </salesTermId>
+  <salesTermName>$0.salesTermName</salesTermName>
+  <showAs>$0.showAs</showAs>
+  <suffix>$0.suffix</suffix>
+  <syncToken>$0.syncToken</syncToken>
+  <synchronized>$0.synchronized</synchronized>
+  <taxGroupId>
+    <idDomain>$0.idDomain21</idDomain>
+    <value>$0.value21</value>
+  </taxGroupId>
+  <taxGroupName>$0.taxGroupName</taxGroupName>
+  <taxId>
+    <idDomain>$0.idDomain22</idDomain>
+    <value>$0.value22</value>
+  </taxId>
+  <taxIdentifier>$0.taxIdentifier</taxIdentifier>
+  <taxName>$0.taxName</taxName>
+  <title>$0.title</title>
+  <totalExpense>
+    <amount>$0.amount9</amount>
+    <currencyCode>$0.currencyCode9</currencyCode>
+  </totalExpense>
+  <totalRevenue>
+    <amount>$0.amount10</amount>
+    <currencyCode>$0.currencyCode10</currencyCode>
+  </totalRevenue>
+  <typeOf>$0.typeOf</typeOf>
+  <userId>$0.userId</userId>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.Customer"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.EmailAddress">
+    <typed-object-ref name="address" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Gender"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="java.util.Date"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="java.util.Date"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PhysicalAddress">
+    <typed-object-ref name="city" type-ref="java.lang.String"/>
+    <typed-object-ref name="country" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countrySubDivisionCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="county" type-ref="java.lang.String"/>
+    <typed-object-ref name="countyCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="geoCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="line1" type-ref="java.lang.String"/>
+    <typed-object-ref name="line2" type-ref="java.lang.String"/>
+    <typed-object-ref name="line3" type-ref="java.lang.String"/>
+    <typed-object-ref name="line4" type-ref="java.lang.String"/>
+    <typed-object-ref name="line5" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCodeSuffix" type-ref="java.lang.String"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.JobInfo">
+    <typed-object-ref name="description" type-ref="java.lang.String"/>
+    <typed-object-ref name="endDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="jobTypeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="jobTypeName" type-ref="java.lang.String"/>
+    <typed-object-ref name="projectedEndDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="startDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="status" type-ref="org.mule.modules.quickbooks.online.schema.JobStatusEnum"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Money">
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="currencyCode" type-ref="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.WebSiteAddress">
+    <typed-object-ref name="URI" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PartyType"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Customer">
+    <typed-object-ref name="DBAName" type-ref="java.lang.String"/>
+    <typed-object-ref name="acctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="active" type-ref="java.lang.Boolean"/>
+    <schema-collection name="address" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.PhysicalAddress"/>
+    </schema-collection>
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="birthDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="category" type-ref="java.lang.String"/>
+    <typed-object-ref name="creditLimit" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <schema-collection name="customField" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.CustomField"/>
+    </schema-collection>
+    <typed-object-ref name="customerTypeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="customerTypeName" type-ref="java.lang.String"/>
+    <schema-collection name="email" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.EmailAddress"/>
+    </schema-collection>
+    <typed-object-ref name="externalId" type-ref="java.lang.String"/>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="familyName" type-ref="java.lang.String"/>
+    <typed-object-ref name="gender" type-ref="org.mule.modules.quickbooks.online.schema.Gender"/>
+    <typed-object-ref name="givenName" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="industry" type-ref="java.lang.String"/>
+    <typed-object-ref name="jobInfo" type-ref="org.mule.modules.quickbooks.online.schema.JobInfo"/>
+    <typed-object-ref name="legalName" type-ref="java.lang.String"/>
+    <typed-object-ref name="legalStructure" type-ref="java.lang.String"/>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="middleName" type-ref="java.lang.String"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="nonProfit" type-ref="java.lang.Boolean"/>
+    <schema-collection name="notes" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.Note"/>
+    </schema-collection>
+    <typed-object-ref name="openBalance" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="openBalanceDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="openBalanceWithJobs" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="orgId" type-ref="java.lang.String"/>
+    <typed-object-ref name="overDueBalance" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="partyReferenceId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="paymentMethodId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="paymentMethodName" type-ref="java.lang.String"/>
+    <schema-collection name="phone" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.TelephoneNumber"/>
+    </schema-collection>
+    <typed-object-ref name="priceLevelId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="priceLevelName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesRepId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesRepName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesTaxCodeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTaxCodeName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesTermId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTermName" type-ref="java.lang.String"/>
+    <typed-object-ref name="showAs" type-ref="java.lang.String"/>
+    <typed-object-ref name="suffix" type-ref="java.lang.String"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="taxGroupId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxGroupName" type-ref="java.lang.String"/>
+    <typed-object-ref name="taxId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxIdentifier" type-ref="java.lang.String"/>
+    <typed-object-ref name="taxName" type-ref="java.lang.String"/>
+    <typed-object-ref name="title" type-ref="java.lang.String"/>
+    <typed-object-ref name="totalExpense" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="totalRevenue" type-ref="org.mule.modules.quickbooks.online.schema.Money"/>
+    <typed-object-ref name="typeOf" type-ref="org.mule.modules.quickbooks.online.schema.PartyType"/>
+    <typed-object-ref name="userId" type-ref="java.lang.String"/>
+    <schema-collection name="webSite" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.WebSiteAddress"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.NameValue">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.TelephoneNumber">
+    <typed-object-ref name="PIN" type-ref="java.lang.String"/>
+    <typed-object-ref name="areaCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="deviceType" type-ref="java.lang.String"/>
+    <typed-object-ref name="exchangeCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="extension" type-ref="java.lang.String"/>
+    <typed-object-ref name="freeFormNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Note">
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="content" type-ref="java.lang.String"/>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.JobStatusEnum"/>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CustomField">
+    <typed-object-ref name="definitionId" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="object_to_object" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.name = $in.0.name + "UPDATED";
+$out.0.__id=$in.0.__id;
+	
+	
+	
+	
+	
+	$out.0.amount5=$in.0.amount5;
+	$out.0.currencyCode5=$in.0.currencyCode5;
+	$out.0.idDomain11=$in.0.idDomain11;
+	$out.0.value11=$in.0.value11;
+	
+	
+	$out.0.idDomain12=$in.0.idDomain12;
+	$out.0.value12=$in.0.value12;
+	
+	
+	
+	$out.0.idDomain13=$in.0.idDomain13;
+	$out.0.value13=$in.0.value13;
+	
+	$out.0.description=$in.0.description;
+	$out.0.endDate=$in.0.endDate;
+	$out.0.idDomain14=$in.0.idDomain14;
+	$out.0.value14=$in.0.value14;
+	$out.0.jobTypeName=$in.0.jobTypeName;
+	$out.0.projectedEndDate=$in.0.projectedEndDate;
+	$out.0.startDate=$in.0.startDate;
+	$out.0.status=$in.0.status;
+	
+	
+	$out.0.createTime=$in.0.createTime;
+	$out.0.createdBy=$in.0.createdBy;
+	$out.0.createdById=$in.0.createdById;
+	$out.0.lastModifiedBy=$in.0.lastModifiedBy;
+	$out.0.lastModifiedById=$in.0.lastModifiedById;
+	$out.0.lastUpdatedTime=$in.0.lastUpdatedTime;
+	
+	
+	
+	$out.0.amount6=$in.0.amount6;
+	$out.0.currencyCode6=$in.0.currencyCode6;
+	
+	$out.0.amount7=$in.0.amount7;
+	$out.0.currencyCode7=$in.0.currencyCode7;
+	
+	$out.0.amount8=$in.0.amount8;
+	$out.0.currencyCode8=$in.0.currencyCode8;
+	$out.0.idDomain15=$in.0.idDomain15;
+	$out.0.value15=$in.0.value15;
+	$out.0.idDomain16=$in.0.idDomain16;
+	$out.0.value16=$in.0.value16;
+	
+	$out.0.idDomain17=$in.0.idDomain17;
+	$out.0.value17=$in.0.value17;
+	
+	$out.0.idDomain18=$in.0.idDomain18;
+	$out.0.value18=$in.0.value18;
+	
+	$out.0.idDomain19=$in.0.idDomain19;
+	$out.0.value19=$in.0.value19;
+	
+	$out.0.idDomain20=$in.0.idDomain20;
+	$out.0.value20=$in.0.value20;
+	
+	
+	
+	
+	
+	$out.0.idDomain21=$in.0.idDomain21;
+	$out.0.value21=$in.0.value21;
+	
+	$out.0.idDomain22=$in.0.idDomain22;
+	$out.0.value22=$in.0.value22;
+	
+	
+	
+	$out.0.amount9=$in.0.amount9;
+	$out.0.currencyCode9=$in.0.currencyCode9;
+	$out.0.amount10=$in.0.amount10;
+	$out.0.currencyCode10=$in.0.currencyCode10;
+	
+	
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="Metadata9" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>
