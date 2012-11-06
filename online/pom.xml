@@ -12,7 +12,6 @@
     </parent>
     
     <properties>
-        <category>Community</category>
         <github.merge>true</github.merge>
     </properties>
     
