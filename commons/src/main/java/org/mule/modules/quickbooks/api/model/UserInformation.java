@@ -10,9 +10,10 @@
 
 package org.mule.modules.quickbooks.api.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -22,11 +23,15 @@ import javax.xml.bind.annotation.XmlType;
  **/
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "User", namespace = "http://platform.intuit.com/api/v1")
-public class UserInformation
+@XmlType(name = "UserInformation", namespace = "http://platform.intuit.com/api/v1")
+public class UserInformation implements Serializable
 {
 
-    @XmlAttribute(name = "Id")
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    @XmlElement(name = "Id", namespace = "http://platform.intuit.com/api/v1")
     protected String id;
     @XmlElement(name = "FirstName", namespace = "http://platform.intuit.com/api/v1")
     protected String firstName;
