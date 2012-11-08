@@ -79,6 +79,12 @@ public class QuickBooksWindowsModule
     @Configurable
     private String baseUri;
     
+    /**
+     * Service Provider Id
+     * This parameter depends on your IPP account
+     */
+    @Configurable
+    private String serviceProviderId;
     
     /**
      * Creates.
@@ -476,7 +482,7 @@ public class QuickBooksWindowsModule
     {
         if (client == null )
         {
-            client = new DefaultQuickBooksWindowsClient(baseUri);
+            client = new DefaultQuickBooksWindowsClient(baseUri, serviceProviderId);
         }
     }
     
@@ -502,5 +508,13 @@ public class QuickBooksWindowsModule
 
     public void setClient(QuickBooksWindowsClient client) {
         this.client = client;
+    }
+
+    public String getServiceProviderId() {
+        return serviceProviderId;
+    }
+
+    public void setServiceProviderId(String serviceProviderId) {
+        this.serviceProviderId = serviceProviderId;
     }
 }

@@ -49,11 +49,11 @@ import org.mule.modules.utils.pagination.PaginatedIterable;
 public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient implements QuickBooksOnlineClient
 {   
     
-    public DefaultQuickBooksOnlineClient(final String baseUri)
+    public DefaultQuickBooksOnlineClient(final String baseUri, final String serviceProviderId)
     {
         Validate.notEmpty(baseUri);
         
-        init(baseUri);
+        init(baseUri, serviceProviderId);
         setResultsPerPage(100);
     }
     

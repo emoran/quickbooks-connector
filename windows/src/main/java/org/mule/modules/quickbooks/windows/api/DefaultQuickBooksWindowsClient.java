@@ -48,11 +48,11 @@ import org.mule.modules.utils.pagination.PaginatedIterable;
 public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient implements QuickBooksWindowsClient
 {
     
-    public DefaultQuickBooksWindowsClient(final String baseUri)
+    public DefaultQuickBooksWindowsClient(final String baseUri, final String serviceProviderId)
     {
         Validate.notEmpty(baseUri);
         
-        init(baseUri);
+        init(baseUri, serviceProviderId);
     }
     
     @Override

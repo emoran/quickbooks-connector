@@ -25,7 +25,7 @@
     
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     
-    <quickbooks:config />
+    <quickbooks:config serviceProviderId="serviceProviderId" />
 
      <!--<flow name="GetProfileByUrl">
         <http:inbound-endpoint host="localhost" port="9091" path="pointsOfInterest"/>

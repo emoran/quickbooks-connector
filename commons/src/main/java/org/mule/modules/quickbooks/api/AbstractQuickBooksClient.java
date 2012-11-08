@@ -78,11 +78,12 @@ public abstract class AbstractQuickBooksClient
         return client;
     }
     
-    protected void init(final String baseUri)
+    protected void init(final String baseUri, final String serviceProviderId)
     {
         Validate.notEmpty(baseUri);
         
         this.baseUri = baseUri;
+        this.serviceProviderId = serviceProviderId;
         
         try 
         {
@@ -245,7 +246,6 @@ public abstract class AbstractQuickBooksClient
         String privateKeyPassword = (String) properties.get("keystore.privateKeyPassword");
         String privateKeyAlias = (String) properties.get("keystore.privateKeyAlias");
         String keyStoreType = (String) properties.get("keystore.keystoreType");
-        serviceProviderId = (String) properties.get("serviceProviderId");
         
         try
         {

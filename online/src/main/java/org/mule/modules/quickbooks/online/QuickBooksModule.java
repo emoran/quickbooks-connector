@@ -77,6 +77,13 @@ public class QuickBooksModule
     private String baseUri;
     
     /**
+     * Service Provider Id
+     * This parameter depends on your IPP account
+     */
+    @Configurable
+    private String serviceProviderId;
+    
+    /**
      * Creates an Account.
      * The Account object represents the accounts that you keep to track your business.
      * Account is a component of a chart of accounts, and is part of a ledger.
@@ -1304,7 +1311,7 @@ public class QuickBooksModule
     {
         if (client == null )
         {
-            client = new DefaultQuickBooksOnlineClient(baseUri);
+            client = new DefaultQuickBooksOnlineClient(baseUri, serviceProviderId);
         }
     }
     
@@ -1324,5 +1331,13 @@ public class QuickBooksModule
 
     public void setClient(QuickBooksOnlineClient client) {
         this.client = client;
+    }
+
+    public String getServiceProviderId() {
+        return serviceProviderId;
+    }
+
+    public void setServiceProviderId(String serviceProviderId) {
+        this.serviceProviderId = serviceProviderId;
     }
 }
