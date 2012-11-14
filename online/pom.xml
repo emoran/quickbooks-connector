@@ -78,7 +78,12 @@
         <dependency>
             <groupId>oauth.signpost</groupId>
             <artifactId>signpost-core</artifactId>
-            <version>1.2.1.1</version>
+            <version>1.2.1.2</version>
+        </dependency>
+	<dependency>
+            <groupId>oauth.signpost</groupId>
+            <artifactId>signpost-commonshttp4</artifactId>
+            <version>1.2.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
