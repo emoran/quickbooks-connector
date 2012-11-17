@@ -38,6 +38,7 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpParams;
+import org.apache.log4j.Logger;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.gateway.MuleOAuthCredentialStorage;
@@ -53,6 +54,7 @@ public abstract class AbstractQuickBooksClient
 {   
     private static final String INTERNAL_GATEWAY_PROPS = "internal-gateway.properties";
     private static final String APP_CENTER_URI = "https://appcenter.intuit.com/api/v1/user/current";
+    private static final Logger LOGGER = Logger.getLogger(AbstractQuickBooksClient.class);
     protected Properties properties;
 
     protected Integer resultsPerPage = 999;
@@ -132,6 +134,9 @@ public abstract class AbstractQuickBooksClient
         postConsumer.setSigningStrategy(new XoAuthAuthorizationHeaderSigningStrategy());       
         try
         {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(String.format("## Signing HttpRequest: %s", httpRequest.getURI().toString()));
+            }
             postConsumer.sign(httpRequest);
         }
         catch (Exception e)
@@ -285,6 +290,9 @@ public abstract class AbstractQuickBooksClient
             {
                 connectionDatas.put(realmId, new CompanyConnectionData());
                 connectionDatas.get(realmId).setBaseUri(loadCompanyBaseUri(realmId, appKey, accessToken));
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug(String.format("## Setting BaseURI: %s", connectionDatas.get(realmId).getBaseUri()));
+                }
             }
             connectionDatas.get(realmId).setAccessToken(accessToken);
         }
