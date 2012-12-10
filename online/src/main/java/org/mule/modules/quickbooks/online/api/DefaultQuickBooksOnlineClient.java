@@ -29,15 +29,13 @@ import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
+import org.mule.modules.quickbooks.api.model.PlatformResponse;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
-import org.mule.modules.quickbooks.online.schema.CdmBase;
-import org.mule.modules.quickbooks.online.schema.IdType;
-import org.mule.modules.quickbooks.online.schema.QboUser;
-import org.mule.modules.quickbooks.online.schema.SearchResults;
+import org.mule.modules.quickbooks.online.schema.*;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
@@ -444,6 +442,14 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     @Override
     public String getBlueDotInformation(OAuthCredentials credentials) {
         return (String) getBlueDotMenu(credentials);
+    }
+
+    @Override
+    public boolean disconnect(OAuthCredentials credentials) {
+        PlatformResponse response = (PlatformResponse) disconnectFromQB(credentials);
+        if (response.getErrorCode() != 0) throw new QuickBooksRuntimeException(response.getErrorMessage());
+
+        return true;
     }
 
     @Override

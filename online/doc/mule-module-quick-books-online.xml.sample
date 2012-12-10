@@ -232,3 +232,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" />
 <!-- BEGIN_INCLUDE(quickbooks:get-blue-dot-information) -->
 <quickbooks:get-blue-dot-information accessTokenId="accessTokenId" />
 <!-- END_INCLUDE(quickbooks:get-blue-dot-information) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:disconnect) -->
+<quickbooks:disconnect accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks:disconnect) -->

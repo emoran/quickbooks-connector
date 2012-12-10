@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
+import org.mule.modules.quickbooks.api.model.PlatformResponse;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.online.schema.*;
@@ -98,6 +99,7 @@ public class ObjectFactory {
  private final static QName _GenericEntity_QNAME = new QName("http://www.intuit.com/sb/cdm/qbo", "GenericEntity");
  
  private final static QName _UserResponse_QNAME = new QName("http://platform.intuit.com/api/v1", "UserResponse");
+ private final static QName _PlatformResponse_QNAME = new QName("http://platform.intuit.com/api/v1", "PlatformResponse");
 
  /**
   * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.mule.modules.quickbooks.schema
@@ -1777,6 +1779,14 @@ public class ObjectFactory {
  public UserInformation createUserInformation() {
      return new UserInformation();
  }
+
+ /**
+ * Create an instance of {@link org.mule.modules.quickbooks.api.model.PlatformResponse }
+ *
+ */
+ public PlatformResponse createPlatformResponse() {
+    return new PlatformResponse();
+ }
  
  /**
   * Create an instance of {@link JAXBElement }{@code <}{@link Discount }{@code >}}
@@ -2289,6 +2299,15 @@ public class ObjectFactory {
  @XmlElementDecl(namespace = "http://platform.intuit.com/api/v1", name = "UserResponse")
  public JAXBElement<UserResponse> createUserResponse(UserResponse value) {
      return new JAXBElement<UserResponse>(_UserResponse_QNAME, UserResponse.class, null, value);
+ }
+
+ /**
+ * Create an instance of {@link JAXBElement }{@code <}{@link PlatformResponse }{@code >}}
+ *
+ */
+ @XmlElementDecl(namespace = "http://platform.intuit.com/api/v1", name = "PlatformResponse")
+ public JAXBElement<PlatformResponse> createPlatformResponse(PlatformResponse value) {
+    return new JAXBElement<PlatformResponse>(_PlatformResponse_QNAME, PlatformResponse.class, null, value);
  }
 }
 

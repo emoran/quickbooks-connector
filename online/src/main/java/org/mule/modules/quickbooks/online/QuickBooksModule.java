@@ -1214,6 +1214,23 @@ public class QuickBooksModule
     {
         return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId));
     }
+
+    /**
+     * Invalidates the OAuth access token in the request, thereby disconnecting the user from QuickBooks for this app.
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:disconnect}
+     *
+     *
+     * @param accessTokenId credentials identifier for the user information to be requested
+     *
+     * @return true if the user was disconnect from QBO
+     *
+     */
+    @Processor
+    public boolean disconnect(String accessTokenId)
+    {
+        return client.disconnect(getAccessTokenInformation(accessTokenId));
+    }
     
     /**
      * This method retrieves the accessTokenInformation from the object store instance
