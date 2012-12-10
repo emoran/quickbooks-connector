@@ -81,7 +81,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
 
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, credentials);
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
         }
         catch(QuickBooksRuntimeException e)
         {
@@ -116,7 +116,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, credentials);
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
         }
         catch(QuickBooksRuntimeException e)
         {
@@ -160,7 +160,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, credentials);
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
         }
         catch(QuickBooksRuntimeException e)
         {
@@ -203,7 +203,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         prepareToPost(obj, httpRequest);
         try
         {
-            makeARequestToQuickbooks(httpRequest, credentials);
+            makeARequestToQuickbooks(httpRequest, credentials, false);
         }
         catch(QuickBooksRuntimeException e)
         {
@@ -303,7 +303,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
                     
                     try
                     {
-                        return (SearchResults) makeARequestToQuickbooks(httpRequest, credentials);
+                        return (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
                     }
                     catch(QuickBooksRuntimeException e)
                     {
@@ -372,14 +372,14 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
             
             try
             {
-                searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials);
+                searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
             }
             catch(QuickBooksRuntimeException e)
             {
                 if(e.isAExpiredTokenFault())
                 {
                     destroyAccessToken(credentials);
-                    searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials);
+                    searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
                 } 
                 else 
                 {
@@ -417,7 +417,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", this.baseUri,
                 credentials.getRealmId()));
 
-        QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, credentials);
+        QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, credentials, false);
 
         return qboUser.getCurrentCompany().getBaseURI();
     }
@@ -442,6 +442,11 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     }
 
     @Override
+    public String getBlueDotInformation(OAuthCredentials credentials) {
+        return (String) getBlueDotMenu(credentials);
+    }
+
+    @Override
     public <T> T get(OAuthCredentials credentials, OnlineEntityType type) {
         Validate.notNull(type);
         
@@ -452,7 +457,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, credentials);
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
         }
         catch(QuickBooksRuntimeException e)
         {

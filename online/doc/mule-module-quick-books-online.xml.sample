@@ -228,3 +228,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" />
     <quickbooks:response-parameters ref="#[message.inboundProperties['http.query.params']]"/>
 </quickbooks:verify-open-id>
 <!-- END_INCLUDE(quickbooks:verify-open-id) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:get-blue-dot-information) -->
+<quickbooks:get-blue-dot-information accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks:get-blue-dot-information) -->

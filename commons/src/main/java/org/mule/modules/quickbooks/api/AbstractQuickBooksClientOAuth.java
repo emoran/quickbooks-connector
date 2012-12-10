@@ -26,6 +26,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
+import org.mule.modules.quickbooks.api.exception.QuickBooksExpiredTokenException;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.utils.MessageUtils;
@@ -40,6 +41,7 @@ import java.io.InputStreamReader;
 public abstract class AbstractQuickBooksClientOAuth
 {   
     private static final String APP_CENTER_URI = "https://appcenter.intuit.com/api/v1/user/current";
+    private static final String BLUE_DOT_MENU_URI = "https://appcenter.intuit.com/api/v1/Account/AppMenu";
     private static final Logger LOGGER = Logger.getLogger(AbstractQuickBooksClientOAuth.class);
 
     protected Integer resultsPerPage = 999;
@@ -80,7 +82,8 @@ public abstract class AbstractQuickBooksClientOAuth
     }
     
     @SuppressWarnings("ThrowFromFinallyBlock")
-    protected Object makeARequestToQuickbooks(HttpUriRequest httpRequest, OAuthCredentials credentials)
+    protected Object makeARequestToQuickbooks(HttpUriRequest httpRequest, OAuthCredentials credentials,
+                                              boolean rawResponse)
     {
         CommonsHttpOAuthConsumer postConsumer = new CommonsHttpOAuthConsumer(getConsumerKey(), getConsumerSecret());
         postConsumer.setMessageSigner(new HmacSha1MessageSigner());
@@ -139,6 +142,7 @@ public abstract class AbstractQuickBooksClientOAuth
         }
         try
         {
+            if (rawResponse) return responseBody.toString();
             return getMessageUtilsInstance().parseResponse(responseBody.toString());
         }
         catch (JAXBException e)
@@ -195,7 +199,7 @@ public abstract class AbstractQuickBooksClientOAuth
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, credentials);
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
         }
         catch(QuickBooksRuntimeException e)
         {
@@ -203,6 +207,31 @@ public abstract class AbstractQuickBooksClientOAuth
                 destroyAccessToken(credentials);
                 return retrieveUserInformation(credentials);
             } 
+            else {
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * Retrieves the blue dot menu information
+     * @param credentials OAuth credentials
+     */
+    @SuppressWarnings("unchecked")
+    protected <T> T getBlueDotMenu(final OAuthCredentials credentials)
+    {
+
+        HttpUriRequest httpRequest = new HttpGet(BLUE_DOT_MENU_URI);
+
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, true);
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault()) {
+                throw new QuickBooksExpiredTokenException(e);
+            }
             else {
                 throw e;
             }

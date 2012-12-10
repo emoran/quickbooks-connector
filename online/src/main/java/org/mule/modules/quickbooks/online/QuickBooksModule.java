@@ -1197,6 +1197,23 @@ public class QuickBooksModule
     {
         return new DefaultOpenIDClient().verifyOpenIDFromIntuit(responseParameters);
     }
+
+    /**
+     * Gets blueDot menu information from Intuit
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-blue-dot-information}
+     *
+     *
+     * @param accessTokenId credentials identifier for the user information to be requested
+     *
+     * @return BlueDot menu information from Intuit
+     *
+     */
+    @Processor
+    public String getBlueDotInformation(String accessTokenId)
+    {
+        return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId));
+    }
     
     /**
      * This method retrieves the accessTokenInformation from the object store instance

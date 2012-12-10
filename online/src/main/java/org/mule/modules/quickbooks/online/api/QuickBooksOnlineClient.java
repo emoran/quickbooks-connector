@@ -44,5 +44,7 @@ public interface QuickBooksOnlineClient
     UserInformation getCurrentUserInformation(OAuthCredentials credentials);
 
     String getCompanyBaseUri(OAuthCredentials credentials);
+
+    String getBlueDotInformation(OAuthCredentials credentials);
 }
 
