@@ -1,331 +1,230 @@
 <!-- BEGIN_INCLUDE(quickbooks:create-account) -->
-<quickbooks:create-account realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]" >            
+<quickbooks:create-account accessTokenId="accessTokenId" >
 </quickbooks:create-account>
 <!-- END_INCLUDE(quickbooks:create-account) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill) -->
-<quickbooks:create-bill realmId="#[map-payload:realmId]"
-                        appKey="#[map-payload:appKey]"
-                        realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                        authIdPseudonym="#[map-payload:authIdPseudonym]" >
-                        
+<quickbooks:create-bill accessTokenId="accessTokenId" >
 </quickbooks:create-bill>
 <!-- END_INCLUDE(quickbooks:create-bill) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-bill-payment) -->
-<quickbooks:create-bill-payment realmId="#[map-payload:realmId]"
-                                appKey="#[map-payload:appKey]"
-                                realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:create-bill-payment accessTokenId="accessTokenId" >
 </quickbooks:create-bill-payment>
 <!-- END_INCLUDE(quickbooks:create-bill-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase) -->
-<quickbooks:create-cash-purchase realmId="#[map-payload:realmId]"
-                                 appKey="#[map-payload:appKey]"
-                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:create-cash-purchase accessTokenId="accessTokenId" >
 </quickbooks:create-cash-purchase>
 <!-- END_INCLUDE(quickbooks:create-cash-purchase) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-check) -->
-<quickbooks:create-check realmId="#[map-payload:realmId]"
-                         appKey="#[map-payload:appKey]"
-                         realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                         authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:create-check accessTokenId="accessTokenId" >
 </quickbooks:create-check>
 <!-- END_INCLUDE(quickbooks:create-check) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-credit-card-charge) -->
-<quickbooks:create-credit-card-charge realmId="#[map-payload:realmId]"
-                                      appKey="#[map-payload:appKey]"
-                                      realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                    authIdPseudonym="#[map-payload:authIdPseudonym]" >                                    
+<quickbooks:create-credit-card-charge accessTokenId="accessTokenId" >
 </quickbooks:create-credit-card-charge>
 <!-- END_INCLUDE(quickbooks:create-credit-card-charge) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-customer) -->
-<quickbooks:create-customer realmId="realmId"
-                            appKey="appKey"
-                            realmIdPseudonym="reamIdPseudonym"
-                            authIdPseudonym="authIdPseudonym" >
+<quickbooks:create-customer accessTokenId="accessTokenId">
 </quickbooks:create-customer>
 <!-- END_INCLUDE(quickbooks:create-customer) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-estimate) -->
-<quickbooks:create-estimate realmId="#[map-payload:realmId]"
-                            appKey="#[map-payload:appKey]"
-                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                            authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:create-estimate accessTokenId="accessTokenId">
 </quickbooks:create-estimate>
 <!-- END_INCLUDE(quickbooks:create-estimate) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-invoice) -->
-<quickbooks:create-invoice realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:create-invoice accessTokenId="accessTokenId">
 </quickbooks:create-invoice>
 <!-- END_INCLUDE(quickbooks:create-invoice) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-item) -->
-<quickbooks:create-item realmId="realmId"
-                        appKey="appKey"
-                        realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym" >    
+<quickbooks:create-item accessTokenId="accessTokenId">
 </quickbooks:create-item>
 <!-- END_INCLUDE(quickbooks:create-item) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-payment) -->
-<quickbooks:create-payment realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" >                            
+<quickbooks:create-payment accessTokenId="accessTokenId">
 </quickbooks:create-payment>
 <!-- END_INCLUDE(quickbooks:create-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-payment-method) -->
-<quickbooks:create-payment-method realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" >                            
+<quickbooks:create-payment-method accessTokenId="accessTokenId">
 </quickbooks:create-payment-method>
 <!-- END_INCLUDE(quickbooks:create-payment-method) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-receipt) -->
-<quickbooks:create-sales-receipt realmId="#[map-payload:realmId]"
-                                 appKey="#[map-payload:appKey]"
-                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:create-sales-receipt accessTokenId="accessTokenId">
 </quickbooks:create-sales-receipt>
 <!-- END_INCLUDE(quickbooks:create-sales-receipt) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-sales-term) -->
-<quickbooks:create-sales-term realmId="#[map-payload:realmId]"
-                              appKey="#[map-payload:appKey]"
-                              realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:create-sales-term accessTokenId="accessTokenId">
 </quickbooks:create-sales-term>
 <!-- END_INCLUDE(quickbooks:create-sales-term) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor) -->
-<quickbooks:create-vendor realmId="realmId"
-                          appKey="appKey"
-                          realmIdPseudonym="reamIdPseudonym"
-                          authIdPseudonym="authIdPseudonym" >
+<quickbooks:create-vendor accessTokenId="accessTokenId">
 </quickbooks:create-vendor>
 <!-- END_INCLUDE(quickbooks:create-vendor) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:get-object) -->
-<quickbooks:get-object realmId="#[map-payload:realmId]"
-                       appKey="#[map-payload:appKey]"
-                       realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]"
+<quickbooks:get-object accessTokenId="accessTokenId"
                        type="INVOICE" >
 </quickbooks:get-object>
 <!-- END_INCLUDE(quickbooks:get-object) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-account) -->
-<quickbooks:update-account realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" >                           
+<quickbooks:update-account accessTokenId="accessTokenId">
 </quickbooks:update-account>
 <!-- END_INCLUDE(quickbooks:update-account) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill) -->
-<quickbooks:update-bill realmId="#[map-payload:realmId]"
-                        appKey="#[map-payload:appKey]"
-                        realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                        authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-bill accessTokenId="accessTokenId">
 </quickbooks:update-bill>
 <!-- END_INCLUDE(quickbooks:update-bill) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-bill-payment) -->
-<quickbooks:update-bill-payment realmId="#[map-payload:realmId]"
-                                appKey="#[map-payload:appKey]"
-                                realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-bill-payment accessTokenId="accessTokenId">
 </quickbooks:update-bill-payment>
 <!-- END_INCLUDE(quickbooks:update-bill-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase) -->
-<quickbooks:update-cash-purchase realmId="#[map-payload:realmId]"
-                                 appKey="#[map-payload:appKey]"
-                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-cash-purchase accessTokenId="accessTokenId">
 </quickbooks:update-cash-purchase>
 <!-- END_INCLUDE(quickbooks:update-cash-purchase) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-check) -->
-<quickbooks:update-check realmId="#[map-payload:realmId]"
-                         appKey="#[map-payload:appKey]"
-                         realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                         authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-check accessTokenId="accessTokenId">
 </quickbooks:update-check>
 <!-- END_INCLUDE(quickbooks:update-check) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-credit-card-charge) -->
-<quickbooks:update-credit-card-charge realmId="#[map-payload:realmId]"
-                                      appKey="#[map-payload:appKey]"
-                                      realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                      authIdPseudonym="#[map-payload:authIdPseudonym]" >  
+<quickbooks:update-credit-card-charge accessTokenId="accessTokenId">
 </quickbooks:update-credit-card-charge>
 <!-- END_INCLUDE(quickbooks:update-credit-card-charge) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-customer) -->
-<quickbooks:update-customer realmId="realmId"
-                            appKey="appKey"
-                            realmIdPseudonym="reamIdPseudonym"
-                            authIdPseudonym="authIdPseudonym" >
+<quickbooks:update-customer accessTokenId="accessTokenId">
 </quickbooks:update-customer>
 <!-- END_INCLUDE(quickbooks:update-customer) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-estimate) -->
-<quickbooks:update-estimate realmId="#[map-payload:realmId]"
-                            appKey="#[map-payload:appKey]"
-                            realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                             authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-estimate accessTokenId="accessTokenId">
 </quickbooks:update-estimate>
 <!-- END_INCLUDE(quickbooks:update-estimate) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-invoice) -->
-<quickbooks:update-invoice realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-invoice accessTokenId="accessTokenId">
 </quickbooks:update-invoice>                                             
 <!-- END_INCLUDE(quickbooks:update-invoice) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-item) -->
-<quickbooks:update-item realmId="realmId"
-                        appKey="appKey"
-                        realmIdPseudonym="reamIdPseudonym"
-                        authIdPseudonym="authIdPseudonym" >    
+<quickbooks:update-item accessTokenId="accessTokenId">
 </quickbooks:update-item>
 <!-- END_INCLUDE(quickbooks:update-item) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-payment) -->
-<quickbooks:update-payment realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-payment accessTokenId="accessTokenId">
 </quickbooks:update-payment>
 <!-- END_INCLUDE(quickbooks:update-payment) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-payment-method) -->
-<quickbooks:update-payment-method realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" >
+<quickbooks:update-payment-method accessTokenId="accessTokenId">
 </quickbooks:update-payment-method>
 <!-- END_INCLUDE(quickbooks:update-payment-method) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-receipt) -->
-<quickbooks:update-sales-receipt realmId="#[map-payload:realmId]"
-                                 appKey="#[map-payload:appKey]"
-                                 realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                 authIdPseudonym="#[map-payload:authIdPseudonym]" >
+<quickbooks:update-sales-receipt accessTokenId="accessTokenId">
 </quickbooks:update-sales-receipt>
 <!-- END_INCLUDE(quickbooks:update-sales-receipt) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-sales-term) -->
-<quickbooks:update-sales-term realmId="realmId"
-                              appKey="appKey"
-                              realmIdPseudonym="reamIdPseudonym"
-                              authIdPseudonym="authIdPseudonym" >
+<quickbooks:update-sales-term accessTokenId="accessTokenId">
 </quickbooks:update-sales-term>
 <!-- END_INCLUDE(quickbooks:update-sales-term) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-vendor) -->
-<quickbooks:update-vendor realmId="realmId"
-                          appKey="appKey"
-                          realmIdPseudonym="reamIdPseudonym"
-                          authIdPseudonym="authIdPseudonym" >
+<quickbooks:update-vendor accessTokenId="accessTokenId">
 </quickbooks:update-vendor>
 <!-- END_INCLUDE(quickbooks:update-vendor) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:delete-object) -->
-<quickbooks:delete-object realmId="realmId"
-                          appKey="appKey"
-                          realmIdPseudonym="reamIdPseudonym"
-                          authIdPseudonym="authIdPseudonym"                         
+<quickbooks:delete-object accessTokenId="accessTokenId"
                           type="INVOICE"
                           syncToken="2" >
 </quickbooks:delete-object>
 <!-- END_INCLUDE(quickbooks:delete-object) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects) -->
-<quickbooks:find-objects realmId="realmId"
-                         appKey="appKey"
-                         realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym"                         
+<quickbooks:find-objects accessTokenId="accessTokenId"
                          type="ACCOUNT"
                          queryFilter="#[variable:queryfilterstring]"
                          querySort="#[variable:querysortstring]"/>
 <!-- END_INCLUDE(quickbooks:find-objects) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects2) -->
-<quickbooks:find-objects realmId="realmId"
-                         appKey="appKey"
-                         realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym"                         
+<quickbooks:find-objects accessTokenId="accessTokenId"
                          type="ACCOUNT"
                          queryFilter="Name :EQUALS: Loan Account"
                          querySort="Name AToZ"/>
 <!-- END_INCLUDE(quickbooks:find-objects2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects3) -->
-<quickbooks:find-objects realmId="realmId"
-                         appKey="appKey"
-                         realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym"                         
+<quickbooks:find-objects accessTokenId="accessTokenId"
                          type="CUSTOMER"
                          queryFilter="FamilyName :EQUALS: Doe" />
 <!-- END_INCLUDE(quickbooks:find-objects3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects4) -->
-<quickbooks:find-objects realmId="realmId"
-                         appKey="appKey"
-                         realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym"                         
+<quickbooks:find-objects accessTokenId="accessTokenId"
                          type="INVOICE"
                          queryFilter="DBAName :EQUALS: Smith Bakery :AND: FamilyName :EQUALS: Smith" />
 <!-- END_INCLUDE(quickbooks:find-objects4) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects5) -->
-<quickbooks:find-objects realmId="realmId"
-                         appKey="appKey"
-                         realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym"
+<quickbooks:find-objects accessTokenId="accessTokenId"
                          type="INVOICE"
                          queryFilter="LastUpdatedTime :AFTER: 2010-08-10T14:30:00-0700 :AND: LastUpdatedTime :BEFORE: 2010-08-10T15:30:00-0700" />
 <!-- END_INCLUDE(quickbooks:find-objects5) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:change-data-deleted) -->
-<quickbooks:change-data-deleted realmId="realmId"
-                         appKey="appKey"
-                         realmIdPseudonym="reamIdPseudonym"
-                         authIdPseudonym="authIdPseudonym"                         
+<quickbooks:change-data-deleted accessTokenId="accessTokenId"
                          queryFilter="#[variable:queryfilterstring]"
                          querySort="#[variable:querysortstring]"/>
 <!-- END_INCLUDE(quickbooks:change-data-deleted) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:get-current-user) -->
-<quickbooks:get-current-user realmId="realmId"
-                        appKey="appKey"
-                        realmIdPseudonym="reamIdPseudonym"
-                        authIdPseudonym="authIdPseudonym" >    
+<quickbooks:get-current-user accessTokenId="accessTokenId">
 </quickbooks:get-current-user>
 <!-- END_INCLUDE(quickbooks:get-current-user) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:get-company-metadata) -->
-<quickbooks:get-company-metadata realmId="realmId"
-                        appKey="appKey"
-                        realmIdPseudonym="reamIdPseudonym"
-                        authIdPseudonym="authIdPseudonym" >    
+<quickbooks:get-company-metadata accessTokenId="accessTokenId">
 </quickbooks:get-company-metadata>
 <!-- END_INCLUDE(quickbooks:get-company-metadata) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:auth-user) -->
+<quickbooks:auth-user config-ref="Quickbooks_Online" accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token"
+authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="http://localhost:8090" requestTokenId="requestTokenId"
+requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" />
+<!-- END_INCLUDE(quickbooks:auth-user) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:get-access-token) -->
+<quickbooks:get-access-token />
+<!-- END_INCLUDE(quickbooks:get-access-token) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:open-id-initialize) -->
+<quickbooks:open-id-initialize callbackUrl="http://localhost:8090/openId" />
+<!-- END_INCLUDE(quickbooks:open-id-initialize) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:verify-open-id) -->
+<quickbooks:verify-open-id >
+    <quickbooks:response-parameters ref="#[message.inboundProperties['http.query.params']]"/>
+</quickbooks:verify-open-id>
+<!-- END_INCLUDE(quickbooks:verify-open-id) -->

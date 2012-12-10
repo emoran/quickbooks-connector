@@ -15,14 +15,29 @@ package org.mule.modules.quickbooks.online;
 
 import javax.annotation.PostConstruct;
 
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+import oauth.signpost.exception.OAuthNotAuthorizedException;
+import oauth.signpost.signature.HmacSha1MessageSigner;
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.api.annotations.param.OutboundHeaders;
+import org.mule.api.config.MuleProperties;
+import org.mule.api.store.ObjectDoesNotExistException;
+import org.mule.api.store.ObjectStore;
+import org.mule.api.store.ObjectStoreException;
+import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.model.UserInformation;
+import org.mule.modules.quickbooks.api.oauth.DefaultQuickbooksOAuthClient;
+import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
+import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
+import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.schema.Account;
@@ -42,6 +57,8 @@ import org.mule.modules.quickbooks.online.schema.SalesReceipt;
 import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.quickbooks.online.schema.Vendor;
 
+import java.util.Map;
+
 /**
  * QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
  * making the accounting process more comfortable for the average business owner or manager. By using the built-in
@@ -52,9 +69,35 @@ import org.mule.modules.quickbooks.online.schema.Vendor;
  * Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_5462311_quickbooks-accounting-tutorial.html#ixzz1csaydwxl
  * @author MuleSoft, inc.
  */
+@SuppressWarnings("unused")
 @Module(name = "quickbooks", schemaVersion= "3.0", friendlyName = "Quickbooks Online")
 public class QuickBooksModule
-{   
+{
+    /**
+     * API Key
+     */
+    @Configurable
+    private String consumerKey;
+
+    /**
+     * API Secret
+     */
+    @Configurable
+    private String consumerSecret;
+
+    /**
+     * Object store reference
+     */
+    @Configurable
+    @Optional
+    @Default(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME)
+    private ObjectStore objectStore;
+
+    /**
+     * Object store helper
+     */
+    private ObjectStoreHelper objectStoreHelper;
+
     /**
      * Quick-Books client. By default uses DefaultQuickBooksOnlineClient class.
      */
@@ -90,27 +133,20 @@ public class QuickBooksModule
      * You can use Account to record the total monetary amount that is allocated for a specific use.
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Account">Account Especification</a>
+     * 0400_QuickBooks_Online/Account">Account Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-account}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param account   The Quickbooks account to be created.
      * @return The created Account.
      */
     @Processor
-    public Account createAccount(String realmId,
-                                 String appKey,
-                                 String realmIdPseudonym, String authIdPseudonym,
+    public Account createAccount(String accessTokenId,
                                  @Optional @Default("#[payload]") Account account)
     {
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, account);
+        return client.create(getAccessTokenInformation(accessTokenId), account);
     }
     
     /**
@@ -118,26 +154,19 @@ public class QuickBooksModule
      * The Bill object represents an expense to the business.
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Bill">Bill Especification</a>
+     * 0400_QuickBooks_Online/Bill">Bill Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param bill The bill to be created
      * @return The created Bill.
      */
     @Processor
-    public Bill createBill(String realmId,
-                           String appKey,
-                           String realmIdPseudonym, String authIdPseudonym,
+    public Bill createBill(String accessTokenId,
                            @Optional @Default("#[payload]") Bill bill)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, bill);
+        return client.create(getAccessTokenInformation(accessTokenId), bill);
     }
     
     /**
@@ -147,16 +176,11 @@ public class QuickBooksModule
      * QBO supports bill payments through a credit card or a bank account.
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/BillPayment">BillPayment Especification</a>
+     * 0400_QuickBooks_Online/BillPayment">BillPayment Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-bill-payment}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param billPayment The bill payment object
      * @return The created BillPayment.
      * 
@@ -164,12 +188,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public BillPayment createBillPayment(String realmId,
-                                         String appKey,
-                                         String realmIdPseudonym, String authIdPseudonym,
+    public BillPayment createBillPayment(String accessTokenId,
                                          @Optional @Default("#[payload]") BillPayment billPayment)
     {    
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, billPayment);
+        return client.create(getAccessTokenInformation(accessTokenId), billPayment);
     }
     
     /**
@@ -177,16 +199,11 @@ public class QuickBooksModule
      * CashPurchase represents an expense to the business as a cash transaction.
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CashPurchase">CashPurchase Especification</a>
+     * 0400_QuickBooks_Online/CashPurchase">CashPurchase Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-cash-purchase}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param cashPurchase The cash purchase to be created
      * @return The created CashPurchase.
      * 
@@ -194,12 +211,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase createCashPurchase(String realmId,
-                                           String appKey,
-                                           String realmIdPseudonym, String authIdPseudonym,
+    public CashPurchase createCashPurchase(String accessTokenId,
                                            @Optional @Default("#[payload]") CashPurchase cashPurchase)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, cashPurchase);
+        return client.create(getAccessTokenInformation(accessTokenId), cashPurchase);
     }
     
     /**
@@ -207,16 +222,11 @@ public class QuickBooksModule
      * The Check object represents an expense to the business paid as a check transaction.
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Check">Check Especification</a>
+     * 0400_QuickBooks_Online/Check">Check Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-check}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param check The check to be created
      * @return The created Check.
      * 
@@ -224,12 +234,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Check createCheck(String realmId,
-                             String appKey,
-                             String realmIdPseudonym, String authIdPseudonym,
+    public Check createCheck(String accessTokenId,
                              @Optional @Default("#[payload]") Check check)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, check);
+        return client.create(getAccessTokenInformation(accessTokenId), check);
     }
     
     /**
@@ -240,16 +248,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Especification</a>
+     * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-credit-card-charge}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param creditCardCharge The credit card charge to be created
      * @return The created CreditCardCharge.
      * 
@@ -257,12 +260,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CreditCardCharge createCreditCardCharge(String realmId,
-                                                   String appKey,
-                                                   String realmIdPseudonym, String authIdPseudonym,
+    public CreditCardCharge createCreditCardCharge(String accessTokenId,
                                                    @Optional @Default("#[payload]") CreditCardCharge creditCardCharge)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, creditCardCharge);
+        return client.create(getAccessTokenInformation(accessTokenId), creditCardCharge);
     }
 
     /**
@@ -272,16 +273,11 @@ public class QuickBooksModule
      *
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Customer">Customer Especification</a>
+     * 0400_QuickBooks_Online/Customer">Customer Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-customer}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param customer The customer to be created
      * @return The created Customer.
      * 
@@ -289,9 +285,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Customer createCustomer(String realmId,
-                                   String appKey,
-                                   String realmIdPseudonym, String authIdPseudonym,
+    public Customer createCustomer(String accessTokenId,
                                    @Optional @Default("#[payload]") Customer customer)
     {
         if(customer.getPaymentMethodId() != null && (customer.getPaymentMethodId().getValue().isEmpty() 
@@ -300,7 +294,7 @@ public class QuickBooksModule
             customer.setPaymentMethodId(new IdType());
         }
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, customer);
+        return client.create(getAccessTokenInformation(accessTokenId), customer);
     }
     
     /**
@@ -309,16 +303,11 @@ public class QuickBooksModule
      * for goods or services proposed to be sold, including proposed pricing. It is also known as quote.
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Estimate">Estimate Especification</a>
+     * 0400_QuickBooks_Online/Estimate">Estimate Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-estimate}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param estimate The estimate to be created
      * @return The created Estimate.
      * 
@@ -326,12 +315,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Estimate createEstimate(String realmId,
-                                   String appKey,
-                                   String realmIdPseudonym, String authIdPseudonym,
+    public Estimate createEstimate(String accessTokenId,
                                    @Optional @Default("#[payload]") Estimate estimate)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, estimate);
+        return client.create(getAccessTokenInformation(accessTokenId), estimate);
     }
     
     /**
@@ -342,16 +329,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Invoice">Invoice Especification</a>
+     * 0400_QuickBooks_Online/Invoice">Invoice Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-invoice}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param invoice The invoice to be created
      * @return The created Invoice.
      * 
@@ -359,12 +341,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Invoice createInvoice(String realmId,
-                                 String appKey,
-                                 String realmIdPseudonym, String authIdPseudonym,
+    public Invoice createInvoice(String accessTokenId,
                                  @Optional @Default("#[payload]") Invoice invoice)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, invoice);
+        return client.create(getAccessTokenInformation(accessTokenId), invoice);
     }
     
     /**
@@ -374,16 +354,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Item">Item Especification</a>
+     * 0400_QuickBooks_Online/Item">Item Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-item}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param item The item to be created
      * @return The created Item.
      * 
@@ -391,12 +366,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Item createItem(String realmId,
-                           String appKey,
-                           String realmIdPseudonym, String authIdPseudonym,
+    public Item createItem(String accessTokenId,
                            @Optional @Default("#[payload]") Item item)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, item);
+        return client.create(getAccessTokenInformation(accessTokenId), item);
     }
     
     /**
@@ -406,16 +379,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Payment">Payment Especification</a>
+     * 0400_QuickBooks_Online/Payment">Payment Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-payment}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param payment The payment to be created
      * @return The created Payment.
      * 
@@ -423,12 +391,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Payment createPayment(String realmId,
-                                 String appKey,
-                                 String realmIdPseudonym, String authIdPseudonym,
+    public Payment createPayment(String accessTokenId,
                                  @Optional @Default("#[payload]") Payment payment)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, payment);
+        return client.create(getAccessTokenInformation(accessTokenId), payment);
     }
     
     /**
@@ -438,16 +404,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Especification</a>
+     * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-payment-method}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param paymentMethod The payment method to be created
      * @return The created PaymentMethod.
      * 
@@ -455,12 +416,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public PaymentMethod createPaymentMethod(String realmId,
-                                             String appKey,
-                                             String realmIdPseudonym, String authIdPseudonym,
+    public PaymentMethod createPaymentMethod(String accessTokenId,
                                              @Optional @Default("#[payload]") PaymentMethod paymentMethod)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, paymentMethod);
+        return client.create(getAccessTokenInformation(accessTokenId), paymentMethod);
     }
     
     /**
@@ -470,16 +429,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Especification</a>
+     * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-sales-receipt}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param salesReceipt The sales receipt to be created
      * @return The created SalesReceipt.
      * 
@@ -487,12 +441,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesReceipt createSalesReceipt(String realmId,
-                                           String appKey,
-                                           String realmIdPseudonym, String authIdPseudonym,
+    public SalesReceipt createSalesReceipt(String accessTokenId,
                                            @Optional @Default("#[payload]") SalesReceipt salesReceipt)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesReceipt);
+        return client.create(getAccessTokenInformation(accessTokenId), salesReceipt);
     }
     
     /**
@@ -504,16 +456,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/SalesTerm">SalesTerm Especification</a>
+     * 0400_QuickBooks_Online/SalesTerm">SalesTerm Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-sales-term}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param salesTerm The sales term to be created
      * @return The created SalesTerm.
      * 
@@ -521,13 +468,11 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm createSalesTerm(String realmId,
-                                     String appKey,
-                                     String realmIdPseudonym, String authIdPseudonym,
+    public SalesTerm createSalesTerm(String accessTokenId,
                                      @Optional @Default("#[payload]") SalesTerm salesTerm)
     {
         
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, salesTerm);
+        return client.create(getAccessTokenInformation(accessTokenId), salesTerm);
     }
     
     /**
@@ -537,16 +482,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
+     * 0400_QuickBooks_Online/Vendor">Vendor Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-vendor}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param vendor The vendor to be created
      * @return The created Vendor.
      * 
@@ -554,12 +494,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Vendor createVendor(String realmId,
-                               String appKey,
-                               String realmIdPseudonym, String authIdPseudonym,
+    public Vendor createVendor(String accessTokenId,
                                @Optional @Default("#[payload]") Vendor vendor)
     {
-        return client.create(realmId, appKey, realmIdPseudonym, authIdPseudonym, vendor);
+        return client.create(getAccessTokenInformation(accessTokenId), vendor);
     }
     
     /**
@@ -567,12 +505,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-object}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
      * @return The object.
@@ -581,13 +514,11 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Object getObject(String realmId,
-                            String appKey,
-                            String realmIdPseudonym, String authIdPseudonym,
+    public Object getObject(String accessTokenId,
                             OnlineEntityType type,
                             @Optional @Default("#[payload]") IdType id)
     {
-        return client.getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id);
+        return client.getObject(getAccessTokenInformation(accessTokenId), type, id);
     }
 
     /**
@@ -601,16 +532,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Account">Account Especification</a>
+     * 0400_QuickBooks_Online/Account">Account Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-account}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param account The account to be updated
      * @return The updated Account.
      * 
@@ -618,12 +544,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Account updateAccount(String realmId,
-                                 String appKey,
-                                 String realmIdPseudonym, String authIdPseudonym,
+    public Account updateAccount(String accessTokenId,
                                  @Optional @Default("#[payload]") Account account)
     {   
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ACCOUNT, account);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.ACCOUNT, account);
     }
     
     /**
@@ -635,16 +559,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Bill">Bill Especification</a>
+     * 0400_QuickBooks_Online/Bill">Bill Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param bill The bill to be updated
      * @return The updated Bill.
      * 
@@ -652,12 +571,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Bill updateBill(String realmId,
-                           String appKey,
-                           String realmIdPseudonym, String authIdPseudonym,
+    public Bill updateBill(String accessTokenId,
                            @Optional @Default("#[payload]") Bill bill)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILL, bill);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.BILL, bill);
     }
     
     /**
@@ -671,16 +588,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/BillPayment">BillPayment Especification</a>
+     * 0400_QuickBooks_Online/BillPayment">BillPayment Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-bill-payment}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param billPayment Bill payment to be updated
      * @return The updated BillPayment.
      * 
@@ -688,12 +600,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public BillPayment updateBillPayment(String realmId,
-                                         String appKey,
-                                         String realmIdPseudonym, String authIdPseudonym,
+    public BillPayment updateBillPayment(String accessTokenId,
                                          @Optional @Default("#[payload]") BillPayment billPayment)
     {    
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.BILLPAYMENT, billPayment);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.BILLPAYMENT, billPayment);
     }
     
     /**
@@ -705,16 +615,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CashPurchase">CashPurchase Especification</a>
+     * 0400_QuickBooks_Online/CashPurchase">CashPurchase Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-cash-purchase}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param cashPurchase The cash purchase to be updated
      * @return The updated CashPurchase.
      * 
@@ -722,12 +627,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase updateCashPurchase(String realmId,
-                                           String appKey,
-                                           String realmIdPseudonym, String authIdPseudonym,
+    public CashPurchase updateCashPurchase(String accessTokenId,
                                            @Optional @Default("#[payload]") CashPurchase cashPurchase)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CASHPURCHASE, cashPurchase);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CASHPURCHASE, cashPurchase);
     }
     
     /**
@@ -739,16 +642,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Check">Check Especification</a>
+     * 0400_QuickBooks_Online/Check">Check Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-check}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param check The check to be updated
      * @return The updated Check.
      * 
@@ -756,12 +654,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Check updateCheck(String realmId,
-                             String appKey,
-                             String realmIdPseudonym, String authIdPseudonym,
+    public Check updateCheck(String accessTokenId,
                              @Optional @Default("#[payload]") Check check)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CHECK, check);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CHECK, check);
     }
     
     /**
@@ -775,16 +671,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Especification</a>
+     * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-credit-card-charge}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param creditCardCharge The credit card charge to be updated
      * @return The updated CreditCardCharge.
      * 
@@ -792,12 +683,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CreditCardCharge updateCreditCardCharge(String realmId,
-                                                   String appKey,
-                                                   String realmIdPseudonym, String authIdPseudonym,
+    public CreditCardCharge updateCreditCardCharge(String accessTokenId,
                                                    @Optional @Default("#[payload]") CreditCardCharge creditCardCharge)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CREDITCARDCHARGE, 
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CREDITCARDCHARGE,
                 creditCardCharge);
     }
 
@@ -811,16 +700,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Customer">Customer Especification</a>
+     * 0400_QuickBooks_Online/Customer">Customer Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-customer}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param customer The customer to be updated
      * @return The updated Customer.
      * 
@@ -828,9 +712,7 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Customer updateCustomer(String realmId,
-                                   String appKey,
-                                   String realmIdPseudonym, String authIdPseudonym,
+    public Customer updateCustomer(String accessTokenId,
                                    @Optional @Default("#[payload]") Customer customer)
     {
         if(customer.getPaymentMethodId() != null && (customer.getPaymentMethodId().getValue().isEmpty() 
@@ -839,7 +721,7 @@ public class QuickBooksModule
             customer.setPaymentMethodId(new IdType());
         }
 
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.CUSTOMER, customer);        
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CUSTOMER, customer);
     }
     
     /**
@@ -852,16 +734,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Estimate">Estimate Especification</a>
+     * 0400_QuickBooks_Online/Estimate">Estimate Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-estimate}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param estimate The estimate to be updated
      * @return The updated Estimate.
      * 
@@ -869,12 +746,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Estimate updateEstimate(String realmId,
-                                   String appKey,
-                                   String realmIdPseudonym, String authIdPseudonym,
+    public Estimate updateEstimate(String accessTokenId,
                                    @Optional @Default("#[payload]") Estimate estimate)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ESTIMATE, estimate);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.ESTIMATE, estimate);
     }
     
     /**
@@ -888,16 +763,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Invoice">Invoice Especification</a>
+     * 0400_QuickBooks_Online/Invoice">Invoice Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-invoice}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param invoice The invoice to be updated
      * @return The updated Invoice.
      * 
@@ -905,12 +775,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Invoice updateInvoice(String realmId,
-                                 String appKey,
-                                 String realmIdPseudonym, String authIdPseudonym,
+    public Invoice updateInvoice(String accessTokenId,
                                  @Optional @Default("#[payload]") Invoice invoice)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.INVOICE, invoice);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.INVOICE, invoice);
     }
     
     /**
@@ -923,16 +791,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Item">Item Especification</a>
+     * 0400_QuickBooks_Online/Item">Item Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-item}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param item The item to be updated
      * @return The updated Item.
      * 
@@ -940,12 +803,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Item updateItem(String realmId,
-                           String appKey,
-                           String realmIdPseudonym, String authIdPseudonym,
+    public Item updateItem(String accessTokenId,
                            @Optional @Default("#[payload]") Item item)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.ITEM, item);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.ITEM, item);
     }
     
     /**
@@ -958,16 +819,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Payment">Payment Especification</a>
+     * 0400_QuickBooks_Online/Payment">Payment Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-payment}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param payment The payment to be updated
      * @return The updated Payment.
      * 
@@ -975,12 +831,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Payment updatePayment(String realmId,
-                                 String appKey,
-                                 String realmIdPseudonym, String authIdPseudonym,
+    public Payment updatePayment(String accessTokenId,
                                  @Optional @Default("#[payload]") Payment payment)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENT, payment);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.PAYMENT, payment);
     }
     
     /**
@@ -993,16 +847,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Especification</a>
+     * 0400_QuickBooks_Online/PaymentMethod">PaymentMethod Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-payment-method}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param paymentMethod The payment method to be updated
      * @return The updated PaymentMethod.
      * 
@@ -1010,12 +859,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public PaymentMethod updatePaymentMethod(String realmId,
-                                             String appKey,
-                                             String realmIdPseudonym, String authIdPseudonym,
+    public PaymentMethod updatePaymentMethod(String accessTokenId,
                                              @Optional @Default("#[payload]") PaymentMethod paymentMethod)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.PAYMENTMETHOD, paymentMethod);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.PAYMENTMETHOD, paymentMethod);
     }
     
     /**
@@ -1028,16 +875,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Especification</a>
+     * 0400_QuickBooks_Online/SalesReceipt">SalesReceipt Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-sales-receipt}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param salesReceipt The sales receipt
      * @return The updated SalesReceipt.
      * 
@@ -1045,12 +887,10 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesReceipt updateSalesReceipt(String realmId,
-                                           String appKey,
-                                           String realmIdPseudonym, String authIdPseudonym,
+    public SalesReceipt updateSalesReceipt(String accessTokenId,
                                            @Optional @Default("#[payload]") SalesReceipt salesReceipt)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESRECEIPT, salesReceipt);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.SALESRECEIPT, salesReceipt);
     }
     
     /**
@@ -1065,16 +905,11 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/SalesTerm">SalesTerm Especification</a>
+     * 0400_QuickBooks_Online/SalesTerm">SalesTerm Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-sales-term}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param salesTerm The sales term to be updated
      * @return The updated SalesTerm.
      * 
@@ -1082,13 +917,11 @@ public class QuickBooksModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm updateSalesTerm(String realmId,
-                                     String appKey,
-                                     String realmIdPseudonym, String authIdPseudonym,
+    public SalesTerm updateSalesTerm(String accessTokenId,
                                      @Optional @Default("#[payload]") SalesTerm salesTerm)
     {
         
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.SALESTERM, salesTerm);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.SALESTERM, salesTerm);
     }
     
     /**
@@ -1101,26 +934,19 @@ public class QuickBooksModule
      * 
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
+     * 0400_QuickBooks_Online/Vendor">Vendor Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-vendor}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param vendor The vendor to be updated
      * @return The updated Vendor.
      */
     @Processor
-    public Vendor updateVendor(String realmId,
-                               String appKey,
-                               String realmIdPseudonym, String authIdPseudonym,
+    public Vendor updateVendor(String accessTokenId,
                                @Optional @Default("#[payload]") Vendor vendor)
     {
-        return client.update(realmId, appKey, realmIdPseudonym, authIdPseudonym,OnlineEntityType.VENDOR, vendor);
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.VENDOR, vendor);
     }
     
     /**
@@ -1128,12 +954,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:delete-object}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Integer that indicates how many times the object has been updated.
@@ -1141,14 +962,12 @@ public class QuickBooksModule
      *                  request has the same value as the SyncToken in the Data Service's repository.
      */
     @Processor
-    public void deleteObject(String realmId,
-                             String appKey,
-                             String realmIdPseudonym, String authIdPseudonym,
+    public void deleteObject(String accessTokenId,
                              OnlineEntityType type, 
                              @Optional @Default("#[payload]") IdType id, 
                              @Optional String syncToken)
     {
-        client.deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, id, syncToken);
+        client.deleteObject(getAccessTokenInformation(accessTokenId), type, id, syncToken);
     }
 
     /**
@@ -1156,7 +975,7 @@ public class QuickBooksModule
      *
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Vendor">Vendor Especification</a>
+     * 0400_QuickBooks_Online/Vendor">Vendor Specification</a>
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects}
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects2}
@@ -1164,12 +983,7 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects4}
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects5}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param type EntityType of the object.
      * @param queryFilter String with a filter format (see details). Each type of object to be 
      *                    retrieved, has a list of attributes for which it can be filtered (See this 
@@ -1184,16 +998,13 @@ public class QuickBooksModule
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
-    @SuppressWarnings("rawtypes")
     @Processor
-    public Iterable findObjects(String realmId,
-                                String appKey,
-                                String realmIdPseudonym, String authIdPseudonym,
+    public Iterable findObjects(String accessTokenId,
                                 OnlineEntityType type, 
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
-        return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym,type, queryFilter, querySort);
+        return client.findObjects(getAccessTokenInformation(accessTokenId), type, queryFilter, querySort);
     }
     
     /**
@@ -1205,12 +1016,7 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:change-data-deleted}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param queryFilter String with a filter format (see details). Each type of object to be 
      *                    retrieved, has a list of attributes for which it can be filtered (See this 
      *                    list following the link in the details of the documentation of the create
@@ -1224,15 +1030,13 @@ public class QuickBooksModule
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
-    @SuppressWarnings("rawtypes")
     @Processor
-    public Iterable changeDataDeleted(String realmId,
-                                String appKey,
-                                String realmIdPseudonym, String authIdPseudonym,
+    public Iterable changeDataDeleted(String accessTokenId,
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
-        return client.findObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, OnlineEntityType.CHANGEDATADELETED, queryFilter, querySort);
+        return client.findObjects(getAccessTokenInformation(accessTokenId), OnlineEntityType.CHANGEDATADELETED,
+                queryFilter, querySort);
     }
     
     /**
@@ -1244,21 +1048,14 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-current-user}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @return current user information
      * 
      */
     @Processor
-    public UserInformation getCurrentUser(String realmId,
-                                String appKey,
-                                String realmIdPseudonym, String authIdPseudonym)
+    public UserInformation getCurrentUser(String accessTokenId)
     {
-        return client.getCurrentUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+        return client.getCurrentUserInformation(getAccessTokenInformation(accessTokenId));
     }
     
     /**
@@ -1270,48 +1067,172 @@ public class QuickBooksModule
      * 
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-company-metadata}
      *
-     * @param realmId The realmID, also known as the Company ID, uniquely identifies the data for a company.
-     *                In QuickBooks Online, the Company ID  appears on the My Account page.
-     *                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.
-     * @param appKey Application Id.
-     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @return company metadata
      * 
      */
     @Processor
-    public Object getCompanyMetadata(String realmId,
-                                String appKey,
-                                String realmIdPseudonym, String authIdPseudonym)
+    public Object getCompanyMetadata(String accessTokenId)
     {
-        return client.get(realmId, appKey, realmIdPseudonym, authIdPseudonym, 
+        return client.get(getAccessTokenInformation(accessTokenId),
                 OnlineEntityType.COMPANY_METADATA);
     }
-    
-//    /**
-//     * Gets a new accessToken from Quickbooks. It will expire in an hour.
-//     * 
-//     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-access-token}
-//     *
-//     * @param appKey Application Key
-//     * @param realmIdPseudonym Pseudonym Realm Id, obtained from the gateway that represents the company.
-//     * @param authIdPseudonym Pseudonym Auth Id, obtained from the gateway that represents the user.
-//     * @return String that represents the accessToken required in every processor.
-//     */
-//    @Processor
-//    public String getAccessToken(String appKey, String realmIdPseudonym, String authIdPseudonym)
-//    {
-//        return client.getAccessTokensFromSaml(appKey, realmIdPseudonym, authIdPseudonym);
-//    }
+
     /**
-     * 
+     * Authorize an user using OAuth1.0a
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:auth-user}
+     *
+     * @param requestTokenUrl requestTokenUrl
+     * @param accessTokenUrl accessTokenUrl
+     * @param authorizationUrl authorizationUrl
+     * @param callbackUrl callbackUrl for OAuth service
+     * @param requestTokenId Optional value for identifying the requestToken. If it is not passed the client will use a UUID
+     * @param headers Outbound headers
+     * @return Authorize Url
+     * @throws ObjectStoreException from the Object Store instance
+     * @throws oauth.signpost.exception.OAuthCommunicationException requesting to OAuth provider
+     * @throws oauth.signpost.exception.OAuthExpectationFailedException requesting to OAuth provider
+     * @throws oauth.signpost.exception.OAuthNotAuthorizedException requesting to OAuth provider
+     * @throws oauth.signpost.exception.OAuthMessageSignerException requesting to OAuth provider
+     */
+    @Processor
+    public String authUser(String requestTokenUrl, String accessTokenUrl, String authorizationUrl, String callbackUrl,
+                           @Optional String requestTokenId, @OutboundHeaders Map<String, Object> headers)
+            throws OAuthMessageSignerException, OAuthNotAuthorizedException,
+            OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException
+    {
+        String authUrl = new DefaultQuickbooksOAuthClient(getConsumerKey(), getConsumerSecret(), getObjectStore()).
+                authorize(requestTokenUrl, accessTokenUrl, authorizationUrl,
+                        callbackUrl, requestTokenId, new HmacSha1MessageSigner());
+
+        headers.put("Location", authUrl);
+        headers.put("http.status", "302");
+        return authUrl;
+    }
+
+    /**
+     * Extract accessToken
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-access-token}
+     *
+     * @param apiUrl API URL
+     * @param verifier OAuth verifier. It comes within the callback.
+     * The default value is "#[header:inbound:oauth_verifier]"
+     * @param requestTokenId id used for identifying the authorized request token. It comes within the callback.
+     * By default the query string parameter is userId
+     * @param userIdentifier id used for store the accessToken in the Object Store.
+     *      By default the value is the realmId
+     * @return credentials user credentials
+     * @throws ObjectStoreException from the object store instance
+     * @throws OAuthCommunicationException requesting to OAuth provider
+     * @throws OAuthExpectationFailedException requesting to OAuth provider
+     * @throws OAuthNotAuthorizedException requesting to OAuth provider
+     * @throws OAuthMessageSignerException requesting to OAuth provider
+     */
+    @Processor
+    public OAuthCredentials getAccessToken(@Optional String apiUrl,
+                                           @Optional @Default("#[message.inboundProperties.oauth_verifier]") String verifier,
+                                           @Optional @Default("#[message.inboundProperties.userId]") String requestTokenId,
+                                           @Optional @Default("#[message.inboundProperties.realmId]") String userIdentifier)
+            throws OAuthMessageSignerException, OAuthNotAuthorizedException,
+            OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException
+    {
+        OAuthCredentials credentials = new DefaultQuickbooksOAuthClient(getConsumerKey(), getConsumerSecret(),
+                getObjectStore()).getAccessToken(verifier, requestTokenId, new HmacSha1MessageSigner());
+        credentials.setUserId(userIdentifier);
+        credentials.setRealmId(userIdentifier);
+
+        if (StringUtils.isNotBlank(apiUrl)) {
+            credentials.setBaseUri(apiUrl);
+        }
+        else {
+            credentials.setBaseUri(client.getCompanyBaseUri(credentials));
+        }
+
+        getObjectStoreHelper().store(userIdentifier, credentials, true);
+
+        return credentials;
+    }
+
+    /**
+     * Initializes OpenID process
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:open-id-initialize}
+     *
+     * @param providerUrl OpenID provider url
+     * @param callbackUrl OpenID callbackUrl. It has to point to an endpoint callback to process the response
+     * @param headers openId response headers
+     *
+     * @return url to redirect the user
+     *
+     */
+    @Processor
+    public String openIdInitialize(@Optional @Default("https://openid.intuit.com/OpenId/Provider") String providerUrl,
+                                   String callbackUrl,
+                                   @OutboundHeaders Map<String, Object> headers)
+    {
+        String url = new DefaultOpenIDClient().initialize(providerUrl, callbackUrl);
+
+        headers.put("Location", url);
+        headers.put("http.status", "302");
+        return url;
+    }
+
+    /**
+     * Verify response from Intuit
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:verify-open-id}
+     *
+     *
+     * @param responseParameters response parameters from Intuit. It process a map<string, string> with all the OpenID
+     *                           attributes sent from Intuit.
+     *
+     * @return OpenID credentials for the authenticated user
+     *
+     */
+    @Processor
+    public OpenIDCredentials verifyOpenId(
+            @Optional @Default("#[message.inboundProperties.oauth_verifier]") Map<String, String> responseParameters)
+    {
+        return new DefaultOpenIDClient().verifyOpenIDFromIntuit(responseParameters);
+    }
+    
+    /**
+     * This method retrieves the accessTokenInformation from the object store instance
+     * @return OAuthCredentials AuthToken and AuthTokenSecret
+     */
+    private OAuthCredentials getAccessTokenInformation(String accessTokenIdentifier) {
+        try {
+            return (OAuthCredentials) objectStoreHelper.retrieve(accessTokenIdentifier);
+        } catch (ObjectDoesNotExistException e) {
+            throw new QuickBooksRuntimeException("The user token could not be retrieved from the Object Store");
+        } catch (ObjectStoreException e) {
+            throw new QuickBooksRuntimeException("The user token could not be retrieved");
+        }
+    }
+
+    /**
+     * Create OAuthCredentials object
+     * @param accessToken user accessToken
+     * @param accessTokenSecret user accessTokenSecret
+     * @return credentials
+     */
+    private OAuthCredentials createCredentials(String accessToken, String accessTokenSecret) {
+        return new OAuthCredentials(accessToken, accessTokenSecret);
+    }
+
+    /**
+     *  Generates the QuickbooksOnlineClient
      */
     @PostConstruct
     public void init()
     {
         if (client == null )
         {
-            client = new DefaultQuickBooksOnlineClient(baseUri, serviceProviderId);
+            //TODO: is it necessary the apiKey?
+            client = new DefaultQuickBooksOnlineClient(baseUri, serviceProviderId, consumerKey, consumerSecret, "");
+            setObjectStoreHelper(new ObjectStoreHelper(objectStore));
         }
     }
     
@@ -1339,5 +1260,38 @@ public class QuickBooksModule
 
     public void setServiceProviderId(String serviceProviderId) {
         this.serviceProviderId = serviceProviderId;
+    }
+
+    public String getConsumerSecret() {
+        return consumerSecret;
+    }
+
+    public void setConsumerSecret(String consumerSecret) {
+        this.consumerSecret = consumerSecret;
+    }
+
+    public String getConsumerKey() {
+        return consumerKey;
+    }
+
+    public void setConsumerKey(String consumerKey) {
+        this.consumerKey = consumerKey;
+    }
+
+
+    public ObjectStore getObjectStore() {
+        return objectStore;
+    }
+
+    public void setObjectStore(ObjectStore objectStore) {
+        this.objectStore = objectStore;
+    }
+
+    public ObjectStoreHelper getObjectStoreHelper() {
+        return objectStoreHelper;
+    }
+
+    public void setObjectStoreHelper(ObjectStoreHelper objectStoreHelper) {
+        this.objectStoreHelper = objectStoreHelper;
     }
 }

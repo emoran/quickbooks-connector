@@ -25,12 +25,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
-import org.mule.modules.quickbooks.api.AbstractQuickBooksClient;
+import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.model.UserResponse;
+import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
@@ -46,34 +47,33 @@ import org.mule.modules.utils.pagination.PaginatedIterable;
  * @author Gaston Ponti
  * @since Aug 19, 2011
  */
-public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient implements QuickBooksOnlineClient
+@SuppressWarnings("unchecked")
+public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth implements QuickBooksOnlineClient
 {   
     
-    public DefaultQuickBooksOnlineClient(final String baseUri, final String serviceProviderId)
+    public DefaultQuickBooksOnlineClient(final String baseUri, final String serviceProviderId,
+                                         final String consumerKey, final String consumerSecret, final String appKey)
     {
         Validate.notEmpty(baseUri);
         
-        init(baseUri, serviceProviderId);
+        init(baseUri, serviceProviderId, consumerKey, consumerSecret, appKey);
         setResultsPerPage(100);
     }
     
     /** @throws QuickBooksRuntimeException 
-     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#create(java.lang.Object) */
+     */
     @Override
-    public <T extends CdmBase> T create(final String realmId,
-                                        final String appKey,
-                                        final String realmIdPseudonym, 
-                                        final String authIdPseudonym,
+    public <T extends CdmBase> T create(final OAuthCredentials credentials,
                                         T obj)
     {
         Validate.notNull(obj);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+//        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
         String str = String.format("%s/resource/%s/v2/%s",
-            getBaseUri(realmId),
+            credentials.getBaseUri(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
-            realmId);
+            credentials.getRealmId());
         
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "application/xml");
@@ -81,14 +81,14 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
 
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            return (T) makeARequestToQuickbooks(httpRequest, credentials);
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, obj);
+                destroyAccessToken(credentials);
+                return create(credentials, obj);
             } 
             else 
             {
@@ -98,35 +98,32 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     }
 
     /** @throws QuickBooksRuntimeException 
-     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#getObject() */
+     */
     @Override
-    public <T extends CdmBase> T getObject(final String realmId,
-                                           final String appKey,
-                                           final String realmIdPseudonym, 
-                                           final String authIdPseudonym,
+    public <T extends CdmBase> T getObject(final OAuthCredentials credentials,
                                            final OnlineEntityType type,
                                            final IdType id)
     {   
         Validate.notNull(type);
         Validate.notNull(id);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+//        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            getBaseUri(realmId), type.getResouceName(), realmId, id.getValue());
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            return (T) makeARequestToQuickbooks(httpRequest, credentials);
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id);
+                destroyAccessToken(credentials);
+                return getObject(credentials, type, id);
             } 
             else 
             {
@@ -136,28 +133,25 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     }
 
     /** @throws QuickBooksRuntimeException 
-     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#update(java.lang.String) */
+     */
     @Override
-    public <T extends CdmBase> T update(final String realmId,
-                                        final String appKey,
-                                        final String realmIdPseudonym, 
-                                        final String authIdPseudonym,
+    public <T extends CdmBase> T update(final OAuthCredentials credentials,
                                         final OnlineEntityType type,
                                         T obj)
     {
         Validate.notNull(obj);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
+//        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
         if (obj.getSyncToken() == null)
         {
-            obj.setSyncToken(getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj.getId()).getSyncToken());
+            obj.setSyncToken(getObject(credentials, type, obj.getId()).getSyncToken());
         }
         
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            getBaseUri(realmId),
+            credentials.getBaseUri(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
-            realmId,
+            credentials.getRealmId(),
             obj.getId().getValue());
         
         HttpUriRequest httpRequest = new HttpPost(str);
@@ -166,14 +160,14 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            return (T) makeARequestToQuickbooks(httpRequest, credentials);
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return update(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj);
+                destroyAccessToken(credentials);
+                return update(credentials, type, obj);
             } 
             else 
             {
@@ -183,12 +177,9 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     }
 
     /** @throws QuickBooksRuntimeException 
-     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#deleteObject(java.lang.Object) */
+     */
     @Override
-    public <T extends CdmBase> void deleteObject(final String realmId,
-                                                 final String appKey,
-                                                 final String realmIdPseudonym, 
-                                                 final String authIdPseudonym,
+    public <T extends CdmBase> void deleteObject(final OAuthCredentials credentials,
                                                  final OnlineEntityType type,
                                                  final IdType id,
                                                  String syncToken)
@@ -196,32 +187,30 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
         Validate.notNull(type);
         Validate.notNull(id);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         if (syncToken == null)
         {
-            syncToken = getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id).getSyncToken();
+            syncToken = getObject(credentials, type, id).getSyncToken();
         }
         T obj = (T) type.newInstance();
         obj.setSyncToken(syncToken);
         obj.setId(id);
         
         String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
-            getBaseUri(realmId), type.getResouceName(), realmId, id.getValue());
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
         
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "application/xml");
         prepareToPost(obj, httpRequest);
         try
         {
-            makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            makeARequestToQuickbooks(httpRequest, credentials);
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                deleteObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id, syncToken);
+                destroyAccessToken(credentials);
+                deleteObject(credentials, type, id, syncToken);
             } 
             else 
             {
@@ -233,15 +222,9 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     /** 
      * Returns the list of result pages from Quickbooks
      * 
-     * @param query 
-     * @param type 
-     * @return List of pages
-     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#findObjectsGetPages() */
+     */
     @Override
-    public <T extends CdmBase> Iterable<T> findObjectsGetPages(final String realmId, 
-                                                       final String appKey,
-                                                       final String realmIdPseudonym, 
-                                                       final String authIdPseudonym,
+    public <T extends CdmBase> Iterable<T> findObjectsGetPages(final OAuthCredentials credentials,
                                                        final OnlineEntityType type, 
                                                        final String queryFilter, 
                                                        final String querySort)
@@ -265,7 +248,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                 @Override
                 protected boolean hasNextPage(SearchResults page)
                 {
-                    return page.getCount() == getResultsPerPage();
+                    return page.getCount().equals(getResultsPerPage());
                 }
 
                 @Override
@@ -275,7 +258,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     try
                     {          
                         return ((List<T>) page.getCdmCollections().getClass()
-                                        .getMethod("get" + type.getCdmCollectionName(), null)
+                                        .getMethod("get" + type.getCdmCollectionName())
                                         .invoke(page.getCdmCollections())).iterator();
                     }
                     catch (IllegalAccessException e)
@@ -294,8 +277,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                 
                 private SearchResults askAnEspecificPage(Integer pageNumber)
                 {
-                    loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                     if (queryFilter != null)
                     {
@@ -308,7 +289,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
                     nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
-                        getBaseUri(realmId), type.getResouceNameForFind(), realmId));
+                        credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
                     
                     httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                     try
@@ -322,13 +303,13 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
                     
                     try
                     {
-                        return (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                        return (SearchResults) makeARequestToQuickbooks(httpRequest, credentials);
                     }
                     catch(QuickBooksRuntimeException e)
                     {
                         if(e.isAExpiredTokenFault())
                         {
-                            destroyAccessToken(realmId);
+                            destroyAccessToken(credentials);
                             return askAnEspecificPage(pageNumber);
                         } 
                         else 
@@ -342,18 +323,10 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     
     /** 
      * Return all the results from Quickbooks.
-     *
-     * 
-     * @param query 
-     * @param type
-     * @return List with all the results 
-     * @see org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient#findObjects() */
+     */
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends CdmBase> Iterable<T> findObjects(final String realmId, 
-                                                       final String appKey,
-                                                       final String realmIdPseudonym, 
-                                                       final String authIdPseudonym,
+    public <T extends CdmBase> Iterable<T> findObjects(final OAuthCredentials credentials,
                                                        final OnlineEntityType type, 
                                                        final String queryFilter, 
                                                        final String querySort)
@@ -366,8 +339,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
         List<NameValuePair> nameValuePairs;
         SearchResults searchResults;
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-
         while(hasMoreResults) {
             
             pageNumber++;
@@ -387,7 +358,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
             nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
             
             HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
-                getBaseUri(realmId), type.getResouceNameForFind(), realmId));
+                credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
             
             httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             try
@@ -401,14 +372,14 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
             
             try
             {
-                searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials);
             }
             catch(QuickBooksRuntimeException e)
             {
                 if(e.isAExpiredTokenFault())
                 {
-                    destroyAccessToken(realmId);
-                    searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                    destroyAccessToken(credentials);
+                    searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials);
                 } 
                 else 
                 {
@@ -420,7 +391,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
             
             try {                
                 listOfResults.addAll((List<T>) searchResults.getCdmCollections().getClass()
-                        .getMethod("get" + type.getCdmCollectionName(), null)
+                        .getMethod("get" + type.getCdmCollectionName())
                         .invoke(searchResults.getCdmCollections()));            
             }
             catch (IllegalAccessException e)
@@ -441,12 +412,13 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     }
     
     @Override
-    protected String loadCompanyBaseUri(String realmId, String appKey, String accessToken)
+    public String getCompanyBaseUri(OAuthCredentials credentials)
     {
-        HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", baseUri, realmId));
-        
-        QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, appKey, accessToken);
-        
+        HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", this.baseUri,
+                credentials.getRealmId()));
+
+        QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, credentials);
+
         return qboUser.getCurrentCompany().getBaseURI();
     }
 
@@ -465,33 +437,29 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClient impl
     }
 
     @Override
-    public UserInformation getCurrentUserInformation(String realmId,
-            String appKey, String realmIdPseudonym, String authIdPseudonym) {        
-        return ((UserResponse) retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym)).getUser();
+    public UserInformation getCurrentUserInformation(OAuthCredentials credentials) {
+        return ((UserResponse) retrieveUserInformation(credentials)).getUser();
     }
 
     @Override
-    public <T> T get(String realmId, String appKey, String realmIdPseudonym,
-            String authIdPseudonym, OnlineEntityType type) {
+    public <T> T get(OAuthCredentials credentials, OnlineEntityType type) {
         Validate.notNull(type);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/resource/%s/v2/%s",
-            getBaseUri(realmId), type.getResouceName(), realmId);
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         
         try
         {
-            return (T) makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            return (T) makeARequestToQuickbooks(httpRequest, credentials);
         }
         catch(QuickBooksRuntimeException e)
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return get(realmId, appKey, realmIdPseudonym, authIdPseudonym, type);
+                destroyAccessToken(credentials);
+                return get(credentials, type);
             } 
             else 
             {

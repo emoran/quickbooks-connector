@@ -11,6 +11,7 @@
 package org.mule.modules.quickbooks.online.api;
 
 import org.mule.modules.quickbooks.api.model.UserInformation;
+import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
 import org.mule.modules.quickbooks.online.schema.IdType;
@@ -26,23 +27,22 @@ import org.mule.modules.quickbooks.online.schema.IdType;
 
 public interface QuickBooksOnlineClient
 {
-    <T extends CdmBase> T create(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, T obj);
+    <T extends CdmBase> T create(final OAuthCredentials credentials, T obj);
     
-    <T extends CdmBase> T getObject(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final IdType id);
+    <T extends CdmBase> T getObject(final OAuthCredentials credentials, final OnlineEntityType type, final IdType id);
     
-    <T extends CdmBase> T update(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, T obj);
+    <T extends CdmBase> T update(final OAuthCredentials credentials, final OnlineEntityType type, T obj);
     
-    <T extends CdmBase> void deleteObject(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final IdType id, String syncToken);
+    <T extends CdmBase> void deleteObject(final OAuthCredentials credentials, final OnlineEntityType type, final IdType id, String syncToken);
 
-    <T extends CdmBase> Iterable<T> findObjects(final String realmId, final String appKey, final String realmIdPseudonym, final String authIdPseudonym, final OnlineEntityType type, final String queryFilter, final String querySort);
+    <T extends CdmBase> Iterable<T> findObjects(final OAuthCredentials credentials, final OnlineEntityType type, final String queryFilter, final String querySort);
 
-    <T extends CdmBase> Iterable<T> findObjectsGetPages(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, OnlineEntityType type, String queryFilter, String querySort);
+    <T extends CdmBase> Iterable<T> findObjectsGetPages(OAuthCredentials credentials, OnlineEntityType type, String queryFilter, String querySort);
     
-    <T extends Object> T get(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, OnlineEntityType type);
+    <T extends Object> T get(OAuthCredentials credentials, OnlineEntityType type);
     
-    UserInformation getCurrentUserInformation(final String realmId,
-            final String appKey,
-            final String realmIdPseudonym, 
-            final String authIdPseudonym);
+    UserInformation getCurrentUserInformation(OAuthCredentials credentials);
+
+    String getCompanyBaseUri(OAuthCredentials credentials);
 }
 

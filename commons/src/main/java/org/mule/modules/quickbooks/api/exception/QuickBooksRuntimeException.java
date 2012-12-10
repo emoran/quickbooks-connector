@@ -30,7 +30,6 @@ public class QuickBooksRuntimeException extends RuntimeException
     /**
      * Creates the QuickBooksException.
      *
-     * @param exceptionInfo
      */    
     public QuickBooksRuntimeException(final ExceptionInfo exceptionInfo)
     {
@@ -48,6 +47,10 @@ public class QuickBooksRuntimeException extends RuntimeException
     {
         return info != null && info.getCause().equals("SERVER") && info.getErrorCode().equals("401") && 
                 info.getMessage().equals("Unauthorized OAuth Token: token_rejected");
+    }
+
+    public QuickBooksRuntimeException(String error) {
+        super(error);
     }
 
 }
