@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
 import org.mule.modules.quickbooks.api.model.PlatformResponse;
+import org.mule.modules.quickbooks.api.model.ReconnectResponse;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.online.schema.*;
@@ -100,6 +101,7 @@ public class ObjectFactory {
  
  private final static QName _UserResponse_QNAME = new QName("http://platform.intuit.com/api/v1", "UserResponse");
  private final static QName _PlatformResponse_QNAME = new QName("http://platform.intuit.com/api/v1", "PlatformResponse");
+ private final static QName _ReconnectResponse_QNAME = new QName("http://platform.intuit.com/api/v1", "ReconnectResponse");
 
  /**
   * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.mule.modules.quickbooks.schema
@@ -1787,6 +1789,14 @@ public class ObjectFactory {
  public PlatformResponse createPlatformResponse() {
     return new PlatformResponse();
  }
+
+ /**
+ * Create an instance of {@link org.mule.modules.quickbooks.api.model.ReconnectResponse }
+ *
+ */
+ public ReconnectResponse createReconnectResponse() {
+    return new ReconnectResponse();
+ }
  
  /**
   * Create an instance of {@link JAXBElement }{@code <}{@link Discount }{@code >}}
@@ -2308,6 +2318,15 @@ public class ObjectFactory {
  @XmlElementDecl(namespace = "http://platform.intuit.com/api/v1", name = "PlatformResponse")
  public JAXBElement<PlatformResponse> createPlatformResponse(PlatformResponse value) {
     return new JAXBElement<PlatformResponse>(_PlatformResponse_QNAME, PlatformResponse.class, null, value);
+ }
+
+ /**
+ * Create an instance of {@link JAXBElement }{@code <}{@link ReconnectResponse }{@code >}}
+ *
+ */
+ @XmlElementDecl(namespace = "http://platform.intuit.com/api/v1", name = "ReconnectResponse")
+ public JAXBElement<ReconnectResponse> createReconnectResponse(ReconnectResponse value) {
+    return new JAXBElement<ReconnectResponse>(_ReconnectResponse_QNAME, ReconnectResponse.class, null, value);
  }
 }
 

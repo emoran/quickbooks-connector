@@ -30,6 +30,7 @@ import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.model.PlatformResponse;
+import org.mule.modules.quickbooks.api.model.ReconnectResponse;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
@@ -450,6 +451,18 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         if (response.getErrorCode() != 0) throw new QuickBooksRuntimeException(response.getErrorMessage());
 
         return true;
+    }
+
+    @Override
+    public OAuthCredentials reconnect(OAuthCredentials credentials) {
+        ReconnectResponse response = (ReconnectResponse) reconnectToQB(credentials);
+        if (response.getErrorCode() != 0) {
+            throw new QuickBooksRuntimeException(response.getErrorMessage());
+        }
+
+        credentials.setAccessToken(response.getAccessToken());
+        credentials.setAccessTokenSecret(response.getAccessTokenSecret());
+        return credentials;
     }
 
     @Override

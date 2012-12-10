@@ -43,6 +43,7 @@ public abstract class AbstractQuickBooksClientOAuth
     private static final String APP_CENTER_URI = "https://appcenter.intuit.com/api/v1/user/current";
     private static final String BLUE_DOT_MENU_URI = "https://appcenter.intuit.com/api/v1/Account/AppMenu";
     private static final String DISCONNECT_API_URI = "https://appcenter.intuit.com/api/v1/Connection/Disconnect";
+    private static final String RECONNECT_API_URI = "https://appcenter.intuit.com/api/v1/Connection/Reconnect";
     private static final Logger LOGGER = Logger.getLogger(AbstractQuickBooksClientOAuth.class);
 
     protected Integer resultsPerPage = 999;
@@ -248,6 +249,31 @@ public abstract class AbstractQuickBooksClientOAuth
     {
 
         HttpUriRequest httpRequest = new HttpGet(DISCONNECT_API_URI);
+
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault()) {
+                throw new QuickBooksExpiredTokenException(e);
+            }
+            else {
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * Reconnect user Intuit Platform. Used for refreshing tokens
+     * @param credentials OAuth credentials
+     */
+    @SuppressWarnings("unchecked")
+    protected <T> T reconnectToQB(final OAuthCredentials credentials)
+    {
+
+        HttpUriRequest httpRequest = new HttpGet(RECONNECT_API_URI);
 
         try
         {

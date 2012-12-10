@@ -1231,6 +1231,28 @@ public class QuickBooksModule
     {
         return client.disconnect(getAccessTokenInformation(accessTokenId));
     }
+
+    /**
+     * Generates a new OAuth access token and invalidates the OAuth access token used in the request,
+     * thereby extending the life span by six months. Because accessing QuickBooks data requires a valid access token,
+     * when the OAuth access token is renewed, your app can continue to access the user's QuickBooks company data.
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:reconnect}
+     *
+     *
+     * @param accessTokenId credentials identifier for the user information to be requested
+     *
+     * @return true if the user was successfully reauthenticated
+     * @throws ObjectStoreException if the credentials store failed
+     *
+     */
+    @Processor
+    public void reconnect(String accessTokenId) throws ObjectStoreException {
+        OAuthCredentials creds = client.reconnect(getAccessTokenInformation(accessTokenId));
+
+        //Stores new credentials
+        getObjectStoreHelper().store(creds.getUserId(), creds, true);
+    }
     
     /**
      * This method retrieves the accessTokenInformation from the object store instance

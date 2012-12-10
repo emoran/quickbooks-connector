@@ -236,3 +236,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" />
 <!-- BEGIN_INCLUDE(quickbooks:disconnect) -->
 <quickbooks:disconnect accessTokenId="accessTokenId" />
 <!-- END_INCLUDE(quickbooks:disconnect) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:reconnect) -->
+<quickbooks:reconnect accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks:reconnect) -->

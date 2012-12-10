@@ -48,5 +48,7 @@ public interface QuickBooksOnlineClient
     String getBlueDotInformation(OAuthCredentials credentials);
 
     boolean disconnect(OAuthCredentials credentials);
+
+    OAuthCredentials reconnect(OAuthCredentials credentials);
 }
 
