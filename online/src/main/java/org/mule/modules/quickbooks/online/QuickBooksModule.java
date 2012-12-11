@@ -33,6 +33,7 @@ import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
+import org.mule.modules.quickbooks.api.model.AppMenuInformation;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.oauth.DefaultQuickbooksOAuthClient;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
@@ -57,8 +58,8 @@ import org.mule.modules.quickbooks.online.schema.SalesReceipt;
 import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.quickbooks.online.schema.Vendor;
 
+import java.util.List;
 import java.util.Map;
-
 /**
  * QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
  * making the accounting process more comfortable for the average business owner or manager. By using the built-in
@@ -70,7 +71,7 @@ import java.util.Map;
  * @author MuleSoft, inc.
  */
 @SuppressWarnings("unused")
-@Module(name = "quickbooks", schemaVersion= "3.0", friendlyName = "Quickbooks Online")
+@Module(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online")
 public class QuickBooksModule
 {
     /**
@@ -1204,13 +1205,14 @@ public class QuickBooksModule
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-blue-dot-information}
      *
      *
+     *
      * @param accessTokenId credentials identifier for the user information to be requested
      *
-     * @return BlueDot menu information from Intuit
+     * @return list with AppMenu information from Intuit
      *
      */
     @Processor
-    public String getBlueDotInformation(String accessTokenId)
+    public List<AppMenuInformation> getBlueDotInformation(String accessTokenId)
     {
         return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId));
     }
@@ -1241,8 +1243,6 @@ public class QuickBooksModule
      *
      *
      * @param accessTokenId credentials identifier for the user information to be requested
-     *
-     * @return true if the user was successfully reauthenticated
      * @throws ObjectStoreException if the credentials store failed
      *
      */

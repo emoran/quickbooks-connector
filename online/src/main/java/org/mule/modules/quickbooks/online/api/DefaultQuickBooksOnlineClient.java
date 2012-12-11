@@ -15,9 +15,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -29,10 +32,7 @@ import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.api.model.PlatformResponse;
-import org.mule.modules.quickbooks.api.model.ReconnectResponse;
-import org.mule.modules.quickbooks.api.model.UserInformation;
-import org.mule.modules.quickbooks.api.model.UserResponse;
+import org.mule.modules.quickbooks.api.model.*;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
@@ -440,9 +440,29 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         return ((UserResponse) retrieveUserInformation(credentials)).getUser();
     }
 
+    /**
+     * Parse the HTML information for BlueDotMenu
+     * @param credentials OAuth credentials
+     * @return List with connected apps information
+     */
     @Override
-    public String getBlueDotInformation(OAuthCredentials credentials) {
-        return (String) getBlueDotMenu(credentials);
+    public List<AppMenuInformation> getBlueDotInformation(OAuthCredentials credentials) {
+        String blueDotInformation = (String) getBlueDotMenu(credentials);
+        List<AppMenuInformation> menuInformationList = new ArrayList<AppMenuInformation>();
+        Pattern p = Pattern.compile("intuitPlatformOpenOtherApp\\((.+?)\\)\" style='background-image: url\\((.+?)\\)");
+        Matcher m = p.matcher(blueDotInformation);
+        while(m.find()) {
+            AppMenuInformation info = new AppMenuInformation();
+            String[] parameters = StringUtils.split(m.group(1), ",");
+            info.setAppId(StringUtils.trim(parameters[0]));
+            info.setName(StringUtils.trim(parameters[1]));
+            info.setContentArea(StringUtils.trim(parameters[2]));
+            info.setImageUrl(StringUtils.trim(m.group(2)));
+
+            menuInformationList.add(info);
+        }
+
+        return menuInformationList;
     }
 
     @Override
