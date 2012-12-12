@@ -67,8 +67,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     {
         Validate.notNull(obj);
         
-//        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/resource/%s/v2/%s",
             credentials.getBaseUri(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
@@ -106,8 +104,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         Validate.notNull(type);
         Validate.notNull(id);
         
-//        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/resource/%s/v2/%s/%s",
             credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
 
@@ -139,8 +135,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
                                         T obj)
     {
         Validate.notNull(obj);
-        
-//        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
         if (obj.getSyncToken() == null)
         {
