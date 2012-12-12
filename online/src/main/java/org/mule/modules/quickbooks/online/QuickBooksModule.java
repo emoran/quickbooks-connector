@@ -1207,14 +1207,20 @@ public class QuickBooksModule
      *
      *
      * @param accessTokenId credentials identifier for the user information to be requested
+     * @param regex Regex for extracting the information
+     *              <p>The regex has to extract the information in this way:</p>
+     *              <p>match[0]: "appId,appName,contextArea"</p>
+     *              <p>match[1]: "logoImageUrl"</p>
+     *              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p>
      *
      * @return list with AppMenu information from Intuit
      *
      */
     @Processor
-    public List<AppMenuInformation> getBlueDotInformation(String accessTokenId)
+    public List<AppMenuInformation> getBlueDotInformation(String accessTokenId,
+                                                          @Optional @Default("intuitPlatformOpenOtherApp\\((.+?)\\)\" style=\'background-image: url\\((.+?)\\)") String regex)
     {
-        return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId));
+        return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId), regex);
     }
 
     /**

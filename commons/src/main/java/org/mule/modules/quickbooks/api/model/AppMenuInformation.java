@@ -15,19 +15,10 @@ package org.mule.modules.quickbooks.api.model;
  */
 public class AppMenuInformation {
 
-    private String realmId;
     private String appId;
     private String contentArea;
     private String imageUrl;
     private String name;
-
-    public String getRealmId() {
-        return realmId;
-    }
-
-    public void setRealmId(String realmId) {
-        this.realmId = realmId;
-    }
 
     public String getAppId() {
         return appId;
