@@ -10,6 +10,9 @@
 
 package org.mule.modules.quickbooks.api.openid;
 
+import org.mule.api.store.ObjectStoreException;
+import org.openid4java.message.MessageException;
+
 import java.util.Map;
 
 /**
@@ -19,7 +22,9 @@ import java.util.Map;
  */
 public interface OpenIDClient {
 
-    public String initialize(String providerUrl, String returnUrl);
+    public String initialize(String providerUrl, String returnUrl)
+            throws ObjectStoreException;
 
-    OpenIDCredentials verifyOpenIDFromIntuit(Map<String, String> params);
+    OpenIDCredentials verifyOpenIDFromIntuit(String receivingUrl, Map<String, String> params)
+            throws MessageException, ObjectStoreException;
 }

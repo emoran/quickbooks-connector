@@ -57,6 +57,7 @@ import org.mule.modules.quickbooks.online.schema.PaymentMethod;
 import org.mule.modules.quickbooks.online.schema.SalesReceipt;
 import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.quickbooks.online.schema.Vendor;
+import org.openid4java.message.MessageException;
 
 import java.util.List;
 import java.util.Map;
@@ -1166,14 +1167,14 @@ public class QuickBooksModule
      * @param headers openId response headers
      *
      * @return url to redirect the user
+     * @throws ObjectStoreException if the operation cannot store the OpenIDManagers
      *
      */
     @Processor
     public String openIdInitialize(@Optional @Default("https://openid.intuit.com/OpenId/Provider") String providerUrl,
                                    String callbackUrl,
-                                   @OutboundHeaders Map<String, Object> headers)
-    {
-        String url = new DefaultOpenIDClient().initialize(providerUrl, callbackUrl);
+                                   @OutboundHeaders Map<String, Object> headers) throws ObjectStoreException {
+        String url = new DefaultOpenIDClient(getObjectStoreHelper()).initialize(providerUrl, callbackUrl);
 
         headers.put("Location", url);
         headers.put("http.status", "302");
@@ -1185,18 +1186,21 @@ public class QuickBooksModule
      *
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:verify-open-id}
      *
-     *
+     * @param receivingUrl url from OpenID provider
      * @param responseParameters response parameters from Intuit. It process a map<string, string> with all the OpenID
      *                           attributes sent from Intuit.
      *
      * @return OpenID credentials for the authenticated user
+     * @throws MessageException from OpenID manager
+     * @throws ObjectStoreException if the operation cannot retrieve OpenID managers from ObjectStore
      *
      */
     @Processor
     public OpenIDCredentials verifyOpenId(
+            @Optional @Default("#[message.inboundProperties['http.context.uri'] + '?' + message.inboundProperties['http.query.string']]") String receivingUrl,
             @Optional @Default("#[message.inboundProperties.oauth_verifier]") Map<String, String> responseParameters)
-    {
-        return new DefaultOpenIDClient().verifyOpenIDFromIntuit(responseParameters);
+            throws MessageException, ObjectStoreException {
+        return new DefaultOpenIDClient(getObjectStoreHelper()).verifyOpenIDFromIntuit(receivingUrl, responseParameters);
     }
 
     /**

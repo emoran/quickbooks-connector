@@ -11,13 +11,21 @@
 package org.mule.modules.quickbooks.api.openid;
 
 import org.apache.log4j.Logger;
+import org.mule.api.store.ObjectStoreException;
+import org.mule.modules.quickbooks.api.ObjectStoreHelper;
+import org.openid4java.OpenIDException;
 import org.openid4java.association.AssociationSessionType;
 import org.openid4java.consumer.*;
 import org.openid4java.discovery.DiscoveryException;
 import org.openid4java.discovery.DiscoveryInformation;
+import org.openid4java.discovery.Identifier;
 import org.openid4java.message.AuthRequest;
+import org.openid4java.message.AuthSuccess;
 import org.openid4java.message.MessageException;
+import org.openid4java.message.ParameterList;
+import org.openid4java.message.ax.AxMessage;
 import org.openid4java.message.ax.FetchRequest;
+import org.openid4java.message.ax.FetchResponse;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,8 +41,10 @@ import java.util.Map;
 public class DefaultOpenIDClient implements OpenIDClient {
 
     public static final Logger logger = Logger.getLogger(DefaultOpenIDClient.class);
+    private ObjectStoreHelper objectStoreHelper;
 
-    public DefaultOpenIDClient() {
+    public DefaultOpenIDClient(ObjectStoreHelper objectStoreHelper) {
+        setObjectStoreHelper(objectStoreHelper);
     }
 
     /**
@@ -42,7 +52,8 @@ public class DefaultOpenIDClient implements OpenIDClient {
      * @return url to redirect the user
      */
     @Override
-    public String initialize(String providerUrl, String returnUrl) {
+    public String initialize(String providerUrl, String returnUrl)
+            throws ObjectStoreException {
 
         final List<DiscoveryInformation> discoveries = new ArrayList<DiscoveryInformation>();
         final ConsumerManager manager = new ConsumerManager();
@@ -100,18 +111,27 @@ public class DefaultOpenIDClient implements OpenIDClient {
         logger.info("authReq.getDestinationUrl: "
                 + authReq.getDestinationUrl(true));
 
+
+        getObjectStoreHelper().store(authReq.getHandle(), new OpenIDManager(manager, discoveryInfo), true);
+        logger.debug("Storing OpenID manager information using key: " + authReq.getHandle());
+
         return authReq.getDestinationUrl(true);
     }
 
     /**
      * This method receives the callback from OpenID provider
      *
+     * @param receivingUrl url from OpenID provider response
      * @param params parameters returned from OpenIdProvider response
      * @return true if openIdFromIntuit was verified
      */
     @Override
-    public OpenIDCredentials verifyOpenIDFromIntuit(Map<String, String> params) {
+    public OpenIDCredentials verifyOpenIDFromIntuit(String receivingUrl, Map<String, String> params)
+            throws MessageException, ObjectStoreException {
         OpenIDCredentials credentials = new OpenIDCredentials();
+        final Identifier identifier = verifyResponse(receivingUrl, params);
+        logger.debug("OpenID identifier:"
+                + ((identifier == null) ? "null" : identifier.getIdentifier()));
 
         credentials.setIdentity(params.get("openid.identity"));
         credentials.setFirstName(params.get("openid.alias3.value.alias1"));
@@ -125,8 +145,69 @@ public class DefaultOpenIDClient implements OpenIDClient {
         logger.debug("openid.alias3.value.alias3: " + credentials.getEmail());
         logger.debug("openid.alias3.value.alias4: " + credentials.getRealmId());
 
-        logger.debug("VerifyOpenIDFromIntuit completed");
+        logger.info("VerifyOpenIDFromIntuit completed");
 
         return credentials;
+    }
+
+    /**
+     * Verify OpenID response
+     *
+     * @param receivingUrl url from OpenID provider
+     * @param params map with response parameters
+     * @return openId identifier
+     */
+    public Identifier verifyResponse(String receivingUrl, Map<String, String> params) throws MessageException,
+            ObjectStoreException {
+        Identifier verified;
+        try {
+
+            final ParameterList response = new ParameterList(params);
+            logger.debug("Retrieving OpenID manager information using key: " + params.get("openid.assoc_handle"));
+            OpenIDManager openIdManager = (OpenIDManager) getObjectStoreHelper().retrieve(params.get("openid.assoc_handle"));
+            logger.debug("ReceivingUrl: " + receivingUrl);
+
+            final DiscoveryInformation discovered = openIdManager.getDiscovery();
+
+            // Extract the receiving URL from the HTTP request.
+            // Verify the response.  Note that ConsumerManager needs to be the same
+            // instance used to place the authentication request.
+            final ConsumerManager manager = openIdManager.getManager();
+            final VerificationResult verification = manager.verify(receivingUrl, response, discovered);
+
+            // Examine the verification result and extract the verified
+            // identifier.
+            verified = verification.getVerifiedId();
+            if (verified != null) {
+                final AuthSuccess authSuccess = (AuthSuccess) verification
+                        .getAuthResponse();
+
+                if (authSuccess.hasExtension(AxMessage.OPENID_NS_AX)) {
+                    FetchResponse fetchResp = (FetchResponse) authSuccess
+                            .getExtension(AxMessage.OPENID_NS_AX);
+                    logger.debug(fetchResp.getAttributeValue("FirstName"));
+                    logger.debug(fetchResp.getAttributeValue("LastName"));
+                    logger.debug(fetchResp.getAttributeValue("FullName"));
+                    logger.debug(fetchResp.getAttributeValue("RealmID"));
+                }
+
+                //Verified is ok
+                return verified;
+            }
+        } catch (OpenIDException e) {
+            throw new org.mule.modules.quickbooks.api.openid.OpenIdException("OpenIDException caught in verifyResponse: "
+                    + e.toString());
+        }
+
+        logger.debug("Verified is null");
+        return null;
+    }
+
+    public ObjectStoreHelper getObjectStoreHelper() {
+        return objectStoreHelper;
+    }
+
+    public void setObjectStoreHelper(ObjectStoreHelper objectStoreHelper) {
+        this.objectStoreHelper = objectStoreHelper;
     }
 }
