@@ -199,7 +199,7 @@ public class DefaultOpenIDClient implements OpenIDClient {
                     + e.toString());
         }
 
-        logger.debug("Verified is null");
+        logger.error("OpenID verified is null. Verification failed.");
         return null;
     }
 

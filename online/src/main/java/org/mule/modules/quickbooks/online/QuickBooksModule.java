@@ -14,6 +14,7 @@
 package org.mule.modules.quickbooks.online;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
@@ -21,6 +22,7 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 import oauth.signpost.signature.HmacSha1MessageSigner;
 import org.apache.commons.lang.StringUtils;
+import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -1186,7 +1188,10 @@ public class QuickBooksModule
      *
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:verify-open-id}
      *
-     * @param receivingUrl url from OpenID provider
+     * @param muleMessage injected MuleMessage
+     * @param receivingUrl url from OpenID provider.
+     *                     <p>If it is not provided the processor will extract it from the
+     *                     Mule message</p>
      * @param responseParameters response parameters from Intuit. It process a map<string, string> with all the OpenID
      *                           attributes sent from Intuit.
      *
@@ -1196,10 +1201,17 @@ public class QuickBooksModule
      *
      */
     @Processor
-    public OpenIDCredentials verifyOpenId(
-            @Optional @Default("#[message.inboundProperties['http.context.uri'] + '?' + message.inboundProperties['http.query.string']]") String receivingUrl,
+    @Inject
+    public OpenIDCredentials verifyOpenId(MuleMessage muleMessage, @Optional String receivingUrl,
             @Optional @Default("#[message.inboundProperties.oauth_verifier]") Map<String, String> responseParameters)
             throws MessageException, ObjectStoreException {
+
+        //Build receivingUrl
+        if (StringUtils.isEmpty(receivingUrl)) {
+            receivingUrl = String.format("%s%s%s", muleMessage.getInboundProperty("http.context.uri"), "?",
+                    muleMessage.getInboundProperty("http.query.string"));
+        }
+
         return new DefaultOpenIDClient(getObjectStoreHelper()).verifyOpenIDFromIntuit(receivingUrl, responseParameters);
     }
 
@@ -1272,9 +1284,11 @@ public class QuickBooksModule
         try {
             return (OAuthCredentials) objectStoreHelper.retrieve(accessTokenIdentifier);
         } catch (ObjectDoesNotExistException e) {
-            throw new QuickBooksRuntimeException("The user token could not be retrieved from the Object Store");
+            throw new QuickBooksRuntimeException(String.format("The user token could not be retrieved from the " +
+                    "Object Store using the key %s. It seems the user is not authenticated, " +
+                    "please start OAuth dance again", accessTokenIdentifier));
         } catch (ObjectStoreException e) {
-            throw new QuickBooksRuntimeException("The user token could not be retrieved");
+            throw new QuickBooksRuntimeException("The user token could not be retrieved: " + e.getMessage());
         }
     }
 
