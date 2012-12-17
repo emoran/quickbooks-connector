@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:context="http://www.springframework.org/schema/context" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd ">
+    <quickbooks:config name="Quickbooks_Online" consumerKey="${quickbooks.consumerKey}" consumerSecret="${quickbooks.consumerSecret}" doc:name="Quickbooks Online"/>
+    <context:property-placeholder location="mule.properties"/>
+    <flow name="Authorize" doc:name="Authorize">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP"/>
+        <quickbooks:auth-user config-ref="Quickbooks_Online" accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token" authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="http://localhost:8090" requestTokenId="#[groovy:message.getSessionProperty('requestTokenId')]" requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" doc:name="Quickbooks Online"/>
+    </flow>
+    <flow name="GetAccessToken" doc:name="GetAccessToken">
+        <http:inbound-endpoint exchange-pattern="one-way" host="localhost" port="8090" doc:name="HTTP"/>
+        <quickbooks:get-access-token config-ref="Quickbooks_Online" doc:name="Quickbooks Online" />
+        <flow-ref name="ListAccounts" doc:name="Flow Reference"/>
+    </flow>
+    <flow name="ListAccounts" doc:name="ListAccounts">
+        <quickbooks:find-objects config-ref="Quickbooks_Online" accessTokenId="#[message.inboundProperties['realmId']]" queryFilter="LastUpdatedTime :AFTER: 2012-06-10T14:30:00-0700" type="ACCOUNT" doc:name="Quickbooks Online"/>
+        <collection-splitter doc:name="Collection Splitter"/>
+        <logger message="Account: #[payload.name]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="InitializeOpenID" doc:name="InitializeOpenID">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8082" doc:name="HTTP" path="openId"/>
+        <quickbooks:open-id-initialize config-ref="Quickbooks_Online" callbackUrl="http://localhost:8090/verifyOpenId" doc:name="Quickbooks Online"/>
+    </flow>
+    <flow name="VerifyResponseOpenID" doc:name="VerifyResponseOpenID">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8090" path="verifyOpenId" doc:name="HTTP"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <quickbooks:verify-open-id config-ref="Quickbooks_Online" doc:name="Quickbooks Online" />
+        <set-session-variable variableName="requestTokenId" value="#[message.inboundProperties['openid.sig']]" doc:name="Save requestTokenIdentifier" doc:description="Saves the openid.sig as request token identifier"/>
+        <flow-ref name="Authorize" doc:name="Flow Reference"/>
+    </flow>
+</mule>

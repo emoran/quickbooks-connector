@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="QBOAuthDemo">
+    <global-element type="http://www.mulesoft.org/schema/mule/quickbooks/config" name="Quickbooks Online" entity-id="Quickbooks Online#1">
+        <properties>
+            <property value="Quickbooks_Online" name="name"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="${quickbooks.consumerKey}" name="consumerKey"/>
+            <property value="${quickbooks.consumerSecret}" name="consumerSecret"/>
+            <property name="objectStore-ref"/>
+            <property name="client-ref"/>
+            <property name="baseUri"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/context/property-placeholder" name="Property Placeholder" entity-id="Property Placeholder#1">
+        <properties>
+            <property value="mule.properties" name="location"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="Authorize" entity-id="64417aca-88de-4a0e-bf30-21d1691f9f08">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="3" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="3" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#1">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="httpLabel"/>
+                    <property value="localhost" name="host"/>
+                    <property value="8081" name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property value="4" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="Quickbooks Online" entity-id="Quickbooks Online#2">
+                <properties>
+                    <property value="https://oauth.intuit.com/oauth/v1/get_request_token" name="requestTokenUrl"/>
+                    <property value="http://localhost:8090" name="callbackUrl"/>
+                    <property value="https://appcenter.intuit.com/Connect/Begin" name="authorizationUrl"/>
+                    <property value="https://oauth.intuit.com/oauth/v1/get_access_token" name="accessTokenUrl"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/auth-user" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="#[groovy:message.getSessionProperty('requestTokenId')]" name="requestTokenId"/>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="5" name="auxiliary;index"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="GetAccessToken" entity-id="c97afafe-8497-4f1b-89ef-e5e1d00bfccf">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="6" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="6" name="auxiliary;index"/>
+            <property value="6" name="auxiliary;index"/>
+            <property value="6" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#2">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property name="httpLabel"/>
+                    <property value="localhost" name="host"/>
+                    <property value="8090" name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="Quickbooks Online" entity-id="Quickbooks Online#3">
+                <properties>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/get-access-token" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property name="apiUrl"/>
+                    <property name="requestTokenId"/>
+                    <property name="userIdentifier"/>
+                    <property name="verifier"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="Flow Reference#1">
+                <properties>
+                    <property value="ListAccounts" name="name"/>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="ListAccounts" entity-id="c7142356-153b-4bc3-89c2-bc4b6f344c5c">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="10" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="10" name="auxiliary;index"/>
+            <property value="10" name="auxiliary;index"/>
+            <property value="10" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="Quickbooks Online" entity-id="Quickbooks Online#4">
+                <properties>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/find-objects" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="#[message.inboundProperties['realmId']]" name="accessTokenId"/>
+                    <property value="LastUpdatedTime :AFTER: 2012-06-10T14:30:00-0700" name="queryFilter"/>
+                    <property name="querySort"/>
+                    <property value="ACCOUNT" name="type"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/collection-splitter" name="Collection Splitter" entity-id="Collection Splitter#1">
+                <properties>
+                    <property name="enableCorrelation"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#1">
+                <properties>
+                    <property value="Account: #[payload.name]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="InitializeOpenID" entity-id="4fb6df0d-cfe6-4b7e-a392-59571f2d9c45">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="14" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="14" name="auxiliary;index"/>
+            <property value="14" name="auxiliary;index"/>
+            <property value="14" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#4">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#3">
+                <properties>
+                    <property value="true" name="auxiliary;erased;contentType"/>
+                    <property value="true" name="auxiliary;erased;mimeType"/>
+                    <property value="8082" name="port"/>
+                    <property value="localhost" name="host"/>
+                    <property value="" name="businessEventsLabel"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="false" name="keep-alive"/>
+                    <property value="" name="contentType"/>
+                    <property value="false" name="disableTransportTransformer"/>
+                    <property value="" name="password"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="false" name="tracking:enable-default-events"/>
+                    <property value="" name="ref"/>
+                    <property value="" name="transformer-refs"/>
+                    <property value="" name="httpLabel"/>
+                    <property value="" name="address"/>
+                    <property value="true" name="auxiliary;erased;encoding"/>
+                    <property value="openId" name="path"/>
+                    <property value="" name="encoding"/>
+                    <property value="" name="responseTransformer-refs"/>
+                    <property value="" name="user"/>
+                    <property value="" name="mimeType"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property value="" name="connector-ref"/>
+                    <property value="15" name="auxiliary;index"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="Quickbooks Online" entity-id="Quickbooks Online#5">
+                <properties>
+                    <property value="" name="providerUrl"/>
+                    <property value="http://localhost:8090/verifyOpenId" name="callbackUrl"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/open-id-initialize" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="16" name="auxiliary;index"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="VerifyResponseOpenID" entity-id="58cff936-c9fe-4ac6-be8f-85ad89c9866c">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="17" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="17" name="auxiliary;index"/>
+            <property value="17" name="auxiliary;index"/>
+            <property value="17" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#5">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#4">
+                <properties>
+                    <property value="true" name="auxiliary;erased;contentType"/>
+                    <property value="true" name="auxiliary;erased;mimeType"/>
+                    <property value="8090" name="port"/>
+                    <property value="localhost" name="host"/>
+                    <property value="" name="businessEventsLabel"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="false" name="keep-alive"/>
+                    <property value="" name="contentType"/>
+                    <property value="false" name="disableTransportTransformer"/>
+                    <property value="" name="password"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="false" name="tracking:enable-default-events"/>
+                    <property value="" name="ref"/>
+                    <property value="" name="transformer-refs"/>
+                    <property value="" name="httpLabel"/>
+                    <property value="" name="address"/>
+                    <property value="true" name="auxiliary;erased;encoding"/>
+                    <property value="verifyOpenId" name="path"/>
+                    <property value="" name="encoding"/>
+                    <property value="" name="responseTransformer-refs"/>
+                    <property value="" name="user"/>
+                    <property value="" name="mimeType"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property value="" name="connector-ref"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#2">
+                <properties>
+                    <property name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/quickbooks/quickbooks-connector" name="Quickbooks Online" entity-id="Quickbooks Online#6">
+                <properties>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/quickbooks/verify-open-id" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Quickbooks_Online" name="config-ref"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property name="receivingUrl"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                    <property value="20" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="Save requestTokenIdentifier" entity-id="Session Variable#1">
+                <properties>
+                    <property value="requestTokenId" name="variableName"/>
+                    <property value="#[message.inboundProperties['openid.sig']]" name="value"/>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="21" name="auxiliary;index"/>
+                    <property name="updated"/>
+                </properties>
+                <description>Saves the openid.sig as request token identifier</description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="Flow Reference#2">
+                <properties>
+                    <property value="Authorize" name="name"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
