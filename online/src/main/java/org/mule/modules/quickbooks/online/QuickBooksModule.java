@@ -1196,7 +1196,7 @@ public class QuickBooksModule
     @Processor
     @Inject
     public OpenIDCredentials verifyOpenId(MuleMessage muleMessage, @Optional String receivingUrl,
-            @Optional @Default("#[message.inboundProperties.oauth_verifier]") Map<String, String> responseParameters)
+            @Optional @Default("#[header:INBOUND:http.query.params]") Map<String, String> responseParameters)
             throws MessageException, ObjectStoreException {
 
         //Build receivingUrl
