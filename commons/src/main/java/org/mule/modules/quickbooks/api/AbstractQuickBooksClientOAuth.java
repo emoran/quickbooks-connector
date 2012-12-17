@@ -51,8 +51,6 @@ public abstract class AbstractQuickBooksClientOAuth
 
     protected Integer resultsPerPage = 999;
 
-    protected String serviceProviderId;
-    
     protected String baseUri;
     
     protected final HttpClient client = getThreadSafeClient();
@@ -89,13 +87,12 @@ public abstract class AbstractQuickBooksClientOAuth
         return client;
     }
     
-    protected void init(final String baseUri, final String serviceProviderId,
-                        final String consumerKey, final String consumerSecret, final String appKey)
+    protected void init(final String baseUri, final String consumerKey, final String consumerSecret,
+                        final String appKey)
     {
         Validate.notEmpty(baseUri);
         
         this.baseUri = baseUri;
-        this.serviceProviderId = serviceProviderId;
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
         this.appKey = appKey;

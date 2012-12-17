@@ -28,7 +28,7 @@
         <spring:bean id="objectStoreRef" class="org.mule.modules.quickbooks.api.oauth.QuickbooksObjectStore" />
     </spring:beans>
     
-    <quickbooks:config serviceProviderId="serviceProviderId" consumerKey="consumerKey" consumerSecret="consumerSecret"
+    <quickbooks:config consumerKey="consumerKey" consumerSecret="consumerSecret"
             objectStore-ref="objectStoreRef" />
     
     <flow name="TestForTheAccessPower">
