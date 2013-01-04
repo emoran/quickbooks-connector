@@ -122,6 +122,15 @@ public class QuickBooksModule
     @Default("https://qbo.intuit.com/qbo1/rest/user/v2")
     @Configurable
     private String baseUri;
+
+    /**
+     * Prefix used for storing credentials in ObjectStore. It will be concatenated to the access token identifier.
+     * <p>E.g. prefix: "qb_", user identifier (realmId): "12345", key for object store "qb_12345"</p>
+     */
+    @Configurable
+    @Optional
+    private String accessTokenIdentifierPrefix;
+
     
     /**
      * Creates an Account.
@@ -1147,6 +1156,11 @@ public class QuickBooksModule
             credentials.setBaseUri(client.getCompanyBaseUri(credentials));
         }
 
+        //Use the prefix if it is defined in the config
+        if (StringUtils.isNotEmpty(getAccessTokenIdentifierPrefix())) {
+            userIdentifier = getAccessTokenIdentifierPrefix() + userIdentifier;
+        }
+
         getObjectStoreHelper().store(userIdentifier, credentials, true);
 
         return credentials;
@@ -1274,6 +1288,12 @@ public class QuickBooksModule
      * @return OAuthCredentials AuthToken and AuthTokenSecret
      */
     private OAuthCredentials getAccessTokenInformation(String accessTokenIdentifier) {
+
+        //Check if there is a prefix in the config
+        if(StringUtils.isNotEmpty(getAccessTokenIdentifierPrefix())) {
+            accessTokenIdentifier = getAccessTokenIdentifierPrefix() + accessTokenIdentifier;
+        }
+
         try {
             return (OAuthCredentials) objectStoreHelper.retrieve(accessTokenIdentifier);
         } catch (ObjectDoesNotExistException e) {
@@ -1358,5 +1378,13 @@ public class QuickBooksModule
 
     public void setObjectStoreHelper(ObjectStoreHelper objectStoreHelper) {
         this.objectStoreHelper = objectStoreHelper;
+    }
+
+    public String getAccessTokenIdentifierPrefix() {
+        return accessTokenIdentifierPrefix;
+    }
+
+    public void setAccessTokenIdentifierPrefix(String accessTokenIdentifierPrefix) {
+        this.accessTokenIdentifierPrefix = accessTokenIdentifierPrefix;
     }
 }
