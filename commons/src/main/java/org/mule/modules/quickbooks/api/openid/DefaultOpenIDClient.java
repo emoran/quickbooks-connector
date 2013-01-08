@@ -111,9 +111,8 @@ public class DefaultOpenIDClient implements OpenIDClient {
         logger.info("authReq.getDestinationUrl: "
                 + authReq.getDestinationUrl(true));
 
-
+        logger.info("Storing OpenID manager information using key: " + authReq.getHandle());
         getObjectStoreHelper().store(authReq.getHandle(), new OpenIDManager(manager, discoveryInfo), true);
-        logger.debug("Storing OpenID manager information using key: " + authReq.getHandle());
 
         return authReq.getDestinationUrl(true);
     }
