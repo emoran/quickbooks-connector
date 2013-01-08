@@ -52,7 +52,7 @@ public class DefaultOpenIDClient implements OpenIDClient {
      * @return url to redirect the user
      */
     @Override
-    public String initialize(String providerUrl, String returnUrl)
+    public String initialize(String providerUrl, String returnUrl, boolean verifyResponse)
             throws ObjectStoreException {
 
         final List<DiscoveryInformation> discoveries = new ArrayList<DiscoveryInformation>();
@@ -111,8 +111,10 @@ public class DefaultOpenIDClient implements OpenIDClient {
         logger.info("authReq.getDestinationUrl: "
                 + authReq.getDestinationUrl(true));
 
-        logger.info("Storing OpenID manager information using key: " + authReq.getHandle());
-        getObjectStoreHelper().store(authReq.getHandle(), new OpenIDManager(manager, discoveryInfo), true);
+        if (verifyResponse) {
+            logger.info("Storing OpenID manager information using key: " + authReq.getHandle());
+            getObjectStoreHelper().store(authReq.getHandle(), new OpenIDManager(manager, discoveryInfo), true);
+        }
 
         return authReq.getDestinationUrl(true);
     }
@@ -125,12 +127,15 @@ public class DefaultOpenIDClient implements OpenIDClient {
      * @return true if openIdFromIntuit was verified
      */
     @Override
-    public OpenIDCredentials verifyOpenIDFromIntuit(String receivingUrl, Map<String, String> params)
+    public OpenIDCredentials verifyOpenIDFromIntuit(String receivingUrl, Map<String, String> params,
+                                                    boolean verifyResponse)
             throws MessageException, ObjectStoreException {
         OpenIDCredentials credentials = new OpenIDCredentials();
-        final Identifier identifier = verifyResponse(receivingUrl, params);
-        logger.debug("OpenID identifier:"
+        if (verifyResponse) {
+            final Identifier identifier = verifyResponse(receivingUrl, params);
+            logger.debug("OpenID identifier:"
                 + ((identifier == null) ? "null" : identifier.getIdentifier()));
+        }
 
         credentials.setIdentity(params.get("openid.identity"));
         credentials.setFirstName(params.get("openid.alias3.value.alias1"));

@@ -22,9 +22,9 @@ import java.util.Map;
  */
 public interface OpenIDClient {
 
-    public String initialize(String providerUrl, String returnUrl)
+    public String initialize(String providerUrl, String returnUrl, boolean verifyResponse)
             throws ObjectStoreException;
 
-    OpenIDCredentials verifyOpenIDFromIntuit(String receivingUrl, Map<String, String> params)
+    OpenIDCredentials verifyOpenIDFromIntuit(String receivingUrl, Map<String, String> params, boolean verifyResponse)
             throws MessageException, ObjectStoreException;
 }

@@ -131,6 +131,14 @@ public class QuickBooksModule
     @Optional
     private String accessTokenIdentifierPrefix;
 
+    /**
+     * Specifies if the OpenID response will be verified. By default it is true.
+     */
+    @Configurable
+    @Optional
+    @Default("true")
+    private boolean verifyOpenIdResponse;
+
     
     /**
      * Creates an Account.
@@ -1183,7 +1191,8 @@ public class QuickBooksModule
     public String openIdInitialize(@Optional @Default("https://openid.intuit.com/OpenId/Provider") String providerUrl,
                                    String callbackUrl,
                                    @OutboundHeaders Map<String, Object> headers) throws ObjectStoreException {
-        String url = new DefaultOpenIDClient(getObjectStoreHelper()).initialize(providerUrl, callbackUrl);
+        String url = new DefaultOpenIDClient(getObjectStoreHelper()).initialize(
+                providerUrl, callbackUrl, getVerifyOpenIdResponse());
 
         headers.put("Location", url);
         headers.put("http.status", "302");
@@ -1219,7 +1228,8 @@ public class QuickBooksModule
                     muleMessage.getInboundProperty("http.query.string"));
         }
 
-        return new DefaultOpenIDClient(getObjectStoreHelper()).verifyOpenIDFromIntuit(receivingUrl, responseParameters);
+        return new DefaultOpenIDClient(getObjectStoreHelper()).verifyOpenIDFromIntuit(
+                receivingUrl, responseParameters, getVerifyOpenIdResponse());
     }
 
     /**
@@ -1386,5 +1396,13 @@ public class QuickBooksModule
 
     public void setAccessTokenIdentifierPrefix(String accessTokenIdentifierPrefix) {
         this.accessTokenIdentifierPrefix = accessTokenIdentifierPrefix;
+    }
+
+    public boolean getVerifyOpenIdResponse() {
+        return verifyOpenIdResponse;
+    }
+
+    public void setVerifyOpenIdResponse(boolean verifyOpenIdResponse) {
+        this.verifyOpenIdResponse = verifyOpenIdResponse;
     }
 }
