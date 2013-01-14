@@ -113,12 +113,15 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
         setRequestToken(consumer.getToken());
         setRequestTokenSecret(consumer.getTokenSecret());
 
+        //Removes special characters from requestTokenId
+        requestTokenId = removeSpecialCharacters(requestTokenId);
+
         //Stores the request token
         getObjectStoreHelper().store(requestTokenId,
                 new OAuthCredentials(consumer.getToken(), consumer.getTokenSecret(), requestTokenUrl, 
                         accessTokenUrl, authorizationUrl), true);
 
-        LOGGER.debug("Request Token stored");
+        LOGGER.debug("Request Token stored using ID: " + requestTokenId);
         return authTokenUrl;
     }
 
@@ -130,7 +133,10 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
     public OAuthCredentials getAccessToken(String verifier, String requestTokenId, OAuthMessageSigner messageSigner)
             throws OAuthMessageSignerException, OAuthNotAuthorizedException, 
             OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException {
-        
+
+        //Removes special characters from requestTokenId
+        requestTokenId = removeSpecialCharacters(requestTokenId);
+
         if (LOGGER.isDebugEnabled()) {
             StringBuilder messageStringBuilder = new StringBuilder();
             messageStringBuilder.append("Trying to retrieve request token information ");
@@ -139,7 +145,7 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
             messageStringBuilder.append("] ");
             LOGGER.debug(messageStringBuilder.toString());
         }
-        
+
         //Retrieves requestToken and requestTokenSecret
         OAuthCredentials credentials = (OAuthCredentials) getObjectStoreHelper().retrieve(requestTokenId);
         if (LOGGER.isDebugEnabled()) {
@@ -222,5 +228,14 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
 
     public void setObjectStoreHelper(ObjectStoreHelper objectStoreHelper) {
         this.objectStoreHelper = objectStoreHelper;
+    }
+
+    /**
+     * This method is used for avoiding errors in CloudHub's Object Store API
+     * @param idToStore key to be stored
+     * @return String without encoded characters
+     */
+    private String removeSpecialCharacters(String idToStore) {
+        return StringUtils.remove(idToStore, "%");
     }
 }
