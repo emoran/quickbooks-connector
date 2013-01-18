@@ -30,6 +30,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -38,6 +39,7 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HttpContext;
 import org.apache.log4j.Logger;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
@@ -76,6 +78,22 @@ public abstract class AbstractQuickBooksClient
      
         client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, 
                 mgr.getSchemeRegistry()), params);
+
+        client.setHttpRequestRetryHandler(new HttpRequestRetryHandler() {
+            @Override
+            public boolean retryRequest(IOException exception, int executionCount,
+                                        HttpContext context) {
+                if (executionCount > 3) {
+                    LOGGER.warn("Maximum tries reached for client http pool ");
+                    return false;
+                }
+                if (exception instanceof org.apache.http.NoHttpResponseException) {
+                    LOGGER.warn("No response from server on " + executionCount + " call");
+                    return true;
+                }
+                return false;
+            }
+        });
      
         return client;
     }
