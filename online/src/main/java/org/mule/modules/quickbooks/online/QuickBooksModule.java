@@ -20,7 +20,6 @@ import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
-import oauth.signpost.signature.HmacSha1MessageSigner;
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
@@ -37,8 +36,9 @@ import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.model.AppMenuInformation;
 import org.mule.modules.quickbooks.api.model.UserInformation;
-import org.mule.modules.quickbooks.api.oauth.DefaultQuickbooksOAuthClient;
+import org.mule.modules.quickbooks.api.oauth.DefaultQuickBooksOAuthClient;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
+import org.mule.modules.quickbooks.api.oauth.QuickBooksOAuthClient;
 import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
 import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
@@ -138,6 +138,16 @@ public class QuickBooksModule
     @Optional
     @Default("true")
     private boolean verifyOpenIdResponse;
+
+    /**
+     * Intuit OAuthClient
+     */
+    private QuickBooksOAuthClient oAuthClient;
+
+    /**
+     * Intuit OpenID client
+     */
+    private DefaultOpenIDClient openIDClient;
 
     
     /**
@@ -1116,9 +1126,8 @@ public class QuickBooksModule
             throws OAuthMessageSignerException, OAuthNotAuthorizedException,
             OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException
     {
-        String authUrl = new DefaultQuickbooksOAuthClient(getConsumerKey(), getConsumerSecret(), getObjectStore()).
-                authorize(requestTokenUrl, accessTokenUrl, authorizationUrl,
-                        callbackUrl, requestTokenId, new HmacSha1MessageSigner());
+        String authUrl = getoAuthClient().authorize(requestTokenUrl, accessTokenUrl, authorizationUrl,
+                callbackUrl, requestTokenId);
 
         headers.put("Location", authUrl);
         headers.put("http.status", "302");
@@ -1152,8 +1161,7 @@ public class QuickBooksModule
             throws OAuthMessageSignerException, OAuthNotAuthorizedException,
             OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException
     {
-        OAuthCredentials credentials = new DefaultQuickbooksOAuthClient(getConsumerKey(), getConsumerSecret(),
-                getObjectStore()).getAccessToken(verifier, requestTokenId, new HmacSha1MessageSigner());
+        OAuthCredentials credentials = getoAuthClient().getAccessToken(verifier, requestTokenId);
         credentials.setUserId(userIdentifier);
         credentials.setRealmId(userIdentifier);
 
@@ -1191,8 +1199,7 @@ public class QuickBooksModule
     public String openIdInitialize(@Optional @Default("https://openid.intuit.com/OpenId/Provider") String providerUrl,
                                    String callbackUrl,
                                    @OutboundHeaders Map<String, Object> headers) throws ObjectStoreException {
-        String url = new DefaultOpenIDClient(getObjectStoreHelper()).initialize(
-                providerUrl, callbackUrl, getVerifyOpenIdResponse());
+        String url = getOpenIDClient().initialize(providerUrl, callbackUrl, getVerifyOpenIdResponse());
 
         headers.put("Location", url);
         headers.put("http.status", "302");
@@ -1228,7 +1235,7 @@ public class QuickBooksModule
                     muleMessage.getInboundProperty("http.query.string"));
         }
 
-        return new DefaultOpenIDClient(getObjectStoreHelper()).verifyOpenIDFromIntuit(
+        return getOpenIDClient().verifyOpenIDFromIntuit(
                 receivingUrl, responseParameters, getVerifyOpenIdResponse());
     }
 
@@ -1333,9 +1340,12 @@ public class QuickBooksModule
     {
         if (client == null )
         {
-            //TODO: is it necessary the apiKey?
+            //Sets blank API key
             client = new DefaultQuickBooksOnlineClient(baseUri, consumerKey, consumerSecret, "");
             setObjectStoreHelper(new ObjectStoreHelper(objectStore));
+            setoAuthClient(new DefaultQuickBooksOAuthClient(getConsumerKey(), getConsumerSecret(),
+                    getObjectStoreHelper()));
+            setOpenIDClient(new DefaultOpenIDClient(getObjectStoreHelper()));
         }
     }
     
@@ -1404,5 +1414,21 @@ public class QuickBooksModule
 
     public void setVerifyOpenIdResponse(boolean verifyOpenIdResponse) {
         this.verifyOpenIdResponse = verifyOpenIdResponse;
+    }
+
+    public QuickBooksOAuthClient getoAuthClient() {
+        return oAuthClient;
+    }
+
+    public void setoAuthClient(QuickBooksOAuthClient oAuthClient) {
+        this.oAuthClient = oAuthClient;
+    }
+
+    public DefaultOpenIDClient getOpenIDClient() {
+        return openIDClient;
+    }
+
+    public void setOpenIDClient(DefaultOpenIDClient openIDClient) {
+        this.openIDClient = openIDClient;
     }
 }

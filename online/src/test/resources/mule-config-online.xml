@@ -25,7 +25,7 @@
     
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     <spring:beans>
-        <spring:bean id="objectStoreRef" class="org.mule.modules.quickbooks.api.oauth.QuickbooksObjectStore" />
+        <spring:bean id="objectStoreRef" class="org.mule.modules.quickbooks.api.oauth.QuickBooksObjectStore" />
     </spring:beans>
     
     <quickbooks:config consumerKey="consumerKey" consumerSecret="consumerSecret"
@@ -148,5 +148,18 @@
                                    type="ACCOUNT"
                                  queryFilter="#[header:queryFilterString]"
                                  querySort="#[header:querySortString]"/>
+    </flow>
+
+    <flow name="Authorize">
+        <quickbooks:auth-user accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token" authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="http://localhost:8090" requestTokenId="11" requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token"/>
+    </flow>
+    <flow name="GetAccessToken">
+        <quickbooks:get-access-token />
+    </flow>
+    <flow name="InitializeOpenID">
+        <quickbooks:open-id-initialize callbackUrl="http://localhost:8090/verifyOpenId"/>
+    </flow>
+    <flow name="VerifyResponseOpenID">
+        <quickbooks:verify-open-id />
     </flow>
 </mule>

@@ -27,7 +27,7 @@ import java.util.Map;
 *   @author Mulesoft Inc.
 *
 */
-public class QuickbooksObjectStore implements ListableObjectStore<Serializable> {
+public class QuickBooksObjectStore implements ListableObjectStore<Serializable> {
 
     private Map<Serializable, Serializable> values = new LinkedHashMap<Serializable, Serializable>();
 

@@ -18,33 +18,32 @@ import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
+import oauth.signpost.signature.HmacSha1MessageSigner;
 import oauth.signpost.signature.OAuthMessageSigner;
 import oauth.signpost.signature.PlainTextMessageSigner;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
-import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 
 @SuppressWarnings({"rawtypes", "unused"})
-public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
+public class DefaultQuickBooksOAuthClient implements QuickBooksOAuthClient
 {
-    private static final Logger LOGGER = Logger.getLogger(DefaultQuickbooksOAuthClient.class);
+    private static final Logger LOGGER = Logger.getLogger(DefaultQuickBooksOAuthClient.class);
 
-    private String requestToken;
-    private String requestTokenSecret;
     private String consumerKey;
     private String consumerSecret;
     private ObjectStoreHelper objectStoreHelper;
+    private OAuthMessageSigner messageSigner = new HmacSha1MessageSigner();
     
-    public DefaultQuickbooksOAuthClient(String consumerKey, String consumerSecret, ObjectStore objectStoreRef)
+    public DefaultQuickBooksOAuthClient(String consumerKey, String consumerSecret, ObjectStoreHelper objectStoreHelper)
     {
         Validate.notEmpty(consumerKey);
         Validate.notEmpty(consumerSecret);        
         setConsumerKey(consumerKey);
         setConsumerSecret(consumerSecret);
-        setObjectStoreHelper(new ObjectStoreHelper(objectStoreRef));
+        setObjectStoreHelper(objectStoreHelper);
     }
 
     /**
@@ -54,7 +53,7 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
      */
     @Override
     public String authorize(String requestTokenUrl, String accessTokenUrl, String authorizationUrl,
-                            String callbackUrl, String requestTokenId, OAuthMessageSigner messageSigner)
+                            String callbackUrl, String requestTokenId)
             throws OAuthMessageSignerException, OAuthNotAuthorizedException, 
             OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException {
         
@@ -110,9 +109,6 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
             LOGGER.debug(messageStringBuilder.toString());
         }
 
-        setRequestToken(consumer.getToken());
-        setRequestTokenSecret(consumer.getTokenSecret());
-
         //Removes special characters from requestTokenId
         requestTokenId = removeSpecialCharacters(requestTokenId);
 
@@ -130,7 +126,7 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
      * The requestTokenId is provided by the app.
      */
     @Override
-    public OAuthCredentials getAccessToken(String verifier, String requestTokenId, OAuthMessageSigner messageSigner)
+    public OAuthCredentials getAccessToken(String verifier, String requestTokenId)
             throws OAuthMessageSignerException, OAuthNotAuthorizedException, 
             OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException {
 
@@ -188,22 +184,6 @@ public class DefaultQuickbooksOAuthClient implements QuickbooksOAuthClient
         credentials.setAccessToken(consumer.getToken());
         credentials.setAccessTokenSecret(consumer.getTokenSecret());
         return credentials;
-    }
-
-    public String getRequestToken() {
-        return requestToken;
-    }
-
-    public String getRequestTokenSecret() {
-        return requestTokenSecret;
-    }
-
-    public void setRequestToken(String requestToken) {
-        this.requestToken = requestToken;
-    }
-
-    public void setRequestTokenSecret(String requestTokenSecret) {
-        this.requestTokenSecret = requestTokenSecret;
     }
 
     public String getConsumerKey() {

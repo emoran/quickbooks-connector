@@ -17,14 +17,14 @@ import oauth.signpost.exception.OAuthNotAuthorizedException;
 import oauth.signpost.signature.OAuthMessageSigner;
 import org.mule.api.store.ObjectStoreException;
 
-public interface QuickbooksOAuthClient {
+public interface QuickBooksOAuthClient {
 
-    OAuthCredentials getAccessToken(String verifier, String requestTokenId, OAuthMessageSigner messageSigner)
+    OAuthCredentials getAccessToken(String verifier, String requestTokenId)
             throws OAuthMessageSignerException, OAuthNotAuthorizedException,
             OAuthExpectationFailedException, OAuthCommunicationException, ObjectStoreException;
 
     String authorize(String requestTokenUrl, String accessTokenUrl, String authorizationUrl,
-                     String callbackUrl, String requestTokenId, OAuthMessageSigner messageSigner)
+                     String callbackUrl, String requestTokenId)
             throws OAuthMessageSignerException, OAuthNotAuthorizedException,
             OAuthExpectationFailedException, OAuthCommunicationException,
             ObjectStoreException;
