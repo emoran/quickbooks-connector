@@ -589,9 +589,9 @@ Summary:
           private
           
           
-          ObjectStore</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#objectStore">objectStore</a></td>
-          <td class="jd-descrcol" width="100%">Object store reference
+          QuickBooksOAuthClient</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#oAuthClient">oAuthClient</a></td>
+          <td class="jd-descrcol" width="100%">Intuit OAuthClient
 </td>
       </tr>
       
@@ -601,9 +601,33 @@ Summary:
           private
           
           
+          ObjectStore</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#objectStore">objectStore</a></td>
+          <td class="jd-descrcol" width="100%">Object store reference
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
           ObjectStoreHelper</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#objectStoreHelper">objectStoreHelper</a></td>
           <td class="jd-descrcol" width="100%">Object store helper
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          DefaultOpenIDClient</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#openIDClient">openIDClient</a></td>
+          <td class="jd-descrcol" width="100%">Intuit OpenID client
 </td>
       </tr>
       
@@ -1254,10 +1278,42 @@ Summary:
             
             
             
+            DefaultOpenIDClient</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#getOpenIDClient()">getOpenIDClient</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#getVerifyOpenIdResponse()">getVerifyOpenIdResponse</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            QuickBooksOAuthClient</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#getoAuthClient()">getoAuthClient</a></span>()</nobr>
         
   </td></tr>
 
@@ -1443,7 +1499,39 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#setOpenIDClient(org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient)">setOpenIDClient</a></span>(DefaultOpenIDClient openIDClient)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#setVerifyOpenIdResponse(boolean)">setVerifyOpenIdResponse</a></span>(boolean verifyOpenIdResponse)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/quickbooks/online/QuickBooksModule.html#setoAuthClient(org.mule.modules.quickbooks.api.oauth.QuickBooksOAuthClient)">setoAuthClient</a></span>(QuickBooksOAuthClient oAuthClient)</nobr>
         
   </td></tr>
 
@@ -2152,6 +2240,37 @@ From class
 
 
 
+<A NAME="oAuthClient"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        QuickBooksOAuthClient
+      </span>
+        oAuthClient
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Intuit OAuthClient
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="objectStore"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2206,6 +2325,37 @@ From class
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Object store helper
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="openIDClient"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        DefaultOpenIDClient
+      </span>
+        openIDClient
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Intuit OpenID client
 </p></div>
 
     
@@ -4166,6 +4316,37 @@ From class
 </div>
 
 
+<A NAME="getOpenIDClient()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        DefaultOpenIDClient
+      </span>
+      <span class="sympad">getOpenIDClient</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
 <A NAME="getVerifyOpenIdResponse()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4179,6 +4360,37 @@ From class
         boolean
       </span>
       <span class="sympad">getVerifyOpenIdResponse</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getoAuthClient()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        QuickBooksOAuthClient
+      </span>
+      <span class="sympad">getoAuthClient</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -4629,6 +4841,46 @@ From class
 </div>
 
 
+<A NAME="setOpenIDClient(org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setOpenIDClient</span>
+      <span class="normal">(DefaultOpenIDClient openIDClient)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>openIDClient</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="setVerifyOpenIdResponse(boolean)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4660,6 +4912,46 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>verifyOpenIdResponse</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setoAuthClient(org.mule.modules.quickbooks.api.oauth.QuickBooksOAuthClient)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setoAuthClient</span>
+      <span class="normal">(QuickBooksOAuthClient oAuthClient)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>oAuthClient</td>
           <td></td>
         </tr>
       </table>
