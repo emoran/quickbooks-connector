@@ -830,13 +830,24 @@ org.mule.api.lifecycle.Stoppable
           
           
           String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#accessTokenIdentifierPrefix">accessTokenIdentifierPrefix</a></td>
+          <td class="jd-descrcol" width="100%">Prefix used for storing credentials in ObjectStore.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#baseUri">baseUri</a></td>
           <td class="jd-descrcol" width="100%">The base uri of the quickbooks endpoint,
  used to fetch the company uri.</td>
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -847,7 +858,31 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#consumerKey">consumerKey</a></td>
+          <td class="jd-descrcol" width="100%">API Key
+</td>
+      </tr>
+      
+    
       <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#consumerSecret">consumerSecret</a></td>
+          <td class="jd-descrcol" width="100%">API Secret
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -858,16 +893,62 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          QuickBooksOAuthClient</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#oAuthClient">oAuthClient</a></td>
+          <td class="jd-descrcol" width="100%">Intuit OAuthClient
+</td>
+      </tr>
+      
+    
       <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
           
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#serviceProviderId">serviceProviderId</a></td>
-          <td class="jd-descrcol" width="100%">Service Provider Id
- This parameter depends on your IPP account
+          ObjectStore</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#objectStore">objectStore</a></td>
+          <td class="jd-descrcol" width="100%">Object store reference
 </td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          ObjectStoreHelper</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#objectStoreHelper">objectStoreHelper</a></td>
+          <td class="jd-descrcol" width="100%">Object store helper
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          DefaultOpenIDClient</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#openIDClient">openIDClient</a></td>
+          <td class="jd-descrcol" width="100%">Intuit OpenID client
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          boolean</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#verifyOpenIdResponse">verifyOpenIdResponse</a></td>
+          <td class="jd-descrcol" width="100%">Specifies if the OpenID response will be verified.</td>
       </tr>
       
     
@@ -1172,12 +1253,14 @@ From class
             
             
             
-            Object</nobr>
+            String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#create(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object, java.lang.Boolean, java.lang.Boolean)">create</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object entityObject, Boolean draft, Boolean fullResponse)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#authUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">authUser</a></span>(String requestTokenUrl, String accessTokenUrl, String authorizationUrl, String callbackUrl, String requestTokenId, Map&lt;String,&nbsp;Object&gt; headers)</nobr>
         
-        <div class="jd-descrdiv">Creates.</div>
+        <div class="jd-descrdiv">Authorize an user using OAuth1.0a
+
+ </div>
   
   </td></tr>
 
@@ -1190,12 +1273,48 @@ From class
             
             
             
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#create(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object, java.lang.Boolean, java.lang.Boolean)">create</a></span>(String accessTokenId, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object entityObject, Boolean draft, Boolean fullResponse)</nobr>
+        
+        <div class="jd-descrdiv">Creates.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#delete(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)">delete</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object entityObject)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#delete(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)">delete</a></span>(String accessTokenId, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object entityObject)</nobr>
         
         <div class="jd-descrdiv">Deletes an object.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#disconnect(java.lang.String)">disconnect</a></span>(String accessTokenId)</nobr>
+        
+        <div class="jd-descrdiv">Invalidates the OAuth access token in the request, thereby disconnecting the user from QuickBooks for this app.</div>
   
   </td></tr>
 
@@ -1211,7 +1330,7 @@ From class
             Iterable</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">findObjects</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Map&lt;String,&nbsp;Object&gt; query)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">findObjects</a></span>(String accessTokenId, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Map&lt;String,&nbsp;Object&gt; query)</nobr>
         
         <div class="jd-descrdiv">Lazily retrieves Objects
 
@@ -1244,6 +1363,42 @@ From class
  
  </div>
   
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            OAuthCredentials</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getAccessToken(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAccessToken</a></span>(String apiUrl, String verifier, String requestTokenId, String userIdentifier)</nobr>
+        
+        <div class="jd-descrdiv">Extract accessToken
+
+ </div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getAccessTokenIdentifierPrefix()">getAccessTokenIdentifierPrefix</a></span>()</nobr>
+        
   </td></tr>
 
 
@@ -1290,7 +1445,7 @@ From class
             Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getCompanyMetadata(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getCompanyMetadata</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getCompanyMetadata(java.lang.String)">getCompanyMetadata</a></span>(String accessTokenId)</nobr>
         
         <div class="jd-descrdiv">Returns company metadata information.</div>
   
@@ -1305,10 +1460,42 @@ From class
             
             
             
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getConsumerKey()">getConsumerKey</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getConsumerSecret()">getConsumerSecret</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/UserInformation.html">UserInformation</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getCurrentUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getCurrentUser</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getCurrentUser(java.lang.String)">getCurrentUser</a></span>(String accessTokenId)</nobr>
         
         <div class="jd-descrdiv">Returns current user information such as first name, last name, and email address.</div>
   
@@ -1326,7 +1513,7 @@ From class
             Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)">getObject</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object idType)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getObject(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)">getObject</a></span>(String accessTokenId, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object idType)</nobr>
         
         <div class="jd-descrdiv">Retrieve objects by ID.</div>
   
@@ -1341,10 +1528,74 @@ From class
             
             
             
-            String</nobr>
+            ObjectStore</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getServiceProviderId()">getServiceProviderId</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getObjectStore()">getObjectStore</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            ObjectStoreHelper</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getObjectStoreHelper()">getObjectStoreHelper</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            DefaultOpenIDClient</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getOpenIDClient()">getOpenIDClient</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getVerifyOpenIdResponse()">getVerifyOpenIdResponse</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            QuickBooksOAuthClient</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getoAuthClient()">getoAuthClient</a></span>()</nobr>
         
   </td></tr>
 
@@ -1376,6 +1627,61 @@ From class
             
             
             
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#openIdInitialize(java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">openIdInitialize</a></span>(String providerUrl, String callbackUrl, Map&lt;String,&nbsp;Object&gt; headers)</nobr>
+        
+        <div class="jd-descrdiv">Initializes OpenID process
+
+ </div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#reconnect(java.lang.String)">reconnect</a></span>(String accessTokenId)</nobr>
+        
+        <div class="jd-descrdiv">Generates a new OAuth access token and invalidates the OAuth access token used in the request,
+ thereby extending the life span by six months.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setAccessTokenIdentifierPrefix(java.lang.String)">setAccessTokenIdentifierPrefix</a></span>(String accessTokenIdentifierPrefix)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1385,7 +1691,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1401,6 +1707,22 @@ From class
 
 
 	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setConsumerKey(java.lang.String)">setConsumerKey</a></span>(String consumerKey)</nobr>
+        
+  </td></tr>
+
+
+	 
     <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
@@ -1411,7 +1733,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setServiceProviderId(java.lang.String)">setServiceProviderId</a></span>(String serviceProviderId)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setConsumerSecret(java.lang.String)">setConsumerSecret</a></span>(String consumerSecret)</nobr>
         
   </td></tr>
 
@@ -1424,14 +1746,114 @@ From class
             
             
             
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setObjectStore(org.mule.api.store.ObjectStore)">setObjectStore</a></span>(ObjectStore objectStore)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setObjectStoreHelper(org.mule.modules.quickbooks.api.ObjectStoreHelper)">setObjectStoreHelper</a></span>(ObjectStoreHelper objectStoreHelper)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setOpenIDClient(org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient)">setOpenIDClient</a></span>(DefaultOpenIDClient openIDClient)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setVerifyOpenIdResponse(boolean)">setVerifyOpenIdResponse</a></span>(boolean verifyOpenIdResponse)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#setoAuthClient(org.mule.modules.quickbooks.api.oauth.QuickBooksOAuthClient)">setoAuthClient</a></span>(QuickBooksOAuthClient oAuthClient)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncStatusResponse.html">SyncStatusResponse</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">status</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncStatusRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">status</a></span>(String accessTokenId, Map&lt;String,&nbsp;Object&gt; syncStatusRequest)</nobr>
         
         <div class="jd-descrdiv">Retrieve the Status
  
  <p>Retrieves information about the sync status of Quickbooks entities.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#syncActivity(java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">syncActivity</a></span>(String accessTokenId, Map&lt;String,&nbsp;Object&gt; syncActivityRequest)</nobr>
+        
+        <div class="jd-descrdiv">Retrieve the SyncActivities
+ 
+ <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations.</div>
   
   </td></tr>
 
@@ -1444,14 +1866,12 @@ From class
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/modules/quickbooks/windows/schema/SyncActivityResponse.html">SyncActivityResponse</a>&gt;</nobr>
+            Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#syncActivity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">syncActivity</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, Map&lt;String,&nbsp;Object&gt; syncActivityRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#update(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object, java.lang.Boolean, java.lang.Boolean)">update</a></span>(String accessTokenId, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object entityObject, Boolean draft, Boolean fullResponse)</nobr>
         
-        <div class="jd-descrdiv">Retrieve the SyncActivities
- 
- <p>The SyncActivity object contains information about Quickbooks for Windows synchronizations.</div>
+        <div class="jd-descrdiv">Updates.</div>
   
   </td></tr>
 
@@ -1464,12 +1884,14 @@ From class
             
             
             
-            Object</nobr>
+            OpenIDCredentials</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#update(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object, java.lang.Boolean, java.lang.Boolean)">update</a></span>(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a> type, Object entityObject, Boolean draft, Boolean fullResponse)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#verifyOpenId(org.mule.api.MuleMessage, java.lang.String, java.util.Map<java.lang.String, java.lang.String>)">verifyOpenId</a></span>(MuleMessage muleMessage, String receivingUrl, Map&lt;String,&nbsp;String&gt; responseParameters)</nobr>
         
-        <div class="jd-descrdiv">Updates.</div>
+        <div class="jd-descrdiv">Verify response from Intuit
+
+ </div>
   
   </td></tr>
 

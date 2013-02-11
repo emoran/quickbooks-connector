@@ -234,16 +234,22 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/AbstractExpressionEvaluator.html">AbstractExpressionEvaluator</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/AbstractListeningMessageProcessor.html">AbstractListeningMessageProcessor</a>&lt;O&gt;</li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/AbstractMessageProcessor.html">AbstractMessageProcessor</a>&lt;O&gt;</li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/AuthUserMessageProcessor.html">AuthUserMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/CreateMessageProcessor.html">CreateMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/DeleteMessageProcessor.html">DeleteMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/DisconnectMessageProcessor.html">DisconnectMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html">FindObjectsMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GenerateANewRequestIdMessageProcessor.html">GenerateANewRequestIdMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetAccessTokenMessageProcessor.html">GetAccessTokenMessageProcessor</a></li>
           <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html">GetCompanyMetadataMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetCurrentUserMessageProcessor.html">GetCurrentUserMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/OpenIdInitializeMessageProcessor.html">OpenIdInitializeMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/ReconnectMessageProcessor.html">ReconnectMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/StatusMessageProcessor.html">StatusMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/SyncActivityMessageProcessor.html">SyncActivityMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/UpdateMessageProcessor.html">UpdateMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html">VerifyOpenIdMessageProcessor</a></li>
       </ul>
     </li>
               
@@ -516,7 +522,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>GetCompanyMetadataMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getCompanyMetadata(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getCompanyMetadata(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</a></code> method in <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>GetCompanyMetadataMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getCompanyMetadata(java.lang.String)">getCompanyMetadata(java.lang.String)</a></code> method in <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -718,51 +724,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#_appKeyType">_appKeyType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#_authIdPseudonymType">_authIdPseudonymType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#_realmIdPseudonymType">_realmIdPseudonymType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#_realmIdType">_realmIdType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#appKey">appKey</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#_accessTokenIdType">_accessTokenIdType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -773,29 +735,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#authIdPseudonym">authIdPseudonym</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#realmId">realmId</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#realmIdPseudonym">realmIdPseudonym</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#accessTokenId">accessTokenId</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -995,33 +935,15 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#setAppKey(java.lang.Object)">setAppKey</a></span>(Object value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#setAccessTokenId(java.lang.Object)">setAccessTokenId</a></span>(Object value)</nobr>
         
-        <div class="jd-descrdiv">Sets appKey</div>
+        <div class="jd-descrdiv">Sets accessTokenId</div>
   
   </td></tr>
 
 
 	 
     <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#setAuthIdPseudonym(java.lang.Object)">setAuthIdPseudonym</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets authIdPseudonym</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1039,7 +961,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1057,43 +979,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#setRealmId(java.lang.Object)">setRealmId</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets realmId</div>
-  
-  </td></tr>
-
-
-	 
     <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html#setRealmIdPseudonym(java.lang.Object)">setRealmIdPseudonym</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets realmIdPseudonym</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1109,7 +995,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2048,7 +1934,7 @@ From interface
 
 
 
-<A NAME="_appKeyType"></A>
+<A NAME="_accessTokenIdType"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2058,7 +1944,7 @@ From interface
          
         String
       </span>
-        _appKeyType
+        _accessTokenIdType
     </h4>
       <div class="api-level">
         
@@ -2078,97 +1964,7 @@ From interface
 
 
 
-<A NAME="_authIdPseudonymType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        _authIdPseudonymType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_realmIdPseudonymType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        _realmIdPseudonymType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_realmIdType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        _realmIdType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="appKey"></A>
+<A NAME="accessTokenId"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2178,97 +1974,7 @@ From interface
          
         Object
       </span>
-        appKey
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="authIdPseudonym"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Object
-      </span>
-        authIdPseudonym
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="realmId"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Object
-      </span>
-        realmId
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="realmIdPseudonym"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Object
-      </span>
-        realmIdPseudonym
+        accessTokenId
     </h4>
       <div class="api-level">
         
@@ -2463,7 +2169,7 @@ From interface
 </div>
 
 
-<A NAME="setAppKey(java.lang.Object)"></A>
+<A NAME="setAccessTokenId(java.lang.Object)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2475,7 +2181,7 @@ From interface
          
         void
       </span>
-      <span class="sympad">setAppKey</span>
+      <span class="sympad">setAccessTokenId</span>
       <span class="normal">(Object value)</span>
     </h4>
       <div class="api-level">
@@ -2488,48 +2194,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Sets appKey</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setAuthIdPseudonym(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setAuthIdPseudonym</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets authIdPseudonym</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Sets accessTokenId</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
@@ -2618,88 +2283,6 @@ From interface
         <tr>
           <th>context</td>
           <td>Mule context to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setRealmId(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setRealmId</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets realmId</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setRealmIdPseudonym(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setRealmIdPseudonym</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets realmIdPseudonym</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
 </td>
         </tr>
       </table>

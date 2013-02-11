@@ -237,7 +237,7 @@ Summary:
           <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/quickbooks-windows/current/mule-quickbooks-windows.xsd&nbsp;&nbsp;(<a href="quickbooks-windows-schema.html">View Schema</a>)</td>
         </tr>
 <tr>
-          <th>Schema Version</th><td>3.0</td>
+          <th>Schema Version</th><td>4.0</td>
         </tr>
 <tr>
           <th>Minimum Mule Version</th><td>3.2</td>
@@ -300,6 +300,18 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#auth-user">&lt;quickbooks-windows:auth-user&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Authorize an user using OAuth1.0a
+
+ </div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#create">&lt;quickbooks-windows:create&gt;</a></nobr>
         
         <div class="jd-descrdiv">Creates.</div>
@@ -308,11 +320,21 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#delete">&lt;quickbooks-windows:delete&gt;</a></nobr>
         
         <div class="jd-descrdiv">Deletes an object.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#disconnect">&lt;quickbooks-windows:disconnect&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Invalidates the OAuth access token in the request, thereby disconnecting the user from QuickBooks for this app.</div>
         
   </td></tr>
 
@@ -351,6 +373,18 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-access-token">&lt;quickbooks-windows:get-access-token&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Extract accessToken
+
+ </div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-company-metadata">&lt;quickbooks-windows:get-company-metadata&gt;</a></nobr>
         
         <div class="jd-descrdiv">Returns company metadata information.</div>
@@ -359,7 +393,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-current-user">&lt;quickbooks-windows:get-current-user&gt;</a></nobr>
         
@@ -369,7 +403,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-object">&lt;quickbooks-windows:get-object&gt;</a></nobr>
         
@@ -379,7 +413,30 @@ Summary:
 
 
 	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#open-id-initialize">&lt;quickbooks-windows:open-id-initialize&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Initializes OpenID process
+
+ </div>
+        
+  </td></tr>
+
+
+	 
     <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#reconnect">&lt;quickbooks-windows:reconnect&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Generates a new OAuth access token and invalidates the OAuth access token used in the request,
+ thereby extending the life span by six months.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#status">&lt;quickbooks-windows:status&gt;</a></nobr>
         
@@ -391,7 +448,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#sync-activity">&lt;quickbooks-windows:sync-activity&gt;</a></nobr>
         
@@ -403,11 +460,23 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#update">&lt;quickbooks-windows:update&gt;</a></nobr>
         
         <div class="jd-descrdiv">Updates.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#verify-open-id">&lt;quickbooks-windows:verify-open-id&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Verify response from Intuit
+
+ </div>
         
   </td></tr>
 
@@ -469,6 +538,18 @@ specify which configuration to use.</p>
       <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           xs:string</nobr></td>
+          <td class="jd-linkcol"><nobr>accessTokenIdentifierPrefix</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Prefix used for storing credentials in ObjectStore.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          xs:string</nobr></td>
           <td class="jd-linkcol"><nobr>baseUri</nobr></td>
           <td class="jd-descrcol">https://services.intuit.com/sb</td>
           <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The base uri of the quickbooks endpoint,
@@ -479,7 +560,7 @@ specify which configuration to use.</p>
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           </nobr></td>
           <td class="jd-linkcol"><nobr>client</nobr></td>
@@ -491,14 +572,51 @@ specify which configuration to use.</p>
       </tr>
       
     
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          xs:string</nobr></td>
+          <td class="jd-linkcol"><nobr>consumerKey</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%">API Key
+</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+      </tr>
+      
+    
       <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           xs:string</nobr></td>
-          <td class="jd-linkcol"><nobr>serviceProviderId</nobr></td>
+          <td class="jd-linkcol"><nobr>consumerSecret</nobr></td>
           <td class="jd-descrcol"></td>
-          <td class="jd-descrcol" width="100%">Service Provider Id
- This parameter depends on your IPP account
+          <td class="jd-descrcol" width="100%">API Secret
 </td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          </nobr></td>
+          <td class="jd-linkcol"><nobr>objectStore</nobr></td>
+          <td class="jd-descrcol">_defaultUserObjectStore</td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Object store reference
+</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          xs:boolean</nobr></td>
+          <td class="jd-linkcol"><nobr>verifyOpenIdResponse</nobr></td>
+          <td class="jd-descrcol">true</td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specifies if the OpenID response will be verified.</td>
           <td class="jd-descrcol"></td>
           <td class="jd-descrcol"></td>
           <td class="jd-descrcol"></td>
@@ -530,6 +648,184 @@ specify which configuration to use.</p>
     
 
 
+<A NAME="auth-user"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:auth-user&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Authorize an user using OAuth1.0a
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:auth-user config-ref="Quickbooks_Windows" accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token"
+authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="http://localhost:8090" requestTokenId="requestTokenId"
+requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>requestTokenUrl</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">RequestTokenUrl</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>accessTokenUrl</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">AccessTokenUrl</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>authorizationUrl</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">AuthorizationUrl</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>callbackUrl</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">CallbackUrl for OAuth service</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>requestTokenId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Optional value for identifying the requestToken. If it is not passed the client will use a UUID</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+          
+          
+          
+        </table>
+  </div>
+  
+      <div class="jd-tagdata">
+          <h5 class="jd-tagtitle">Child Elements</h5>
+            <table id="lconfig" class="jd-sumtable">
+              
+              <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                    <tr>
+                        <td><nobr>&lt;quickbooks-windows:headers&gt;</nobr></td>
+                        <td></td>
+                        <td>Outbound headers</td>
+                        <td>Map&lt;String,&nbsp;Object&gt;</td>
+                    </tr>
+                
+                
+              
+          </table>
+      </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">String</td>
+                <td class="jd-descrcol">Authorize Url</td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td>ObjectStoreException</td>
+            <td>from the Object Store instance</td>
+        </tr>
+        <tr>
+            <td>OAuthCommunicationException</td>
+            <td>requesting to OAuth provider</td>
+        </tr>
+        <tr>
+            <td>OAuthExpectationFailedException</td>
+            <td>requesting to OAuth provider</td>
+        </tr>
+        <tr>
+            <td>OAuthNotAuthorizedException</td>
+            <td>requesting to OAuth provider</td>
+        </tr>
+        <tr>
+            <td>OAuthMessageSignerException</td>
+            <td>requesting to OAuth provider
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="create"></A>
 
 <div class="jd-details api apilevel-">
@@ -549,10 +845,7 @@ specify which configuration to use.</p>
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
  0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:create realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:create accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]"
@@ -575,11 +868,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks, the realmID is required in the URL for most calls.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -589,42 +880,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>type</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">WindowsEntityType of the object.</td>
@@ -636,7 +891,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>entityObject</nobr></td>
                         <td class="jd-descrcol">#[payload]</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Represents the object to be created.</td>
@@ -648,7 +903,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>draft</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Boolean draft
@@ -665,7 +920,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>fullResponse</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Boolean fullResponse. If this flag is true, it will return the created object, otherwise, it
@@ -738,10 +993,7 @@ specify which configuration to use.</p>
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
  0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a></p>
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:delete realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:delete accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            entityObject-ref="#[map-payload:obj]" &gt;            
 &lt;/quickbooks-windows:delete&gt;</pre></div></p></div>
@@ -762,11 +1014,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks Online, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -776,42 +1026,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>type</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">WindowsEntityType of the object.</td>
@@ -823,7 +1037,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>entityObject</nobr></td>
                         <td class="jd-descrcol">#[payload]</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Represents the object to be deleted.</td>
@@ -860,6 +1074,77 @@ specify which configuration to use.</p>
 </div>
 
 
+<A NAME="disconnect"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:disconnect&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Invalidates the OAuth access token in the request, thereby disconnecting the user from QuickBooks for this app.
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:disconnect accessTokenId="accessTokenId" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Credentials identifier for the user information to be requested</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">boolean</td>
+                <td class="jd-descrcol">true if the user was disconnect from QBW
+
+</td>
+             </tr>
+         </table>
+  </div>
+    
+  
+
+    </div>
+</div>
+
+
 <A NAME="find-objects"></A>
 
 <div class="jd-details api apilevel-">
@@ -879,17 +1164,11 @@ specify which configuration to use.</p>
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/0500_QuickBooks_Windows/
  0100_Calling_Data_Services/0015_Retrieving_Objects">Retrieve Especification</a>
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:find-objects realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="#[map-payload:type]"&gt;
                            &lt;quickbooks-windows:query ref="#[map-payload:query]"/&gt;            
 &lt;/quickbooks-windows:find-objects&gt;</pre></div>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:find-objects realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="BILL"&gt;
     &lt;quickbooks-windows:query&gt;
         &lt;draftFilter&gt;DRAFT_ONLY&lt;/draftFilter&gt;
@@ -901,15 +1180,9 @@ specify which configuration to use.</p>
 
 &lt;/quickbooks-windows:find-objects&gt;</pre></div>
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;!-- retrieves all the accounts --&gt;
-&lt;quickbooks-windows:find-objects realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" 
+&lt;quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="ACCOUNT" /&gt;</pre></div>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:find-objects realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="ACCOUNT"&gt;
     &lt;quickbooks-windows:query&gt;
         &lt;listIdSet&gt;#[groovy: [
@@ -945,11 +1218,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks Online, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -959,42 +1230,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>type</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">WindowsEntityType of the object.</td>
@@ -1017,12 +1252,6 @@ specify which configuration to use.</p>
             <table id="lconfig" class="jd-sumtable">
               
               <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
-              
-                
-              
-                
-              
-                
               
                 
               
@@ -1141,11 +1370,11 @@ specify which configuration to use.</p>
 </div>
 
 
-<A NAME="get-company-metadata"></A>
+<A NAME="get-access-token"></A>
 
 <div class="jd-details api apilevel-">
     <h4 class="jd-details-title">
-      <span class="sympad">&lt;quickbooks-windows:get-company-metadata&gt;</span>
+      <span class="sympad">&lt;quickbooks-windows:get-access-token&gt;</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1154,12 +1383,9 @@ specify which configuration to use.</p>
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns company metadata information.
- 
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-company-metadata realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Extract accessToken
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-access-token /&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1177,11 +1403,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>apiUrl</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks Online, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>API URL</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1191,9 +1415,10 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
+                        <td class="jd-linkcol"><nobr>verifier</nobr></td>
+                        <td class="jd-descrcol">#[message.inboundProperties.oauth_verifier]</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>OAuth verifier. It comes within the callback.
+ The default value is "#[header:inbound:oauth_verifier]"</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1203,9 +1428,10 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
+                        <td class="jd-linkcol"><nobr>requestTokenId</nobr></td>
+                        <td class="jd-descrcol">#[message.inboundProperties.userId]</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Id used for identifying the authorized request token. It comes within the callback.
+ By default the query string parameter is userId</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1215,9 +1441,107 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
+                        <td class="jd-linkcol"><nobr>userIdentifier</nobr></td>
+                        <td class="jd-descrcol">#[message.inboundProperties.realmId]</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Id used for store the accessToken in the Object Store.
+      By default the value is the realmId</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">OAuthCredentials</td>
+                <td class="jd-descrcol">credentials user credentials</td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td>ObjectStoreException</td>
+            <td>from the object store instance</td>
+        </tr>
+        <tr>
+            <td>OAuthCommunicationException</td>
+            <td>requesting to OAuth provider</td>
+        </tr>
+        <tr>
+            <td>OAuthExpectationFailedException</td>
+            <td>requesting to OAuth provider</td>
+        </tr>
+        <tr>
+            <td>OAuthNotAuthorizedException</td>
+            <td>requesting to OAuth provider</td>
+        </tr>
+        <tr>
+            <td>OAuthMessageSignerException</td>
+            <td>requesting to OAuth provider
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="get-company-metadata"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:get-company-metadata&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns company metadata information.
+ 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-company-metadata accessTokenId="accessTokenId" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1272,10 +1596,7 @@ specify which configuration to use.</p>
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/
  0025_Intuit_Anywhere/0060_Reference/Current_User_API">CurrentUserAPI</a>
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-current-user realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-current-user accessTokenId="accessTokenId" /&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1293,47 +1614,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks Online, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1387,10 +1670,7 @@ specify which configuration to use.</p>
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
  0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-object realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-object accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            idType-ref="#[map-payload:id]"&gt;            
 &lt;/quickbooks-windows:get-object&gt;</pre></div></p></div>
@@ -1411,11 +1691,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks, the realmID is required in the URL for most calls.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1425,42 +1703,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>type</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">WindowsEntityType of the object.</td>
@@ -1472,7 +1714,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>idType</nobr></td>
                         <td class="jd-descrcol">#[payload]</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Id <code><a href="../java/org/mule/modules/quickbooks/windows/schema/IdType.html">IdType</a></code> which is assigned by Data Services when the object is created.</td>
@@ -1522,11 +1764,11 @@ specify which configuration to use.</p>
 </div>
 
 
-<A NAME="status"></A>
+<A NAME="open-id-initialize"></A>
 
 <div class="jd-details api apilevel-">
     <h4 class="jd-details-title">
-      <span class="sympad">&lt;quickbooks-windows:status&gt;</span>
+      <span class="sympad">&lt;quickbooks-windows:open-id-initialize&gt;</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1535,45 +1777,9 @@ specify which configuration to use.</p>
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieve the Status
- 
- <p>Retrieves information about the sync status of Quickbooks entities. You can also query 
- specific entity types for either synchronized or unsynchronized objects with filters. You can get information 
- on recent synchronizations using the syncActivity operation.</p>
- <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. 
- Of those operations older than 30 days, only the last operation's synch status will be maintained.</p>
- 
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="#[map-payload:realmId]"
-                                  appKey="#[map-payload:appKey]"
-                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                  authIdPseudonym="#[map-payload:authIdPseudonym]"&gt;
-    &lt;quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/&gt;
-&lt;/quickbooks-windows:status&gt;</pre></div>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" /&gt;</pre></div>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym"&gt;
-    &lt;quickbooks-windows:sync-status-request&gt;
-        &lt;ngIdSet&gt;#[groovy: [ 
-            [   'ngObjectType' : 'CUSTOMER',
-                'ngId' : '2948729' ]
-        ] ]&lt;/ngIdSet&gt;
-    &lt;/quickbooks-windows:sync-status-request&gt;
-&lt;/quickbooks-windows:status&gt;</pre></div>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym"&gt;
-    &lt;quickbooks-windows:sync-status-request&gt;
-        &lt;requestId&gt;#[groovy: [ 
-            [   '81283818123912398123981723981239' ]
-        ] ]&lt;/requestId&gt;
-    &lt;/quickbooks-windows:sync-status-request&gt;
-&lt;/quickbooks-windows:status&gt;</pre></div></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Initializes OpenID process
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:open-id-initialize callbackUrl="http://localhost:8090/openId" /&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1591,11 +1797,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks Online, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+                        <td class="jd-linkcol"><nobr>providerUrl</nobr></td>
+                        <td class="jd-descrcol">https://openid.intuit.com/OpenId/Provider</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>OpenID provider url</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1605,33 +1809,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
+                        <td class="jd-linkcol"><nobr>callbackUrl</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+                        <td class="jd-descrcol">OpenID callbackUrl. It has to point to an endpoint callback to process the response</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1657,6 +1837,202 @@ specify which configuration to use.</p>
                 
               
                 
+                    <tr>
+                        <td><nobr>&lt;quickbooks-windows:headers&gt;</nobr></td>
+                        <td></td>
+                        <td>OpenId response headers</td>
+                        <td>Map&lt;String,&nbsp;Object&gt;</td>
+                    </tr>
+                
+                
+              
+          </table>
+      </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">String</td>
+                <td class="jd-descrcol">url to redirect the user</td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td>ObjectStoreException</td>
+            <td>if the operation cannot store the OpenIDManagers
+
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="reconnect"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:reconnect&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Generates a new OAuth access token and invalidates the OAuth access token used in the request,
+ thereby extending the life span by six months. Because accessing QuickBooks data requires a valid access token,
+ when the OAuth access token is renewed, your app can continue to access the user's QuickBooks company data.
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:reconnect accessTokenId="accessTokenId" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Credentials identifier for the user information to be requested</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td>ObjectStoreException</td>
+            <td>if the credentials store failed
+
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="status"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:status&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieve the Status
+ 
+ <p>Retrieves information about the sync status of Quickbooks entities. You can also query 
+ specific entity types for either synchronized or unsynchronized objects with filters. You can get information 
+ on recent synchronizations using the syncActivity operation.</p>
+ <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. 
+ Of those operations older than 30 days, only the last operation's synch status will be maintained.</p>
+ 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status accessTokenId="accessTokenId"&gt;
+    &lt;quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/&gt;
+&lt;/quickbooks-windows:status&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status accessTokenId="accessTokenId"/&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status accessTokenId="accessTokenId"&gt;
+    &lt;quickbooks-windows:sync-status-request&gt;
+        &lt;ngIdSet&gt;#[groovy: [ 
+            [   'ngObjectType' : 'CUSTOMER',
+                'ngId' : '2948729' ]
+        ] ]&lt;/ngIdSet&gt;
+    &lt;/quickbooks-windows:sync-status-request&gt;
+&lt;/quickbooks-windows:status&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:status accessTokenId="accessTokenId"&gt;
+    &lt;quickbooks-windows:sync-status-request&gt;
+        &lt;requestId&gt;#[groovy: [ 
+            [   '81283818123912398123981723981239' ]
+        ] ]&lt;/requestId&gt;
+    &lt;/quickbooks-windows:sync-status-request&gt;
+&lt;/quickbooks-windows:status&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+          
+          
+          
+        </table>
+  </div>
+  
+      <div class="jd-tagdata">
+          <h5 class="jd-tagtitle">Child Elements</h5>
+            <table id="lconfig" class="jd-sumtable">
+              
+              <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
               
                 
               
@@ -1717,20 +2093,11 @@ specify which configuration to use.</p>
  <p>Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. Of those 
  operations older than 30 days, only the last operation's synch status will be maintained.</p>
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity realmId="#[map-payload:realmId]"
-                                  appKey="#[map-payload:appKey]"
-                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                  authIdPseudonym="#[map-payload:authIdPseudonym]"&gt;
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity accessTokenId="accessTokenId"&gt;
     &lt;quickbooks-windows:sync-activity-request ref="#[map-payload:syncActivityRequest]"/&gt;
 &lt;/quickbooks-windows:sync-activity&gt;</pre></div>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" /&gt;</pre></div>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" &gt;
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity accessTokenId="accessTokenId" /&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:sync-activity accessTokenId="accessTokenId" &gt;
     &lt;quickbooks-windows:sync-activity-request&gt;
         &lt;startCreatedTMS&gt;2010-06-18T02:17:29&lt;/startCreatedTMS&gt;
         &lt;endCreatedTMS&gt;2011-06-18T02:17:29&lt;/endCreatedTMS&gt;
@@ -1753,47 +2120,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks Online, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1813,12 +2142,6 @@ specify which configuration to use.</p>
             <table id="lconfig" class="jd-sumtable">
               
               <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
-              
-                
-              
-                
-              
-                
               
                 
               
@@ -1885,10 +2208,7 @@ specify which configuration to use.</p>
  <p>* To remove a line item, omit it. </p>
  <p>* To add a new line item, insert a new one in the list.</p>
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:update realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:update accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]"
@@ -1911,11 +2231,9 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmId</nobr></td>
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The realmID, also known as the Company ID, uniquely identifies the data for a company.
-                In QuickBooks Online, the Company ID  appears on the My Account page.
-                In Data Services for QuickBooks Online, the realmID is required in the URL for most calls.</td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
                         <td class="jd-descrcol">String</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol">UTF-8</td>
@@ -1925,42 +2243,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>appKey</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Application Id.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>realmIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Realm Id, obtained from the gateway that represents the company.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>authIdPseudonym</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Pseudonym Auth Id, obtained from the gateway that represents the user.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>type</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">WindowsEntityType of the object.</td>
@@ -1972,7 +2254,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>entityObject</nobr></td>
                         <td class="jd-descrcol">#[payload]</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Represents the object to be updated.</td>
@@ -1984,7 +2266,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>draft</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Boolean draft 
@@ -2001,7 +2283,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>fullResponse</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Boolean fullResponse. If this flag is true, it will return the created object, otherwise, it
@@ -2043,6 +2325,134 @@ specify which configuration to use.</p>
             <td>QuickBooksRuntimeException</td>
             <td>when there is a problem with the server. It has a code 
          and a message provided by quickbooks about the error.
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="verify-open-id"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:verify-open-id&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Verify response from Intuit
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:verify-open-id &gt;
+    &lt;quickbooks-windows:response-parameters ref="#[message.inboundProperties['http.query.params']]"/&gt;
+&lt;/quickbooks-windows:verify-open-id&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>muleMessage</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Injected MuleMessage</td>
+                        <td class="jd-descrcol">MuleMessage</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>receivingUrl</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Url from OpenID provider.
+                     <p>If it is not provided the processor will extract it from the
+                     Mule message</p></td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+          
+          
+          
+        </table>
+  </div>
+  
+      <div class="jd-tagdata">
+          <h5 class="jd-tagtitle">Child Elements</h5>
+            <table id="lconfig" class="jd-sumtable">
+              
+              <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
+              
+                
+              
+                
+              
+                
+                    <tr>
+                        <td><nobr>&lt;quickbooks-windows:response-parameters&gt;</nobr></td>
+                        <td>#[header:INBOUND:http.query.params]</td>
+                        <td><i>Optional.&nbsp;</i>Response parameters from Intuit. It process a map<string, string> with all the OpenID
+                           attributes sent from Intuit.</td>
+                        <td>Map&lt;String,&nbsp;String&gt;</td>
+                    </tr>
+                
+                
+              
+          </table>
+      </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">OpenIDCredentials</td>
+                <td class="jd-descrcol">OpenID credentials for the authenticated user</td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td>MessageException</td>
+            <td>from OpenID manager</td>
+        </tr>
+        <tr>
+            <td>ObjectStoreException</td>
+            <td>if the operation cannot retrieve OpenID managers from ObjectStore
+
 </td>
         </tr>
       </table>
