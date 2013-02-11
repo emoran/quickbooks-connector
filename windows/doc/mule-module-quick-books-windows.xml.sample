@@ -1,8 +1,5 @@
 <!-- BEGIN_INCLUDE(quickbooks-windows:create) -->
-<quickbooks-windows:create realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+<quickbooks-windows:create accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]"
@@ -11,10 +8,7 @@
 <!-- END_INCLUDE(quickbooks-windows:create) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:update) -->
-<quickbooks-windows:update realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+<quickbooks-windows:update accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            draft="#[map-payload:draft]"
                            fullResponse="#[map-payload:fullResponse]"
@@ -23,40 +17,28 @@
 <!-- END_INCLUDE(quickbooks-windows:update) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:delete) -->
-<quickbooks-windows:delete realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+<quickbooks-windows:delete accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            entityObject-ref="#[map-payload:obj]" >            
 </quickbooks-windows:delete>
 <!-- END_INCLUDE(quickbooks-windows:delete) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:get-object) -->
-<quickbooks-windows:get-object realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+<quickbooks-windows:get-object accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
                            idType-ref="#[map-payload:id]">            
 </quickbooks-windows:get-object>
 <!-- END_INCLUDE(quickbooks-windows:get-object) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:find-objects) -->
-<quickbooks-windows:find-objects realmId="#[map-payload:realmId]"
-                           appKey="#[map-payload:appKey]"
-                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+<quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="#[map-payload:type]">
                            <quickbooks-windows:query ref="#[map-payload:query]"/>            
 </quickbooks-windows:find-objects>
 <!-- END_INCLUDE(quickbooks-windows:find-objects) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-list-of-id) -->
-<quickbooks-windows:find-objects realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" 
+<quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="ACCOUNT">
     <quickbooks-windows:query>
         <listIdSet>#[groovy: [
@@ -79,18 +61,12 @@
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-all-accounts) -->
 <!-- retrieves all the accounts -->
-<quickbooks-windows:find-objects realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" 
+<quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="ACCOUNT" />
 <!-- END_INCLUDE(quickbooks-windows:find-objects-all-accounts) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:find-objects-bill) -->
-<quickbooks-windows:find-objects realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" 
+<quickbooks-windows:find-objects accessTokenId="accessTokenId"
                            type="BILL">
     <quickbooks-windows:query>
         <draftFilter>DRAFT_ONLY</draftFilter>
@@ -108,26 +84,17 @@
 <!-- END_INCLUDE(quickbooks-windows:generate-a-new-request-id) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:status) -->
-<quickbooks-windows:status realmId="#[map-payload:realmId]"
-                                  appKey="#[map-payload:appKey]"
-                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+<quickbooks-windows:status accessTokenId="accessTokenId">
     <quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/>
 </quickbooks-windows:status>
 <!-- END_INCLUDE(quickbooks-windows:status) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:status2) -->
-<quickbooks-windows:status realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym" />
+<quickbooks-windows:status accessTokenId="accessTokenId"/>
 <!-- END_INCLUDE(quickbooks-windows:status2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:status3) -->
-<quickbooks-windows:status realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym">
+<quickbooks-windows:status accessTokenId="accessTokenId">
     <quickbooks-windows:sync-status-request>
         <ngIdSet>#[groovy: [ 
             [   'ngObjectType' : 'CUSTOMER',
@@ -138,10 +105,7 @@
 <!-- END_INCLUDE(quickbooks-windows:status3) -->
     
 <!-- BEGIN_INCLUDE(quickbooks-windows:status4) -->
-<quickbooks-windows:status realmId="realmId"
-                           appKey="appKey"
-                           realmIdPseudonym="reamIdPseudonym"
-                           authIdPseudonym="authIdPseudonym">
+<quickbooks-windows:status accessTokenId="accessTokenId">
     <quickbooks-windows:sync-status-request>
         <requestId>#[groovy: [ 
             [   '81283818123912398123981723981239' ]
@@ -151,26 +115,17 @@
 <!-- END_INCLUDE(quickbooks-windows:status4) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity) -->
-<quickbooks-windows:sync-activity realmId="#[map-payload:realmId]"
-                                  appKey="#[map-payload:appKey]"
-                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+<quickbooks-windows:sync-activity accessTokenId="accessTokenId">
     <quickbooks-windows:sync-activity-request ref="#[map-payload:syncActivityRequest]"/>
 </quickbooks-windows:sync-activity>
 <!-- END_INCLUDE(quickbooks-windows:sync-activity) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity2) -->
-<quickbooks-windows:sync-activity realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" />
+<quickbooks-windows:sync-activity accessTokenId="accessTokenId" />
 <!-- END_INCLUDE(quickbooks-windows:sync-activity2) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:sync-activity3) -->
-<quickbooks-windows:sync-activity realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" >
+<quickbooks-windows:sync-activity accessTokenId="accessTokenId" >
     <quickbooks-windows:sync-activity-request>
         <startCreatedTMS>2010-06-18T02:17:29</startCreatedTMS>
         <endCreatedTMS>2011-06-18T02:17:29</endCreatedTMS>
@@ -179,15 +134,37 @@
 <!-- END_INCLUDE(quickbooks-windows:sync-activity3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:get-current-user) -->
-<quickbooks-windows:get-current-user realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" />
+<quickbooks-windows:get-current-user accessTokenId="accessTokenId" />
 <!-- END_INCLUDE(quickbooks-windows:get-current-user) -->
 
 <!-- BEGIN_INCLUDE(quickbooks-windows:get-company-metadata) -->
-<quickbooks-windows:get-company-metadata realmId="realmId"
-                                  appKey="appKey"
-                                  realmIdPseudonym="reamIdPseudonym"
-                                  authIdPseudonym="authIdPseudonym" />
+<quickbooks-windows:get-company-metadata accessTokenId="accessTokenId" />
 <!-- END_INCLUDE(quickbooks-windows:get-company-metadata) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:auth-user) -->
+<quickbooks-windows:auth-user config-ref="Quickbooks_Windows" accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token"
+authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="http://localhost:8090" requestTokenId="requestTokenId"
+requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" />
+<!-- END_INCLUDE(quickbooks-windows:auth-user) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:get-access-token) -->
+<quickbooks-windows:get-access-token />
+<!-- END_INCLUDE(quickbooks-windows:get-access-token) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:open-id-initialize) -->
+<quickbooks-windows:open-id-initialize callbackUrl="http://localhost:8090/openId" />
+<!-- END_INCLUDE(quickbooks-windows:open-id-initialize) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:verify-open-id) -->
+<quickbooks-windows:verify-open-id >
+    <quickbooks-windows:response-parameters ref="#[message.inboundProperties['http.query.params']]"/>
+</quickbooks-windows:verify-open-id>
+<!-- END_INCLUDE(quickbooks-windows:verify-open-id) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:disconnect) -->
+<quickbooks-windows:disconnect accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks-windows:disconnect) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:reconnect) -->
+<quickbooks-windows:reconnect accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks-windows:reconnect) -->

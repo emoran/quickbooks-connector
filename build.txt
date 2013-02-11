@@ -1,0 +1,441 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.mule.modules:mule-module-quick-books-windows:mule-module:4.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.codehaus.mojo:jaxb2-maven-plugin is missing. @ line 20, column 17
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] QuickBooks Cloud Connector
+[INFO] QuickBooks Cloud Connector Commons Libraries
+[INFO] QuickBooks Windows Cloud Connector
+[INFO] QuickBooks Online Cloud Connector
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building QuickBooks Cloud Connector 4.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ mule-module-quick-books ---
+[INFO] 
+[INFO] >>> maven-source-plugin:2.1.2:jar (attach-sources) @ mule-module-quick-books >>>
+[INFO] 
+[INFO] <<< maven-source-plugin:2.1.2:jar (attach-sources) @ mule-module-quick-books <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.1.2:jar (attach-sources) @ mule-module-quick-books ---
+[INFO] 
+[INFO] --- maven-javadoc-plugin:2.8:jar (attach-javadocs) @ mule-module-quick-books ---
+[INFO] Not executing Javadoc as the project is not a Java classpath-capable package
+[INFO] 
+[INFO] --- maven-license-plugin:1.8.0:check (default) @ mule-module-quick-books ---
+[INFO] Checking licenses...
+[WARNING] Property 'strictChecking' is not enabled. Please consider adding <strictChecking>true</strictChecking> in your pom.xml file.
+[WARNING] See http://code.google.com/p/maven-license-plugin/wiki/Configuration for more information.
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/demo-windows/mappings/555.grf
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/demo-windows/flows/QuickbooksWindowsDemo.mflow
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/commons-cert/federatedconnectortestapp.zauberlabs.com.p12
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/internal-gateway/src/main/resources/federatedconnectortestapp.zauberlabs.com.p12
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/internal-gateway/src/main/resources/intuit-public.crt
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/test.log
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/demo-qbo-oauth/flows/QBOAuthDemo.mflow
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/demo/flows/QuickbooksOnlineDemo.mflow
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/demo/mappings/update_customer.grf
+[INFO] 
+[INFO] --- maven-install-plugin:2.3.1:install (default-install) @ mule-module-quick-books ---
+[INFO] Installing /Users/adrianhsieh/git/quickbooks-connector/pom.xml to /Users/adrianhsieh/.m2/repository/org/mule/modules/mule-module-quick-books/4.0-SNAPSHOT/mule-module-quick-books-4.0-SNAPSHOT.pom
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building QuickBooks Cloud Connector Commons Libraries 4.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ mule-module-quick-books-commons ---
+[INFO] Deleting /Users/adrianhsieh/git/quickbooks-connector/commons/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:resources (default-resources) @ mule-module-quick-books-commons ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ mule-module-quick-books-commons ---
+[INFO] Compiling 28 source files to /Users/adrianhsieh/git/quickbooks-connector/commons/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:testResources (default-testResources) @ mule-module-quick-books-commons ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/adrianhsieh/git/quickbooks-connector/commons/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ mule-module-quick-books-commons ---
+[INFO] Compiling 2 source files to /Users/adrianhsieh/git/quickbooks-connector/commons/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.7.2:test (default-test) @ mule-module-quick-books-commons ---
+[INFO] Surefire report directory: /Users/adrianhsieh/git/quickbooks-connector/commons/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running org.mule.modules.quickbooks.QuickBooksCommonsOAuthClientTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.186 sec
+Running org.mule.modules.quickbooks.QuickBooksConventionsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+
+Results :
+
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.3.1:jar (default-jar) @ mule-module-quick-books-commons ---
+[INFO] Building jar: /Users/adrianhsieh/git/quickbooks-connector/commons/target/mule-module-quick-books-commons-4.0-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.1.2:jar (attach-sources) @ mule-module-quick-books-commons >>>
+[INFO] 
+[INFO] <<< maven-source-plugin:2.1.2:jar (attach-sources) @ mule-module-quick-books-commons <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.1.2:jar (attach-sources) @ mule-module-quick-books-commons ---
+[INFO] Building jar: /Users/adrianhsieh/git/quickbooks-connector/commons/target/mule-module-quick-books-commons-4.0-SNAPSHOT-sources.jar
+[INFO] 
+[INFO] --- maven-javadoc-plugin:2.8:jar (attach-javadocs) @ mule-module-quick-books-commons ---
+[INFO] Skipping javadoc generation
+[INFO] 
+[INFO] --- maven-license-plugin:1.8.0:check (default) @ mule-module-quick-books-commons ---
+[INFO] Checking licenses...
+[WARNING] Property 'strictChecking' is not enabled. Please consider adding <strictChecking>true</strictChecking> in your pom.xml file.
+[WARNING] See http://code.google.com/p/maven-license-plugin/wiki/Configuration for more information.
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/commons/src/main/javacc/FilterExpressionParser.jj0
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/commons/src/main/resources/federatedconnectortestapp.zauberlabs.com.p12
+[WARNING] Unknown file extension: /Users/adrianhsieh/git/quickbooks-connector/commons/src/main/resources/star_cloudhub_io.p12
+[INFO] 
+[INFO] --- maven-install-plugin:2.3.1:install (default-install) @ mule-module-quick-books-commons ---
+[INFO] Installing /Users/adrianhsieh/git/quickbooks-connector/commons/target/mule-module-quick-books-commons-4.0-SNAPSHOT.jar to /Users/adrianhsieh/.m2/repository/com/mulesoft/modules/mule-module-quick-books-commons/4.0-SNAPSHOT/mule-module-quick-books-commons-4.0-SNAPSHOT.jar
+[INFO] Installing /Users/adrianhsieh/git/quickbooks-connector/commons/pom.xml to /Users/adrianhsieh/.m2/repository/com/mulesoft/modules/mule-module-quick-books-commons/4.0-SNAPSHOT/mule-module-quick-books-commons-4.0-SNAPSHOT.pom
+[INFO] Installing /Users/adrianhsieh/git/quickbooks-connector/commons/target/mule-module-quick-books-commons-4.0-SNAPSHOT-sources.jar to /Users/adrianhsieh/.m2/repository/com/mulesoft/modules/mule-module-quick-books-commons/4.0-SNAPSHOT/mule-module-quick-books-commons-4.0-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building QuickBooks Windows Cloud Connector 4.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ mule-module-quick-books-windows ---
+[INFO] Deleting /Users/adrianhsieh/git/quickbooks-connector/windows/target
+[INFO] 
+[INFO] --- mule-devkit-maven-plugin:3.3.2:attach-test-resources (default-attach-test-resources) @ mule-module-quick-books-windows ---
+[INFO] Attaching test resource /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/app
+[INFO] 
+[INFO] --- mule-devkit-maven-plugin:3.3.2:generate-sources (default-generate-sources) @ mule-module-quick-books-windows ---
+[INFO] Source directory: /Users/adrianhsieh/git/quickbooks-connector/windows/target/generated-sources/mule added
+[INFO] Resource directory: /Users/adrianhsieh/git/quickbooks-connector/windows/target/generated-sources/mule added
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:35: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:36: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:37: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:38: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:39: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:40: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:41: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:42: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:43: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:44: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:45: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/QuickBooksWindowsClient.java:15: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/QuickBooksWindowsClient.java:16: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/WindowsEntityType.java:13: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/WindowsEntityType.java:14: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:115: cannot find symbol
+symbol  : class IdType
+location: class org.mule.modules.quickbooks.windows.api.DefaultQuickBooksWindowsClient
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/DefaultQuickBooksWindowsClient.java:523: cannot find symbol
+symbol  : class UserInformation
+location: class org.mule.modules.quickbooks.windows.api.DefaultQuickBooksWindowsClient
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/QuickBooksWindowsClient.java:25: cannot find symbol
+symbol  : class IdType
+location: interface org.mule.modules.quickbooks.windows.api.QuickBooksWindowsClient
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/api/QuickBooksWindowsClient.java:48: cannot find symbol
+symbol  : class UserInformation
+location: interface org.mule.modules.quickbooks.windows.api.QuickBooksWindowsClient
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:26: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:27: package org.mule.modules.quickbooks.windows.schema does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:308: cannot find symbol
+symbol  : class TemplateRefParam
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:316: cannot find symbol
+symbol  : class PaymentHeader
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:324: cannot find symbol
+symbol  : class InventorySites
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:332: cannot find symbol
+symbol  : class PaymentMethod
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:340: cannot find symbol
+symbol  : class Deposits
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:348: cannot find symbol
+symbol  : class TelephoneNumber
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:356: cannot find symbol
+symbol  : class SalesReceipt
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:364: cannot find symbol
+symbol  : class BillPaymentQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:372: cannot find symbol
+symbol  : class BillPaymentCreditCards
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:380: cannot find symbol
+symbol  : class Party
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:388: cannot find symbol
+symbol  : class ClassQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:396: cannot find symbol
+symbol  : class SortByColumnItemWithOrder
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:404: cannot find symbol
+symbol  : class TemplateRefMapQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:412: cannot find symbol
+symbol  : class CustomerType
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:420: cannot find symbol
+symbol  : class BatchRequestSet
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:428: cannot find symbol
+symbol  : class BillPayment
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:436: cannot find symbol
+symbol  : class TaxLine
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:444: cannot find symbol
+symbol  : class VendorCreditHeader
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:452: cannot find symbol
+symbol  : class Label
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:460: cannot find symbol
+symbol  : class BOMComponent
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:468: cannot find symbol
+symbol  : class TaskQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:476: package Facets does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:484: cannot find symbol
+symbol  : class JournalEntries
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:492: cannot find symbol
+symbol  : class PayrollNonWageItem
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:500: cannot find symbol
+symbol  : class Vendor
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:508: cannot find symbol
+symbol  : class ItemsConsolidated
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:516: cannot find symbol
+symbol  : class ReimbursableInfo
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:524: cannot find symbol
+symbol  : class PurchaseOrderQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:532: cannot find symbol
+symbol  : class BOMComponentQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:540: cannot find symbol
+symbol  : class SalesOrderQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:548: cannot find symbol
+symbol  : class SortByColumnItemReceiptWithOrder
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:556: package TemplateRef does not exist
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:564: cannot find symbol
+symbol  : class MetaData
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:572: cannot find symbol
+symbol  : class BuildAssembly
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:580: cannot find symbol
+symbol  : class OtherNames
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:588: cannot find symbol
+symbol  : class JobInfo
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:596: cannot find symbol
+symbol  : class VendorCreditQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:604: cannot find symbol
+symbol  : class LineBase
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:612: cannot find symbol
+symbol  : class JobTypeQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:620: cannot find symbol
+symbol  : class WorkersCompCode
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:628: cannot find symbol
+symbol  : class TermQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:636: cannot find symbol
+symbol  : class RefundAppliedTo
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:644: cannot find symbol
+symbol  : class SalesTaxRef
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:652: cannot find symbol
+symbol  : class Check
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:660: cannot find symbol
+symbol  : class CreditCardChargeHeader
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:668: cannot find symbol
+symbol  : class SyncActivityRequest
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:676: cannot find symbol
+symbol  : class PriceLevelPerItem
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:684: cannot find symbol
+symbol  : class SortByColumnEmployeeWithOrder
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:692: cannot find symbol
+symbol  : class BuildAssemblyHeader
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:700: cannot find symbol
+symbol  : class CreditCardRefund
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:708: cannot find symbol
+symbol  : class SyncStatusParam
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:716: cannot find symbol
+symbol  : class CreditCardCharge
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:724: cannot find symbol
+symbol  : class ChargeLine
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:732: cannot find symbol
+symbol  : class SalesReceiptQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:740: cannot find symbol
+symbol  : class DiscountQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:748: cannot find symbol
+symbol  : class TemplateRefMap
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:756: cannot find symbol
+symbol  : class CompanyMetaData
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:764: cannot find symbol
+symbol  : class PurchaseOrders
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:772: cannot find symbol
+symbol  : class CreditCardCharges
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:780: cannot find symbol
+symbol  : class BillLine
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:788: cannot find symbol
+symbol  : class Organization
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:796: cannot find symbol
+symbol  : class TemplateName
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:804: cannot find symbol
+symbol  : class SearchRestResponse
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:812: cannot find symbol
+symbol  : class BuildAssemblyQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:820: cannot find symbol
+symbol  : class Discounts
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:828: cannot find symbol
+symbol  : class SortByColumnCurrencyInfoWithOrder
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:836: cannot find symbol
+symbol  : class VendorCreditsToApply
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:844: cannot find symbol
+symbol  : class AddRequest
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:852: cannot find symbol
+symbol  : class ExternalRoleQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:860: cannot find symbol
+symbol  : class SortByColumnInventoryAdjustmentWithOrder
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:868: cannot find symbol
+symbol  : class ExternalKey
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:876: cannot find symbol
+symbol  : class CashBackInfo
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:884: cannot find symbol
+symbol  : class EstimateQuery
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:892: cannot find symbol
+symbol  : class CurrencyInfo
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:900: cannot find symbol
+symbol  : class SalesTaxGroup
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:908: cannot find symbol
+symbol  : class TimeActivities
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:916: cannot find symbol
+symbol  : class VendorCredit
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:924: cannot find symbol
+symbol  : class CashPurchases
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[ERROR] /Users/adrianhsieh/git/quickbooks-connector/windows/src/main/java/org/mule/modules/quickbooks/windows/objectfactory/ObjectFactory.java:932: cannot find symbol
+symbol  : class SalesTerm
+location: class org.mule.modules.quickbooks.windows.objectfactory.ObjectFactory
+[INFO] Sorting generator executing based on their dependencies...
+[INFO] Searching for classes annotated with @Module
+[INFO] Validating QuickBooksWindowsModule class
+[ERROR] error on execute: An error ocurred while the DevKit was generating Java code. Check the logs for further details.
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] QuickBooks Cloud Connector ........................ SUCCESS [1.104s]
+[INFO] QuickBooks Cloud Connector Commons Libraries ...... SUCCESS [2.486s]
+[INFO] QuickBooks Windows Cloud Connector ................ FAILURE [1.075s]
+[INFO] QuickBooks Online Cloud Connector ................. SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 6.492s
+[INFO] Finished at: Thu Feb 07 17:11:05 PST 2013
+[INFO] Final Memory: 25M/81M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.mule.tools.devkit:mule-devkit-maven-plugin:3.3.2:generate-sources (default-generate-sources) on project mule-module-quick-books-windows: An error ocurred while the DevKit was generating Java code. Check the logs for further details. -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.mule.tools.devkit:mule-devkit-maven-plugin:3.3.2:generate-sources (default-generate-sources) on project mule-module-quick-books-windows: An error ocurred while the DevKit was generating Java code. Check the logs for further details.
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:217)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:319)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:156)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:537)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:196)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:141)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+Caused by: org.apache.maven.plugin.MojoExecutionException: An error ocurred while the DevKit was generating Java code. Check the logs for further details.
+	at org.mule.devkit.maven.AbstractAnnotationProcessorMojo.execute(AbstractAnnotationProcessorMojo.java:127)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:101)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:209)
+	... 19 more
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :mule-module-quick-books-windows

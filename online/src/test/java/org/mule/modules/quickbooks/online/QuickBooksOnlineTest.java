@@ -52,7 +52,7 @@ public class QuickBooksOnlineTest {
     @Mock
     private DefaultOpenIDClient quickBooksOpenIdClient;
 
-    private QuickBooksModule module;
+    private QuickBooksOnlineModule module;
     private ObjectStoreHelper objectStoreHelper;
 
     private static final String CONSUMER_KEY = "consumerkey";
@@ -86,7 +86,7 @@ public class QuickBooksOnlineTest {
     public void setup() throws ObjectStoreException {
         MockitoAnnotations.initMocks(this);
         objectStoreHelper = new ObjectStoreHelper(new QuickBooksObjectStore());
-        module = new QuickBooksModule();
+        module = new QuickBooksOnlineModule();
         module.setClient(quickBooksOnlineClient);
         module.setoAuthClient(quickBooksOAuthClient);
         module.setOpenIDClient(quickBooksOpenIdClient);

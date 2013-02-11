@@ -12,53 +12,43 @@
 -->
 
 <mule xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:quickbooks-windows="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
-http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/3.0/mule-quickbooks-windows.xsd
+http://www.mulesoft.org/schema/mule/quickbooks-windows http://www.mulesoft.org/schema/mule/quickbooks-windows/4.0/mule-quickbooks-windows.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+
+    <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
+    <spring:beans>
+        <spring:bean id="objectStoreRef" class="org.mule.modules.quickbooks.api.oauth.QuickBooksObjectStore" />
+    </spring:beans>
     
-    <quickbooks-windows:config serviceProviderId="serviceProviderId" />
+    <quickbooks-windows:config consumerKey="consumerKey" consumerSecret="consumerSecret" objectStore-ref="objectStoreRef" />
 
     <flow name="create">
-		<quickbooks-windows:create realmId="#[map-payload:realmId]"
-		                           appKey="#[map-payload:appKey]"
-		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		<quickbooks-windows:create accessTokenId="id"
 		                           type="#[map-payload:type]"
 		                           draft="#[map-payload:draft]"
 		                           fullResponse="#[map-payload:fullResponse]" />
 	</flow>
 	<flow name="update">
-		<quickbooks-windows:update realmId="#[map-payload:realmId]"
-		                           appKey="#[map-payload:appKey]"
-		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		<quickbooks-windows:update accessTokenId="id"
 		                           type="#[map-payload:type]"
 		                           draft="#[map-payload:draft]"
 		                           fullResponse="#[map-payload:fullResponse]"
 		                           entityObject-ref="#[payload]"/>
 	</flow>
 	<flow name="delete">
-		<quickbooks-windows:delete realmId="#[map-payload:realmId]"
-		                           appKey="#[map-payload:appKey]"
-		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		<quickbooks-windows:delete accessTokenId="id"
 		                           type="#[map-payload:type]"
 		                           entityObject-ref="#[payload]" />
 	</flow>
 	<flow name="get-object">
-		<quickbooks-windows:get-object realmId="#[map-payload:realmId]"
-		                           appKey="#[map-payload:appKey]"
-		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		<quickbooks-windows:get-object accessTokenId="id"
 		                           type="#[map-payload:type]"
 		                           idType-ref="#[payload]" />
 	</flow>
 	<flow name="find-objects">
-		<quickbooks-windows:find-objects realmId="#[map-payload:realmId]"
-		                           appKey="#[map-payload:appKey]"
-		                           realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                           authIdPseudonym="#[map-payload:authIdPseudonym]" 
+		<quickbooks-windows:find-objects accessTokenId="id"
 		                           type="#[map-payload:type]">
 		    <quickbooks-windows:query ref="#[map-payload:query]"/>
 		            
@@ -68,20 +58,27 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 		<quickbooks-windows:generate-a-new-request-id />
 	</flow>
 	<flow name="status">
-		<quickbooks-windows:status realmId="#[map-payload:realmId]"
-		                                  appKey="#[map-payload:appKey]"
-		                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+		<quickbooks-windows:status accessTokenId="id">
 		    <quickbooks-windows:sync-status-request ref="#[map-payload:syncStatusRequest]"/>
 		</quickbooks-windows:status>
     </flow>
 
     <flow name="sync-activity">
-		<quickbooks-windows:sync-activity realmId="#[map-payload:realmId]"
-		                                  appKey="#[map-payload:appKey]"
-		                                  realmIdPseudonym="#[map-payload:realmIdPseudonym]"
-		                                  authIdPseudonym="#[map-payload:authIdPseudonym]">
+		<quickbooks-windows:sync-activity accessTokenId="id">
 		    <quickbooks-windows:sync-activity-request ref="#[map-payload:syncActivityRequest]"/>
 		</quickbooks-windows:sync-activity>
+    </flow>
+
+    <flow name="Authorize">
+        <quickbooks-windows:auth-user accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token" authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="http://localhost:8090" requestTokenId="11" requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token"/>
+    </flow>
+    <flow name="GetAccessToken">
+        <quickbooks-windows:get-access-token />
+    </flow>
+    <flow name="InitializeOpenID">
+        <quickbooks-windows:open-id-initialize callbackUrl="http://localhost:8090/verifyOpenId"/>
+    </flow>
+    <flow name="VerifyResponseOpenID">
+        <quickbooks-windows:verify-open-id />
     </flow>
 </mule>

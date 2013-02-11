@@ -10,52 +10,48 @@
 
 package org.mule.modules.quickbooks.windows.api;
 
+import java.util.List;
+
+import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.schema.IdType;
 import org.mule.modules.quickbooks.windows.schema.UserInformation;
 
 public interface QuickBooksWindowsClient
 {
-    Object create(final String realmId, final String appKey, 
-                   final String realmIdPseudonym, final String authIdPseudonym,
+    Object create(final OAuthCredentials credentials,
                    final WindowsEntityType type, Object obj, final String requestId, 
                    final Boolean draft, final Boolean fullResponse);
     
-    Object getObject(final String realmId, final String appKey, 
-                     final String realmIdPseudonym, final String authIdPseudonym, 
+    Object getObject(final OAuthCredentials credentials,
                      final WindowsEntityType type, final IdType id);
     
-    Object update(final String realmId, final String appKey, 
-                  final String realmIdPseudonym, final String authIdPseudonym,
+    Object update(final OAuthCredentials credentials,
                   final WindowsEntityType type, Object obj,
                   final String requestId, final Boolean draft, final Boolean fullResponse);
     
-    void delete(final String realmId, final String appKey, 
-                final String realmIdPseudonym, final String authIdPseudonym, 
+    void delete(final OAuthCredentials credentials,
                 final WindowsEntityType type, Object obj, final String requestId);
 
-    Iterable findObjects(final String realmId, final String appKey, 
-                         final String realmIdPseudonym, final String authIdPseudonym, 
+    Iterable findObjects(final OAuthCredentials credentials,
                          final WindowsEntityType type, final Object query);
     
-    Iterable findObjectsGetPages(final String realmId, final String appKey, 
-            final String realmIdPseudonym, final String authIdPseudonym, 
-            final WindowsEntityType type, final Object query);
+    Iterable findObjectsGetPages(final OAuthCredentials credentials,
+            				final WindowsEntityType type, final Object query);
     
-    void revert(final String realmId, final String appKey, 
-                final String realmIdPseudonym, final String authIdPseudonym, 
+    void revert(final OAuthCredentials credentials,
                 final WindowsEntityType type, final Object obj, final String requestId);
     
-    Object retrieveWithoutUsingQueryObjects(final String realmId, final String appKey, 
-                  final String realmIdPseudonym, final String authIdPseudonym, 
+    Object retrieveWithoutUsingQueryObjects(final OAuthCredentials credentials,
                   final Object syncStatusRequest, final String objectName);
     
     String generateARequestId();
     
-    UserInformation getCurrentUserInformation(final String realmId,
-            final String appKey,
-            final String realmIdPseudonym, 
-            final String authIdPseudonym);
+    UserInformation getCurrentUserInformation(final OAuthCredentials credentials);
     
-    Object get(String realmId, String appKey, String realmIdPseudonym, String authIdPseudonym, WindowsEntityType type);
+    boolean disconnect(OAuthCredentials credentials);
+
+    OAuthCredentials reconnect(OAuthCredentials credentials);    
+    
+    Object get(final OAuthCredentials credentials, WindowsEntityType type);
 }

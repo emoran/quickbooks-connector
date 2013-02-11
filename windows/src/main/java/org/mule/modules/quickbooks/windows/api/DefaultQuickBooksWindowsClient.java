@@ -24,10 +24,12 @@ import org.apache.commons.lang.Validate;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.mule.modules.quickbooks.api.AbstractQuickBooksClient;
+import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
 import org.mule.modules.quickbooks.api.exception.ErrorInfo;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
+import org.mule.modules.quickbooks.api.model.*;
+import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.objectfactory.QBWMessageUtils;
@@ -45,21 +47,19 @@ import org.mule.modules.quickbooks.windows.schema.UserResponse;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
 
-public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient implements QuickBooksWindowsClient
+public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAuth implements QuickBooksWindowsClient
 {
     
-    public DefaultQuickBooksWindowsClient(final String baseUri, final String serviceProviderId)
+    public DefaultQuickBooksWindowsClient(final String baseUri, final String consumerKey, final String consumerSecret,
+            							  final String appKey)
     {
         Validate.notEmpty(baseUri);
         
-        init(baseUri, serviceProviderId);
+        init(baseUri, consumerKey, consumerSecret, appKey);
     }
     
     @Override
-    public Object create(String realmId,
-                         String appKey,
-                         String realmIdPseudonym,
-                         String authIdPseudonym,
+    public Object create(final OAuthCredentials credentials,
                          WindowsEntityType type,
                          Object obj,
                          String requestId,
@@ -68,12 +68,10 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     {
         Validate.notNull(obj);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/%s/v2/%s",
-            getBaseUri(realmId),
+        	credentials.getBaseUri(),
             type.getResouceName(),
-            realmId);
+            credentials.getRealmId());
         
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "text/xml");
@@ -88,7 +86,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
 
         try
         {
-            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
             if(respObj instanceof ErrorResponse)
             {
                 throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -103,8 +101,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return create(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId, draft, fullResponse);
+                destroyAccessToken(credentials);
+                return create(credentials, type, obj, requestId, draft, fullResponse);
             } 
             else 
             {
@@ -114,26 +112,21 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     }
 
     @Override
-    public Object getObject(String realmId,
-                            String appKey,
-                            String realmIdPseudonym,
-                            String authIdPseudonym,
+    public Object getObject(final OAuthCredentials credentials,
                             WindowsEntityType type,
                             IdType id)
     {   
         Validate.notNull(type);
         Validate.notNull(id);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/%s/v2/%s/%s?idDomain=%s",
-            getBaseUri(realmId), type.getResouceName(), realmId, id.getValue(), id.getIdDomain().value());
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue(), id.getIdDomain().value());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         
         try
         {
-            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
             if(respObj instanceof ErrorResponse)
             {
                 throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -144,8 +137,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, id);
+                destroyAccessToken(credentials);
+                return getObject(credentials, type, id);
             } 
             else 
             {
@@ -170,10 +163,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         }
     }
     @Override
-    public Object update(String realmId,
-                         String appKey,
-                         String realmIdPseudonym,
-                         String authIdPseudonym,
+    public Object update(final OAuthCredentials credentials,
                          WindowsEntityType type,
                          Object obj,
                          String requestId,
@@ -182,17 +172,16 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     {
         Validate.notNull(obj);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
 
         if (((CdmBase)obj).getSyncToken() == null)
         {
-            ((CdmBase)obj).setSyncToken(((CdmBase)getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, ((CdmBase)obj).getId())).getSyncToken());
+            ((CdmBase)obj).setSyncToken(((CdmBase)getObject(credentials, type, ((CdmBase)obj).getId())).getSyncToken());
         }
         
         String str = String.format("%s/%s/v2/%s",
-            getBaseUri(realmId),
+            credentials.getBaseUri(),
             type.getResouceName(),
-            realmId);
+            credentials.getRealmId());
         
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "text/xml");
@@ -207,7 +196,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         
         try
         {
-            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
             if(respObj instanceof ErrorResponse)
             {
                 throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -222,8 +211,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return update(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId, draft, fullResponse);
+                destroyAccessToken(credentials);
+                return update(credentials, type, obj, requestId, draft, fullResponse);
             } 
             else 
             {
@@ -233,10 +222,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     }
 
     @Override
-    public void delete(String realmId,
-                              String appKey,
-                              String realmIdPseudonym,
-                              String authIdPseudonym,
+    public void delete(final OAuthCredentials credentials,
                               WindowsEntityType type,
                               Object obj,
                               String requestId)
@@ -246,15 +232,13 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         Validate.notNull(((CdmBase)obj).getId());
         Validate.isTrue(((CdmBase)obj).getId().getValue()!=null && !((CdmBase)obj).getId().getValue().equals(""));
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         if (((CdmBase)obj).getSyncToken() == null || ((CdmBase)obj).getMetaData() == null)
         {
-            obj = getObject(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, ((CdmBase)obj).getId());
+            obj = getObject(credentials, type, ((CdmBase)obj).getId());
         }
         
         String str = String.format("%s/%s/v2/%s",
-            getBaseUri(realmId), type.getResouceName(), realmId);
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
         
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "text/xml");
@@ -266,7 +250,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         prepareToPost(delRequest, httpRequest);
         try
         {
-            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
             if(respObj instanceof ErrorResponse)
             {
                 throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -276,8 +260,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                delete(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId);
+                destroyAccessToken(credentials);
+                delete(credentials, type, obj, requestId);
             } 
             else 
             {
@@ -292,10 +276,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
      * @return List of pages with results
      */
     @Override
-    public Iterable findObjectsGetPages(final String realmId,
-                                final String appKey,
-                                final String realmIdPseudonym,
-                                final String authIdPseudonym,
+    public Iterable findObjectsGetPages(final OAuthCredentials credentials,
                                 final WindowsEntityType type,
                                 final Object query)
     {
@@ -331,10 +312,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
           
             private List<Object> askAnEspecificPage(Integer pageNumber)
             {
-                loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-                
                 String str = String.format("%s/%s/v2/%s",
-                    getBaseUri(realmId), type.getResouceName(), realmId);
+                    credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
                 
                 HttpUriRequest httpRequest = new HttpPost(str);
                 httpRequest.addHeader("Content-Type", "text/xml");
@@ -346,7 +325,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
 
                 try
                 {
-                    Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                    Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
                     if(respObj instanceof ErrorResponse)
                     {
                         throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -357,7 +336,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
                 {
                     if(e.isAExpiredTokenFault())
                     {
-                        destroyAccessToken(realmId);
+                        destroyAccessToken(credentials);
                         return askAnEspecificPage(pageNumber);
                     } 
                     else 
@@ -376,10 +355,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public Iterable findObjects(final String realmId,
-                                final String appKey,
-                                final String realmIdPseudonym,
-                                final String authIdPseudonym,
+    public Iterable findObjects(final OAuthCredentials credentials,
                                 final WindowsEntityType type,
                                 final Object query)
     {
@@ -390,10 +366,9 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         Integer pageNumber = 0;
         HttpUriRequest httpRequest;
         Object responseObject;
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
         
         String str = String.format("%s/%s/v2/%s",
-                getBaseUri(realmId), type.getResouceName(), realmId);
+                credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
             
         while (hasMoreResults) {
             pageNumber++;
@@ -407,7 +382,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
 
             try
             {
-                responseObject = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+                responseObject = makeARequestToQuickbooks(httpRequest, credentials, false);
                 if(responseObject instanceof ErrorResponse)
                 {
                     throw new QuickBooksRuntimeException(new ErrorInfo(responseObject));
@@ -417,8 +392,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
             {
                 if(e.isAExpiredTokenFault())
                 {
-                    destroyAccessToken(realmId);
-                    responseObject = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));                    
+                    destroyAccessToken(credentials);
+                    responseObject = makeARequestToQuickbooks(httpRequest, credentials, false);                    
                 } 
                 else 
                 {
@@ -441,19 +416,14 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     }
 
     @Override
-    public Object retrieveWithoutUsingQueryObjects(String realmId,
-                                           String appKey,
-                                           String realmIdPseudonym,
-                                           String authIdPseudonym,
+    public Object retrieveWithoutUsingQueryObjects(final OAuthCredentials credentials,
                                            Object syncStatusRequest,
                                            String objectName)
     { 
         Validate.notNull(syncStatusRequest);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/%s/v2/%s",
-            getBaseUri(realmId), objectName, realmId);
+            credentials.getBaseUri(), objectName, credentials.getRealmId());
 
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "text/xml");
@@ -461,7 +431,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         prepareToPost(syncStatusRequest, httpRequest);
         try
         {
-            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
             if(respObj instanceof ErrorResponse)
             {
                 throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -472,8 +442,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return retrieveWithoutUsingQueryObjects(realmId, appKey, realmIdPseudonym, authIdPseudonym, syncStatusRequest, objectName);
+                destroyAccessToken(credentials);
+                return retrieveWithoutUsingQueryObjects(credentials, syncStatusRequest, objectName);
             } 
             else 
             {
@@ -483,16 +453,13 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     }
     
     @Override
-    public void revert(final String realmId, final String appKey, 
-                final String realmIdPseudonym, final String authIdPseudonym, 
+    public void revert(final OAuthCredentials credentials, 
                 WindowsEntityType type, Object obj, String requestId)
     {
         Validate.notNull(type);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/%s/v2/%s",
-            getBaseUri(realmId), type.getResouceName(), realmId);
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
 
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "text/xml");
@@ -505,7 +472,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         
         try
         {
-            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
             if(respObj instanceof ErrorResponse)
             {
                 throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -515,8 +482,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                revert(realmId, appKey, realmIdPseudonym, authIdPseudonym, type, obj, requestId);
+                destroyAccessToken(credentials);
+                revert(credentials, type, obj, requestId);
             } 
             else 
             {
@@ -555,37 +522,44 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
     }
 
     @Override
-    protected String loadCompanyBaseUri(String realmId, String appKey, String accessToken)
-    {
-        //Not fields necessary. According to the documentation, it's the baseUri
-        return baseUri;
+    public UserInformation getCurrentUserInformation(final OAuthCredentials credentials) {        
+        return ((UserResponse) retrieveUserInformation(credentials)).getUser();
     }
     
     @Override
-    public UserInformation getCurrentUserInformation(String realmId,
-            String appKey, String realmIdPseudonym, String authIdPseudonym) {        
-        return ((UserResponse) retrieveUserInformation(realmId, appKey, realmIdPseudonym, authIdPseudonym)).getUser();
+    public boolean disconnect(OAuthCredentials credentials) {
+        PlatformResponse response = (PlatformResponse) disconnectFromQB(credentials);
+        if (response.getErrorCode() != 0) throw new QuickBooksRuntimeException(response.getErrorMessage());
+
+        return true;
     }
-    
+
     @Override
-    public Object get(String realmId,
-                            String appKey,
-                            String realmIdPseudonym,
-                            String authIdPseudonym,
+    public OAuthCredentials reconnect(OAuthCredentials credentials) {
+        ReconnectResponse response = (ReconnectResponse) reconnectToQB(credentials);
+        if (response.getErrorCode() != 0) {
+            throw new QuickBooksRuntimeException(response.getErrorMessage());
+        }
+
+        credentials.setAccessToken(response.getAccessToken());
+        credentials.setAccessTokenSecret(response.getAccessTokenSecret());
+        return credentials;
+    }
+
+    @Override
+    public Object get(final OAuthCredentials credentials,
                             WindowsEntityType type)
     {   
         Validate.notNull(type);
         
-        loadCompanyData(realmId, appKey, realmIdPseudonym, authIdPseudonym);
-        
         String str = String.format("%s/%s/v2/%s",
-            getBaseUri(realmId), type.getResouceName(), realmId);
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         
         try
         {
-            Object respObj = makeARequestToQuickbooks(httpRequest, appKey, getAccessToken(realmId));
+            Object respObj = makeARequestToQuickbooks(httpRequest, credentials, false);
             if(respObj instanceof ErrorResponse)
             {
                 throw new QuickBooksRuntimeException(new ErrorInfo(respObj));
@@ -596,8 +570,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClient imp
         {
             if(e.isAExpiredTokenFault())
             {
-                destroyAccessToken(realmId);
-                return get(realmId, appKey, realmIdPseudonym, authIdPseudonym, type);
+                destroyAccessToken(credentials);
+                return get(credentials, type);
             } 
             else 
             {

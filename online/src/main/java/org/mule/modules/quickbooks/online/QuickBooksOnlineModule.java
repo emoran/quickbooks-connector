@@ -75,7 +75,7 @@ import java.util.Map;
  */
 @SuppressWarnings("unused")
 @Module(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online")
-public class QuickBooksModule
+public class QuickBooksOnlineModule
 {
     /**
      * API Key
