@@ -1,5 +1,13 @@
-3.0(not released yet)
-=====================
+4.0
+===
+- Migrated to DevKit 3.3.2
+- Migrated authentication to Intuit platform OAuth support (QBO and QBW)
+- Added blueDotMenu API
+- Added OpenID support
+- More unit tests
+
+3.0
+===
 - DataMapper version is now master branch
 - Updated dependencies version
 - Added ServiceProviderId as connector property
