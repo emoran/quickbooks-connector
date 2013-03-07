@@ -351,21 +351,18 @@ public class QuickBooksWindowsModule
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:status4}
      * 
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @param syncStatusRequest Map that represents a {@link SyncStatusRequest} object. It has the specifications
-     *                          of the syncStatuses to be retrieved. (like a filter)
+     * @param syncStatusRequest It has the specifications of the syncStatuses to be retrieved. (like a filter)
      * @return list of {@link SyncStatusResponse}
      */
     @Processor
     public List<SyncStatusResponse> status(String accessTokenId,
-                         @Placement(group = "Sync Status Request") @Optional Map<String, Object> syncStatusRequest)
+                         @Optional @Default("#[payload]") SyncStatusRequest syncStatusRequest)
     {
-        if (syncStatusRequest == null)
-        {
-            syncStatusRequest = new HashMap<String, Object>();
+        if (syncStatusRequest == null) {
+            syncStatusRequest = new SyncStatusRequest();
         }
-        
-        return ((SyncStatusResponses) client.retrieveWithoutUsingQueryObjects(getAccessTokenInformation(accessTokenId), 
-            unmap(SyncStatusRequest.class, syncStatusRequest), "status")).getSyncStatusResponse();
+        return ((SyncStatusResponses) client.retrieveWithoutUsingQueryObjects(getAccessTokenInformation(accessTokenId),
+            syncStatusRequest, "status")).getSyncStatusResponse();
     }
     
     /**
