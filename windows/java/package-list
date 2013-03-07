@@ -7,5 +7,7 @@ org.mule.modules.quickbooks.windows.objectfactory
 org.mule.modules.quickbooks.windows.process
 org.mule.modules.quickbooks.windows.processors
 org.mule.modules.quickbooks.windows.schema
+org.mule.modules.quickbooks.windows.schema.holders
+org.mule.modules.quickbooks.windows.schema.transformers
 org.mule.modules.quickbooks.windows.transformers
 
