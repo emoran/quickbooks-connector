@@ -40,7 +40,7 @@ public interface QuickBooksWindowsClient
             				final WindowsEntityType type, final Object query);
     
     void revert(final OAuthCredentials credentials,
-                final WindowsEntityType type, final Object obj, final String requestId);
+    		final WindowsEntityType type, Object obj, final String requestId);
     
     Object retrieveWithoutUsingQueryObjects(final OAuthCredentials credentials,
                   final Object syncStatusRequest, final String objectName);

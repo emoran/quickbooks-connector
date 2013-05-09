@@ -212,6 +212,29 @@ public class QuickBooksWindowsModule
     }
     
     /**
+     * Revert objects by ID.
+     * 
+     * For details of the supported objects:
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:revert}
+     * 
+     * @param accessTokenId identifier for QuickBooks credentials.
+     * @param type WindowsEntityType of the object.
+     * @param entityObject represents the object to be reverted.
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
+     *         and a message provided by quickbooks about the error.
+     */
+    @Processor
+    public void revert(String accessTokenId,
+                            WindowsEntityType type,
+                            @Optional @Default("#[payload]") Object entityObject)
+    {
+        client.revert(getAccessTokenInformation(accessTokenId), type, entityObject, generateANewRequestId());
+    }
+    
+    /**
      * Updates.
      * 
      * <p>Specify all the parameters for the object, not just the new or changed elements.
