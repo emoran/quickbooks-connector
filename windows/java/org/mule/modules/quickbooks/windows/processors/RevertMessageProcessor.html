@@ -74,7 +74,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../../favicon.ico" />
 <title>
 
-  VerifyOpenIdMessageProcessor
+  RevertMessageProcessor
 
 
 | QuickBooks Windows Cloud Connector
@@ -250,11 +250,11 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/OpenIdInitializeMessageProcessor.html">OpenIdInitializeMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/ReconnectMessageProcessor.html">ReconnectMessageProcessor</a></li>
-          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html">RevertMessageProcessor</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html">RevertMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/StatusMessageProcessor.html">StatusMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/SyncActivityMessageProcessor.html">SyncActivityMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/UpdateMessageProcessor.html">UpdateMessageProcessor</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html">VerifyOpenIdMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html">VerifyOpenIdMessageProcessor</a></li>
       </ul>
     </li>
               
@@ -435,7 +435,7 @@ Summary:
      
     
     class
-<h1>VerifyOpenIdMessageProcessor</h1>
+<h1>RevertMessageProcessor</h1>
 
 
 
@@ -511,7 +511,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.windows.processors.VerifyOpenIdMessageProcessor</td>
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.windows.processors.RevertMessageProcessor</td>
     </tr>
     
 
@@ -527,7 +527,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>VerifyOpenIdMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#verifyOpenId(org.mule.api.MuleMessage, java.lang.String, java.util.Map<java.lang.String, java.lang.String>)">verifyOpenId(org.mule.api.MuleMessage, java.lang.String, java.util.Map)</a></code> method in <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>RevertMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#revert(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)">revert(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)</a></code> method in <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -728,30 +728,8 @@ org.mule.api.lifecycle.Stoppable
           protected
           
           
-          MuleMessage</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#_muleMessageType">_muleMessageType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#_receivingUrlType">_receivingUrlType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Map&lt;String,&nbsp;String&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#_responseParametersType">_responseParametersType</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#_accessTokenIdType">_accessTokenIdType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -762,7 +740,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#muleMessage">muleMessage</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#_entityObjectType">_entityObjectType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -772,8 +750,8 @@ org.mule.api.lifecycle.Stoppable
           protected
           
           
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#receivingUrl">receivingUrl</a></td>
+          <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#_typeType">_typeType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -784,7 +762,29 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#responseParameters">responseParameters</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#accessTokenId">accessTokenId</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#entityObject">entityObject</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#type">type</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -903,7 +903,7 @@ org.mule.api.lifecycle.Stoppable
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#VerifyOpenIdMessageProcessor()">VerifyOpenIdMessageProcessor</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#RevertMessageProcessor()">RevertMessageProcessor</a></span>()</nobr>
         
   </td></tr>
 
@@ -932,7 +932,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#dispose()">dispose</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#dispose()">dispose</a></span>()</nobr>
         
   </td></tr>
 
@@ -948,7 +948,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#initialise()">initialise</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#initialise()">initialise</a></span>()</nobr>
         
         <div class="jd-descrdiv">Obtains the expression manager from the Mule context and initialises the connector.</div>
   
@@ -966,7 +966,7 @@ org.mule.api.lifecycle.Stoppable
             MuleEvent</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#process(org.mule.api.MuleEvent)">process</a></span>(MuleEvent event)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#process(org.mule.api.MuleEvent)">process</a></span>(MuleEvent event)</nobr>
         
         <div class="jd-descrdiv">Invokes the MessageProcessor.</div>
   
@@ -984,7 +984,43 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#setAccessTokenId(java.lang.Object)">setAccessTokenId</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets accessTokenId</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#setEntityObject(java.lang.Object)">setEntityObject</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets entityObject</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
         
         <div class="jd-descrdiv">Sets flow construct</div>
   
@@ -1002,7 +1038,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext context)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext context)</nobr>
         
         <div class="jd-descrdiv">Set the Mule context</div>
   
@@ -1020,9 +1056,9 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#setMuleMessage(java.lang.Object)">setMuleMessage</a></span>(Object value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#setType(java.lang.Object)">setType</a></span>(Object value)</nobr>
         
-        <div class="jd-descrdiv">Sets muleMessage</div>
+        <div class="jd-descrdiv">Sets type</div>
   
   </td></tr>
 
@@ -1038,43 +1074,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#setReceivingUrl(java.lang.Object)">setReceivingUrl</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets receivingUrl</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#setResponseParameters(java.lang.Object)">setResponseParameters</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets responseParameters</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#start()">start</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#start()">start</a></span>()</nobr>
         
   </td></tr>
 
@@ -1090,7 +1090,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/VerifyOpenIdMessageProcessor.html#stop()">stop</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html#stop()">stop</a></span>()</nobr>
         
   </td></tr>
 
@@ -2019,37 +2019,7 @@ From interface
 
 
 
-<A NAME="_muleMessageType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        MuleMessage
-      </span>
-        _muleMessageType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_receivingUrlType"></A>
+<A NAME="_accessTokenIdType"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2059,7 +2029,7 @@ From interface
          
         String
       </span>
-        _receivingUrlType
+        _accessTokenIdType
     </h4>
       <div class="api-level">
         
@@ -2079,37 +2049,7 @@ From interface
 
 
 
-<A NAME="_responseParametersType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Map&lt;String,&nbsp;String&gt;
-      </span>
-        _responseParametersType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="muleMessage"></A>
+<A NAME="_entityObjectType"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2119,7 +2059,7 @@ From interface
          
         Object
       </span>
-        muleMessage
+        _entityObjectType
     </h4>
       <div class="api-level">
         
@@ -2139,7 +2079,7 @@ From interface
 
 
 
-<A NAME="receivingUrl"></A>
+<A NAME="_typeType"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2147,9 +2087,9 @@ From interface
         protected 
          
          
-        Object
+        <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a>
       </span>
-        receivingUrl
+        _typeType
     </h4>
       <div class="api-level">
         
@@ -2169,7 +2109,7 @@ From interface
 
 
 
-<A NAME="responseParameters"></A>
+<A NAME="accessTokenId"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2179,7 +2119,67 @@ From interface
          
         Object
       </span>
-        responseParameters
+        accessTokenId
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="entityObject"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        entityObject
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="type"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        type
     </h4>
       <div class="api-level">
         
@@ -2208,7 +2208,7 @@ From interface
 
 
 
-<A NAME="VerifyOpenIdMessageProcessor()"></A>
+<A NAME="RevertMessageProcessor()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2220,7 +2220,7 @@ From interface
          
         
       </span>
-      <span class="sympad">VerifyOpenIdMessageProcessor</span>
+      <span class="sympad">RevertMessageProcessor</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2374,6 +2374,88 @@ From interface
 </div>
 
 
+<A NAME="setAccessTokenId(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAccessTokenId</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets accessTokenId</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setEntityObject(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setEntityObject</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets entityObject</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="setFlowConstruct(org.mule.api.construct.FlowConstruct)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2456,7 +2538,7 @@ From interface
 </div>
 
 
-<A NAME="setMuleMessage(java.lang.Object)"></A>
+<A NAME="setType(java.lang.Object)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2468,7 +2550,7 @@ From interface
          
         void
       </span>
-      <span class="sympad">setMuleMessage</span>
+      <span class="sympad">setType</span>
       <span class="normal">(Object value)</span>
     </h4>
       <div class="api-level">
@@ -2481,89 +2563,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Sets muleMessage</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setReceivingUrl(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setReceivingUrl</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets receivingUrl</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setResponseParameters(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setResponseParameters</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets responseParameters</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Sets type</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">

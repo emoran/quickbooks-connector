@@ -438,6 +438,16 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#revert">&lt;quickbooks-windows:revert&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Revert objects by ID.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#status">&lt;quickbooks-windows:status&gt;</a></nobr>
         
         <div class="jd-descrdiv">Retrieve the Status
@@ -448,7 +458,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#sync-activity">&lt;quickbooks-windows:sync-activity&gt;</a></nobr>
         
@@ -460,7 +470,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#update">&lt;quickbooks-windows:update&gt;</a></nobr>
         
@@ -470,7 +480,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#verify-open-id">&lt;quickbooks-windows:verify-open-id&gt;</a></nobr>
         
@@ -1945,6 +1955,106 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
             <td>ObjectStoreException</td>
             <td>if the credentials store failed
 
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="revert"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:revert&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Revert objects by ID.
+ 
+ For details of the supported objects:
+ <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+ 0500_QuickBooks_Windows/0500_Supported_Objects">Supported Objects and Operations</a>
+ 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:revert accessTokenId="accessTokenId"
+                           type="#[map-payload:type]"
+                           entityObject-ref="#[map-payload:obj]" &gt;            
+&lt;/quickbooks-windows:revert&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Identifier for QuickBooks credentials.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>type</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">WindowsEntityType of the object.</td>
+                        <td class="jd-descrcol"><a href="../java/org/mule/modules/quickbooks/windows/WindowsEntityType.html">WindowsEntityType</a></td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>entityObject</nobr></td>
+                        <td class="jd-descrcol">#[payload]</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Represents the object to be reverted.</td>
+                        <td class="jd-descrcol">Object</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td>QuickBooksRuntimeException</td>
+            <td>when there is a problem with the server. It has a code 
+         and a message provided by quickbooks about the error.
 </td>
         </tr>
       </table>
