@@ -23,6 +23,13 @@
 </quickbooks-windows:delete>
 <!-- END_INCLUDE(quickbooks-windows:delete) -->
 
+<!-- BEGIN_INCLUDE(quickbooks-windows:revert) -->
+<quickbooks-windows:revert accessTokenId="accessTokenId"
+                           type="#[map-payload:type]"
+                           entityObject-ref="#[map-payload:obj]" >            
+</quickbooks-windows:revert>
+<!-- END_INCLUDE(quickbooks-windows:revert) -->
+
 <!-- BEGIN_INCLUDE(quickbooks-windows:get-object) -->
 <quickbooks-windows:get-object accessTokenId="accessTokenId"
                            type="#[map-payload:type]"
