@@ -75,53 +75,10 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>oauth.signpost</groupId>
-            <artifactId>signpost-core</artifactId>
-            <version>1.2.1.2</version>
-        </dependency>
-		<dependency>
-            <groupId>oauth.signpost</groupId>
-            <artifactId>signpost-commonshttp4</artifactId>
-            <version>1.2.1.2</version>
-        </dependency>
-		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-http</artifactId>
 			<version>${mule.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.intuit.code.oauth</groupId>
-			<artifactId>oAuthHelper-core</artifactId>
-			<version>0.0.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.android</groupId>
-					<artifactId>android</artifactId>
-				</exclusion>
-				<exclusion>
-				    <groupId>javax</groupId>
-				    <artifactId>javaee-web-api</artifactId>
-				</exclusion>
-                <exclusion>
-                    <groupId>oauth.signpost</groupId>
-                    <artifactId>signpost-commonshttp4</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>oauth.signpost</groupId>
-                    <artifactId>signpost-core</artifactId>
-                </exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 </project>
