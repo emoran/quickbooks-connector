@@ -34,7 +34,7 @@
                             <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
                             <schemaFiles>
                                 ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,
-                                IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd, UserInformation.xsd
+                                IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd, UserInformation.xsd, PlatformResponses.xsd
                             </schemaFiles>
                             <extension>true</extension>
                             <bindingDirectory>src/main/resources/schema/windows</bindingDirectory>

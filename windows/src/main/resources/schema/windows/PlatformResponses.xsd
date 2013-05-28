@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule QuickBooks Connector
+
+    Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://platform.intuit.com/api/v1"
+	targetNamespace="http://platform.intuit.com/api/v1" elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	
+	<xs:element name="PlatformResponse" type="PlatformResponse"/>
+    <xs:element name="ReconnectResponse" type="ReconnectResponse"/>
+	
+	<xs:complexType name="ReconnectResponse">
+		<xs:annotation>
+			<xs:documentation>
+				Description: For retrieving information for current user.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="1">
+		    <xs:element minOccurs="0" name="ServerTime" type="xs:string" />
+			<xs:element minOccurs="0" name="ErrorCode" type="xs:int"/>
+            <xs:element minOccurs="0" name="ErrorMessage" type="xs:string" />
+            <xs:element minOccurs="0" name="OAuthToken" type="xs:string" />
+            <xs:element minOccurs="0" name="OAuthTokenSecret" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+    <xs:complexType name="PlatformResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Description: For retrieving information for current user.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence minOccurs="1">
+            <xs:element minOccurs="0" name="ServerTime" type="xs:string" />
+            <xs:element minOccurs="0" name="ErrorCode" type="xs:int"/>
+            <xs:element minOccurs="0" name="ErrorMessage" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

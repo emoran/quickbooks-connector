@@ -33,15 +33,7 @@ import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.objectfactory.QBWMessageUtils;
-import org.mule.modules.quickbooks.windows.schema.AddRequest;
-import org.mule.modules.quickbooks.windows.schema.CdmBase;
-import org.mule.modules.quickbooks.windows.schema.DelRequest;
-import org.mule.modules.quickbooks.windows.schema.ErrorResponse;
-import org.mule.modules.quickbooks.windows.schema.IdType;
-import org.mule.modules.quickbooks.windows.schema.ModRequest;
-import org.mule.modules.quickbooks.windows.schema.QueryBase;
-import org.mule.modules.quickbooks.windows.schema.RevertRequest;
-import org.mule.modules.quickbooks.windows.schema.SuccessResponse;
+import org.mule.modules.quickbooks.windows.schema.*;
 import org.mule.modules.quickbooks.windows.schema.UserInformation;
 import org.mule.modules.quickbooks.windows.schema.UserResponse;
 import org.mule.modules.utils.MuleSoftException;
@@ -528,7 +520,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
     
     @Override
     public boolean disconnect(OAuthCredentials credentials) {
-        PlatformResponse response = (PlatformResponse) disconnectFromQB(credentials);
+        org.mule.modules.quickbooks.windows.schema.PlatformResponse response =
+                (org.mule.modules.quickbooks.windows.schema.PlatformResponse) disconnectFromQB(credentials);
         if (response.getErrorCode() != 0) throw new QuickBooksRuntimeException(response.getErrorMessage());
 
         return true;
@@ -536,13 +529,14 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
 
     @Override
     public OAuthCredentials reconnect(OAuthCredentials credentials) {
-        ReconnectResponse response = (ReconnectResponse) reconnectToQB(credentials);
+        org.mule.modules.quickbooks.windows.schema.ReconnectResponse response =
+                (org.mule.modules.quickbooks.windows.schema.ReconnectResponse) reconnectToQB(credentials);
         if (response.getErrorCode() != 0) {
             throw new QuickBooksRuntimeException(response.getErrorMessage());
         }
 
-        credentials.setAccessToken(response.getAccessToken());
-        credentials.setAccessTokenSecret(response.getAccessTokenSecret());
+        credentials.setAccessToken(response.getOAuthToken());
+        credentials.setAccessTokenSecret(response.getOAuthTokenSecret());
         return credentials;
     }
 
