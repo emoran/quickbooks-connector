@@ -1136,6 +1136,27 @@ For details see:
       &lt;/xs:extension&gt;
     &lt;/xs:complexContent&gt;
   &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/quickbooks-windows&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;blue-dot-menu&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; type=&quot;BlueDotMenuType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Retrieves Blue Dot App Menu from Intuit.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;BlueDotMenuType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute name=&quot;config-ref&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;accessTokenId&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;credentials identifier for the user information to be requested&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
   &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/quickbooks-windows&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;reconnect&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; type=&quot;ReconnectType&quot;&gt;
     &lt;xs:annotation&gt;
       &lt;xs:documentation&gt;Generates a new OAuth access token and invalidates the OAuth access token used in the request,
@@ -1207,47 +1228,6 @@ when the OAuth access token is renewed, your app can continue to access the user
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
           &lt;xs:enumeration value=&quot;QBSDK&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;OfferingIdEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;&amp;lt;p&amp;gt;Java class for offeringId.
-
-&amp;lt;p&amp;gt;The following schema fragment specifies the expected content contained within this class.
-&amp;lt;p&amp;gt;
-&amp;lt;pre&amp;gt;
-&amp;amp;lt;simpleType name=&quot;offeringId&quot;&amp;gt;
-&amp;amp;lt;restriction base=&quot;{http://www.w3.org/2001/XMLSchemastring&quot;&amp;gt;
-&amp;amp;lt;enumeration value=&quot;ipp&quot;/&amp;gt;
-&amp;amp;lt;enumeration value=&quot;cmo&quot;/&amp;gt;
-&amp;amp;lt;enumeration value=&quot;esbsync&quot;/&amp;gt;
-&amp;amp;lt;/restriction&amp;gt;
-&amp;amp;lt;/simpleType&amp;gt;
-&amp;lt;/pre&amp;gt;&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;IPP&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;CMO&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;ESBSYNC&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
@@ -1990,6 +1970,47 @@ then can be used for reporting. You can also create a vendor type as a subtype o
 &amp;lt;p&amp;gt;For details of the fields, and query:
 &amp;lt;a href=&quot;https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
 0500_QuickBooks_Windows/0600_Object_Reference/VendorType&quot;&amp;gt;VendorType&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;OfferingIdEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;&amp;lt;p&amp;gt;Java class for offeringId.
+
+&amp;lt;p&amp;gt;The following schema fragment specifies the expected content contained within this class.
+&amp;lt;p&amp;gt;
+&amp;lt;pre&amp;gt;
+&amp;amp;lt;simpleType name=&quot;offeringId&quot;&amp;gt;
+&amp;amp;lt;restriction base=&quot;{http://www.w3.org/2001/XMLSchemastring&quot;&amp;gt;
+&amp;amp;lt;enumeration value=&quot;ipp&quot;/&amp;gt;
+&amp;amp;lt;enumeration value=&quot;cmo&quot;/&amp;gt;
+&amp;amp;lt;enumeration value=&quot;esbsync&quot;/&amp;gt;
+&amp;amp;lt;/restriction&amp;gt;
+&amp;amp;lt;/simpleType&amp;gt;
+&amp;lt;/pre&amp;gt;&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;IPP&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;CMO&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;ESBSYNC&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
         &lt;/xs:restriction&gt;
