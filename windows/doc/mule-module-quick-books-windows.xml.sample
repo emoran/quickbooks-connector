@@ -175,3 +175,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" />
 <!-- BEGIN_INCLUDE(quickbooks-windows:reconnect) -->
 <quickbooks-windows:reconnect accessTokenId="accessTokenId" />
 <!-- END_INCLUDE(quickbooks-windows:reconnect) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:blue-dot-menu) -->
+<quickbooks-windows:blue-dot-menu accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks-windows:blue-dot-menu) -->

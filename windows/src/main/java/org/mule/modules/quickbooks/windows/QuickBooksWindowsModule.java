@@ -608,6 +608,21 @@ public class QuickBooksWindowsModule
     }
 
     /**
+     * Retrieves Blue Dot App Menu from Intuit.
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:blue-dot-menu}
+     *
+     * @param accessTokenId credentials identifier for the user information to be requested
+     * 
+     * @return Object containing the HTML and javascript for displaying the menu
+     *
+     */
+    @Processor
+    public Object blueDotMenu(String accessTokenId) {
+        return client.blueDotMenu(getAccessTokenInformation(accessTokenId));
+    }
+    
+    /**
      * Generates a new OAuth access token and invalidates the OAuth access token used in the request,
      * thereby extending the life span by six months. Because accessing QuickBooks data requires a valid access token,
      * when the OAuth access token is renewed, your app can continue to access the user's QuickBooks company data.
