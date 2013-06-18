@@ -541,6 +541,11 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
     }
 
     @Override
+    public Object blueDotMenu(final OAuthCredentials credentials) {
+    	return getBlueDotMenu(credentials);
+    }
+    
+    @Override
     public Object get(final OAuthCredentials credentials,
                             WindowsEntityType type)
     {   

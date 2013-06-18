@@ -19,6 +19,8 @@ import org.mule.modules.quickbooks.windows.schema.UserInformation;
 
 public interface QuickBooksWindowsClient
 {
+	Object blueDotMenu(final OAuthCredentials credentials);
+	
     Object create(final OAuthCredentials credentials,
                    final WindowsEntityType type, Object obj, final String requestId, 
                    final Boolean draft, final Boolean fullResponse);
