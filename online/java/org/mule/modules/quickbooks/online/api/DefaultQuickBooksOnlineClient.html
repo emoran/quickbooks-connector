@@ -806,10 +806,10 @@ org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth
             
             
             
-            List&lt;AppMenuInformation&gt;</nobr>
+            Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/DefaultQuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials, java.lang.String)">getBlueDotInformation</a></span>(OAuthCredentials credentials, String regex)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/DefaultQuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials)">getBlueDotInformation</a></span>(OAuthCredentials credentials)</nobr>
         
         <div class="jd-descrdiv">Parse the HTML information for BlueDotMenu</div>
   
@@ -1575,10 +1575,10 @@ From interface
             
             
             
-            List&lt;AppMenuInformation&gt;</nobr>
+            Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials, java.lang.String)">getBlueDotInformation</a></span>(OAuthCredentials credentials, String regex)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials)">getBlueDotInformation</a></span>(OAuthCredentials credentials)</nobr>
         
   </td></tr>
 
@@ -2075,7 +2075,7 @@ From interface
 </div>
 
 
-<A NAME="getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials, java.lang.String)"></A>
+<A NAME="getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2085,10 +2085,10 @@ From interface
          
          
          
-        List&lt;AppMenuInformation&gt;
+        Object
       </span>
       <span class="sympad">getBlueDotInformation</span>
-      <span class="normal">(OAuthCredentials credentials, String regex)</span>
+      <span class="normal">(OAuthCredentials credentials)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2108,19 +2108,11 @@ From interface
           <th>credentials</td>
           <td>OAuth credentials</td>
         </tr>
-        <tr>
-          <th>regex</td>
-          <td>Regex for extracting the information
-              <p>The regex has to extract the information in this way:</p>
-              <p>match[0]: appId,appName,contextArea</p>
-              <p>match[1]: logoImageUrl</p>
-              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p></td>
-        </tr>
       </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>List with connected apps information
+      <ul class="nolist"><li>Object containing the html for the menu
 </li></ul>
   </div>
 

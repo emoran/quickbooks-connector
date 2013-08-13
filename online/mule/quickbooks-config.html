@@ -3205,22 +3205,6 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
                 
                 
           
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>regex</nobr></td>
-                        <td class="jd-descrcol">intuitPlatformOpenOtherApp\\((.+?)\\)\ style=\'background-image: url\\((.+?)\\)</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Regex for extracting the information
-              <p>The regex has to extract the information in this way:</p>
-              <p>match[0]: "appId,appName,contextArea"</p>
-              <p>match[1]: "logoImageUrl"</p>
-              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p></td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
           
           
         </table>
@@ -3235,8 +3219,8 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;AppMenuInformation&gt;</td>
-                <td class="jd-descrcol">list with AppMenu information from Intuit
+                <td class="jd-descrcol">Object</td>
+                <td class="jd-descrcol">Object with AppMenu html information from Intuit
 
 </td>
              </tr>
