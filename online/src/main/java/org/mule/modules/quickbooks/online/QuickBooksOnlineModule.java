@@ -13,6 +13,10 @@
  */
 package org.mule.modules.quickbooks.online;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -20,10 +24,14 @@ import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
+
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
-import org.mule.api.annotations.Module;
+import org.mule.api.annotations.Connector;
+import org.mule.api.annotations.MetaDataKeyRetriever;
+import org.mule.api.annotations.MetaDataRetriever;
+import org.mule.api.annotations.MetaDataSwitch;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
@@ -32,6 +40,21 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.common.metadata.DefaultMetaData;
+import org.mule.common.metadata.DefaultMetaDataKey;
+import org.mule.common.metadata.DefaultPojoMetaDataModel;
+import org.mule.common.metadata.MetaData;
+import org.mule.common.metadata.MetaDataKey;
+import org.mule.common.query.Query;
+import org.mule.common.query.dsql.parser.MuleDsqlParser;
+import org.mule.common.query.expression.And;
+import org.mule.common.query.expression.EmptyExpression;
+import org.mule.common.query.expression.EqualsOperator;
+import org.mule.common.query.expression.Expression;
+import org.mule.common.query.expression.FieldComparation;
+import org.mule.common.query.expression.GreaterOperator;
+import org.mule.common.query.expression.LessOperator;
+import org.mule.common.query.expression.Operator;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.model.AppMenuInformation;
@@ -61,8 +84,6 @@ import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.quickbooks.online.schema.Vendor;
 import org.openid4java.message.MessageException;
 
-import java.util.List;
-import java.util.Map;
 /**
  * QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
  * making the accounting process more comfortable for the average business owner or manager. By using the built-in
@@ -74,7 +95,7 @@ import java.util.Map;
  * @author MuleSoft, inc.
  */
 @SuppressWarnings("unused")
-@Module(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online")
+@Connector(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online", minMuleVersion = "3.5", metaData = MetaDataSwitch.DYNAMIC)
 public class QuickBooksOnlineModule
 {
     /**
@@ -95,7 +116,7 @@ public class QuickBooksOnlineModule
     @Configurable
     @Optional
     @Default(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME)
-    private ObjectStore objectStore;
+    private ObjectStore<?> objectStore;
 
     /**
      * Object store helper
@@ -1023,13 +1044,72 @@ public class QuickBooksOnlineModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Iterable findObjects(String accessTokenId,
+    public Iterable<?> findObjects(String accessTokenId,
                                 OnlineEntityType type, 
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
         return client.findObjects(getAccessTokenInformation(accessTokenId), type, queryFilter, querySort);
     }
+    
+    public Iterable<?> query(String accessTokenId, @org.mule.api.annotations.Query String query)
+    {
+        MuleDsqlParser muleDsqlParser = new MuleDsqlParser();
+        Query q = muleDsqlParser.parse(query);
+
+        OnlineEntityType objectType = getTypeFor(q.getTypes().get(0).getName());
+
+
+        return findObjects(accessTokenId, objectType, generateQueryFilter(q), generateQuerySort(q));
+    }
+    
+    private String generateQueryFilter(Query query) {
+        StringBuilder queryFilter = new StringBuilder();
+        
+        buildQueryFilter(query.getFilterExpression(), queryFilter);
+        
+        return queryFilter.toString().trim();
+    }
+
+    private void buildQueryFilter(Expression filterExpression, StringBuilder queryFilter) {
+        if(filterExpression instanceof FieldComparation) {
+            FieldComparation expr = (FieldComparation) filterExpression;
+            queryFilter.append(expr.getField().getName());
+            queryFilter.append(" ");
+            queryFilter.append(getOperator(expr.getOperator()));
+            queryFilter.append(" ");
+            queryFilter.append(expr.getValue().getValue());
+            queryFilter.append(" ");
+        } else if(filterExpression instanceof And) {
+            And expr = (And) filterExpression;
+            buildQueryFilter(expr.getLeft(), queryFilter);
+            queryFilter.append(" AND ");
+            buildQueryFilter(filterExpression, queryFilter);
+            queryFilter.append(" ");
+        } else if(filterExpression instanceof EmptyExpression) {
+            return;
+        } else {
+            throw new UnsupportedOperationException("Unsupported filter expression " + filterExpression.toString());
+        }
+    }
+
+    private String getOperator(Operator operator) {
+        if(operator instanceof EqualsOperator) {
+            return ":EQUALS:";
+        } else if(operator instanceof LessOperator) {
+            return ":BEFORE";
+        } else if(operator instanceof GreaterOperator) {
+            return ":AFTER:";
+        }
+        throw new UnsupportedOperationException("Operator " + operator.toString() + " is not supported.");
+    }
+    
+    private String generateQuerySort(Query query) {
+        StringBuilder querySort = new StringBuilder();
+        
+        return querySort.toString();
+    }
+
     
     /**
      * Gets all of the transactions and objects that have been deleted on the Data Services server
@@ -1055,7 +1135,7 @@ public class QuickBooksOnlineModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Iterable changeDataDeleted(String accessTokenId,
+    public Iterable<?> changeDataDeleted(String accessTokenId,
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
@@ -1384,11 +1464,11 @@ public class QuickBooksOnlineModule
     }
 
 
-    public ObjectStore getObjectStore() {
+    public ObjectStore<?> getObjectStore() {
         return objectStore;
     }
 
-    public void setObjectStore(ObjectStore objectStore) {
+    public void setObjectStore(ObjectStore<?> objectStore) {
         this.objectStore = objectStore;
     }
 
@@ -1430,5 +1510,46 @@ public class QuickBooksOnlineModule
 
     public void setOpenIDClient(DefaultOpenIDClient openIDClient) {
         this.openIDClient = openIDClient;
+    }
+    
+    @MetaDataKeyRetriever
+    public List<MetaDataKey> getMetaDataKeys() throws Exception {
+        List<MetaDataKey> keys = new ArrayList<MetaDataKey>();
+        
+        for(OnlineEntityType aType : OnlineEntityType.values()) {
+            keys.add(new DefaultMetaDataKey(aType.getType().getName(), aType.getSimpleName()));
+        }
+
+        return keys;
+    }
+
+    @MetaDataRetriever
+    public MetaData getMetaData(MetaDataKey key) throws Exception {
+        OnlineEntityType type = getTypeFor(key);
+        if(type == null) {
+            throw new Exception("Invalid type " + key.getId());
+        }
+        DefaultPojoMetaDataModel model = new DefaultPojoMetaDataModel(type.getType());
+        
+        MetaData metaData = new DefaultMetaData(model);
+        return metaData;
+    }    
+
+    private OnlineEntityType getTypeFor(String name) {
+        for(OnlineEntityType aType : OnlineEntityType.values()) {
+            if(aType.getType().getName().equals(name)) {
+                return aType;
+            }
+        }        
+        return null;
+    }
+    
+    private OnlineEntityType getTypeFor(MetaDataKey key) {
+        for(OnlineEntityType aType : OnlineEntityType.values()) {
+            if(aType.getType().getName().equals(key.getId())) {
+                return aType;
+            }
+        }        
+        return null;
     }
 }
