@@ -13,12 +13,15 @@
  */
 package org.mule.modules.quickbooks.online;
 
+import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
@@ -27,12 +30,7 @@ import oauth.signpost.exception.OAuthNotAuthorizedException;
 
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
-import org.mule.api.annotations.Configurable;
-import org.mule.api.annotations.Connector;
-import org.mule.api.annotations.MetaDataKeyRetriever;
-import org.mule.api.annotations.MetaDataRetriever;
-import org.mule.api.annotations.MetaDataSwitch;
-import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.*;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.OutboundHeaders;
@@ -40,11 +38,10 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
-import org.mule.common.metadata.DefaultMetaData;
-import org.mule.common.metadata.DefaultMetaDataKey;
-import org.mule.common.metadata.DefaultPojoMetaDataModel;
-import org.mule.common.metadata.MetaData;
-import org.mule.common.metadata.MetaDataKey;
+import org.mule.common.DefaultResult;
+import org.mule.common.Result;
+import org.mule.common.metadata.*;
+import org.mule.common.metadata.datatype.DataType;
 import org.mule.common.query.Query;
 import org.mule.common.query.dsql.parser.MuleDsqlParser;
 import org.mule.common.query.expression.And;
@@ -83,6 +80,7 @@ import org.mule.modules.quickbooks.online.schema.SalesReceipt;
 import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.quickbooks.online.schema.Vendor;
 import org.openid4java.message.MessageException;
+import org.springframework.beans.BeanUtils;
 
 /**
  * QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
@@ -95,8 +93,8 @@ import org.openid4java.message.MessageException;
  * @author MuleSoft, inc.
  */
 @SuppressWarnings("unused")
-@Connector(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online", minMuleVersion = "3.5", metaData = MetaDataSwitch.DYNAMIC)
-public class QuickBooksOnlineModule
+@Module(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online", minMuleVersion = "3.5", metaData = MetaDataSwitch.DYNAMIC)
+public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled
 {
     /**
      * API Key
@@ -1044,14 +1042,36 @@ public class QuickBooksOnlineModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Iterable<?> findObjects(String accessTokenId,
+    public Iterable findObjects(String accessTokenId,
                                 OnlineEntityType type, 
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
         return client.findObjects(getAccessTokenInformation(accessTokenId), type, queryFilter, querySort);
     }
-    
+
+
+    /**
+     * Lazily retrieves Objects
+     *
+     * For details see:
+     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+     * 0400_QuickBooks_Online/Vendor">Vendor Specification</a>
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects3}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects4}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects5}
+     *
+     * @param query identifier for QuickBooks credentials.
+     * @param accessTokenId EntityType of the object.
+     * @return Iterable of the objects to be retrieved.
+     *
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code
+     *         and a message provided by quickbooks about the error.
+     */
+    @Processor
     public Iterable<?> query(String accessTokenId, @org.mule.api.annotations.Query String query)
     {
         MuleDsqlParser muleDsqlParser = new MuleDsqlParser();
@@ -1135,7 +1155,7 @@ public class QuickBooksOnlineModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Iterable<?> changeDataDeleted(String accessTokenId,
+    public Iterable changeDataDeleted(String accessTokenId,
                                 @Optional String queryFilter,
                                 @Optional String querySort)
     {
@@ -1512,41 +1532,31 @@ public class QuickBooksOnlineModule
         this.openIDClient = openIDClient;
     }
     
-    @MetaDataKeyRetriever
-    public List<MetaDataKey> getMetaDataKeys() throws Exception {
+
+    public Result<List<MetaDataKey>> getMetaDataKeys(){
         List<MetaDataKey> keys = new ArrayList<MetaDataKey>();
         
         for(OnlineEntityType aType : OnlineEntityType.values()) {
-            keys.add(new DefaultMetaDataKey(aType.getType().getName(), aType.getSimpleName()));
+            keys.add(new DefaultMetaDataKey(aType.getSimpleName(), aType.getSimpleName()));
         }
 
-        return keys;
+        return new DefaultResult<List<MetaDataKey>>(keys);
     }
 
-    @MetaDataRetriever
-    public MetaData getMetaData(MetaDataKey key) throws Exception {
-        OnlineEntityType type = getTypeFor(key);
+    public Result<MetaData> getMetaData(MetaDataKey key) {
+        OnlineEntityType type = getTypeFor(key.getId());
         if(type == null) {
-            throw new Exception("Invalid type " + key.getId());
+            return new DefaultResult<MetaData>(null, Result.Status.FAILURE, "Invalid type " + key.getId());
         }
         DefaultPojoMetaDataModel model = new DefaultPojoMetaDataModel(type.getType());
-        
+
         MetaData metaData = new DefaultMetaData(model);
-        return metaData;
-    }    
+        return new DefaultResult<MetaData>(metaData);
+    }
 
     private OnlineEntityType getTypeFor(String name) {
         for(OnlineEntityType aType : OnlineEntityType.values()) {
-            if(aType.getType().getName().equals(name)) {
-                return aType;
-            }
-        }        
-        return null;
-    }
-    
-    private OnlineEntityType getTypeFor(MetaDataKey key) {
-        for(OnlineEntityType aType : OnlineEntityType.values()) {
-            if(aType.getType().getName().equals(key.getId())) {
+            if(aType.getSimpleName().equals(name)) {
                 return aType;
             }
         }        
