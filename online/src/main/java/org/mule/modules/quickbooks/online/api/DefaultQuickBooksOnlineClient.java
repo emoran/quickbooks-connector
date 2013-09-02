@@ -11,10 +11,12 @@
 package org.mule.modules.quickbooks.online.api;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +30,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
+import org.mule.api.MuleException;
 import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
@@ -40,6 +43,7 @@ import org.mule.modules.quickbooks.online.schema.*;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
+import org.mule.streaming.PagingDelegate;
 
 /**
  * 
@@ -217,101 +221,95 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
      * 
      */
     @Override
-    public <T extends CdmBase> Iterable<T> findObjectsGetPages(final OAuthCredentials credentials,
-                                                       final OnlineEntityType type, 
-                                                       final String queryFilter, 
-                                                       final String querySort)
+    public PagingDelegate<CdmBase> findObjectsGetPages(final OAuthCredentials credentials,
+                                                             final OnlineEntityType type,
+                                                             final String queryFilter,
+                                                             final String querySort)
     {
         Validate.notNull(type);
-        
-        return new PaginatedIterable<T, SearchResults>()
-            {
-                @Override
-                protected SearchResults firstPage()
-                {
-                    return askAnEspecificPage(1);
-                }
 
-                @Override
-                protected SearchResults nextPage(SearchResults currentPage)
-                {
-                    return askAnEspecificPage(currentPage.getCurrentPage() + 1);
-                }
-                
-                @Override
-                protected boolean hasNextPage(SearchResults page)
-                {
-                    return page.getCount().equals(getResultsPerPage());
-                }
 
-                @Override
-                @SuppressWarnings("unchecked")
-                protected Iterator<T> pageIterator(SearchResults page)
-                {
-                    try
-                    {          
-                        return ((List<T>) page.getCdmCollections().getClass()
-                                        .getMethod("get" + type.getCdmCollectionName())
-                                        .invoke(page.getCdmCollections())).iterator();
-                    }
-                    catch (IllegalAccessException e)
-                    {
-                        throw new AssertionError(e);
-                    }
-                    catch (InvocationTargetException e)
-                    {
-                        throw new AssertionError(e);
-                    }
-                    catch (NoSuchMethodException e)
-                    {
-                        throw new AssertionError(e);
-                    }
-                }
-                
-                private SearchResults askAnEspecificPage(Integer pageNumber)
-                {
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                    if (queryFilter != null)
-                    {
-                        nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
-                    }
-                    if (querySort != null)
-                    {
-                        nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
-                    }
-                    nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
-                    nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
-                    HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
-                        credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
-                    
-                    httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                    try
-                    {
-                        ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
-                    }
-                    catch (UnsupportedEncodingException e)
-                    {
-                        throw MuleSoftException.soften(e);
-                    } 
-                    
-                    try
-                    {
-                        return (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
-                    }
-                    catch(QuickBooksRuntimeException e)
-                    {
-                        if(e.isAExpiredTokenFault())
-                        {
-                            destroyAccessToken(credentials);
-                            return askAnEspecificPage(pageNumber);
-                        } 
-                        else 
-                        {
-                            throw e;
+        PagingDelegate pagingDelegate = new PagingDelegate() {
+
+            private int currentPage = 1;
+            private int count = -1;
+
+            @Override
+            public List<? extends CdmBase> getPage() {
+                SearchResults results = askAnEspecificPage(currentPage);
+                count = results.getCount();
+
+                for(Field field :results.getCdmCollections().getClass().getDeclaredFields()) {
+                    if (field.getName().equalsIgnoreCase(type.getSimpleName())) {
+                        try {
+                            field.setAccessible(true);
+                            return (List<? extends CdmBase>) field.get(results.getCdmCollections());
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
                         }
                     }
                 }
-            };
+
+                return new ArrayList<CdmBase>();
+            }
+
+            @Override
+            public int getTotalResults() {
+                return -1;
+            }
+
+            @Override
+            public void close() throws MuleException {
+
+            }
+
+            private SearchResults askAnEspecificPage(Integer pageNumber)
+            {
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                if (queryFilter != null)
+                {
+                    nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
+                }
+                if (querySort != null)
+                {
+                    nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
+                }
+                nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
+                nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
+                HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s",
+                        credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
+
+                httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                try
+                {
+                    ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
+                }
+                catch (UnsupportedEncodingException e)
+                {
+                    throw MuleSoftException.soften(e);
+                }
+
+                try
+                {
+                    return (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
+                }
+                catch(QuickBooksRuntimeException e)
+                {
+                    if(e.isAExpiredTokenFault())
+                    {
+                        destroyAccessToken(credentials);
+                        return askAnEspecificPage(pageNumber);
+                    }
+                    else
+                    {
+                        throw e;
+                    }
+                }
+            }
+        };
+
+        return pagingDelegate;
+
     }
     
     /** 

@@ -16,6 +16,8 @@ import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
 import org.mule.modules.quickbooks.online.schema.IdType;
+import org.mule.modules.quickbooks.online.schema.SearchResults;
+import org.mule.streaming.PagingDelegate;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ public interface QuickBooksOnlineClient
 
     <T extends CdmBase> Iterable<T> findObjects(final OAuthCredentials credentials, final OnlineEntityType type, final String queryFilter, final String querySort);
 
-    <T extends CdmBase> Iterable<T> findObjectsGetPages(OAuthCredentials credentials, OnlineEntityType type, String queryFilter, String querySort);
+    <T extends CdmBase> PagingDelegate<CdmBase> findObjectsGetPages(OAuthCredentials credentials, OnlineEntityType type, String queryFilter, String querySort);
     
     <T extends Object> T get(OAuthCredentials credentials, OnlineEntityType type);
     

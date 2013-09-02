@@ -29,12 +29,14 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 
 import org.apache.commons.lang.StringUtils;
+import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
 import org.mule.api.annotations.*;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.OutboundHeaders;
 import org.mule.api.config.MuleProperties;
+import org.mule.api.context.MuleContextAware;
 import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
@@ -63,22 +65,9 @@ import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
 import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
-import org.mule.modules.quickbooks.online.schema.Account;
-import org.mule.modules.quickbooks.online.schema.Bill;
-import org.mule.modules.quickbooks.online.schema.BillPayment;
-import org.mule.modules.quickbooks.online.schema.CashPurchase;
-import org.mule.modules.quickbooks.online.schema.Check;
-import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
-import org.mule.modules.quickbooks.online.schema.Customer;
-import org.mule.modules.quickbooks.online.schema.Estimate;
-import org.mule.modules.quickbooks.online.schema.IdType;
-import org.mule.modules.quickbooks.online.schema.Invoice;
-import org.mule.modules.quickbooks.online.schema.Item;
-import org.mule.modules.quickbooks.online.schema.Payment;
-import org.mule.modules.quickbooks.online.schema.PaymentMethod;
-import org.mule.modules.quickbooks.online.schema.SalesReceipt;
-import org.mule.modules.quickbooks.online.schema.SalesTerm;
-import org.mule.modules.quickbooks.online.schema.Vendor;
+import org.mule.modules.quickbooks.online.schema.*;
+import org.mule.modules.utils.pagination.PaginatedIterable;
+import org.mule.streaming.PagingDelegate;
 import org.openid4java.message.MessageException;
 import org.springframework.beans.BeanUtils;
 
@@ -94,7 +83,7 @@ import org.springframework.beans.BeanUtils;
  */
 @SuppressWarnings("unused")
 @Module(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online", minMuleVersion = "3.5", metaData = MetaDataSwitch.DYNAMIC)
-public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled
+public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled, MuleContextAware
 {
     /**
      * API Key
@@ -167,8 +156,9 @@ public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled
      * Intuit OpenID client
      */
     private DefaultOpenIDClient openIDClient;
+    private MuleContext muleContext;
 
-    
+
     /**
      * Creates an Account.
      * The Account object represents the accounts that you keep to track your business.
@@ -1064,23 +1054,22 @@ public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects4}
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects5}
      *
-     * @param query identifier for QuickBooks credentials.
+     *
      * @param accessTokenId EntityType of the object.
+     * @param query identifier for QuickBooks credentials.
      * @return Iterable of the objects to be retrieved.
      *
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Iterable<?> query(String accessTokenId, @org.mule.api.annotations.Query String query)
+    public PagingDelegate<CdmBase> query(String accessTokenId, @org.mule.api.annotations.Query String query)
     {
         MuleDsqlParser muleDsqlParser = new MuleDsqlParser();
         Query q = muleDsqlParser.parse(query);
-
         OnlineEntityType objectType = getTypeFor(q.getTypes().get(0).getName());
-
-
-        return findObjects(accessTokenId, objectType, generateQueryFilter(q), generateQuerySort(q));
+        PagingDelegate<CdmBase> delegate = client.findObjectsGetPages(getAccessTokenInformation(accessTokenId), objectType, generateQueryFilter(q), generateQuerySort(q));
+        return delegate;
     }
     
     private String generateQueryFilter(Query query) {
@@ -1088,7 +1077,7 @@ public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled
         
         buildQueryFilter(query.getFilterExpression(), queryFilter);
         
-        return queryFilter.toString().trim();
+        return queryFilter.toString().isEmpty() ? null : queryFilter.toString().trim();
     }
 
     private void buildQueryFilter(Expression filterExpression, StringBuilder queryFilter) {
@@ -1127,7 +1116,7 @@ public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled
     private String generateQuerySort(Query query) {
         StringBuilder querySort = new StringBuilder();
         
-        return querySort.toString();
+        return querySort.toString().isEmpty() ? null : querySort.toString();
     }
 
     
@@ -1556,10 +1545,15 @@ public class QuickBooksOnlineModule implements ConnectorMetaDataEnabled
 
     private OnlineEntityType getTypeFor(String name) {
         for(OnlineEntityType aType : OnlineEntityType.values()) {
-            if(aType.getSimpleName().equals(name)) {
+            if(aType.getSimpleName().equalsIgnoreCase(name)) {
                 return aType;
             }
         }        
         return null;
+    }
+
+    @Override
+    public void setMuleContext(MuleContext muleContext) {
+        this.muleContext = muleContext;
     }
 }
