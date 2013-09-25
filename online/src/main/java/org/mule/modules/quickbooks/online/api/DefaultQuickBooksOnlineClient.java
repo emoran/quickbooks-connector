@@ -431,42 +431,22 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
 
     @Override
     public UserInformation getCurrentUserInformation(OAuthCredentials credentials) {
-        return ((UserResponse) retrieveUserInformation(credentials)).getUser();
-    }
-
-    /**
-     * Parse the HTML information for BlueDotMenu
-     * @param credentials OAuth credentials
-     * @param regex Regex for extracting the information
-     *              <p>The regex has to extract the information in this way:</p>
-     *              <p>match[0]: appId,appName,contextArea</p>
-     *              <p>match[1]: logoImageUrl</p>
-     *              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p>
-     * @return List with connected apps information
-     */
-    @Override
-    public List<AppMenuInformation> getBlueDotInformation(OAuthCredentials credentials, String regex) {
-        String blueDotInformation = (String) getBlueDotMenu(credentials);
-        List<AppMenuInformation> menuInformationList = new ArrayList<AppMenuInformation>();
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(blueDotInformation);
-        while(matcher.find()) {
-            AppMenuInformation info = new AppMenuInformation();
-            String[] parameters = StringUtils.split(matcher.group(1), ",");
-            info.setAppId(StringUtils.trim(StringUtils.remove(parameters[0], "'")));
-            info.setName(StringUtils.trim(StringUtils.remove(parameters[1], "'")));
-            info.setContentArea(StringUtils.trim(StringUtils.remove(parameters[2], "'")));
-            info.setImageUrl(StringUtils.trim(matcher.group(2)));
-
-            menuInformationList.add(info);
+        Object response = retrieveUserInformation(credentials);
+        if(response instanceof UserResponse) {
+            return ((UserResponse) response).getUser();
         }
-
-        return menuInformationList;
+        else if(response instanceof PlatformResponse) {
+            PlatformResponse platformResponse = (PlatformResponse) response;
+            throw new QuickBooksRuntimeException(String.format("Error Code: %s Error Message: %s", platformResponse.getErrorCode(),
+                    platformResponse.getErrorMessage()));
+        } else {
+            throw new QuickBooksRuntimeException("It is not possible to parse the response from Intuit Platform");
+        }
     }
 
     @Override
     public boolean disconnect(OAuthCredentials credentials) {
-        PlatformResponse response = (PlatformResponse) disconnectFromQB(credentials);
+        PlatformResponse response = disconnectFromQB(credentials);
         if (response.getErrorCode() != 0) throw new QuickBooksRuntimeException(response.getErrorMessage());
 
         return true;
@@ -474,7 +454,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
 
     @Override
     public OAuthCredentials reconnect(OAuthCredentials credentials) {
-        ReconnectResponse response = (ReconnectResponse) reconnectToQB(credentials);
+        ReconnectResponse response = reconnectToQB(credentials);
         if (response.getErrorCode() != 0) {
             throw new QuickBooksRuntimeException(response.getErrorMessage());
         }
@@ -509,5 +489,35 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
                 throw e;
             }
         }
+    }
+
+
+    /**
+     * Parse the HTML information for BlueDotMenu
+     * @param credentials OAuth credentials
+     * @param regex Regex for extracting the information
+     *              <p>The regex has to extract the information in this way:</p>
+     *              <p>match[0]: appId,appName,contextArea</p>
+     *              <p>match[1]: logoImageUrl</p>
+     *              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p>
+     * @return List with connected apps information
+     */
+    public BlueDotMenu getBlueDotInformation(OAuthCredentials credentials, String regex) {
+        String blueDotInformation = (String) getBlueDotMenu(credentials);
+        List<AppMenuInformation> menuInformationList = new ArrayList<AppMenuInformation>();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(blueDotInformation);
+        while(matcher.find()) {
+            AppMenuInformation info = new AppMenuInformation();
+            String[] parameters = StringUtils.split(matcher.group(1), ",");
+            info.setAppId(StringUtils.trim(StringUtils.remove(parameters[0], "'")));
+            info.setName(StringUtils.trim(StringUtils.remove(parameters[1], "'")));
+            info.setContentArea(StringUtils.trim(StringUtils.remove(parameters[2], "'")));
+            info.setImageUrl(StringUtils.trim(matcher.group(2)));
+
+            menuInformationList.add(info);
+        }
+
+        return new BlueDotMenu(menuInformationList, blueDotInformation);
     }
 }

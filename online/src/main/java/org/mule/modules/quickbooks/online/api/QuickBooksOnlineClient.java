@@ -11,6 +11,7 @@
 package org.mule.modules.quickbooks.online.api;
 
 import org.mule.modules.quickbooks.api.model.AppMenuInformation;
+import org.mule.modules.quickbooks.api.model.BlueDotMenu;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
@@ -48,10 +49,10 @@ public interface QuickBooksOnlineClient
 
     String getCompanyBaseUri(OAuthCredentials credentials);
 
-    List<AppMenuInformation> getBlueDotInformation(OAuthCredentials credentials, String regex);
-
     boolean disconnect(OAuthCredentials credentials);
 
     OAuthCredentials reconnect(OAuthCredentials credentials);
+
+    BlueDotMenu getBlueDotInformation(OAuthCredentials credentials, String regex);
 }
 

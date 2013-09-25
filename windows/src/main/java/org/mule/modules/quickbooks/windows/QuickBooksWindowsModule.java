@@ -40,6 +40,7 @@ import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
+import org.mule.modules.quickbooks.api.model.BlueDotMenu;
 import org.mule.modules.quickbooks.api.oauth.DefaultQuickBooksOAuthClient;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.api.oauth.QuickBooksOAuthClient;
@@ -608,18 +609,42 @@ public class QuickBooksWindowsModule
     }
 
     /**
-     * Retrieves Blue Dot App Menu from Intuit.
+     * Gets blueDot menu information from Intuit
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:get-blue-dot-information}
+     *
+     *
+     * @param accessTokenId credentials identifier for the user information to be requested
+     * @param regex Regex for extracting the information
+     *              <p>The regex has to extract the information in this way:</p>
+     *              <p>match[0]: "appId,appName,contextArea"</p>
+     *              <p>match[1]: "logoImageUrl"</p>
+     *              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p>
+     *
+     * @return list with AppMenu information from Intuit
+     *
+     */
+    @Processor
+    public BlueDotMenu getBlueDotInformation(String accessTokenId,
+                                             @Optional @Default("intuitPlatformOpenOtherApp\\((.+?)\\)\" style=\'background-image: url\\((.+?)\\)") String regex)
+    {
+        return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId), regex);
+    }
+
+
+    /**
+     * Retrieves Blue Dot App Menu HTML from Intuit.
      *
      * {@sample.xml ../../../doc/mule-module-quick-books-windows.xml.sample quickbooks-windows:blue-dot-menu}
      *
      * @param accessTokenId credentials identifier for the user information to be requested
-     * 
+     *
      * @return Object containing the HTML and javascript for displaying the menu
      *
      */
     @Processor
     public Object blueDotMenu(String accessTokenId) {
-        return client.blueDotMenu(getAccessTokenInformation(accessTokenId));
+        return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId), "").getBlueDotHtml();
     }
     
     /**

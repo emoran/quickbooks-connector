@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.model.AppMenuInformation;
+import org.mule.modules.quickbooks.api.model.BlueDotMenu;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.api.oauth.QuickBooksOAuthClient;
@@ -516,9 +517,12 @@ public class QuickBooksOnlineTest {
         AppMenuInformation menuInformation = new AppMenuInformation();
         menuInformation.setName("MulesoftAPP");
         list.add(menuInformation);
-        when(quickBooksOnlineClient.getBlueDotInformation(OAUTH_CREDENTIALS, ANY_REGEX)).thenReturn(list);
+        BlueDotMenu blueDotMenu = new BlueDotMenu(list, "SomeHTML");
+        when(quickBooksOnlineClient.getBlueDotInformation(OAUTH_CREDENTIALS, ANY_REGEX)).thenReturn(blueDotMenu);
         assertEquals(menuInformation.getName(),
-                module.getBlueDotInformation(ACCESS_TOKEN_ID, ANY_REGEX).get(0).getName());
+                module.getBlueDotInformation(ACCESS_TOKEN_ID, ANY_REGEX).getAppMenuInformationList().get(0).getName());
+        assertEquals("SomeHTML",
+                module.getBlueDotInformation(ACCESS_TOKEN_ID, ANY_REGEX).getBlueDotHtml());
     }
 
 

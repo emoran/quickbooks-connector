@@ -15,11 +15,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBException;
 
 import net.sf.staccatocommons.collections.stream.Streams;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -34,6 +37,7 @@ import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.objectfactory.QBWMessageUtils;
 import org.mule.modules.quickbooks.windows.schema.*;
+import org.mule.modules.quickbooks.windows.schema.PlatformResponse;
 import org.mule.modules.quickbooks.windows.schema.UserInformation;
 import org.mule.modules.quickbooks.windows.schema.UserResponse;
 import org.mule.modules.utils.MuleSoftException;
@@ -515,13 +519,23 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
 
     @Override
     public UserInformation getCurrentUserInformation(final OAuthCredentials credentials) {        
-        return ((UserResponse) retrieveUserInformation(credentials)).getUser();
+        Object response = retrieveUserInformation(credentials);
+        if(response instanceof UserResponse) {
+            return ((UserResponse) response).getUser();
+        }
+        else if(response instanceof PlatformResponse) {
+            PlatformResponse platformResponse = (PlatformResponse) response;
+            throw new QuickBooksRuntimeException(String.format("Error Code: %s Error Message: %s", platformResponse.getErrorCode(),
+                    platformResponse.getErrorMessage()));
+        } else {
+            throw new QuickBooksRuntimeException("It is not possible to parse the response from Intuit Platform");
+        }
     }
     
     @Override
     public boolean disconnect(OAuthCredentials credentials) {
         org.mule.modules.quickbooks.windows.schema.PlatformResponse response =
-                (org.mule.modules.quickbooks.windows.schema.PlatformResponse) disconnectFromQB(credentials);
+                disconnectFromQB(credentials);
         if (response.getErrorCode() != 0) throw new QuickBooksRuntimeException(response.getErrorMessage());
 
         return true;
@@ -530,7 +544,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
     @Override
     public OAuthCredentials reconnect(OAuthCredentials credentials) {
         org.mule.modules.quickbooks.windows.schema.ReconnectResponse response =
-                (org.mule.modules.quickbooks.windows.schema.ReconnectResponse) reconnectToQB(credentials);
+                reconnectToQB(credentials);
         if (response.getErrorCode() != 0) {
             throw new QuickBooksRuntimeException(response.getErrorMessage());
         }
@@ -540,9 +554,34 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
         return credentials;
     }
 
+    /**
+     * Parse the HTML information for BlueDotMenu
+     * @param credentials OAuth credentials
+     * @param regex Regex for extracting the information
+     *              <p>The regex has to extract the information in this way:</p>
+     *              <p>match[0]: appId,appName,contextArea</p>
+     *              <p>match[1]: logoImageUrl</p>
+     *              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p>
+     * @return List with connected apps information
+     */
     @Override
-    public Object blueDotMenu(final OAuthCredentials credentials) {
-    	return getBlueDotMenu(credentials);
+    public BlueDotMenu getBlueDotInformation(OAuthCredentials credentials, String regex) {
+        String blueDotInformation = (String) getBlueDotMenu(credentials);
+        List<AppMenuInformation> menuInformationList = new ArrayList<AppMenuInformation>();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(blueDotInformation);
+        while(matcher.find()) {
+            AppMenuInformation info = new AppMenuInformation();
+            String[] parameters = StringUtils.split(matcher.group(1), ",");
+            info.setAppId(StringUtils.trim(StringUtils.remove(parameters[0], "'")));
+            info.setName(StringUtils.trim(StringUtils.remove(parameters[1], "'")));
+            info.setContentArea(StringUtils.trim(StringUtils.remove(parameters[2], "'")));
+            info.setImageUrl(StringUtils.trim(matcher.group(2)));
+
+            menuInformationList.add(info);
+        }
+
+        return new BlueDotMenu(menuInformationList, blueDotInformation);
     }
     
     @Override

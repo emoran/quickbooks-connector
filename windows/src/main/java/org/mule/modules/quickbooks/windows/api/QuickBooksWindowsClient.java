@@ -12,6 +12,7 @@ package org.mule.modules.quickbooks.windows.api;
 
 import java.util.List;
 
+import org.mule.modules.quickbooks.api.model.BlueDotMenu;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.schema.IdType;
@@ -19,9 +20,7 @@ import org.mule.modules.quickbooks.windows.schema.UserInformation;
 
 public interface QuickBooksWindowsClient
 {
-	Object blueDotMenu(final OAuthCredentials credentials);
-	
-    Object create(final OAuthCredentials credentials,
+	Object create(final OAuthCredentials credentials,
                    final WindowsEntityType type, Object obj, final String requestId, 
                    final Boolean draft, final Boolean fullResponse);
     
@@ -56,4 +55,6 @@ public interface QuickBooksWindowsClient
     OAuthCredentials reconnect(OAuthCredentials credentials);    
     
     Object get(final OAuthCredentials credentials, WindowsEntityType type);
+
+    BlueDotMenu getBlueDotInformation(OAuthCredentials credentials, String regex);
 }
