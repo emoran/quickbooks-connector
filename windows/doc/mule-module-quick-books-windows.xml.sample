@@ -179,3 +179,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" />
 <!-- BEGIN_INCLUDE(quickbooks-windows:blue-dot-menu) -->
 <quickbooks-windows:blue-dot-menu accessTokenId="accessTokenId" />
 <!-- END_INCLUDE(quickbooks-windows:blue-dot-menu) -->
+
+<!-- BEGIN_INCLUDE(quickbooks-windows:get-blue-dot-information) -->
+<quickbooks-windows:get-blue-dot-information accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks-windows:get-blue-dot-information) -->

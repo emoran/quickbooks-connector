@@ -35,6 +35,7 @@ import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.model.AppMenuInformation;
+import org.mule.modules.quickbooks.api.model.BlueDotMenu;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.oauth.DefaultQuickBooksOAuthClient;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
@@ -1257,7 +1258,7 @@ public class QuickBooksOnlineModule
      *
      */
     @Processor
-    public List<AppMenuInformation> getBlueDotInformation(String accessTokenId,
+    public BlueDotMenu getBlueDotInformation(String accessTokenId,
                                                           @Optional @Default("intuitPlatformOpenOtherApp\\((.+?)\\)\" style=\'background-image: url\\((.+?)\\)") String regex)
     {
         return client.getBlueDotInformation(getAccessTokenInformation(accessTokenId), regex);
