@@ -14,6 +14,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,8 +39,8 @@ import org.mule.modules.quickbooks.windows.WindowsEntityType;
 import org.mule.modules.quickbooks.windows.objectfactory.QBWMessageUtils;
 import org.mule.modules.quickbooks.windows.schema.*;
 import org.mule.modules.quickbooks.windows.schema.PlatformResponse;
-import org.mule.modules.quickbooks.windows.schema.UserInformation;
 import org.mule.modules.quickbooks.windows.schema.UserResponse;
+import org.mule.modules.quickbooks.windows.schema.UserInformation;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
 
@@ -353,13 +354,24 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
     @Override
     public Iterable findObjects(final OAuthCredentials credentials,
                                 final WindowsEntityType type,
+                                Integer startPage,
+                                Integer chunkSize,
                                 final Object query)
     {
         Validate.notNull(type);
         
         List<Object> listOfResults = new ArrayList<Object>();
         Boolean hasMoreResults = true;
-        Integer pageNumber = 0;
+        Boolean externalPagination = false;
+        Integer pageNumber = 1;
+        
+        if (startPage != null && chunkSize != null)
+        {
+        	setResultsPerPage(chunkSize);
+        	pageNumber = startPage; 
+        	externalPagination = true;
+        }
+        	
         HttpUriRequest httpRequest;
         Object responseObject;
         
@@ -367,7 +379,6 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
                 credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
             
         while (hasMoreResults) {
-            pageNumber++;
             httpRequest = new HttpPost(str);
             httpRequest.addHeader("Content-Type", "text/xml");
             
@@ -400,8 +411,8 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
             List intuitList = getListFromIntuitResponse(responseObject, type);
             
             if (intuitList != null) {
-                hasMoreResults = intuitList.size() >= getResultsPerPage();
-                listOfResults.addAll(intuitList);
+            	listOfResults.addAll(intuitList);
+           		hasMoreResults = (intuitList.size() >= getResultsPerPage()) && !externalPagination;
             }
             else {
                 hasMoreResults = false;

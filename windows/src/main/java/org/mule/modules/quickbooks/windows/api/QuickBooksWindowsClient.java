@@ -35,7 +35,7 @@ public interface QuickBooksWindowsClient
                 final WindowsEntityType type, Object obj, final String requestId);
 
     Iterable findObjects(final OAuthCredentials credentials,
-                         final WindowsEntityType type, final Object query);
+                         final WindowsEntityType type,  Integer startPage, Integer chunkSize, final Object query);
     
     Iterable findObjectsGetPages(final OAuthCredentials credentials,
             				final WindowsEntityType type, final Object query);
