@@ -314,7 +314,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#blue-dot-menu">&lt;quickbooks-windows:blue-dot-menu&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Retrieves Blue Dot App Menu from Intuit.</div>
+        <div class="jd-descrdiv">Retrieves Blue Dot App Menu HTML from Intuit.</div>
         
   </td></tr>
 
@@ -354,9 +354,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#find-objects">&lt;quickbooks-windows:find-objects&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Lazily retrieves Objects
-
- For details on how to generate a query see: 
+        <div class="jd-descrdiv">For details on how to generate a query see: 
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/0500_QuickBooks_Windows/
  0100_Calling_Data_Services/0015_Retrieving_Objects">Retrieve Especification</a>
  
@@ -395,6 +393,18 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-blue-dot-information">&lt;quickbooks-windows:get-blue-dot-information&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Gets blueDot menu information from Intuit
+
+ </div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-company-metadata">&lt;quickbooks-windows:get-company-metadata&gt;</a></nobr>
         
         <div class="jd-descrdiv">Returns company metadata information.</div>
@@ -403,7 +413,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-current-user">&lt;quickbooks-windows:get-current-user&gt;</a></nobr>
         
@@ -413,7 +423,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#get-object">&lt;quickbooks-windows:get-object&gt;</a></nobr>
         
@@ -423,7 +433,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#open-id-initialize">&lt;quickbooks-windows:open-id-initialize&gt;</a></nobr>
         
@@ -435,7 +445,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#reconnect">&lt;quickbooks-windows:reconnect&gt;</a></nobr>
         
@@ -446,7 +456,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#revert">&lt;quickbooks-windows:revert&gt;</a></nobr>
         
@@ -456,7 +466,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#status">&lt;quickbooks-windows:status&gt;</a></nobr>
         
@@ -468,7 +478,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#sync-activity">&lt;quickbooks-windows:sync-activity&gt;</a></nobr>
         
@@ -480,7 +490,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#update">&lt;quickbooks-windows:update&gt;</a></nobr>
         
@@ -490,7 +500,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/quickbooks-windows-config.html#verify-open-id">&lt;quickbooks-windows:verify-open-id&gt;</a></nobr>
         
@@ -859,7 +869,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves Blue Dot App Menu from Intuit.
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves Blue Dot App Menu HTML from Intuit.
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:blue-dot-menu accessTokenId="accessTokenId" /&gt;</pre></div></p></div>
   <div class="jd-tagdata">
@@ -1249,9 +1259,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Lazily retrieves Objects
-
- For details on how to generate a query see: 
+  <div class="jd-tagdata jd-tagdescr"><p>For details on how to generate a query see: 
  <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/0500_QuickBooks_Windows/
  0100_Calling_Data_Services/0015_Retrieving_Objects">Retrieve Especification</a>
  
@@ -1332,6 +1340,30 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
                 
           
                 
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>startPage</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specific page you want to bring</td>
+                        <td class="jd-descrcol">Integer</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>chunkSize</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Number of records for each page</td>
+                        <td class="jd-descrcol">Integer</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
           
           
           
@@ -1349,6 +1381,10 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
                 
               
                 
+              
+                
+              
+                
                     <tr>
                         <td><nobr>&lt;quickbooks-windows:query&gt;</nobr></td>
                         <td></td>
@@ -1359,7 +1395,7 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
               the word OBJECT for the object that you required, for example Account: 
               <p>https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
               0500_QuickBooks_Windows/0600_Object_Reference/OBJECT</p>).</p>
-              <p>Do not complete the fields chunkSize and startPage, because are need it for the "lazily retrieve".</p>
+              <p>If you do not complete the fields chunkSize and startPage, method will retrieve all records without paging them.</p>
               If query is null, it will retrieve all the objects of that WindowsEntityType.</td>
                         <td>Map&lt;String,&nbsp;Object&gt;</td>
                     </tr>
@@ -1592,6 +1628,93 @@ requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" /&gt;</pre
         </tr>
       </table>
   </div>
+
+    </div>
+</div>
+
+
+<A NAME="get-blue-dot-information"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;quickbooks-windows:get-blue-dot-information&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Gets blueDot menu information from Intuit
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;quickbooks-windows:get-blue-dot-information accessTokenId="accessTokenId" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Credentials identifier for the user information to be requested</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>regex</nobr></td>
+                        <td class="jd-descrcol">intuitPlatformOpenOtherApp\\((.+?)\\)\ style=\'background-image: url\\((.+?)\\)</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Regex for extracting the information
+              <p>The regex has to extract the information in this way:</p>
+              <p>match[0]: "appId,appName,contextArea"</p>
+              <p>match[1]: "logoImageUrl"</p>
+              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p></td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">BlueDotMenu</td>
+                <td class="jd-descrcol">list with AppMenu information from Intuit
+
+</td>
+             </tr>
+         </table>
+  </div>
+    
+  
 
     </div>
 </div>

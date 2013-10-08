@@ -205,13 +205,25 @@
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/package-summary.html">org.mule.modules.quickbooks.windows</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/adapter/package-summary.html">org.mule.modules.quickbooks.windows.adapter</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/adapters/package-summary.html">org.mule.modules.quickbooks.windows.adapters</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/agents/package-summary.html">org.mule.modules.quickbooks.windows.agents</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/api/package-summary.html">org.mule.modules.quickbooks.windows.api</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/basic/package-summary.html">org.mule.modules.quickbooks.windows.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/callback/package-summary.html">org.mule.modules.quickbooks.windows.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/config/package-summary.html">org.mule.modules.quickbooks.windows.config</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/connection/package-summary.html">org.mule.modules.quickbooks.windows.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/devkit/package-summary.html">org.mule.modules.quickbooks.windows.devkit</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/oauth/package-summary.html">org.mule.modules.quickbooks.windows.oauth</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/windows/objectfactory/package-summary.html">org.mule.modules.quickbooks.windows.objectfactory</a></li>
     <li class="api apilevel-">
@@ -246,6 +258,7 @@
           <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html">FindObjectsMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GenerateANewRequestIdMessageProcessor.html">GenerateANewRequestIdMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetAccessTokenMessageProcessor.html">GetAccessTokenMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetBlueDotInformationMessageProcessor.html">GetBlueDotInformationMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetCompanyMetadataMessageProcessor.html">GetCompanyMetadataMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetCurrentUserMessageProcessor.html">GetCurrentUserMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/processors/GetObjectMessageProcessor.html">GetObjectMessageProcessor</a></li>
@@ -528,7 +541,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>FindObjectsMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map)</a></code> method in <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>FindObjectsMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Integer, java.lang.Integer, java.util.Map<java.lang.String, java.lang.Object>)">findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Integer, java.lang.Integer, java.util.Map)</a></code> method in <code><a href="../../../../../../../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -740,8 +753,30 @@ org.mule.api.lifecycle.Stoppable
           protected
           
           
+          Integer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#_chunkSizeType">_chunkSizeType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
           Map&lt;String,&nbsp;Object&gt;</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#_queryType">_queryType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Integer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#_startPageType">_startPageType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -774,7 +809,29 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#chunkSize">chunkSize</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#query">query</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#startPage">startPage</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1003,6 +1060,24 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#setChunkSize(java.lang.Object)">setChunkSize</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets chunkSize</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
         
         <div class="jd-descrdiv">Sets flow construct</div>
@@ -1011,7 +1086,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1029,7 +1104,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1042,6 +1117,24 @@ org.mule.api.lifecycle.Stoppable
         <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#setQuery(java.lang.Object)">setQuery</a></span>(Object value)</nobr>
         
         <div class="jd-descrdiv">Sets query</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html#setStartPage(java.lang.Object)">setStartPage</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets startPage</div>
   
   </td></tr>
 
@@ -2050,6 +2143,36 @@ From interface
 
 
 
+<A NAME="_chunkSizeType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Integer
+      </span>
+        _chunkSizeType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="_queryType"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2061,6 +2184,36 @@ From interface
         Map&lt;String,&nbsp;Object&gt;
       </span>
         _queryType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_startPageType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Integer
+      </span>
+        _startPageType
     </h4>
       <div class="api-level">
         
@@ -2140,6 +2293,36 @@ From interface
 
 
 
+<A NAME="chunkSize"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        chunkSize
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="query"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2151,6 +2334,36 @@ From interface
         Object
       </span>
         query
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="startPage"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        startPage
     </h4>
       <div class="api-level">
         
@@ -2416,6 +2629,47 @@ From interface
 </div>
 
 
+<A NAME="setChunkSize(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setChunkSize</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets chunkSize</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="setFlowConstruct(org.mule.api.construct.FlowConstruct)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2524,6 +2778,47 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Sets query</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setStartPage(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setStartPage</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets startPage</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">

@@ -205,13 +205,25 @@
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/windows/package-summary.html">org.mule.modules.quickbooks.windows</a></li>
     <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/windows/adapter/package-summary.html">org.mule.modules.quickbooks.windows.adapter</a></li>
+    <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/windows/adapters/package-summary.html">org.mule.modules.quickbooks.windows.adapters</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/windows/agents/package-summary.html">org.mule.modules.quickbooks.windows.agents</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/windows/api/package-summary.html">org.mule.modules.quickbooks.windows.api</a></li>
     <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/windows/basic/package-summary.html">org.mule.modules.quickbooks.windows.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/windows/callback/package-summary.html">org.mule.modules.quickbooks.windows.callback</a></li>
+    <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/windows/config/package-summary.html">org.mule.modules.quickbooks.windows.config</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/windows/connection/package-summary.html">org.mule.modules.quickbooks.windows.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/windows/devkit/package-summary.html">org.mule.modules.quickbooks.windows.devkit</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/windows/oauth/package-summary.html">org.mule.modules.quickbooks.windows.oauth</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/windows/objectfactory/package-summary.html">org.mule.modules.quickbooks.windows.objectfactory</a></li>
     <li class="api apilevel-">
@@ -695,6 +707,18 @@
     
     
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/basic/Capabilities.html">Capabilities</a></td>
+            <td class="jd-descrcol" width="100%">This interface is implemented for every org.mule.api.annotations.Module annotated class, to dynamically query what its capabilities are.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/basic/Capability.html">Capability</a></td>
+            <td class="jd-descrcol" width="100%">Enumeration of possible capabilities of Mule modules.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/CashBackInfo.html">CashBackInfo</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
  				Description: Cash withheld from the deposit.&nbsp;</td>
@@ -992,6 +1016,18 @@
         <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/CompanyRequest.html">CompanyRequest</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for CompanyRequest complex type.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/connection/Connection.html">Connection</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/connection/ConnectionManager.html">ConnectionManager</a>&lt;K,&nbsp;C&nbsp;extends&nbsp;<a href="../java/org/mule/modules/quickbooks/windows/connection/Connection.html">Connection</a>&gt;</td>
+            <td class="jd-descrcol" width="100%">Wrapper around org.mule.api.annotations.Connector annotated class that will infuse it with connection management capabilities.&nbsp;</td>
         </tr>
     
     
@@ -1741,7 +1777,7 @@
     
         <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/processors/FindObjectsMessageProcessor.html">FindObjectsMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">FindObjectsMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map<java.lang.String, java.lang.Object>)">findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
+            <td class="jd-descrcol" width="100%">FindObjectsMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Integer, java.lang.Integer, java.util.Map<java.lang.String, java.lang.Object>)">findObjects(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Integer, java.lang.Integer, java.util.Map)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
         </tr>
     
     
@@ -1806,6 +1842,18 @@
     
     
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/GetBlueDotInformationDefinitionParser.html">GetBlueDotInformationDefinitionParser</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/processors/GetBlueDotInformationMessageProcessor.html">GetBlueDotInformationMessageProcessor</a></td>
+            <td class="jd-descrcol" width="100%">GetBlueDotInformationMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#getBlueDotInformation(java.lang.String, java.lang.String)">getBlueDotInformation(java.lang.String, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/GetCompanyMetadataDefinitionParser.html">GetCompanyMetadataDefinitionParser</a></td>
             <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
@@ -1866,6 +1914,18 @@
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/HeaderSales.html">HeaderSales</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
          Description: Super-set of data that is associated with the Sale transaction types.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/callback/HttpCallback.html">HttpCallback</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/adapter/HttpCallbackAdapter.html">HttpCallbackAdapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
@@ -2383,6 +2443,12 @@
     
     
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/basic/MetadataAware.html">MetadataAware</a></td>
+            <td class="jd-descrcol" width="100%">This interface is implemented for every org.mule.api.annotations.Module and org.mule.api.annotations.Connector annotated class and its purpose is to define a contract to query the annotated class about its metadata.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ModificationMetaData.html">ModificationMetaData</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
  			Description: Defines the metadata of the instance of data			
@@ -2392,7 +2458,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ModRequest.html">ModRequest</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Request type to modify existing data in the system
@@ -2402,7 +2468,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/Money.html">Money</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
  			Description: Money type describes the Money value represented in Intuit as Currency Code and decimal value.&nbsp;</td>
@@ -2471,6 +2537,12 @@
     
     
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/NotAuthorizedException.html">NotAuthorizedException</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/Note.html">Note</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
  			Description: Specifies free text information that can be associated with a CDM type 
@@ -2480,7 +2552,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/NumberTypeCustomField.html">NumberTypeCustomField</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
  			Description: If NumberTypeCustomFieldDefinition is defined, the NumberTypeCustomField specifies the strongly typed field value 
@@ -2490,7 +2562,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/NumberTypeCustomFieldDefinition.html">NumberTypeCustomFieldDefinition</a></td>
             <td class="jd-descrcol" width="100%">Product: ALL
  			Description: Specifies the strongly typed version of Number type custom field definition 
@@ -2505,6 +2577,31 @@
 
 <h2 id="letter_O">O</h2>
 <table class="jd-sumtable">
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/OAuth1Adapter.html">OAuth1Adapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/OAuth2Adapter.html">OAuth2Adapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/OAuthAdapter.html">OAuthAdapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/OAuthManager.html">OAuthManager</a>&lt;C&nbsp;extends&nbsp;<a href="../java/org/mule/modules/quickbooks/windows/oauth/OAuthAdapter.html">OAuthAdapter</a>&gt;</td>
+            <td class="jd-descrcol" width="100%">Wrapper around org.mule.api.annotations.oauth.OAuth annotated class that will infuse it with
+ access token management capabilities.&nbsp;</td>
+        </tr>
     
     
         <tr class="alt-color api apilevel-" >
@@ -2852,31 +2949,37 @@
     
     
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/adapter/PoolManager.html">PoolManager</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PostAction.html">PostAction</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for postAction.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PostingTypeEnum.html">PostingTypeEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for PostingTypeEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/Preferences.html">Preferences</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for Preferences complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PriceLevel.html">PriceLevel</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
  				Description: You can use price levels to specify custom pricing for specific customers.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PriceLevelPerItem.html">PriceLevelPerItem</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
  				Description: Specifies a custom price or percentage change from the item's base price for a specific price level 
@@ -2886,46 +2989,70 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PriceLevelTypeEnum.html">PriceLevelTypeEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for PriceLevelTypeEnum.&nbsp;</td>
         </tr>
     
     
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/process/ProcessAdapter.html">ProcessAdapter</a>&lt;O&gt;</td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/process/ProcessCallback.html">ProcessCallback</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-descrcol" width="100%">Callback with logic to execute within a controlled environment provided by <code><a href="../java/org/mule/modules/quickbooks/windows/process/ProcessTemplate.html">ProcessTemplate</a></code>&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/process/ProcessCallbackProcessInterceptor.html">ProcessCallbackProcessInterceptor</a>&lt;T,&nbsp;O&gt;</td>
             <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/process/ProcessInterceptor.html">ProcessInterceptor</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/process/ProcessTemplate.html">ProcessTemplate</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-descrcol" width="100%">ProcessTemplate provides a processing context for message processing.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrder.html">PurchaseOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: PurchaseOrder is a non-posting transaction representing a request to purchase goods or services from a third party.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrderHeader.html">PurchaseOrderHeader</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Financial Transaction information that pertains to the entire PurchaseOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrderLine.html">PurchaseOrderLine</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Information about a specific good or service purchased for which payment is being demanded, as part of a PurchaseOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrderQuery.html">PurchaseOrderQuery</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for PurchaseOrderQuery complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/PurchaseOrders.html">PurchaseOrders</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Provides the definition that allows bulk data transfer of PurchaseOrders
@@ -3193,24 +3320,30 @@
     
     
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RestResponse.html">RestResponse</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for anonymous complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/RevertDefinitionParser.html">RevertDefinitionParser</a></td>
             <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/processors/RevertMessageProcessor.html">RevertMessageProcessor</a></td>
             <td class="jd-descrcol" width="100%">RevertMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#revert(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)">revert(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RevertRequest.html">RevertRequest</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Request type to revert the changes in the existing data in the system
@@ -3220,14 +3353,14 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RoleBase.html">RoleBase</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW 
  			Description: Describes Role of a Party.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/RoleType.html">RoleType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for roleType.&nbsp;</td>
         </tr>
@@ -3515,12 +3648,18 @@
     
     
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SearchDoc.html">SearchDoc</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SearchDoc complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SearchDocs.html">SearchDocs</a></td>
             <td class="jd-descrcol" width="100%">Description: This is the enclosing envelope for all Search Documents in sorted order
        
@@ -3529,38 +3668,38 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SearchRestResponse.html">SearchRestResponse</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SearchRestResponse complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SeatType.html">SeatType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for seatType.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SeparatorEnum.html">SeparatorEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for separatorEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ShipMethod.html">ShipMethod</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: You can use the ShipMethod object to specify a method to ship the goods that are purchased or sold.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ShipMethodQuery.html">ShipMethodQuery</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for ShipMethodQuery complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/ShipMethods.html">ShipMethods</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Provides the definition that allows bulk data transfer of Ship Methods
@@ -3570,13 +3709,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortBy.html">SortBy</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortBy complex type.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumn.html">SortByColumn</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Allowed sort options for Advanced Reports queries, also specifying ascending/descending order as an attribute
@@ -3586,13 +3725,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnAccount.html">SortByColumnAccount</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnAccount.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnAccountWithOrder.html">SortByColumnAccountWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Account queries also specifying ascending/descending order as an attribute
@@ -3602,19 +3741,19 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBill.html">SortByColumnBill</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnBill.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBillPayment.html">SortByColumnBillPayment</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnBillPayment.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBillPaymentWithOrder.html">SortByColumnBillPaymentWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Bill Payment queries also specifying ascending/descending order as an attribute
@@ -3624,7 +3763,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBillWithOrder.html">SortByColumnBillWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Allowed sort options for Bill queries also specifying ascending/descending order as an attribute
@@ -3634,13 +3773,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBuildAssembly.html">SortByColumnBuildAssembly</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnBuildAssembly.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnBuildAssemblyWithOrder.html">SortByColumnBuildAssemblyWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Adjustment queries also specifying ascending/descending order as an attribute
@@ -3650,13 +3789,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCharge.html">SortByColumnCharge</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCharge.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnChargeWithOrder.html">SortByColumnChargeWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Charge queries also specifying ascending/descending order as an attribute
@@ -3666,13 +3805,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCreditMemo.html">SortByColumnCreditMemo</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCreditMemo.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCreditMemoWithOrder.html">SortByColumnCreditMemoWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Credit Memo queries also specifying ascending/descending order as an attribute
@@ -3682,13 +3821,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCurrencyInfo.html">SortByColumnCurrencyInfo</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCurrencyInfo.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCurrencyInfoWithOrder.html">SortByColumnCurrencyInfoWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Customer queries also specifying ascending/descending order as an attribute
@@ -3698,13 +3837,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCustomer.html">SortByColumnCustomer</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnCustomer.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnCustomerWithOrder.html">SortByColumnCustomerWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Customer queries also specifying ascending/descending order as an attribute
@@ -3714,13 +3853,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnDeposit.html">SortByColumnDeposit</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnDeposit.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnDepositWithOrder.html">SortByColumnDepositWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Deposit queries also specifying ascending/descending order as an attribute
@@ -3730,13 +3869,13 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEmployee.html">SortByColumnEmployee</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnEmployee.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEmployeeWithOrder.html">SortByColumnEmployeeWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Employee queries also specifying ascending/descending order as an attribute
@@ -3746,19 +3885,19 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEnum.html">SortByColumnEnum</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnEnum.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEstimate.html">SortByColumnEstimate</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnEstimate.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnEstimateWithOrder.html">SortByColumnEstimateWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Estimate queries also specifying ascending/descending order as an attribute
@@ -3768,13 +3907,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnFixedAsset.html">SortByColumnFixedAsset</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnFixedAsset.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnFixedAssetWithOrder.html">SortByColumnFixedAssetWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Fixed Asset queries also specifying ascending/descending order as an attribute
@@ -3784,13 +3923,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryAdjustment.html">SortByColumnInventoryAdjustment</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInventoryAdjustment.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryAdjustmentWithOrder.html">SortByColumnInventoryAdjustmentWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Adjustment queries also specifying ascending/descending order as an attribute
@@ -3800,13 +3939,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventorySite.html">SortByColumnInventorySite</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInventorySite.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventorySiteWithOrder.html">SortByColumnInventorySiteWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Site queries also specifying ascending/descending order as an attribute
@@ -3816,13 +3955,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryTransfer.html">SortByColumnInventoryTransfer</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInventoryTransfer.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInventoryTransferWithOrder.html">SortByColumnInventoryTransferWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Inventory Transfer queries also specifying ascending/descending order as an attribute
@@ -3832,13 +3971,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInvoice.html">SortByColumnInvoice</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnInvoice.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnInvoiceWithOrder.html">SortByColumnInvoiceWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Invoice queries also specifying ascending/descending order as an attribute
@@ -3848,19 +3987,19 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItem.html">SortByColumnItem</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnItem.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItemReceipt.html">SortByColumnItemReceipt</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnItemReceipt.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItemReceiptWithOrder.html">SortByColumnItemReceiptWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Item Receipt queries also specifying ascending/descending order as an attribute
@@ -3870,7 +4009,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnItemWithOrder.html">SortByColumnItemWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Item queries also specifying ascending/descending order as an attribute
@@ -3880,13 +4019,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnJournalEntry.html">SortByColumnJournalEntry</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnJournalEntry.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnJournalEntryWithOrder.html">SortByColumnJournalEntryWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Journal Entry queries also specifying ascending/descending order as an attribute
@@ -3896,25 +4035,25 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameAmount.html">SortByColumnNameAmount</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for sortByColumnNameAmount.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameAmountDueDate.html">SortByColumnNameAmountDueDate</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for sortByColumnNameAmountDueDate.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameDate.html">SortByColumnNameDate</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnNameDate.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnNameDateWithOrder.html">SortByColumnNameDateWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for JobType/VendorType queries also specifying ascending/descending order as an attribute
@@ -3924,13 +4063,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnOtherName.html">SortByColumnOtherName</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnOtherName.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnOtherNameWithOrder.html">SortByColumnOtherNameWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Other Name queries also specifying ascending/descending order as an attribute
@@ -3940,13 +4079,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPayment.html">SortByColumnPayment</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnPayment.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPaymentWithOrder.html">SortByColumnPaymentWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Payment queries also specifying ascending/descending order as an attribute
@@ -3956,13 +4095,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPayrollNonWageItem.html">SortByColumnPayrollNonWageItem</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnPayrollNonWageItem.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPayrollNonWageItemWithOrder.html">SortByColumnPayrollNonWageItemWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for PayrollNonWageItem queries also specifying ascending/descending order as an attribute
@@ -3972,13 +4111,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPurchaseOrder.html">SortByColumnPurchaseOrder</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnPurchaseOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnPurchaseOrderWithOrder.html">SortByColumnPurchaseOrderWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Purchase Order queries also specifying ascending/descending order as an attribute
@@ -3988,13 +4127,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesOrder.html">SortByColumnSalesOrder</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnSalesOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesOrderWithOrder.html">SortByColumnSalesOrderWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Sales Order queries also specifying ascending/descending order as an attribute
@@ -4004,13 +4143,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesReceipt.html">SortByColumnSalesReceipt</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnSalesReceipt.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnSalesReceiptWithOrder.html">SortByColumnSalesReceiptWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Sales Receipt queries also specifying ascending/descending order as an attribute
@@ -4020,13 +4159,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTask.html">SortByColumnTask</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnTask.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTaskWithOrder.html">SortByColumnTaskWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Task queries also specifying ascending/descending order as an attribute
@@ -4036,13 +4175,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTimeActivity.html">SortByColumnTimeActivity</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnTimeActivity.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnTimeActivityWithOrder.html">SortByColumnTimeActivityWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: allowed sort options for Time Activity queries also specifying ascending/descending order as an attribute
@@ -4052,13 +4191,13 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnVendor.html">SortByColumnVendor</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for SortByColumnVendor.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortByColumnVendorWithOrder.html">SortByColumnVendorWithOrder</a></td>
             <td class="jd-descrcol" width="100%">Product: QBW
          Description: Allowed sort options for Vendor queries also specifying ascending/descending order as an attribute
@@ -4068,21 +4207,41 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/schema/SortOrder.html">SortOrder</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for sortOrder.&nbsp;</td>
         </tr>
     
     
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/callback/SourceCallback.html">SourceCallback</a></td>
+            <td class="jd-descrcol" width="100%">Callback interface used by org.mule.api.annotations.Source annotated methods to dispatch messages.&nbsp;</td>
+        </tr>
+    
+    
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/devkit/SplashScreenAgent.html">SplashScreenAgent</a></td>
+            <td class="jd-descrcol" width="100%">Marks DevKit org.mule.api.agent.Agent implementations to take care of logging information at Mule app level mainly for troubleshooting purposes.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/config/StatusDefinitionParser.html">StatusDefinitionParser</a></td>
             <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/processors/StatusMessageProcessor.html">StatusMessageProcessor</a></td>
             <td class="jd-descrcol" width="100%">StatusMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html#status(java.lang.String, org.mule.modules.quickbooks.windows.schema.SyncStatusRequest)">status(java.lang.String, org.mule.modules.quickbooks.windows.schema.SyncStatusRequest)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/windows/QuickBooksWindowsModule.html">QuickBooksWindowsModule</a></code>.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/callback/StopSourceCallback.html">StopSourceCallback</a></td>
+            <td class="jd-descrcol" width="100%">Callback returned by methods that are annotated with @Source
+ <p/>
+ It will be executed when the MessageSource is being stopped.&nbsp;</td>
         </tr>
     
     
@@ -4477,6 +4636,36 @@
 
 <h2 id="letter_U">U</h2>
 <table class="jd-sumtable">
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/UnableToAcquireAccessTokenException.html">UnableToAcquireAccessTokenException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the access token needed for accessing a protected resource cannot be acquired
+ 
+&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/connection/UnableToAcquireConnectionException.html">UnableToAcquireConnectionException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the connection needed for executing an
+  operation is null.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/oauth/UnableToAcquireRequestTokenException.html">UnableToAcquireRequestTokenException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the request token needed for building the authorization URL cannot be acquired
+ 
+&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/windows/connection/UnableToReleaseConnectionException.html">UnableToReleaseConnectionException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the release connection operation of the
+  connection manager fails.&nbsp;</td>
+        </tr>
     
     
         <tr class="alt-color api apilevel-" >
