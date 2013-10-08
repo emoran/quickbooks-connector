@@ -413,6 +413,7 @@ public class DefaultQuickBooksWindowsClient extends AbstractQuickBooksClientOAut
             if (intuitList != null) {
             	listOfResults.addAll(intuitList);
            		hasMoreResults = (intuitList.size() >= getResultsPerPage()) && !externalPagination;
+           		pageNumber++;
             }
             else {
                 hasMoreResults = false;
