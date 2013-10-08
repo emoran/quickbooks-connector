@@ -306,8 +306,7 @@ public class QuickBooksWindowsModule
     }
 
     /**
-     * Lazily retrieves Objects
-     *
+     * 
      * For details on how to generate a query see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/0500_QuickBooks_Windows/
      * 0100_Calling_Data_Services/0015_Retrieving_Objects">Retrieve Especification</a>
@@ -319,6 +318,8 @@ public class QuickBooksWindowsModule
      *
      * @param accessTokenId identifier for QuickBooks credentials.
      * @param type WindowsEntityType of the object.
+	 * @param startPage Specific page you want to bring
+     * @param chunkSize Number of records for each page
      * @param query Map that represents every filter and sort for the objects retrieved. Each type of object to be 
      *              retrieved, has a TheObjectQuery class that has the attributes for which it can be filtered 
      *              <p>(To know which attributes are accepted in every ObjectQuery, you could follow the link in 
@@ -326,7 +327,7 @@ public class QuickBooksWindowsModule
      *              the word OBJECT for the object that you required, for example Account: 
      *              <p>https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      *              0500_QuickBooks_Windows/0600_Object_Reference/OBJECT</p>).</p>
-     *              <p>Do not complete the fields chunkSize and startPage, because are need it for the "lazily retrieve".</p>
+     *              <p>If you do not complete the fields chunkSize and startPage, method will retrieve all records without paging them.</p>
      *              If query is null, it will retrieve all the objects of that WindowsEntityType.
      * @return Iterable of the objects to be retrieved.
      * 
@@ -337,6 +338,8 @@ public class QuickBooksWindowsModule
     @Processor
     public Iterable findObjects(String accessTokenId,
                                 WindowsEntityType type,
+                                @Optional Integer startPage,
+                                @Optional Integer chunkSize,
                                 @Placement(group = "Query") @Optional Map<String, Object> query)
     {
         if (query == null)
@@ -344,7 +347,7 @@ public class QuickBooksWindowsModule
             query = new HashMap<String, Object>();
         }
         
-        return client.findObjects(getAccessTokenInformation(accessTokenId), type, unmap(type.getQueryType(), query));
+        return client.findObjects(getAccessTokenInformation(accessTokenId), type, startPage, chunkSize, unmap(type.getQueryType(), query));
     }
     
     /**
