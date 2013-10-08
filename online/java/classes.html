@@ -209,13 +209,25 @@
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/online/package-summary.html">org.mule.modules.quickbooks.online</a></li>
     <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/online/adapter/package-summary.html">org.mule.modules.quickbooks.online.adapter</a></li>
+    <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/online/adapters/package-summary.html">org.mule.modules.quickbooks.online.adapters</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/online/agents/package-summary.html">org.mule.modules.quickbooks.online.agents</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/online/api/package-summary.html">org.mule.modules.quickbooks.online.api</a></li>
     <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/online/basic/package-summary.html">org.mule.modules.quickbooks.online.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/online/callback/package-summary.html">org.mule.modules.quickbooks.online.callback</a></li>
+    <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/online/config/package-summary.html">org.mule.modules.quickbooks.online.config</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/online/connection/package-summary.html">org.mule.modules.quickbooks.online.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/online/devkit/package-summary.html">org.mule.modules.quickbooks.online.devkit</a></li>
+    <li class="api apilevel-">
+  <a href="../java/org/mule/modules/quickbooks/online/oauth/package-summary.html">org.mule.modules.quickbooks.online.oauth</a></li>
     <li class="api apilevel-">
   <a href="../java/org/mule/modules/quickbooks/online/objectfactory/package-summary.html">org.mule.modules.quickbooks.online.objectfactory</a></li>
     <li class="api apilevel-">
@@ -596,6 +608,18 @@
     
     
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/basic/Capabilities.html">Capabilities</a></td>
+            <td class="jd-descrcol" width="100%">This interface is implemented for every org.mule.api.annotations.Module annotated class, to dynamically query what its capabilities are.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/basic/Capability.html">Capability</a></td>
+            <td class="jd-descrcol" width="100%">Enumeration of possible capabilities of Mule modules.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/CashPayment.html">CashPayment</a></td>
             <td class="jd-descrcol" width="100%">Holds information about a payment received in cash
  
@@ -870,6 +894,18 @@
         <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/CompanyPreferences.html">CompanyPreferences</a></td>
             <td class="jd-descrcol" width="100%">Defines a wrapper for rest response substitution in Preferences api.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/connection/Connection.html">Connection</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/connection/ConnectionManager.html">ConnectionManager</a>&lt;K,&nbsp;C&nbsp;extends&nbsp;<a href="../java/org/mule/modules/quickbooks/online/connection/Connection.html">Connection</a>&gt;</td>
+            <td class="jd-descrcol" width="100%">Wrapper around org.mule.api.annotations.Connector annotated class that will infuse it with connection management capabilities.&nbsp;</td>
         </tr>
     
     
@@ -1583,7 +1619,7 @@
     
         <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/processors/GetBlueDotInformationMessageProcessor.html">GetBlueDotInformationMessageProcessor</a></td>
-            <td class="jd-descrcol" width="100%">GetBlueDotInformationMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getBlueDotInformation(java.lang.String)">getBlueDotInformation(java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html">QuickBooksOnlineModule</a></code>.&nbsp;</td>
+            <td class="jd-descrcol" width="100%">GetBlueDotInformationMessageProcessor invokes the <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getBlueDotInformation(java.lang.String, java.lang.String)">getBlueDotInformation(java.lang.String, java.lang.String)</a></code> method in <code><a href="../java/org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html">QuickBooksOnlineModule</a></code>.&nbsp;</td>
         </tr>
     
     
@@ -1645,6 +1681,18 @@
         <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/HeaderSales.html">HeaderSales</a></td>
             <td class="jd-descrcol" width="100%">Superset of data that is associated with the Sale transaction types.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/callback/HttpCallback.html">HttpCallback</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/adapter/HttpCallbackAdapter.html">HttpCallbackAdapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
@@ -1973,6 +2021,12 @@
     
     
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/basic/MetadataAware.html">MetadataAware</a></td>
+            <td class="jd-descrcol" width="100%">This interface is implemented for every org.mule.api.annotations.Module and org.mule.api.annotations.Connector annotated class and its purpose is to define a contract to query the annotated class about its metadata.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ModificationMetaData.html">ModificationMetaData</a></td>
             <td class="jd-descrcol" width="100%">Defines the metadata of the instance of data
  
@@ -1980,19 +2034,19 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Money.html">Money</a></td>
             <td class="jd-descrcol" width="100%">Money type describes the Money value represented in Intuit as Currency Code and decimal value.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/holders/MoneyExpressionHolder.html">MoneyExpressionHolder</a></td>
             <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/transformers/MoneyExpressionHolderTransformer.html">MoneyExpressionHolderTransformer</a></td>
             <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
@@ -2018,6 +2072,12 @@
     
     
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/NotAuthorizedException.html">NotAuthorizedException</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Note.html">Note</a></td>
             <td class="jd-descrcol" width="100%">Specifies free text information that can be associated with a CDM type 
  
@@ -2025,7 +2085,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/NumberTypeCustomField.html">NumberTypeCustomField</a></td>
             <td class="jd-descrcol" width="100%">If NumberTypeCustomFieldDefinition is defined, the NumberTypeCustomField specifies the strongly typed field value 
  
@@ -2033,7 +2093,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/NumberTypeCustomFieldDefinition.html">NumberTypeCustomFieldDefinition</a></td>
             <td class="jd-descrcol" width="100%">Specifies the strongly typed version of Number type custom field definition 
  
@@ -2046,6 +2106,31 @@
 
 <h2 id="letter_O">O</h2>
 <table class="jd-sumtable">
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/OAuth1Adapter.html">OAuth1Adapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/OAuth2Adapter.html">OAuth2Adapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/OAuthAdapter.html">OAuthAdapter</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/OAuthManager.html">OAuthManager</a>&lt;C&nbsp;extends&nbsp;<a href="../java/org/mule/modules/quickbooks/online/oauth/OAuthAdapter.html">OAuthAdapter</a>&gt;</td>
+            <td class="jd-descrcol" width="100%">Wrapper around org.mule.api.annotations.oauth.OAuth annotated class that will infuse it with
+ access token management capabilities.&nbsp;</td>
+        </tr>
     
     
         <tr class="alt-color api apilevel-" >
@@ -2408,36 +2493,66 @@
     
     
         <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/PostingTypeEnum.html">PostingTypeEnum</a></td>
-            <td class="jd-descrcol" width="100%"><p>Java class for PostingTypeEnum.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class="alt-color api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Preferences.html">Preferences</a></td>
-            <td class="jd-descrcol" width="100%"><p>Java class for Preferences complex type.&nbsp;</td>
-        </tr>
-    
-    
-        <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/process/ProcessCallbackProcessInterceptor.html">ProcessCallbackProcessInterceptor</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/adapter/PoolManager.html">PoolManager</a></td>
             <td class="jd-descrcol" width="100%">&nbsp;</td>
         </tr>
     
     
         <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/PostingTypeEnum.html">PostingTypeEnum</a></td>
+            <td class="jd-descrcol" width="100%"><p>Java class for PostingTypeEnum.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Preferences.html">Preferences</a></td>
+            <td class="jd-descrcol" width="100%"><p>Java class for Preferences complex type.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/process/ProcessAdapter.html">ProcessAdapter</a>&lt;O&gt;</td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/process/ProcessCallback.html">ProcessCallback</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-descrcol" width="100%">Callback with logic to execute within a controlled environment provided by <code><a href="../java/org/mule/modules/quickbooks/online/process/ProcessTemplate.html">ProcessTemplate</a></code>&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/process/ProcessCallbackProcessInterceptor.html">ProcessCallbackProcessInterceptor</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/process/ProcessInterceptor.html">ProcessInterceptor</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/process/ProcessTemplate.html">ProcessTemplate</a>&lt;T,&nbsp;O&gt;</td>
+            <td class="jd-descrcol" width="100%">ProcessTemplate provides a processing context for message processing.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/PurchaseOrder.html">PurchaseOrder</a></td>
             <td class="jd-descrcol" width="100%">PurchaseOrder is a non-posting transaction representing a request to purchase goods or services from a third party.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/PurchaseOrderHeader.html">PurchaseOrderHeader</a></td>
             <td class="jd-descrcol" width="100%">Financial Transaction information that pertains to the entire PurchaseOrder.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/PurchaseOrderLine.html">PurchaseOrderLine</a></td>
             <td class="jd-descrcol" width="100%">Information about a specific good or service purchased for which payment is being demanded, as part of a PurchaseOrder
  
@@ -2445,7 +2560,7 @@
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/PurchaseOrders.html">PurchaseOrders</a></td>
             <td class="jd-descrcol" width="100%">Provides the definition that allows bulk data transfer of PurchaseOrders
  
@@ -2733,6 +2848,12 @@
     
     
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/RoleBase.html">RoleBase</a></td>
             <td class="jd-descrcol" width="100%">Describes Role of a Party, Generally the role can be Customer, Vendor, EmployeeWorker 
  
@@ -2740,7 +2861,7 @@
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/RoleType.html">RoleType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for roleType.&nbsp;</td>
         </tr>
@@ -2980,24 +3101,30 @@
     
     
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></td>
+            <td class="jd-descrcol" width="100%">&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/SearchResults.html">SearchResults</a></td>
             <td class="jd-descrcol" width="100%">Wrapper for search results.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/SeatType.html">SeatType</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for seatType.&nbsp;</td>
         </tr>
     
     
-        <tr class=" api apilevel-" >
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ShipMethod.html">ShipMethod</a></td>
             <td class="jd-descrcol" width="100%">Method of shipment of sold or purchased goods.&nbsp;</td>
         </tr>
     
     
-        <tr class="alt-color api apilevel-" >
+        <tr class=" api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/ShipMethods.html">ShipMethods</a></td>
             <td class="jd-descrcol" width="100%">Provides the definition that allows bulk data transfer of Ship Methods
  
@@ -3005,9 +3132,29 @@
         </tr>
     
     
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/callback/SourceCallback.html">SourceCallback</a></td>
+            <td class="jd-descrcol" width="100%">Callback interface used by org.mule.api.annotations.Source annotated methods to dispatch messages.&nbsp;</td>
+        </tr>
+    
+    
         <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/devkit/SplashScreenAgent.html">SplashScreenAgent</a></td>
+            <td class="jd-descrcol" width="100%">Marks DevKit org.mule.api.agent.Agent implementations to take care of logging information at Mule app level mainly for troubleshooting purposes.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
             <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/schema/Status.html">Status</a></td>
             <td class="jd-descrcol" width="100%"><p>Java class for Status.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/callback/StopSourceCallback.html">StopSourceCallback</a></td>
+            <td class="jd-descrcol" width="100%">Callback returned by methods that are annotated with @Source
+ <p/>
+ It will be executed when the MessageSource is being stopped.&nbsp;</td>
         </tr>
     
     
@@ -3169,6 +3316,36 @@
 
 <h2 id="letter_U">U</h2>
 <table class="jd-sumtable">
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/UnableToAcquireAccessTokenException.html">UnableToAcquireAccessTokenException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the access token needed for accessing a protected resource cannot be acquired
+ 
+&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/connection/UnableToAcquireConnectionException.html">UnableToAcquireConnectionException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the connection needed for executing an
+  operation is null.&nbsp;</td>
+        </tr>
+    
+    
+        <tr class="alt-color api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/oauth/UnableToAcquireRequestTokenException.html">UnableToAcquireRequestTokenException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the request token needed for building the authorization URL cannot be acquired
+ 
+&nbsp;</td>
+        </tr>
+    
+    
+        <tr class=" api apilevel-" >
+            <td class="jd-linkcol"><a href="../java/org/mule/modules/quickbooks/online/connection/UnableToReleaseConnectionException.html">UnableToReleaseConnectionException</a></td>
+            <td class="jd-descrcol" width="100%">Exception thrown when the release connection operation of the
+  connection manager fails.&nbsp;</td>
+        </tr>
     
     
         <tr class="alt-color api apilevel-" >

@@ -209,13 +209,25 @@
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/online/package-summary.html">org.mule.modules.quickbooks.online</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapter/package-summary.html">org.mule.modules.quickbooks.online.adapter</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/package-summary.html">org.mule.modules.quickbooks.online.adapters</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/online/agents/package-summary.html">org.mule.modules.quickbooks.online.agents</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/online/api/package-summary.html">org.mule.modules.quickbooks.online.api</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/basic/package-summary.html">org.mule.modules.quickbooks.online.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/callback/package-summary.html">org.mule.modules.quickbooks.online.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/online/config/package-summary.html">org.mule.modules.quickbooks.online.config</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/connection/package-summary.html">org.mule.modules.quickbooks.online.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/devkit/package-summary.html">org.mule.modules.quickbooks.online.devkit</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/oauth/package-summary.html">org.mule.modules.quickbooks.online.oauth</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../../java/org/mule/modules/quickbooks/online/objectfactory/package-summary.html">org.mule.modules.quickbooks.online.objectfactory</a></li>
     <li class="api apilevel-">
@@ -806,10 +818,10 @@ org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth
             
             
             
-            Object</nobr>
+            BlueDotMenu</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/DefaultQuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials)">getBlueDotInformation</a></span>(OAuthCredentials credentials)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/DefaultQuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials, java.lang.String)">getBlueDotInformation</a></span>(OAuthCredentials credentials, String regex)</nobr>
         
         <div class="jd-descrdiv">Parse the HTML information for BlueDotMenu</div>
   
@@ -1575,10 +1587,10 @@ From interface
             
             
             
-            Object</nobr>
+            BlueDotMenu</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials)">getBlueDotInformation</a></span>(OAuthCredentials credentials)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html#getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials, java.lang.String)">getBlueDotInformation</a></span>(OAuthCredentials credentials, String regex)</nobr>
         
   </td></tr>
 
@@ -2075,7 +2087,7 @@ From interface
 </div>
 
 
-<A NAME="getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials)"></A>
+<A NAME="getBlueDotInformation(org.mule.modules.quickbooks.api.oauth.OAuthCredentials, java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2085,10 +2097,10 @@ From interface
          
          
          
-        Object
+        BlueDotMenu
       </span>
       <span class="sympad">getBlueDotInformation</span>
-      <span class="normal">(OAuthCredentials credentials)</span>
+      <span class="normal">(OAuthCredentials credentials, String regex)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2108,11 +2120,19 @@ From interface
           <th>credentials</td>
           <td>OAuth credentials</td>
         </tr>
+        <tr>
+          <th>regex</td>
+          <td>Regex for extracting the information
+              <p>The regex has to extract the information in this way:</p>
+              <p>match[0]: appId,appName,contextArea</p>
+              <p>match[1]: logoImageUrl</p>
+              <p>The method will split the application information to generate the @link{AppMenuInformation} object</p></td>
+        </tr>
       </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Object containing the html for the menu
+      <ul class="nolist"><li>List with connected apps information
 </li></ul>
   </div>
 
