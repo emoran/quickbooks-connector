@@ -558,6 +558,13 @@ Summary:
     
     <tr class=" api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a>&nbsp;</td>
+        <td class="jd-linkcol">EMPLOYEE&nbsp;</td>
+        <td class="jd-descrcol" width="100%">The Employee represents the persons who are working for the company.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a>&nbsp;</td>
         <td class="jd-linkcol">ESTIMATE&nbsp;</td>
         <td class="jd-descrcol" width="100%">The Estimate object represents a proposal for a financial transaction from a 
  business to a customer for goods or services proposed to be sold, including 
@@ -565,17 +572,24 @@ Summary:
     </tr>
     
     
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a>&nbsp;</td>
         <td class="jd-linkcol">INVOICE&nbsp;</td>
         <td class="jd-descrcol" width="100%">The Invoice object represents an invoice to a customer.&nbsp;</td>
     </tr>
     
     
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a>&nbsp;</td>
         <td class="jd-linkcol">ITEM&nbsp;</td>
         <td class="jd-descrcol" width="100%">The Item object represents any product or service that is sold or purchased.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a>&nbsp;</td>
+        <td class="jd-linkcol">JOURNALENTRY&nbsp;</td>
+        <td class="jd-descrcol" width="100%">A JournalEntry is a "free-form" transaction typically used to adjust the books.&nbsp;</td>
     </tr>
     
     
@@ -1696,6 +1710,38 @@ From interface
 
 
 
+<A NAME="EMPLOYEE"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a>
+      </span>
+        EMPLOYEE
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>The Employee represents the persons who are working for the company. In QBO, the Employee resource is available
+ as a read-only resource. That is, only retrieve and simple query operations are supported for this resource.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="ESTIMATE"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1785,6 +1831,39 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>The Item object represents any product or service that is sold or purchased.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="JOURNALENTRY"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../java/org/mule/modules/quickbooks/online/OnlineEntityType.html">OnlineEntityType</a>
+      </span>
+        JOURNALENTRY
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>A JournalEntry is a "free-form" transaction typically used to adjust the books. It must have at least 2 line items,
+ one for a credit and one for a debit, and the sum of the two line item amounts must be zero (that is, credit
+ and debit amounts must be balanced).
 </p></div>
 
     
