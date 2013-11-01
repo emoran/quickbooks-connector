@@ -34,7 +34,6 @@ import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.api.model.AppMenuInformation;
 import org.mule.modules.quickbooks.api.model.BlueDotMenu;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.oauth.DefaultQuickBooksOAuthClient;
@@ -55,6 +54,7 @@ import org.mule.modules.quickbooks.online.schema.Estimate;
 import org.mule.modules.quickbooks.online.schema.IdType;
 import org.mule.modules.quickbooks.online.schema.Invoice;
 import org.mule.modules.quickbooks.online.schema.Item;
+import org.mule.modules.quickbooks.online.schema.JournalEntry;
 import org.mule.modules.quickbooks.online.schema.Payment;
 import org.mule.modules.quickbooks.online.schema.PaymentMethod;
 import org.mule.modules.quickbooks.online.schema.SalesReceipt;
@@ -62,7 +62,6 @@ import org.mule.modules.quickbooks.online.schema.SalesTerm;
 import org.mule.modules.quickbooks.online.schema.Vendor;
 import org.openid4java.message.MessageException;
 
-import java.util.List;
 import java.util.Map;
 /**
  * QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
@@ -395,6 +394,33 @@ public class QuickBooksOnlineModule
                            @Optional @Default("#[payload]") Item item)
     {
         return client.create(getAccessTokenInformation(accessTokenId), item);
+    }
+
+    /**
+     * Creates a Journal Entry.
+     * A JournalEntry is a "free-form" transaction typically used to adjust the books. It must have at least 2 line items,
+     * one for a credit and one for a debit, and the sum of the two line item amounts must be zero (that is,
+     * credit and debit amounts must be balanced).
+     *
+     * For details see:
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/v2/0400_quickbooks_online/
+     * journalentry">Journal Entry Specification</a>
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-journal-entry}
+     *
+     *
+     * @param accessTokenId identifier for QuickBooks credentials.
+     * @param journalEntry The journalEntry to be created
+     * @return The created journalEntry.
+     *
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code
+     *         and a message provided by quickbooks about the error.
+     */
+    @Processor
+    public JournalEntry createJournalEntry(String accessTokenId,
+                                          @Optional @Default("#[payload]") JournalEntry journalEntry)
+    {
+        return client.create(getAccessTokenInformation(accessTokenId), journalEntry);
     }
     
     /**
@@ -833,7 +859,34 @@ public class QuickBooksOnlineModule
     {
         return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.ITEM, item);
     }
-    
+
+    /**
+     * Updates a Journal Entry.
+     * A JournalEntry is a "free-form" transaction typically used to adjust the books. It must have at least 2 line items,
+     * one for a credit and one for a debit, and the sum of the two line item amounts must be zero (that is,
+     * credit and debit amounts must be balanced).
+     *
+     * For details see:
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/v2/0400_quickbooks_online/
+     * journalentry">Journal Entry Specification</a>
+     *
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-journal-entry}
+     *
+     *
+     * @param accessTokenId identifier for QuickBooks credentials.
+     * @param journalEntry The journalEntry to be updated
+     * @return The updated journalEntry.
+     *
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code
+     *         and a message provided by quickbooks about the error.
+     */
+    @Processor
+    public JournalEntry updateJournalEntry(String accessTokenId,
+                                          @Optional @Default("#[payload]") JournalEntry journalEntry)
+    {
+        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.JOURNALENTRY, journalEntry);
+    }
+
     /**
      * Updates a Payment.
      * The Payment object  represents the financial transaction that signifies a payment from a customer 

@@ -20,9 +20,11 @@ import org.mule.modules.quickbooks.online.schema.CompanyMetaData;
 import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
 import org.mule.modules.quickbooks.online.schema.Customer;
 import org.mule.modules.quickbooks.online.schema.DeletedEntities;
+import org.mule.modules.quickbooks.online.schema.Employee;
 import org.mule.modules.quickbooks.online.schema.Estimate;
 import org.mule.modules.quickbooks.online.schema.Invoice;
 import org.mule.modules.quickbooks.online.schema.Item;
+import org.mule.modules.quickbooks.online.schema.JournalEntry;
 import org.mule.modules.quickbooks.online.schema.Payment;
 import org.mule.modules.quickbooks.online.schema.PaymentMethod;
 import org.mule.modules.quickbooks.online.schema.SalesReceipt;
@@ -80,7 +82,13 @@ public enum OnlineEntityType
      * QBO allows categorizing the customers in a way that is meaningful to the business. 
      */
     CUSTOMER(Customer.class),
-    
+
+    /**
+     * The Employee represents the persons who are working for the company. In QBO, the Employee resource is available
+     * as a read-only resource. That is, only retrieve and simple query operations are supported for this resource.
+     */
+    EMPLOYEE(Employee.class),
+
     /**
      * The Estimate object represents a proposal for a financial transaction from a 
      * business to a customer for goods or services proposed to be sold, including 
@@ -99,6 +107,13 @@ public enum OnlineEntityType
      * The Item object represents any product or service that is sold or purchased.
      */
     ITEM(Item.class),
+
+    /**
+     * A JournalEntry is a "free-form" transaction typically used to adjust the books. It must have at least 2 line items,
+     * one for a credit and one for a debit, and the sum of the two line item amounts must be zero (that is, credit
+     * and debit amounts must be balanced).
+     */
+    JOURNALENTRY(JournalEntry.class),
     
     /**
      * The Payment object  represents the financial transaction that signifies a 
