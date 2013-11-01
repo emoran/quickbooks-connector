@@ -33,6 +33,10 @@
 </quickbooks:create-customer>
 <!-- END_INCLUDE(quickbooks:create-customer) -->
 
+<!-- BEGIN_INCLUDE(quickbooks:create-journal-entry) -->
+<quickbooks:create-journal-entry accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks:create-journal-entry) -->
+
 <!-- BEGIN_INCLUDE(quickbooks:create-estimate) -->
 <quickbooks:create-estimate accessTokenId="accessTokenId">
 </quickbooks:create-estimate>
@@ -128,6 +132,10 @@
 <quickbooks:update-item accessTokenId="accessTokenId">
 </quickbooks:update-item>
 <!-- END_INCLUDE(quickbooks:update-item) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:update-journal-entry) -->
+<quickbooks:update-journal-entry accessTokenId="accessTokenId" />
+<!-- END_INCLUDE(quickbooks:update-journal-entry) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-payment) -->
 <quickbooks:update-payment accessTokenId="accessTokenId">
