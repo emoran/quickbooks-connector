@@ -42,16 +42,28 @@ public class QuickBooksRuntimeException extends RuntimeException
         super(ToStringBuilder.reflectionToString(error));
         this.info = null;
     }
+    
+    public QuickBooksRuntimeException(final ExceptionInfo exceptionInfo, Throwable e)
+    {
+        super(ToStringBuilder.reflectionToString(exceptionInfo), e);
+        this.info = exceptionInfo;
+    }
+    
+    public QuickBooksRuntimeException(String error)
+    {
+        super(error);
+    }
 
     public boolean isAExpiredTokenFault()
     {
-        return info != null && info.getCause().equals("SERVER") && info.getErrorCode().equals("401") && 
-                info.getMessage().equals("Unauthorized OAuth Token: token_rejected");
+    	return info != null && info.getCause().equals("SERVER") && info.getErrorCode().equals("401") && 
+    			info.getMessage().equals("Unauthorized OAuth Token: token_rejected");
     }
 
-    public QuickBooksRuntimeException(String error) {
-        super(error);
-    }
+    public ExceptionInfo getInfo()
+    {
+		return info;
+	}
 
 }
 
