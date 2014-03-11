@@ -10,15 +10,15 @@
 
 package org.mule.modules.quickbooks.online.api;
 
+import org.mule.modules.quickbooks.api.model.AppMenuInformation;
 import org.mule.modules.quickbooks.api.model.BlueDotMenu;
 import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
-import org.mule.modules.quickbooks.online.IntuitEntityEnum;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
 import org.mule.modules.quickbooks.online.schema.IdType;
 
-import com.intuit.ipp.core.IEntity;
+import java.util.List;
 
 
 /**
@@ -29,13 +29,13 @@ import com.intuit.ipp.core.IEntity;
  * @since Aug 19, 2011
  */
 
-public interface QuickBooksOnlineClient
+public interface OldQuickBooksOnlineClient
 {
-    <T extends IEntity> T create(final OAuthCredentials credentials, T obj);
+    <T extends CdmBase> T create(final OAuthCredentials credentials, T obj);
     
-    <T extends IEntity> T getObject(final OAuthCredentials credentials, final IntuitEntityEnum type, final String id);
+    <T extends CdmBase> T getObject(final OAuthCredentials credentials, final OnlineEntityType type, final IdType id);
     
-    <T extends IEntity> T update(final OAuthCredentials credentials, T obj);
+    <T extends CdmBase> T update(final OAuthCredentials credentials, final OnlineEntityType type, T obj);
     
     <T extends CdmBase> void deleteObject(final OAuthCredentials credentials, final OnlineEntityType type, final IdType id, String syncToken);
 
@@ -46,6 +46,8 @@ public interface QuickBooksOnlineClient
     <T extends Object> T get(OAuthCredentials credentials, OnlineEntityType type);
     
     UserInformation getCurrentUserInformation(OAuthCredentials credentials);
+
+    String getCompanyBaseUri(OAuthCredentials credentials);
 
     boolean disconnect(OAuthCredentials credentials);
 

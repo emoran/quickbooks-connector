@@ -13,20 +13,10 @@
 </quickbooks:create-bill-payment>
 <!-- END_INCLUDE(quickbooks:create-bill-payment) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:create-cash-purchase) -->
-<quickbooks:create-cash-purchase accessTokenId="accessTokenId" >
-</quickbooks:create-cash-purchase>
-<!-- END_INCLUDE(quickbooks:create-cash-purchase) -->
-
-<!-- BEGIN_INCLUDE(quickbooks:create-check) -->
-<quickbooks:create-check accessTokenId="accessTokenId" >
-</quickbooks:create-check>
-<!-- END_INCLUDE(quickbooks:create-check) -->
-
-<!-- BEGIN_INCLUDE(quickbooks:create-credit-card-charge) -->
-<quickbooks:create-credit-card-charge accessTokenId="accessTokenId" >
-</quickbooks:create-credit-card-charge>
-<!-- END_INCLUDE(quickbooks:create-credit-card-charge) -->
+<!-- BEGIN_INCLUDE(quickbooks:create-purchase) -->
+<quickbooks:create-purchase accessTokenId="accessTokenId" >
+</quickbooks:create-purchase>
+<!-- END_INCLUDE(quickbooks:create-purchase) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-customer) -->
 <quickbooks:create-customer accessTokenId="accessTokenId">
@@ -67,10 +57,10 @@
 </quickbooks:create-sales-receipt>
 <!-- END_INCLUDE(quickbooks:create-sales-receipt) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:create-sales-term) -->
-<quickbooks:create-sales-term accessTokenId="accessTokenId">
-</quickbooks:create-sales-term>
-<!-- END_INCLUDE(quickbooks:create-sales-term) -->
+<!-- BEGIN_INCLUDE(quickbooks:create-term) -->
+<quickbooks:create-term accessTokenId="accessTokenId">
+</quickbooks:create-term>
+<!-- END_INCLUDE(quickbooks:create-term) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:create-vendor) -->
 <quickbooks:create-vendor accessTokenId="accessTokenId">
@@ -98,20 +88,10 @@
 </quickbooks:update-bill-payment>
 <!-- END_INCLUDE(quickbooks:update-bill-payment) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:update-cash-purchase) -->
-<quickbooks:update-cash-purchase accessTokenId="accessTokenId">
-</quickbooks:update-cash-purchase>
-<!-- END_INCLUDE(quickbooks:update-cash-purchase) -->
-
-<!-- BEGIN_INCLUDE(quickbooks:update-check) -->
-<quickbooks:update-check accessTokenId="accessTokenId">
-</quickbooks:update-check>
-<!-- END_INCLUDE(quickbooks:update-check) -->
-
-<!-- BEGIN_INCLUDE(quickbooks:update-credit-card-charge) -->
-<quickbooks:update-credit-card-charge accessTokenId="accessTokenId">
-</quickbooks:update-credit-card-charge>
-<!-- END_INCLUDE(quickbooks:update-credit-card-charge) -->
+<!-- BEGIN_INCLUDE(quickbooks:update-purchase) -->
+<quickbooks:update-purchase accessTokenId="accessTokenId">
+</quickbooks:update-purchase>
+<!-- END_INCLUDE(quickbooks:update-purchase) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-customer) -->
 <quickbooks:update-customer accessTokenId="accessTokenId">
@@ -152,10 +132,10 @@
 </quickbooks:update-sales-receipt>
 <!-- END_INCLUDE(quickbooks:update-sales-receipt) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:update-sales-term) -->
-<quickbooks:update-sales-term accessTokenId="accessTokenId">
-</quickbooks:update-sales-term>
-<!-- END_INCLUDE(quickbooks:update-sales-term) -->
+<!-- BEGIN_INCLUDE(quickbooks:update-term) -->
+<quickbooks:update-term accessTokenId="accessTokenId">
+</quickbooks:update-term>
+<!-- END_INCLUDE(quickbooks:update-term) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:update-vendor) -->
 <quickbooks:update-vendor accessTokenId="accessTokenId">

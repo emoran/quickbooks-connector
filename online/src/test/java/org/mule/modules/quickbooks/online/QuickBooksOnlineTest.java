@@ -29,9 +29,26 @@ import org.mule.modules.quickbooks.api.oauth.QuickBooksObjectStore;
 import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
 import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
-import org.mule.modules.quickbooks.online.schema.*;
+import org.mule.modules.quickbooks.online.schema.CompanyMetaData;
+import org.mule.modules.quickbooks.online.schema.IdType;
 import org.openid4java.message.MessageException;
 
+import com.intuit.ipp.data.Account;
+import com.intuit.ipp.data.Bill;
+import com.intuit.ipp.data.BillPayment;
+import com.intuit.ipp.data.Customer;
+import com.intuit.ipp.data.Estimate;
+import com.intuit.ipp.data.Invoice;
+import com.intuit.ipp.data.Item;
+import com.intuit.ipp.data.Payment;
+import com.intuit.ipp.data.PaymentMethod;
+import com.intuit.ipp.data.PaymentTypeEnum;
+import com.intuit.ipp.data.Purchase;
+import com.intuit.ipp.data.SalesReceipt;
+import com.intuit.ipp.data.Term;
+import com.intuit.ipp.data.Vendor;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -143,249 +160,208 @@ public class QuickBooksOnlineTest {
     @Test
     public void testCreateBill() {
         Bill bill = new Bill();
-        IdType id = new IdType();
-        id.setValue("newBill");
-        bill.setId(id);
+        bill.setId("newBill");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, bill)).thenReturn(bill);
-        assertEquals(bill.getId().getValue(), module.createBill(ACCESS_TOKEN_ID, bill).getId().getValue());
+        assertEquals(bill.getId(), module.createBill(ACCESS_TOKEN_ID, bill).getId());
     }
 
     @Test
     public void testCreateBillPayment() {
         BillPayment billPayment = new BillPayment();
-        IdType id = new IdType();
-        id.setValue("newBillPayment");
-        billPayment.setId(id);
+        billPayment.setId("newBillPayment");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, billPayment)).
                 thenReturn(billPayment);
-        assertEquals(billPayment.getId().getValue(), module.createBillPayment(ACCESS_TOKEN_ID, billPayment).
-                getId().getValue());
+        assertEquals(billPayment.getId(), module.createBillPayment(ACCESS_TOKEN_ID, billPayment).getId());
     }
 
     @Test
     public void testCreateCashPurchase() {
-        CashPurchase cashPurchase = new CashPurchase();
-        IdType id = new IdType();
-        id.setValue("newCashPurchase");
-        cashPurchase.setId(id);
+        Purchase cashPurchase = new Purchase();
+        cashPurchase.setId("newCashPurchase");
+        cashPurchase.setPaymentType(PaymentTypeEnum.CASH);
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, cashPurchase)).
                 thenReturn(cashPurchase);
-        assertEquals(cashPurchase.getId().getValue(), module.createCashPurchase(ACCESS_TOKEN_ID, cashPurchase).
-                getId().getValue());
+        assertEquals(cashPurchase.getId(), module.createPurchase(ACCESS_TOKEN_ID, cashPurchase).getId());
     }
 
     @Test
-    public void testCreateCheck() {
-        Check check = new Check();
-        IdType id = new IdType();
-        id.setValue("newCheck");
-        check.setId(id);
-        when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, check)).
-                thenReturn(check);
-        assertEquals(check.getId().getValue(), module.createCheck(ACCESS_TOKEN_ID, check).
-                getId().getValue());
+    public void testCreateCheckPurchase() {
+    	Purchase checkPurchase = new Purchase();
+        checkPurchase.setId("newCheckPurchase");
+        checkPurchase.setPaymentType(PaymentTypeEnum.CHECK);
+        when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, checkPurchase)).
+                thenReturn(checkPurchase);
+        assertEquals(checkPurchase.getId(), module.createPurchase(ACCESS_TOKEN_ID, checkPurchase).getId());
     }
 
     @Test
-    public void testCreateCreditCardCharge() {
-        CreditCardCharge creditCardCharge = new CreditCardCharge();
-        IdType id = new IdType();
-        id.setValue("newCreditCardCharge");
-        creditCardCharge.setId(id);
-        when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, creditCardCharge)).
-                thenReturn(creditCardCharge);
-        assertEquals(creditCardCharge.getId().getValue(),
-                module.createCreditCardCharge(ACCESS_TOKEN_ID, creditCardCharge).getId().getValue());
+    public void testCreateCreditCardPurchase() {
+    	Purchase creditCardPurchase = new Purchase();
+        creditCardPurchase.setId("newCreditCardPurchase");
+        creditCardPurchase.setPaymentType(PaymentTypeEnum.CREDIT_CARD);
+        when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, creditCardPurchase)).
+                thenReturn(creditCardPurchase);
+        assertEquals(creditCardPurchase.getId(), module.createPurchase(ACCESS_TOKEN_ID, creditCardPurchase).getId());
     }
 
     @Test
     public void testCreateCustomer() {
         Customer customer = new Customer();
-        IdType id = new IdType();
-        id.setValue("newCustomer");
-        customer.setId(id);
+        customer.setId("newCustomer");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, customer)).
                 thenReturn(customer);
-        assertEquals(customer.getId().getValue(),
-                module.createCustomer(ACCESS_TOKEN_ID, customer).getId().getValue());
+        assertEquals(customer.getId(), module.createCustomer(ACCESS_TOKEN_ID, customer).getId());
     }
 
     @Test
     public void testCreateEstimate() {
         Estimate estimate = new Estimate();
-        IdType id = new IdType();
-        id.setValue("newEstimate");
-        estimate.setId(id);
+        estimate.setId("newEstimate");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, estimate)).
                 thenReturn(estimate);
-        assertEquals(estimate.getId().getValue(),
-                module.createEstimate(ACCESS_TOKEN_ID, estimate).getId().getValue());
+        assertEquals(estimate.getId(),
+                module.createEstimate(ACCESS_TOKEN_ID, estimate).getId());
     }
 
     @Test
     public void testCreateInvoice() {
         Invoice invoice = new Invoice();
-        IdType id = new IdType();
-        id.setValue("newEstimate");
-        invoice.setId(id);
+        invoice.setId("newEstimate");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, invoice)).
                 thenReturn(invoice);
-        assertEquals(invoice.getId().getValue(),
-                module.createInvoice(ACCESS_TOKEN_ID, invoice).getId().getValue());
+        assertEquals(invoice.getId(),
+                module.createInvoice(ACCESS_TOKEN_ID, invoice).getId());
     }
 
     @Test
     public void testCreateItem() {
         Item item = new Item();
-        IdType id = new IdType();
-        id.setValue("newItem");
-        item.setId(id);
+        item.setId("newItem");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, item)).
                 thenReturn(item);
-        assertEquals(item.getId().getValue(),
-                module.createItem(ACCESS_TOKEN_ID, item).getId().getValue());
+        assertEquals(item.getId(),
+                module.createItem(ACCESS_TOKEN_ID, item).getId());
     }
 
     @Test
     public void testCreatePayment() {
         Payment payment = new Payment();
-        IdType id = new IdType();
-        id.setValue("newItem");
-        payment.setId(id);
+        payment.setId("newItem");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, payment)).
                 thenReturn(payment);
-        assertEquals(payment.getId().getValue(),
-                module.createPayment(ACCESS_TOKEN_ID, payment).getId().getValue());
+        assertEquals(payment.getId(),
+                module.createPayment(ACCESS_TOKEN_ID, payment).getId());
     }
 
     @Test
     public void testCreatePaymentMethod() {
         PaymentMethod paymentMethod = new PaymentMethod();
-        IdType id = new IdType();
-        id.setValue("newItem");
-        paymentMethod.setId(id);
+        paymentMethod.setId("newItem");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, paymentMethod)).
                 thenReturn(paymentMethod);
-        assertEquals(paymentMethod.getId().getValue(),
-                module.createPaymentMethod(ACCESS_TOKEN_ID, paymentMethod).getId().getValue());
+        assertEquals(paymentMethod.getId(),
+                module.createPaymentMethod(ACCESS_TOKEN_ID, paymentMethod).getId());
     }
 
     @Test
     public void testCreateSalesReceipt() {
         SalesReceipt salesReceipt = new SalesReceipt();
-        IdType id = new IdType();
-        id.setValue("newSalesReceipt");
-        salesReceipt.setId(id);
+        salesReceipt.setId("newSalesReceipt");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, salesReceipt)).
                 thenReturn(salesReceipt);
-        assertEquals(salesReceipt.getId().getValue(),
-                module.createSalesReceipt(ACCESS_TOKEN_ID, salesReceipt).getId().getValue());
+        assertEquals(salesReceipt.getId(),
+                module.createSalesReceipt(ACCESS_TOKEN_ID, salesReceipt).getId());
     }
 
     @Test
-    public void testCreateSalesTerm() {
-        SalesTerm salesTerm = new SalesTerm();
-        IdType id = new IdType();
-        id.setValue("newSalesReceipt");
-        salesTerm.setId(id);
-        when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, salesTerm)).
-                thenReturn(salesTerm);
-        assertEquals(salesTerm.getId().getValue(),
-                module.createSalesTerm(ACCESS_TOKEN_ID, salesTerm).getId().getValue());
+    public void testCreateTerm() {
+        Term term = new Term();
+        term.setId("newSalesReceipt");
+        when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, term)).
+                thenReturn(term);
+        assertEquals(term.getId(),
+                module.createTerm(ACCESS_TOKEN_ID, term).getId());
     }
 
     @Test
     public void testCreateVendor() {
         Vendor vendor = new Vendor();
-        IdType id = new IdType();
-        id.setValue("newSalesReceipt");
-        vendor.setId(id);
+        vendor.setId("newSalesReceipt");
         when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, vendor)).
                 thenReturn(vendor);
-        assertEquals(vendor.getId().getValue(),
-                module.createVendor(ACCESS_TOKEN_ID, vendor).getId().getValue());
+        assertEquals(vendor.getId(),
+                module.createVendor(ACCESS_TOKEN_ID, vendor).getId());
     }
 
-    @Test
-    public void testGetObject() {
-        Account account = new Account();
-        IdType id = new IdType();
-        id.setValue("account");
-        account.setId(id);
-        when(quickBooksOnlineClient.getObject(OAUTH_CREDENTIALS, OnlineEntityType.ACCOUNT, id)).
-                thenReturn(account);
-        assertEquals(account.getId().getValue(),
-                ((Account) module.getObject(ACCESS_TOKEN_ID, OnlineEntityType.ACCOUNT, id)).getId().getValue());
-    }
+//    @Test
+//    public void testGetObject() {
+//        Account account = new Account();
+//        account.setId("account");
+//        when(quickBooksOnlineClient.getObject(OAUTH_CREDENTIALS, OnlineEntityType.ACCOUNT, null)).
+//                thenReturn(account);
+//        assertEquals(account.getId(),
+//                ((Account) module.getObject(ACCESS_TOKEN_ID, OnlineEntityType.ACCOUNT, null)).getId());
+//    }
 
     @Test
     public void testUpdateAccount() {
         Account account = new Account();
-        account.setDesc("UpdatedAccount");
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.ACCOUNT, account)).thenReturn(account);
+        account.setDescription("UpdatedAccount");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, account)).thenReturn(account);
         assertEquals(account, module.updateAccount(ACCESS_TOKEN_ID, account));
     }
 
     @Test
     public void testUpdateBill() {
         Bill bill = new Bill();
-        IdType id = new IdType();
-        id.setValue("updatedBill");
-        bill.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.BILL, bill)).thenReturn(bill);
+        bill.setId("updatedBill");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, bill)).thenReturn(bill);
         assertEquals(bill, module.updateBill(ACCESS_TOKEN_ID, bill));
     }
 
     @Test
     public void testUpdateBillPayment() {
         BillPayment billPayment = new BillPayment();
-        IdType id = new IdType();
-        id.setValue("updatedBillPayment");
-        billPayment.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.BILLPAYMENT, billPayment)).thenReturn(billPayment);
+        billPayment.setTotalAmt(new BigDecimal(10));
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, billPayment)).thenReturn(billPayment);
         assertEquals(billPayment, module.updateBillPayment(ACCESS_TOKEN_ID, billPayment));
     }
 
     @Test
     public void testUpdateCashPurchase() {
-        CashPurchase cashPurchase = new CashPurchase();
-        IdType id = new IdType();
-        id.setValue("updatedCashPurchase");
-        cashPurchase.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.CASHPURCHASE, cashPurchase)).
+    	Purchase cashPurchase = new Purchase();
+    	cashPurchase.setPaymentType(PaymentTypeEnum.CASH);
+        cashPurchase.setTotalAmt(new BigDecimal(10));
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, cashPurchase)).
                 thenReturn(cashPurchase);
-        assertEquals(cashPurchase, module.updateCashPurchase(ACCESS_TOKEN_ID, cashPurchase));
+        assertEquals(cashPurchase, module.updatePurchase(ACCESS_TOKEN_ID, cashPurchase));
     }
 
     @Test
-    public void testUpdateCheck() {
-        Check check = new Check();
-        IdType id = new IdType();
-        id.setValue("updatedCheck");
-        check.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.CHECK, check)).
-                thenReturn(check);
-        assertEquals(check, module.updateCheck(ACCESS_TOKEN_ID, check));
+    public void testUpdateCheckPurchase() {
+        Purchase checkPurchase = new Purchase();
+        checkPurchase.setPaymentType(PaymentTypeEnum.CHECK);
+        checkPurchase.setTotalAmt(new BigDecimal(10));
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, checkPurchase)).
+                thenReturn(checkPurchase);
+        assertEquals(checkPurchase, module.updatePurchase(ACCESS_TOKEN_ID, checkPurchase));
     }
 
     @Test
-    public void testUpdateCreditCardCharge() {
-        CreditCardCharge creditCardCharge = new CreditCardCharge();
-        IdType id = new IdType();
-        id.setValue("updatedCreditCardCharge");
-        creditCardCharge.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.CREDITCARDCHARGE, creditCardCharge)).
-                thenReturn(creditCardCharge);
-        assertEquals(creditCardCharge, module.updateCreditCardCharge(ACCESS_TOKEN_ID, creditCardCharge));
+    public void testUpdateCreditCardPurchase() {
+        Purchase creditCardPurchase = new Purchase();
+        creditCardPurchase.setPaymentType(PaymentTypeEnum.CREDIT_CARD);
+        creditCardPurchase.setTotalAmt(new BigDecimal(10));
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, creditCardPurchase)).
+                thenReturn(creditCardPurchase);
+        assertEquals(creditCardPurchase, module.updatePurchase(ACCESS_TOKEN_ID, creditCardPurchase));
     }
 
     @Test
      public void testUpdateCustomer() {
         Customer customer = new Customer();
-        IdType id = new IdType();
-        id.setValue("updatedCashPurchase");
-        customer.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.CUSTOMER, customer)).
+        customer.setCompanyName("UpdatedCompanyName");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, customer)).
                 thenReturn(customer);
         assertEquals(customer, module.updateCustomer(ACCESS_TOKEN_ID, customer));
     }
@@ -393,10 +369,8 @@ public class QuickBooksOnlineTest {
     @Test
     public void testUpdateEstimate() {
         Estimate estimate = new Estimate();
-        IdType id = new IdType();
-        id.setValue("updatedEstimate");
-        estimate.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.ESTIMATE, estimate)).
+        estimate.setTotalAmt(new BigDecimal(10));
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, estimate)).
                 thenReturn(estimate);
         assertEquals(estimate, module.updateEstimate(ACCESS_TOKEN_ID, estimate));
     }
@@ -404,21 +378,26 @@ public class QuickBooksOnlineTest {
     @Test
     public void testUpdateInvoice() {
         Invoice invoice = new Invoice();
-        IdType id = new IdType();
-        id.setValue("updatedInvoice");
-        invoice.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.INVOICE, invoice)).
+        invoice.setTotalAmt(new BigDecimal(10));
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, invoice)).
                 thenReturn(invoice);
         assertEquals(invoice, module.updateInvoice(ACCESS_TOKEN_ID, invoice));
     }
 
     @Test
+    public void testUpdateSalesReceipt() {
+    	SalesReceipt salesReceipt = new SalesReceipt();
+    	salesReceipt.setTotalAmt(new BigDecimal(10));
+    	when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, salesReceipt)).
+    	thenReturn(salesReceipt);
+    	assertEquals(salesReceipt, module.updateSalesReceipt(ACCESS_TOKEN_ID, salesReceipt));
+    }
+
+    @Test
     public void testUpdateItem() {
         Item item = new Item();
-        IdType id = new IdType();
-        id.setValue("updatedCashPurchase");
-        item.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.ITEM, item)).
+        item.setDescription("updatedCashPurchase");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, item)).
                 thenReturn(item);
         assertEquals(item, module.updateItem(ACCESS_TOKEN_ID, item));
     }
@@ -426,10 +405,8 @@ public class QuickBooksOnlineTest {
     @Test
     public void testUpdatePayment() {
         Payment payment = new Payment();
-        IdType id = new IdType();
-        id.setValue("updatedItem");
-        payment.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.PAYMENT, payment)).
+        payment.setTotalAmt(new BigDecimal(10));
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, payment)).
                 thenReturn(payment);
         assertEquals(payment, module.updatePayment(ACCESS_TOKEN_ID, payment));
     }
@@ -437,43 +414,26 @@ public class QuickBooksOnlineTest {
     @Test
     public void testUpdatePaymentMethod() {
         PaymentMethod paymentMethod = new PaymentMethod();
-        IdType id = new IdType();
-        id.setValue("updatedPaymentMethod");
-        paymentMethod.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.PAYMENTMETHOD, paymentMethod)).
+        paymentMethod.setName("updatedPaymentMethod");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, paymentMethod)).
                 thenReturn(paymentMethod);
         assertEquals(paymentMethod, module.updatePaymentMethod(ACCESS_TOKEN_ID, paymentMethod));
     }
 
     @Test
-    public void testUpdateSalesReceipt() {
-        SalesReceipt salesReceipt = new SalesReceipt();
-        IdType id = new IdType();
-        id.setValue("updatedSalesReceipt");
-        salesReceipt.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.SALESRECEIPT, salesReceipt)).
-                thenReturn(salesReceipt);
-        assertEquals(salesReceipt, module.updateSalesReceipt(ACCESS_TOKEN_ID, salesReceipt));
-    }
-
-    @Test
-    public void testUpdateSalesTerm() {
-        SalesTerm salesTerm = new SalesTerm();
-        IdType id = new IdType();
-        id.setValue("updatedSalesTerm");
-        salesTerm.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.SALESTERM, salesTerm)).
-                thenReturn(salesTerm);
-        assertEquals(salesTerm, module.updateSalesTerm(ACCESS_TOKEN_ID, salesTerm));
+    public void testUpdateTerm() {
+        Term term = new Term();
+        term.setName("updatedSalesTerm");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, term)).
+                thenReturn(term);
+        assertEquals(term, module.updateTerm(ACCESS_TOKEN_ID, term));
     }
 
     @Test
     public void testUpdateVendor() {
         Vendor vendor = new Vendor();
-        IdType id = new IdType();
-        id.setValue("updatedVendor");
-        vendor.setId(id);
-        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, OnlineEntityType.VENDOR, vendor)).
+        vendor.setCompanyName("updatedVendorCompany");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, vendor)).
                 thenReturn(vendor);
         assertEquals(vendor, module.updateVendor(ACCESS_TOKEN_ID, vendor));
     }

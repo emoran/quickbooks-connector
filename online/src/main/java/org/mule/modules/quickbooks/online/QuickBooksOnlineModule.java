@@ -43,24 +43,26 @@ import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
 import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
-import org.mule.modules.quickbooks.online.schema.Account;
-import org.mule.modules.quickbooks.online.schema.Bill;
-import org.mule.modules.quickbooks.online.schema.BillPayment;
-import org.mule.modules.quickbooks.online.schema.CashPurchase;
-import org.mule.modules.quickbooks.online.schema.Check;
-import org.mule.modules.quickbooks.online.schema.CreditCardCharge;
-import org.mule.modules.quickbooks.online.schema.Customer;
-import org.mule.modules.quickbooks.online.schema.Estimate;
-import org.mule.modules.quickbooks.online.schema.IdType;
-import org.mule.modules.quickbooks.online.schema.Invoice;
-import org.mule.modules.quickbooks.online.schema.Item;
-import org.mule.modules.quickbooks.online.schema.JournalEntry;
-import org.mule.modules.quickbooks.online.schema.Payment;
-import org.mule.modules.quickbooks.online.schema.PaymentMethod;
-import org.mule.modules.quickbooks.online.schema.SalesReceipt;
-import org.mule.modules.quickbooks.online.schema.SalesTerm;
-import org.mule.modules.quickbooks.online.schema.Vendor;
 import org.openid4java.message.MessageException;
+
+import org.mule.modules.quickbooks.online.schema.IdType;
+
+import com.intuit.ipp.core.IEntity;
+import com.intuit.ipp.data.Bill;
+import com.intuit.ipp.data.Account;
+import com.intuit.ipp.data.BillPayment;
+import com.intuit.ipp.data.Purchase;
+import com.intuit.ipp.data.Customer;
+import com.intuit.ipp.data.Estimate;
+import com.intuit.ipp.data.Invoice;
+import com.intuit.ipp.data.Item;
+import com.intuit.ipp.data.ReferenceType;
+import com.intuit.ipp.data.SalesReceipt;
+import com.intuit.ipp.data.Payment;
+import com.intuit.ipp.data.Term;
+import com.intuit.ipp.data.Vendor;
+import com.intuit.ipp.data.PaymentMethod;
+import com.intuit.ipp.data.JournalEntry;
 
 import java.util.Map;
 /**
@@ -219,77 +221,34 @@ public class QuickBooksOnlineModule
     }
     
     /**
-     * Creates a CashPurchase.
-     * CashPurchase represents an expense to the business as a cash transaction.
-     * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CashPurchase">CashPurchase Specification</a>
+     * Creates a Purchase.
+     * This entity represents expenses, such as a purchase made from a vendor.
+     * There are three types of Purchases: Cash, Check, and Credit Card.
+     * 	- Cash Purchase contains information regarding a payment made in cash.
+     *  - Check Purchase contains information regarding a payment made by check.
+     *  - Credit Card Purchase contains information regarding a payment made by credit card.
+     * The purchase type needs to be set in the PaymentType attribute of a Purchase object.
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-cash-purchase}
+     * For details see: 
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/
+     * 030_entity_services_reference/purchase">Purchase Specification</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-purchase}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @param cashPurchase The cash purchase to be created
-     * @return The created CashPurchase.
+     * @param purchase The purchase to be created
+     * @return The created Purchase.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase createCashPurchase(String accessTokenId,
-                                           @Optional @Default("#[payload]") CashPurchase cashPurchase)
+    public Purchase createPurchase(String accessTokenId,
+                                           @Optional @Default("#[payload]") Purchase purchase)
     {
-        return client.create(getAccessTokenInformation(accessTokenId), cashPurchase);
+        return client.create(getAccessTokenInformation(accessTokenId), purchase);
     }
     
-    /**
-     * Creates a Check.
-     * The Check object represents an expense to the business paid as a check transaction.
-     * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Check">Check Specification</a>
-     * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-check}
-     *
-     * @param accessTokenId identifier for QuickBooks credentials.
-     * @param check The check to be created
-     * @return The created Check.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
-     */
-    @Processor
-    public Check createCheck(String accessTokenId,
-                             @Optional @Default("#[payload]") Check check)
-    {
-        return client.create(getAccessTokenInformation(accessTokenId), check);
-    }
-    
-    /**
-     * Creates a CreditCardCharge.
-     * The CreditCardCharge object represents an expense to the business as a credit card charge 
-     * transaction. CreditCardCharge must have the total expense equal to the total expense of 
-     * line items.
-     * 
-     * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Specification</a>
-     * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-credit-card-charge}
-     *
-     * @param accessTokenId identifier for QuickBooks credentials.
-     * @param creditCardCharge The credit card charge to be created
-     * @return The created CreditCardCharge.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
-     */
-    @Processor
-    public CreditCardCharge createCreditCardCharge(String accessTokenId,
-                                                   @Optional @Default("#[payload]") CreditCardCharge creditCardCharge)
-    {
-        return client.create(getAccessTokenInformation(accessTokenId), creditCardCharge);
-    }
-
     /**
      * Creates a Customer.
      * The Customer object represents the consumer of the service or the product that your business offers. 
@@ -312,12 +271,6 @@ public class QuickBooksOnlineModule
     public Customer createCustomer(String accessTokenId,
                                    @Optional @Default("#[payload]") Customer customer)
     {
-        if(customer.getPaymentMethodId() != null && (customer.getPaymentMethodId().getValue().isEmpty() 
-                || StringUtils.isEmpty(customer.getPaymentMethodId().getValue())))
-        {
-            customer.setPaymentMethodId(new IdType());
-        }
-        
         return client.create(getAccessTokenInformation(accessTokenId), customer);
     }
     
@@ -499,31 +452,30 @@ public class QuickBooksOnlineModule
     }
     
     /**
-     * Creates a SalesTerm.
-     * The SalesTerm object  represents the terms under which a sale is made. SalesTerm is typically 
-     * expressed in the form of days due after the goods are received. There is an optional discount 
-     * part of the sales term, where a discount of total amount can automatically be applied if 
-     * payment is made within a few days of the stipulated time.
+     * Creates a Term.
+     * The Term entity represents the terms under which a sale is made, typically expressed in
+     * the form of days due after the goods are received. Optionally, a discount of the total
+     * amount may be applied if payment is made within a stipulated time.
      * 
      * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/SalesTerm">SalesTerm Specification</a>
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/
+     * 030_entity_services_reference/term">Term Specification</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-sales-term}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:create-term}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @param salesTerm The sales term to be created
-     * @return The created SalesTerm.
+     * @param term The term to be created
+     * @return The created Term.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm createSalesTerm(String accessTokenId,
-                                     @Optional @Default("#[payload]") SalesTerm salesTerm)
+    public Term createTerm(String accessTokenId,
+                                     @Optional @Default("#[payload]") Term term)
     {
         
-        return client.create(getAccessTokenInformation(accessTokenId), salesTerm);
+        return client.create(getAccessTokenInformation(accessTokenId), term);
     }
     
     /**
@@ -566,8 +518,8 @@ public class QuickBooksOnlineModule
      */
     @Processor
     public Object getObject(String accessTokenId,
-                            OnlineEntityType type,
-                            @Optional @Default("#[payload]") IdType id)
+                            IntuitEntityEnum type,
+                            @Optional @Default("#[payload]") String id)
     {
         return client.getObject(getAccessTokenInformation(accessTokenId), type, id);
     }
@@ -598,7 +550,7 @@ public class QuickBooksOnlineModule
     public Account updateAccount(String accessTokenId,
                                  @Optional @Default("#[payload]") Account account)
     {   
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.ACCOUNT, account);
+        return client.update(getAccessTokenInformation(accessTokenId), account);
     }
     
     /**
@@ -625,7 +577,7 @@ public class QuickBooksOnlineModule
     public Bill updateBill(String accessTokenId,
                            @Optional @Default("#[payload]") Bill bill)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.BILL, bill);
+        return client.update(getAccessTokenInformation(accessTokenId), bill);
     }
     
     /**
@@ -654,92 +606,41 @@ public class QuickBooksOnlineModule
     public BillPayment updateBillPayment(String accessTokenId,
                                          @Optional @Default("#[payload]") BillPayment billPayment)
     {    
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.BILLPAYMENT, billPayment);
+        return client.update(getAccessTokenInformation(accessTokenId), billPayment);
     }
     
     /**
-     * Updates a CashPurchase.
-     * CashPurchase represents an expense to the business as a cash transaction.
+     * Updates a Purchase.
+     * This entity represents expenses, such as a purchase made from a vendor.
+     * There are three types of Purchases: Cash, Check, and Credit Card.
+     * 	- Cash Purchase contains information regarding a payment made in cash.
+     *  - Check Purchase contains information regarding a payment made by check.
+     *  - Credit Card Purchase contains information regarding a payment made by credit card.
+     * The purchase type needs to be set in the PaymentType attribute of a Purchase object.
      * 
      * Specify all the parameters for the object, not just the new or changed elements.
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CashPurchase">CashPurchase Specification</a>
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/
+     * 030_entity_services_reference/purchase">Purchase Specification</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-cash-purchase}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-purchase}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @param cashPurchase The cash purchase to be updated
-     * @return The updated CashPurchase.
+     * @param purchase The purchase to be created
+     * @return The updated Purchase.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public CashPurchase updateCashPurchase(String accessTokenId,
-                                           @Optional @Default("#[payload]") CashPurchase cashPurchase)
+    public Purchase updatePurchase(String accessTokenId,
+                                           @Optional @Default("#[payload]") Purchase purchase)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CASHPURCHASE, cashPurchase);
+        return client.update(getAccessTokenInformation(accessTokenId), purchase);
     }
     
-    /**
-     * Updates a Check.
-     * The Check object represents an expense to the business paid as a check transaction.
-     * 
-     * Specify all the parameters for the object, not just the new or changed elements.
-     * If you omit an element, it is removed from the object by the update operation.
-     * 
-     * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Check">Check Specification</a>
-     * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-check}
-     *
-     * @param accessTokenId identifier for QuickBooks credentials.
-     * @param check The check to be updated
-     * @return The updated Check.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
-     */
-    @Processor
-    public Check updateCheck(String accessTokenId,
-                             @Optional @Default("#[payload]") Check check)
-    {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CHECK, check);
-    }
-    
-    /**
-     * Updates a CreditCardCharge.
-     * The CreditCardCharge object represents an expense to the business as a credit card charge 
-     * transaction. CreditCardCharge must have the total expense equal to the total expense of 
-     * line items.
-     * 
-     * Specify all the parameters for the object, not just the new or changed elements.
-     * If you omit an element, it is removed from the object by the update operation.
-     * 
-     * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/CreditCardCharge">CreditCardCharge Specification</a>
-     * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-credit-card-charge}
-     *
-     * @param accessTokenId identifier for QuickBooks credentials.
-     * @param creditCardCharge The credit card charge to be updated
-     * @return The updated CreditCardCharge.
-     * 
-     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
-     *         and a message provided by quickbooks about the error.
-     */
-    @Processor
-    public CreditCardCharge updateCreditCardCharge(String accessTokenId,
-                                                   @Optional @Default("#[payload]") CreditCardCharge creditCardCharge)
-    {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CREDITCARDCHARGE,
-                creditCardCharge);
-    }
 
     /**
      * Updates a Customer.
@@ -766,13 +667,7 @@ public class QuickBooksOnlineModule
     public Customer updateCustomer(String accessTokenId,
                                    @Optional @Default("#[payload]") Customer customer)
     {
-        if(customer.getPaymentMethodId() != null && (customer.getPaymentMethodId().getValue().isEmpty() 
-                || StringUtils.isEmpty(customer.getPaymentMethodId().getValue())))
-        {
-            customer.setPaymentMethodId(new IdType());
-        }
-
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.CUSTOMER, customer);
+        return client.update(getAccessTokenInformation(accessTokenId), customer);
     }
     
     /**
@@ -800,7 +695,7 @@ public class QuickBooksOnlineModule
     public Estimate updateEstimate(String accessTokenId,
                                    @Optional @Default("#[payload]") Estimate estimate)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.ESTIMATE, estimate);
+        return client.update(getAccessTokenInformation(accessTokenId), estimate);
     }
     
     /**
@@ -829,7 +724,7 @@ public class QuickBooksOnlineModule
     public Invoice updateInvoice(String accessTokenId,
                                  @Optional @Default("#[payload]") Invoice invoice)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.INVOICE, invoice);
+        return client.update(getAccessTokenInformation(accessTokenId), invoice);
     }
     
     /**
@@ -857,7 +752,7 @@ public class QuickBooksOnlineModule
     public Item updateItem(String accessTokenId,
                            @Optional @Default("#[payload]") Item item)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.ITEM, item);
+        return client.update(getAccessTokenInformation(accessTokenId), item);
     }
 
     /**
@@ -884,7 +779,7 @@ public class QuickBooksOnlineModule
     public JournalEntry updateJournalEntry(String accessTokenId,
                                           @Optional @Default("#[payload]") JournalEntry journalEntry)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.JOURNALENTRY, journalEntry);
+        return client.update(getAccessTokenInformation(accessTokenId), journalEntry);
     }
 
     /**
@@ -912,7 +807,7 @@ public class QuickBooksOnlineModule
     public Payment updatePayment(String accessTokenId,
                                  @Optional @Default("#[payload]") Payment payment)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.PAYMENT, payment);
+        return client.update(getAccessTokenInformation(accessTokenId), payment);
     }
     
     /**
@@ -940,7 +835,7 @@ public class QuickBooksOnlineModule
     public PaymentMethod updatePaymentMethod(String accessTokenId,
                                              @Optional @Default("#[payload]") PaymentMethod paymentMethod)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.PAYMENTMETHOD, paymentMethod);
+        return client.update(getAccessTokenInformation(accessTokenId), paymentMethod);
     }
     
     /**
@@ -968,38 +863,37 @@ public class QuickBooksOnlineModule
     public SalesReceipt updateSalesReceipt(String accessTokenId,
                                            @Optional @Default("#[payload]") SalesReceipt salesReceipt)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.SALESRECEIPT, salesReceipt);
+        return client.update(getAccessTokenInformation(accessTokenId), salesReceipt);
     }
     
     /**
-     * Updates a SalesTerm.
-     * The SalesTerm object  represents the terms under which a sale is made. SalesTerm is typically 
-     * expressed in the form of days due after the goods are received. There is an optional discount 
-     * part of the sales term, where a discount of total amount can automatically be applied if 
-     * payment is made within a few days of the stipulated time.
+     * Updates a Term.
+     * The Term entity represents the terms under which a sale is made, typically expressed in
+     * the form of days due after the goods are received. Optionally, a discount of the total
+     * amount may be applied if payment is made within a stipulated time.
      * 
      * Specify all the parameters for the object, not just the new or changed elements.
      * If you omit an element, it is removed from the object by the update operation.
      * 
      * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/SalesTerm">SalesTerm Specification</a>
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/
+     * 030_entity_services_reference/term">Term Specification</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-sales-term}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:update-term}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @param salesTerm The sales term to be updated
-     * @return The updated SalesTerm.
+     * @param term The term to be updated
+     * @return The updated Term.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public SalesTerm updateSalesTerm(String accessTokenId,
-                                     @Optional @Default("#[payload]") SalesTerm salesTerm)
+    public Term updateTerm(String accessTokenId,
+                                     @Optional @Default("#[payload]") Term term)
     {
         
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.SALESTERM, salesTerm);
+        return client.update(getAccessTokenInformation(accessTokenId), term);
     }
     
     /**
@@ -1024,7 +918,7 @@ public class QuickBooksOnlineModule
     public Vendor updateVendor(String accessTokenId,
                                @Optional @Default("#[payload]") Vendor vendor)
     {
-        return client.update(getAccessTokenInformation(accessTokenId), OnlineEntityType.VENDOR, vendor);
+        return client.update(getAccessTokenInformation(accessTokenId), vendor);
     }
     
     /**
@@ -1223,7 +1117,7 @@ public class QuickBooksOnlineModule
             credentials.setBaseUri(apiUrl);
         }
         else {
-            credentials.setBaseUri(client.getCompanyBaseUri(credentials));
+            credentials.setBaseUri(this.baseUri);
         }
 
         //Use the prefix if it is defined in the config

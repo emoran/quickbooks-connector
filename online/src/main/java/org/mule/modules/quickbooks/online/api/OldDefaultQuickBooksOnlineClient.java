@@ -29,47 +29,30 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
 import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
+import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.api.model.AppMenuInformation;
-import org.mule.modules.quickbooks.api.model.BlueDotMenu;
-import org.mule.modules.quickbooks.api.model.PlatformResponse;
-import org.mule.modules.quickbooks.api.model.ReconnectResponse;
-import org.mule.modules.quickbooks.api.model.UserInformation;
-import org.mule.modules.quickbooks.api.model.UserResponse;
+import org.mule.modules.quickbooks.api.model.*;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
-import org.mule.modules.quickbooks.online.IntuitEntityEnum;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
-import org.mule.modules.quickbooks.online.schema.CdmBase;
-import org.mule.modules.quickbooks.online.schema.IdType;
-import org.mule.modules.quickbooks.online.schema.QboUser;
-import org.mule.modules.quickbooks.online.schema.SearchResults;
+import org.mule.modules.quickbooks.online.schema.*;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
-import org.springframework.util.CollectionUtils;
 
-import com.intuit.ipp.core.Context;
-import com.intuit.ipp.core.IEntity;
-import com.intuit.ipp.core.ServiceType;
-import com.intuit.ipp.data.Error;
-import com.intuit.ipp.data.IntuitEntity;
-import com.intuit.ipp.exception.FMSException;
-import com.intuit.ipp.security.OAuthAuthorizer;
 import com.intuit.ipp.services.DataService;
 
 /**
  * 
- * @author damianpelaez
- *
+ * @author Gaston Ponti
+ * @since Aug 19, 2011
  */
 @SuppressWarnings("unchecked")
-public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth implements QuickBooksOnlineClient
+public class OldDefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth implements OldQuickBooksOnlineClient
 {   
-    private final ServiceType SERVICE_TYPE = ServiceType.QBO;
-	
-    public DefaultQuickBooksOnlineClient(final String baseUri, final String consumerKey, final String consumerSecret,
+    
+    public OldDefaultQuickBooksOnlineClient(final String baseUri, final String consumerKey, final String consumerSecret,
                                          final String appKey)
     {
         Validate.notEmpty(baseUri);
@@ -78,72 +61,53 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         setResultsPerPage(100);
     }
     
-    // **********************************************************************************************
-    // ************************** QuickBooks Online DataService Operations **************************
-    // **********************************************************************************************
-    
-    private DataService createIntuitDataService(OAuthCredentials credentials) throws FMSException
-    {
-    	return new DataService(this.createIntuitContext(credentials));
-    }
-    
-    private Context createIntuitContext(OAuthCredentials credentials) throws FMSException
-    {
-    	return new Context(this.createIntuitOAuthAuthorizer(credentials), this.SERVICE_TYPE, credentials.getRealmId());
-    }
-    
-    private OAuthAuthorizer createIntuitOAuthAuthorizer(OAuthCredentials credentials)
-    {
-    	return new OAuthAuthorizer(this.getConsumerKey(), this.getConsumerSecret(), credentials.getAccessToken(), credentials.getAccessTokenSecret());
-    }
-    
     /** @throws QuickBooksRuntimeException 
      */
     @Override
-    public <T extends IEntity> T create(final OAuthCredentials credentials, T obj)
+    public <T extends CdmBase> T create(final OAuthCredentials credentials,
+                                        T obj)
     {
     	Validate.notNull(obj);
-    	Validate.notNull(credentials);
-    	
-    	try
-    	{
-			DataService service = this.createIntuitDataService(credentials);
-			return service.add(obj);
-		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
-		}
+        
+        String str = String.format("%s/resource/%s/v2/%s",
+            credentials.getBaseUri(),
+            QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
+            credentials.getRealmId());
+        
+        HttpUriRequest httpRequest = new HttpPost(str);
+        httpRequest.addHeader("Content-Type", "application/xml");
+        prepareToPost(obj, httpRequest);
+
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                destroyAccessToken(credentials);
+                return create(credentials, obj);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
     }
-    
+
     /** @throws QuickBooksRuntimeException 
      */
     @Override
-    public <T extends IEntity> T getObject(final OAuthCredentials credentials,
-                                           final IntuitEntityEnum type,
-                                           final String id)
+    public <T extends CdmBase> T getObject(final OAuthCredentials credentials,
+                                           final OnlineEntityType type,
+                                           final IdType id)
     {   
-    	Validate.notNull(credentials);
-    	Validate.notNull(type);
+        Validate.notNull(type);
         Validate.notNull(id);
         
-        try
-    	{
-			IntuitEntity obj = type.newInstance();
-			obj.setId(id);
-			
-        	DataService service = this.createIntuitDataService(credentials);
-        	
-        	return (T) service.findById(obj);
-		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
-		}
-    }
-    
-    @Override
-    public <T> T get(OAuthCredentials credentials, OnlineEntityType type) {
-        Validate.notNull(type);
-        
-        String str = String.format("%s/resource/%s/v2/%s",
-            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
+        String str = String.format("%s/resource/%s/v2/%s/%s",
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         
@@ -156,7 +120,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
             if(e.isAExpiredTokenFault())
             {
                 destroyAccessToken(credentials);
-                return get(credentials, type);
+                return getObject(credentials, type, id);
             } 
             else 
             {
@@ -168,18 +132,43 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     /** @throws QuickBooksRuntimeException 
      */
     @Override
-    public <T extends IEntity> T update(final OAuthCredentials credentials, T obj)
+    public <T extends CdmBase> T update(final OAuthCredentials credentials,
+                                        final OnlineEntityType type,
+                                        T obj)
     {
         Validate.notNull(obj);
-    	Validate.notNull(credentials);
-    	
-    	try
-    	{
-			DataService service = this.createIntuitDataService(credentials);
-			return service.update(obj);
-		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
-		}
+        
+        if (obj.getSyncToken() == null)
+        {
+            obj.setSyncToken(getObject(credentials, type, obj.getId()).getSyncToken());
+        }
+        
+        String str = String.format("%s/resource/%s/v2/%s/%s",
+            credentials.getBaseUri(),
+            QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
+            credentials.getRealmId(),
+            obj.getId().getValue());
+        
+        HttpUriRequest httpRequest = new HttpPost(str);
+        httpRequest.addHeader("Content-Type", "application/xml");
+        prepareToPost(obj, httpRequest);
+        
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                destroyAccessToken(credentials);
+                return update(credentials, type, obj);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -417,35 +406,17 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         return listOfResults;
     }
     
-    // **********************************************************************************************
-    // ********************************** ExceptionInfo Operations **********************************
-    // **********************************************************************************************
-    
-    private ExceptionInfo adaptFMSExceptionToExceptionInfo(FMSException exception) {
-    	ExceptionInfo exceptionInfo = new ExceptionInfo(); 
-    	
-    	exceptionInfo.setMessage(StringUtils.defaultIfEmpty(exception.getMessage(), "No Message"));
+    @Override
+    public String getCompanyBaseUri(OAuthCredentials credentials)
+    {
+        HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", this.baseUri,
+                credentials.getRealmId()));
 
-    	List<Error> errorList = exception.getErrorList();
-    	
-    	if(!CollectionUtils.isEmpty(errorList))
-    	{
-    		for(Error error : errorList)
-    		{
-    			if(!StringUtils.isEmpty(error.getCode()))
-    			{
-    				exceptionInfo.setErrorCode(error.getCode());
-    				exceptionInfo.setCause(error.getMessage());
-    				return exceptionInfo;
-    			}
-    		}
-    	}
-    	
-    	exceptionInfo.setErrorCode("No Cause Obtained");
-    	exceptionInfo.setErrorCode("No ErrorCode Obtained");
-    	return exceptionInfo;
-	}
-    
+        QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, credentials, false);
+
+        return qboUser.getCurrentCompany().getBaseURI();
+    }
+
     @Override
     protected ExceptionInfo getFaultInfo(String str) throws JAXBException
     {
@@ -460,10 +431,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         return QBOMessageUtils.getInstance();
     }
 
-    // **********************************************************************************************
-    // ********************************* INTUIT Platform Operations *********************************
-    // **********************************************************************************************
-    
     @Override
     public UserInformation getCurrentUserInformation(OAuthCredentials credentials) {
         Object response = retrieveUserInformation(credentials);
@@ -499,7 +466,35 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         return credentials;
     }
 
-     /**
+    @Override
+    public <T> T get(OAuthCredentials credentials, OnlineEntityType type) {
+        Validate.notNull(type);
+        
+        String str = String.format("%s/resource/%s/v2/%s",
+            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
+
+        HttpUriRequest httpRequest = new HttpGet(str);
+        
+        try
+        {
+            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
+        }
+        catch(QuickBooksRuntimeException e)
+        {
+            if(e.isAExpiredTokenFault())
+            {
+                destroyAccessToken(credentials);
+                return get(credentials, type);
+            } 
+            else 
+            {
+                throw e;
+            }
+        }
+    }
+
+
+    /**
      * Parse the HTML information for BlueDotMenu
      * @param credentials OAuth credentials
      * @param regex Regex for extracting the information

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">	
+
+	<import resource="ConnectorTestCaseSpringBeans.xml" />
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>${QUICKBOOKS_ONLINE_CREDENTIALS}</value>
+		</property>
+	</bean>
+	
+	<bean id="oAuthCredentials" class="org.mule.modules.quickbooks.api.oauth.OAuthCredentials">
+		<property name="accessToken" value="${quickbooks.online.accesstoken}" />
+		<property name="accessTokenSecret" value="${quickbooks.online.accesstokensecret}" />
+		<property name="realmId" value="${quickbooks.online.realmid}" />
+		<property name="userId" value="${quickbooks.online.realmid}" />
+		<property name="authUrl" value="https://appcenter.intuit.com/Connect/Begin" />
+		<property name="baseUri" value="" />
+		<property name="requestTokenUrl" value="https://oauth.intuit.com/oauth/v1/get_request_token" />
+		<property name="accessTokenUrl" value="https://oauth.intuit.com/oauth/v1/get_access_token" />
+	</bean>
+	
+	<bean id="customerObject" class="com.intuit.ipp.data.Customer">
+		<property name="givenName" value="GivenName" />
+		<property name="middleName" value="MiddleName" />
+		<property name="familyName" value="FamilyName" />
+		<property name="contactName" value="ContactName" />
+		<property name="taxable" value="true" />
+	</bean>
+
+</beans>

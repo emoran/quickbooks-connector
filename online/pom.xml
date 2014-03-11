@@ -13,6 +13,7 @@
     
     <properties>
         <github.merge>true</github.merge>
+        <connector.test.version>2.0.6</connector.test.version>
     </properties>
     
     <build>
@@ -105,6 +106,7 @@
                 <useStandardDocletOptions>false</useStandardDocletOptions>
                 <additionalJOption>-J-Xmx1024m</additionalJOption>
             </configuration>
+
         </plugin>
     </plugins>
     </build>
@@ -126,5 +128,41 @@
             <version>2.0.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+			<groupId>com.intuit.code.devkit.v3</groupId>
+			<artifactId>ipp-v3-java-devkit</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.intuit.code.devkit.qbhelper</groupId> -->
+<!-- 			<artifactId>ipp-java-qbapihelper</artifactId> -->
+<!-- 			<version>1.2.0</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.intuit.code.devkit.v3</groupId>
+			<artifactId>ipp-v3-java-data</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+		
+		<!-- Added dependencies -->
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>0.6.3</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.6</version>
+		</dependency>
+		
+		<!-- Mule Connector Test Framework -->
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-connector-test</artifactId>
+			<version>${connector.test.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
