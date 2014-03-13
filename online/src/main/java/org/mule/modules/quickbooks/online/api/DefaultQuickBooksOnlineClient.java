@@ -68,7 +68,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         Validate.notNull(obj);
         
         String str = String.format("%s/resource/%s/v2/%s",
-            credentials.getBaseUri(),
+            getBaseUri(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             credentials.getRealmId());
         
@@ -105,7 +105,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         Validate.notNull(id);
         
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
+            getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         
@@ -142,7 +142,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         }
         
         String str = String.format("%s/resource/%s/v2/%s/%s",
-            credentials.getBaseUri(),
+            getBaseUri(),
             QuickBooksConventions.toQuickBooksPathVariable(obj.getClass().getSimpleName()),
             credentials.getRealmId(),
             obj.getId().getValue());
@@ -189,7 +189,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         obj.setId(id);
         
         String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
-            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
+            getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
         
         HttpUriRequest httpRequest = new HttpPost(str);
         httpRequest.addHeader("Content-Type", "application/xml");
@@ -282,9 +282,9 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
                     nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
                     nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
-                        credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
+                        getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
                     
-                    httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                    httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
                     try
                     {
                         ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
@@ -351,9 +351,9 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
             nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
             
             HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
-                credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
+                getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
             
-            httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
             try
             {
                 ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
@@ -404,10 +404,18 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         return listOfResults;
     }
     
+    /**
+     * This method was used to retrieve the baseUri for a Company when getting the Base URL at Runtime.
+     * The Base URL at Runtime method is no longer supported by the connector. The Static Base URL is the only supported method now.
+     * 
+     * Link:
+     * <a href="https://developer.intuit.com/docs/95_legacy/qbo_v2/0400_qbo_v2_reference/0100_calling_data_services/
+     * 0010_getting_the_base_url">Getting BaseURL</a>
+     */
     @Override
-    public String getCompanyBaseUri(OAuthCredentials credentials)
+    public String getCompanyBaseUri(OAuthCredentials credentials, String requestBaseUri)
     {
-        HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", this.baseUri,
+        HttpUriRequest httpRequest = new HttpGet(String.format("%s/%s", requestBaseUri,
                 credentials.getRealmId()));
 
         QboUser qboUser = (QboUser) makeARequestToQuickbooks(httpRequest, credentials, false);
@@ -469,7 +477,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         Validate.notNull(type);
         
         String str = String.format("%s/resource/%s/v2/%s",
-            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
+            getBaseUri(), type.getResouceName(), credentials.getRealmId());
 
         HttpUriRequest httpRequest = new HttpGet(str);
         

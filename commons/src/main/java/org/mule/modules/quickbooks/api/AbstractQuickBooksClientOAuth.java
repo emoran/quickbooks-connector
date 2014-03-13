@@ -10,8 +10,17 @@
 
 package org.mule.modules.quickbooks.api;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.signature.HmacSha1MessageSigner;
+
 import org.apache.commons.lang.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -33,13 +42,6 @@ import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public abstract class AbstractQuickBooksClientOAuth
 {   
@@ -316,6 +318,10 @@ public abstract class AbstractQuickBooksClientOAuth
 
     public String getConsumerSecret() {
         return consumerSecret;
+    }
+    
+    public String getBaseUri() {
+        return baseUri;
     }
 
     @SuppressWarnings("unused")

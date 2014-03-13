@@ -111,15 +111,9 @@ public class QuickBooksOnlineModule
 
     /**
      * The base uri of the quickbooks endpoint,
-     * used to fetch the company uri. 
-     * 
-     * Quickbooks connector will first use this uri and the realmId to
-     * get a second uri, called company uri, 
-     * which is the actual quickbooks endpoint for the connector 
-     *  
      */
     @Optional
-    @Default("https://qbo.intuit.com/qbo1/rest/user/v2")
+    @Default("https://qbo.sbfinance.intuit.com")
     @Configurable
     private String baseUri;
 
@@ -1223,7 +1217,7 @@ public class QuickBooksOnlineModule
             credentials.setBaseUri(apiUrl);
         }
         else {
-            credentials.setBaseUri(client.getCompanyBaseUri(credentials));
+            credentials.setBaseUri(this.getBaseUri());
         }
 
         //Use the prefix if it is defined in the config
