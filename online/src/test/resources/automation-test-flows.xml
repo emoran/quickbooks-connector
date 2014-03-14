@@ -20,7 +20,19 @@
             			objectStore-ref="_defaultInMemoryObjectStore" />
     
     <flow name="CreateCustomer">
-        <quickbooks:create-customer accessTokenId="${quickbooks.online.realmid}"/>
+        <quickbooks:create-customer config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="GetCustomer">
+        <quickbooks:get-object config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" type="#[payload['type']]" id="#[payload['id']]" />
+    </flow>
+    
+    <flow name="UpdateCustomer">
+        <quickbooks:update-customer config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="GetCompanyInfo">
+        <quickbooks:get-company-info config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
     </flow>
     
 </mule>

@@ -36,6 +36,7 @@ import org.openid4java.message.MessageException;
 import com.intuit.ipp.data.Account;
 import com.intuit.ipp.data.Bill;
 import com.intuit.ipp.data.BillPayment;
+import com.intuit.ipp.data.CompanyInfo;
 import com.intuit.ipp.data.Customer;
 import com.intuit.ipp.data.Estimate;
 import com.intuit.ipp.data.Invoice;
@@ -456,11 +457,11 @@ public class QuickBooksOnlineTest {
 
     @Test
     public void testGetCompanyMetadata() {
-        CompanyMetaData companyMetaData = new CompanyMetaData();
-        companyMetaData.setQBNRegisteredCompanyName("Mulesoft");
-        when(quickBooksOnlineClient.get(OAUTH_CREDENTIALS, OnlineEntityType.COMPANY_METADATA)).thenReturn(companyMetaData);
-        assertEquals(companyMetaData.getQBNRegisteredCompanyName(),
-                ((CompanyMetaData) module.getCompanyMetadata(ACCESS_TOKEN_ID)).getQBNRegisteredCompanyName());
+        CompanyInfo companyInfo = new CompanyInfo();
+        companyInfo.setCompanyName("Mulesoft");
+        when(quickBooksOnlineClient.getCompanyInfo(OAUTH_CREDENTIALS)).thenReturn(companyInfo);
+        assertEquals(companyInfo.getCompanyName(),
+                ((CompanyInfo) module.getCompanyInfo(ACCESS_TOKEN_ID)).getCompanyName());
     }
 
     @Test

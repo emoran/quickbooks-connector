@@ -192,10 +192,10 @@
 </quickbooks:get-current-user>
 <!-- END_INCLUDE(quickbooks:get-current-user) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:get-company-metadata) -->
-<quickbooks:get-company-metadata accessTokenId="accessTokenId">
-</quickbooks:get-company-metadata>
-<!-- END_INCLUDE(quickbooks:get-company-metadata) -->
+<!-- BEGIN_INCLUDE(quickbooks:get-company-info) -->
+<quickbooks:get-company-info accessTokenId="accessTokenId">
+</quickbooks:get-company-info>
+<!-- END_INCLUDE(quickbooks:get-company-info) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:auth-user) -->
 <quickbooks:auth-user config-ref="Quickbooks_Online" accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token"

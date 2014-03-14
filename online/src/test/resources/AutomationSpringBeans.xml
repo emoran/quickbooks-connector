@@ -37,5 +37,5 @@
 		<property name="contactName" value="ContactName" />
 		<property name="taxable" value="true" />
 	</bean>
-
+	
 </beans>

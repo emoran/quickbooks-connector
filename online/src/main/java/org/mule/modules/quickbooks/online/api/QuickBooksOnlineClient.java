@@ -33,17 +33,17 @@ public interface QuickBooksOnlineClient
 {
     <T extends IEntity> T create(final OAuthCredentials credentials, T obj);
     
-    <T extends IEntity> T getObject(final OAuthCredentials credentials, final IntuitEntityEnum type, final String id);
+    <T extends IEntity> T getObjectWithId(final OAuthCredentials credentials, final IntuitEntityEnum type, final String id);
     
+    <T extends IEntity> T getCompanyInfo(final OAuthCredentials credentials);
+
     <T extends IEntity> T update(final OAuthCredentials credentials, T obj);
     
-    <T extends CdmBase> void deleteObject(final OAuthCredentials credentials, final OnlineEntityType type, final IdType id, String syncToken);
+    <T extends IEntity> void deleteObject(final OAuthCredentials credentials, IntuitEntityEnum type, final String id, String syncToken);
 
     <T extends CdmBase> Iterable<T> findObjects(final OAuthCredentials credentials, final OnlineEntityType type, final String queryFilter, final String querySort);
 
     <T extends CdmBase> Iterable<T> findObjectsGetPages(OAuthCredentials credentials, OnlineEntityType type, String queryFilter, String querySort);
-    
-    <T extends Object> T get(OAuthCredentials credentials, OnlineEntityType type);
     
     UserInformation getCurrentUserInformation(OAuthCredentials credentials);
 

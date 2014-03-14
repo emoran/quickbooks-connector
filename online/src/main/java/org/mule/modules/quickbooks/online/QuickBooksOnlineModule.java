@@ -51,6 +51,7 @@ import com.intuit.ipp.core.IEntity;
 import com.intuit.ipp.data.Bill;
 import com.intuit.ipp.data.Account;
 import com.intuit.ipp.data.BillPayment;
+import com.intuit.ipp.data.CompanyInfo;
 import com.intuit.ipp.data.Purchase;
 import com.intuit.ipp.data.Customer;
 import com.intuit.ipp.data.Estimate;
@@ -521,7 +522,7 @@ public class QuickBooksOnlineModule
                             IntuitEntityEnum type,
                             @Optional @Default("#[payload]") String id)
     {
-        return client.getObject(getAccessTokenInformation(accessTokenId), type, id);
+        return client.getObjectWithId(getAccessTokenInformation(accessTokenId), type, id);
     }
 
     /**
@@ -935,8 +936,8 @@ public class QuickBooksOnlineModule
      */
     @Processor
     public void deleteObject(String accessTokenId,
-                             OnlineEntityType type, 
-                             @Optional @Default("#[payload]") IdType id, 
+                             IntuitEntityEnum type, 
+                             @Optional @Default("#[payload]") String id, 
                              @Optional String syncToken)
     {
         client.deleteObject(getAccessTokenInformation(accessTokenId), type, id, syncToken);
@@ -1031,23 +1032,22 @@ public class QuickBooksOnlineModule
     }
     
     /**
-     * Returns company metadata information.
+     * Returns company information.
      *
      * For details see: 
      * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
      * 0400_QuickBooks_Online/CompanyMetaData">CompanyMetaData</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-company-metadata}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:get-company-info}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @return company metadata
+     * @return company info
      * 
      */
     @Processor
-    public Object getCompanyMetadata(String accessTokenId)
+    public CompanyInfo getCompanyInfo(String accessTokenId)
     {
-        return client.get(getAccessTokenInformation(accessTokenId),
-                OnlineEntityType.COMPANY_METADATA);
+        return client.getCompanyInfo(getAccessTokenInformation(accessTokenId));
     }
 
     /**

@@ -10,18 +10,12 @@
 
 package org.mule.modules.quickbooks.online.automation;
 
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.Timeout;
 import org.mule.api.store.ObjectStore;
-import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.tests.ConnectorTestCase;
-
-import com.intuit.ipp.data.Customer;
 
 public class QuickBooksOnlineTestParent extends ConnectorTestCase {
 
@@ -30,7 +24,7 @@ public class QuickBooksOnlineTestParent extends ConnectorTestCase {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
-    public void init() throws ObjectStoreException, IOException {
+    public void setUp() throws Exception {
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject("_defaultInMemoryObjectStore");
     	
     	OAuthCredentials credentials = getBeanFromContext("oAuthCredentials");
@@ -40,13 +34,4 @@ public class QuickBooksOnlineTestParent extends ConnectorTestCase {
     	objectStore.store(credentials.getRealmId(), credentials);
     }
     
-    @Test
-	public void createCustomer() throws Exception {
-    	initializeTestRunMessage("customerObject");
-		Customer customer = runFlowAndGetPayload("CreateCustomer");
-
-//		Customer expectedCustomer = getBeanFromContext("customerObject"); 
-//		upsertPayloadContentOnTestRunMessage(expectedCustomer);
-	}
-
 }

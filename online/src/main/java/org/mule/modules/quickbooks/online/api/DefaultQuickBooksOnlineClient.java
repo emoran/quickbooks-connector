@@ -24,7 +24,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
@@ -42,8 +41,6 @@ import org.mule.modules.quickbooks.online.IntuitEntityEnum;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
-import org.mule.modules.quickbooks.online.schema.IdType;
-import org.mule.modules.quickbooks.online.schema.QboUser;
 import org.mule.modules.quickbooks.online.schema.SearchResults;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
@@ -53,6 +50,7 @@ import org.springframework.util.CollectionUtils;
 import com.intuit.ipp.core.Context;
 import com.intuit.ipp.core.IEntity;
 import com.intuit.ipp.core.ServiceType;
+import com.intuit.ipp.data.CompanyInfo;
 import com.intuit.ipp.data.Error;
 import com.intuit.ipp.data.IntuitEntity;
 import com.intuit.ipp.exception.FMSException;
@@ -117,7 +115,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     /** @throws QuickBooksRuntimeException 
      */
     @Override
-    public <T extends IEntity> T getObject(final OAuthCredentials credentials,
+    public <T extends IEntity> T getObjectWithId(final OAuthCredentials credentials,
                                            final IntuitEntityEnum type,
                                            final String id)
     {   
@@ -139,30 +137,22 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     }
     
     @Override
-    public <T> T get(OAuthCredentials credentials, OnlineEntityType type) {
-        Validate.notNull(type);
+    public CompanyInfo getCompanyInfo(OAuthCredentials credentials) {
+    	Validate.notNull(credentials);
         
-        String str = String.format("%s/resource/%s/v2/%s",
-            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId());
-
-        HttpUriRequest httpRequest = new HttpGet(str);
-        
-        try
-        {
-            return (T) makeARequestToQuickbooks(httpRequest, credentials, false);
-        }
-        catch(QuickBooksRuntimeException e)
-        {
-            if(e.isAExpiredTokenFault())
-            {
-                destroyAccessToken(credentials);
-                return get(credentials, type);
-            } 
-            else 
-            {
-                throw e;
-            }
-        }
+    	try
+    	{
+        	DataService service = this.createIntuitDataService(credentials);
+        	List<CompanyInfo> companyInfoList = service.findAll(new CompanyInfo());
+        	
+        	if(CollectionUtils.isEmpty(companyInfoList)) {
+        		throw new QuickBooksRuntimeException("The query for Company Info was empty.");
+        	}
+        	
+        	return companyInfoList.get(0);
+		} catch (FMSException e) {
+			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+		}
     }
 
     /** @throws QuickBooksRuntimeException 
@@ -182,49 +172,38 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
 		}
     }
 
-    /** @throws QuickBooksRuntimeException 
+    /** @return 
+     * @throws QuickBooksRuntimeException 
      */
     @Override
-    public <T extends CdmBase> void deleteObject(final OAuthCredentials credentials,
-                                                 final OnlineEntityType type,
-                                                 final IdType id,
+    public void deleteObject(final OAuthCredentials credentials,
+                                                 final IntuitEntityEnum type,
+                                                 final String id,
                                                  String syncToken)
     {   
-        Validate.notNull(type);
+    	Validate.notNull(credentials);
+    	Validate.notNull(type);
         Validate.notNull(id);
         
-        if (syncToken == null)
-        {
-            syncToken = getObject(credentials, type, id).getSyncToken();
-        }
-        T obj = (T) type.newInstance();
-        obj.setSyncToken(syncToken);
-        obj.setId(id);
-        
-        String str = String.format("%s/resource/%s/v2/%s/%s?methodx=delete",
-            credentials.getBaseUri(), type.getResouceName(), credentials.getRealmId(), id.getValue());
-        
-        HttpUriRequest httpRequest = new HttpPost(str);
-        httpRequest.addHeader("Content-Type", "application/xml");
-        prepareToPost(obj, httpRequest);
-        try
-        {
-            makeARequestToQuickbooks(httpRequest, credentials, false);
-        }
-        catch(QuickBooksRuntimeException e)
-        {
-            if(e.isAExpiredTokenFault())
-            {
-                destroyAccessToken(credentials);
-                deleteObject(credentials, type, id, syncToken);
-            } 
-            else 
-            {
-                throw e;
-            }
-        }
+    	try
+    	{
+    		IntuitEntity obj = type.newInstance();
+			obj.setId(id);
+			
+			if(StringUtils.isNotEmpty(syncToken))
+			{
+				obj.setSyncToken(syncToken);
+			}
+    		
+			DataService service = this.createIntuitDataService(credentials);
+			
+			service.delete(obj);
+		} catch (FMSException e) {
+			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+		}
     }
 
+    
     /** 
      * Returns the list of result pages from Quickbooks
      * 

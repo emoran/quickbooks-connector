@@ -48,15 +48,9 @@
         <quickbooks:create-bill-payment accessTokenId="id" >
         </quickbooks:create-bill-payment>
                                         
-        <quickbooks:create-cash-purchase accessTokenId="id" >
-        </quickbooks:create-cash-purchase>
+        <quickbooks:create-purchase accessTokenId="id" >
+        </quickbooks:create-purchase>
                                          
-        <quickbooks:create-check accessTokenId="id" >
-        </quickbooks:create-check>                     
-        
-        <quickbooks:create-credit-card-charge accessTokenId="id" >
-        </quickbooks:create-credit-card-charge>
-                                              
         <quickbooks:create-customer accessTokenId="id" >
         </quickbooks:create-customer>
         
@@ -75,8 +69,8 @@
         <quickbooks:create-payment-method accessTokenId="id" >
         </quickbooks:create-payment-method>
                                          
-        <quickbooks:create-sales-term accessTokenId="id" >
-        </quickbooks:create-sales-term>
+        <quickbooks:create-term accessTokenId="id" >
+        </quickbooks:create-term>
                                       
         <quickbooks:create-vendor accessTokenId="id" >
         </quickbooks:create-vendor>
@@ -100,15 +94,9 @@
         <quickbooks:update-bill-payment accessTokenId="id" >
         </quickbooks:update-bill-payment>
                                         
-        <quickbooks:update-cash-purchase accessTokenId="id" >
-        </quickbooks:update-cash-purchase>
+        <quickbooks:update-purchase accessTokenId="id" >
+        </quickbooks:update-purchase>
                                          
-        <quickbooks:update-check accessTokenId="id" >
-        </quickbooks:update-check>                     
-        
-        <quickbooks:update-credit-card-charge accessTokenId="id" >
-        </quickbooks:update-credit-card-charge>
-                                              
         <quickbooks:update-customer accessTokenId="id" >
             </quickbooks:update-customer>
         
@@ -130,8 +118,8 @@
         <quickbooks:update-sales-receipt accessTokenId="id" >
         </quickbooks:update-sales-receipt>
                                          
-        <quickbooks:update-sales-term accessTokenId="id" >
-        </quickbooks:update-sales-term>
+        <quickbooks:update-term accessTokenId="id" >
+        </quickbooks:update-term>
                                       
         <quickbooks:update-vendor accessTokenId="id" >
         </quickbooks:update-vendor>
