@@ -12,6 +12,7 @@ package org.mule.modules.quickbooks.online.api;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
+import org.apache.http.Consts;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -32,11 +34,19 @@ import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
 import org.mule.modules.quickbooks.api.QuickBooksConventions;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.api.model.*;
+import org.mule.modules.quickbooks.api.model.AppMenuInformation;
+import org.mule.modules.quickbooks.api.model.BlueDotMenu;
+import org.mule.modules.quickbooks.api.model.PlatformResponse;
+import org.mule.modules.quickbooks.api.model.ReconnectResponse;
+import org.mule.modules.quickbooks.api.model.UserInformation;
+import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
-import org.mule.modules.quickbooks.online.schema.*;
+import org.mule.modules.quickbooks.online.schema.CdmBase;
+import org.mule.modules.quickbooks.online.schema.IdType;
+import org.mule.modules.quickbooks.online.schema.QboUser;
+import org.mule.modules.quickbooks.online.schema.SearchResults;
 import org.mule.modules.quickbooks.utils.MessageUtils;
 import org.mule.modules.utils.MuleSoftException;
 import org.mule.modules.utils.pagination.PaginatedIterable;
@@ -273,26 +283,20 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                     if (queryFilter != null)
                     {
-                        nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
+                        nameValuePairs.add(new BasicNameValuePair("Filter", urlEncodeParam(queryFilter)));
                     }
                     if (querySort != null)
                     {
-                        nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
+                        nameValuePairs.add(new BasicNameValuePair("Sort", urlEncodeParam(querySort)));
                     }
-                    nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
-                    nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
+                    nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", urlEncodeParam(getResultsPerPage().toString())));
+                    nameValuePairs.add(new BasicNameValuePair("PageNum", urlEncodeParam(pageNumber.toString())));
+                    
                     HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
                         getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
                     
                     httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
-                    try
-                    {
-                        ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
-                    }
-                    catch (UnsupportedEncodingException e)
-                    {
-                        throw MuleSoftException.soften(e);
-                    } 
+                    ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, Consts.UTF_8));
                     
                     try
                     {
@@ -339,29 +343,22 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
             
             if (queryFilter != null)
             {
-                nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
+                nameValuePairs.add(new BasicNameValuePair("Filter", this.urlEncodeParam(queryFilter)));
             }
             
             if (querySort != null)
             {
-                nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
+                nameValuePairs.add(new BasicNameValuePair("Sort", this.urlEncodeParam(querySort)));
             }
             
-            nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
-            nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
+            nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", this.urlEncodeParam(getResultsPerPage().toString())));
+            nameValuePairs.add(new BasicNameValuePair("PageNum", this.urlEncodeParam(pageNumber.toString())));
             
             HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
                 getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
             
             httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded");
-            try
-            {
-                ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
-            }
-            catch (UnsupportedEncodingException e)
-            {
-                throw MuleSoftException.soften(e);
-            }
+            ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, Consts.UTF_8));
             
             try
             {
@@ -402,6 +399,14 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         }
         
         return listOfResults;
+    }
+    
+    private String urlEncodeParam(String param) {
+    	try {
+			return URLEncoder.encode(param, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw MuleSoftException.soften(e);
+		}
     }
     
     /**
