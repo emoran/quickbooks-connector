@@ -123,11 +123,15 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     	Validate.notNull(type);
         Validate.notNull(id);
         
-        try
+        IntuitEntity obj = type.newInstance();
+        obj.setId(id);
+
+        return (T) this.getObject(credentials, obj);
+    }
+    
+    private <T extends IEntity> T getObject(final OAuthCredentials credentials, IntuitEntity obj) {
+    	try
     	{
-			IntuitEntity obj = type.newInstance();
-			obj.setId(id);
-			
         	DataService service = this.createIntuitDataService(credentials);
         	
         	return (T) service.findById(obj);
@@ -163,38 +167,82 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         Validate.notNull(obj);
     	Validate.notNull(credentials);
     	
+    	this.checkAndFillNullSyncToken(credentials, obj);
+    	
     	try
     	{
 			DataService service = this.createIntuitDataService(credentials);
+			
 			return service.update(obj);
 		} catch (FMSException e) {
 			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
 		}
+    }
+    
+    private <T extends IEntity> void checkAndFillNullSyncToken(final OAuthCredentials credentials, T obj) {
+    	IntuitEntity intuitEntity = (IntuitEntity) obj;
+		
+    	if(StringUtils.isEmpty(intuitEntity.getSyncToken())) {
+    		IntuitEntity entityToRetrieve = null;
+
+    		try {
+    			entityToRetrieve = intuitEntity.getClass().newInstance();
+    			entityToRetrieve.setId(intuitEntity.getId());
+    		} catch (InstantiationException e) {
+    			this.throwFillNullSyncTokenException(intuitEntity);
+    		} catch (IllegalAccessException e) {
+    			this.throwFillNullSyncTokenException(intuitEntity);
+    		}
+    		
+    		IntuitEntity retrievedEntity = (IntuitEntity) this.getObject(credentials, entityToRetrieve);
+    		intuitEntity.setSyncToken(retrievedEntity.getSyncToken());
+    	}
+    }
+    
+    private void throwFillNullSyncTokenException(IntuitEntity intuitEntity){
+    	throw new QuickBooksRuntimeException("Failed to fill Null SyncToken for class " + intuitEntity.getClass().getCanonicalName() + " with id: " + intuitEntity.getId());
     }
 
     /** @return 
      * @throws QuickBooksRuntimeException 
      */
     @Override
-    public void deleteObject(final OAuthCredentials credentials,
-                                                 final IntuitEntityEnum type,
-                                                 final String id,
-                                                 String syncToken)
+    public void deleteObject(final OAuthCredentials credentials, IEntity obj)
+    {   
+    	Validate.notNull(credentials);
+    	Validate.notNull(obj);
+    	
+    	this.checkAndFillNullSyncToken(credentials, obj);
+
+    	try
+    	{
+			DataService service = this.createIntuitDataService(credentials);
+			
+			service.delete(obj);
+		} catch (FMSException e) {
+			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+		}
+    }
+    
+    /** @return 
+     * @throws QuickBooksRuntimeException 
+     */
+    @Override
+    public <T extends IEntity> void deleteObjectWithId(final OAuthCredentials credentials, IntuitEntityEnum type, final String id, final String syncToken)
     {   
     	Validate.notNull(credentials);
     	Validate.notNull(type);
-        Validate.notNull(id);
-        
+    	Validate.notNull(id);
+    	
+    	T obj = this.getObjectWithId(credentials, type, id);
+    	
+    	if(StringUtils.isNotEmpty(syncToken)) {
+    		IntuitEntity intuitEntity = (IntuitEntity) obj;
+    		intuitEntity.setSyncToken(syncToken);
+    	}
+    	
     	try
     	{
-    		IntuitEntity obj = type.newInstance();
-			obj.setId(id);
-			
-			if(StringUtils.isNotEmpty(syncToken))
-			{
-				obj.setSyncToken(syncToken);
-			}
-    		
 			DataService service = this.createIntuitDataService(credentials);
 			
 			service.delete(obj);

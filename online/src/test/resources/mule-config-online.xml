@@ -125,9 +125,14 @@
         </quickbooks:update-vendor>
     </flow>
 
-    <flow name="DeleteObject">
-        <quickbooks:delete-object accessTokenId="id"
+    <flow name="DeleteObjectWithId">
+        <quickbooks:delete-object-with-id accessTokenId="id"
                                    type="INVOICE" syncToken="2">
+        </quickbooks:delete-object-with-id>
+    </flow>
+    
+    <flow name="DeleteObject">
+        <quickbooks:delete-object accessTokenId="id">
         </quickbooks:delete-object>
     </flow>
     

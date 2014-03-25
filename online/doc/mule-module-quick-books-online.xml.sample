@@ -143,11 +143,16 @@
 <!-- END_INCLUDE(quickbooks:update-vendor) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:delete-object) -->
-<quickbooks:delete-object accessTokenId="accessTokenId"
-                          type="INVOICE"
-                          syncToken="2" >
+<quickbooks:delete-object accessTokenId="accessTokenId">
 </quickbooks:delete-object>
 <!-- END_INCLUDE(quickbooks:delete-object) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:delete-object-with-id) -->
+<quickbooks:delete-object-with-id accessTokenId="accessTokenId"
+                          type="INVOICE"
+                          syncToken="2" >
+</quickbooks:delete-object-with-id>
+<!-- END_INCLUDE(quickbooks:delete-object-with-id) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:find-objects) -->
 <quickbooks:find-objects accessTokenId="accessTokenId"

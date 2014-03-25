@@ -10,6 +10,9 @@
 
 package org.mule.modules.quickbooks.online.automation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
@@ -33,5 +36,12 @@ public class QuickBooksOnlineTestParent extends ConnectorTestCase {
 			objectStore.remove(credentials.getRealmId());
     	objectStore.store(credentials.getRealmId(), credentials);
     }
+    
+    protected Map<String,Object> createMapPayloadForGetAndDelete(String type, String id) {
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		map.put("type", type);
+		map.put("id", id);
+		return map;
+	}
     
 }

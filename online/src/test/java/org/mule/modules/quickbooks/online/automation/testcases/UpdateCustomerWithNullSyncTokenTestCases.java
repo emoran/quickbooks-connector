@@ -19,7 +19,7 @@ import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
 
 import com.intuit.ipp.data.Customer;
 
-public class GetCustomerTestCases extends QuickBooksOnlineTestParent {
+public class UpdateCustomerWithNullSyncTokenTestCases extends QuickBooksOnlineTestParent {
 	private Customer createdCustomer;
 	
 	@Before
@@ -32,10 +32,23 @@ public class GetCustomerTestCases extends QuickBooksOnlineTestParent {
 	
 	@Test
 	public void test() throws Exception {
-		upsertPayloadContentOnTestRunMessage(this.createMapPayloadForGetAndDelete("CUSTOMER", createdCustomer.getId()));
-    	Customer retrievedCustomer = runFlowAndGetPayload("GetObject");
+		Customer customer = new Customer();
+		
+		customer.setId(createdCustomer.getId());
+		customer.setGivenName("GivenNameUpdated");
+		customer.setMiddleName("MiddleNameUpdated");
+		customer.setFamilyName("FamilyNameUpdated");
+		customer.setContactName("ContactNameUpdated");
+		
+		upsertPayloadContentOnTestRunMessage(customer);
+    	Customer updatedCustomer = runFlowAndGetPayload("UpdateCustomer");
     	
-    	assertEquals(createdCustomer, retrievedCustomer);
+    	Integer syncToken = new Integer(createdCustomer.getSyncToken()) + 1; 
+    	
+    	assertEquals(syncToken.toString(), updatedCustomer.getSyncToken());
+    	assertEquals(customer.getGivenName(), updatedCustomer.getGivenName());
+    	assertEquals(customer.getMiddleName(), updatedCustomer.getMiddleName());
+    	assertEquals(customer.getFamilyName(), updatedCustomer.getFamilyName());
 	}
 	
 	@After

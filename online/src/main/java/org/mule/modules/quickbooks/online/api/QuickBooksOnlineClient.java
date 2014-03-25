@@ -16,7 +16,6 @@ import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.IntuitEntityEnum;
 import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.schema.CdmBase;
-import org.mule.modules.quickbooks.online.schema.IdType;
 
 import com.intuit.ipp.core.IEntity;
 
@@ -39,7 +38,9 @@ public interface QuickBooksOnlineClient
 
     <T extends IEntity> T update(final OAuthCredentials credentials, T obj);
     
-    <T extends IEntity> void deleteObject(final OAuthCredentials credentials, IntuitEntityEnum type, final String id, String syncToken);
+    <T extends IEntity> void deleteObjectWithId(final OAuthCredentials credentials, IntuitEntityEnum type, final String id, String syncToken);
+    
+    void deleteObject(OAuthCredentials credentials, IEntity obj);
 
     <T extends CdmBase> Iterable<T> findObjects(final OAuthCredentials credentials, final OnlineEntityType type, final String queryFilter, final String querySort);
 

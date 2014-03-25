@@ -928,6 +928,21 @@ public class QuickBooksOnlineModule
      * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:delete-object}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
+     * @param object instance of a IEntity to be deleted by Data Services.
+     */
+    @Processor
+    public void deleteObject(String accessTokenId,
+    											@Optional @Default("#[payload]") IEntity object)
+    {
+        client.deleteObject(getAccessTokenInformation(accessTokenId), object);
+    }
+    
+    /**
+     * Deletes an object.
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:delete-object-with-id}
+     *
+     * @param accessTokenId identifier for QuickBooks credentials.
      * @param type EntityType of the object.
      * @param id Id which is assigned by Data Services when the object is created.
      * @param syncToken Integer that indicates how many times the object has been updated.
@@ -935,12 +950,12 @@ public class QuickBooksOnlineModule
      *                  request has the same value as the SyncToken in the Data Service's repository.
      */
     @Processor
-    public void deleteObject(String accessTokenId,
+    public void deleteObjectWithId(String accessTokenId,
                              IntuitEntityEnum type, 
                              @Optional @Default("#[payload]") String id, 
                              @Optional String syncToken)
     {
-        client.deleteObject(getAccessTokenInformation(accessTokenId), type, id, syncToken);
+        client.deleteObjectWithId(getAccessTokenInformation(accessTokenId), type, id, syncToken);
     }
 
     /**

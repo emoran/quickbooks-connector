@@ -19,20 +19,44 @@
 						consumerSecret="${quickbooks.online.consumersecret}"
             			objectStore-ref="_defaultInMemoryObjectStore" />
     
-    <flow name="CreateCustomer">
-        <quickbooks:create-customer config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    <flow name="GetCompanyInfo">
+        <quickbooks:get-company-info config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+
+    <flow name="GetObject">
+        <quickbooks:get-object config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" type="#[payload['type']]" id="#[payload['id']]" />
     </flow>
     
-    <flow name="GetCustomer">
-        <quickbooks:get-object config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" type="#[payload['type']]" id="#[payload['id']]" />
+    <flow name="DeleteObject">
+        <quickbooks:delete-object config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="DeleteObjectWithId">
+        <quickbooks:delete-object-with-id config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" type="#[payload['type']]" id="#[payload['id']]" />
+    </flow>
+
+    <flow name="CreateCustomer">
+        <quickbooks:create-customer config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
     </flow>
     
     <flow name="UpdateCustomer">
         <quickbooks:update-customer config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
     </flow>
     
-    <flow name="GetCompanyInfo">
-        <quickbooks:get-company-info config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    <flow name="CreateInvoice">
+        <quickbooks:create-invoice config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="UpdateInvoice">
+        <quickbooks:update-invoice config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="CreateItem">
+        <quickbooks:create-item config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="UpdateItem">
+        <quickbooks:update-item config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
     </flow>
     
 </mule>
