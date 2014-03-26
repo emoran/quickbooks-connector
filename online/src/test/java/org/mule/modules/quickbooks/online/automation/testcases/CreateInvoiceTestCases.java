@@ -28,10 +28,11 @@ import com.intuit.ipp.data.Item;
 import com.intuit.ipp.data.Line;
 import com.intuit.ipp.data.ReferenceType;
 
-public class GetInvoiceTestCases extends QuickBooksOnlineTestParent {
-	private Invoice createdInvoice;
+public class CreateInvoiceTestCases extends QuickBooksOnlineTestParent {
 	private Item createdItem;
 	private Customer createdCustomer;
+	private Invoice createdInvoice;
+	private List<Line> createdLineList;
 	
 	@Before
     public void setUp() throws Exception {
@@ -48,31 +49,38 @@ public class GetInvoiceTestCases extends QuickBooksOnlineTestParent {
 		
 		line.getSalesItemLineDetail().setItemRef(itemReference);
 
-		List<Line> lineList = new ArrayList<Line>();
-		lineList.add(line);
+		createdLineList = new ArrayList<Line>();
+		createdLineList.add(line);
 		
 		Customer customer = getBeanFromContext("customerObject"); 
 		upsertPayloadContentOnTestRunMessage(customer);
 		createdCustomer = runFlowAndGetPayload("CreateCustomer");
-		
-		ReferenceType customerReference = new ReferenceType();
-		customerReference.setValue(createdCustomer.getId());
-		
-		Invoice invoice = getBeanFromContext("invoiceObject");
-		invoice.setLine(lineList);
-		invoice.setCustomerRef(customerReference);
-		
-		upsertPayloadContentOnTestRunMessage(invoice);
-		createdInvoice = runFlowAndGetPayload("CreateInvoice");
     }
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void getInvoice() throws Exception {
-		upsertPayloadContentOnTestRunMessage(this.createMapPayloadForGetAndDelete("INVOICE",createdInvoice.getId()));
-    	Invoice retrievedInvoice = runFlowAndGetPayload("GetObject");
-    	
-    	assertEquals(createdInvoice, retrievedInvoice);
+	public void createInvoice() throws Exception {
+		ReferenceType customerReference = new ReferenceType();
+		customerReference.setValue(createdCustomer.getId());
+		
+		Invoice invoice = getBeanFromContext("invoiceObject");
+		invoice.setLine(createdLineList);
+		invoice.setCustomerRef(customerReference);
+		
+		upsertPayloadContentOnTestRunMessage(invoice);
+		createdInvoice = runFlowAndGetPayload("CreateInvoice");
+
+		assertEquals(createdInvoice.getCustomerRef().getValue(), createdInvoice.getCustomerRef().getValue());
+		
+		assertEquals(invoice.getBillAddr().getLine1(), createdInvoice.getBillAddr().getLine1());
+		assertEquals(invoice.getBillAddr().getCity(), createdInvoice.getBillAddr().getCity());
+		assertEquals(invoice.getBillAddr().getCountrySubDivisionCode(), createdInvoice.getBillAddr().getCountrySubDivisionCode());
+		assertEquals(invoice.getBillAddr().getCountry(), createdInvoice.getBillAddr().getCountry());
+		assertEquals(invoice.getBillAddr().getPostalCode(), createdInvoice.getBillAddr().getPostalCode());
+		
+		assertEquals(invoice.getLine().get(0).getAmount(), createdInvoice.getLine().get(0).getAmount());
+		assertEquals(invoice.getLine().get(0).getDetailType(), createdInvoice.getLine().get(0).getDetailType());
+		assertEquals(invoice.getLine().get(0).getSalesItemLineDetail().getQty(), createdInvoice.getLine().get(0).getSalesItemLineDetail().getQty());
 	}
 	
 	@After

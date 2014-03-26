@@ -15,7 +15,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
+import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
 import com.intuit.ipp.data.Customer;
 
@@ -30,8 +32,9 @@ public class GetCustomerTestCases extends QuickBooksOnlineTestParent {
 		createdCustomer = runFlowAndGetPayload("CreateCustomer");
     }
 	
+	@Category({RegressionTests.class})
 	@Test
-	public void test() throws Exception {
+	public void getCustomer() throws Exception {
 		upsertPayloadContentOnTestRunMessage(this.createMapPayloadForGetAndDelete("CUSTOMER", createdCustomer.getId()));
     	Customer retrievedCustomer = runFlowAndGetPayload("GetObject");
     	

@@ -294,15 +294,15 @@ public class QuickBooksOnlineTest {
                 module.createVendor(ACCESS_TOKEN_ID, vendor).getId());
     }
 
-//    @Test
-//    public void testGetObject() {
-//        Account account = new Account();
-//        account.setId("account");
-//        when(quickBooksOnlineClient.getObject(OAUTH_CREDENTIALS, OnlineEntityType.ACCOUNT, null)).
-//                thenReturn(account);
-//        assertEquals(account.getId(),
-//                ((Account) module.getObject(ACCESS_TOKEN_ID, OnlineEntityType.ACCOUNT, null)).getId());
-//    }
+    @Test
+    public void testGetObject() {
+        Account account = new Account();
+        account.setId("1");
+        when(quickBooksOnlineClient.getObjectWithId(OAUTH_CREDENTIALS, IntuitEntityEnum.ACCOUNT, "1")).
+                thenReturn(account);
+        assertEquals(account.getId(),
+                ((Account) module.getObject(ACCESS_TOKEN_ID, IntuitEntityEnum.ACCOUNT, "1")).getId());
+    }
 
     @Test
     public void testUpdateAccount() {

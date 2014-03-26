@@ -13,14 +13,17 @@ package org.mule.modules.quickbooks.online.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
+import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
 import com.intuit.ipp.data.CompanyInfo;
 
 public class GetCompanyInfoTestCases extends QuickBooksOnlineTestParent {
 	
+	@Category({RegressionTests.class})
 	@Test
-	public void test() throws Exception {
+	public void getCompanyInfo() throws Exception {
     	CompanyInfo companyInfo = runFlowAndGetPayload("GetCompanyInfo");
     	assertNotNull(companyInfo);
 	}

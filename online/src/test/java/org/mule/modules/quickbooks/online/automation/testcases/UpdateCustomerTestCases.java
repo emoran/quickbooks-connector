@@ -15,7 +15,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
+import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
 import com.intuit.ipp.data.Customer;
 
@@ -30,8 +32,9 @@ public class UpdateCustomerTestCases extends QuickBooksOnlineTestParent {
 		createdCustomer = runFlowAndGetPayload("CreateCustomer");
     }
 	
+	@Category({RegressionTests.class})
 	@Test
-	public void test() throws Exception {
+	public void updateCustomerWithSyncToken() throws Exception {
 		createdCustomer.setGivenName("GivenNameUpdated");
 		createdCustomer.setMiddleName("MiddleNameUpdated");
 		createdCustomer.setFamilyName("FamilyNameUpdated");
@@ -46,6 +49,28 @@ public class UpdateCustomerTestCases extends QuickBooksOnlineTestParent {
     	assertEquals(createdCustomer.getGivenName(), updatedCustomer.getGivenName());
     	assertEquals(createdCustomer.getMiddleName(), updatedCustomer.getMiddleName());
     	assertEquals(createdCustomer.getFamilyName(), updatedCustomer.getFamilyName());
+	}
+	
+	@Category({RegressionTests.class})
+	@Test
+	public void updateCustomerWithNullSyncToken() throws Exception {
+		Customer customer = new Customer();
+		
+		customer.setId(createdCustomer.getId());
+		customer.setGivenName("GivenNameUpdated");
+		customer.setMiddleName("MiddleNameUpdated");
+		customer.setFamilyName("FamilyNameUpdated");
+		customer.setContactName("ContactNameUpdated");
+		
+		upsertPayloadContentOnTestRunMessage(customer);
+    	Customer updatedCustomer = runFlowAndGetPayload("UpdateCustomer");
+    	
+    	Integer syncToken = new Integer(createdCustomer.getSyncToken()) + 1; 
+    	
+    	assertEquals(syncToken.toString(), updatedCustomer.getSyncToken());
+    	assertEquals(customer.getGivenName(), updatedCustomer.getGivenName());
+    	assertEquals(customer.getMiddleName(), updatedCustomer.getMiddleName());
+    	assertEquals(customer.getFamilyName(), updatedCustomer.getFamilyName());
 	}
 	
 	@After

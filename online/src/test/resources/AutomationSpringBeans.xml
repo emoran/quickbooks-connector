@@ -59,7 +59,7 @@
 	</bean>
 	
 	<bean id="salesItemLineDetailObject" class="com.intuit.ipp.data.SalesItemLineDetail">
-		<property name="qty" value="10.00" />
+		<property name="qty" value="10" />
 	</bean>
 	
 	<bean id="invoiceObject" class="com.intuit.ipp.data.Invoice">

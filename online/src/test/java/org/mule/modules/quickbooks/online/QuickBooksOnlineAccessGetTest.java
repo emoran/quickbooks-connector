@@ -36,59 +36,10 @@ public class QuickBooksOnlineAccessGetTest extends FunctionalTestCase
          muleContext.getRegistry().registerObject("connector.http.mule.default", new HttpConnector(muleContext));
         return muleContext;
     }
-//    
-    @Override
-    protected void doSetUp() throws Exception 
-    {
-//        MockitoAnnotations.initMocks(this);
-//        LinkedInClientFactory.setDefaultClient(mockClient);
 
-        //QuickBooksModuleOAuth1Adapter moduleObject = muleContext.getRegistry().lookupObject(QuickBooksModuleOAuth1Adapter.class);
-        //moduleObject.setAccessToken("lvprdUOzPD8jlLdCSgKGYubbNAwFh03PUHM34gWvXPYoPdgJ");
-        //moduleObject.setAccessTokenSecret("B5zGyujNpe3dTwL4hHY5Cr0x1CRXqgukiAex9Aab");
-        //moduleObject.setOauthVerifier("");
-
-//        profileFields = new HashSet<ProfileField>(2);
-//        profileFields.add(ProfileField.LAST_NAME);
-//        profileFields.add(ProfileField.HONORS);
-//
-//        networkUpdateTypes = new HashSet<NetworkUpdateType>(2);
-//        networkUpdateTypes.add(NetworkUpdateType.PROFILE_UPDATE);1
-//        networkUpdateTypes.add(NetworkUpdateType.RECOMMENDATION_UPDATE);
-//
-//        searchParameters = new HashMap<SearchParameter, String>(2);
-//        searchParameters.put(SearchParameter.CURRENT_COMPANY, "MuleSoft");
-//        searchParameters.put(SearchParameter.TITLE, "Engineer");
-//
-//        facets = new ArrayList<Parameter<FacetType, String>>(2);
-//        facets.add(new Parameter<FacetType, String>(FacetType.INDUSTRY, "Software"));
-//        facets.add(new Parameter<FacetType, String>(FacetType.PAST_COMPANY, "MuleSource"));
-//
-//        facetFields = new HashSet<FacetField>(2);
-//        facetFields.add(FacetField.BUCKET_NAME);
-//        facetFields.add(FacetField.BUCKET_CODE);
-    }
-    
     @Override
     protected String getConfigResources()
     {
         return "mule-config.xml";
     }
-//
-//    @Test
-//    public void testFlow() throws Exception
-//    {
-//        lookupFlowConstruct("TestForTheAccessPower").process(getTestEvent(""));
-//        QuickBooksModuleOAuth1Adapter moduleObject = muleContext.getRegistry().lookupObject(QuickBooksModuleOAuth1Adapter.class);
-//    }
-//
-//    /**
-//     * Retrieve a flow by name from the registry
-//     *
-//     * @param name Name of the flow to retrieve
-//     */
-//    protected MessageProcessor lookupFlowConstruct(String name)
-//    {
-//        return (MessageProcessor) AbstractMuleTestCase.muleContext.getRegistry().lookupFlowConstruct(name);
-//    }
 }
