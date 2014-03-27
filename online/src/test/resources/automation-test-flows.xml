@@ -59,4 +59,8 @@
         <quickbooks:update-item config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
     </flow>
     
+    <flow name="Query">
+        <quickbooks:query config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" query="#[payload]" />
+    </flow>
+    
 </mule>

@@ -136,11 +136,15 @@
         </quickbooks:delete-object>
     </flow>
     
-    <flow name="FindObjects">
-        <quickbooks:find-objects accessTokenId="id"
-                                   type="ACCOUNT"
-                                 queryFilter="#[header:queryFilterString]"
-                                 querySort="#[header:querySortString]"/>
+    <flow name="Query">
+        <quickbooks:query accessTokenId="id"
+                                 query="#[variable:query]"/>
+    </flow>
+    
+    <flow name="PaginatedQuery">
+        <quickbooks:paginated-query accessTokenId="id"
+                                 query="#[variable:query]"
+                                 resultsPerPage="10"/>
     </flow>
 
     <flow name="Authorize">

@@ -10,10 +10,7 @@
 
 package org.mule.modules.quickbooks.online.api;
 
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,11 +19,6 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.message.BasicNameValuePair;
 import org.mule.modules.quickbooks.api.AbstractQuickBooksClientOAuth;
 import org.mule.modules.quickbooks.api.exception.ExceptionInfo;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
@@ -38,24 +30,16 @@ import org.mule.modules.quickbooks.api.model.UserInformation;
 import org.mule.modules.quickbooks.api.model.UserResponse;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.quickbooks.online.IntuitEntityEnum;
-import org.mule.modules.quickbooks.online.OnlineEntityType;
 import org.mule.modules.quickbooks.online.objectfactory.QBOMessageUtils;
-import org.mule.modules.quickbooks.online.schema.CdmBase;
-import org.mule.modules.quickbooks.online.schema.SearchResults;
 import org.mule.modules.quickbooks.utils.MessageUtils;
-import org.mule.modules.utils.MuleSoftException;
-import org.mule.modules.utils.pagination.PaginatedIterable;
 import org.springframework.util.CollectionUtils;
 
-import com.intuit.ipp.core.Context;
 import com.intuit.ipp.core.IEntity;
-import com.intuit.ipp.core.ServiceType;
 import com.intuit.ipp.data.CompanyInfo;
-import com.intuit.ipp.data.Error;
 import com.intuit.ipp.data.IntuitEntity;
 import com.intuit.ipp.exception.FMSException;
-import com.intuit.ipp.security.OAuthAuthorizer;
 import com.intuit.ipp.services.DataService;
+import com.intuit.ipp.services.QueryResult;
 
 /**
  * 
@@ -65,34 +49,19 @@ import com.intuit.ipp.services.DataService;
 @SuppressWarnings("unchecked")
 public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth implements QuickBooksOnlineClient
 {   
-    private final ServiceType SERVICE_TYPE = ServiceType.QBO;
-	
+	private QuickBooksOnlineDataServiceHelper dataServiceHelper; 
+    
     public DefaultQuickBooksOnlineClient(final String baseUri, final String consumerKey, final String consumerSecret,
                                          final String appKey)
     {
         Validate.notEmpty(baseUri);
+        Validate.notEmpty(consumerKey);
+        Validate.notEmpty(consumerSecret);
         
         init(baseUri, consumerKey, consumerSecret, appKey);
+        this.dataServiceHelper = new QuickBooksOnlineDataServiceHelper(consumerKey, consumerSecret);
+
         setResultsPerPage(100);
-    }
-    
-    // **********************************************************************************************
-    // ************************** QuickBooks Online DataService Operations **************************
-    // **********************************************************************************************
-    
-    private DataService createIntuitDataService(OAuthCredentials credentials) throws FMSException
-    {
-    	return new DataService(this.createIntuitContext(credentials));
-    }
-    
-    private Context createIntuitContext(OAuthCredentials credentials) throws FMSException
-    {
-    	return new Context(this.createIntuitOAuthAuthorizer(credentials), this.SERVICE_TYPE, credentials.getRealmId());
-    }
-    
-    private OAuthAuthorizer createIntuitOAuthAuthorizer(OAuthCredentials credentials)
-    {
-    	return new OAuthAuthorizer(this.getConsumerKey(), this.getConsumerSecret(), credentials.getAccessToken(), credentials.getAccessTokenSecret());
     }
     
     /** @throws QuickBooksRuntimeException 
@@ -105,10 +74,10 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     	
     	try
     	{
-			DataService service = this.createIntuitDataService(credentials);
+			DataService service = dataServiceHelper.createIntuitDataService(credentials);
 			return service.add(obj);
 		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}
     }
     
@@ -132,11 +101,11 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     private <T extends IEntity> T getObject(final OAuthCredentials credentials, IntuitEntity obj) {
     	try
     	{
-        	DataService service = this.createIntuitDataService(credentials);
+        	DataService service = dataServiceHelper.createIntuitDataService(credentials);
         	
         	return (T) service.findById(obj);
 		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}
     }
     
@@ -146,7 +115,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         
     	try
     	{
-        	DataService service = this.createIntuitDataService(credentials);
+        	DataService service = dataServiceHelper.createIntuitDataService(credentials);
         	List<CompanyInfo> companyInfoList = service.findAll(new CompanyInfo());
         	
         	if(CollectionUtils.isEmpty(companyInfoList)) {
@@ -155,7 +124,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         	
         	return companyInfoList.get(0);
 		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}
     }
 
@@ -171,11 +140,11 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     	
     	try
     	{
-			DataService service = this.createIntuitDataService(credentials);
+			DataService service = dataServiceHelper.createIntuitDataService(credentials);
 			
 			return service.update(obj);
 		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}
     }
     
@@ -216,11 +185,11 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
 
     	try
     	{
-			DataService service = this.createIntuitDataService(credentials);
+			DataService service = dataServiceHelper.createIntuitDataService(credentials);
 			
 			service.delete(obj);
 		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}
     }
     
@@ -243,250 +212,56 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     	
     	try
     	{
-			DataService service = this.createIntuitDataService(credentials);
+			DataService service = dataServiceHelper.createIntuitDataService(credentials);
 			
 			service.delete(obj);
 		} catch (FMSException e) {
-			throw new QuickBooksRuntimeException(this.adaptFMSExceptionToExceptionInfo(e), e);
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}
     }
-
     
-    /** 
-     * Returns the list of result pages from Quickbooks
-     * 
-     */
-    @Override
-    public <T extends CdmBase> Iterable<T> findObjectsGetPages(final OAuthCredentials credentials,
-                                                       final OnlineEntityType type, 
-                                                       final String queryFilter, 
-                                                       final String querySort)
-    {
-        Validate.notNull(type);
-        
-        return new PaginatedIterable<T, SearchResults>()
-            {
-                @Override
-                protected SearchResults firstPage()
-                {
-                    return askAnEspecificPage(1);
-                }
-
-                @Override
-                protected SearchResults nextPage(SearchResults currentPage)
-                {
-                    return askAnEspecificPage(currentPage.getCurrentPage() + 1);
-                }
-                
-                @Override
-                protected boolean hasNextPage(SearchResults page)
-                {
-                    return page.getCount().equals(getResultsPerPage());
-                }
-
-                @Override
-                @SuppressWarnings("unchecked")
-                protected Iterator<T> pageIterator(SearchResults page)
-                {
-                    try
-                    {          
-                        return ((List<T>) page.getCdmCollections().getClass()
-                                        .getMethod("get" + type.getCdmCollectionName())
-                                        .invoke(page.getCdmCollections())).iterator();
-                    }
-                    catch (IllegalAccessException e)
-                    {
-                        throw new AssertionError(e);
-                    }
-                    catch (InvocationTargetException e)
-                    {
-                        throw new AssertionError(e);
-                    }
-                    catch (NoSuchMethodException e)
-                    {
-                        throw new AssertionError(e);
-                    }
-                }
-                
-                private SearchResults askAnEspecificPage(Integer pageNumber)
-                {
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                    if (queryFilter != null)
-                    {
-                        nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
-                    }
-                    if (querySort != null)
-                    {
-                        nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
-                    }
-                    nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
-                    nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
-                    HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
-                        credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
-                    
-                    httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                    try
-                    {
-                        ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
-                    }
-                    catch (UnsupportedEncodingException e)
-                    {
-                        throw MuleSoftException.soften(e);
-                    } 
-                    
-                    try
-                    {
-                        return (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
-                    }
-                    catch(QuickBooksRuntimeException e)
-                    {
-                        if(e.isAExpiredTokenFault())
-                        {
-                            destroyAccessToken(credentials);
-                            return askAnEspecificPage(pageNumber);
-                        } 
-                        else 
-                        {
-                            throw e;
-                        }
-                    }
-                }
-            };
-    }
+    // **********************************************************************************************
+    // ************************************** Query Operations **************************************
+    // **********************************************************************************************
     
     /** 
      * Return all the results from Quickbooks.
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public <T extends CdmBase> Iterable<T> findObjects(final OAuthCredentials credentials,
-                                                       final OnlineEntityType type, 
-                                                       final String queryFilter, 
-                                                       final String querySort)
+    public <T extends IEntity> Iterable<T> query(final OAuthCredentials credentials,
+                                                 final String query)
     {
-        Validate.notNull(type);
+    	Validate.notNull(credentials);
+        Validate.notNull(query);
         
-        List<T> listOfResults = new ArrayList<T>();
-        Integer pageNumber = 0;
-        Boolean hasMoreResults = true;
-        List<NameValuePair> nameValuePairs;
-        SearchResults searchResults;
-        
-        while(hasMoreResults) {
-            
-            pageNumber++;
-            nameValuePairs = new ArrayList<NameValuePair>();
-            
-            if (queryFilter != null)
-            {
-                nameValuePairs.add(new BasicNameValuePair("Filter", queryFilter));
-            }
-            
-            if (querySort != null)
-            {
-                nameValuePairs.add(new BasicNameValuePair("Sort", querySort));
-            }
-            
-            nameValuePairs.add(new BasicNameValuePair("ResultsPerPage", getResultsPerPage().toString()));
-            nameValuePairs.add(new BasicNameValuePair("PageNum", pageNumber.toString()));
-            
-            HttpUriRequest httpRequest = new HttpPost(String.format("%s/resource/%s/v2/%s", 
-                credentials.getBaseUri(), type.getResouceNameForFind(), credentials.getRealmId()));
-            
-            httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            try
-            {
-                ((HttpPost) httpRequest).setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
-            }
-            catch (UnsupportedEncodingException e)
-            {
-                throw MuleSoftException.soften(e);
-            }
-            
-            try
-            {
-                searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
-            }
-            catch(QuickBooksRuntimeException e)
-            {
-                if(e.isAExpiredTokenFault())
-                {
-                    destroyAccessToken(credentials);
-                    searchResults = (SearchResults) makeARequestToQuickbooks(httpRequest, credentials, false);
-                } 
-                else 
-                {
-                    throw e;
-                }
-            }
-            
-            hasMoreResults = searchResults.getCount() >= getResultsPerPage();
-            
-            try {                
-                listOfResults.addAll((List<T>) searchResults.getCdmCollections().getClass()
-                        .getMethod("get" + type.getCdmCollectionName())
-                        .invoke(searchResults.getCdmCollections()));            
-            }
-            catch (IllegalAccessException e)
-            {
-                throw new AssertionError(e);
-            }
-            catch (InvocationTargetException e)
-            {
-                throw new AssertionError(e);
-            }
-            catch (NoSuchMethodException e)
-            {
-                throw new AssertionError(e);
-            }
-        }
-        
-        return listOfResults;
+        try {
+			DataService dataService = dataServiceHelper.createIntuitDataService(credentials);
+			QueryResult queryResult = dataService.executeQuery(query);
+			 
+			return (List<T>) queryResult.getEntities();
+		} catch(FMSException e) {
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
+		}
     }
     
-    // **********************************************************************************************
-    // ********************************** ExceptionInfo Operations **********************************
-    // **********************************************************************************************
-    
-    private ExceptionInfo adaptFMSExceptionToExceptionInfo(FMSException exception) {
-    	ExceptionInfo exceptionInfo = new ExceptionInfo(); 
+    @Override
+	public QuickBooksOnlinePaginatedIterable paginatedQuery(final OAuthCredentials credentials,
+															final String query,
+															final Integer resultsPerPage)
+    {
+    	Validate.notNull(credentials);
+        Validate.notNull(query);
     	
-    	exceptionInfo.setMessage(StringUtils.defaultIfEmpty(exception.getMessage(), "No Message"));
-
-    	List<Error> errorList = exception.getErrorList();
+    	Integer selectedResultsPerPage = this.resultsPerPage;
     	
-    	if(!CollectionUtils.isEmpty(errorList))
-    	{
-    		for(Error error : errorList)
-    		{
-    			if(!StringUtils.isEmpty(error.getCode()))
-    			{
-    				exceptionInfo.setErrorCode(error.getCode());
-    				exceptionInfo.setCause(error.getMessage());
-    				return exceptionInfo;
-    			}
-    		}
+    	if(selectedResultsPerPage != null) {
+    		Validate.isTrue(resultsPerPage > 0);
+    		selectedResultsPerPage = resultsPerPage;
     	}
     	
-    	exceptionInfo.setErrorCode("No Cause Obtained");
-    	exceptionInfo.setErrorCode("No ErrorCode Obtained");
-    	return exceptionInfo;
+		return new QuickBooksOnlinePaginatedIterable(dataServiceHelper, credentials, query, selectedResultsPerPage);
 	}
     
-    @Override
-    protected ExceptionInfo getFaultInfo(String str) throws JAXBException
-    {
-        //This use of the QBWMessageUtils is because, in QBW it's not defined FaultInfo, 
-        //but if the tokens expired of if they are wrong, they send us this object.
-        return new ExceptionInfo(getMessageUtilsInstance().parseResponse(str));
-    }
-    
-    @Override
-    protected MessageUtils getMessageUtilsInstance()
-    {
-        return QBOMessageUtils.getInstance();
-    }
-
     // **********************************************************************************************
     // ********************************* INTUIT Platform Operations *********************************
     // **********************************************************************************************
@@ -554,4 +329,19 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
 
         return new BlueDotMenu(menuInformationList, blueDotInformation);
     }
+
+    @Override
+    protected ExceptionInfo getFaultInfo(String str) throws JAXBException
+    {
+    	//This use of the QBWMessageUtils is because, in QBW it's not defined FaultInfo, 
+    	//but if the tokens expired of if they are wrong, they send us this object.
+    	return new ExceptionInfo(getMessageUtilsInstance().parseResponse(str));
+    }
+    
+    @Override
+    protected MessageUtils getMessageUtilsInstance()
+    {
+    	return QBOMessageUtils.getInstance();
+    }
+    
 }

@@ -20,6 +20,7 @@ import org.mule.modules.quickbooks.online.automation.testcases.DeleteInvoiceTest
 import org.mule.modules.quickbooks.online.automation.testcases.GetCompanyInfoTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.GetCustomerTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.GetInvoiceTestCases;
+import org.mule.modules.quickbooks.online.automation.testcases.QueryTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.UpdateCustomerTestCases;
 
 @RunWith(Categories.class)
@@ -31,6 +32,7 @@ import org.mule.modules.quickbooks.online.automation.testcases.UpdateCustomerTes
 	GetCompanyInfoTestCases.class,
 	GetCustomerTestCases.class,
 	GetInvoiceTestCases.class,
+	QueryTestCases.class,
 	UpdateCustomerTestCases.class
 })
 

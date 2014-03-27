@@ -43,9 +43,8 @@ import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
 import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
+import org.mule.modules.quickbooks.online.api.QuickBooksOnlinePaginatedIterable;
 import org.openid4java.message.MessageException;
-
-import org.mule.modules.quickbooks.online.schema.IdType;
 
 import com.intuit.ipp.core.IEntity;
 import com.intuit.ipp.data.Bill;
@@ -931,72 +930,54 @@ public class QuickBooksOnlineModule
     }
 
     /**
-     * Lazily retrieves Objects
+     * The query operation is the method for creating a guided query against an entity.
+     * This operation only executes the exact query that is given. It does not handle pagination automatically.
      *
      * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/Vendor">Vendor Specification</a>
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/020_key_concepts/00300_query_operations">Querying Data Specification</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects2}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects3}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects4}
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:find-objects5}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:query}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:query2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:query3}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @param type EntityType of the object.
-     * @param queryFilter String with a filter format (see details). Each type of object to be 
-     *                    retrieved, has a list of attributes for which it can be filtered (See this 
-     *                    list following the link in the details of the documentation of the create
-     *                    or update method of that object).
-     * @param querySort String with a sort format (see details). Each type of object to be 
-     *                    retrieved, has a list of attributes for which it can be sorted (See this 
-     *                    list following the link in the details of the documentation of the create
-     *                    or update method of that object).
-     * @return Iterable of the objects to be retrieved.
+     * @param query String
+     * @return Iterable of the retrieved objects.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Iterable findObjects(String accessTokenId,
-                                OnlineEntityType type, 
-                                @Optional String queryFilter,
-                                @Optional String querySort)
+    public Iterable query(String accessTokenId, String query)
     {
-        return client.findObjects(getAccessTokenInformation(accessTokenId), type, queryFilter, querySort);
+        return client.query(getAccessTokenInformation(accessTokenId), query);
     }
     
     /**
-     * Gets all of the transactions and objects that have been deleted on the Data Services server
+     * The query operation is the method for creating a guided query against an entity.
+     * This operation returns an object that extends {@link org.mule.modules.utils.pagination.PaginatedIterable}.
+     * It handles pagination automatically, so it is important no to add the pagination params in the query itself.
      *
-     * For details see: 
-     * <a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
-     * 0400_QuickBooks_Online/ChangeDataDeleted">ChangeDataDeleted</a>
+     * For details see:
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/020_key_concepts/00300_query_operations">Querying Data Specification</a>
      * 
-     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:change-data-deleted}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:paginated-query}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:paginated-query2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:paginated-query3}
      *
      * @param accessTokenId identifier for QuickBooks credentials.
-     * @param queryFilter String with a filter format (see details). Each type of object to be 
-     *                    retrieved, has a list of attributes for which it can be filtered (See this 
-     *                    list following the link in the details of the documentation of the create
-     *                    or update method of that object).
-     * @param querySort String with a sort format (see details). Each type of object to be 
-     *                    retrieved, has a list of attributes for which it can be sorted (See this 
-     *                    list following the link in the details of the documentation of the create
-     *                    or update method of that object).
-     * @return Iterable of the objects to be retrieved.
+     * @param query String
+     * @param resultsPerPage number of entities to be retrieved in each request
+     * @return Iterable of the retrieved objects.
      * 
      * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public Iterable changeDataDeleted(String accessTokenId,
-                                @Optional String queryFilter,
-                                @Optional String querySort)
+    public QuickBooksOnlinePaginatedIterable paginatedQuery(String accessTokenId, String query,
+    														@Optional Integer resultsPerPage)
     {
-        return client.findObjects(getAccessTokenInformation(accessTokenId), OnlineEntityType.CHANGEDATADELETED,
-                queryFilter, querySort);
+        return client.paginatedQuery(getAccessTokenInformation(accessTokenId), query, resultsPerPage);
     }
     
     /**
@@ -1316,7 +1297,6 @@ public class QuickBooksOnlineModule
     public void setConsumerKey(String consumerKey) {
         this.consumerKey = consumerKey;
     }
-
 
     public ObjectStore getObjectStore() {
         return objectStore;

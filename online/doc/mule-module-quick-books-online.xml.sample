@@ -154,43 +154,38 @@
 </quickbooks:delete-object-with-id>
 <!-- END_INCLUDE(quickbooks:delete-object-with-id) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:find-objects) -->
-<quickbooks:find-objects accessTokenId="accessTokenId"
-                         type="ACCOUNT"
-                         queryFilter="#[variable:queryfilterstring]"
-                         querySort="#[variable:querysortstring]"/>
-<!-- END_INCLUDE(quickbooks:find-objects) -->
+<!-- BEGIN_INCLUDE(quickbooks:query) -->
+<quickbooks:query accessTokenId="accessTokenId"
+                         query="#[variable:query]"/>
+<!-- END_INCLUDE(quickbooks:query) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:find-objects2) -->
-<quickbooks:find-objects accessTokenId="accessTokenId"
-                         type="ACCOUNT"
-                         queryFilter="Name :EQUALS: Loan Account"
-                         querySort="Name AToZ"/>
-<!-- END_INCLUDE(quickbooks:find-objects2) -->
+<!-- BEGIN_INCLUDE(quickbooks:query2) -->
+<quickbooks:query accessTokenId="accessTokenId"
+                         query="SELECT * FROM Invoice WHERE TotalAmt > '1000.0'"/>
+<!-- END_INCLUDE(quickbooks:query2) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:find-objects3) -->
-<quickbooks:find-objects accessTokenId="accessTokenId"
-                         type="CUSTOMER"
-                         queryFilter="FamilyName :EQUALS: Doe" />
-<!-- END_INCLUDE(quickbooks:find-objects3) -->
+<!-- BEGIN_INCLUDE(quickbooks:query3) -->
+<quickbooks:query accessTokenId="accessTokenId"
+                         query="SELECT * FROM Invoice WHERE Status = 'Deleted'"/>
+<!-- END_INCLUDE(quickbooks:query3) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:find-objects4) -->
-<quickbooks:find-objects accessTokenId="accessTokenId"
-                         type="INVOICE"
-                         queryFilter="DBAName :EQUALS: Smith Bakery :AND: FamilyName :EQUALS: Smith" />
-<!-- END_INCLUDE(quickbooks:find-objects4) -->
+<!-- BEGIN_INCLUDE(quickbooks:paginated-query) -->
+<quickbooks:paginated-query accessTokenId="accessTokenId"
+                         query="#[variable:query]"
+                         resultsPerPage="20"/>
+<!-- END_INCLUDE(quickbooks:paginated-query) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:find-objects5) -->
-<quickbooks:find-objects accessTokenId="accessTokenId"
-                         type="INVOICE"
-                         queryFilter="LastUpdatedTime :AFTER: 2010-08-10T14:30:00-0700 :AND: LastUpdatedTime :BEFORE: 2010-08-10T15:30:00-0700" />
-<!-- END_INCLUDE(quickbooks:find-objects5) -->
+<!-- BEGIN_INCLUDE(quickbooks:paginated-query2) -->
+<quickbooks:paginated-query accessTokenId="accessTokenId"
+                         query="SELECT * FROM Invoice WHERE TotalAmt > '1000.0'"
+                         resultsPerPage="20"/>
+<!-- END_INCLUDE(quickbooks:paginated-query2) -->
 
-<!-- BEGIN_INCLUDE(quickbooks:change-data-deleted) -->
-<quickbooks:change-data-deleted accessTokenId="accessTokenId"
-                         queryFilter="#[variable:queryfilterstring]"
-                         querySort="#[variable:querysortstring]"/>
-<!-- END_INCLUDE(quickbooks:change-data-deleted) -->
+<!-- BEGIN_INCLUDE(quickbooks:paginated-query3) -->
+<quickbooks:paginated-query accessTokenId="accessTokenId"
+                         query="SELECT * FROM Invoice WHERE Status = 'Deleted'"
+                         resultsPerPage="20"/>
+<!-- END_INCLUDE(quickbooks:paginated-query3) -->
 
 <!-- BEGIN_INCLUDE(quickbooks:get-current-user) -->
 <quickbooks:get-current-user accessTokenId="accessTokenId">
