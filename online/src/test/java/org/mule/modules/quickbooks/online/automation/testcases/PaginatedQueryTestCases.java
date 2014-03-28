@@ -11,9 +11,12 @@
 package org.mule.modules.quickbooks.online.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,9 +27,9 @@ import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
 import com.intuit.ipp.data.Item;
 
-public class QueryTestCases extends QuickBooksOnlineTestParent {
+public class PaginatedQueryTestCases extends QuickBooksOnlineTestParent {
 	private List<Item> createdItems;
-	private Integer itemsSize = 4;
+	private Integer itemsSize = 25;
 	
 	@Before
     public void setUp() throws Exception {
@@ -44,9 +47,24 @@ public class QueryTestCases extends QuickBooksOnlineTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void queryItems() throws Exception {
-		upsertPayloadContentOnTestRunMessage("SELECT * FROM ITEM WHERE Name LIKE 'TestItem_%'");
-		List<Item> retrievedItems = runFlowAndGetPayload("Query");
-		assertEquals(itemsSize, retrievedItems.size(), 0);
+		String query = "SELECT * FROM ITEM WHERE Name LIKE 'TestItem_%'";
+		upsertPayloadContentOnTestRunMessage(this.createPaginatedQueryPayload(query, 5));
+		Iterable<Item> retrievedItems = runFlowAndGetPayload("PaginatedQuery");
+		
+		Integer i = 0;
+		for(Item item : retrievedItems){
+			assertTrue(item.getName().startsWith("TestItem"));
+			i++;
+		}
+		
+		assertEquals(itemsSize,i,0);
+	}
+	
+	private Map<String,Object> createPaginatedQueryPayload(String query, Integer resultsPerPage){
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		map.put("query", query);
+		map.put("resultsPerPage", resultsPerPage);
+		return map;
 	}
 	
 	@After

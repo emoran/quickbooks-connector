@@ -26,7 +26,6 @@ public class UpdateCustomerTestCases extends QuickBooksOnlineTestParent {
 	
 	@Before
     public void setUp() throws Exception {
-		super.setUp();
 		Customer customer = getBeanFromContext("customerObject"); 
 		upsertPayloadContentOnTestRunMessage(customer);
 		createdCustomer = runFlowAndGetPayload("CreateCustomer");

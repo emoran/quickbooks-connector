@@ -38,8 +38,6 @@ public class DeleteInvoiceTestCases extends QuickBooksOnlineTestParent {
 	
 	@Before
     public void setUp() throws Exception {
-		super.setUp();
-		
 		Item item = getBeanFromContext("itemObject"); 
 		upsertPayloadContentOnTestRunMessage(item);
 		createdItem = runFlowAndGetPayload("CreateItem");

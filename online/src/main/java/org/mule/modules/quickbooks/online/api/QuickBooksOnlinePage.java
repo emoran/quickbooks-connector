@@ -15,34 +15,36 @@ import com.intuit.ipp.services.QueryResult;
 public class QuickBooksOnlinePage {
 	private QueryResult queryResult;
 	private Integer pageNumber;
+	private Integer usedStartPosition;
 
-	public QuickBooksOnlinePage(QueryResult queryResult, Integer pageNumber) {
+	public QuickBooksOnlinePage(QueryResult queryResult, Integer usedStartPosition, Integer pageNumber) {
 		this.queryResult = queryResult;
 		this.pageNumber = pageNumber;
+		this.usedStartPosition = usedStartPosition;
 	}
 	
 	public QueryResult getQueryResult() {
 		return queryResult;
 	}
 	
-	public void setQueryResult(QueryResult queryResult) {
-		this.queryResult = queryResult;
-	}
-	
 	public Integer getPageNumber() {
 		return pageNumber;
 	}
 	
-	public void setPageNumber(Integer pageNumber) {
-		this.pageNumber = pageNumber;
+	public Integer getUsedStartPosition() {
+		return usedStartPosition;
+	}
+
+	public Integer getPageResultsSize() {
+		return queryResult.getEntities().size();
 	}
 	
 	public Integer nextPageNumber() {
-		return pageNumber+1;
+		return pageNumber + 1;
 	}
 	
-	public Integer getTotalCount() {
-		return queryResult.getTotalCount();
+	public Integer nextStartPosition() {
+		return usedStartPosition + this.getPageResultsSize();
 	}
 	
 }

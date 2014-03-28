@@ -63,4 +63,8 @@
         <quickbooks:query config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" query="#[payload]" />
     </flow>
     
+    <flow name="PaginatedQuery">
+        <quickbooks:paginated-query config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" query="#[payload['query']]" resultsPerPage="#[payload['resultsPerPage']]" />
+    </flow>
+    
 </mule>

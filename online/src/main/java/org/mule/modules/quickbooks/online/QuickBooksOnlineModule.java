@@ -974,7 +974,7 @@ public class QuickBooksOnlineModule
      *         and a message provided by quickbooks about the error.
      */
     @Processor
-    public QuickBooksOnlinePaginatedIterable paginatedQuery(String accessTokenId, String query,
+    public Iterable paginatedQuery(String accessTokenId, String query,
     														@Optional Integer resultsPerPage)
     {
         return client.paginatedQuery(getAccessTokenInformation(accessTokenId), query, resultsPerPage);

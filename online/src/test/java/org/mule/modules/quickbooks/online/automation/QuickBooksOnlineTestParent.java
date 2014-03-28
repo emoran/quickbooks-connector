@@ -27,7 +27,7 @@ public class QuickBooksOnlineTestParent extends ConnectorTestCase {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
-    public void setUp() throws Exception {
+    public void parentSetUp() throws Exception {
     	ObjectStore objectStore = muleContext.getRegistry().lookupObject("_defaultInMemoryObjectStore");
     	
     	OAuthCredentials credentials = getBeanFromContext("oAuthCredentials");

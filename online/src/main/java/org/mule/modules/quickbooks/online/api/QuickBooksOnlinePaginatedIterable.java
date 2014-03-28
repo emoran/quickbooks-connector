@@ -25,7 +25,9 @@ import com.intuit.ipp.exception.FMSException;
 import com.intuit.ipp.services.DataService;
 import com.intuit.ipp.services.QueryResult;
 
-public class QuickBooksOnlinePaginatedIterable extends PaginatedIterable<IEntity, QuickBooksOnlinePage> {
+public class QuickBooksOnlinePaginatedIterable<T extends IEntity> extends PaginatedIterable<T, QuickBooksOnlinePage> {
+	private static final String START_POSITION_KEY = "STARTPOSITION"; 
+	private static final String MAX_RESULTS_KEY = "MAXRESULTS";
 	
 	private QuickBooksOnlineDataServiceHelper dataServiceHelper;
 	private OAuthCredentials credentials;
@@ -53,20 +55,20 @@ public class QuickBooksOnlinePaginatedIterable extends PaginatedIterable<IEntity
 	 * [ORDERBY OrderByClause]
 	 * [STARTPOSITION  Number] [MAXRESULTS  Number]
 	 */
-	private QuickBooksOnlinePage askForAnEspecificPage(Integer pageNumber) {
-		Validate.isTrue(pageNumber > 0);
-		Integer startPosition = (pageNumber-1)*resultsPerPage+1;
+	protected QuickBooksOnlinePage askForPage(Integer startPosition, Integer maxResults, Integer pageNumber) {
+		Validate.isTrue(startPosition > 0);
+		Validate.isTrue(maxResults > 0);
 		
 		String pagedQuery = new StringBuilder(query)
-							.append(" STARTPOSITION ").append(startPosition)
-							.append(" MAXRESULTS ").append(resultsPerPage)
+							.append(" ").append(START_POSITION_KEY).append(" ").append(startPosition)
+							.append(" ").append(MAX_RESULTS_KEY).append(" ").append(maxResults)
 							.toString();
 		
 		try {
 			DataService dataService = dataServiceHelper.createIntuitDataService(credentials);
 			QueryResult queryResult = dataService.executeQuery(pagedQuery);
 			
-			return new QuickBooksOnlinePage(queryResult, pageNumber);
+			return new QuickBooksOnlinePage(queryResult, startPosition, pageNumber);
 		} catch(FMSException e) {
 			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}
@@ -74,29 +76,29 @@ public class QuickBooksOnlinePaginatedIterable extends PaginatedIterable<IEntity
 
 	@Override
 	protected QuickBooksOnlinePage firstPage() {
-		return this.askForAnEspecificPage(1);
+		return this.askForPage(1, resultsPerPage, 1);
 	}
 
 	@Override
 	protected boolean hasNextPage(QuickBooksOnlinePage page) {
-		return page.getTotalCount().equals(resultsPerPage);
+		return page.getPageResultsSize() > 0;
 	}
 
 	@Override
 	protected QuickBooksOnlinePage nextPage(QuickBooksOnlinePage page) {
-		return this.askForAnEspecificPage(page.nextPageNumber());
+		return this.askForPage(page.nextStartPosition(), resultsPerPage, page.nextPageNumber());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Iterator<IEntity> pageIterator(QuickBooksOnlinePage page) {
+	protected Iterator<T> pageIterator(QuickBooksOnlinePage page) {
 		List<IEntity> entities = (List<IEntity>) page.getQueryResult().getEntities();
 		
 		if(CollectionUtils.isEmpty(entities)) {
 			entities = new ArrayList<IEntity>();
 		}
 		
-		return entities.iterator();
+		return (Iterator<T>) entities.iterator();
 	}
 
 }

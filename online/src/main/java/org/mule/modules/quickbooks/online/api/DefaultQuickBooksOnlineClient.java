@@ -237,7 +237,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
         try {
 			DataService dataService = dataServiceHelper.createIntuitDataService(credentials);
 			QueryResult queryResult = dataService.executeQuery(query);
-			 
+
 			return (List<T>) queryResult.getEntities();
 		} catch(FMSException e) {
 			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
@@ -245,7 +245,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     }
     
     @Override
-	public QuickBooksOnlinePaginatedIterable paginatedQuery(final OAuthCredentials credentials,
+	public <T extends IEntity> Iterable<T> paginatedQuery(final OAuthCredentials credentials,
 															final String query,
 															final Integer resultsPerPage)
     {
@@ -259,7 +259,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     		selectedResultsPerPage = resultsPerPage;
     	}
     	
-		return new QuickBooksOnlinePaginatedIterable(dataServiceHelper, credentials, query, selectedResultsPerPage);
+		return (Iterable<T>) new QuickBooksOnlinePaginatedIterable<T>(dataServiceHelper, credentials, query, selectedResultsPerPage);
 	}
     
     // **********************************************************************************************

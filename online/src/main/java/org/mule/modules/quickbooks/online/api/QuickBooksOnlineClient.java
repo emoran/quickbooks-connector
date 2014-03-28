@@ -43,8 +43,8 @@ public interface QuickBooksOnlineClient
 
     <T extends IEntity> Iterable<T> query(OAuthCredentials credentials, String query);
 
-    QuickBooksOnlinePaginatedIterable paginatedQuery(OAuthCredentials accessTokenInformation, String query, Integer resultsPerPage);
-
+    <T extends IEntity> Iterable<T> paginatedQuery(OAuthCredentials credentials, String query, Integer resultsPerPage);
+    
     UserInformation getCurrentUserInformation(OAuthCredentials credentials);
 
     BlueDotMenu getBlueDotInformation(OAuthCredentials credentials, String regex);
@@ -52,5 +52,7 @@ public interface QuickBooksOnlineClient
     boolean disconnect(OAuthCredentials credentials);
 
     OAuthCredentials reconnect(OAuthCredentials credentials);
+
+	
 }
 

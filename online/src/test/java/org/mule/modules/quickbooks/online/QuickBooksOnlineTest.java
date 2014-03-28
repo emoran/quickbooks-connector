@@ -17,6 +17,7 @@ import oauth.signpost.exception.OAuthNotAuthorizedException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.modules.quickbooks.api.ObjectStoreHelper;
@@ -29,8 +30,11 @@ import org.mule.modules.quickbooks.api.oauth.QuickBooksObjectStore;
 import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
 import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
+import org.mule.modules.quickbooks.online.api.QuickBooksOnlinePage;
+import org.mule.modules.quickbooks.online.api.QuickBooksOnlinePaginatedIterable;
 import org.openid4java.message.MessageException;
 
+import com.intuit.ipp.core.IEntity;
 import com.intuit.ipp.data.Account;
 import com.intuit.ipp.data.Bill;
 import com.intuit.ipp.data.BillPayment;
@@ -46,6 +50,7 @@ import com.intuit.ipp.data.Purchase;
 import com.intuit.ipp.data.SalesReceipt;
 import com.intuit.ipp.data.Term;
 import com.intuit.ipp.data.Vendor;
+import com.intuit.ipp.services.QueryResult;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -95,8 +100,8 @@ public class QuickBooksOnlineTest {
     private static final String ACCESS_TOKEN_ID = "ACCESS_TOKEN_ID";
     private static final OAuthCredentials OAUTH_CREDENTIALS = new OAuthCredentials(ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
     private static final String SYNC_TOKEN = "SYNC_TOKEN";
-    private static final String QUERY_FILTER = "QUERY_FILTER";
-    private static final String QUERY_SORT = "QUERY_SORT";
+    private static final String QUERY = "QUERY";
+    private static final Integer RESULTS_PER_PAGE = 100;
     private static final String ANY_REGEX = "ANY_REGEX";
 
     @Before
@@ -437,21 +442,28 @@ public class QuickBooksOnlineTest {
         assertEquals(vendor, module.updateVendor(ACCESS_TOKEN_ID, vendor));
     }
 
-//    @Test
-//    public void testFindObjects() {
-//        when(quickBooksOnlineClient.findObjects(OAUTH_CREDENTIALS, OnlineEntityType.ACCOUNT, QUERY_FILTER, QUERY_SORT)).
-//                thenReturn(createListAccount());
-//        assertEquals("FoundAccount", ((List<Account>)
-//                module.findObjects(ACCESS_TOKEN_ID, OnlineEntityType.ACCOUNT, QUERY_FILTER, QUERY_SORT)).get(0).getName());
-//    }
-//
-//    @Test
-//    public void testChangeDataDeleted() {
-//        when(quickBooksOnlineClient.findObjects(OAUTH_CREDENTIALS, OnlineEntityType.CHANGEDATADELETED, QUERY_FILTER, QUERY_SORT)).
-//                thenReturn(createListAccount());
-//        assertEquals("FoundAccount", ((List<Account>)
-//                module.changeDataDeleted(ACCESS_TOKEN_ID, QUERY_FILTER, QUERY_SORT)).get(0).getName());
-//    }
+    @SuppressWarnings("unchecked")
+	@Test
+    public void testQuery() {
+        when(quickBooksOnlineClient.query(OAUTH_CREDENTIALS, QUERY)).
+                thenReturn(createListAccount());
+        assertEquals("FoundAccount", ((List<Account>)
+                module.query(ACCESS_TOKEN_ID, QUERY)).get(0).getName());
+    }
+
+    @SuppressWarnings("unchecked")
+	@Test
+    public void testPaginatedQuery() {
+    	QuickBooksOnlinePaginatedIterable paginatedIterable = Mockito.mock(QuickBooksOnlinePaginatedIterable.class);
+    	when(paginatedIterable.iterator()).thenReturn(createListAccount().iterator());
+    	
+    	when(quickBooksOnlineClient.paginatedQuery(OAUTH_CREDENTIALS, QUERY, RESULTS_PER_PAGE)).
+                thenReturn(paginatedIterable);
+    	
+    	Account account = (Account) module.paginatedQuery(ACCESS_TOKEN_ID, QUERY, RESULTS_PER_PAGE).iterator().next();
+    	
+        assertEquals("FoundAccount", account.getName());
+    }
 
     @Test
     public void testGetCompanyInfo() {
@@ -483,7 +495,6 @@ public class QuickBooksOnlineTest {
         assertEquals("SomeHTML",
                 module.getBlueDotInformation(ACCESS_TOKEN_ID, ANY_REGEX).getBlueDotHtml());
     }
-
 
     private static OpenIDCredentials createOpenIdCredentials() {
         OpenIDCredentials credentials = new OpenIDCredentials();
