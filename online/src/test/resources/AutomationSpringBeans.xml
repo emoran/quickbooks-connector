@@ -30,21 +30,20 @@
 		<property name="accessTokenUrl" value="https://oauth.intuit.com/oauth/v1/get_access_token" />
 	</bean>
 	
-	<bean id="customerObject" class="com.intuit.ipp.data.Customer">
+	<bean id="customerObject" class="com.intuit.ipp.data.Customer" scope="prototype">
 		<property name="givenName" value="GivenName" />
 		<property name="middleName" value="MiddleName" />
 		<property name="familyName" value="FamilyName" />
-		<property name="contactName" value="ContactName" />
 		<property name="taxable" value="true" />
 	</bean>
 	
-	<bean id="itemObject" class="com.intuit.ipp.data.Item">
+	<bean id="itemObject" class="com.intuit.ipp.data.Item" scope="prototype">
 		<property name="name" value="TestItem" />
 		<property name="description" value="TestItemDescription" />
 		<property name="unitPrice" value="10.00" />
 	</bean>
 	
-	<bean id="physicalAddressObject" class="com.intuit.ipp.data.PhysicalAddress">
+	<bean id="physicalAddressObject" class="com.intuit.ipp.data.PhysicalAddress" scope="prototype">
 		<property name="line1" value="77 Geary St" />
 		<property name="city" value="San Francisco" />
 		<property name="country" value="US" />
@@ -52,17 +51,17 @@
 		<property name="postalCode" value="94108" />
 	</bean>
 	
-	<bean id="lineObject" class="com.intuit.ipp.data.Line">
+	<bean id="lineObject" class="com.intuit.ipp.data.Line" scope="prototype">
 		<property name="salesItemLineDetail" ref="salesItemLineDetailObject" />
 		<property name="detailType" value="SALES_ITEM_LINE_DETAIL" />
 		<property name="amount" value="100.00" />
 	</bean>
 	
-	<bean id="salesItemLineDetailObject" class="com.intuit.ipp.data.SalesItemLineDetail">
+	<bean id="salesItemLineDetailObject" class="com.intuit.ipp.data.SalesItemLineDetail" scope="prototype">
 		<property name="qty" value="10" />
 	</bean>
 	
-	<bean id="invoiceObject" class="com.intuit.ipp.data.Invoice">
+	<bean id="invoiceObject" class="com.intuit.ipp.data.Invoice" scope="prototype">
 		<property name="billAddr" ref="physicalAddressObject" />
 	</bean>
 	

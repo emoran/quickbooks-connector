@@ -13,59 +13,22 @@ package org.mule.modules.quickbooks.online.automation.testcases;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MessagingException;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
-import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
 import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
-import com.intuit.ipp.data.Customer;
-import com.intuit.ipp.data.Invoice;
-import com.intuit.ipp.data.Item;
-import com.intuit.ipp.data.Line;
-import com.intuit.ipp.data.ReferenceType;
+public class DeleteInvoiceTestCases extends InvoiceTestCases {
 
-public class DeleteInvoiceTestCases extends QuickBooksOnlineTestParent {
-	private Invoice createdInvoice;
-	private Item createdItem;
-	private Customer createdCustomer;
-	
 	@Before
     public void setUp() throws Exception {
-		Item item = getBeanFromContext("itemObject"); 
-		upsertPayloadContentOnTestRunMessage(item);
-		createdItem = runFlowAndGetPayload("CreateItem");
-		
-		Line line = getBeanFromContext("lineObject");
-		
-		ReferenceType itemReference = new ReferenceType();
-		itemReference.setValue(createdItem.getId());
-		
-		line.getSalesItemLineDetail().setItemRef(itemReference);
-
-		List<Line> lineList = new ArrayList<Line>();
-		lineList.add(line);
-		
-		Customer customer = getBeanFromContext("customerObject"); 
-		upsertPayloadContentOnTestRunMessage(customer);
-		createdCustomer = runFlowAndGetPayload("CreateCustomer");
-		
-		ReferenceType customerReference = new ReferenceType();
-		customerReference.setValue(createdCustomer.getId());
-		
-		Invoice invoice = getBeanFromContext("invoiceObject");
-		invoice.setLine(lineList);
-		invoice.setCustomerRef(customerReference);
-		
-		upsertPayloadContentOnTestRunMessage(invoice);
-		createdInvoice = runFlowAndGetPayload("CreateInvoice");
-    }
+		createdItem = this.createDefaultItemInQBO();
+		createdCustomer = this.createDefaultCustomerInQBO();
+		createdInvoice = this.createInvoiceInQBO(createdCustomer, createdItem);
+	}
 	
 	@Category({RegressionTests.class})
 	@Test
@@ -102,13 +65,13 @@ public class DeleteInvoiceTestCases extends QuickBooksOnlineTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		createdItem.setActive(false);
-		upsertPayloadContentOnTestRunMessage(createdItem);
-		runFlowAndGetPayload("UpdateItem");
-		
-		createdCustomer.setActive(false);
-		upsertPayloadContentOnTestRunMessage(createdCustomer);
-		runFlowAndGetPayload("UpdateCustomer");
+		//The test tearDown attempts to delete the Invoice, even if the test is successful
+		//If the test is successful the deletion will fail, but the tearDown will be completed
+		try {
+			this.deleteInvoiceInQBO(createdInvoice);
+		} catch (Exception e) {}
+		this.disableItemInQBO(createdItem);
+		this.disableCustomerInQBO(createdCustomer);
 	}
 
 }

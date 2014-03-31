@@ -12,47 +12,26 @@ package org.mule.modules.quickbooks.online.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
 import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
 import com.intuit.ipp.data.Customer;
 import com.intuit.ipp.data.Invoice;
 import com.intuit.ipp.data.Item;
-import com.intuit.ipp.data.Line;
 import com.intuit.ipp.data.ReferenceType;
 
-public class CreateInvoiceTestCases extends QuickBooksOnlineTestParent {
+public class CreateInvoiceTestCases extends InvoiceTestCases {
 	private Item createdItem;
 	private Customer createdCustomer;
 	private Invoice createdInvoice;
-	private List<Line> createdLineList;
 	
 	@Before
     public void setUp() throws Exception {
-		Item item = getBeanFromContext("itemObject"); 
-		upsertPayloadContentOnTestRunMessage(item);
-		createdItem = runFlowAndGetPayload("CreateItem");
-		
-		Line line = getBeanFromContext("lineObject");
-		
-		ReferenceType itemReference = new ReferenceType();
-		itemReference.setValue(createdItem.getId());
-		
-		line.getSalesItemLineDetail().setItemRef(itemReference);
-
-		createdLineList = new ArrayList<Line>();
-		createdLineList.add(line);
-		
-		Customer customer = getBeanFromContext("customerObject"); 
-		upsertPayloadContentOnTestRunMessage(customer);
-		createdCustomer = runFlowAndGetPayload("CreateCustomer");
+		createdItem = this.createDefaultItemInQBO();
+		createdCustomer = this.createDefaultCustomerInQBO();
     }
 	
 	@Category({RegressionTests.class})
@@ -62,7 +41,7 @@ public class CreateInvoiceTestCases extends QuickBooksOnlineTestParent {
 		customerReference.setValue(createdCustomer.getId());
 		
 		Invoice invoice = getBeanFromContext("invoiceObject");
-		invoice.setLine(createdLineList);
+		invoice.setLine(this.createInvoiceLineList(createdItem));
 		invoice.setCustomerRef(customerReference);
 		
 		upsertPayloadContentOnTestRunMessage(invoice);
@@ -83,16 +62,9 @@ public class CreateInvoiceTestCases extends QuickBooksOnlineTestParent {
 	
 	@After
 	public void tearDown() throws Exception {
-		upsertPayloadContentOnTestRunMessage(createdInvoice);
-		runFlowAndGetPayload("DeleteObject");
-
-		createdItem.setActive(false);
-		upsertPayloadContentOnTestRunMessage(createdItem);
-		runFlowAndGetPayload("UpdateItem");
-		
-		createdCustomer.setActive(false);
-		upsertPayloadContentOnTestRunMessage(createdCustomer);
-		runFlowAndGetPayload("UpdateCustomer");
+		this.deleteInvoiceInQBO(createdInvoice);
+		this.disableItemInQBO(createdItem);
+		this.disableCustomerInQBO(createdCustomer);
 	}
 
 }

@@ -26,14 +26,12 @@ public class UpdateCustomerTestCases extends QuickBooksOnlineTestParent {
 	
 	@Before
     public void setUp() throws Exception {
-		Customer customer = getBeanFromContext("customerObject"); 
-		upsertPayloadContentOnTestRunMessage(customer);
-		createdCustomer = runFlowAndGetPayload("CreateCustomer");
+		createdCustomer = this.createDefaultCustomerInQBO();
     }
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void updateCustomerWithSyncToken() throws Exception {
+	public void updateCustomer() throws Exception {
 		createdCustomer.setGivenName("GivenNameUpdated");
 		createdCustomer.setMiddleName("MiddleNameUpdated");
 		createdCustomer.setFamilyName("FamilyNameUpdated");
@@ -53,30 +51,13 @@ public class UpdateCustomerTestCases extends QuickBooksOnlineTestParent {
 	@Category({RegressionTests.class})
 	@Test
 	public void updateCustomerWithNullSyncToken() throws Exception {
-		Customer customer = new Customer();
-		
-		customer.setId(createdCustomer.getId());
-		customer.setGivenName("GivenNameUpdated");
-		customer.setMiddleName("MiddleNameUpdated");
-		customer.setFamilyName("FamilyNameUpdated");
-		customer.setContactName("ContactNameUpdated");
-		
-		upsertPayloadContentOnTestRunMessage(customer);
-    	Customer updatedCustomer = runFlowAndGetPayload("UpdateCustomer");
-    	
-    	Integer syncToken = new Integer(createdCustomer.getSyncToken()) + 1; 
-    	
-    	assertEquals(syncToken.toString(), updatedCustomer.getSyncToken());
-    	assertEquals(customer.getGivenName(), updatedCustomer.getGivenName());
-    	assertEquals(customer.getMiddleName(), updatedCustomer.getMiddleName());
-    	assertEquals(customer.getFamilyName(), updatedCustomer.getFamilyName());
+		createdCustomer.setSyncToken(null);
+		this.updateCustomer();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
-		createdCustomer.setActive(false);
-		upsertPayloadContentOnTestRunMessage(createdCustomer);
-		runFlowAndGetPayload("UpdateCustomer");
+		this.disableCustomerInQBO(createdCustomer);
 	}
 
 }

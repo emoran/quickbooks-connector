@@ -22,7 +22,7 @@ import com.intuit.ipp.data.Customer;
 import com.intuit.ipp.data.Invoice;
 import com.intuit.ipp.data.Item;
 
-public class GetInvoiceTestCases extends InvoiceTestCases {
+public class UpdateInvoiceTestCases extends InvoiceTestCases {
 	private Invoice createdInvoice;
 	private Item createdItem;
 	private Customer createdCustomer;
@@ -36,11 +36,23 @@ public class GetInvoiceTestCases extends InvoiceTestCases {
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void getInvoice() throws Exception {
-		upsertPayloadContentOnTestRunMessage(this.createMapPayloadForGetAndDelete("INVOICE",createdInvoice.getId()));
-    	Invoice retrievedInvoice = runFlowAndGetPayload("GetObject");
+	public void updateInvoice() throws Exception {
+		createdInvoice.getBillAddr().setLine1("ChangedAddressLine");
+		createdInvoice.getBillAddr().setCountrySubDivisionCode("ChangedCountrySubDivisionCode");
+		
+		upsertPayloadContentOnTestRunMessage(this.createdInvoice);
+    	Invoice updatedInvoice = runFlowAndGetPayload("UpdateInvoice");
     	
-    	assertEquals(createdInvoice, retrievedInvoice);
+    	assertEquals("1", updatedInvoice.getSyncToken());
+    	assertEquals(createdInvoice.getBillAddr().getLine1(), updatedInvoice.getBillAddr().getLine1());
+    	assertEquals(createdInvoice.getBillAddr().getCountrySubDivisionCode(), updatedInvoice.getBillAddr().getCountrySubDivisionCode());
+	}
+	
+	@Category({RegressionTests.class})
+	@Test
+	public void updateInvoiceWithNullSyncToken() throws Exception {
+		createdInvoice.setSyncToken(null);
+		this.updateInvoice();
 	}
 	
 	@After
@@ -49,5 +61,5 @@ public class GetInvoiceTestCases extends InvoiceTestCases {
 		this.disableItemInQBO(createdItem);
 		this.disableCustomerInQBO(createdCustomer);
 	}
-
+	
 }

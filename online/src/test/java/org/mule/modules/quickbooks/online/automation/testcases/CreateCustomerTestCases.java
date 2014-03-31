@@ -11,9 +11,9 @@
 package org.mule.modules.quickbooks.online.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
@@ -21,21 +21,20 @@ import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
 import com.intuit.ipp.data.Customer;
 
-public class GetCustomerTestCases extends QuickBooksOnlineTestParent {
+public class CreateCustomerTestCases extends QuickBooksOnlineTestParent {
 	private Customer createdCustomer;
-	
-	@Before
-    public void setUp() throws Exception {
-		createdCustomer = this.createDefaultCustomerInQBO();
-    }
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void getCustomer() throws Exception {
-		upsertPayloadContentOnTestRunMessage(this.createMapPayloadForGetAndDelete("CUSTOMER", createdCustomer.getId()));
-    	Customer retrievedCustomer = runFlowAndGetPayload("GetObject");
-    	
-    	assertEquals(createdCustomer, retrievedCustomer);
+	public void createCustomer() throws Exception {
+		Customer customer = getBeanFromContext("customerObject"); 
+		createdCustomer = this.createCustomerInQBO(customer);
+		
+		assertNotNull(createdCustomer);
+		assertEquals(customer.getGivenName(), createdCustomer.getGivenName());
+		assertEquals(customer.getMiddleName(), createdCustomer.getMiddleName());
+		assertEquals(customer.getFamilyName(), createdCustomer.getFamilyName());
+		assertEquals(customer.isTaxable(), createdCustomer.isTaxable());
 	}
 	
 	@After

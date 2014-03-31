@@ -20,6 +20,9 @@ import org.mule.api.store.ObjectStore;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
 import org.mule.modules.tests.ConnectorTestCase;
 
+import com.intuit.ipp.data.Customer;
+import com.intuit.ipp.data.Item;
+
 public class QuickBooksOnlineTestParent extends ConnectorTestCase {
 
 	@Rule
@@ -43,5 +46,37 @@ public class QuickBooksOnlineTestParent extends ConnectorTestCase {
 		map.put("id", id);
 		return map;
 	}
+    
+    protected Item createDefaultItemInQBO() throws Exception{
+    	Item item = getBeanFromContext("itemObject"); 
+    	return this.createItemInQBO(item);
+    }
+    
+    protected Customer createDefaultCustomerInQBO() throws Exception{
+    	Customer customer = getBeanFromContext("customerObject"); 
+		return this.createCustomerInQBO(customer);
+    }
+    
+    protected Item createItemInQBO(Item item) throws Exception{
+		upsertPayloadContentOnTestRunMessage(item);
+		return runFlowAndGetPayload("CreateItem");
+    }
+    
+    protected Customer createCustomerInQBO(Customer customer) throws Exception{
+		upsertPayloadContentOnTestRunMessage(customer);
+		return runFlowAndGetPayload("CreateCustomer");
+    }
+    
+    protected void disableItemInQBO(Item item) throws Exception {
+    	item.setActive(false);
+		upsertPayloadContentOnTestRunMessage(item);
+		runFlowAndGetPayload("UpdateItem");
+    }
+    
+    protected void disableCustomerInQBO(Customer customer) throws Exception {
+    	customer.setActive(false);
+		upsertPayloadContentOnTestRunMessage(customer);
+		runFlowAndGetPayload("UpdateCustomer");
+    }
     
 }

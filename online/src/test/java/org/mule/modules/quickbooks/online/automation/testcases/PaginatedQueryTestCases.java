@@ -38,8 +38,7 @@ public class PaginatedQueryTestCases extends QuickBooksOnlineTestParent {
 		for(Integer i = 0; i < itemsSize; i++) {
 			Item item = getBeanFromContext("itemObject");
 			item.setName("TestItem_" + i);
-			upsertPayloadContentOnTestRunMessage(item);
-			Item createdItem = runFlowAndGetPayload("CreateItem");
+			Item createdItem = this.createItemInQBO(item);
 			createdItems.add(createdItem);
 		}
     }
@@ -70,9 +69,7 @@ public class PaginatedQueryTestCases extends QuickBooksOnlineTestParent {
 	@After
 	public void tearDown() throws Exception {
 		for(Item item: createdItems) {
-			item.setActive(false);
-			upsertPayloadContentOnTestRunMessage(item);
-			runFlowAndGetPayload("UpdateItem");
+			this.disableItemInQBO(item);
 		}
 	}
 }

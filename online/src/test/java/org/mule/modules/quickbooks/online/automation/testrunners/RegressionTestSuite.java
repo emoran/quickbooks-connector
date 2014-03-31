@@ -15,6 +15,7 @@ import org.junit.experimental.categories.Categories.IncludeCategory;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 import org.mule.modules.quickbooks.online.automation.RegressionTests;
+import org.mule.modules.quickbooks.online.automation.testcases.CreateCustomerTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.CreateInvoiceTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.DeleteInvoiceTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.GetCompanyInfoTestCases;
@@ -23,11 +24,13 @@ import org.mule.modules.quickbooks.online.automation.testcases.GetInvoiceTestCas
 import org.mule.modules.quickbooks.online.automation.testcases.PaginatedQueryTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.QueryTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.UpdateCustomerTestCases;
+import org.mule.modules.quickbooks.online.automation.testcases.UpdateInvoiceTestCases;
 
 @RunWith(Categories.class)
 @IncludeCategory(RegressionTests.class)
 
 @SuiteClasses({
+	CreateCustomerTestCases.class,
 	CreateInvoiceTestCases.class,
 	DeleteInvoiceTestCases.class,
 	GetCompanyInfoTestCases.class,
@@ -35,7 +38,8 @@ import org.mule.modules.quickbooks.online.automation.testcases.UpdateCustomerTes
 	GetInvoiceTestCases.class,
 	PaginatedQueryTestCases.class,
 	QueryTestCases.class,
-	UpdateCustomerTestCases.class
+	UpdateCustomerTestCases.class,
+	UpdateInvoiceTestCases.class
 })
 
 public class RegressionTestSuite {
