@@ -13,6 +13,8 @@
  */
 package org.mule.modules.quickbooks.online;
 
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -20,6 +22,7 @@ import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
+
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
@@ -43,28 +46,26 @@ import org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient;
 import org.mule.modules.quickbooks.api.openid.OpenIDCredentials;
 import org.mule.modules.quickbooks.online.api.DefaultQuickBooksOnlineClient;
 import org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient;
-import org.mule.modules.quickbooks.online.api.QuickBooksOnlinePaginatedIterable;
 import org.openid4java.message.MessageException;
 
 import com.intuit.ipp.core.IEntity;
-import com.intuit.ipp.data.Bill;
 import com.intuit.ipp.data.Account;
+import com.intuit.ipp.data.Bill;
 import com.intuit.ipp.data.BillPayment;
 import com.intuit.ipp.data.CompanyInfo;
-import com.intuit.ipp.data.Purchase;
 import com.intuit.ipp.data.Customer;
 import com.intuit.ipp.data.Estimate;
 import com.intuit.ipp.data.Invoice;
 import com.intuit.ipp.data.Item;
-import com.intuit.ipp.data.ReferenceType;
-import com.intuit.ipp.data.SalesReceipt;
+import com.intuit.ipp.data.JournalEntry;
 import com.intuit.ipp.data.Payment;
+import com.intuit.ipp.data.PaymentMethod;
+import com.intuit.ipp.data.Purchase;
+import com.intuit.ipp.data.SalesReceipt;
 import com.intuit.ipp.data.Term;
 import com.intuit.ipp.data.Vendor;
-import com.intuit.ipp.data.PaymentMethod;
-import com.intuit.ipp.data.JournalEntry;
+import com.intuit.ipp.util.Config;
 
-import java.util.Map;
 /**
  * QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
  * making the accounting process more comfortable for the average business owner or manager. By using the built-in
@@ -112,19 +113,35 @@ public class QuickBooksOnlineModule
     private QuickBooksOnlineClient client;
 
     /**
-     * The base uri of the quickbooks endpoint,
-     * used to fetch the company uri. 
-     * 
-     * Quickbooks connector will first use this uri and the realmId to
-     * get a second uri, called company uri, 
-     * which is the actual quickbooks endpoint for the connector 
-     *  
+     * The base uri used by the QBO SDK for QuickBooks Online requests.
+     * Used to make all QuickBooks Online requests.
      */
-    @Optional
-    @Default("https://qbo.intuit.com/qbo1/rest/user/v2")
     @Configurable
+    @Optional
     private String baseUri;
-
+    
+    /**
+     * The base uri used by the QBO SDK for Platform Services requests.
+     * Used to make all Intuit Platform requests.
+     */
+    @Configurable
+    @Optional
+    private String platformBaseUri;
+    
+    /**
+     * The number of retries for a failed request used by the QBO SDK.
+     */
+    @Configurable
+    @Optional
+    private Integer retryCount;
+    
+    /**
+     * The time between retries for a failed request in seconds used by the QBO SDK.
+     */
+    @Configurable
+    @Optional
+    private Integer retryInterval;
+    
     /**
      * Prefix used for storing credentials in ObjectStore. It will be concatenated to the access token identifier.
      * <p>E.g. prefix: "qb_", user identifier (realmId): "12345", key for object store "qb_12345"</p>
@@ -1253,26 +1270,69 @@ public class QuickBooksOnlineModule
     @PostConstruct
     public void init()
     {
-        if (client == null )
+    	overrideIntuitSDKConfig();
+
+    	if (client == null)
         {
-            //Sets blank API key
-            client = new DefaultQuickBooksOnlineClient(baseUri, consumerKey, consumerSecret, "");
+        	//Sets blank API key
+            client = new DefaultQuickBooksOnlineClient(Config.getProperty(Config.BASE_URL_QBO), consumerKey, consumerSecret, "");
             setObjectStoreHelper(new ObjectStoreHelper(objectStore));
-            setoAuthClient(new DefaultQuickBooksOAuthClient(getConsumerKey(), getConsumerSecret(),
-                    getObjectStoreHelper()));
+            setoAuthClient(new DefaultQuickBooksOAuthClient(getConsumerKey(),
+            				getConsumerSecret(),
+            				getObjectStoreHelper()));
             setOpenIDClient(new DefaultOpenIDClient(getObjectStoreHelper()));
         }
     }
     
-    public void setBaseUri(String baseUri)
-    {
+    private void overrideIntuitSDKConfig() {
+    	if(StringUtils.isNotEmpty(baseUri)) {
+    		Config.setProperty(Config.BASE_URL_QBO, baseUri);
+    	}
+    	
+    	if(StringUtils.isNotEmpty(platformBaseUri)) {
+    		Config.setProperty(Config.BASE_URL_PLATFORMSERVICE, platformBaseUri);
+    	}
+    	
+    	if(retryCount != null) {
+    		Config.setProperty(Config.RETRY_FIXED_COUNT, retryCount.toString());
+    	}
+    	
+    	if(retryInterval != null) {
+    		Config.setProperty(Config.RETRY_FIXED_INTERVAL, retryInterval.toString());
+    	}
+	}
+
+	public void setBaseUri(String baseUri) {
         this.baseUri = baseUri;
     }
     
-    public String getBaseUri()
-    {
+    public String getBaseUri() {
         return baseUri;
     }
+
+	public String getPlatformBaseUri() {
+		return platformBaseUri;
+	}
+
+	public void setPlatformBaseUri(String platformBaseUri) {
+		this.platformBaseUri = platformBaseUri;
+	}
+
+	public Integer getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(Integer retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public Integer getRetryInterval() {
+		return retryInterval;
+	}
+
+	public void setRetryInterval(Integer retryInterval) {
+		this.retryInterval = retryInterval;
+	}
 
     public QuickBooksOnlineClient getClient() {
         return client;
@@ -1345,4 +1405,5 @@ public class QuickBooksOnlineModule
     public void setOpenIDClient(DefaultOpenIDClient openIDClient) {
         this.openIDClient = openIDClient;
     }
+    
 }

@@ -54,7 +54,6 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     public DefaultQuickBooksOnlineClient(final String baseUri, final String consumerKey, final String consumerSecret,
                                          final String appKey)
     {
-        Validate.notEmpty(baseUri);
         Validate.notEmpty(consumerKey);
         Validate.notEmpty(consumerSecret);
         
