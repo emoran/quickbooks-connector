@@ -43,6 +43,7 @@ import com.intuit.ipp.data.Customer;
 import com.intuit.ipp.data.Estimate;
 import com.intuit.ipp.data.Invoice;
 import com.intuit.ipp.data.Item;
+import com.intuit.ipp.data.JournalEntry;
 import com.intuit.ipp.data.Payment;
 import com.intuit.ipp.data.PaymentMethod;
 import com.intuit.ipp.data.PaymentTypeEnum;
@@ -60,6 +61,8 @@ import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mock;
 
 /**
  * @author Mulesoft Inc
@@ -246,6 +249,16 @@ public class QuickBooksOnlineTest {
         assertEquals(item.getId(),
                 module.createItem(ACCESS_TOKEN_ID, item).getId());
     }
+    
+    @Test
+    public void testCreateJournalEntry() {
+        JournalEntry journalEntry = new JournalEntry();
+        journalEntry.setId("newJournalEntry");
+        when(quickBooksOnlineClient.create(OAUTH_CREDENTIALS, journalEntry)).
+                thenReturn(journalEntry);
+        assertEquals(journalEntry.getId(),
+                module.createJournalEntry(ACCESS_TOKEN_ID, journalEntry).getId());
+    }
 
     @Test
     public void testCreatePayment() {
@@ -405,6 +418,15 @@ public class QuickBooksOnlineTest {
                 thenReturn(item);
         assertEquals(item, module.updateItem(ACCESS_TOKEN_ID, item));
     }
+    
+    @Test
+    public void testUpdateJournalEntry() {
+        JournalEntry journalEntry = new JournalEntry();
+        journalEntry.setDocNumber("0");
+        when(quickBooksOnlineClient.update(OAUTH_CREDENTIALS, journalEntry)).
+                thenReturn(journalEntry);
+        assertEquals(journalEntry, module.updateJournalEntry(ACCESS_TOKEN_ID, journalEntry));
+    }
 
     @Test
     public void testUpdatePayment() {
@@ -454,7 +476,7 @@ public class QuickBooksOnlineTest {
     @SuppressWarnings("unchecked")
 	@Test
     public void testPaginatedQuery() {
-    	QuickBooksOnlinePaginatedIterable paginatedIterable = Mockito.mock(QuickBooksOnlinePaginatedIterable.class);
+    	QuickBooksOnlinePaginatedIterable paginatedIterable = mock(QuickBooksOnlinePaginatedIterable.class);
     	when(paginatedIterable.iterator()).thenReturn(createListAccount().iterator());
     	
     	when(quickBooksOnlineClient.paginatedQuery(OAUTH_CREDENTIALS, QUERY, RESULTS_PER_PAGE)).
@@ -473,9 +495,29 @@ public class QuickBooksOnlineTest {
         assertEquals(companyInfo.getCompanyName(),
                 ((CompanyInfo) module.getCompanyInfo(ACCESS_TOKEN_ID)).getCompanyName());
     }
+    
+    @Test
+    public void testDeleteObject() {
+        Invoice invoice = new Invoice();
+        invoice.setId("1");
+        invoice.setTotalAmt(new BigDecimal(10));
+
+        module.deleteObject(ACCESS_TOKEN_ID, invoice);
+        verify(quickBooksOnlineClient).deleteObject(OAUTH_CREDENTIALS, invoice);
+    }
+    
+    @Test
+    public void testDeleteObjectWithId() {
+        Invoice invoice = new Invoice();
+        invoice.setId("1");
+        invoice.setTotalAmt(new BigDecimal(10));
+
+        module.deleteObjectWithId(ACCESS_TOKEN_ID, IntuitEntityEnum.INVOICE, "1", null);
+        verify(quickBooksOnlineClient).deleteObjectWithId(OAUTH_CREDENTIALS, IntuitEntityEnum.INVOICE, "1", null);
+    }
 
     @Test
-    public void testGetUserInformation() {
+    public void testGetCurrentUser() {
         UserInformation userInformation = new UserInformation();
         userInformation.setEmailAddress("newuser@mail.com");
         when(quickBooksOnlineClient.getCurrentUserInformation(OAUTH_CREDENTIALS)).thenReturn(userInformation);
@@ -494,6 +536,19 @@ public class QuickBooksOnlineTest {
                 module.getBlueDotInformation(ACCESS_TOKEN_ID, ANY_REGEX).getAppMenuInformationList().get(0).getName());
         assertEquals("SomeHTML",
                 module.getBlueDotInformation(ACCESS_TOKEN_ID, ANY_REGEX).getBlueDotHtml());
+    }
+    
+    @Test
+    public void testDisconnect() {
+    	module.disconnect(ACCESS_TOKEN_ID);
+    	verify(quickBooksOnlineClient).disconnect(OAUTH_CREDENTIALS);
+    }
+    
+    @Test
+    public void testReconnect() throws ObjectStoreException {
+        when(quickBooksOnlineClient.reconnect(OAUTH_CREDENTIALS)).thenReturn(OAUTH_CREDENTIALS);
+        module.reconnect(ACCESS_TOKEN_ID);
+        verify(quickBooksOnlineClient).reconnect(OAUTH_CREDENTIALS);
     }
 
     private static OpenIDCredentials createOpenIdCredentials() {
@@ -521,4 +576,5 @@ public class QuickBooksOnlineTest {
         list.add(account);
         return list;
     }
+    
 }

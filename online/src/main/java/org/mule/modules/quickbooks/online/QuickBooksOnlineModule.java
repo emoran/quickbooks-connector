@@ -143,6 +143,20 @@ public class QuickBooksOnlineModule
     private Integer retryInterval;
     
     /**
+     * The connection timeout in ms for Quickbooks Data Services used by the QBO SDK.
+     */
+    @Configurable
+    @Optional
+    private Integer connectionTimeOut;
+    
+    /**
+     * The request timeout in ms for Quickbooks Data Services used by the QBO SDK.
+     */
+    @Configurable
+    @Optional
+    private Integer requestTimeOut;
+    
+    /**
      * Prefix used for storing credentials in ObjectStore. It will be concatenated to the access token identifier.
      * <p>E.g. prefix: "qb_", user identifier (realmId): "12345", key for object store "qb_12345"</p>
      */
@@ -1294,11 +1308,20 @@ public class QuickBooksOnlineModule
     	}
     	
     	if(retryCount != null) {
+    		Config.setProperty(Config.RETRY_MODE, "fixed");
     		Config.setProperty(Config.RETRY_FIXED_COUNT, retryCount.toString());
+
+    		if(retryInterval != null) {
+    			Config.setProperty(Config.RETRY_FIXED_INTERVAL, retryInterval.toString());
+    		}
     	}
     	
-    	if(retryInterval != null) {
-    		Config.setProperty(Config.RETRY_FIXED_INTERVAL, retryInterval.toString());
+    	if(connectionTimeOut != null) {
+    		Config.setProperty(Config.TIMEOUT_CONNECTION, connectionTimeOut.toString());
+    	}
+    	
+    	if(requestTimeOut != null) {
+    		Config.setProperty(Config.TIMEOUT_REQUEST, requestTimeOut.toString());
     	}
 	}
 
@@ -1334,7 +1357,23 @@ public class QuickBooksOnlineModule
 		this.retryInterval = retryInterval;
 	}
 
-    public QuickBooksOnlineClient getClient() {
+    public Integer getConnectionTimeOut() {
+		return connectionTimeOut;
+	}
+
+	public void setConnectionTimeOut(Integer connectionTimeOut) {
+		this.connectionTimeOut = connectionTimeOut;
+	}
+
+	public Integer getRequestTimeOut() {
+		return requestTimeOut;
+	}
+
+	public void setRequestTimeOut(Integer requestTimeOut) {
+		this.requestTimeOut = requestTimeOut;
+	}
+
+	public QuickBooksOnlineClient getClient() {
         return client;
     }
 

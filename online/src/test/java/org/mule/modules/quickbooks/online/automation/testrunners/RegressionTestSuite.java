@@ -18,7 +18,9 @@ import org.mule.modules.quickbooks.online.automation.RegressionTests;
 import org.mule.modules.quickbooks.online.automation.testcases.CreateCustomerTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.CreateInvoiceTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.DeleteInvoiceTestCases;
+import org.mule.modules.quickbooks.online.automation.testcases.GetBlueDotInformationTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.GetCompanyInfoTestCases;
+import org.mule.modules.quickbooks.online.automation.testcases.GetCurrentUserTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.GetCustomerTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.GetInvoiceTestCases;
 import org.mule.modules.quickbooks.online.automation.testcases.PaginatedQueryTestCases;
@@ -33,7 +35,9 @@ import org.mule.modules.quickbooks.online.automation.testcases.UpdateInvoiceTest
 	CreateCustomerTestCases.class,
 	CreateInvoiceTestCases.class,
 	DeleteInvoiceTestCases.class,
+	GetBlueDotInformationTestCases.class,
 	GetCompanyInfoTestCases.class,
+	GetCurrentUserTestCases.class,
 	GetCustomerTestCases.class,
 	GetInvoiceTestCases.class,
 	PaginatedQueryTestCases.class,

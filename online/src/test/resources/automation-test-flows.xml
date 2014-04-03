@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:spring="http://www.springframework.org/schema/beans"
-  xmlns:http="http://www.mulesoft.org/schema/mule/http"
-  xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
-  xsi:schemaLocation="
+  	xmlns:spring="http://www.springframework.org/schema/beans"
+  	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+  	xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks"
+  	xmlns:context="http://www.springframework.org/schema/context"
+  	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+  	xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
-        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.1/mule-scripting.xsd
-        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
-        http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd">
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/current/mule-quickbooks.xsd">
 
 	<context:property-placeholder location="${QUICKBOOKS_ONLINE_CREDENTIALS}"/>
 
@@ -65,6 +65,14 @@
     
     <flow name="PaginatedQuery">
         <quickbooks:paginated-query config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" query="#[payload['query']]" resultsPerPage="#[payload['resultsPerPage']]" />
+    </flow>
+    
+    <flow name="GetCurrentUser">
+        <quickbooks:get-current-user config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="GetBlueDotInformation">
+        <quickbooks:get-blue-dot-information config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" />
     </flow>
     
 </mule>

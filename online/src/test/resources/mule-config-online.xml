@@ -18,10 +18,10 @@
   xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
   xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
-        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.1/mule-scripting.xsd
-        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
-        http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd">
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/current/mule-quickbooks.xsd">
     
     <http:connector name="connector.http.mule.default" enableCookies="true" keepAlive="true"/>
     <spring:beans>
@@ -31,15 +31,9 @@
     <quickbooks:config consumerKey="consumerKey" consumerSecret="consumerSecret"
             objectStore-ref="objectStoreRef" />
     
-    <flow name="TestForTheAccessPower">
+    <flow name="Create">
         <quickbooks:create-account accessTokenId="id" >
               <quickbooks:account ref="#[payload]"/>
-        </quickbooks:create-account>
-    </flow>
-
-    <flow name="Create">
-        
-        <quickbooks:create-account accessTokenId="id" >
         </quickbooks:create-account>
                                    
         <quickbooks:create-bill accessTokenId="id" >
@@ -62,30 +56,34 @@
                                    
         <quickbooks:create-item accessTokenId="id" >
         </quickbooks:create-item>
+        
+        <quickbooks:create-journal-entry accessTokenId="id" >
+        </quickbooks:create-journal-entry>
                         
         <quickbooks:create-payment accessTokenId="id" >
         </quickbooks:create-payment>
                                    
         <quickbooks:create-payment-method accessTokenId="id" >
         </quickbooks:create-payment-method>
+        
+        <quickbooks:create-sales-receipt accessTokenId="id" >
+        </quickbooks:create-sales-receipt>
                                          
         <quickbooks:create-term accessTokenId="id" >
         </quickbooks:create-term>
                                       
         <quickbooks:create-vendor accessTokenId="id" >
         </quickbooks:create-vendor>
-                                  
     </flow>
     
     <flow name="GetObject">
-        <quickbooks:get-object accessTokenId="id"
-                                   type="INVOICE">
+        <quickbooks:get-object accessTokenId="id" type="INVOICE">
         </quickbooks:get-object>
     </flow>
     
     <flow name="Update">
         <quickbooks:update-account accessTokenId="id" >
-                           <quickbooks:account ref="#[payload]" />
+        	<quickbooks:account ref="#[payload]" />
         </quickbooks:update-account>
                                    
         <quickbooks:update-bill accessTokenId="id" >
@@ -98,7 +96,7 @@
         </quickbooks:update-purchase>
                                          
         <quickbooks:update-customer accessTokenId="id" >
-            </quickbooks:update-customer>
+		</quickbooks:update-customer>
         
         <quickbooks:update-estimate accessTokenId="id" >
         </quickbooks:update-estimate>
@@ -108,6 +106,9 @@
                                    
         <quickbooks:update-item accessTokenId="id" >
         </quickbooks:update-item>
+        
+        <quickbooks:update-journal-entry accessTokenId="id" >
+        </quickbooks:update-journal-entry>
                         
         <quickbooks:update-payment accessTokenId="id" >
         </quickbooks:update-payment>
@@ -126,8 +127,7 @@
     </flow>
 
     <flow name="DeleteObjectWithId">
-        <quickbooks:delete-object-with-id accessTokenId="id"
-                                   type="INVOICE" syncToken="2">
+        <quickbooks:delete-object-with-id accessTokenId="id" type="INVOICE" syncToken="2">
         </quickbooks:delete-object-with-id>
     </flow>
     
@@ -147,16 +147,40 @@
                                  resultsPerPage="10"/>
     </flow>
 
-    <flow name="Authorize">
+    <flow name="GetCurrentUser">
+        <quickbooks:get-current-user accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="GetCompanyInfo">
+        <quickbooks:get-company-info accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+
+    <flow name="AuthUser">
         <quickbooks:auth-user accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token" authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="http://localhost:8090" requestTokenId="11" requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token"/>
     </flow>
+    
     <flow name="GetAccessToken">
         <quickbooks:get-access-token />
     </flow>
+    
     <flow name="InitializeOpenID">
         <quickbooks:open-id-initialize callbackUrl="http://localhost:8090/verifyOpenId"/>
     </flow>
+    
     <flow name="VerifyResponseOpenID">
         <quickbooks:verify-open-id />
     </flow>
+    
+    <flow name="GetBlueDotInformation">
+        <quickbooks:get-blue-dot-information accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="Disconnect">
+        <quickbooks:disconnect accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
+    <flow name="Reconnect">
+        <quickbooks:reconnect accessTokenId="${quickbooks.online.realmid}" />
+    </flow>
+    
 </mule>
