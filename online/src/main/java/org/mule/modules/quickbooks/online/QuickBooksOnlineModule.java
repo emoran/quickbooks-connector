@@ -77,7 +77,7 @@ import com.intuit.ipp.util.Config;
  * @author MuleSoft, inc.
  */
 @SuppressWarnings("unused")
-@Module(name = "quickbooks", schemaVersion= "4.0", friendlyName = "Quickbooks Online")
+@Module(name = "quickbooks", schemaVersion= "5.0", friendlyName = "Quickbooks Online")
 public class QuickBooksOnlineModule
 {
     /**
