@@ -29,7 +29,7 @@ import com.intuit.ipp.data.Item;
 
 public class PaginatedQueryTestCases extends QuickBooksOnlineTestParent {
 	private List<Item> createdItems;
-	private Integer itemsSize = 25;
+	private final Integer itemsSize = 25;
 	
 	@Before
     public void setUp() throws Exception {
@@ -45,10 +45,20 @@ public class PaginatedQueryTestCases extends QuickBooksOnlineTestParent {
 	
 	@Category({RegressionTests.class})
 	@Test
-	public void queryItems() throws Exception {
+	public void queryItemsWithResultsPerPage() throws Exception {
+		queryItems("PaginatedQueryWithResultsPerPage", 5);
+	}
+	
+	@Category({RegressionTests.class})
+	@Test
+	public void queryItemsWithoutResultsPerPage() throws Exception {
+		queryItems("PaginatedQueryWithoutResultsPerPage", null);
+	}
+	
+	private void queryItems(String flowName, Integer resultsPerPage) throws Exception {
 		String query = "SELECT * FROM ITEM WHERE Name LIKE 'TestItem_%'";
-		upsertPayloadContentOnTestRunMessage(this.createPaginatedQueryPayload(query, 5));
-		Iterable<Item> retrievedItems = runFlowAndGetPayload("PaginatedQuery");
+		upsertPayloadContentOnTestRunMessage(this.createPaginatedQueryPayload(query, resultsPerPage));
+		Iterable<Item> retrievedItems = runFlowAndGetPayload(flowName);
 		
 		Integer i = 0;
 		for(Item item : retrievedItems){
@@ -62,7 +72,9 @@ public class PaginatedQueryTestCases extends QuickBooksOnlineTestParent {
 	private Map<String,Object> createPaginatedQueryPayload(String query, Integer resultsPerPage){
 		Map<String,Object> map = new HashMap<String,Object>(); 
 		map.put("query", query);
-		map.put("resultsPerPage", resultsPerPage);
+		if(resultsPerPage != null) {
+			map.put("resultsPerPage", resultsPerPage);
+		}
 		return map;
 	}
 	
