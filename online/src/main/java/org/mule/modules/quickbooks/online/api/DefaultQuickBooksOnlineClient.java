@@ -253,7 +253,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     	
     	Integer selectedResultsPerPage = this.resultsPerPage;
     	
-    	if(selectedResultsPerPage != null) {
+    	if(resultsPerPage != null) {
     		Validate.isTrue(resultsPerPage > 0);
     		selectedResultsPerPage = resultsPerPage;
     	}
