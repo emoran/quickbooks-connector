@@ -16,3 +16,10 @@ Reporting Issues
 ----------------
 
 We use GitHub:Issues for tracking issues with this connector. You can report new issues at this link https://github.com/mulesoft/quickbooks-connector/issues.
+
+Maven Build
+-----------
+
+In order to Build both Quickbooks-Online and Quickbooks-Windows connectors with Maven, it is necessary to add the following option to the MAVEN_OPTS environment variable:
+
+MAVEN_OPTS=-Xmx512m
