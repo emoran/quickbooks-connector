@@ -17,6 +17,7 @@ import org.mule.modules.quickbooks.online.IntuitEntityEnum;
 
 import com.intuit.ipp.core.IEntity;
 import com.intuit.ipp.data.CompanyInfo;
+import com.intuit.ipp.services.QueryResult;
 
 
 /**
@@ -43,6 +44,8 @@ public interface QuickBooksOnlineClient
 
     <T extends IEntity> Iterable<T> query(OAuthCredentials credentials, String query);
 
+    QueryResult queryWithMetadata(OAuthCredentials credentials, String query);
+
     <T extends IEntity> Iterable<T> paginatedQuery(OAuthCredentials credentials, String query, Integer resultsPerPage);
     
     UserInformation getCurrentUserInformation(OAuthCredentials credentials);
@@ -52,6 +55,7 @@ public interface QuickBooksOnlineClient
     boolean disconnect(OAuthCredentials credentials);
 
     OAuthCredentials reconnect(OAuthCredentials credentials);
+
 
 	
 }

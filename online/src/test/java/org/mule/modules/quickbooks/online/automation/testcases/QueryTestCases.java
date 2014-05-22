@@ -11,6 +11,7 @@
 package org.mule.modules.quickbooks.online.automation.testcases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,10 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
 import org.mule.modules.quickbooks.online.automation.RegressionTests;
+import org.springframework.util.CollectionUtils;
 
 import com.intuit.ipp.data.Item;
+import com.intuit.ipp.services.QueryResult;
 
 public class QueryTestCases extends QuickBooksOnlineTestParent {
 	private List<Item> createdItems;
@@ -46,6 +49,24 @@ public class QueryTestCases extends QuickBooksOnlineTestParent {
 		upsertPayloadContentOnTestRunMessage("SELECT * FROM ITEM WHERE Name LIKE 'TestItem_%'");
 		List<Item> retrievedItems = runFlowAndGetPayload("Query");
 		assertEquals(itemsSize, retrievedItems.size(), 0);
+	}
+	
+	@Category({RegressionTests.class})
+	@Test
+	public void queryItemsWithMetadata() throws Exception {
+		upsertPayloadContentOnTestRunMessage("SELECT * FROM ITEM WHERE Name LIKE 'TestItem_%'");
+		QueryResult queryResult = runFlowAndGetPayload("QueryWithMetadata");
+		assertEquals(itemsSize, queryResult.getMaxResults(), 0);
+		assertEquals(itemsSize, queryResult.getEntities().size(), 0);
+	}
+	
+	@Category({RegressionTests.class})
+	@Test
+	public void queryItemsCountWithMetadata() throws Exception {
+		upsertPayloadContentOnTestRunMessage("SELECT COUNT(*) FROM ITEM WHERE Name LIKE 'TestItem_%'");
+		QueryResult queryResult = runFlowAndGetPayload("QueryWithMetadata");
+		assertEquals(itemsSize, queryResult.getTotalCount(), 0);
+		assertTrue(CollectionUtils.isEmpty(queryResult.getEntities()));
 	}
 	
 	@After

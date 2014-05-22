@@ -34,7 +34,8 @@ import com.intuit.ipp.services.QueryResult;
 
 public class QuickBooksOnlinePaginatedIterableTest {
 	private final String ITEM_QUERY = "SELECT * FROM ITEM";
-	private final String START_POSITION_KEY = "STARTPOSITION"; 
+	private final String ITEM_QUERY_COUNT = "SELECT COUNT(*) FROM ITEM";
+	private final String START_POSITION_KEY = "STARTPOSITION";
 	private final String MAX_RESULTS_KEY = "MAXRESULTS";
 	
 	private OAuthCredentials credentials;
@@ -67,9 +68,14 @@ public class QuickBooksOnlinePaginatedIterableTest {
 					Integer fromIndex = (startPosition > toIndex? toIndex : startPosition);
 					
 					queryResult.setEntities(itemList.subList(fromIndex, toIndex));
+					queryResult.setMaxResults(queryResult.getEntities().size());
+					return queryResult;
+				
+				} else if(StringUtils.contains(query, ITEM_QUERY_COUNT)) {
+					queryResult.setTotalCount(itemList.size());
 					return queryResult;
 				} else {
-					throw new IllegalArgumentException("The query cannot be be tested.");
+					throw new IllegalArgumentException("The query cannot be tested.");
 				}
 			}
 		});
@@ -114,14 +120,20 @@ public class QuickBooksOnlinePaginatedIterableTest {
 		verify(paginatedIterable).askForPage(listSize+1, maxResults, pageNumber);
 	}
 	
+	private void checkTotalResultsCount(QuickBooksOnlinePaginatedIterable<Item> paginatedIterable, Integer listSize) {
+		Integer totalResultsCount = paginatedIterable.getTotalResultsCount();
+		assertEquals(listSize, totalResultsCount);
+	}
+
 	private void testQuickBooksOnlineItemPaginatedIterable(Integer listSize, Integer maxResults){
 		this.populateItemList(listSize);
 		QuickBooksOnlinePaginatedIterable<Item> paginatedIterable = spy(new QuickBooksOnlinePaginatedIterable<Item>(dataServiceHelper, credentials, ITEM_QUERY, maxResults));
 
 		this.checkItemsOfPaginatedIterable(paginatedIterable, listSize);
 		this.checkPageRequests(paginatedIterable, listSize, maxResults);
+		this.checkTotalResultsCount(paginatedIterable, listSize);
 	}
-	
+
 	@Test
 	public void testQuickBooksOnlineItemPaginatedIterable1() {
 		this.testQuickBooksOnlineItemPaginatedIterable(124, 10);

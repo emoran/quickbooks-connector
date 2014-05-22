@@ -22,6 +22,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.modules.quickbooks.online.api.QuickBooksOnlinePaginatedIterable;
 import org.mule.modules.quickbooks.online.automation.QuickBooksOnlineTestParent;
 import org.mule.modules.quickbooks.online.automation.RegressionTests;
 
@@ -60,12 +61,16 @@ public class PaginatedQueryTestCases extends QuickBooksOnlineTestParent {
 		upsertPayloadContentOnTestRunMessage(this.createPaginatedQueryPayload(query, resultsPerPage));
 		Iterable<Item> retrievedItems = runFlowAndGetPayload(flowName);
 		
+		QuickBooksOnlinePaginatedIterable<Item> retrievedItemsPaginator = (QuickBooksOnlinePaginatedIterable<Item>) retrievedItems;
+		Integer totalResultsCount = retrievedItemsPaginator.getTotalResultsCount();
+		
 		Integer i = 0;
 		for(Item item : retrievedItems){
 			assertTrue(item.getName().startsWith("TestItem"));
 			i++;
 		}
 		
+		assertEquals(itemsSize,totalResultsCount,0);
 		assertEquals(itemsSize,i,0);
 	}
 	

@@ -169,6 +169,21 @@
                          query="SELECT * FROM Invoice WHERE Status = 'Deleted'"/>
 <!-- END_INCLUDE(quickbooks:query3) -->
 
+<!-- BEGIN_INCLUDE(quickbooks:query-with-metadata) -->
+<quickbooks:query-with-metadata accessTokenId="accessTokenId"
+                         query="#[variable:query]"/>
+<!-- END_INCLUDE(quickbooks:query-with-metadata) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:query-with-metadata2) -->
+<quickbooks:query-with-metadata accessTokenId="accessTokenId"
+                         query="SELECT * FROM Invoice WHERE TotalAmt > '1000.0'"/>
+<!-- END_INCLUDE(quickbooks:query-with-metadata2) -->
+
+<!-- BEGIN_INCLUDE(quickbooks:query-with-metadata3) -->
+<quickbooks:query-with-metadata accessTokenId="accessTokenId"
+                         query="SELECT * FROM Invoice WHERE Status = 'Deleted'"/>
+<!-- END_INCLUDE(quickbooks:query-with-metadata3) -->
+
 <!-- BEGIN_INCLUDE(quickbooks:paginated-query) -->
 <quickbooks:paginated-query accessTokenId="accessTokenId"
                          query="#[variable:query]"
