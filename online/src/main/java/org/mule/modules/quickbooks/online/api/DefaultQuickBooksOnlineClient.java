@@ -224,10 +224,21 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
     // **********************************************************************************************
     
     /** 
-     * Return all the results from Quickbooks.
+     * Return the list of results of a query from QuickBooks.
      */
     @Override
     public <T extends IEntity> Iterable<T> query(final OAuthCredentials credentials,
+                                                 final String query)
+    {
+    	QueryResult queryResult = this.queryWithMetadata(credentials, query);
+    	return (List<T>) queryResult.getEntities();
+    }
+    
+    /** 
+     * Return the QueryResult of a query from QuickBooks.
+     */
+    @Override
+    public QueryResult queryWithMetadata(final OAuthCredentials credentials,
                                                  final String query)
     {
     	Validate.notNull(credentials);
@@ -237,7 +248,7 @@ public class DefaultQuickBooksOnlineClient extends AbstractQuickBooksClientOAuth
 			DataService dataService = dataServiceHelper.createIntuitDataService(credentials);
 			QueryResult queryResult = dataService.executeQuery(query);
 
-			return (List<T>) queryResult.getEntities();
+			return queryResult;
 		} catch(FMSException e) {
 			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
 		}

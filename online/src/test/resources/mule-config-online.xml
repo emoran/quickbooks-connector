@@ -141,6 +141,11 @@
                                  query="#[variable:query]"/>
     </flow>
     
+    <flow name="QueryWithMetadata">
+        <quickbooks:query-with-metadata accessTokenId="id"
+                                 query="#[variable:query]"/>
+    </flow>
+    
     <flow name="PaginatedQuery">
         <quickbooks:paginated-query accessTokenId="id"
                                  query="#[variable:query]"

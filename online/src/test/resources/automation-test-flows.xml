@@ -63,6 +63,10 @@
         <quickbooks:query config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" query="#[payload]" />
     </flow>
     
+    <flow name="QueryWithMetadata">
+        <quickbooks:query-with-metadata config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" query="#[payload]" />
+    </flow>
+    
     <flow name="PaginatedQueryWithResultsPerPage">
         <quickbooks:paginated-query config-ref="quickbooks" accessTokenId="${quickbooks.online.realmid}" query="#[payload['query']]" resultsPerPage="#[payload['resultsPerPage']]" />
     </flow>

@@ -13,7 +13,10 @@ package org.mule.modules.quickbooks.online.api;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.mule.modules.quickbooks.api.exception.QuickBooksRuntimeException;
 import org.mule.modules.quickbooks.api.oauth.OAuthCredentials;
@@ -28,6 +31,7 @@ import com.intuit.ipp.services.QueryResult;
 public class QuickBooksOnlinePaginatedIterable<T extends IEntity> extends PaginatedIterable<T, QuickBooksOnlinePage> {
 	private static final String START_POSITION_KEY = "STARTPOSITION"; 
 	private static final String MAX_RESULTS_KEY = "MAXRESULTS";
+	private static final String COUNT_QUERY_SELECT_FIELDS = " COUNT(*) ";
 	
 	private QuickBooksOnlineDataServiceHelper dataServiceHelper;
 	private OAuthCredentials credentials;
@@ -99,6 +103,38 @@ public class QuickBooksOnlinePaginatedIterable<T extends IEntity> extends Pagina
 		}
 		
 		return (Iterator<T>) entities.iterator();
+	}
+	
+	/*
+	 * Count Query Format Example
+	 * 
+	 * SELECT COUNT(*)
+	 * FROM IntuitEntity
+	 * [WHERE WhereClause]
+	 */
+	/**
+	 * Performs the count query to QuickBooks to calculate the total number of results (all pages) for the original paginated query.
+	 * 
+	 * @return number of total results
+	 */
+	public Integer getTotalResultsCount() {
+		String cQuery = query.trim();
+		
+		Matcher queryMatcher = QuickBooksOnlineQueryEvaluator.matchSelectFieldsPattern(cQuery);
+		
+		Validate.isTrue(queryMatcher.matches(), "The query - " + cQuery + " - received is not valid.");
+		
+		MatchResult queryMatchResult = queryMatcher.toMatchResult();
+		String countQuery = StringUtils.replaceOnce(cQuery, queryMatchResult.group(1), COUNT_QUERY_SELECT_FIELDS);
+		
+		try {
+			DataService dataService = dataServiceHelper.createIntuitDataService(credentials);
+			QueryResult queryResult = dataService.executeQuery(countQuery);
+			
+			return queryResult.getTotalCount();
+		} catch(FMSException e) {
+			throw new QuickBooksRuntimeException(dataServiceHelper.adaptFMSExceptionToExceptionInfo(e), e);
+		}
 	}
 
 }

@@ -64,6 +64,7 @@ import com.intuit.ipp.data.Purchase;
 import com.intuit.ipp.data.SalesReceipt;
 import com.intuit.ipp.data.Term;
 import com.intuit.ipp.data.Vendor;
+import com.intuit.ipp.services.QueryResult;
 import com.intuit.ipp.util.Config;
 
 /**
@@ -962,7 +963,8 @@ public class QuickBooksOnlineModule
 
     /**
      * The query operation is the method for creating a guided query against an entity.
-     * This operation only executes the exact query that is given. It does not handle pagination automatically.
+     * This operation only executes the exact query that is given and returns the list of results.
+     * It does not handle pagination automatically.
      *
      * For details see: 
      * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/020_key_concepts/00300_query_operations">Querying Data Specification</a>
@@ -982,6 +984,31 @@ public class QuickBooksOnlineModule
     public Iterable query(String accessTokenId, String query)
     {
         return client.query(getAccessTokenInformation(accessTokenId), query);
+    }
+    
+    /**
+     * The query operation is the method for creating a guided query against an entity.
+     * This operation only executes the exact query that is given and returns a {@link QueryResult} that contains the list of results and the related metadata.
+     * It does not handle pagination automatically.
+     *
+     * For details see: 
+     * <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/020_key_concepts/00300_query_operations">Querying Data Specification</a>
+     * 
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:query-with-metadata}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:query-with-metadata2}
+     * {@sample.xml ../../../doc/mule-module-quick-books-online.xml.sample quickbooks:query-with-metadata3}
+     *
+     * @param accessTokenId identifier for QuickBooks credentials.
+     * @param query String
+     * @return QueryResult of the QuickBooks query.
+     * 
+     * @throws QuickBooksRuntimeException when there is a problem with the server. It has a code 
+     *         and a message provided by quickbooks about the error.
+     */
+    @Processor
+    public QueryResult queryWithMetadata(String accessTokenId, String query)
+    {
+        return client.queryWithMetadata(getAccessTokenInformation(accessTokenId), query);
     }
     
     /**

@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.mule.modules</groupId>
         <artifactId>mule-module-quick-books</artifactId>
-        <version>4.0.5-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -32,13 +32,13 @@
                             <staleFile>${project.build.directory}/jaxb2/.schemaWindowsXjcStaleFlag</staleFile>
                             <enableIntrospection>true</enableIntrospection>
                             <packageName>org.mule.modules.quickbooks.windows.schema</packageName>
-                            <schemaDirectory>src/main/resources/schema/windows</schemaDirectory>
+                            <schemaDirectory>${basedir}/src/main/resources/schema/windows</schemaDirectory>
                             <schemaFiles>
                                 ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,
                                 IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd, UserInformation.xsd, PlatformResponses.xsd
                             </schemaFiles>
                             <extension>true</extension>
-                            <bindingDirectory>src/main/resources/schema/windows</bindingDirectory>
+                            <bindingDirectory>${basedir}/src/main/resources/schema/windows</bindingDirectory>
                             <bindingFiles>GlobalBindings.xjb</bindingFiles>
                             <arguments>-Xcollection-setter-injector</arguments>
                         </configuration>
