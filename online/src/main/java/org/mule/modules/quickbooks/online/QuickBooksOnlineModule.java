@@ -1144,12 +1144,7 @@ public class QuickBooksOnlineModule
             credentials.setBaseUri(this.baseUri);
         }
 
-        //Use the prefix if it is defined in the config
-        if (StringUtils.isNotEmpty(getAccessTokenIdentifierPrefix())) {
-            userIdentifier = getAccessTokenIdentifierPrefix() + userIdentifier;
-        }
-
-        getObjectStoreHelper().store(userIdentifier, credentials, true);
+        getObjectStoreHelper().store(attachAccessTokenIdentifierPrefix(userIdentifier), credentials, true);
 
         return credentials;
     }
@@ -1270,8 +1265,17 @@ public class QuickBooksOnlineModule
         OAuthCredentials creds = client.reconnect(getAccessTokenInformation(accessTokenId));
 
         //Stores new credentials
-        getObjectStoreHelper().store(creds.getUserId(), creds, true);
+        getObjectStoreHelper().store(attachAccessTokenIdentifierPrefix(creds.getUserId()), creds, true);
     }
+    
+    /**
+     * This method adds the AccessTokenIdentifierPrefix to the beginning of the String that is recieved as a parameter
+     * @param accessTokenIdentifier
+     * @return Access Token Identifier with the attached Prefix if defined in the config
+     */
+    private String attachAccessTokenIdentifierPrefix(String accessTokenIdentifier) {
+    	return StringUtils.defaultIfEmpty(getAccessTokenIdentifierPrefix(), "") + accessTokenIdentifier;
+	}
     
     /**
      * This method retrieves the accessTokenInformation from the object store instance
