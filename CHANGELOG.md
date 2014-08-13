@@ -1,3 +1,7 @@
+5.1
+===
+- Fixed reconnect error related to the accessTokenIdentifierPrefix config option
+
 5.0
 ===
 - Migrated QuickBooks Online Connector to API v3
