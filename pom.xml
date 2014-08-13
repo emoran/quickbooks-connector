@@ -56,7 +56,7 @@
         </repository>
         <!-- Mule Third Party repository -->
         <repository>
-            <id>mule-third-party</id>
+            <id>mule-ee-thirdparty</id>
             <name>Mule Third Party</name>
             <url>https://repository.mulesoft.org/nexus/content/repositories/thirdparty/</url>
             <layout>default</layout>
