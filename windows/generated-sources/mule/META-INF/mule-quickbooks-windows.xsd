@@ -1,0 +1,2241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:ns2="http://www.mulesoft.org/schema/mule/devkit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://www.mulesoft.org/schema/mule/quickbooks-windows">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"></xs:import>
+  <xs:import schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" namespace="http://www.springframework.org/schema/beans"></xs:import>
+  <xs:import schemaLocation="http://www.mulesoft.org/schema/mule/core/current/mule.xsd" namespace="http://www.mulesoft.org/schema/mule/core"></xs:import>
+  <xs:element xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="config" substitutionGroup="mule:abstract-extension" ns2:javaClass="org.mule.modules.quickbooks.windows.adapters.QuickBooksWindowsModuleProcessAdapter">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mule:abstractExtensionType">
+          <xs:annotation>
+            <xs:documentation>QuickBooks software provides an interface that allows you to use forms such as checks, deposit slips and invoices,
+making the accounting process more comfortable for the average business owner or manager. By using the built-in
+functions that pertain to your business, you are able to perform your company accounting by simply recording your
+vendor activities, customer activities, banking transactions, payroll checks and taxes. QuickBooks handles the
+accounting portion of each transaction behind the scenes.
+Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_5462311_quickbooks-accounting-tutorial.html#ixzz1csaydwxl</xs:documentation>
+          </xs:annotation>
+          <xs:attribute name="name" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Give a name to this configuration so it can be later referenced by config-ref.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="consumerKey" use="required" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>API Key</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="consumerSecret" use="required" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>API Secret</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="objectStore-ref" default="_defaultUserObjectStore" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Object store reference</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="client-ref" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Quick-Books client. By default uses DefaultQuickBooksWindowsClient class.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="baseUri" default="https://services.intuit.com/sb" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The base uri of the quickbooks endpoint,
+used to fetch the company uri.
+
+Quickbooks connector will first use this uri and the realmId to
+get a second uri, called company uri,
+which is the actual quickbooks endpoint for the connector</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="accessTokenIdentifierPrefix" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Prefix used for storing credentials in ObjectStore. It will be concatenated to the access token identifier.
+&lt;p&gt;E.g. prefix: "qb_", user identifier (realmId): "12345", key for object store "qb_12345"&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="verifyOpenIdResponse" default="true" use="optional" type="booleanType">
+            <xs:annotation>
+              <xs:documentation>Specifies if the OpenID response will be verified. By default it is true.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="create" substitutionGroup="mule:abstract-message-processor" type="CreateType">
+    <xs:annotation>
+      <xs:documentation>Creates.
+
+For details of the supported objects and its fields:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0500_Supported_Objects"&gt;Supported Objects and Operations&lt;/a&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="CreateType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="type" use="required" type="WindowsEntityTypeEnumType">
+          <xs:annotation>
+            <xs:documentation>WindowsEntityType of the object.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="entityObject-ref" default="#[payload]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>represents the object to be created.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="draft" default="false" use="optional" type="booleanType">
+          <xs:annotation>
+            <xs:documentation>Boolean draft &lt;p&gt;Saving an IDS object in a draft state prevents it from being synchronized with Quickbooks. Your app might want to save an object in a draft state if the user has not finished entering data, or for some other reason the user does not want to commit the object for synchronization. You may save an object in draft state during a create or update operation by specifying the draft="true" attribute. By default, the Draft attribute is false, which means that the saved object will be synchronized with Quickbooks.&lt;/p&gt;</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="fullResponse" default="false" use="optional" type="booleanType">
+          <xs:annotation>
+            <xs:documentation>Boolean fullResponse. If this flag is true, it will return the created object, otherwise, it will return an .</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="get-object" substitutionGroup="mule:abstract-message-processor" type="GetObjectType">
+    <xs:annotation>
+      <xs:documentation>Retrieve objects by ID.
+
+For details of the supported objects:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0500_Supported_Objects"&gt;Supported Objects and Operations&lt;/a&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="GetObjectType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="type" use="required" type="WindowsEntityTypeEnumType">
+          <xs:annotation>
+            <xs:documentation>WindowsEntityType of the object.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="idType-ref" default="#[payload]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Id  which is assigned by Data Services when the object is created.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="revert" substitutionGroup="mule:abstract-message-processor" type="RevertType">
+    <xs:annotation>
+      <xs:documentation>Revert objects by ID.
+
+For details of the supported objects:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0500_Supported_Objects"&gt;Supported Objects and Operations&lt;/a&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="RevertType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="type" use="required" type="WindowsEntityTypeEnumType">
+          <xs:annotation>
+            <xs:documentation>WindowsEntityType of the object.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="entityObject-ref" default="#[payload]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>represents the object to be reverted.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="update" substitutionGroup="mule:abstract-message-processor" type="UpdateType">
+    <xs:annotation>
+      <xs:documentation>Updates.
+
+&lt;p&gt;Specify all the parameters for the object, not just the new or changed elements.
+If you omit an element, it is removed from the object by the update operation.&lt;/p&gt;
+
+For details of the supported objects and its fields:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0500_Supported_Objects"&gt;Supported Objects and Operations&lt;/a&gt;
+
+&lt;p&gt;When updating transaction objects (such as Estimate or Invoice), note the following:&lt;/p&gt;
+&lt;p&gt;* To retain existing line items, specify them in the request XML body and do not change their order. &lt;/p&gt;
+&lt;p&gt;* To remove a line item, omit it. &lt;/p&gt;
+&lt;p&gt;* To add a new line item, insert a new one in the list.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="UpdateType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="type" use="required" type="WindowsEntityTypeEnumType">
+          <xs:annotation>
+            <xs:documentation>WindowsEntityType of the object.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="entityObject-ref" default="#[payload]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>represents the object to be updated.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="draft" default="false" use="optional" type="booleanType">
+          <xs:annotation>
+            <xs:documentation>Boolean draft &lt;p&gt;Saving an IDS object in a draft state prevents it from being synchronized with Quickbooks. Your app might want to save an object in a draft state if the user has not finished entering data, or for some other reason the user does not want to commit the object for synchronization. You may save an object in draft state during a create or update operation by specifying the draft="true" attribute. By default, the Draft attribute is false, which means that the saved object will be synchronized with Quickbooks.&lt;/p&gt;</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="fullResponse" default="false" use="optional" type="booleanType">
+          <xs:annotation>
+            <xs:documentation>Boolean fullResponse. If this flag is true, it will return the created object, otherwise, it will return an .</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="delete" substitutionGroup="mule:abstract-message-processor" type="DeleteType">
+    <xs:annotation>
+      <xs:documentation>Deletes an object.
+&lt;p&gt;Most objects cannot be deleted by calling Data Services.&lt;/p&gt;
+&lt;p&gt;If the obj map do not have the MetaData field or the SyncToken, internally, will retrieve the
+object at first, to delete it. So be careful, because it will need two request instead of one, which
+could make it slower.&lt;/p&gt;
+&lt;p&gt;For details of the supported objects and its fields:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0500_Supported_Objects"&gt;Supported Objects and Operations&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="DeleteType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="type" use="required" type="WindowsEntityTypeEnumType">
+          <xs:annotation>
+            <xs:documentation>WindowsEntityType of the object.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="entityObject-ref" default="#[payload]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>represents the object to be deleted.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="find-objects" substitutionGroup="mule:abstract-message-processor" type="FindObjectsType">
+    <xs:annotation>
+      <xs:documentation>For details on how to generate a query see:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/0500_QuickBooks_Windows/
+0100_Calling_Data_Services/0015_Retrieving_Objects"&gt;Retrieve Especification&lt;/a&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="FindObjectsType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:sequence>
+          <xs:element name="query" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Map that represents every filter and sort for the objects retrieved. Each type of object to be retrieved, has a TheObjectQuery class that has the attributes for which it can be filtered &lt;p&gt;(To know which attributes are accepted in every ObjectQuery, you could follow the link in the documentation of the WindowsEntityType that you require, or you can follow the link changing the word OBJECT for the object that you required, for example Account: &lt;p&gt;https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/ 0500_QuickBooks_Windows/0600_Object_Reference/OBJECT&lt;/p&gt;).&lt;/p&gt; &lt;p&gt;If you do not complete the fields chunkSize and startPage, method will retrieve all records without paging them.&lt;/p&gt; If query is null, it will retrieve all the objects of that WindowsEntityType.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:choice>
+                <xs:sequence>
+                  <xs:element name="query" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                      <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                          <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                          <xs:attribute name="key" type="xs:string"></xs:attribute>
+                        </xs:extension>
+                      </xs:simpleContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:sequence>
+                  <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"></xs:any>
+                </xs:sequence>
+              </xs:choice>
+              <xs:attribute name="ref" use="optional" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>The reference object for this parameter</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="type" use="required" type="WindowsEntityTypeEnumType">
+          <xs:annotation>
+            <xs:documentation>WindowsEntityType of the object.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="startPage" use="optional" type="integerType">
+          <xs:annotation>
+            <xs:documentation>Specific page you want to bring</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="chunkSize" use="optional" type="integerType">
+          <xs:annotation>
+            <xs:documentation>Number of records for each page</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="generate-a-new-request-id" substitutionGroup="mule:abstract-message-processor" type="GenerateANewRequestIdType">
+    <xs:annotation>
+      <xs:documentation>Generate a new GUID for the requestId</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="GenerateANewRequestIdType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="status" substitutionGroup="mule:abstract-message-processor" type="StatusType">
+    <xs:annotation>
+      <xs:documentation>Retrieve the Status
+
+&lt;p&gt;Retrieves information about the sync status of Quickbooks entities. You can also query
+specific entity types for either synchronized or unsynchronized objects with filters. You can get information
+on recent synchronizations using the syncActivity operation.&lt;/p&gt;
+&lt;p&gt;Note: Sync status information will be maintained for all operations in the cloud up to 30 days old.
+Of those operations older than 30 days, only the last operation's synch status will be maintained.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="NgIdSetObjectType">
+    <xs:sequence></xs:sequence>
+    <xs:attribute name="ngId" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="syncToken" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="ngObjectType" use="optional" type="ObjectNameEnumType">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="partyId" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ref" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The reference object for this parameter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="IdTypeObjectType">
+    <xs:sequence></xs:sequence>
+    <xs:attribute name="value" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="idDomain" use="optional" type="IdDomainEnumEnumType">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ref" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The reference object for this parameter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="IdSetObjectType">
+    <xs:sequence>
+      <xs:element name="id" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" maxOccurs="unbounded" minOccurs="0">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" base="IdTypeObjectType">
+                    <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="ref" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The reference object for this parameter</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ref" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The reference object for this parameter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SyncStatusParamObjectType">
+    <xs:sequence>
+      <xs:element name="id-set" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" base="IdSetObjectType"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="syncToken" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="objectType" use="optional" type="ObjectNameEnumType">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="partyId" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ref" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The reference object for this parameter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SyncStatusRequestObjectType">
+    <xs:sequence>
+      <xs:element name="ng-id-set" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="ng-id-set" maxOccurs="unbounded" minOccurs="0">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" base="NgIdSetObjectType">
+                    <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="ref" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The reference object for this parameter</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sync-status-param" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sync-status-param" maxOccurs="unbounded" minOccurs="0">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" base="SyncStatusParamObjectType">
+                    <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="ref" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The reference object for this parameter</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="request-id" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="request-id" maxOccurs="unbounded" minOccurs="0">
+              <xs:complexType>
+                <xs:simpleContent>
+                  <xs:extension base="xs:string">
+                    <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                  </xs:extension>
+                </xs:simpleContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="ref" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The reference object for this parameter</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="batch-id" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="batch-id" maxOccurs="unbounded" minOccurs="0">
+              <xs:complexType>
+                <xs:simpleContent>
+                  <xs:extension base="xs:string">
+                    <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                  </xs:extension>
+                </xs:simpleContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="ref" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The reference object for this parameter</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="offeringId" use="optional" type="OfferingIdEnumType">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="startCreatedTMS" use="optional" type="dateTimeType">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="endCreatedTMS" use="optional" type="dateTimeType">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" name="erroredObjectsOnly" use="optional" type="booleanType">
+      <xs:annotation>
+        <xs:documentation></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ref" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The reference object for this parameter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="StatusType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:sequence>
+          <xs:element name="sync-status-request" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>It has the specifications of the syncStatuses to be retrieved. (like a filter)</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" base="SyncStatusRequestObjectType"></xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="sync-activity" substitutionGroup="mule:abstract-message-processor" type="SyncActivityType">
+    <xs:annotation>
+      <xs:documentation>Retrieve the SyncActivities
+
+&lt;p&gt;The SyncActivity object contains information about Quickbooks for Windows synchronizations. To get the sync
+status of another type of object, for example, a customer, use the status operation.  To filter a query based
+on whether or not an object  is synchronized, use a filter.&lt;/p&gt;
+&lt;p&gt;Note: Sync status information will be maintained for all operations in the cloud up to 30 days old. Of those
+operations older than 30 days, only the last operation's synch status will be maintained.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="SyncActivityType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:sequence>
+          <xs:element name="sync-activity-request" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Map that represents a  object. It has the specifications of the SyncActivities to be retrieved. (like a filter)</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:choice>
+                <xs:sequence>
+                  <xs:element name="sync-activity-request" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                      <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                          <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                          <xs:attribute name="key" type="xs:string"></xs:attribute>
+                        </xs:extension>
+                      </xs:simpleContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:sequence>
+                  <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"></xs:any>
+                </xs:sequence>
+              </xs:choice>
+              <xs:attribute name="ref" use="optional" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>The reference object for this parameter</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="get-current-user" substitutionGroup="mule:abstract-message-processor" type="GetCurrentUserType">
+    <xs:annotation>
+      <xs:documentation>Returns current user information such as first name, last name, and email address.
+For details see:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/
+0025_Intuit_Anywhere/0060_Reference/Current_User_API"&gt;CurrentUserAPI&lt;/a&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="GetCurrentUserType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="get-company-metadata" substitutionGroup="mule:abstract-message-processor" type="GetCompanyMetadataType">
+    <xs:annotation>
+      <xs:documentation>Returns company metadata information.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="GetCompanyMetadataType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>identifier for QuickBooks credentials.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="auth-user" substitutionGroup="mule:abstract-message-processor" type="AuthUserType">
+    <xs:annotation>
+      <xs:documentation>Authorize an user using OAuth1.0a</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AuthUserType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="requestTokenUrl" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>requestTokenUrl</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenUrl" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>accessTokenUrl</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="authorizationUrl" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>authorizationUrl</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="callbackUrl" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>callbackUrl for OAuth service</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="requestTokenId" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Optional value for identifying the requestToken. If it is not passed the client will use a UUID</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="get-access-token" substitutionGroup="mule:abstract-message-processor" type="GetAccessTokenType">
+    <xs:annotation>
+      <xs:documentation>Extract accessToken</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="GetAccessTokenType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="apiUrl" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>API URL</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="verifier" default="#[message.inboundProperties.oauth_verifier]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>OAuth verifier. It comes within the callback. The default value is "#[header:inbound:oauth_verifier]"</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="requestTokenId" default="#[message.inboundProperties.userId]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>id used for identifying the authorized request token. It comes within the callback. By default the query string parameter is userId</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="userIdentifier" default="#[message.inboundProperties.realmId]" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>id used for store the accessToken in the Object Store. By default the value is the realmId</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="open-id-initialize" substitutionGroup="mule:abstract-message-processor" type="OpenIdInitializeType">
+    <xs:annotation>
+      <xs:documentation>Initializes OpenID process</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="OpenIdInitializeType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="providerUrl" default="https://openid.intuit.com/OpenId/Provider" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>OpenID provider url</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="callbackUrl" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>OpenID callbackUrl. It has to point to an endpoint callback to process the response</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="verify-open-id" substitutionGroup="mule:abstract-message-processor" type="VerifyOpenIdType">
+    <xs:annotation>
+      <xs:documentation>Verify response from Intuit</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="VerifyOpenIdType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:sequence>
+          <xs:element name="response-parameters" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>response parameters from Intuit. It process a map&lt;string, string&gt; with all the OpenID attributes sent from Intuit.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:choice>
+                <xs:sequence>
+                  <xs:element name="response-parameter" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                      <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                          <xs:attribute name="value-ref" use="optional" type="xs:string"></xs:attribute>
+                          <xs:attribute name="key" type="xs:string"></xs:attribute>
+                        </xs:extension>
+                      </xs:simpleContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:sequence>
+                  <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"></xs:any>
+                </xs:sequence>
+              </xs:choice>
+              <xs:attribute name="ref" use="optional" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>The reference object for this parameter</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="receivingUrl" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>url from OpenID provider. &lt;p&gt;If it is not provided the processor will extract it from the Mule message&lt;/p&gt;</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="disconnect" substitutionGroup="mule:abstract-message-processor" type="DisconnectType">
+    <xs:annotation>
+      <xs:documentation>Invalidates the OAuth access token in the request, thereby disconnecting the user from QuickBooks for this app.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="DisconnectType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>credentials identifier for the user information to be requested</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="get-blue-dot-information" substitutionGroup="mule:abstract-message-processor" type="GetBlueDotInformationType">
+    <xs:annotation>
+      <xs:documentation>Gets blueDot menu information from Intuit</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="GetBlueDotInformationType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>credentials identifier for the user information to be requested</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="regex" default="intuitPlatformOpenOtherApp\((.+?)\)&quot; style='background-image: url\((.+?)\)" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Regex for extracting the information &lt;p&gt;The regex has to extract the information in this way:&lt;/p&gt; &lt;p&gt;match[0]: "appId,appName,contextArea"&lt;/p&gt; &lt;p&gt;match[1]: "logoImageUrl"&lt;/p&gt; &lt;p&gt;The method will split the application information to generate the @link{AppMenuInformation object&lt;/p&gt;</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="blue-dot-menu" substitutionGroup="mule:abstract-message-processor" type="BlueDotMenuType">
+    <xs:annotation>
+      <xs:documentation>Retrieves Blue Dot App Menu HTML from Intuit.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="BlueDotMenuType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>credentials identifier for the user information to be requested</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/quickbooks-windows" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="reconnect" substitutionGroup="mule:abstract-message-processor" type="ReconnectType">
+    <xs:annotation>
+      <xs:documentation>Generates a new OAuth access token and invalidates the OAuth access token used in the request,
+thereby extending the life span by six months. Because accessing QuickBooks data requires a valid access token,
+when the OAuth access token is renewed, your app can continue to access the user's QuickBooks company data.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ReconnectType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accessTokenId" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>credentials identifier for the user information to be requested</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ObjectNameEnumType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Java class for objectName.
+
+&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+&lt;p&gt;
+&lt;pre&gt;
+&amp;lt;simpleType name="objectName"&gt;
+&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
+&amp;lt;enumeration value="Account"/&gt;
+&amp;lt;enumeration value="Bill"/&gt;
+&amp;lt;enumeration value="BillPayment"/&gt;
+&amp;lt;enumeration value="BillPaymentCreditCard"/&gt;
+&amp;lt;enumeration value="Charge"/&gt;
+&amp;lt;enumeration value="Check"/&gt;
+&amp;lt;enumeration value="Class"/&gt;
+&amp;lt;enumeration value="Company"/&gt;
+&amp;lt;enumeration value="CreditCardCharge"/&gt;
+&amp;lt;enumeration value="CreditCardCredit"/&gt;
+&amp;lt;enumeration value="CreditMemo"/&gt;
+&amp;lt;enumeration value="Customer"/&gt;
+&amp;lt;enumeration value="CustomerMsg"/&gt;
+&amp;lt;enumeration value="CustomerType"/&gt;
+&amp;lt;enumeration value="Discount"/&gt;
+&amp;lt;enumeration value="Employee"/&gt;
+&amp;lt;enumeration value="Estimate"/&gt;
+&amp;lt;enumeration value="FixedAsset"/&gt;
+&amp;lt;enumeration value="InventoryAdjustment"/&gt;
+&amp;lt;enumeration value="InventorySite"/&gt;
+&amp;lt;enumeration value="InventoryTransfer"/&gt;
+&amp;lt;enumeration value="Invoice"/&gt;
+&amp;lt;enumeration value="Item"/&gt;
+&amp;lt;enumeration value="ItemReceipt"/&gt;
+&amp;lt;enumeration value="Job"/&gt;
+&amp;lt;enumeration value="JobType"/&gt;
+&amp;lt;enumeration value="JournalEntry"/&gt;
+&amp;lt;enumeration value="OtherName"/&gt;
+&amp;lt;enumeration value="Payment"/&gt;
+&amp;lt;enumeration value="PaymentMethod"/&gt;
+&amp;lt;enumeration value="PayrollItem"/&gt;
+&amp;lt;enumeration value="Preferences"/&gt;
+&amp;lt;enumeration value="PurchaseOrder"/&gt;
+&amp;lt;enumeration value="SalesOrder"/&gt;
+&amp;lt;enumeration value="SalesReceipt"/&gt;
+&amp;lt;enumeration value="SalesRep"/&gt;
+&amp;lt;enumeration value="SalesTax"/&gt;
+&amp;lt;enumeration value="SalesTaxCode"/&gt;
+&amp;lt;enumeration value="SalesTaxGroup"/&gt;
+&amp;lt;enumeration value="SalesTaxPaymentCheck"/&gt;
+&amp;lt;enumeration value="ShipMethod"/&gt;
+&amp;lt;enumeration value="Task"/&gt;
+&amp;lt;enumeration value="TemplateName"/&gt;
+&amp;lt;enumeration value="Term"/&gt;
+&amp;lt;enumeration value="TimeActivity"/&gt;
+&amp;lt;enumeration value="UOM"/&gt;
+&amp;lt;enumeration value="Vendor"/&gt;
+&amp;lt;enumeration value="VendorCredit"/&gt;
+&amp;lt;enumeration value="VendorType"/&gt;
+&amp;lt;/restriction&gt;
+&amp;lt;/simpleType&gt;
+&lt;/pre&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ACCOUNT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILL">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILL_PAYMENT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILL_PAYMENT_CREDIT_CARD">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CHARGE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CHECK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CLASS">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="COMPANY">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDIT_CARD_CHARGE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDIT_CARD_CREDIT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDIT_MEMO">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMER_MSG">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMER_TYPE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DISCOUNT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="EMPLOYEE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ESTIMATE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FIXED_ASSET">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORY_ADJUSTMENT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORY_SITE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORY_TRANSFER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVOICE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEM_RECEIPT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOB">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOB_TYPE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOURNAL_ENTRY">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="OTHER_NAME">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYMENT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYMENT_METHOD">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYROLL_ITEM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PREFERENCES">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PURCHASE_ORDER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_ORDER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_RECEIPT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_REP">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX_CODE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX_GROUP">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX_PAYMENT_CHECK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SHIP_METHOD">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TASK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TEMPLATE_NAME">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TERM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TIME_ACTIVITY">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UOM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDOR">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDOR_CREDIT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDOR_TYPE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="IdDomainEnumEnumType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Java class for idDomainEnum.
+
+&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+&lt;p&gt;
+&lt;pre&gt;
+&amp;lt;simpleType name="idDomainEnum"&gt;
+&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
+&amp;lt;enumeration value="BM"/&gt;
+&amp;lt;enumeration value="NG"/&gt;
+&amp;lt;enumeration value="PMT"/&gt;
+&amp;lt;enumeration value="QB"/&gt;
+&amp;lt;enumeration value="QBO"/&gt;
+&amp;lt;enumeration value="QBSDK"/&gt;
+&amp;lt;/restriction&gt;
+&amp;lt;/simpleType&gt;
+&lt;/pre&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="BM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="NG">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PMT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QB">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QBO">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QBSDK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="OfferingIdEnumType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Java class for offeringId.
+
+&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+&lt;p&gt;
+&lt;pre&gt;
+&amp;lt;simpleType name="offeringId"&gt;
+&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
+&amp;lt;enumeration value="ipp"/&gt;
+&amp;lt;enumeration value="cmo"/&gt;
+&amp;lt;enumeration value="esbsync"/&gt;
+&amp;lt;/restriction&gt;
+&amp;lt;/simpleType&gt;
+&lt;/pre&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="IPP">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CMO">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ESBSYNC">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="WindowsEntityTypeEnumType">
+    <xs:annotation>
+      <xs:documentation>The supported objects for Data Services for QuickBooks Online.</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ACCOUNT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Account is a component of a Chart Of Accounts, and is part of a Ledger. Used to record a total monetary amount
+allocated against a specific use. Accounts are one of five basic types:&lt;/p&gt;
+&lt;p&gt;* Asset&lt;/p&gt;
+&lt;p&gt;* Liability&lt;/p&gt;
+&lt;p&gt;* Revenue (Income)&lt;/p&gt;
+&lt;p&gt;* Expenses&lt;/p&gt;
+&lt;p&gt;* Equity&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The account name must be unique.&lt;/p&gt;
+&lt;p&gt;* The account name cannot contain a colon (:).&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Account"&gt;Account&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILL">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Bill is an AP transaction representing a request-for-payment from a third party for goods/services rendered
+and/or received. Bill is a request for payment from the vendor for the goods or services that are rendered.
+You can enter a bill for your expenses or the items that you track as part of your business. An item is anything
+that your company buys, sells, or resells in the course of business. For example, products, shipping and handling
+charges, discounts, and sales tax. An expense is the amount of money that you spend on the items that you want to
+buy. Expenses are linked to expense accounts. For example, if you pay $200 per month for utilities, you can set up
+an expense account for these utilities, and assign the bill to this account.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* If an account is provided in the header of the bill, it must be the Account Payable (AP) account.&lt;/p&gt;
+&lt;p&gt;* A bill must have reference to a vendor in the header.&lt;/p&gt;
+&lt;p&gt;* A bill must have at least one line that describes the item or account.&lt;/p&gt;
+&lt;p&gt;* A bill must have reference to an object.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Bill"&gt;Bill&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILLPAYMENT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a Payment by check issued to pay one or more bills received from 3rd
+party (vendor) for purchased goods or services.
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* If an account is provided in the header of the bill payment, it must be the Account Payable (AP) account.&lt;/p&gt;
+&lt;p&gt;* A bill payment must have reference to a vendor in the header.&lt;/p&gt;
+&lt;p&gt;* A bill payment must have reference to an object.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/BillPayment"&gt;BillPayment&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILLPAYMENTCREDITCARD">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a Payment by credit card issued to pay one or more bills received from 3rd
+party (vendor) for purchased goods or services. Creates a BillPaymentCreditCard transaction, representing a payment
+by credit card against a bill issued for goods or services. If using with QuickBooks desktop versions, if you want
+to pay multiple bills, you must issue a separate request for each bill you want to pay. Also, if you are using more
+than one A/P account, make sure that the APAccount used in the BillPaymentCreditCard matches the APAccount that was
+used when the Bill was originally added.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/BillPaymentCreditCard"&gt;BillPaymentCreditCard&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BOMCOMPONENT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Describes one component of the BOM (Bill of Materials), an Inventory Assembly Item.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/BOMComponent"&gt;BOMComponent&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BUILDASSEMBLY">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Transaction that adds Assembly Items to inventory. The assembly's components (identified by Line/ItemId) are deducted
+from inventory and the quantity of assembly items (identified by Header/ItemId) is increased accordingly. Note that while
+the QBSDK returns QuantityOnHand data for the assembly and the components of the assembly, Data Services does NOT. Quantity
+on hand data can be obtained by looking only at the Item object itself.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/BuildAssembly"&gt;BuildAssembly&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CHARGE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a request for payment for goods or services that have been sold.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Charge"&gt;Charge&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CHECK">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a payment to a payee. When used together with a realm synchronized with a QuickBooks
+company, the IDS Check object maps to the QuickBooks Check. Upon synchronization with QuickBooks, the Check Create operation
+results in a new Check added to the QuickBooks register. The Check Create operation creates a Check similar to what a user
+might create in the QuickBooks "Write Checks" form. The Write Checks form can be reached in the QuickBooks UI by selecting
+Banking-&gt;Write Checks or by clicking on the Write Checks icon in the Home page.
+In the Check line items, you refer to an item via the ItemName field. That references automatically supplies the base unit
+of measure (UOM) for the item, and its description. You need only supply the quantity and unit price. At least one line item
+is required.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* A check must have at least one line that describes the item or account.&lt;/p&gt;
+&lt;p&gt;* A check must have reference to a vendor in the header.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Check"&gt;Check&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CLASS">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Classes provide a way to track different segments of the business, and to break down the income and expenses for each
+segment. Classes provide a system for categorizing transactions that goes beyond the basic ways of assigning transactions
+to expense or income accounts. With classes, it is possible to categorize each detail line on a transaction. This allows
+the customer to write one check to the office supply store for things bought for two different business units and still
+track the business unit for those purchases.&lt;/p&gt;
+&lt;p&gt;* Example uses of classes:&lt;/p&gt;
+&lt;p&gt;* Department&lt;/p&gt;
+&lt;p&gt;* Enterprise&lt;/p&gt;
+&lt;p&gt;* Properties&lt;/p&gt;
+&lt;p&gt;* Work categories (plumbing, electrical, etc.)&lt;/p&gt;
+&lt;p&gt;* Manufacturers&lt;/p&gt;
+&lt;p&gt;* Partners&lt;/p&gt;
+&lt;p&gt;* Product Lines&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Class"&gt;Class&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDITCARDCHARGE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a charge for purchase of goods or services. The CreditCardCharge represents an expense
+to the business as a credit card charge transaction. The expense is of the following types:&lt;/p&gt;
+&lt;p&gt;Item based expense for the item that is purchased for reselling.&lt;/p&gt;
+&lt;p&gt;Account based expense for the amount spend on an account, such as expense incurred on "advertisement expense" account.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/CreditCardCharge"&gt;CreditCardCharge&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="COMPANY_METADATA">
+            <xs:annotation>
+              <xs:documentation>Reports information about the company, given the realm ID.
+The information is read-only through this API.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDITCARDCREDIT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a credit for purchase of goods or services.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/CreditCardCredit"&gt;CreditCardCredit&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDITCARDREFUND">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The CreditCardRefund object helps you to refund a sale transaction that involves the credit card of a customer. You can use
+this object to refund transactions such as invoice, sales receipt, and statement charge.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/CreditCardRefund"&gt;CreditCardRefund&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDITMEMO">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a refund (or credit) of payment or part of a payment for goods or services that have
+been sold.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/CreditMemo"&gt;CreditMemo&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CURRENCYINFO">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The currency object contains all of the information needed to display and use a foreign currency. For built-in currencies,
+the name and currency code values are internationally accepted values and thus are not editable. The comma format is editable,
+as is the IsActive status. For user-defined currencies, every value in the object is editable including name and currency code.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/CurrencyInfo"&gt;CurrencyInfo&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMER">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A customer is a consumer of the service or product that your business offers. The Customer object allows you to categorize
+customers according to your business requirements. For example, you can create a category of customers to indicate the industry
+that a customer represents, the geographic location of a customer, or the awareness of the business. Categorization of customers
+is useful for reports. While creating a customer, avoid entering any job data. If you enter a job data, the system can prevent
+you from adding any more jobs for that customer. You must first create a customer, and then create a job using that customer as
+a parent.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The customer name must be unique.&lt;/p&gt;
+&lt;p&gt;* The customer name must not contain a colon (:).&lt;/p&gt;
+&lt;p&gt;* The e-mail address of the customer must contain @ and . (dot).&lt;/p&gt;
+&lt;p&gt;* The customer address field is mandatory.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Customer"&gt;Customer&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMERMSG">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A standard message to a customer that can be included at the bottom of a sales form. A customer message or a customer message
+list appears at the bottom of a sales form. For example, you can create a thank you message using the CustomerMsg, and include
+this message in any invoice.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/CustomerMsg"&gt;CustomerMsg&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMERTYPE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Customer types allow categorizing customers in ways that are meaningful to the business. For example, one could set up customer
+types so that they indicate which industry a customer represents, a customer's geographic location, or how a customer first heard
+about the business. The categorization then can be used for reporting or mailings.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/CustomerType"&gt;CustomerType&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DEPOSIT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Transaction recording the transfer of money from the Undeposited Funds account to the Bank account.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Deposit"&gt;Deposit&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DISCOUNT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Identifies the discount or allowance that the Customer is to receive off of the TotalAmount owed.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Discount"&gt;Discount&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="EMPLOYEE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The Employee represents the persons who are working for the company.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The employee name must be unique.&lt;/p&gt;
+&lt;p&gt;* The employee name, first name, or last name must not contain a colon (:).&lt;/p&gt;
+&lt;p&gt;* The name, first name or last name field should not be blank.&lt;/p&gt;
+&lt;p&gt;* The e-mail, phone, and address fields are mandatory.&lt;/p&gt;
+&lt;p&gt;* The e-mail address of the employee must contain @ and . (dot).&lt;/p&gt;
+&lt;p&gt;* The value for the EmployeeType element must be either of the following: Officer, Owner, Regular,
+or Statutory.&lt;/p&gt;
+&lt;p&gt;* The value for the DeviceType element must be either of the following: Landline, Mobile, Fax, or Pager.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Employee"&gt;Employee&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ESTIMATE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;An estimate is a description of a sale that you propose to a current or prospective customer. An estimate
+contains a list of tasks that you can perform for, or products that you can provide to customers. An estimate
+is also called a bid or proposal. An estimate is a non-posting transaction that does not affect the balance
+sheet or income statement of a company.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* An estimate must have at least one line that describes an item.&lt;/p&gt;
+&lt;p&gt;* An estimate must have a reference to a customer in the header.&lt;/p&gt;
+&lt;p&gt;* If you submit a query with the filter IncludeDiscountLineDetails, the system retrieves either DiscountAmount
+or DiscountRatePercent with associated values&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Estimate"&gt;Estimate&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FIXEDASSET">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Fixed assets represent the business assets that you do not convert to cash within one year of operation.
+A fixed asset is usually integral to your business operations. For example, a truck, cash register,
+or computer.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* If ItemID or ItemType are specified for a transaction, do not specify UnitPrice for the fixed asset.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/FixedAsset"&gt;FixedAsset&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORYADJUSTMENT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing quantity or value adjustments of inventory items that either increase
+or decrease inventory for the specified items.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/InventoryAdjustment"&gt;InventoryAdjustment&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORYSITE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The InventorySite resource represents a location where inventory is stored.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The site name must be unique.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/InventorySite"&gt;InventorySite&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORYTRANSFER">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Transaction reflecting the movement of inventory assets between inventory sites.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/InventoryTransfer"&gt;InventoryTransfer&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVOICE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Financial transaction representing a request for payment for goods or services that have been sold.
+An invoice is a form that records the details of a customer's purchase, such as quantity and price of the
+goods or services. An invoice records the amount owed by a customer who does not pay in full at the time of
+purchase. If full payment is received at the time of purchase, the sale may be recorded as a sales receipt,
+not an invoice. See SalesReceipt.&lt;/p&gt;
+&lt;p&gt;Note: You can now make Payments for Invoices that you created in Data Services and simultaneously
+synchronize them back to QuickBooks.&lt;/p&gt;
+&lt;p&gt;An invoice for QuickBooks must contain a valid customer reference in the CustomerId field and at least
+one line item. The referenced customer must already exist in the QuickBooks company at the desktop and any
+line items must also already exists in the QuickBooks company, or the attempt to sync will fail.&lt;/p&gt;
+&lt;p&gt;In general, it is a good practice to specify all the QuickBooks header fields if you have the data.
+You should always specify the ARAccountId; otherwise a default AR account will be used and this may give
+you unexpected results.If you want to apply one tax to all the transaction line items, use the TaxId or
+TaxGroupId field. If you want to use more than one tax, you need to use Tax Line items instead.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* An invoice must have at least one line that describes the item.&lt;/p&gt;
+&lt;p&gt;* If an account is specified in the header, the account must be of the Accounts Receivable (AR) type.&lt;/p&gt;
+&lt;p&gt;* An invoice must have a reference to a customer in the header.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Invoice"&gt;Invoice&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEM">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;An item is a thing that your company buys, sells, or re-sells, such as products, shipping and handling
+charges, discounts, and sales tax (if applicable). An item is shown as a line on an invoice or other sales
+form. An item helps you to fill the line item area of the sales or purchase form quickly. When you select
+an item from the item list, QuickBooks fills in a description of the line item and calculates the amount
+for you. An item is of the following types:&lt;/p&gt;
+&lt;p&gt;* Assembly Item: The Assembly item allows you combine inventory part items and other assembly items
+(subassemblies) into a single item by defining a Bill of Materials, that lists the component parts of
+the assembly item. You can also include the cost of building the assembly item by adding the non-inventory
+part items, service items, and other charge items to the Bill of Materials.&lt;/p&gt;
+&lt;p&gt;* Fixed Asset Item: The Fixed Asset item represents those business assets that you do not convert to
+cash one year of normal operation. A fixed asset is usually something that is integral to your business
+operations. For example, a truck or computer.&lt;/p&gt;
+&lt;p&gt;* Group Item: The Group item helps you to quickly enter a group of individual items that you often
+purchase or sell together.&lt;/p&gt;
+&lt;p&gt;* Inventory Item: The Inventory item is used to track merchandise which your business purchases, stocks
+as inventory, and re-sells. QuickBooks tracks the current number of inventory items in stock and the average
+value of the inventory after the purchase and sale of every item.&lt;/p&gt;
+&lt;p&gt;* Other Charge Item: The Other Charge item is used to charge customers for the mileage expense.&lt;/p&gt;
+&lt;p&gt;* Product Item: The Product item is used to record the sales information of a product.&lt;/p&gt;
+&lt;p&gt;* Payment Item: The Payment item subtracts the amount of a customer payment from the total amount of
+an invoice or statement. You must create a payment item if you receive payment for an invoice or statement
+in parts. If you receive full payment at the time of sale, use a sales receipt form instead of an invoice
+with a payment item.&lt;/p&gt;
+&lt;p&gt;* Service Item: The Service item is used for the services that you charge on the purchase. For example,
+including specialized labor, consulting hours, and professional fees.&lt;/p&gt;
+&lt;p&gt;* Subtotal Item: The Subtotal item is used when you want the total of all the items. You can use this
+item to apply a percentage discount or surcharge.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The item name must be unique.&lt;/p&gt;
+&lt;p&gt;* The item type must not be NULL.&lt;/p&gt;
+&lt;p&gt;* The item cannot define both unit price and unit price percent simultaneously.&lt;/p&gt;
+&lt;p&gt;* For the Service, Product, and Other Charge items, you must specify the ID or name of the expense
+account or both.&lt;/p&gt;
+&lt;p&gt;* If the purchase order cost is specified for the Service, Product, and Other Charge items, you must
+specify the ID or name of the expense account or both.&lt;/p&gt;
+&lt;p&gt;* For the Inventory and Assembly items, you must specify:&lt;/p&gt;
+&lt;p&gt;|--&gt; * the ID or name of the income account or both&lt;/p&gt;
+&lt;p&gt;|--&gt; * the ID or name of the cogs account or both&lt;/p&gt;
+&lt;p&gt;|--&gt; * the ID or name of the asset account or both&lt;/p&gt;
+&lt;p&gt;* For the Group item, you must specify the tax ID or tax name or both.&lt;/p&gt;
+&lt;p&gt;* For the Fixed Asset item, you must:&lt;/p&gt;
+&lt;p&gt;|--&gt; * set the asset account type to Asset&lt;/p&gt;
+&lt;p&gt;|--&gt; * specify the purchase date&lt;/p&gt;
+&lt;p&gt;|--&gt; * specify the ID or name of the income account or both&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Invoice"&gt;Invoice&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEMCONSOLIDATED">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;ItemConsolidated provides efficient parity between QuickBooks and applications that depend on the Data
+Services Item types that are synchronized with the QuickBooks Item type. This object allows collaboration
+of the following objects:&lt;/p&gt;
+&lt;p&gt;* Item&lt;/p&gt;
+&lt;p&gt;* Discount&lt;/p&gt;
+&lt;p&gt;* FixedAssets&lt;/p&gt;
+&lt;p&gt;* SalesTax&lt;/p&gt;
+&lt;p&gt;* SalesTaxGroup.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/ItemConsolidated"&gt;ItemConsolidated&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEMGROUPCOMPONENT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Describes one line of the Item Group.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/ItemGroupComponent"&gt;ItemGroupComponent&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEMRECEIPT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;ItemReceipt is an AP transaction representing the delivery of goods from a 3rd party. The Bill is
+expected to be received at a later date. You can use the ItemReceipt object to manage your Account
+Receivable transactions with third party vendors.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/ItemReceipt"&gt;ItemReceipt&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOB">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A job can be defined as a project, policy (insurance), or case (legal) according to your business.
+The Job object is a way to track larger orders, such as order placed by different departments within
+the same organization. You can use job types to track important information about your projects and jobs.
+Tracking the job types gives you an idea of the profitability of each job that you do. Tracking can also
+help you to determine the time that you spent on different types of projects or jobs. You can filter any
+project report based on the job type.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The job name must be unique.&lt;/p&gt;
+&lt;p&gt;* The job name must not contain a colon (:).&lt;/p&gt;
+&lt;p&gt;* Each job must have a valid customer ID or customer name reference.&lt;/p&gt;
+&lt;p&gt;* The job parent ID or job parent name must be valid.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Job"&gt;Job&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOBTYPE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Job types allow categorizing jobs so that similar jobs can be grouped and subtotaled on reports.
+Ultimately, they will help in determining which jobs are most profitable for the business.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/JobType"&gt;JobType&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOURNALENTRY">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Adds a Journal Entry. In traditional accounting, transactions are entered into the general journal
+and categorized exclusively by account. In QuickBooks, most transactions can be categorized either by
+account or by type (invoice, check, and so on). For a few activities in QuickBooks, you must use the
+general journal directly, for example for recording depreciation. Notice that you must supply the credit
+line and a corresponding debit line in the same request. It will not work to supply them in two distinct
+requests. You can supply as many credit lines and debit lines in one single request as you want so long
+as the total monetary amount from the credits equals the total monetary amount from the debits in that
+request. DO NOT supply negative sign for the monetary amounts.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The Line/PostingType attribute (either Credit or Debit) is required.&lt;/p&gt;
+&lt;p&gt;* The Line/Amount attribute may not be negative.&lt;/p&gt;
+&lt;p&gt;* Each request must have debits and credits.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/JournalEntry"&gt;JournalEntry&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="NAMEVALUE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A name/value pair allows for clients including data that is meaningful in the domain of origin,
+outside of the Intuit domain.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/NameValue"&gt;NameValue&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="OTHERNAME">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The OtherName object represents a person or a company that is not your customer, vendor, or employee.
+For example, you can use OtherName object to represent owners or partners.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/OtherName"&gt;OtherName&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYMENT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Payment is a financial transaction, in which a customer pays for the goods and services purchased.
+You can make Payments for Invoices that you created in Data Service and simultaneously synchronize
+them back to QuickBooks.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* If an account is specified in the header, the account must be of the Accounts Receivable (AR) type.&lt;/p&gt;
+&lt;p&gt;* A payment must have a reference to a customer in the header&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Payment"&gt;Payment&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYMENTMETHOD">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Payment methods provide information about the various ways through which a customer can make payment.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/PaymentMethod"&gt;PaymentMethod&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYROLLITEM">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A payroll item (wage-based) is used to track individual amounts on a paycheck for wage, salary, commission,
+or bonus. You can assign these payroll items to various accounts. For non-wage based payroll items, such as
+taxes, saving plan (401K) contributions, or direct-deposit amounts, see PayrollNonWageItem.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/PayrollItem"&gt;PayrollItem&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYROLLNONWAGEITEM">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A non-wage payroll item is used to track individual amounts on a paycheck for taxes, saving plan (401K)
+contributions, direct-deposit amounts - items other than wage, salary, commission, or bonus. You can assign
+these payroll items to various accounts. For wage-based payroll items, see PayrollItem.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/PayrollNonWageItem"&gt;PayrollNonWageItem&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PURCHASEORDER">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;PurchaseOrder is a non-posting transaction representing a request to purchase goods or services from a
+third party. You can use ItemReceipt Create to receive items against a purchase order as items arrive from
+the vendor. A purchase order is a non-posting transaction, so it does not affect a company's balance sheet
+or income statement.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/PayrollNonWageItem"&gt;PayrollNonWageItem&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALESORDER">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A sales order is a financial transaction that represents a request received from a customer to purchase
+products or services. Sales orders help you manage the sale of products and services your customers order.
+For example, a sales order tracks inventory that is on back order for a customer. Sales Orders are supported
+only in QuickBooks Premier (desktop) and above. However, if you are accessing a company file created in
+Premier and above from a lesser edition of QuickBooks (such as Pro), you can do queries against SalesOrders.
+Using sales orders is optional.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* A sales order must have at least one line that describes the item.&lt;/p&gt;
+&lt;p&gt;* A sales order must have a reference to a customer in the header.&lt;/p&gt;
+&lt;p&gt;* If you submit a query with the filter IncludeDiscountLineDetails, the system retrieves either
+DiscountAmount or DiscountRatePercent with associated values&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/SalesOrder"&gt;SalesOrder&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALESRECEIPT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A sales receipt is a financial transaction that represents the sale of goods or services where payment in
+full is received at the time of purchase. Do not use a sales receipt if customers pay in part at the time of
+purchase; instead, use an invoice. The Invoice object offers more options than the SalesReceipt, and because
+a customer name is required for an invoice but not a sales receipt, use the Invoice object to keep track of
+payments owed on a purchase.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* A sales receipt must have at least one line that describes the item.&lt;/p&gt;
+&lt;p&gt;* A sales receipt must have a reference to a customer in the header.&lt;/p&gt;
+&lt;p&gt;* If an account is specified in the header, the account must be of the Accounts Receivable (AR) type.&lt;/p&gt;
+&lt;p&gt;* If you submit a query with the filter IncludeDiscountLineDetails, the system retrieves either
+DiscountAmount or DiscountRatePercent with associated values.&lt;/p&gt;
+&lt;p&gt;Note: The PONumber field in a sales receipt is removed after synchronization, as QBSDK does not support it.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/SalesReceipt"&gt;SalesReceipt&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALESREP">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The SalesRep object allows you to identify sales representatives and track their transactions. A sales
+representative can be an employee, a vendor, or an independent contractor. You can associate sales representatives
+with sales deals to track their transactions.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/SalesRep"&gt;SalesRep&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALESTAX">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;You can use the SalesTax object to manage the sales tax that you collect on behalf of the state or any other
+government agency, after completing a sales transaction.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* If ItemID or ItemType are specified for a transaction, do not specify the following parameters for the sales
+tax: UnitPrice, Quantity.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/SalesTax"&gt;SalesTax&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALESTAXCODE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A sales tax code is used to track the taxable or non-taxable status of products, services, and customers.
+You can assign a sales tax code to each of your products, services, and customers based on their taxable or
+non-taxable status. You can then use these codes to generate reports that provide information to the tax
+agencies about the taxable or non-taxable status of certain sales.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/SalesTaxCode"&gt;SalesTaxCode&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALESTAXGROUP">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Collection of Sales taxes which the business must collect on behalf of one or more state or government
+agencies when a sales transaction is completed.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/SalesTaxGroup"&gt;SalesTaxGroup&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALESTERM">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The SalesTerm object represents the terms under which a sale is made, typically expressed in the form of
+days due after the goods are received. There is an optional discount part of the sales term, where a discount
+of total amount can automatically be applied if payment is made within the stipulated time.&lt;/p&gt;
+&lt;p&gt;For example, net 30 indicates that you must make the payment within 30 days; 2%/15 net 60 indicates that
+you must make the payment within 60 days, and you can get a discount of 2% if you make payment within 15 days.
+SalesTerm also supports the ability to specify the absolute due date, a number of days from a start date, a
+percent discount, or an absolute discount.&lt;/p&gt;
+&lt;p&gt;The SalesTerm name itself is a text-only attribute and the desired application of the sales term must be
+coded. For example, a common term such as Net30Days is explicitly coded as a calculated DueDateTime or as a
+PaymentTermsDateTime and NumberOfDays.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/SalesTerm"&gt;SalesTerm&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SHIPMETHOD">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;You can use the ShipMethod object to specify a method to ship the goods that are purchased or sold.
+For example, you can specify a method to ship goods to your customers when you make a sales transaction.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/ShipMethod"&gt;ShipMethod&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TASK">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A specific task to be completed, maps to a ToDo record in QuickBooks.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Task"&gt;Task&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TEMPLATENAME">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;The name of a template used for a specific form presentation.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/TemplateName"&gt;TemplateName&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TIMEACTIVITY">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;A record of time worked by a vendor or employee. A time activity records the time taken to complete a
+particular task. Professional service firms can track time for the following reasons:&lt;/p&gt;
+&lt;p&gt;* To know the tasks of a person and the time spent on various projects, and to use this information
+for job costing.&lt;/p&gt;
+&lt;p&gt;* To bill the clients using standard service item rates or custom billing rates.&lt;/p&gt;
+&lt;p&gt;* To view and quickly access the unbilled time or expenses for a customer.&lt;/p&gt;
+&lt;p&gt;* To view the number of unbilled hours in the project for each client in reports.&lt;/p&gt;
+&lt;p&gt;* To use the stopwatch to record the time for a current activity. For example, when you answer a
+phone call from a client.&lt;/p&gt;
+&lt;p&gt;* To preview the time records and paychecks of your employees when you pay your employees.&lt;/p&gt;
+&lt;p&gt;* To pay non-employees (owners, partners, subcontractors, and vendors) for the number of hours they
+work.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* If you modify the time activity records that are more than 5 years old, an error occurs.&lt;/p&gt;
+&lt;p&gt;* The value of the NameOf element must be Employee or Vendor.&lt;/p&gt;
+&lt;p&gt;* The value of the BillableStatus element must be Billable or HasBeenBillable. The default value
+is Billable.&lt;/p&gt;
+&lt;p&gt;* The default value of the Taxable element is set to True.&lt;/p&gt;
+&lt;p&gt;* Both the Hours and Minutes elements are either positive or negative.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/TimeActivity"&gt;TimeActivity&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UOM">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;You can use the UOM (Unit of Measure) object to represent data such as quantities, prices, rates,
+and costs, in units. This object also helps you to convert these units to related units. The UOM type
+defines the data used to represent a set of equivalent units and the conversion rates to other related
+units. It allows showing what quantities, prices, rates, and costs are based on.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/UOM"&gt;UOM&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDOR">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;You can use the Vendor object to store information about the people and companies you do business with.
+A vendor is an individual or an organization that provides goods and services to a customer. For example,
+banks and tax agencies.&lt;/p&gt;
+&lt;p&gt;Business Rules:&lt;/p&gt;
+&lt;p&gt;* The vendor name must be unique.&lt;/p&gt;
+&lt;p&gt;* The name, first name, and last name of the vendor must not contain a colon (:).&lt;/p&gt;
+&lt;p&gt;* The name, first name, or last name field should not be blank.&lt;/p&gt;
+&lt;p&gt;* The e-mail address of the vendor must contain @ and . (dot).&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/Vendor"&gt;Vendor&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDORCREDIT">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;VendorCredit is an AP transaction representing a credit from a third party for returned goods or
+services not rendered. In QuickBooks desktop versions, a vendor credit is also known as a "bill credit".
+That is, it is a credit that a vendor owes you because you overpaid your bill, returned merchandise, or for
+some other reason. The VendorCredit is not applied until it is referenced in a Bill Payment transaction.&lt;/p&gt;
+&lt;p&gt;Note: A VendorCredit should not be confused with a Credit Memo, which is something you owe your customer.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/VendorCredit"&gt;VendorCredit&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDORTYPE">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Vendor types allow categorizing vendors in ways that are meaningful to the business. For example, one
+could set up vendor types so that they indicate a vendor's industry or geographic location. The categorization
+then can be used for reporting. You can also create a vendor type as a subtype of another vendor type.&lt;/p&gt;
+&lt;p&gt;For details of the fields, and query:
+&lt;a href="https://ipp.developer.intuit.com/0010_Intuit_Partner_Platform/0050_Data_Services/
+0500_QuickBooks_Windows/0600_Object_Reference/VendorType"&gt;VendorType&lt;/a&gt;&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="integerType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:integer"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="decimalType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="floatType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:float"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="doubleType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:double"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="dateTimeType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:dateTime"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="longType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:long"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="byteType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:byte"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="booleanType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:boolean"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="anyUriType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:anyURI"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="charType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1"></xs:minLength>
+          <xs:maxLength value="1"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+</xs:schema>
