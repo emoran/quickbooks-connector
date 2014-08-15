@@ -1,0 +1,1 @@
+http\://www.mulesoft.org/schema/mule/quickbooks=org.mule.modules.quickbooks.online.config.QuickbooksNamespaceHandler
