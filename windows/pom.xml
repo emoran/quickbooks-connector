@@ -16,57 +16,22 @@
     </properties>
 
     <build>
-    <plugins>
-        <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <id>schema-windows-xjc</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                        <configuration>
-                            <staleFile>${project.build.directory}/jaxb2/.schemaWindowsXjcStaleFlag</staleFile>
-                            <enableIntrospection>true</enableIntrospection>
-                            <packageName>org.mule.modules.quickbooks.windows.schema</packageName>
-                            <schemaDirectory>${basedir}/src/main/resources/schema/windows</schemaDirectory>
-                            <schemaFiles>
-                                ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,
-                                IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd, UserInformation.xsd, PlatformResponses.xsd
-                            </schemaFiles>
-                            <extension>true</extension>
-                            <bindingDirectory>${basedir}/src/main/resources/schema/windows</bindingDirectory>
-                            <bindingFiles>GlobalBindings.xjb</bindingFiles>
-                            <arguments>-Xcollection-setter-injector</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                   <dependency>
-                       <groupId>net.java.dev.vcc.thirdparty</groupId>
-                       <artifactId>collection-setter-injector</artifactId>
-                       <version>0.5.0-1</version>
-                   </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.mule.tools.devkit</groupId>
-                <artifactId>mule-devkit-maven-plugin</artifactId>
-                <configuration>
-                    <path>windows</path>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>github-upload-doc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-    </plugins>
+	    <plugins>
+			<plugin>
+				<groupId>org.mule.tools.devkit</groupId>
+				<artifactId>mule-devkit-maven-plugin</artifactId>
+				<configuration>
+					<path>windows</path>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>github-upload-doc</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
     </build>
 
 	<dependencies>
@@ -82,4 +47,50 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<profiles>
+    	<profile>
+	      <id>generate-xsd-classes</id>
+	      <build>
+			    <plugins>
+			        <plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>jaxb2-maven-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<id>schema-windows-xjc</id>
+								<goals>
+									<goal>xjc</goal>
+								</goals>
+								<configuration>
+									<staleFile>${project.build.directory}/jaxb2/.schemaWindowsXjcStaleFlag</staleFile>
+									<enableIntrospection>true</enableIntrospection>
+									<packageName>org.mule.modules.quickbooks.windows.schema</packageName>
+									<schemaDirectory>${basedir}/src/main/resources/schema/windows</schemaDirectory>
+									<schemaFiles>
+										ActionScriptObjGen.xsd,CompanyMetaData.xsd,CustomerCdmTypes.xsd,Finance.xsd,Groups.xsd,IntuitCdmBaseTypes.xsd,
+										IntuitCustomFieldCdmTypes.xsd,MetaData.xsd,PartyCdmTypes.xsd,Report.xsd,RestDataFilter.xsd,search.xsd,UserInformation.xsd,PlatformResponses.xsd
+									</schemaFiles>
+									<extension>true</extension>
+									<bindingDirectory>${basedir}/src/main/resources/schema/windows</bindingDirectory>
+									<bindingFiles>GlobalBindings.xjb</bindingFiles>
+									<arguments>-Xcollection-setter-injector</arguments>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>net.java.dev.vcc.thirdparty</groupId>
+								<artifactId>collection-setter-injector</artifactId>
+								<version>0.5.0-1</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+			    </plugins>
+	    	</build>
+	    </profile>
+	</profiles>
+	
 </project>

@@ -10,10 +10,10 @@
     LICENSE.txt file.
 
 -->
-
 <!-- edited with XMLSpy v2008 (http://www.altova.com) by PETER VOGEL (INTUIT) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://xmlns.oracle.com/xdb" xmlns="http://www.intuit.com/sb/cdm/v2" xmlns:junk="http://www.intuit.com/sb/cdm/junk" targetNamespace="http://www.intuit.com/sb/cdm/junk" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://www.intuit.com/sb/cdm/v2" schemaLocation="RestDataFilter.xsd"/>
+	<xs:import namespace="http://www.intuit.com/sb/cdm/v2" schemaLocation="Finance.xsd"/>
 	<xs:element name="Junk" type="junk:Junk"/>
 	<xs:complexType name="Junk">
 		<xs:annotation>
