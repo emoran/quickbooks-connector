@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * A <code>QuickBooksWindowsModuleLifecycleAdapter</code> is a wrapper around {@link QuickBooksWindowsModule } that adds lifecycle methods to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-15T04:12:18-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-21T02:51:05-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class QuickBooksWindowsModuleLifecycleAdapter
     extends QuickBooksWindowsModuleMetadataAdapater
     implements Disposable, Initialisable, Startable, Stoppable

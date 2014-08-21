@@ -26,7 +26,7 @@ import org.mule.modules.quickbooks.windows.process.ProcessTemplate;
  * GenerateANewRequestIdMessageProcessor invokes the {@link org.mule.modules.quickbooks.windows.QuickBooksWindowsModule#generateANewRequestId()} method in {@link QuickBooksWindowsModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-15T04:12:18-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-21T02:51:05-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class GenerateANewRequestIdMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor

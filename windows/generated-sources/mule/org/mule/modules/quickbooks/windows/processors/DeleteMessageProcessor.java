@@ -27,7 +27,7 @@ import org.mule.modules.quickbooks.windows.process.ProcessTemplate;
  * DeleteMessageProcessor invokes the {@link org.mule.modules.quickbooks.windows.QuickBooksWindowsModule#delete(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)} method in {@link QuickBooksWindowsModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-15T04:12:18-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-21T02:51:05-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class DeleteMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor

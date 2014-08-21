@@ -978,6 +978,106 @@ when the OAuth access token is renewed, your app can continue to access the user
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:simpleType name="OfferingIdEnumType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Java class for offeringId.
+
+&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+&lt;p&gt;
+&lt;pre&gt;
+&amp;lt;simpleType name="offeringId"&gt;
+&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
+&amp;lt;enumeration value="ipp"/&gt;
+&amp;lt;enumeration value="cmo"/&gt;
+&amp;lt;enumeration value="esbsync"/&gt;
+&amp;lt;/restriction&gt;
+&amp;lt;/simpleType&gt;
+&lt;/pre&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="IPP">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CMO">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ESBSYNC">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="IdDomainEnumEnumType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Java class for idDomainEnum.
+
+&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+&lt;p&gt;
+&lt;pre&gt;
+&amp;lt;simpleType name="idDomainEnum"&gt;
+&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
+&amp;lt;enumeration value="BM"/&gt;
+&amp;lt;enumeration value="NG"/&gt;
+&amp;lt;enumeration value="PMT"/&gt;
+&amp;lt;enumeration value="QB"/&gt;
+&amp;lt;enumeration value="QBO"/&gt;
+&amp;lt;enumeration value="QBSDK"/&gt;
+&amp;lt;/restriction&gt;
+&amp;lt;/simpleType&gt;
+&lt;/pre&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="BM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="NG">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PMT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QB">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QBO">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QBSDK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
   <xs:simpleType name="ObjectNameEnumType">
     <xs:annotation>
       <xs:documentation>&lt;p&gt;Java class for objectName.
@@ -1284,106 +1384,6 @@ when the OAuth access token is renewed, your app can continue to access the user
             </xs:annotation>
           </xs:enumeration>
           <xs:enumeration value="VENDOR_TYPE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType>
-        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
-      </xs:simpleType>
-    </xs:union>
-  </xs:simpleType>
-  <xs:simpleType name="IdDomainEnumEnumType">
-    <xs:annotation>
-      <xs:documentation>&lt;p&gt;Java class for idDomainEnum.
-
-&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-&lt;p&gt;
-&lt;pre&gt;
-&amp;lt;simpleType name="idDomainEnum"&gt;
-&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
-&amp;lt;enumeration value="BM"/&gt;
-&amp;lt;enumeration value="NG"/&gt;
-&amp;lt;enumeration value="PMT"/&gt;
-&amp;lt;enumeration value="QB"/&gt;
-&amp;lt;enumeration value="QBO"/&gt;
-&amp;lt;enumeration value="QBSDK"/&gt;
-&amp;lt;/restriction&gt;
-&amp;lt;/simpleType&gt;
-&lt;/pre&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:union>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="BM">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="NG">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="PMT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="QB">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="QBO">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="QBSDK">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType>
-        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
-      </xs:simpleType>
-    </xs:union>
-  </xs:simpleType>
-  <xs:simpleType name="OfferingIdEnumType">
-    <xs:annotation>
-      <xs:documentation>&lt;p&gt;Java class for offeringId.
-
-&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-&lt;p&gt;
-&lt;pre&gt;
-&amp;lt;simpleType name="offeringId"&gt;
-&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
-&amp;lt;enumeration value="ipp"/&gt;
-&amp;lt;enumeration value="cmo"/&gt;
-&amp;lt;enumeration value="esbsync"/&gt;
-&amp;lt;/restriction&gt;
-&amp;lt;/simpleType&gt;
-&lt;/pre&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:union>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="IPP">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CMO">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="ESBSYNC">
             <xs:annotation>
               <xs:documentation></xs:documentation>
             </xs:annotation>
