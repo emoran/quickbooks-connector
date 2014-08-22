@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Quickbooks Online
 Bundle-SymbolicName: org.mule.tooling.ui.contribution.quickbooks;singleton:=true
-Bundle-Version: 5.0.0.201408221001
+Bundle-Version: 5.0.0.201408221435
 Bundle-Activator: org.mule.tooling.ui.contribution.QuickbooksActivator
 Bundle-Vendor: MuleSoft, inc.
 Require-Bundle: org.eclipse.ui,

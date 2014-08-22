@@ -768,7 +768,8 @@ Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_546
     <radioBoolean fillLine="true" description="Provide a reference to a bean or use an expression" caption="Reference or expression" name="useReference"></radioBoolean>
     <string controlled="useReference" description="" caption="Credit Card Payment Reference" name="ref"></string>
     <radioBoolean fillLine="true" description="Define this element's attributes" caption="Define attributes" name="complex"></radioBoolean>
-    <childElement allowMultiple="false" inplace="true" javaType="com.intuit.ipp.data.IntuitAnyType" controlled="complex" required="false" caption="Bill Payment Credit Card Ex Reference" name="http://www.mulesoft.org/schema/mule/quickbooks/bill-payment-credit-card-ex"></childElement>
+    <childElement allowMultiple="false" inplace="true" javaType="com.intuit.ipp.data.CreditChargeInfo" controlled="complex" required="false" caption="Credit Charge Info Reference" name="http://www.mulesoft.org/schema/mule/quickbooks/credit-charge-info"></childElement>
+    <childElement allowMultiple="false" inplace="true" javaType="com.intuit.ipp.data.CreditChargeResponse" controlled="complex" required="false" caption="Credit Charge Response Reference" name="http://www.mulesoft.org/schema/mule/quickbooks/credit-charge-response"></childElement>
   </nested>
   <nested xmlname="credit-charge-info" abstract="false" localId="credit-charge-info" description="" caption="">
     <radioBoolean fillLine="true" description="Provide a reference to a bean or use an expression" caption="Reference or expression" name="useReference"></radioBoolean>
@@ -1062,14 +1063,9 @@ Read more: QuickBooks Accounting Tutorial | eHow.com http://www.ehow.com/way_546
     <radioBoolean fillLine="true" description="Provide a reference to a bean or use an expression" caption="Reference or expression" name="useReference"></radioBoolean>
     <string controlled="useReference" description="" caption="Entity Reference" name="ref"></string>
     <radioBoolean fillLine="true" description="Define this element's attributes" caption="Define attributes" name="complex"></radioBoolean>
-    <enum allowsCustom="true" javaType="com.intuit.ipp.data.EntityTypeEnum" controlled="complex" required="false" supportsExpressions="true" description="" caption="Type" name="type">
-      <option value="CUSTOMER"></option>
-      <option value="EMPLOYEE"></option>
-      <option value="JOB"></option>
-      <option value="OTHER"></option>
-      <option value="VENDOR"></option>
-    </enum>
-    <childElement allowMultiple="false" inplace="true" javaType="com.intuit.ipp.data.ReferenceType" controlled="complex" required="false" caption="Entity Ref Reference" name="http://www.mulesoft.org/schema/mule/quickbooks/entity-ref"></childElement>
+    <string javaType="java.lang.String" controlled="complex" required="false" description="" caption="Value" name="value"></string>
+    <string javaType="java.lang.String" controlled="complex" required="false" description="" caption="Name" name="name"></string>
+    <string javaType="java.lang.String" controlled="complex" required="false" description="" caption="Type" name="type"></string>
   </nested>
   <nested xmlname="entity-ref" abstract="false" localId="entity-ref" description="" caption="">
     <radioBoolean fillLine="true" description="Provide a reference to a bean or use an expression" caption="Reference or expression" name="useReference"></radioBoolean>

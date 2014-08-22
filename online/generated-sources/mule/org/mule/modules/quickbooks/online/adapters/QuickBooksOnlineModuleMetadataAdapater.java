@@ -10,7 +10,7 @@ import org.mule.modules.quickbooks.online.basic.MetadataAware;
  * A <code>QuickBooksOnlineModuleMetadataAdapater</code> is a wrapper around {@link QuickBooksOnlineModule } that adds support for querying metadata about the extension.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T10:01:32-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T02:35:33-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class QuickBooksOnlineModuleMetadataAdapater
     extends QuickBooksOnlineModuleCapabilitiesAdapter
     implements MetadataAware
