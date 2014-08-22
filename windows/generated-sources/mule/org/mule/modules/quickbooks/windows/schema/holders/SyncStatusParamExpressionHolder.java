@@ -5,7 +5,7 @@ import javax.annotation.Generated;
 import org.mule.modules.quickbooks.windows.schema.IdSet;
 import org.mule.modules.quickbooks.windows.schema.ObjectName;
 
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-21T02:51:05-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T09:57:16-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class SyncStatusParamExpressionHolder {
 
     protected Object idSet;
