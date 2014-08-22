@@ -29,7 +29,7 @@ import org.mule.modules.quickbooks.windows.process.ProcessTemplate;
  * OpenIdInitializeMessageProcessor invokes the {@link org.mule.modules.quickbooks.windows.QuickBooksWindowsModule#openIdInitialize(java.lang.String, java.lang.String, java.util.Map)} method in {@link QuickBooksWindowsModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T09:57:16-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T02:33:09-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class OpenIdInitializeMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor

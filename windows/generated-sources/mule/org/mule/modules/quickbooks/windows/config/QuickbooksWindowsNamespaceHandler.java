@@ -9,7 +9,7 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
  * Registers bean definitions parsers for handling elements in <code>http://www.mulesoft.org/schema/mule/quickbooks-windows</code>.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T09:57:16-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T02:33:09-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class QuickbooksWindowsNamespaceHandler
     extends NamespaceHandlerSupport
 {
