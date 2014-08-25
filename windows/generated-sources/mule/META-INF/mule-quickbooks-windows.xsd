@@ -978,364 +978,6 @@ when the OAuth access token is renewed, your app can continue to access the user
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="OfferingIdEnumType">
-    <xs:annotation>
-      <xs:documentation>&lt;p&gt;Java class for offeringId.
-
-&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-&lt;p&gt;
-&lt;pre&gt;
-&amp;lt;simpleType name="offeringId"&gt;
-&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
-&amp;lt;enumeration value="ipp"/&gt;
-&amp;lt;enumeration value="cmo"/&gt;
-&amp;lt;enumeration value="esbsync"/&gt;
-&amp;lt;/restriction&gt;
-&amp;lt;/simpleType&gt;
-&lt;/pre&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:union>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="IPP">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CMO">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="ESBSYNC">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType>
-        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
-      </xs:simpleType>
-    </xs:union>
-  </xs:simpleType>
-  <xs:simpleType name="ObjectNameEnumType">
-    <xs:annotation>
-      <xs:documentation>&lt;p&gt;Java class for objectName.
-
-&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-&lt;p&gt;
-&lt;pre&gt;
-&amp;lt;simpleType name="objectName"&gt;
-&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
-&amp;lt;enumeration value="Account"/&gt;
-&amp;lt;enumeration value="Bill"/&gt;
-&amp;lt;enumeration value="BillPayment"/&gt;
-&amp;lt;enumeration value="BillPaymentCreditCard"/&gt;
-&amp;lt;enumeration value="Charge"/&gt;
-&amp;lt;enumeration value="Check"/&gt;
-&amp;lt;enumeration value="Class"/&gt;
-&amp;lt;enumeration value="Company"/&gt;
-&amp;lt;enumeration value="CreditCardCharge"/&gt;
-&amp;lt;enumeration value="CreditCardCredit"/&gt;
-&amp;lt;enumeration value="CreditMemo"/&gt;
-&amp;lt;enumeration value="Customer"/&gt;
-&amp;lt;enumeration value="CustomerMsg"/&gt;
-&amp;lt;enumeration value="CustomerType"/&gt;
-&amp;lt;enumeration value="Discount"/&gt;
-&amp;lt;enumeration value="Employee"/&gt;
-&amp;lt;enumeration value="Estimate"/&gt;
-&amp;lt;enumeration value="FixedAsset"/&gt;
-&amp;lt;enumeration value="InventoryAdjustment"/&gt;
-&amp;lt;enumeration value="InventorySite"/&gt;
-&amp;lt;enumeration value="InventoryTransfer"/&gt;
-&amp;lt;enumeration value="Invoice"/&gt;
-&amp;lt;enumeration value="Item"/&gt;
-&amp;lt;enumeration value="ItemReceipt"/&gt;
-&amp;lt;enumeration value="Job"/&gt;
-&amp;lt;enumeration value="JobType"/&gt;
-&amp;lt;enumeration value="JournalEntry"/&gt;
-&amp;lt;enumeration value="OtherName"/&gt;
-&amp;lt;enumeration value="Payment"/&gt;
-&amp;lt;enumeration value="PaymentMethod"/&gt;
-&amp;lt;enumeration value="PayrollItem"/&gt;
-&amp;lt;enumeration value="Preferences"/&gt;
-&amp;lt;enumeration value="PurchaseOrder"/&gt;
-&amp;lt;enumeration value="SalesOrder"/&gt;
-&amp;lt;enumeration value="SalesReceipt"/&gt;
-&amp;lt;enumeration value="SalesRep"/&gt;
-&amp;lt;enumeration value="SalesTax"/&gt;
-&amp;lt;enumeration value="SalesTaxCode"/&gt;
-&amp;lt;enumeration value="SalesTaxGroup"/&gt;
-&amp;lt;enumeration value="SalesTaxPaymentCheck"/&gt;
-&amp;lt;enumeration value="ShipMethod"/&gt;
-&amp;lt;enumeration value="Task"/&gt;
-&amp;lt;enumeration value="TemplateName"/&gt;
-&amp;lt;enumeration value="Term"/&gt;
-&amp;lt;enumeration value="TimeActivity"/&gt;
-&amp;lt;enumeration value="UOM"/&gt;
-&amp;lt;enumeration value="Vendor"/&gt;
-&amp;lt;enumeration value="VendorCredit"/&gt;
-&amp;lt;enumeration value="VendorType"/&gt;
-&amp;lt;/restriction&gt;
-&amp;lt;/simpleType&gt;
-&lt;/pre&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:union>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="ACCOUNT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="BILL">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="BILL_PAYMENT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="BILL_PAYMENT_CREDIT_CARD">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CHARGE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CHECK">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CLASS">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="COMPANY">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CREDIT_CARD_CHARGE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CREDIT_CARD_CREDIT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CREDIT_MEMO">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CUSTOMER">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CUSTOMER_MSG">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="CUSTOMER_TYPE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="DISCOUNT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="EMPLOYEE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="ESTIMATE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="FIXED_ASSET">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="INVENTORY_ADJUSTMENT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="INVENTORY_SITE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="INVENTORY_TRANSFER">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="INVOICE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="ITEM">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="ITEM_RECEIPT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="JOB">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="JOB_TYPE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="JOURNAL_ENTRY">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="OTHER_NAME">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="PAYMENT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="PAYMENT_METHOD">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="PAYROLL_ITEM">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="PREFERENCES">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="PURCHASE_ORDER">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SALES_ORDER">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SALES_RECEIPT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SALES_REP">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SALES_TAX">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SALES_TAX_CODE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SALES_TAX_GROUP">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SALES_TAX_PAYMENT_CHECK">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="SHIP_METHOD">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="TASK">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="TEMPLATE_NAME">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="TERM">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="TIME_ACTIVITY">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="UOM">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="VENDOR">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="VENDOR_CREDIT">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="VENDOR_TYPE">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType>
-        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
-      </xs:simpleType>
-    </xs:union>
-  </xs:simpleType>
   <xs:simpleType name="WindowsEntityTypeEnumType">
     <xs:annotation>
       <xs:documentation>The supported objects for Data Services for QuickBooks Online.</xs:documentation>
@@ -2124,6 +1766,364 @@ then can be used for reporting. You can also create a vendor type as a subtype o
             </xs:annotation>
           </xs:enumeration>
           <xs:enumeration value="QBSDK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="OfferingIdEnumType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Java class for offeringId.
+
+&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+&lt;p&gt;
+&lt;pre&gt;
+&amp;lt;simpleType name="offeringId"&gt;
+&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
+&amp;lt;enumeration value="ipp"/&gt;
+&amp;lt;enumeration value="cmo"/&gt;
+&amp;lt;enumeration value="esbsync"/&gt;
+&amp;lt;/restriction&gt;
+&amp;lt;/simpleType&gt;
+&lt;/pre&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="IPP">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CMO">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ESBSYNC">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="ObjectNameEnumType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Java class for objectName.
+
+&lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+&lt;p&gt;
+&lt;pre&gt;
+&amp;lt;simpleType name="objectName"&gt;
+&amp;lt;restriction base="{http://www.w3.org/2001/XMLSchemastring"&gt;
+&amp;lt;enumeration value="Account"/&gt;
+&amp;lt;enumeration value="Bill"/&gt;
+&amp;lt;enumeration value="BillPayment"/&gt;
+&amp;lt;enumeration value="BillPaymentCreditCard"/&gt;
+&amp;lt;enumeration value="Charge"/&gt;
+&amp;lt;enumeration value="Check"/&gt;
+&amp;lt;enumeration value="Class"/&gt;
+&amp;lt;enumeration value="Company"/&gt;
+&amp;lt;enumeration value="CreditCardCharge"/&gt;
+&amp;lt;enumeration value="CreditCardCredit"/&gt;
+&amp;lt;enumeration value="CreditMemo"/&gt;
+&amp;lt;enumeration value="Customer"/&gt;
+&amp;lt;enumeration value="CustomerMsg"/&gt;
+&amp;lt;enumeration value="CustomerType"/&gt;
+&amp;lt;enumeration value="Discount"/&gt;
+&amp;lt;enumeration value="Employee"/&gt;
+&amp;lt;enumeration value="Estimate"/&gt;
+&amp;lt;enumeration value="FixedAsset"/&gt;
+&amp;lt;enumeration value="InventoryAdjustment"/&gt;
+&amp;lt;enumeration value="InventorySite"/&gt;
+&amp;lt;enumeration value="InventoryTransfer"/&gt;
+&amp;lt;enumeration value="Invoice"/&gt;
+&amp;lt;enumeration value="Item"/&gt;
+&amp;lt;enumeration value="ItemReceipt"/&gt;
+&amp;lt;enumeration value="Job"/&gt;
+&amp;lt;enumeration value="JobType"/&gt;
+&amp;lt;enumeration value="JournalEntry"/&gt;
+&amp;lt;enumeration value="OtherName"/&gt;
+&amp;lt;enumeration value="Payment"/&gt;
+&amp;lt;enumeration value="PaymentMethod"/&gt;
+&amp;lt;enumeration value="PayrollItem"/&gt;
+&amp;lt;enumeration value="Preferences"/&gt;
+&amp;lt;enumeration value="PurchaseOrder"/&gt;
+&amp;lt;enumeration value="SalesOrder"/&gt;
+&amp;lt;enumeration value="SalesReceipt"/&gt;
+&amp;lt;enumeration value="SalesRep"/&gt;
+&amp;lt;enumeration value="SalesTax"/&gt;
+&amp;lt;enumeration value="SalesTaxCode"/&gt;
+&amp;lt;enumeration value="SalesTaxGroup"/&gt;
+&amp;lt;enumeration value="SalesTaxPaymentCheck"/&gt;
+&amp;lt;enumeration value="ShipMethod"/&gt;
+&amp;lt;enumeration value="Task"/&gt;
+&amp;lt;enumeration value="TemplateName"/&gt;
+&amp;lt;enumeration value="Term"/&gt;
+&amp;lt;enumeration value="TimeActivity"/&gt;
+&amp;lt;enumeration value="UOM"/&gt;
+&amp;lt;enumeration value="Vendor"/&gt;
+&amp;lt;enumeration value="VendorCredit"/&gt;
+&amp;lt;enumeration value="VendorType"/&gt;
+&amp;lt;/restriction&gt;
+&amp;lt;/simpleType&gt;
+&lt;/pre&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ACCOUNT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILL">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILL_PAYMENT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BILL_PAYMENT_CREDIT_CARD">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CHARGE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CHECK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CLASS">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="COMPANY">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDIT_CARD_CHARGE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDIT_CARD_CREDIT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CREDIT_MEMO">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMER_MSG">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CUSTOMER_TYPE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DISCOUNT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="EMPLOYEE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ESTIMATE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FIXED_ASSET">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORY_ADJUSTMENT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORY_SITE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVENTORY_TRANSFER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="INVOICE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ITEM_RECEIPT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOB">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOB_TYPE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="JOURNAL_ENTRY">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="OTHER_NAME">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYMENT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYMENT_METHOD">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PAYROLL_ITEM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PREFERENCES">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PURCHASE_ORDER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_ORDER">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_RECEIPT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_REP">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX_CODE">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX_GROUP">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SALES_TAX_PAYMENT_CHECK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SHIP_METHOD">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TASK">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TEMPLATE_NAME">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TERM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TIME_ACTIVITY">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UOM">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDOR">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDOR_CREDIT">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="VENDOR_TYPE">
             <xs:annotation>
               <xs:documentation></xs:documentation>
             </xs:annotation>

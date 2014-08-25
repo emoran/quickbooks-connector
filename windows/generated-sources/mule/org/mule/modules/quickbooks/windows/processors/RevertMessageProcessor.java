@@ -27,7 +27,7 @@ import org.mule.modules.quickbooks.windows.process.ProcessTemplate;
  * RevertMessageProcessor invokes the {@link org.mule.modules.quickbooks.windows.QuickBooksWindowsModule#revert(java.lang.String, org.mule.modules.quickbooks.windows.WindowsEntityType, java.lang.Object)} method in {@link QuickBooksWindowsModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T02:33:09-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-25T05:20:59-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class RevertMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor

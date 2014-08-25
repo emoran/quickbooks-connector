@@ -10,14 +10,14 @@ import org.mule.modules.quickbooks.windows.basic.MetadataAware;
  * A <code>QuickBooksWindowsModuleMetadataAdapater</code> is a wrapper around {@link QuickBooksWindowsModule } that adds support for querying metadata about the extension.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T02:33:09-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-25T05:20:59-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class QuickBooksWindowsModuleMetadataAdapater
     extends QuickBooksWindowsModuleCapabilitiesAdapter
     implements MetadataAware
 {
 
     private final static String MODULE_NAME = "Quickbooks Windows";
-    private final static String MODULE_VERSION = "5.0.1-SNAPSHOT";
+    private final static String MODULE_VERSION = "5.0.2-SNAPSHOT";
     private final static String DEVKIT_VERSION = "3.4.3";
     private final static String DEVKIT_BUILD = "3.4.3.1620.30ea288";
 
