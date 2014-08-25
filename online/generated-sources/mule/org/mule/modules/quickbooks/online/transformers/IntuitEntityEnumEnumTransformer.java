@@ -8,7 +8,7 @@ import org.mule.modules.quickbooks.online.IntuitEntityEnum;
 import org.mule.transformer.AbstractTransformer;
 import org.mule.transformer.types.DataTypeFactory;
 
-@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-22T02:35:33-05:00", comments = "Build 3.4.3.1620.30ea288")
+@Generated(value = "Mule DevKit Version 3.4.3", date = "2014-08-25T05:23:44-05:00", comments = "Build 3.4.3.1620.30ea288")
 public class IntuitEntityEnumEnumTransformer
     extends AbstractTransformer
     implements DiscoverableTransformer
