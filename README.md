@@ -23,3 +23,8 @@ Maven Build
 In order to Build both Quickbooks-Online and Quickbooks-Windows connectors with Maven, it is necessary to add the following option to the MAVEN_OPTS environment variable:
 
 MAVEN_OPTS=-Xmx512m
+
+Contribute to Quickbooks Connector
+----------------------------------
+
+Find something you don't like? - Want to add your own magic to the connector? Go to http://mulesoft.github.io/connector-certification-docs/contr/index.html and learn how you can also be a part of it.
