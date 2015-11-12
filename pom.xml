@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.mule.modules</groupId>
 	<artifactId>mule-module-quick-books</artifactId>
-	<version>5.0.2-SNAPSHOT</version>
+	<version>5.0.2</version>
 	<packaging>pom</packaging>
 	<name>QuickBooks Cloud Connector</name>
 
@@ -12,7 +12,7 @@
 		<artifactId>mule-devkit-parent</artifactId>
 		<version>3.5.3</version>
 	</parent>
-	
+
 	<modules>
         <module>commons</module>
         <module>windows</module>
@@ -62,7 +62,7 @@
             <layout>default</layout>
         </repository>
     </repositories>
-	
+
 	<scm>
 		<connection>scm:git:git://github.com:mulesoft/quickbooks-connector.git</connection>
 		<developerConnection>
