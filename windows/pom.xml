@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.mule.modules</groupId>
         <artifactId>mule-module-quick-books</artifactId>
-        <version>5.0.2-SNAPSHOT</version>
+        <version>5.0.2</version>
     </parent>
 
     <properties>
