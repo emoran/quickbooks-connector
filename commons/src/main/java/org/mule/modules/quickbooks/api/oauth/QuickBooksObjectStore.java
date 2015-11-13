@@ -62,6 +62,10 @@ public class QuickBooksObjectStore implements ListableObjectStore<Serializable> 
         return true;
     }
 
+    public void clear() throws ObjectStoreException {
+        this.values.clear();
+    }
+
     @Override
     public void open() throws ObjectStoreException {
         // TODO Auto-generated method stub
