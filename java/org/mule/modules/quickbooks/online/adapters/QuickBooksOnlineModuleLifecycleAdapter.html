@@ -1,0 +1,3438 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <meta name="description" content="Documentation for QuickBooks Online Cloud Connector." />
+
+<link rel="shortcut icon" type="image/x-icon" href="../../../../../../../favicon.ico" />
+<title>
+
+  QuickBooksOnlineModuleLifecycleAdapter
+
+
+| QuickBooks Online Cloud Connector
+
+</title>
+<link href="../../../../../../../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../../../assets/mule-developer-prettify.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../../../assets/customizations.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+<script src="../../../../../../../assets/search_autocomplete.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/jquery-toc.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/mule-developer-docs.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+  setToRoot("../../../../../../../", "../../../../../../../assets/");
+</script>
+<script src="../../../../../../../assets/mule-developer-reference.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/navtree_data.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/customizations.js" type="text/javascript"></script>
+<noscript>
+  <style type="text/css">
+    html,body{overflow:auto;}
+    #body-content{position:relative; top:0;}
+    #doc-content{overflow:visible;border-left:3px solid #666;}
+    #side-nav{padding:0;}
+    #side-nav .toggle-list ul {display:block;}
+    #resize-packages-nav{border-bottom:3px solid #666;}
+  </style>
+</noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "QuickBooks Online Cloud Connector";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+</head>
+
+<body class="">
+
+<div id="header">
+    <div id="headerLeft">
+    
+      <span id="masthead-title">QuickBooks Online Cloud Connector</span>
+    
+    <ul id="header-tabs" class="">
+    
+    	<li id="guide"><a href="../../../../../../../guide/install.html">
+	    	<span class="en">Install Guide</span>
+    	</a></li>
+    
+    	<li id="authentication"><a href="../../../../../../../authentication.html">
+	    	<span class="en">Authentication Guide</span>
+    	</a></li>
+    
+    	<li id="java"><a href="../../../../../../../java/packages.html">
+	    	<span class="en">Java API Reference</span>
+    	</a></li>
+    
+    	<li id="mule"><a href="../../../../../../../mule/modules.html">
+	    	<span class="en">Mule API Reference</span>
+    	</a></li>
+    
+    </ul>
+    </div>
+    <div id="headerRight">
+      <a href="http://www.mulesoft.com" tabindex="-1">
+      <img src="../../../../../../../assets//images/mulesoft-logo-final.gif" alt="MuleSoft" border="0" id="mulesoftlogo"></a><br/>
+      
+  <div id="searchContainer" >
+      <div id="searchForm">
+          <form accept-charset="utf-8" class="gsc-search-box" 
+                onsubmit="return submit_search()">
+            <table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody>
+                <tr>
+                  <td class="gsc-input">
+                    <input id="search_autocomplete" class="gsc-input" type="text" size="33" autocomplete="off"
+                      title="search developer docs" name="q"
+                      value="search developer docs"
+                      onFocus="search_focus_changed(this, true)"
+                      onBlur="search_focus_changed(this, false)"
+                      onkeydown="return search_changed(event, true, '../../../../../../../')"
+                      onkeyup="return search_changed(event, false, '../../../../../../../')" />
+                  <div id="search_filtered_div" class="no-display">
+                      <table id="search_filtered" cellspacing=0>
+                      </table>
+                  </div>
+                  </td>
+                  <td class="gsc-search-button">
+                    <input type="submit" value="Search" title="search" id="search-button" class="gsc-search-button" />
+                  </td>
+                  <td class="gsc-clear-button">
+                    <div title="clear results" class="gsc-clear-button">&nbsp;</div>
+                  </td>
+                </tr></tbody>
+              </table>
+          </form>
+      </div><!-- searchForm -->
+  </div><!-- search -->
+      
+    </div>
+</div><!-- header -->
+
+
+  <div class="g-section g-tpl-240" id="body-content">
+    <div class="g-unit g-first side-nav-resizable" id="side-nav">
+      <div id="swapper">
+        <div id="nav-panels">
+          <div id="resize-packages-nav">
+            <div id="packages-nav">
+              <div id="index-links">
+                <a href="../../../../../../../java/packages.html"  >Package Index</a> |
+                <a href="../../../../../../../java/classes.html" >Class Index</a>
+              </div>
+              <ul>
+                
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/com/intuit/ipp/data/holders/package-summary.html">com.intuit.ipp.data.holders</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/com/intuit/ipp/data/transformers/package-summary.html">com.intuit.ipp.data.transformers</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/package-summary.html">org.mule.modules.quickbooks.online</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapter/package-summary.html">org.mule.modules.quickbooks.online.adapter</a></li>
+    <li class="selected api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/package-summary.html">org.mule.modules.quickbooks.online.adapters</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/agents/package-summary.html">org.mule.modules.quickbooks.online.agents</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/api/package-summary.html">org.mule.modules.quickbooks.online.api</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/config/package-summary.html">org.mule.modules.quickbooks.online.config</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/connection/package-summary.html">org.mule.modules.quickbooks.online.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/devkit/package-summary.html">org.mule.modules.quickbooks.online.devkit</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/objectfactory/package-summary.html">org.mule.modules.quickbooks.online.objectfactory</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/processors/package-summary.html">org.mule.modules.quickbooks.online.processors</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../../java/org/mule/modules/quickbooks/online/transformers/package-summary.html">org.mule.modules.quickbooks.online.transformers</a></li>
+              </ul><br/>
+            </div> <!-- end packages -->
+          </div> <!-- end resize-packages -->
+          <div id="classes-nav">
+            <ul>
+              
+              
+    <li><h2>Classes</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleCapabilitiesAdapter.html">QuickBooksOnlineModuleCapabilitiesAdapter</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleLifecycleAdapter.html">QuickBooksOnlineModuleLifecycleAdapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html">QuickBooksOnlineModuleMetadataAdapater</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleProcessAdapter.html">QuickBooksOnlineModuleProcessAdapter</a></li>
+      </ul>
+    </li>
+              
+              
+              
+              
+            </ul><br/>
+          </div><!-- end classes -->
+        </div><!-- end nav-panels -->
+        <div id="nav-tree" style="display:none">
+          <div id="index-links">
+            <a href="../../../../../../../packages.html"  >Package Index</a> | 
+            <a href="../../../../../../../classes.html" >Class Index</a>
+          </div>
+        </div><!-- end nav-tree -->
+      </div><!-- end swapper -->
+    </div> <!-- end side-nav -->
+    <script>
+      if (!isMobile) {
+        $("<a href='#' id='nav-swap' onclick='swapNav();return false;' style='font-size:10px;line-height:9px;margin-left:1em;text-decoration:none;'><span id='tree-link'>Use Tree Navigation</span><span id='panel-link' style='display:none'>Use Panel Navigation</span></a>").appendTo("#side-nav");
+        chooseDefaultNav();
+        if ($("#nav-tree").is(':visible')) {
+          init_default_navtree("../../../../../../../");
+        } else {
+          addLoadEvent(function() {
+            scrollIntoView("packages-nav");
+            scrollIntoView("classes-nav");
+          });
+        }
+        $("#swapper").css({borderBottom:"2px solid #aaa"});
+      } else {
+        swapNav(); // tree view should be used on mobile
+      }
+    </script>
+
+
+
+<div class="g-unit" id="doc-content">
+
+<div id="api-info-block">
+
+
+
+  
+   
+  
+  
+   
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+   
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+   
+  
+  
+  
+
+  
+   
+  
+  
+   
+  
+  
+  
+
+  
+   
+  
+  
+   
+  
+  
+  
+
+  
+   
+  
+  
+   
+  
+  
+  
+
+
+<div class="sum-details-links">
+
+
+Summary:
+
+
+
+
+
+
+  <a href="#inhconstants">Inherited Constants</a>
+  
+
+
+
+  &#124; <a href="#inhfields">Inherited Fields</a>
+  
+
+
+  &#124; <a href="#pubctors">Ctors</a>
+  
+
+
+
+  &#124; <a href="#pubmethods">Methods</a>
+  
+
+
+
+  &#124; <a href="#inhmethods">Inherited Methods</a>
+
+&#124; <a href="#" onclick="return toggleAllClassInherited()" id="toggleAllClassInherited">[Expand All]</a>
+
+</div><!-- end sum-details-links -->
+<div class="api-level">
+  
+
+
+  
+  
+
+</div>
+</div><!-- end api-info-block -->
+
+
+<!-- ======== START OF CLASS DATA ======== -->
+
+<div id="jd-header">
+    public
+     
+     
+    
+    class
+<h1>QuickBooksOnlineModuleLifecycleAdapter</h1>
+
+
+
+  
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+
+  
+    extends <a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html">QuickBooksOnlineModuleMetadataAdapater</a><br/>
+  
+  
+  
+
+  
+  
+      implements 
+      
+        Disposable 
+      
+        Initialisable 
+      
+        Startable 
+      
+        Stoppable 
+      
+  
+  
+
+
+</div><!-- end header -->
+
+<div id="naMessage"></div>
+
+<div id="jd-content" class="api apilevel-">
+<table class="jd-inheritance-table">
+
+
+    <tr>
+        
+        <td colspan="5" class="jd-inheritance-class-cell">java.lang.Object</td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="4" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html">org.mule.modules.quickbooks.online.QuickBooksOnlineModule</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="3" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleCapabilitiesAdapter.html">org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleCapabilitiesAdapter</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="2" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html">org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleLifecycleAdapter</td>
+    </tr>
+    
+
+</table>
+
+
+
+
+<table class="jd-sumtable jd-sumtable-subclasses"><tr><td colspan="12" style="border:none;margin:0;padding:0;">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="subclasses-direct" class="jd-expando-trigger closed"
+          ><img id="subclasses-direct-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>Known Direct Subclasses
+
+  <div id="subclasses-direct">
+      <div id="subclasses-direct-list"
+              class="jd-inheritedlinks"
+              
+              >
+          
+            
+              <a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleProcessAdapter.html">QuickBooksOnlineModuleProcessAdapter</a>
+            
+          
+      </div>
+      <div id="subclasses-direct-summary"
+              style="display: none;"
+              >
+  <table class="jd-sumtable-expando">
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../../java/org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleProcessAdapter.html">QuickBooksOnlineModuleProcessAdapter</a></td>
+              <td class="jd-descrcol" width="100%">A <code>QuickBooksOnlineModuleProcessAdapter</code> is a wrapper around <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html">QuickBooksOnlineModule</a></code> that enables custom processing strategies.&nbsp;</td>
+          </tr>
+  </table>
+      </div>
+  </div>
+</td></tr></table>
+
+
+
+
+<div class="jd-descr">
+
+
+<h2>Class Overview</h2>
+<p>A <code>QuickBooksOnlineModuleLifecycleAdapter</code> is a wrapper around <code><a href="../../../../../../../java/org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html">QuickBooksOnlineModule</a></code> that adds lifecycle methods to the pojo.
+ 
+</p>
+
+
+
+
+
+</div><!-- jd-descr -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="jd-descr">
+
+
+<h2>Summary</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =========== ENUM CONSTANT SUMMARY =========== -->
+<table id="inhconstants" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Constants</div></th></tr>
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+<a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html">org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater</a>
+<div id="inherited-constants-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater">
+  <div id="inherited-constants-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#DEVKIT_BUILD">DEVKIT_BUILD</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#DEVKIT_VERSION">DEVKIT_VERSION</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#MIN_MULE_VERSION">MIN_MULE_VERSION</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#MODULE_NAME">MODULE_NAME</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#MODULE_VERSION">MODULE_VERSION</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Disposable" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-org.mule.api.lifecycle.Disposable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From interface
+org.mule.api.lifecycle.Disposable
+<div id="inherited-constants-org.mule.api.lifecycle.Disposable">
+  <div id="inherited-constants-org.mule.api.lifecycle.Disposable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-org.mule.api.lifecycle.Disposable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol">PHASE_NAME</td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Initialisable" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-org.mule.api.lifecycle.Initialisable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From interface
+org.mule.api.lifecycle.Initialisable
+<div id="inherited-constants-org.mule.api.lifecycle.Initialisable">
+  <div id="inherited-constants-org.mule.api.lifecycle.Initialisable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-org.mule.api.lifecycle.Initialisable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol">PHASE_NAME</td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Startable" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-org.mule.api.lifecycle.Startable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From interface
+org.mule.api.lifecycle.Startable
+<div id="inherited-constants-org.mule.api.lifecycle.Startable">
+  <div id="inherited-constants-org.mule.api.lifecycle.Startable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-org.mule.api.lifecycle.Startable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol">PHASE_NAME</td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.api.lifecycle.Stoppable" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-org.mule.api.lifecycle.Stoppable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From interface
+org.mule.api.lifecycle.Stoppable
+<div id="inherited-constants-org.mule.api.lifecycle.Stoppable">
+  <div id="inherited-constants-org.mule.api.lifecycle.Stoppable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-org.mule.api.lifecycle.Stoppable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol">PHASE_NAME</td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+</table>
+
+
+
+
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+<table id="inhfields" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Fields</div></th></tr>
+
+
+
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.modules.quickbooks.online.QuickBooksOnlineModule" class="jd-expando-trigger closed"
+          ><img id="inherited-fields-org.mule.modules.quickbooks.online.QuickBooksOnlineModule-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+<a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html">org.mule.modules.quickbooks.online.QuickBooksOnlineModule</a>
+<div id="inherited-fields-org.mule.modules.quickbooks.online.QuickBooksOnlineModule">
+  <div id="inherited-fields-org.mule.modules.quickbooks.online.QuickBooksOnlineModule-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-fields-org.mule.modules.quickbooks.online.QuickBooksOnlineModule-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#accessTokenIdentifierPrefix">accessTokenIdentifierPrefix</a></td>
+          <td class="jd-descrcol" width="100%">Prefix used for storing credentials in ObjectStore.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#baseUri">baseUri</a></td>
+          <td class="jd-descrcol" width="100%">The base uri used by the QBO SDK for QuickBooks Online requests.</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          <a href="../../../../../../../java/org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html">QuickBooksOnlineClient</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#client">client</a></td>
+          <td class="jd-descrcol" width="100%">Quick-Books client.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Integer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#connectionTimeOut">connectionTimeOut</a></td>
+          <td class="jd-descrcol" width="100%">The connection timeout in ms for Quickbooks Data Services used by the QBO SDK.</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#consumerKey">consumerKey</a></td>
+          <td class="jd-descrcol" width="100%">API Key
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#consumerSecret">consumerSecret</a></td>
+          <td class="jd-descrcol" width="100%">API Secret
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          QuickBooksOAuthClient</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#oAuthClient">oAuthClient</a></td>
+          <td class="jd-descrcol" width="100%">Intuit OAuthClient
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          ObjectStore</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#objectStore">objectStore</a></td>
+          <td class="jd-descrcol" width="100%">Object store reference
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          ObjectStoreHelper</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#objectStoreHelper">objectStoreHelper</a></td>
+          <td class="jd-descrcol" width="100%">Object store helper
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          DefaultOpenIDClient</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#openIDClient">openIDClient</a></td>
+          <td class="jd-descrcol" width="100%">Intuit OpenID client
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#platformBaseUri">platformBaseUri</a></td>
+          <td class="jd-descrcol" width="100%">The base uri used by the QBO SDK for Platform Services requests.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Integer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#requestTimeOut">requestTimeOut</a></td>
+          <td class="jd-descrcol" width="100%">The request timeout in ms for Quickbooks Data Services used by the QBO SDK.</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Integer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#retryCount">retryCount</a></td>
+          <td class="jd-descrcol" width="100%">The number of retries for a failed request used by the QBO SDK.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Integer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#retryInterval">retryInterval</a></td>
+          <td class="jd-descrcol" width="100%">The time between retries for a failed request in seconds used by the QBO SDK.</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          boolean</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#verifyOpenIdResponse">verifyOpenIdResponse</a></td>
+          <td class="jd-descrcol" width="100%">Specifies if the OpenID response will be verified.</td>
+      </tr>
+      
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</table>
+
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<table id="pubctors" class="jd-sumtable"><tr><th colspan="12">Public Constructors</th></tr>
+
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            </nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleLifecycleAdapter.html#QuickBooksOnlineModuleLifecycleAdapter()">QuickBooksOnlineModuleLifecycleAdapter</a></span>()</nobr>
+        
+  </td></tr>
+
+
+
+</table>
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="pubmethods" class="jd-sumtable"><tr><th colspan="12">Public Methods</th></tr>
+
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleLifecycleAdapter.html#dispose()">dispose</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleLifecycleAdapter.html#initialise()">initialise</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleLifecycleAdapter.html#start()">start</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleLifecycleAdapter.html#stop()">stop</a></span>()</nobr>
+        
+  </td></tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="inhmethods" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Methods</div></th></tr>
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  <a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html">org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater</a>
+
+<div id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater">
+  <div id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleMetadataAdapater-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#getMinMuleVersion()">getMinMuleVersion</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#getModuleName()">getModuleName</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleMetadataAdapater.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleCapabilitiesAdapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleCapabilitiesAdapter-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  <a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleCapabilitiesAdapter.html">org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleCapabilitiesAdapter</a>
+
+<div id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleCapabilitiesAdapter">
+  <div id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleCapabilitiesAdapter-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.modules.quickbooks.online.adapters.QuickBooksOnlineModuleCapabilitiesAdapter-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/adapters/QuickBooksOnlineModuleCapabilitiesAdapter.html#isCapableOf(org.mule.api.devkit.capability.ModuleCapability)">isCapableOf</a></span>(ModuleCapability capability)</nobr>
+        
+        <div class="jd-descrdiv">Returns true if this module implements such capability
+ 
+</div>
+  
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.quickbooks.online.QuickBooksOnlineModule" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.modules.quickbooks.online.QuickBooksOnlineModule-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  <a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html">org.mule.modules.quickbooks.online.QuickBooksOnlineModule</a>
+
+<div id="inherited-methods-org.mule.modules.quickbooks.online.QuickBooksOnlineModule">
+  <div id="inherited-methods-org.mule.modules.quickbooks.online.QuickBooksOnlineModule-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.modules.quickbooks.online.QuickBooksOnlineModule-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#authUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">authUser</a></span>(String requestTokenUrl, String accessTokenUrl, String authorizationUrl, String callbackUrl, String requestTokenId, Map&lt;String,&nbsp;Object&gt; headers)</nobr>
+        
+        <div class="jd-descrdiv">Authorize an user using OAuth1.0a
+
+ </div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Account</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createAccount(java.lang.String, com.intuit.ipp.data.Account)">createAccount</a></span>(String accessTokenId, Account account)</nobr>
+        
+        <div class="jd-descrdiv">Creates an Account.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Bill</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createBill(java.lang.String, com.intuit.ipp.data.Bill)">createBill</a></span>(String accessTokenId, Bill bill)</nobr>
+        
+        <div class="jd-descrdiv">Creates a Bill.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            BillPayment</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createBillPayment(java.lang.String, com.intuit.ipp.data.BillPayment)">createBillPayment</a></span>(String accessTokenId, BillPayment billPayment)</nobr>
+        
+        <div class="jd-descrdiv">Creates a BillPayment.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Customer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createCustomer(java.lang.String, com.intuit.ipp.data.Customer)">createCustomer</a></span>(String accessTokenId, Customer customer)</nobr>
+        
+        <div class="jd-descrdiv">Creates a Customer.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Estimate</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createEstimate(java.lang.String, com.intuit.ipp.data.Estimate)">createEstimate</a></span>(String accessTokenId, Estimate estimate)</nobr>
+        
+        <div class="jd-descrdiv">Creates an Estimate.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Invoice</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createInvoice(java.lang.String, com.intuit.ipp.data.Invoice)">createInvoice</a></span>(String accessTokenId, Invoice invoice)</nobr>
+        
+        <div class="jd-descrdiv">Creates an Invoice.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Item</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createItem(java.lang.String, com.intuit.ipp.data.Item)">createItem</a></span>(String accessTokenId, Item item)</nobr>
+        
+        <div class="jd-descrdiv">Creates an Item.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            JournalEntry</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createJournalEntry(java.lang.String, com.intuit.ipp.data.JournalEntry)">createJournalEntry</a></span>(String accessTokenId, JournalEntry journalEntry)</nobr>
+        
+        <div class="jd-descrdiv">Creates a Journal Entry.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Payment</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createPayment(java.lang.String, com.intuit.ipp.data.Payment)">createPayment</a></span>(String accessTokenId, Payment payment)</nobr>
+        
+        <div class="jd-descrdiv">Creates a Payment.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            PaymentMethod</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createPaymentMethod(java.lang.String, com.intuit.ipp.data.PaymentMethod)">createPaymentMethod</a></span>(String accessTokenId, PaymentMethod paymentMethod)</nobr>
+        
+        <div class="jd-descrdiv">Creates a PaymentMethod.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Purchase</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createPurchase(java.lang.String, com.intuit.ipp.data.Purchase)">createPurchase</a></span>(String accessTokenId, Purchase purchase)</nobr>
+        
+        <div class="jd-descrdiv">Creates a Purchase.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            SalesReceipt</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createSalesReceipt(java.lang.String, com.intuit.ipp.data.SalesReceipt)">createSalesReceipt</a></span>(String accessTokenId, SalesReceipt salesReceipt)</nobr>
+        
+        <div class="jd-descrdiv">Creates a SalesReceipt.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Term</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createTerm(java.lang.String, com.intuit.ipp.data.Term)">createTerm</a></span>(String accessTokenId, Term term)</nobr>
+        
+        <div class="jd-descrdiv">Creates a Term.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Vendor</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#createVendor(java.lang.String, com.intuit.ipp.data.Vendor)">createVendor</a></span>(String accessTokenId, Vendor vendor)</nobr>
+        
+        <div class="jd-descrdiv">Creates a Vendor.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#deleteObject(java.lang.String, com.intuit.ipp.core.IEntity)">deleteObject</a></span>(String accessTokenId, IEntity object)</nobr>
+        
+        <div class="jd-descrdiv">Deletes an object.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#deleteObjectWithId(java.lang.String, org.mule.modules.quickbooks.online.IntuitEntityEnum, java.lang.String, java.lang.String)">deleteObjectWithId</a></span>(String accessTokenId, <a href="../../../../../../../java/org/mule/modules/quickbooks/online/IntuitEntityEnum.html">IntuitEntityEnum</a> type, String id, String syncToken)</nobr>
+        
+        <div class="jd-descrdiv">Deletes an object.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#disconnect(java.lang.String)">disconnect</a></span>(String accessTokenId)</nobr>
+        
+        <div class="jd-descrdiv">Invalidates the OAuth access token in the request, thereby disconnecting the user from QuickBooks for this app.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            OAuthCredentials</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getAccessToken(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getAccessToken</a></span>(String apiUrl, String verifier, String requestTokenId, String userIdentifier)</nobr>
+        
+        <div class="jd-descrdiv">Extract accessToken
+
+ </div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getAccessTokenIdentifierPrefix()">getAccessTokenIdentifierPrefix</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getBaseUri()">getBaseUri</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            BlueDotMenu</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getBlueDotInformation(java.lang.String, java.lang.String)">getBlueDotInformation</a></span>(String accessTokenId, String regex)</nobr>
+        
+        <div class="jd-descrdiv">Gets blueDot menu information from Intuit
+
+ For details see:
+ <a href="https://developer.intuit.com/docs/0025_quickbooksapi/0053_auth_auth/platform_api#AppMenu">AppMenu</a>
+
+ </div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="../../../../../../../java/org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html">QuickBooksOnlineClient</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getClient()">getClient</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            CompanyInfo</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getCompanyInfo(java.lang.String)">getCompanyInfo</a></span>(String accessTokenId)</nobr>
+        
+        <div class="jd-descrdiv">Returns company information.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Integer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getConnectionTimeOut()">getConnectionTimeOut</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getConsumerKey()">getConsumerKey</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getConsumerSecret()">getConsumerSecret</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            UserInformation</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getCurrentUser(java.lang.String)">getCurrentUser</a></span>(String accessTokenId)</nobr>
+        
+        <div class="jd-descrdiv">Returns current user information such as first name, last name, and email address.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getObject(java.lang.String, org.mule.modules.quickbooks.online.IntuitEntityEnum, java.lang.String)">getObject</a></span>(String accessTokenId, <a href="../../../../../../../java/org/mule/modules/quickbooks/online/IntuitEntityEnum.html">IntuitEntityEnum</a> type, String id)</nobr>
+        
+        <div class="jd-descrdiv">Retrieve objects by ID.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            ObjectStore</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getObjectStore()">getObjectStore</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            ObjectStoreHelper</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getObjectStoreHelper()">getObjectStoreHelper</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            DefaultOpenIDClient</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getOpenIDClient()">getOpenIDClient</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getPlatformBaseUri()">getPlatformBaseUri</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Integer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getRequestTimeOut()">getRequestTimeOut</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Integer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getRetryCount()">getRetryCount</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Integer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getRetryInterval()">getRetryInterval</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getVerifyOpenIdResponse()">getVerifyOpenIdResponse</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            QuickBooksOAuthClient</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#getoAuthClient()">getoAuthClient</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#init()">init</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Generates the QuickbooksOnlineClient
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#openIdInitialize(java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>)">openIdInitialize</a></span>(String providerUrl, String callbackUrl, Map&lt;String,&nbsp;Object&gt; headers)</nobr>
+        
+        <div class="jd-descrdiv">Initializes OpenID process
+
+ </div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Iterable</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#paginatedQuery(java.lang.String, java.lang.String, java.lang.Integer)">paginatedQuery</a></span>(String accessTokenId, String query, Integer resultsPerPage)</nobr>
+        
+        <div class="jd-descrdiv">The query operation is the method for creating a guided query against an entity.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Iterable</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#query(java.lang.String, java.lang.String)">query</a></span>(String accessTokenId, String query)</nobr>
+        
+        <div class="jd-descrdiv">The query operation is the method for creating a guided query against an entity.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            QueryResult</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#queryWithMetadata(java.lang.String, java.lang.String)">queryWithMetadata</a></span>(String accessTokenId, String query)</nobr>
+        
+        <div class="jd-descrdiv">The query operation is the method for creating a guided query against an entity.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#reconnect(java.lang.String)">reconnect</a></span>(String accessTokenId)</nobr>
+        
+        <div class="jd-descrdiv">Generates a new OAuth access token and invalidates the OAuth access token used in the request,
+ thereby extending the life span by six months.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setAccessTokenIdentifierPrefix(java.lang.String)">setAccessTokenIdentifierPrefix</a></span>(String accessTokenIdentifierPrefix)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setBaseUri(java.lang.String)">setBaseUri</a></span>(String baseUri)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setClient(org.mule.modules.quickbooks.online.api.QuickBooksOnlineClient)">setClient</a></span>(<a href="../../../../../../../java/org/mule/modules/quickbooks/online/api/QuickBooksOnlineClient.html">QuickBooksOnlineClient</a> client)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setConnectionTimeOut(java.lang.Integer)">setConnectionTimeOut</a></span>(Integer connectionTimeOut)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setConsumerKey(java.lang.String)">setConsumerKey</a></span>(String consumerKey)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setConsumerSecret(java.lang.String)">setConsumerSecret</a></span>(String consumerSecret)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setObjectStore(org.mule.api.store.ObjectStore)">setObjectStore</a></span>(ObjectStore objectStore)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setObjectStoreHelper(org.mule.modules.quickbooks.api.ObjectStoreHelper)">setObjectStoreHelper</a></span>(ObjectStoreHelper objectStoreHelper)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setOpenIDClient(org.mule.modules.quickbooks.api.openid.DefaultOpenIDClient)">setOpenIDClient</a></span>(DefaultOpenIDClient openIDClient)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setPlatformBaseUri(java.lang.String)">setPlatformBaseUri</a></span>(String platformBaseUri)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setRequestTimeOut(java.lang.Integer)">setRequestTimeOut</a></span>(Integer requestTimeOut)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setRetryCount(java.lang.Integer)">setRetryCount</a></span>(Integer retryCount)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setRetryInterval(java.lang.Integer)">setRetryInterval</a></span>(Integer retryInterval)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setVerifyOpenIdResponse(boolean)">setVerifyOpenIdResponse</a></span>(boolean verifyOpenIdResponse)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#setoAuthClient(org.mule.modules.quickbooks.api.oauth.QuickBooksOAuthClient)">setoAuthClient</a></span>(QuickBooksOAuthClient oAuthClient)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Account</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateAccount(java.lang.String, com.intuit.ipp.data.Account)">updateAccount</a></span>(String accessTokenId, Account account)</nobr>
+        
+        <div class="jd-descrdiv">Updates an Account
+ The Account object represents the accounts that you keep to track your business.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Bill</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateBill(java.lang.String, com.intuit.ipp.data.Bill)">updateBill</a></span>(String accessTokenId, Bill bill)</nobr>
+        
+        <div class="jd-descrdiv">Updates a Bill
+ The Bill object represents an expense to the business.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            BillPayment</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateBillPayment(java.lang.String, com.intuit.ipp.data.BillPayment)">updateBillPayment</a></span>(String accessTokenId, BillPayment billPayment)</nobr>
+        
+        <div class="jd-descrdiv">Updates a BillPayment
+ BillPayment represents the financial transaction of payment of bills that the business owner receives
+ from a vendor for goods or services purchased from the vendor.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Customer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateCustomer(java.lang.String, com.intuit.ipp.data.Customer)">updateCustomer</a></span>(String accessTokenId, Customer customer)</nobr>
+        
+        <div class="jd-descrdiv">Updates a Customer.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Estimate</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateEstimate(java.lang.String, com.intuit.ipp.data.Estimate)">updateEstimate</a></span>(String accessTokenId, Estimate estimate)</nobr>
+        
+        <div class="jd-descrdiv">Updates an Estimate.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Invoice</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateInvoice(java.lang.String, com.intuit.ipp.data.Invoice)">updateInvoice</a></span>(String accessTokenId, Invoice invoice)</nobr>
+        
+        <div class="jd-descrdiv">Updates an Invoice.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Item</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateItem(java.lang.String, com.intuit.ipp.data.Item)">updateItem</a></span>(String accessTokenId, Item item)</nobr>
+        
+        <div class="jd-descrdiv">Updates an Item.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            JournalEntry</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateJournalEntry(java.lang.String, com.intuit.ipp.data.JournalEntry)">updateJournalEntry</a></span>(String accessTokenId, JournalEntry journalEntry)</nobr>
+        
+        <div class="jd-descrdiv">Updates a Journal Entry.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Payment</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updatePayment(java.lang.String, com.intuit.ipp.data.Payment)">updatePayment</a></span>(String accessTokenId, Payment payment)</nobr>
+        
+        <div class="jd-descrdiv">Updates a Payment.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            PaymentMethod</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updatePaymentMethod(java.lang.String, com.intuit.ipp.data.PaymentMethod)">updatePaymentMethod</a></span>(String accessTokenId, PaymentMethod paymentMethod)</nobr>
+        
+        <div class="jd-descrdiv">Updates a PaymentMethod.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Purchase</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updatePurchase(java.lang.String, com.intuit.ipp.data.Purchase)">updatePurchase</a></span>(String accessTokenId, Purchase purchase)</nobr>
+        
+        <div class="jd-descrdiv">Updates a Purchase.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            SalesReceipt</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateSalesReceipt(java.lang.String, com.intuit.ipp.data.SalesReceipt)">updateSalesReceipt</a></span>(String accessTokenId, SalesReceipt salesReceipt)</nobr>
+        
+        <div class="jd-descrdiv">Updates a SalesReceipt.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Term</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateTerm(java.lang.String, com.intuit.ipp.data.Term)">updateTerm</a></span>(String accessTokenId, Term term)</nobr>
+        
+        <div class="jd-descrdiv">Updates a Term.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Vendor</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#updateVendor(java.lang.String, com.intuit.ipp.data.Vendor)">updateVendor</a></span>(String accessTokenId, Vendor vendor)</nobr>
+        
+        <div class="jd-descrdiv">Updates a Vendor.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            OpenIDCredentials</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/quickbooks/online/QuickBooksOnlineModule.html#verifyOpenId(org.mule.api.MuleMessage, java.lang.String, java.util.Map<java.lang.String, java.lang.String>)">verifyOpenId</a></span>(MuleMessage muleMessage, String receivingUrl, Map&lt;String,&nbsp;String&gt; responseParameters)</nobr>
+        
+        <div class="jd-descrdiv">Verify response from Intuit
+
+ </div>
+  
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-java.lang.Object" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-java.lang.Object-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  java.lang.Object
+
+<div id="inherited-methods-java.lang.Object">
+  <div id="inherited-methods-java.lang.Object-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-java.lang.Object-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">clone</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">equals</span>(Object arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">finalize</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            Class&lt;?&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getClass</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            int</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">hashCode</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">notify</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">notifyAll</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">toString</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>(long arg0, int arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>(long arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.MetadataAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.MetadataAware-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.MetadataAware
+
+<div id="inherited-methods-org.mule.api.MetadataAware">
+  <div id="inherited-methods-org.mule.api.MetadataAware-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.MetadataAware-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDevkitBuild</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDevkitVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getMinMuleVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getModuleName</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getModuleVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.devkit.capability.Capabilities" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.devkit.capability.Capabilities-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.devkit.capability.Capabilities
+
+<div id="inherited-methods-org.mule.api.devkit.capability.Capabilities">
+  <div id="inherited-methods-org.mule.api.devkit.capability.Capabilities-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.devkit.capability.Capabilities-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">isCapableOf</span>(ModuleCapability arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Disposable" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.lifecycle.Disposable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.lifecycle.Disposable
+
+<div id="inherited-methods-org.mule.api.lifecycle.Disposable">
+  <div id="inherited-methods-org.mule.api.lifecycle.Disposable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.lifecycle.Disposable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">dispose</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Initialisable" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.lifecycle.Initialisable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.lifecycle.Initialisable
+
+<div id="inherited-methods-org.mule.api.lifecycle.Initialisable">
+  <div id="inherited-methods-org.mule.api.lifecycle.Initialisable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.lifecycle.Initialisable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">initialise</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Startable" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.lifecycle.Startable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.lifecycle.Startable
+
+<div id="inherited-methods-org.mule.api.lifecycle.Startable">
+  <div id="inherited-methods-org.mule.api.lifecycle.Startable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.lifecycle.Startable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">start</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.lifecycle.Stoppable" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.lifecycle.Stoppable-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.lifecycle.Stoppable
+
+<div id="inherited-methods-org.mule.api.lifecycle.Stoppable">
+  <div id="inherited-methods-org.mule.api.lifecycle.Stoppable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.lifecycle.Stoppable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">stop</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+</table>
+
+
+</div><!-- jd-descr (summary) -->
+
+<!-- Details -->
+
+
+
+
+
+
+
+
+<!-- XML Attributes -->
+
+
+<!-- Enum Values -->
+
+
+<!-- Constants -->
+
+
+<!-- Fields -->
+
+
+<!-- Public ctors -->
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<h2>Public Constructors</h2>
+
+
+
+<A NAME="QuickBooksOnlineModuleLifecycleAdapter()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        
+      </span>
+      <span class="sympad">QuickBooksOnlineModuleLifecycleAdapter</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- Protected ctors -->
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+<!-- Public methdos -->
+
+<h2>Public Methods</h2>
+
+
+
+<A NAME="dispose()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">dispose</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="initialise()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">initialise</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>InitialisationException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="start()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">start</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>MuleException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="stop()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">stop</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>MuleException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+
+
+
+<!-- ========= END OF CLASS DATA ========= -->
+<A NAME="navbar_top"></A>
+
+<div id="footer">
+Generated by <a href="http://www.mulesoft.com/devkit">Mule DevKit</a>. Document generation technology based on <a href="http://code.google.com/p/doclava/">Google's Doclava</a>.
+</div> <!-- end footer -->
+
+</div> <!-- jd-content -->
+
+</div><!-- end doc-content -->
+
+</div> <!-- end body-content --> 
+
+<script type="text/javascript">
+init(); /* initialize mule-developer-docs.js */
+</script>
+
+</body>
+</html>
